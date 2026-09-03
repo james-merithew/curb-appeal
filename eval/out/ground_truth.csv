@@ -1,0 +1,97 @@
+door,door_name,criterion,truth
+door-01,DeSano Pizzeria (E-001),step_free_entry,present
+door-01,DeSano Pizzeria (E-001),ramp_present,absent
+door-01,DeSano Pizzeria (E-001),handrails_present,absent
+door-01,DeSano Pizzeria (E-001),auto_door_button,absent
+door-01,DeSano Pizzeria (E-001),lever_or_pull_hardware,present
+door-01,DeSano Pizzeria (E-001),clear_approach,present
+door-01,DeSano Pizzeria (E-001),accessible_signage,absent
+door-01,DeSano Pizzeria (E-001),door_width_adequate,appears_wide
+door-02,CardVault by Tom Brady (E-002),step_free_entry,present
+door-02,CardVault by Tom Brady (E-002),ramp_present,absent
+door-02,CardVault by Tom Brady (E-002),handrails_present,absent
+door-02,CardVault by Tom Brady (E-002),auto_door_button,absent
+door-02,CardVault by Tom Brady (E-002),lever_or_pull_hardware,present
+door-02,CardVault by Tom Brady (E-002),clear_approach,present
+door-02,CardVault by Tom Brady (E-002),accessible_signage,absent
+door-02,CardVault by Tom Brady (E-002),door_width_adequate,appears_wide
+door-03,Which Wich (E-003),step_free_entry,present
+door-03,Which Wich (E-003),ramp_present,absent
+door-03,Which Wich (E-003),handrails_present,absent
+door-03,Which Wich (E-003),auto_door_button,absent
+door-03,Which Wich (E-003),lever_or_pull_hardware,absent
+door-03,Which Wich (E-003),clear_approach,present
+door-03,Which Wich (E-003),accessible_signage,absent
+door-03,Which Wich (E-003),door_width_adequate,appears_wide
+door-04,Royal Blue Grocery (E-004),step_free_entry,present
+door-04,Royal Blue Grocery (E-004),ramp_present,absent
+door-04,Royal Blue Grocery (E-004),handrails_present,absent
+door-04,Royal Blue Grocery (E-004),auto_door_button,absent
+door-04,Royal Blue Grocery (E-004),lever_or_pull_hardware,present
+door-04,Royal Blue Grocery (E-004),clear_approach,present
+door-04,Royal Blue Grocery (E-004),accessible_signage,absent
+door-04,Royal Blue Grocery (E-004),door_width_adequate,appears_wide
+door-05,Cathy's Cleaners (E-005),step_free_entry,present
+door-05,Cathy's Cleaners (E-005),ramp_present,absent
+door-05,Cathy's Cleaners (E-005),handrails_present,absent
+door-05,Cathy's Cleaners (E-005),auto_door_button,absent
+door-05,Cathy's Cleaners (E-005),lever_or_pull_hardware,present
+door-05,Cathy's Cleaners (E-005),clear_approach,present
+door-05,Cathy's Cleaners (E-005),accessible_signage,absent
+door-05,Cathy's Cleaners (E-005),door_width_adequate,appears_wide
+door-06,Bill's Oyster (E-006),step_free_entry,present
+door-06,Bill's Oyster (E-006),ramp_present,absent
+door-06,Bill's Oyster (E-006),handrails_present,absent
+door-06,Bill's Oyster (E-006),auto_door_button,absent
+door-06,Bill's Oyster (E-006),lever_or_pull_hardware,present
+door-06,Bill's Oyster (E-006),clear_approach,present
+door-06,Bill's Oyster (E-006),accessible_signage,absent
+door-06,Bill's Oyster (E-006),door_width_adequate,appears_narrow
+door-07,RedFarm (E-007),step_free_entry,present
+door-07,RedFarm (E-007),ramp_present,absent
+door-07,RedFarm (E-007),handrails_present,absent
+door-07,RedFarm (E-007),auto_door_button,absent
+door-07,RedFarm (E-007),lever_or_pull_hardware,present
+door-07,RedFarm (E-007),clear_approach,present
+door-07,RedFarm (E-007),accessible_signage,absent
+door-07,RedFarm (E-007),door_width_adequate,appears_narrow
+door-08,SEV laser studio (E-008),step_free_entry,absent
+door-08,SEV laser studio (E-008),ramp_present,present
+door-08,SEV laser studio (E-008),handrails_present,present
+door-08,SEV laser studio (E-008),auto_door_button,absent
+door-08,SEV laser studio (E-008),lever_or_pull_hardware,present
+door-08,SEV laser studio (E-008),clear_approach,present
+door-08,SEV laser studio (E-008),accessible_signage,absent
+door-08,SEV laser studio (E-008),door_width_adequate,appears_wide
+door-09,Austin Transit Partnership (E-009),step_free_entry,present
+door-09,Austin Transit Partnership (E-009),ramp_present,
+door-09,Austin Transit Partnership (E-009),handrails_present,
+door-09,Austin Transit Partnership (E-009),auto_door_button,
+door-09,Austin Transit Partnership (E-009),lever_or_pull_hardware,present
+door-09,Austin Transit Partnership (E-009),clear_approach,present
+door-09,Austin Transit Partnership (E-009),accessible_signage,absent
+door-09,Austin Transit Partnership (E-009),door_width_adequate,appears_wide
+door-10,Sweetgreen (E-010),step_free_entry,present
+door-10,Sweetgreen (E-010),ramp_present,absent
+door-10,Sweetgreen (E-010),handrails_present,absent
+door-10,Sweetgreen (E-010),auto_door_button,absent
+door-10,Sweetgreen (E-010),lever_or_pull_hardware,present
+door-10,Sweetgreen (E-010),clear_approach,present
+door-10,Sweetgreen (E-010),accessible_signage,present
+door-10,Sweetgreen (E-010),door_width_adequate,appears_wide
+door-11,Jo's Coffee (E-011),step_free_entry,absent
+door-11,Jo's Coffee (E-011),ramp_present,present
+door-11,Jo's Coffee (E-011),handrails_present,present
+door-11,Jo's Coffee (E-011),auto_door_button,absent
+door-11,Jo's Coffee (E-011),lever_or_pull_hardware,absent
+door-11,Jo's Coffee (E-011),clear_approach,present
+door-11,Jo's Coffee (E-011),accessible_signage,absent
+door-11,Jo's Coffee (E-011),door_width_adequate,appears_narrow
+door-12,The Ashton lobby (E-012),step_free_entry,present
+door-12,The Ashton lobby (E-012),ramp_present,absent
+door-12,The Ashton lobby (E-012),handrails_present,absent
+door-12,The Ashton lobby (E-012),auto_door_button,absent
+door-12,The Ashton lobby (E-012),lever_or_pull_hardware,present
+door-12,The Ashton lobby (E-012),clear_approach,present
+door-12,The Ashton lobby (E-012),accessible_signage,absent
+door-12,The Ashton lobby (E-012),door_width_adequate,appears_wide
