@@ -97,6 +97,15 @@ prefers-reduced-motion collapses to end state.
      capture can earn the Owner-confirmed ring.
    - Workspace contents: the pin as customers see it, claim status, the guided
      capture flow, correct/dispute channel, tax-credit explainer.
+
+   **Account model (three levels):**
+   - Browse: no login, ever. The map and every receipt are anonymous-readable.
+   - Contribute (scan, correct): lightweight account — Sign in with Apple or email
+     magic link (Apple required on iOS if any third-party login is offered). Accounts
+     give scans provenance: "4 neighbors" = four distinct accounts.
+   - Claim: same login + the ownership confirmation channel. **Login says who you
+     are; it never says what you own** — the proof is always the confirmation step.
+     One account can own multiple doors; the workspace is a list.
 6. **How trust grows** page: the tier ladder explained with receipts philosophy
    ("every badge opens into its evidence"), method + error-rate disclosure lives here
    once (Zestimate pattern), and the roadmap line: "as licensed accessibility
