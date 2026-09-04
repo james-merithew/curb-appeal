@@ -147,7 +147,7 @@ body{
 .sw.partial{border:3px dashed var(--teal-ink)}
 .sw.unknown{border:3px dotted var(--blue)}
 .map-fabs{position:absolute;left:14px;bottom:110px;z-index:20;display:flex;gap:8px;transition:bottom .25s}
-.map-fabs.lifted{bottom:192px}
+.map-fabs.lifted{bottom:214px}
 .fab-needs{
   min-height:48px;border:none;border-radius:26px;padding:0 18px 0 14px;
   background:var(--purple);color:#fff;font-family:inherit;font-weight:800;font-size:.95em;
@@ -215,10 +215,16 @@ body{
 .sheet{
   position:absolute;left:0;right:0;bottom:0;z-index:48;
   background:var(--card);border-radius:24px 24px 0 0;box-shadow:0 -12px 40px rgba(36,31,58,.25);
-  transform:translateY(105%);transition:transform .32s cubic-bezier(.3,.9,.3,1);
+  transform:translateY(105%);
+  /* visibility guard: percentage transforms on composited layers can stick at a
+     stale pixel value on mobile when sheet heights change after first paint
+     (web-font load) — closed sheets then show inside the frame. visibility:hidden
+     (delayed past the slide) makes "closed" unconditional. */
+  visibility:hidden;
+  transition:transform .32s cubic-bezier(.3,.9,.3,1), visibility 0s .32s;
   max-height:76%;display:flex;flex-direction:column;
 }
-.sheet.on{transform:translateY(0)}
+.sheet.on{transform:translateY(0);visibility:visible;transition:transform .32s cubic-bezier(.3,.9,.3,1), visibility 0s 0s}
 .sheet-grip{width:44px;height:5px;border-radius:3px;background:#D9D5EC;margin:10px auto 2px;flex:0 0 auto}
 .sheet-scroll{overflow-y:auto;padding:10px 18px 26px}
 .sheet-close{
@@ -401,8 +407,10 @@ body{
 .charcount{font-size:.72em;color:var(--sub);font-weight:700;text-align:right;margin-top:3px}
 
 /* ============ scan flow ============ */
-.scanscreen{background:var(--ground);z-index:50}
-.scan-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:70px 22px 30px;overflow-y:auto}
+/* z-index sits BELOW the navbar (45): the bottom nav stays visible through the
+   whole scan flow (board 03) — scan bodies pad the nav height instead. */
+.scanscreen{background:var(--ground);z-index:40}
+.scan-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:70px 22px 104px;overflow-y:auto}
 .scan-h{font-size:1.45em;font-weight:900;text-align:center;line-height:1.2;margin-top:14px}
 .scan-p{font-size:.92em;color:var(--sub);font-weight:700;text-align:center;line-height:1.5;margin-top:10px;max-width:300px}
 .privacy-line{margin-top:14px;background:var(--purple-wash);color:var(--purple-ink);font-weight:900;font-size:.9em;border-radius:12px;padding:10px 14px;text-align:center}
@@ -435,7 +443,7 @@ body{
 }
 .shutter:active{transform:scale(.93)}
 .cancel-x{
-  position:absolute;top:54px;right:14px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  position:absolute;top:54px;left:14px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
   background:rgba(255,255,255,.16);color:#fff;font-size:19px;font-weight:900;z-index:5;
 }
 #scan-capture .cancel-x{background:rgba(255,255,255,.16)}
@@ -536,6 +544,175 @@ body{
 .tsize-btn.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
 .owner-tease{background:linear-gradient(120deg,var(--purple-wash),#fff 70%);border:1.5px solid #D8CCF3}
 
+/* ============ onboarding ============ */
+.obscreen{background:var(--ground);z-index:52}
+.ob-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:70px 26px 34px;overflow-y:auto}
+.ob-word{font-weight:900;font-size:1.5em;letter-spacing:-.01em;color:var(--purple-ink)}
+.ob-h{font-size:1.55em;font-weight:900;text-align:center;line-height:1.2;margin-top:22px;color:var(--ink)}
+.ob-p{font-size:.94em;color:var(--sub);font-weight:700;text-align:center;line-height:1.5;margin-top:10px;max-width:300px}
+.ob-illus{margin-top:22px}
+.ob-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px;padding-top:22px}
+.ob-foot{font-size:.78em;color:var(--sub);font-weight:700;text-align:center;margin-top:10px}
+.ob-back{
+  position:absolute;top:54px;left:14px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:#fff;color:var(--sub);font-size:20px;font-weight:900;z-index:5;box-shadow:var(--shadow);
+}
+.ob-kicker{font-size:.8em;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-top:2px}
+#ob-needs .ob-body{align-items:stretch}
+#ob-needs .persona-grid{margin-top:16px}
+
+/* ============ active-filter chip row ============ */
+.chiprow{
+  pointer-events:auto;display:none;flex-wrap:wrap;gap:6px;max-width:100%;padding-right:52px;
+}
+.chiprow.on{display:flex}
+.achip{
+  display:inline-flex;align-items:center;gap:6px;background:var(--purple-ink);color:#fff;
+  border:none;border-radius:999px;padding:6px 8px 6px 13px;font-size:.76em;font-weight:900;
+  cursor:pointer;font-family:inherit;box-shadow:var(--shadow);min-height:32px;
+}
+.achip .x{
+  width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.22);
+  display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;
+}
+
+/* ============ state-records layer toggle ============ */
+.layers-btn{
+  position:absolute;top:104px;right:12px;z-index:20;width:44px;height:44px;border:none;border-radius:50%;
+  background:rgba(255,255,255,.95);box-shadow:var(--shadow);cursor:pointer;color:var(--sub);
+  display:flex;align-items:center;justify-content:center;
+}
+.layers-btn.on{background:var(--blue-ink);color:#fff}
+.star-acc{
+  position:absolute;right:-2px;top:-4px;width:17px;height:17px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--blue-ink);display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.pinbtn.star-lift .pin{transform:scale(1.16);filter:brightness(1.06)}
+.pinbtn.selected.star-lift .pin{transform:scale(1.28)}
+
+/* ============ nearby matches rail title ============ */
+.nearby-title{
+  position:absolute;left:14px;bottom:186px;z-index:21;display:none;
+  background:rgba(255,255,255,.94);border-radius:999px;padding:5px 12px;
+  font-size:.72em;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--sub);
+  box-shadow:var(--shadow);pointer-events:none;
+}
+.nearby-title.on{display:block}
+
+/* ============ empty-area invite ============ */
+.map-empty{
+  position:absolute;left:24px;right:24px;top:38%;transform:translateY(-30%);z-index:21;display:none;
+  background:rgba(255,255,255,.97);border-radius:20px;box-shadow:var(--shadow);
+  padding:22px 20px;text-align:center;flex-direction:column;align-items:center;
+}
+.map-empty.on{display:flex}
+.map-empty .me-h{font-weight:900;font-size:1.05em;margin-top:10px}
+.map-empty .me-p{font-size:.85em;color:var(--sub);font-weight:700;margin-top:5px;line-height:1.45}
+.map-empty .card-actions{width:100%}
+
+/* ============ re-check nudge (stale estimate) ============ */
+.nudge{
+  margin-top:12px;background:var(--amber-wash);border-radius:14px;padding:13px 14px;
+}
+.nudge .n-h{font-weight:900;font-size:.95em;color:var(--ink)}
+.nudge .n-age{
+  display:inline-flex;align-items:center;gap:6px;margin-top:6px;background:#fff;
+  border-radius:999px;padding:4px 11px;font-size:.78em;font-weight:900;color:var(--amber-ink);
+}
+.nudge .n-p{font-size:.82em;color:var(--sub);font-weight:700;margin-top:7px;line-height:1.4}
+.nudge .card-actions{margin-top:10px}
+
+/* ============ claim flow ============ */
+.claimscreen .screen-body{background:var(--ground);display:flex;flex-direction:column}
+.flowhead{display:flex;align-items:center;gap:6px;margin-bottom:10px;min-height:44px}
+.flowhead .backbtn{
+  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;background:#fff;cursor:pointer;
+  color:var(--sub);font-size:20px;font-weight:900;box-shadow:0 2px 10px rgba(36,31,58,.07);
+}
+.flowhead h2{flex:1;text-align:center;font-size:1.15em;font-weight:900;margin-right:44px}
+.searchfield{
+  display:flex;align-items:center;gap:9px;background:#fff;border:2px solid #E6E2F4;border-radius:14px;
+  padding:0 14px;min-height:48px;margin-top:2px;
+}
+.searchfield input{
+  flex:1;border:none;outline:none;font-family:inherit;font-size:.95em;font-weight:700;color:var(--ink);
+  background:none;min-width:0;
+}
+.claim-result{
+  display:flex;align-items:center;gap:12px;width:100%;background:#fff;border:2px solid #E6E2F4;
+  border-radius:16px;padding:12px 14px;margin-top:9px;cursor:pointer;font-family:inherit;text-align:left;
+  min-height:60px;
+}
+.claim-result.sel{border-color:var(--purple)}
+.cr-icon{flex:0 0 38px;height:38px;border-radius:12px;background:var(--purple-wash);display:flex;align-items:center;justify-content:center}
+.cr-name{font-weight:900;font-size:.95em;color:var(--ink)}
+.cr-sub{display:block;font-size:.78em;color:var(--sub);font-weight:700;margin-top:1px}
+.cr-dist{margin-left:auto;font-size:.8em;font-weight:800;color:var(--sub)}
+.bizhead{
+  display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;
+  box-shadow:0 2px 10px rgba(36,31,58,.07);padding:12px 14px;
+}
+.field input[type=email],.field input[type=tel],.field input[type=text]{
+  width:100%;border:2px solid #E6E2F4;border-radius:12px;padding:11px 12px;font-family:inherit;font-size:.92em;
+  color:var(--ink);font-weight:700;background:#fff;min-height:44px;
+}
+.verify-opt{
+  display:flex;align-items:flex-start;gap:11px;width:100%;background:#fff;border:2px solid #E6E2F4;
+  border-radius:14px;padding:12px 13px;margin-top:8px;cursor:pointer;min-height:56px;
+}
+.verify-opt input{accent-color:var(--purple);width:20px;height:20px;margin-top:1px;flex:0 0 auto;cursor:pointer}
+.verify-opt.sel{border-color:var(--purple)}
+.verify-opt .vo-name{font-weight:900;font-size:.92em;color:var(--ink)}
+.verify-opt .vo-sub{display:block;font-size:.78em;color:var(--sub);font-weight:700;margin-top:1px}
+.authz{
+  display:flex;align-items:flex-start;gap:11px;margin-top:14px;cursor:pointer;
+  font-size:.88em;font-weight:800;color:var(--ink);line-height:1.4;min-height:44px;
+}
+.authz input{accent-color:var(--purple);width:20px;height:20px;flex:0 0 auto;margin-top:0;cursor:pointer}
+.guardrail{
+  display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:.78em;color:var(--sub);
+  font-weight:700;line-height:1.45;
+}
+.timeline{display:flex;flex-direction:column;margin-top:18px;width:100%;max-width:300px}
+.tl-item{display:flex;gap:13px;align-items:flex-start;position:relative;padding-bottom:22px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:13px;top:28px;bottom:0;width:2.5px;background:#DDD8F0;
+}
+.tl-item:last-child::before{display:none}
+.tl-dot{
+  flex:0 0 28px;width:28px;height:28px;border-radius:50%;border:2.5px solid #C9C2E2;background:#fff;
+  display:flex;align-items:center;justify-content:center;color:transparent;font-weight:900;font-size:14px;z-index:1;
+}
+.tl-item.done .tl-dot{border-color:var(--purple);background:var(--purple);color:#fff}
+.tl-item.now .tl-dot{border-color:var(--purple);color:var(--purple-ink)}
+.tl-name{font-weight:900;font-size:.95em;color:var(--ink);padding-top:3px}
+.tl-sub{display:block;font-size:.78em;color:var(--sub);font-weight:700;margin-top:1px}
+.whatsnext{
+  margin-top:20px;width:100%;background:#fff;border:2px solid #E6E2F4;border-radius:16px;padding:14px;
+}
+.tax-box{
+  display:flex;align-items:flex-start;gap:10px;background:var(--purple-wash);border-radius:12px;
+  padding:11px 12px;margin-top:11px;font-size:.82em;color:var(--purple-ink);font-weight:700;line-height:1.45;
+}
+
+/* scan library option */
+.lib-link{
+  margin-top:14px;border:none;background:none;font-family:inherit;color:#EDEBFA;font-weight:900;
+  font-size:.9em;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;
+}
+/* correction photo affordance */
+.photo-add{
+  display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:52px;
+  border:2px dashed #C9C2E2;border-radius:12px;background:#F8F7FD;color:var(--purple-ink);
+  font-family:inherit;font-weight:800;font-size:.88em;cursor:pointer;
+}
+
+/* your scans */
+.scanrow-tail{margin-left:auto;text-align:right}
+.scanrow-tail .dots{margin-left:0}
+
 /* toast */
 .toast{
   position:absolute;left:50%;bottom:104px;transform:translate(-50%,20px);z-index:70;opacity:0;
@@ -555,6 +732,23 @@ body{
 }
 /* fit-to-viewport scaling (projector / small panes) */
 .phone-wrap{transform-origin:center center}
+
+/* ============ real-phone mode (<768px): the app IS the screen ============
+   No bezel, no scale transform. The desktop presentation scales .phone-wrap with
+   transform + negative margins; on mobile that promoted the translated (closed)
+   sheets to their own compositing layers, which escape the rounded overflow clip —
+   closed sheets showed through and scan screens painted past the bezel. Dropping
+   the transform entirely (and the bezel) removes the failure mode. */
+@media (max-width:767px){
+  body{padding:0;gap:0;display:block;background:var(--bezel);min-height:100dvh}
+  .stage-caption{display:none}
+  .phone-wrap{transform:none !important;margin:0 !important}
+  .phone{
+    width:100vw;height:100vh;height:100dvh;
+    border:none;border-radius:0;box-shadow:none;
+  }
+  .notch{display:none}
+}
 </style>
 </head>
 <body>
@@ -584,14 +778,28 @@ body{
           </button>
         </div>
         <div class="map-top">
+          <div class="chiprow" id="chiprow" aria-label="Active filters"></div>
           <div class="legend" id="legend"></div>
           <div class="match-legend" id="match-legend">
             <span id="ml-label"></span>
             <span class="lg"><span class="sw good"></span>good</span>
             <span class="lg"><span class="sw partial"></span>partial</span>
-            <span class="lg"><span class="sw unknown"></span>unknown</span>
+            <span class="lg">not yet seen — no halo</span>
           </div>
         </div>
+        <button class="layers-btn" id="layers-btn" role="switch" aria-checked="false" aria-label="State records layer">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5" opacity=".55"/></svg>
+        </button>
+        <div class="map-empty" id="map-empty">
+          <span id="me-pin"></span>
+          <div class="me-h">No entrances mapped here yet</div>
+          <div class="me-p">Be the first to help neighbors plan ahead.</div>
+          <div class="card-actions">
+            <button class="btn marigold" id="me-scan" style="min-height:44px">Scan an entrance</button>
+            <button class="btn ghost" id="me-area" style="min-height:44px">Try another area</button>
+          </div>
+        </div>
+        <div class="nearby-title" id="nearby-title">Nearby matches</div>
         <div class="map-fabs">
           <button class="fab-needs" id="fab-needs" aria-label="My needs">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 21s-7.5-4.8-10-9.3C.4 8.6 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4h4.6C15.1 6.1 16.5 5 18.5 5 22 5 23.6 8.6 22 11.7 19.5 16.2 12 21 12 21z" transform="scale(.9) translate(1.3 1.3)"/></svg>
@@ -678,12 +886,24 @@ body{
 
         <div class="sectionlabel">For business owners</div>
         <div class="prof-card owner-tease">
-          <div style="font-weight:900;font-size:1em">Claim your door</div>
-          <div class="prof-sub" style="margin-top:4px;line-height:1.45">Get scanned, get seen. Missing-feature fixes may qualify for federal tax credits — ask your accountant.</div>
+          <div style="display:flex;align-items:center;gap:13px">
+            <span id="claim-illus" aria-hidden="true"></span>
+            <div>
+              <div style="font-weight:900;font-size:1.05em">Claim your door</div>
+              <div class="prof-sub" style="margin-top:3px;line-height:1.45">Manage the entrance details customers rely on.</div>
+            </div>
+          </div>
+          <div class="tax-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5" stroke-linecap="round"/></svg>
+            Accessibility fixes may qualify for federal tax credits — ask your accountant.
+          </div>
           <div class="card-actions" style="margin-top:12px">
-            <button class="btn ghost" id="btn-claim" style="min-height:44px">Start a claim</button>
+            <button class="btn primary" id="btn-claim" style="min-height:48px">Start a claim</button>
           </div>
         </div>
+
+        <div class="sectionlabel">Your scans</div>
+        <div class="prof-card" id="your-scans"></div>
         <div style="height:8px"></div>
       </div>
     </section>
@@ -692,13 +912,33 @@ body{
     <section class="screen scanscreen light" id="scan-primer">
       <button class="cancel-x" data-scan-exit aria-label="Close scan">✕</button>
       <div class="scan-body">
-        <div class="big-icon">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#6E4A00" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg>
+        <div style="margin:auto 0;display:flex;flex-direction:column;align-items:center">
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center">
+            <svg width="216" height="196" viewBox="0 0 216 196" aria-hidden="true">
+              <circle cx="108" cy="98" r="92" fill="#F0EDFB"/>
+              <rect x="52" y="30" width="112" height="132" rx="9" fill="#fff" stroke="#C3BBE3" stroke-width="3"/>
+              <rect x="60" y="38" width="96" height="10" rx="3" fill="#E2DDF5"/>
+              <rect x="74" y="58" width="68" height="104" rx="4" fill="#F0A32F"/>
+              <rect x="74" y="58" width="68" height="104" rx="4" fill="none" stroke="#B97A10" stroke-width="2.5"/>
+              <rect x="82" y="68" width="52" height="38" rx="3" fill="none" stroke="#B97A10" stroke-width="2"/>
+              <rect x="82" y="114" width="52" height="38" rx="3" fill="none" stroke="#B97A10" stroke-width="2"/>
+              <circle cx="130" cy="112" r="3.4" fill="#6E4A00"/>
+              <path d="M30 176h156l8-14H22z" fill="#D8D2EC"/>
+              <path d="M28 162h160" stroke="#CEC7E6" stroke-width="4"/>
+              <ellipse cx="34" cy="146" rx="13" ry="18" fill="#AFC2F2"/>
+              <rect x="28" y="158" width="12" height="14" rx="2" fill="#C3BBE3"/>
+              <ellipse cx="182" cy="146" rx="13" ry="18" fill="#AFC2F2"/>
+              <rect x="176" y="158" width="12" height="14" rx="2" fill="#C3BBE3"/>
+            </svg>
+            <div class="big-icon" style="margin-top:-48px;position:relative;z-index:2">
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#6E4A00" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg>
+            </div>
+          </div>
+          <h2 class="scan-h">Help map an entrance</h2>
+          <p class="scan-p">A quick 7-second scan helps neighbors plan ahead.</p>
+          <div class="privacy-line">Only the doorway is captured.</div>
+          <p class="privacy-sub">Faces are auto-blurred and GPS is stripped at upload — you never have to do a privacy step.</p>
         </div>
-        <h2 class="scan-h">Help map an entrance</h2>
-        <p class="scan-p">A quick 7-second scan helps neighbors plan ahead.</p>
-        <div class="privacy-line">Only the doorway is captured.</div>
-        <p class="privacy-sub">Faces are auto-blurred and GPS is stripped at upload — you never have to do a privacy step.</p>
         <div class="scan-actions">
           <button class="btn marigold" id="btn-allow-cam">Allow camera</button>
           <button class="btn quiet" data-scan-exit>Not now</button>
@@ -714,17 +954,22 @@ body{
           <video id="cam-video" autoplay playsinline muted hidden></video>
           <div class="frame-guide"><i></i><i></i><i></i><i></i></div>
           <div class="coach" style="top:12px">Center the full doorway</div>
-          <div class="coach" style="bottom:12px">Include the path in front</div>
+          <div class="coach" style="bottom:12px">Step back a little</div>
           <div class="live-chip"><span class="dot"></span>LIVE</div>
         </div>
         <div class="scan-target">Scanning near W 3rd St · <b id="scan-target-name"></b></div>
         <button class="shutter" id="btn-shutter" aria-label="Capture photo"></button>
+        <button class="lib-link" id="btn-library">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="9" cy="9" r="1.8"/><path d="M3.5 16.5l4.8-4.6 4.2 4 3-2.8 5 4.4"/></svg>
+          Choose from library
+        </button>
+        <input type="file" id="lib-input" accept="image/*" hidden>
       </div>
     </section>
 
     <section class="screen scanscreen light" id="scan-processing">
       <div class="scan-body">
-        <h2 class="scan-h" style="margin-top:8px">Reading the doorway…</h2>
+        <h2 class="scan-h" style="margin-top:8px">Checking the entrance</h2>
         <div class="ringwrap">
           <svg width="150" height="150" viewBox="0 0 150 150">
             <circle class="ring-bg" cx="75" cy="75" r="65"/>
@@ -779,6 +1024,177 @@ body{
       </div>
     </section>
 
+    <!-- ================= ONBOARDING (first load; skippable; in-memory flag) ================= -->
+    <section class="screen obscreen" id="ob-welcome">
+      <div class="ob-body">
+        <div style="margin:auto 0;display:flex;flex-direction:column;align-items:center">
+          <div class="ob-word">entrymap</div>
+          <h1 class="ob-h">access starts before you arrive</h1>
+          <p class="ob-p">Find entrances and places that fit your needs.</p>
+          <svg class="ob-illus" width="290" height="158" viewBox="0 0 290 158" aria-hidden="true">
+            <rect x="14" y="34" width="52" height="96" rx="4" fill="#E4E1F6"/>
+            <rect x="22" y="44" width="10" height="10" fill="#fff"/><rect x="38" y="44" width="10" height="10" fill="#fff"/><rect x="54" y="44" width="10" height="10" fill="#fff"/>
+            <rect x="22" y="62" width="10" height="10" fill="#fff"/><rect x="38" y="62" width="10" height="10" fill="#fff"/><rect x="54" y="62" width="10" height="10" fill="#fff"/>
+            <rect x="22" y="80" width="10" height="10" fill="#fff"/><rect x="38" y="80" width="10" height="10" fill="#fff"/><rect x="54" y="80" width="10" height="10" fill="#fff"/>
+            <rect x="78" y="56" width="70" height="74" rx="4" fill="#D9D3F0"/>
+            <rect x="88" y="66" width="12" height="12" fill="#fff"/><rect x="107" y="66" width="12" height="12" fill="#fff"/><rect x="126" y="66" width="12" height="12" fill="#fff"/>
+            <rect x="88" y="86" width="12" height="12" fill="#fff"/><rect x="107" y="86" width="12" height="12" fill="#fff"/><rect x="126" y="86" width="12" height="12" fill="#fff"/>
+            <rect x="100" y="104" width="22" height="26" rx="2" fill="#F0A32F"/>
+            <rect x="160" y="22" width="60" height="108" rx="4" fill="#E4E1F6"/>
+            <rect x="170" y="34" width="11" height="11" fill="#fff"/><rect x="188" y="34" width="11" height="11" fill="#fff"/><rect x="206" y="34" width="11" height="11" fill="#fff"/>
+            <rect x="170" y="54" width="11" height="11" fill="#fff"/><rect x="188" y="54" width="11" height="11" fill="#fff"/><rect x="206" y="54" width="11" height="11" fill="#fff"/>
+            <rect x="170" y="74" width="11" height="11" fill="#fff"/><rect x="188" y="74" width="11" height="11" fill="#fff"/><rect x="206" y="74" width="11" height="11" fill="#fff"/>
+            <rect x="232" y="66" width="44" height="64" rx="4" fill="#D9D3F0"/>
+            <rect x="240" y="76" width="10" height="10" fill="#fff"/><rect x="256" y="76" width="10" height="10" fill="#fff"/>
+            <ellipse cx="150" cy="140" rx="130" ry="6" fill="#DCD7F1"/>
+            <path d="M110 44c0-12.2 9.3-21 21-21s21 8.8 21 21c0 10-8 18.5-21 30-13-11.5-21-20-21-30z" fill="#7053C5"/>
+            <circle cx="131" cy="43" r="8.2" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="ob-actions">
+          <button class="btn primary" id="ob-signin">Sign in</button>
+          <button class="btn ghost" id="ob-guest">Continue as guest</button>
+          <div class="ob-foot">Guest choices stay on this device.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen obscreen" id="ob-location">
+      <button class="ob-back" id="ob-loc-back" aria-label="Back">‹</button>
+      <div class="ob-body">
+        <div style="margin:auto 0;display:flex;flex-direction:column;align-items:center">
+          <div class="ob-kicker">Your location</div>
+          <svg class="ob-illus" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true" style="margin-top:18px">
+            <circle cx="48" cy="48" r="46" fill="var(--purple-wash)"/>
+            <path d="M48 24c-9.4 0-17 7.4-17 16.6 0 8 6.4 14.8 17 24 10.6-9.2 17-16 17-24C65 31.4 57.4 24 48 24z" fill="#7053C5"/>
+            <circle cx="48" cy="40" r="6.6" fill="#fff"/>
+          </svg>
+          <h1 class="ob-h" style="margin-top:16px">See what works nearby</h1>
+          <p class="ob-p">We use your location to center the map and show walking distance.</p>
+        </div>
+        <div class="ob-actions">
+          <button class="btn primary" id="ob-allow-loc">Allow location</button>
+          <button class="btn ghost" id="ob-loc-notnow">Not now</button>
+          <div class="ob-foot">You control this in Settings.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen obscreen" id="ob-needs">
+      <button class="ob-back" id="ob-needs-back" aria-label="Back">‹</button>
+      <div class="ob-body">
+        <div class="ob-kicker" style="text-align:center">My Needs</div>
+        <h1 class="ob-h" style="margin-top:10px">What should we prioritize?</h1>
+        <p class="ob-p" style="align-self:center">Optional · choose any that help</p>
+        <div class="persona-grid" id="ob-persona-grid"></div>
+        <div class="ob-actions" style="padding-top:14px">
+          <button class="btn primary" id="ob-needs-continue">Continue</button>
+          <button class="btn-textlink" id="ob-needs-skip">Skip for now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OWNER CLAIM FLOW (stub) ================= -->
+    <section class="screen claimscreen" id="claim-find">
+      <div class="screen-body">
+        <div class="flowhead">
+          <button class="backbtn" data-goto="screen-profile" aria-label="Back to Profile">‹</button>
+          <h2>Find your business</h2>
+        </div>
+        <div class="searchfield">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--sub)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <input id="claim-search" value="Royal Blue" aria-label="Search your business">
+        </div>
+        <p class="sheet-p" style="margin-top:12px">Choose the entrance you manage.</p>
+        <div id="claim-results"></div>
+        <div class="card-actions" style="margin-top:18px">
+          <button class="btn primary" id="btn-claim-continue">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen claimscreen" id="claim-confirm">
+      <div class="screen-body">
+        <div class="flowhead">
+          <button class="backbtn" data-goto="claim-find" aria-label="Back">‹</button>
+          <h2>Confirm ownership</h2>
+        </div>
+        <div class="bizhead" id="claim-bizhead"></div>
+        <div class="field">
+          <label for="claim-role">Your role</label>
+          <select id="claim-role"><option>Owner</option><option>Manager</option></select>
+        </div>
+        <div class="field">
+          <label for="claim-email">Work email</label>
+          <input type="email" id="claim-email" placeholder="you@yourbusiness.com" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="claim-phone">Business phone</label>
+          <input type="tel" id="claim-phone" placeholder="(512) 555-0137" autocomplete="off">
+        </div>
+        <div class="chips-title" style="margin-top:16px">How should we verify you?</div>
+        <label class="verify-opt sel" id="vo-email">
+          <input type="radio" name="claim-verify" value="email" checked>
+          <span><span class="vo-name">Business email</span>
+          <span class="vo-sub">We'll send a link to the business's listed domain.</span></span>
+        </label>
+        <label class="verify-opt" id="vo-call">
+          <input type="radio" name="claim-verify" value="call">
+          <span><span class="vo-name">Call the business</span>
+          <span class="vo-sub">We'll call the business's listed phone.</span></span>
+        </label>
+        <label class="authz">
+          <input type="checkbox" id="claim-authz">
+          <span>I'm authorized to manage this business listing.</span>
+        </label>
+        <div class="guardrail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" style="flex:0 0 auto;margin-top:2px"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 018 0v2.5"/></svg>
+          Codes go only to the business's listed contact — a typed address is input, never authority.
+        </div>
+        <div class="card-actions" style="margin-top:16px">
+          <button class="btn primary" id="btn-claim-submit">Submit claim</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen claimscreen" id="claim-track">
+      <div class="screen-body">
+        <div class="flowhead">
+          <button class="backbtn" data-goto="screen-profile" aria-label="Back to Profile">‹</button>
+          <h2>Claim submitted</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <svg width="86" height="86" viewBox="0 0 96 96" aria-hidden="true" style="margin-top:10px">
+            <circle cx="48" cy="48" r="44" fill="#fff"/>
+            <circle cx="48" cy="48" r="30" fill="none" stroke="#7053C5" stroke-width="4"/>
+            <path d="M48 33v15l10 7" fill="none" stroke="#7053C5" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="74" cy="70" r="12" fill="#7053C5"/>
+            <path d="M68.5 70l4 4 7-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h2 class="scan-h" style="font-size:1.3em;margin-top:14px">We're reviewing your claim</h2>
+          <p class="scan-p" style="margin-top:6px">We'll email you when your workspace is ready.</p>
+          <div class="timeline">
+            <div class="tl-item done"><span class="tl-dot">✓</span><span><span class="tl-name">Submitted</span><span class="tl-sub">Just now</span></span></div>
+            <div class="tl-item done"><span class="tl-dot">✓</span><span><span class="tl-name">Business match</span><span class="tl-sub">Just now</span></span></div>
+            <div class="tl-item now"><span class="tl-dot">·</span><span><span class="tl-name">Ownership review</span><span class="tl-sub">In progress</span></span></div>
+          </div>
+          <div class="whatsnext">
+            <div class="chips-title" style="margin:0 0 8px">What's next</div>
+            <div style="display:flex;align-items:center;gap:12px;text-align:left">
+              <span id="track-pin" aria-hidden="true"></span>
+              <span style="font-size:.86em;font-weight:700;color:var(--sub);line-height:1.45">
+                <b style="color:var(--ink)">Owner-confirmed (preview)</b><br>
+                You'll get full access to manage your entrance details — the ring itself still takes an attested at-the-door capture.
+              </span>
+            </div>
+          </div>
+          <div class="card-actions" style="margin-top:18px;width:100%">
+            <button class="btn ghost" data-goto="screen-profile">Back to Profile</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= SHEETS ================= -->
     <div class="scrim" id="scrim"></div>
 
@@ -792,8 +1208,8 @@ body{
       <div class="sheet-grip"></div>
       <button class="sheet-close" data-close aria-label="Close">✕</button>
       <div class="sheet-scroll">
-        <h3 class="sheet-h">My Needs</h3>
-        <p class="sheet-p">What should we prioritize? Optional — choose any that help.</p>
+        <h3 class="sheet-h">What should we prioritize?</h3>
+        <p class="sheet-p">Optional · choose any that help.</p>
         <div class="persona-grid" id="persona-grid"></div>
         <div class="card-actions" style="margin-top:16px">
           <button class="btn primary" id="btn-needs-apply">Continue</button>
@@ -828,7 +1244,6 @@ body{
         <div class="prof-row" style="cursor:default;border-bottom:none;margin-top:4px">
           <span class="rowmain">
             <span class="rowlabel">Open now</span>
-            <span class="rowsub">Hours come from the place provider, live</span>
           </span>
           <button class="toggle" id="filt-open" role="switch" aria-checked="false" aria-label="Open now"></button>
         </div>
@@ -861,7 +1276,8 @@ body{
       <button class="sheet-close" data-close aria-label="Close">✕</button>
       <div class="sheet-scroll">
         <h3 class="sheet-h">Suggest a correction</h3>
-        <p class="sheet-p" id="correct-biz"></p>
+        <p class="sheet-p" style="margin-top:2px">Tell us what changed — corrections stay human; nothing changes without review.</p>
+        <div class="bizhead" id="correct-bizhead" style="margin-top:12px;border:2px solid #E6E2F4;box-shadow:none"></div>
         <div class="field">
           <label for="correct-what">What needs updating?</label>
           <select id="correct-what">
@@ -873,12 +1289,35 @@ body{
         </div>
         <div class="field">
           <label for="correct-note">What did you notice?</label>
-          <textarea id="correct-note" maxlength="300" placeholder="e.g. There's a small ramp around the corner…"></textarea>
+          <textarea id="correct-note" maxlength="300" placeholder="Share what's different or new so others have the right info."></textarea>
           <div class="charcount"><span id="correct-count">0</span>/300</div>
+        </div>
+        <div class="field">
+          <label for="correct-photo-btn">Add a photo (optional)</label>
+          <button class="photo-add" id="correct-photo-btn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg>
+            <span id="correct-photo-label">Choose a photo</span>
+          </button>
+          <input type="file" id="correct-photo" accept="image/*" hidden>
         </div>
         <p class="sheet-p">We'll review your note with the community.</p>
         <div class="card-actions">
-          <button class="btn primary" id="btn-correct-send">Send</button>
+          <button class="btn primary" id="btn-correct-send">Send suggestion</button>
+          <button class="btn quiet" data-close>Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet" id="sheet-privacy" role="dialog" aria-label="Privacy">
+      <div class="sheet-grip"></div>
+      <button class="sheet-close" data-close aria-label="Close">✕</button>
+      <div class="sheet-scroll">
+        <h3 class="sheet-h">Privacy</h3>
+        <p class="sheet-p">Privacy is built in — you never have to do a privacy step.</p>
+        <div class="ladder" style="margin-top:12px">
+          <div class="rung"><span class="rowicon" style="flex:0 0 34px;height:34px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--purple-ink)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/></svg></span><div class="r-body"><span class="r-name">Faces are auto-blurred</span><br>Every photo is screened at upload. If a face might survive the blur, the photo is quarantined — the verdicts publish, the photo doesn't.</div></div>
+          <div class="rung"><span class="rowicon" style="flex:0 0 34px;height:34px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--purple-ink)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="10" r="3.2"/><path d="M12 21c4-4.5 7-8 7-11a7 7 0 10-14 0c0 3 3 6.5 7 11z"/></svg></span><div class="r-body"><span class="r-name">GPS is stripped at upload</span><br>Photos carry no location metadata. Pins come from the place you chose, not your camera.</div></div>
+          <div class="rung"><span class="rowicon" style="flex:0 0 34px;height:34px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--purple-ink)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><rect x="6" y="3.5" width="12" height="17" rx="2.5"/><path d="M10.5 17.5h3"/></svg></span><div class="r-body"><span class="r-name">Guest choices stay on this device</span><br>Browsing never needs a login. Signing in only adds sync — it never adds tracking.</div></div>
         </div>
       </div>
     </div>
@@ -968,6 +1407,11 @@ DATA.doors.forEach(d=>{
   places.push({...d, tier, date:'2026-09-02'});
 });
 places.forEach(p=>p.f = featsOf(p));
+/* TABS provenance (staged for demo): one scanned door carries a Texas
+   accessibility inspection record — card row + receipt row + map layer. */
+const TABS_PLACE = places.find(p=>p.id==='door-04');
+if(TABS_PLACE) TABS_PLACE.tabs = {year:2019};
+let stateLayer = false;
 
 /* scan flow target: estimated pin nearest bbox center */
 const cx=(BBOX.lat0+BBOX.lat1)/2, cy=(BBOX.lng0+BBOX.lng1)/2;
@@ -1017,31 +1461,38 @@ const GL = {
 };
 
 /* Pin hierarchy (spec 2026-09-04): the pin IS the tier — no sparkle, no tabs,
-   no floating marks; the owner check is a badge integrated into the silhouette. */
+   no floating marks; the owner check is a badge integrated into the silhouette.
+   All three tiers share the teardrop map-pin silhouette (owner boards); the
+   tier treatments (dash / segmented ring / fused check) live INSIDE it. */
+const TEAR = 'M18 41.5C13.9 34.7 5.5 27.2 5.5 15.8a12.5 12.5 0 1125 0C30.5 27.2 22.1 34.7 18 41.5Z';
 function pinSVG(tier, size){
   if(tier==='est'){
     const s = size||26;
-    return `<svg width="${s}" height="${s}" viewBox="0 0 30 30" aria-hidden="true">
-      <circle cx="15" cy="15" r="10.5" fill="#fff" stroke="#5B8DEF" stroke-width="2.4" stroke-dasharray="4 3"/>
-      <text x="15" y="20" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="13" fill="#1E3A8A">i</text>
+    return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+      <path d="${TEAR}" fill="#fff" stroke="#5B8DEF" stroke-width="2.4" stroke-dasharray="4 3" stroke-linejoin="round"/>
+      <text x="18" y="21" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="14" fill="#1E3A8A">i</text>
     </svg>`;
   }
   if(tier==='scan'){
     const s = size||30;
-    return `<svg width="${s}" height="${s}" viewBox="0 0 36 36" aria-hidden="true">
-      <circle cx="18" cy="18" r="16" fill="none" stroke="#F0A32F" stroke-width="2.6" stroke-dasharray="12.5 8" stroke-linecap="round"/>
-      <circle cx="18" cy="18" r="11.5" fill="#F0A32F" stroke="#fff" stroke-width="2"/>
-      <g transform="translate(6 6) scale(1)">${GL.person}</g>
+    return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+      <path d="${TEAR}" fill="#F0A32F" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="18" cy="15.8" r="10.2" fill="none" stroke="#fff" stroke-width="1.9" stroke-dasharray="8 5" stroke-linecap="round"/>
+      <g transform="translate(8.4 6.2) scale(.8)">${GL.person}</g>
     </svg>`;
   }
-  /* owner — check badge fused into the pin silhouette */
+  /* owner — check badge fused into the teardrop's shoulder */
   const s = size||36;
-  return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-hidden="true">
-    <circle cx="19" cy="18" r="13.5" fill="#7053C5" stroke="#fff" stroke-width="2"/>
-    <g transform="translate(7.5 6.5) scale(.96)">${GL.store}</g>
-    <circle cx="30" cy="29" r="7.5" fill="#7053C5" stroke="#fff" stroke-width="2"/>
-    <path d="M26.8 29l2.3 2.3 4-4.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+    <path d="${TEAR}" fill="#7053C5" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <g transform="translate(6.6 4.8) scale(.95)">${GL.store}</g>
+    <circle cx="28.5" cy="26.5" r="6.4" fill="#7053C5" stroke="#fff" stroke-width="2"/>
+    <path d="M25.7 26.5l2 2 3.5-3.9" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
+}
+/* lone-star accessory (state-records layer, Level-1 slot) — outline star, no red */
+function starAccHTML(){
+  return `<span class="star-acc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--blue-ink)" stroke-width="2" stroke-linejoin="round"><path d="M12 2.5l2.7 5.9 6.3.6-4.8 4.2 1.4 6.3L12 16.2l-5.6 3.3 1.4-6.3L3 9l6.3-.6z"/></svg></span>`;
 }
 function avatarHTML(tier){
   return `<span class="avatar">${pinSVG(tier, tier==='est'?40:46)}</span>`;
@@ -1114,16 +1565,25 @@ function renderMap(){
     b.style.left=x+'px'; b.style.top=y+'px';
     b.style.zIndex=order[p.tier]*10;
     b.setAttribute('aria-label', p.name + ' — ' + tierName(p.tier));
-    let halo='', label='';
+    let halo='', label='', acc='';
     const m=matchOf(p);
-    if(m) halo=`<span class="halo ${m.state}"></span>`;
+    /* good/partial halos only — unknown gets NO halo (less ring static; absence reads as "not yet seen") */
+    if(m && m.state!=='unknown') halo=`<span class="halo ${m.state}"></span>`;
     /* label chip only on the SELECTED pin (pin-hierarchy rule) */
     if(m && m.state==='good' && p.id===selectedId) label=`<span class="pin-label">♥ Good match</span>`;
-    b.innerHTML = halo + `<span class="pin">${pinSVG(p.tier)}</span>` + label;
+    /* Level-1 accessory slot: needs halo wins; the lone star only when no profile is active */
+    if(stateLayer && p.tabs){
+      if(personas.size) b.classList.add('star-lift'); /* halo holds the slot — star pins lift, never double-mark */
+      else acc=starAccHTML();
+    }
+    b.innerHTML = halo + `<span class="pin" style="position:relative">${pinSVG(p.tier)}${acc}</span>` + label;
     b.addEventListener('click',()=>openCard(p.id));
     b.dataset.id=p.id;
     pinsEl.appendChild(b);
   });
+  /* empty-area invite: filtering (or panning) to zero pins invites, never shames */
+  const me=document.getElementById('map-empty');
+  if(me) me.classList.toggle('on', sorted.length===0);
 }
 function tierName(t){return t==='est'?'Estimated':t==='scan'?'Scanned on-site':'Owner-confirmed';}
 function tierChip(t){
@@ -1142,6 +1602,14 @@ document.getElementById('legend').innerHTML =
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function fmtMonth(d){ if(!d) return 'date unavailable'; const [y,m]=d.split('-'); return MONTHS[+m-1]+' '+y; }
 function monthsOld(d){ if(!d) return 999; const [y,m]=d.split('-').map(Number); return (2026-y)*12+(9-m); }
+function ageLabel(d){
+  const mo=monthsOld(d);
+  if(mo>=999) return 'a while ago';
+  if(mo<1) return 'this month';
+  if(mo<24) return mo+' month'+(mo>1?'s':'')+' ago';
+  const y=Math.round(mo/12);
+  return y+' years ago';
+}
 function dotTriple(conf, cls){
   const n = conf>=70?3:conf>=40?2:1;
   return `<span class="dots" style="color:${cls}"><i class="${n>0?'f':''}"></i><i class="${n>1?'f':''}"></i><i class="${n>2?'f':''}"></i></span>`;
@@ -1199,15 +1667,23 @@ function cardHTML(p){
       `<span class="pr-sub invite">been here? Confirm in 30 seconds</span>`,
       'rcpt-est');
   } else {
-    const who = p.staged ? 'you' : 'a neighbor';
+    const nv = p.views||1;
     if(p.tier==='owner'){
       prov += provRow(iconSVG(GL.store,'var(--purple-ink)'),
         `Owner update · today <span style="color:var(--sub);font-weight:700">(staged for demo)</span>`,
         `<span class="pr-sub" style="color:var(--purple-ink)">confirmed at the door, attested in-app</span>`,'rcpt-owner');
     }
+    /* neighbors = distinct contributors (receipt framing) */
     prov += provRow(iconSVG(GL.camera,'var(--marigold-ink)'),
-      `Photographed on-site · ${p.staged?'just now':'Tue Sep 2'} · ${p.views||1} photo${(p.views||1)>1?'s':''} · ${who}`,
+      p.staged ? `Photographed just now — your scan`
+               : `Photographed Tuesday — ${nv} neighbor${nv>1?'s':''}`,
       `<span class="pr-sub" style="color:var(--marigold-ink)">tap for what the scan saw</span>`,'rcpt-scan');
+    if(p.tabs){
+      prov += provRow(
+        `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-ink)" stroke-width="1.9" stroke-linejoin="round"><path d="M12 2.5l2.7 5.9 6.3.6-4.8 4.2 1.4 6.3L12 16.2l-5.6 3.3 1.4-6.3L3 9l6.3-.6z"/></svg>`,
+        `Texas accessibility inspection on record · ${p.tabs.year}`,
+        `<span class="pr-sub" style="color:var(--sub)">state record — provenance, not a badge</span>`,'rcpt-scan');
+    }
     if(p.tier==='owner'){
       prov += provRow(sparkle('#1E3A8A'),
         `Estimated by AI from street imagery · earlier`,
@@ -1270,6 +1746,20 @@ function cardHTML(p){
     </div>`;
   }
 
+  /* re-check nudge: stale estimates ask gently — age is context, not failure */
+  let nudge='';
+  if(p.tier==='est' && aged){
+    nudge = `<div class="nudge">
+      <div class="n-h">Could you take another look?</div>
+      <span class="n-age"><svg width="13" height="13" viewBox="0 0 24 24" style="color:var(--amber-ink)">${GL.clock}</svg> Last checked ${ageLabel(p.date)}</span>
+      <div class="n-p">A fresh photo helps everyone plan with confidence.</div>
+      <div class="card-actions">
+        <button class="btn marigold" id="btn-recheck" style="min-height:44px">Re-check entrance</button>
+        <button class="btn quiet" id="btn-recheck-later" style="min-height:44px">Maybe later</button>
+      </div>
+    </div>`;
+  }
+
   return `
     <div class="card-head">
       ${avatarHTML(p.tier)}
@@ -1280,6 +1770,7 @@ function cardHTML(p){
       </div>
     </div>
     ${breakdown}
+    ${nudge}
     ${photoStrip}
     <div class="tiles">
       <div class="tile ${p.tier==='est'&&aged?'aged':''}">
@@ -1340,8 +1831,15 @@ function wireCard(el,p){
   if(ps) ps.addEventListener('click',()=>openReceipt(p));
   const sc=el.querySelector('#btn-scan-this');
   if(sc) sc.addEventListener('click',()=>{scanTarget=p; closeSheets(); startScan();});
+  const rc=el.querySelector('#btn-recheck');
+  if(rc) rc.addEventListener('click',()=>{scanTarget=p; closeSheets(); startScan();});
+  const rl=el.querySelector('#btn-recheck-later');
+  if(rl) rl.addEventListener('click',()=>{closeSheets(); toast('No problem — the estimate stays honest about its age');});
   el.querySelector('#btn-correct').addEventListener('click',()=>{
-    document.getElementById('correct-biz').textContent = p.name + ' — corrections stay human; nothing changes without review.';
+    document.getElementById('correct-bizhead').innerHTML =
+      `<span class="cr-icon">${iconSVG(GL.store,'var(--purple-ink)')}</span>
+       <span><span class="cr-name">${esc(p.name)}</span>
+       <span class="cr-sub">${esc(p.addr||tierName(p.tier))}</span></span>`;
     openSheet('sheet-correct');
   });
   el.querySelector('#btn-card-needs').addEventListener('click',()=>openSheet('sheet-needs'));
@@ -1383,6 +1881,13 @@ function openReceipt(p){
       <span>1 owner<span class="rc-sub">attested at the door, in-app · staged for demo</span></span>
     </div>`;
   }
+  if(p.tabs){
+    rows += `
+    <div class="rcpt-row">
+      <span class="rc-icon">${rcptIcon('<path d="M12 2.5l2.7 5.9 6.3.6-4.8 4.2 1.4 6.3L12 16.2l-5.6 3.3 1.4-6.3L3 9l6.3-.6z"/>','var(--blue-ink)')}</span>
+      <span>Texas record · ${p.tabs.year}<span class="rc-sub">accessibility inspection on file · (staged for demo)</span></span>
+    </div>`;
+  }
   el.innerHTML = `
     <button class="rcpt-back" id="rcpt-back">‹ Back to ${esc(p.name)}</button>
     <h3 class="sheet-h" style="margin-top:0">Evidence receipt</h3>
@@ -1421,8 +1926,9 @@ const P_ICONS={
   stroller:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 4h2l2 8h9l3-6M9 12l-2 5h11"/><circle cx="9.5" cy="20" r="1.8"/><circle cx="16.5" cy="20" r="1.8"/></svg>'
 };
 let pendingPersonas=new Set();
-function renderPersonas(){
-  pg.innerHTML='';
+function renderPersonaGrid(el){
+  if(!el) return;
+  el.innerHTML='';
   Object.entries(PERSONAS).forEach(([k,v])=>{
     const sel=pendingPersonas.has(k);
     const b=document.createElement('button');
@@ -1435,8 +1941,12 @@ function renderPersonas(){
       if(pendingPersonas.has(k)) pendingPersonas.delete(k); else pendingPersonas.add(k);
       renderPersonas();
     });
-    pg.appendChild(b);
+    el.appendChild(b);
   });
+}
+function renderPersonas(){
+  renderPersonaGrid(pg);
+  renderPersonaGrid(document.getElementById('ob-persona-grid'));
 }
 document.getElementById('btn-needs-apply').addEventListener('click',()=>{
   personas=new Set(pendingPersonas);
@@ -1462,6 +1972,7 @@ function applyPersona(){
   document.getElementById('prof-needs-chips').innerHTML = [...personas].map(k=>`<span class="needchip">${PERSONAS[k].label}</span>`).join('');
   renderMap();
   renderNearby();
+  renderChipRow();
 }
 document.getElementById('fab-needs').addEventListener('click',()=>{pendingPersonas=new Set(personas);renderPersonas();openSheet('sheet-needs');});
 document.getElementById('prof-needs-row').addEventListener('click',()=>{pendingPersonas=new Set(personas);renderPersonas();openSheet('sheet-needs');});
@@ -1469,7 +1980,12 @@ document.getElementById('prof-needs-row').addEventListener('click',()=>{pendingP
 /* ===================== nearby matches (needs filter active) ===================== */
 function renderNearby(){
   const nb=document.getElementById('nearby');
-  if(!personas.size){nb.classList.remove('on');nb.innerHTML='';return;}
+  if(!personas.size){
+    nb.classList.remove('on');nb.innerHTML='';
+    document.getElementById('nearby-title').classList.remove('on');
+    document.querySelector('.map-fabs').classList.remove('lifted');
+    return;
+  }
   const rank={good:0,partial:1};
   const matches=places
     .map(p=>({p,m:matchOf(p)}))
@@ -1499,6 +2015,7 @@ function renderNearby(){
     nb.appendChild(b);
   });
   nb.classList.toggle('on',matches.length>0);
+  document.getElementById('nearby-title').classList.toggle('on',matches.length>0);
   document.querySelector('.map-fabs').classList.toggle('lifted',matches.length>0);
 }
 
@@ -1570,10 +2087,70 @@ document.getElementById('filt-reset').addEventListener('click',()=>{
 });
 document.getElementById('btn-filt-show').addEventListener('click',()=>{
   filterApplied = filtFeats.size>0 || filtFresh!=='any' || personas.size>0;
-  renderMap(); renderNearby(); updateFiltShow(); closeSheets();
+  renderMap(); renderNearby(); updateFiltShow(); renderChipRow(); closeSheets();
   if(filterApplied) toast('Showing '+filtCount()+' places that fit');
 });
 document.getElementById('fab-filters').addEventListener('click',()=>{renderFilters();updateFiltShow();openSheet('sheet-filters');});
+
+/* ===================== active-filter chip row (removable) ===================== */
+function chipEl(label, onRemove){
+  const b=document.createElement('button');
+  b.className='achip';
+  b.setAttribute('aria-label','Remove filter: '+label);
+  b.innerHTML=`${label}<span class="x" aria-hidden="true">✕</span>`;
+  b.addEventListener('click',onRemove);
+  return b;
+}
+function renderChipRow(){
+  const row=document.getElementById('chiprow');
+  row.innerHTML='';
+  personas.forEach(k=>{
+    row.appendChild(chipEl(PERSONAS[k].label,()=>{
+      personas.delete(k); pendingPersonas.delete(k);
+      applyPersona(); renderPersonas();
+    }));
+  });
+  if(filterApplied){
+    filtFeats.forEach(k=>{
+      const lbl=(FILT_FEATS.find(f=>f[0]===k)||[k,FEATS[k]?FEATS[k].label:k])[1];
+      row.appendChild(chipEl(lbl,()=>{
+        filtFeats.delete(k);
+        filterApplied = filtFeats.size>0 || filtFresh!=='any' || personas.size>0;
+        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+      }));
+    });
+    if(filtFresh!=='any'){
+      row.appendChild(chipEl(filtFresh+' days',()=>{
+        filtFresh='any';
+        filterApplied = filtFeats.size>0 || personas.size>0;
+        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+      }));
+    }
+  }
+  row.classList.toggle('on', row.children.length>0);
+}
+
+/* ===================== state-records layer (Level-1 accessory slot) ===================== */
+const layersBtn=document.getElementById('layers-btn');
+layersBtn.addEventListener('click',()=>{
+  stateLayer=!stateLayer;
+  layersBtn.classList.toggle('on',stateLayer);
+  layersBtn.setAttribute('aria-checked',stateLayer);
+  renderMap();
+  const n=places.filter(p=>p.tabs).length;
+  toast(stateLayer
+    ? `State records on — ${n} entrance${n===1?'':'s'} with a Texas inspection on file`
+    : 'State records off');
+});
+
+/* ===================== empty-area invite ===================== */
+document.getElementById('me-pin').innerHTML=pinSVG('est',36);
+document.getElementById('me-scan').addEventListener('click',()=>{closeSheets();startScan();});
+document.getElementById('me-area').addEventListener('click',()=>{
+  filtFeats.clear(); filtFresh='any'; filterApplied = personas.size>0;
+  renderFilters(); updateFiltShow(); renderChipRow(); renderMap(); renderNearby();
+  toast('Filters eased — showing this area again');
+});
 
 /* ===================== header ===================== */
 document.getElementById('locpill').addEventListener('click',()=>toast('Demo area: 2nd & Colorado, downtown Austin'));
@@ -1590,6 +2167,8 @@ const cNote=document.getElementById('correct-note');
 cNote.addEventListener('input',()=>document.getElementById('correct-count').textContent=cNote.value.length);
 document.getElementById('btn-correct-send').addEventListener('click',()=>{
   closeSheets(); cNote.value=''; document.getElementById('correct-count').textContent='0';
+  const cp=document.getElementById('correct-photo'); if(cp) cp.value='';
+  const cpl=document.getElementById('correct-photo-label'); if(cpl) cpl.textContent='Choose a photo';
   toast("Thanks — we'll review your note with the community");
 });
 
@@ -1598,7 +2177,8 @@ function showScreen(id){
   if(id!=='scan-capture' && typeof stopCamera==='function') stopCamera();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   document.getElementById('nav-map').classList.toggle('on',id==='screen-map');
-  document.getElementById('nav-profile').classList.toggle('on',id==='screen-profile');
+  document.getElementById('nav-profile').classList.toggle('on',id==='screen-profile'||id.indexOf('claim-')===0);
+  if(id==='screen-profile') renderYourScans();
 }
 document.getElementById('nav-map').addEventListener('click',()=>{cancelScanTimers();showScreen('screen-map');renderMap();});
 document.getElementById('nav-profile').addEventListener('click',()=>{cancelScanTimers();closeSheets();showScreen('screen-profile');});
@@ -1606,8 +2186,39 @@ document.getElementById('nav-scan').addEventListener('click',()=>{closeSheets();
 
 /* ===================== profile controls ===================== */
 document.getElementById('btn-signin').addEventListener('click',()=>toast('Prototype: sign-in comes later — guests are first-class'));
-document.getElementById('btn-claim').addEventListener('click',()=>toast('Owner claim flow — next build'));
-document.getElementById('privacy-row').addEventListener('click',()=>openSheet('sheet-trust'));
+document.getElementById('btn-claim').addEventListener('click',()=>{closeSheets();initClaimFind();showScreen('claim-find');});
+document.getElementById('privacy-row').addEventListener('click',()=>openSheet('sheet-privacy'));
+document.getElementById('claim-illus').innerHTML=pinSVG('owner',40);
+
+/* ===================== your scans (session publishes + one staged example) ===================== */
+const EXAMPLE_SCAN_ID='door-01'; /* DeSano — a real pilot scan, standing in as the example row */
+function scanRowHTML(p, sub){
+  const confs=Object.values(p.f).filter(f=>f.v==='present').map(f=>f.c);
+  const avg=confs.length?confs.reduce((a,b)=>a+b,0)/confs.length:0;
+  return `<button class="prof-row" data-scan-open="${p.id}">
+    <span class="rowicon" style="background:var(--marigold-wash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--marigold-ink)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${GL.camera}</svg></span>
+    <span class="rowmain">
+      <span class="rowlabel">${esc(p.name)}</span>
+      <span class="rowsub">${sub}</span>
+    </span>
+    <span class="scanrow-tail"><span class="rowsub">Confidence</span>${dotTriple(avg,tierColor(p.tier))}</span>
+  </button>`;
+}
+function renderYourScans(){
+  const el=document.getElementById('your-scans');
+  if(!el) return;
+  let html='';
+  places.filter(p=>p.staged && p.tier==='scan').forEach(p=>{
+    html+=scanRowHTML(p,'Scanned on-site · just now · your scan');
+  });
+  const ex=places.find(p=>p.id===EXAMPLE_SCAN_ID);
+  if(ex) html+=scanRowHTML(ex,'Scanned on-site · Tuesday · example');
+  if(!html) html=`<p class="sheet-p" style="margin-top:0">No scans yet — a quick 7-second scan helps neighbors plan ahead.</p>`;
+  el.innerHTML=html;
+  el.querySelectorAll('[data-scan-open]').forEach(b=>b.addEventListener('click',()=>{
+    showScreen('screen-map'); renderMap(); openCard(b.dataset.scanOpen);
+  }));
+}
 document.querySelectorAll('.tsize-btn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.tsize-btn').forEach(x=>x.classList.remove('sel'));
   b.classList.add('sel');
@@ -1804,6 +2415,18 @@ function runProcessing(){
   }
   requestAnimationFrame(step);
   CHECK_AT.forEach((t,i)=>after(t,()=>document.getElementById('ck-'+(i+1)).classList.add('done')));
+  /* watchdog: rAF can be throttled/frozen (backgrounded tab, occluded pane) —
+     timers still run, so the flow never hangs on the ring */
+  function watchdog(){
+    if(!document.getElementById('scan-processing').classList.contains('active')) return;
+    if(fired) return;
+    if(liveUpload && !liveSettled){ after(600,watchdog); return; }
+    fired=true;
+    ring.style.strokeDashoffset=0; pct.textContent='100%';
+    ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.add('done'));
+    after(250,goReview);
+  }
+  after(T+1600,watchdog);
 }
 
 /* review chips (the staged one-photo honest partial) */
@@ -1935,6 +2558,116 @@ document.getElementById('btn-done-map').addEventListener('click',()=>{
   after(600,()=>openCard(scanTarget.id));
 });
 
+/* ===================== onboarding (guest-first; every step skippable) ===================== */
+let onboarded=false; /* in-memory only: returning sessions go straight to the map */
+function finishOnboarding(){
+  onboarded=true;
+  showScreen('screen-map');
+  renderMap();
+}
+document.getElementById('ob-signin').addEventListener('click',()=>{
+  toast('Prototype: sign-in comes later — continuing as guest');
+  showScreen('ob-location');
+});
+document.getElementById('ob-guest').addEventListener('click',()=>showScreen('ob-location'));
+document.getElementById('ob-loc-back').addEventListener('click',()=>showScreen('ob-welcome'));
+document.getElementById('ob-allow-loc').addEventListener('click',()=>{
+  const lt=document.getElementById('loc-toggle');
+  lt.classList.add('on'); lt.setAttribute('aria-checked','true');
+  showScreen('ob-needs');
+});
+document.getElementById('ob-loc-notnow').addEventListener('click',()=>{
+  const lt=document.getElementById('loc-toggle');
+  lt.classList.remove('on'); lt.setAttribute('aria-checked','false');
+  toast('No problem — search the map instead');
+  showScreen('ob-needs');
+});
+document.getElementById('ob-needs-back').addEventListener('click',()=>showScreen('ob-location'));
+document.getElementById('ob-needs-continue').addEventListener('click',()=>{
+  personas=new Set(pendingPersonas);
+  applyPersona();
+  finishOnboarding();
+  if(personas.size) toast('Matching for '+personaLabel()+' — halos show fit, not certainty');
+});
+document.getElementById('ob-needs-skip').addEventListener('click',()=>{
+  pendingPersonas.clear(); renderPersonas();
+  finishOnboarding();
+});
+
+/* ===================== owner claim flow (stub; entrance-level, proof-of-control honest) ===================== */
+const CLAIM_RESULTS=[
+  {name:'Royal Blue Grocery', addr:'241 W 3rd St', dist:'0.1 mi', id:'door-04'},
+  {name:'Royal Blue Grocery', addr:'609 Congress Ave', dist:'0.3 mi', id:null},
+  {name:'Royal Blue Grocery', addr:'360 Nueces St', dist:'0.4 mi', id:null}
+];
+let claimSel=0;
+function initClaimFind(){
+  const wrap=document.getElementById('claim-results');
+  wrap.innerHTML='';
+  CLAIM_RESULTS.forEach((r,i)=>{
+    const b=document.createElement('button');
+    b.className='claim-result'+(i===claimSel?' sel':'');
+    b.innerHTML=`<span class="cr-icon">${iconSVG(GL.store,'var(--purple-ink)')}</span>
+      <span><span class="cr-name">${esc(r.name)}</span>
+      <span class="cr-sub">${esc(r.addr)}</span></span>
+      <span class="cr-dist">${r.dist}</span>`;
+    b.addEventListener('click',()=>{claimSel=i;initClaimFind();});
+    wrap.appendChild(b);
+  });
+}
+document.getElementById('btn-claim-continue').addEventListener('click',()=>{
+  const r=CLAIM_RESULTS[claimSel];
+  document.getElementById('claim-bizhead').innerHTML=
+    `<span class="cr-icon">${iconSVG(GL.store,'var(--purple-ink)')}</span>
+     <span><span class="cr-name">${esc(r.name)}</span>
+     <span class="cr-sub">${esc(r.addr)}, Austin, TX</span></span>`;
+  showScreen('claim-confirm');
+});
+document.querySelectorAll('input[name="claim-verify"]').forEach(rb=>rb.addEventListener('change',()=>{
+  document.getElementById('vo-email').classList.toggle('sel',rb.value==='email'&&rb.checked);
+  document.getElementById('vo-call').classList.toggle('sel',rb.value==='call'&&rb.checked);
+  if(rb.value==='email') document.getElementById('vo-call').classList.remove('sel');
+  else document.getElementById('vo-email').classList.remove('sel');
+}));
+document.getElementById('btn-claim-submit').addEventListener('click',()=>{
+  if(!document.getElementById('claim-authz').checked){
+    toast("Please confirm you're authorized to manage this listing");
+    return;
+  }
+  document.getElementById('track-pin').innerHTML=pinSVG('owner',38);
+  showScreen('claim-track');
+});
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{
+  showScreen(b.dataset.goto);
+}));
+
+/* ===================== camera-roll upload (scan accepts whatever you have) ===================== */
+const libInput=document.getElementById('lib-input');
+document.getElementById('btn-library').addEventListener('click',()=>libInput.click());
+libInput.addEventListener('change',()=>{
+  const file=libInput.files && libInput.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    stopCamera();
+    liveFrame={blob:file, dataUrl:reader.result}; /* in-memory only, same as camera frames */
+    startLiveUpload(liveFrame);
+    libInput.value='';
+    showScreen('scan-processing');
+    runProcessing();
+  };
+  reader.onerror=()=>{ libInput.value=''; toast("Couldn't read that photo — try another"); };
+  reader.readAsDataURL(file);
+});
+
+/* ===================== correction photo (optional) ===================== */
+const cPhoto=document.getElementById('correct-photo');
+document.getElementById('correct-photo-btn').addEventListener('click',()=>cPhoto.click());
+cPhoto.addEventListener('change',()=>{
+  const f=cPhoto.files && cPhoto.files[0];
+  document.getElementById('correct-photo-label').textContent = f ? f.name+' — attached' : 'Choose a photo';
+});
+
 /* ===================== toast ===================== */
 let toastTimer=null;
 function toast(msg){
@@ -1947,6 +2680,11 @@ function toast(msg){
 /* ===================== boot ===================== */
 function fitPhone(){
   const wrap=document.querySelector('.phone-wrap');
+  if(matchMedia('(max-width:767px)').matches){
+    /* real-phone mode: full-bleed app, no transform (see the media query note) */
+    wrap.style.transform=''; wrap.style.marginBottom=''; wrap.style.marginTop='';
+    return;
+  }
   const avail=innerHeight-80, availW=innerWidth-24;
   const s=Math.min(1, avail/866, availW/412);
   wrap.style.transform = s<1 ? `scale(${s})` : '';
@@ -1954,8 +2692,12 @@ function fitPhone(){
   wrap.style.marginTop = s<1 ? (-(866*(1-s))/2)+'px' : '';
 }
 renderPersonas();
+renderYourScans();
 fitPhone();
 renderMap();
+/* first load lands on the welcome screen (guest-first onboarding); a returning
+   session (in-memory flag) would go straight to the map */
+if(!onboarded) showScreen('ob-welcome');
 addEventListener('resize',()=>{fitPhone();renderMap();});
 </script>
 </body>
