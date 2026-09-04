@@ -1,0 +1,5317 @@
+{
+ "doctrine": "presence only - step_score is a depth-profile shape statistic, never a height",
+ "criterion": "step_free_entry",
+ "tune_on": "doors 13-38 (half A)",
+ "validate_on": "doors 39-64 (half B)",
+ "passes": {
+  "full518_allviews": {
+   "pass": "full518_allviews",
+   "depth_dir": "C:\\Users\\merit\\AppData\\Local\\Temp\\claude\\C--dev-curb-appeal\\171dd3c1-5cac-4ae8-acf4-5f2235f4490a\\scratchpad\\depth_dav2s",
+   "model": "depth-anything/Depth-Anything-V2-Small-hf",
+   "params": {
+    "BAND_TOP": 0.55,
+    "COL": [
+     0.3,
+     0.7
+    ],
+    "SIGMA": 3.0,
+    "T_LOW": 0.3,
+    "T_HIGH": 0.55,
+    "MIN_PLATEAU": 6,
+    "MIN_RECOVERY": 10
+   },
+   "crop_top": 0.0,
+   "net_size": 518,
+   "runtime_s_per_image": {
+    "mean": 8.81,
+    "median": 2.58,
+    "n_images": 273
+   },
+   "tuned": {
+    "aggregation": "median",
+    "threshold": 0.05,
+    "uncertain_band": [
+     0.0,
+     0.15
+    ],
+    "fusion_rule": "override_lowconf",
+    "fusion_X": 80
+   },
+   "halfA": {
+    "vlm": {
+     "correct": 22,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.846,
+     "acc_of_all": 0.846,
+     "abstained": 0
+    },
+    "depth_hard": {
+     "correct": 23,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.885,
+     "acc_of_all": 0.885,
+     "abstained": 0
+    },
+    "depth_with_uncertain": {
+     "correct": 22,
+     "committed": 25,
+     "n": 26,
+     "acc_of_committed": 0.88,
+     "acc_of_all": 0.846,
+     "abstained": 1
+    },
+    "fusion": {
+     "correct": 23,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.885,
+     "acc_of_all": 0.885,
+     "abstained": 0
+    }
+   },
+   "halfB": {
+    "vlm": {
+     "correct": 23,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.885,
+     "acc_of_all": 0.885,
+     "abstained": 0
+    },
+    "depth_hard": {
+     "correct": 22,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.846,
+     "acc_of_all": 0.846,
+     "abstained": 0
+    },
+    "depth_with_uncertain": {
+     "correct": 20,
+     "committed": 23,
+     "n": 26,
+     "acc_of_committed": 0.87,
+     "acc_of_all": 0.769,
+     "abstained": 3
+    },
+    "fusion": {
+     "correct": 24,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.923,
+     "acc_of_all": 0.923,
+     "abstained": 0
+    }
+   },
+   "fusion_sweep": {
+    "override_lowconf_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_lowconf_X70": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_lowconf_X75": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_lowconf_X80": {
+     "halfA": "23/26",
+     "halfB": "24/26"
+    },
+    "override_lowconf_X85": {
+     "halfA": "23/26",
+     "halfB": "24/26"
+    },
+    "override_lowconf_X90": {
+     "halfA": "23/26",
+     "halfB": "22/26"
+    },
+    "override_lowconf_X101": {
+     "halfA": "22/26",
+     "halfB": "21/26"
+    },
+    "override_always_X101": {
+     "halfA": "22/26",
+     "halfB": "21/26"
+    },
+    "override_strong_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X70": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X75": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X80": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X85": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X90": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X101": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X70": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X75": {
+     "halfA": "22/26",
+     "halfB": "22/26"
+    },
+    "control_flip_absent_X80": {
+     "halfA": "23/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X85": {
+     "halfA": "23/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X90": {
+     "halfA": "23/26",
+     "halfB": "21/26"
+    },
+    "control_flip_absent_X101": {
+     "halfA": "22/26",
+     "halfB": "19/26"
+    }
+   },
+   "known_misses": {
+    "door-18": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 85,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "absent"
+    },
+    "door-21": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.106,
+     "depth": "uncertain",
+     "fusion": "present"
+    },
+    "door-29": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    },
+    "door-35": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 75,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    },
+    "door-41": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.124,
+     "depth": "uncertain",
+     "fusion": "present"
+    },
+    "door-44": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.017,
+     "depth": "uncertain",
+     "fusion": "present"
+    },
+    "door-47": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 75,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    }
+   },
+   "doors": {
+    "door-13": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3329",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3330",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3331",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-14": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3332",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-15": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3338",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3339",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3340",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3341",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-16": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3351",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3352",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3353",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3354",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3355",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-17": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3356",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3357",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3358",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3359",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3360",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-18": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3361",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3362",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3363",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3364",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3365",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-19": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3366",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3367",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3368",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3369",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-20": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3370",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3371",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3372",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3373",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3374",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-21": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.106,
+     "step_score_by_agg": {
+      "max": 0.458,
+      "mean": 0.168,
+      "median": 0.106,
+      "top2": 0.335
+     },
+     "depth_verdict": "uncertain",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3375",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3376",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3377",
+       "step_score": 0.458,
+       "debug": {
+        "plateau_rows": [
+         571,
+         604
+        ],
+        "dip": 0.693,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.66,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3378",
+       "step_score": 0.212,
+       "debug": {
+        "plateau_rows": [
+         595,
+         626
+        ],
+        "dip": 0.469,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.451,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-22": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3379",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3380",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3381",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3382",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3383",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3384",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-23": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3385",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3386",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3387",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-24": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3388",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3389",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3390",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3391",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3392",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3393",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-25": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3394",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3395",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3396",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3397",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3398",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-26": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3399",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3400",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3401",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3402",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3403",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-27": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3404",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3405",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3406",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3407",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3408",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-28": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3409",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3410",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3411",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3412",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-29": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3413",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3414",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3415",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3416",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3417",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-30": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3418",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3419",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3420",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3421",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3422",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3423",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3424",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-31": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3425",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3426",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3427",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3428",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3429",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-32": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.663,
+      "mean": 0.198,
+      "median": 0.0,
+      "top2": 0.594
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3430",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3431",
+       "step_score": 0.525,
+       "debug": {
+        "plateau_rows": [
+         408,
+         470
+        ],
+        "dip": 1.0,
+        "recovery": 0.882,
+        "span": 0.873,
+        "consist": 0.954,
+        "clean": 0.667,
+        "crossings": 6
+       }
+      },
+      {
+       "file": "IMG_3432",
+       "step_score": 0.663,
+       "debug": {
+        "plateau_rows": [
+         418,
+         490
+        ],
+        "dip": 0.83,
+        "recovery": 1.0,
+        "span": 0.691,
+        "consist": 0.946,
+        "clean": 1.0,
+        "crossings": 4
+       }
+      },
+      {
+       "file": "IMG_3433",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3434",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3435",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-33": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3436",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3437",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3438",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3439",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3440",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3441",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-34": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 60,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3442",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3443",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3444",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3445",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3446",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3447",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-35": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3448",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3449",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3450",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3451",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3452",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-36": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3453",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3454",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3455",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3456",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3457",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3458",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-37": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3459",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3460",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3461",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3462",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3463",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-38": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3464",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3465",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3466",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3467",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3468",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3469",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-39": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 70,
+     "step_score": 0.111,
+     "step_score_by_agg": {
+      "max": 0.493,
+      "mean": 0.179,
+      "median": 0.111,
+      "top2": 0.428
+     },
+     "depth_verdict": "uncertain",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3471",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3472",
+       "step_score": 0.221,
+       "debug": {
+        "plateau_rows": [
+         546,
+         581
+        ],
+        "dip": 0.471,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.47,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3473",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3474",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3475",
+       "step_score": 0.363,
+       "debug": {
+        "plateau_rows": [
+         565,
+         577
+        ],
+        "dip": 0.5,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.726,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3476",
+       "step_score": 0.493,
+       "debug": {
+        "plateau_rows": [
+         562,
+         574
+        ],
+        "dip": 0.493,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-40": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3477",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3478",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3479",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3480",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3481",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-41": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.124,
+     "step_score_by_agg": {
+      "max": 0.563,
+      "mean": 0.208,
+      "median": 0.124,
+      "top2": 0.499
+     },
+     "depth_verdict": "uncertain",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3483",
+       "step_score": 0.248,
+       "debug": {
+        "plateau_rows": [
+         582,
+         618
+        ],
+        "dip": 0.471,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.527,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3484",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3485",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3486",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3487",
+       "step_score": 0.563,
+       "debug": {
+        "plateau_rows": [
+         581,
+         603
+        ],
+        "dip": 0.563,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3488",
+       "step_score": 0.436,
+       "debug": {
+        "plateau_rows": [
+         580,
+         604
+        ],
+        "dip": 0.551,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.791,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-42": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.348,
+      "mean": 0.101,
+      "median": 0.0,
+      "top2": 0.304
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3489",
+       "step_score": 0.348,
+       "debug": {
+        "plateau_rows": [
+         541,
+         699
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 0.0,
+        "consist": 0.696,
+        "clean": 1.0,
+        "crossings": 2
+       }
+      },
+      {
+       "file": "IMG_3490",
+       "step_score": 0.26,
+       "debug": {
+        "plateau_rows": [
+         564,
+         699
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 0.0,
+        "consist": 0.519,
+        "clean": 1.0,
+        "crossings": 2
+       }
+      },
+      {
+       "file": "IMG_3491",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3492",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3493",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3494",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-43": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.619,
+     "step_score_by_agg": {
+      "max": 0.833,
+      "mean": 0.513,
+      "median": 0.619,
+      "top2": 0.833
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3495",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3496",
+       "step_score": 0.477,
+       "debug": {
+        "plateau_rows": [
+         435,
+         450
+        ],
+        "dip": 0.581,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.821,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3497",
+       "step_score": 0.173,
+       "debug": {
+        "plateau_rows": [
+         469,
+         484
+        ],
+        "dip": 0.32,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.541,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3498",
+       "step_score": 0.833,
+       "debug": {
+        "plateau_rows": [
+         467,
+         483
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3499",
+       "step_score": 0.833,
+       "debug": {
+        "plateau_rows": [
+         477,
+         493
+        ],
+        "dip": 0.999,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3500",
+       "step_score": 0.762,
+       "debug": {
+        "plateau_rows": [
+         501,
+         519
+        ],
+        "dip": 0.914,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      }
+     ]
+    },
+    "door-44": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.017,
+     "step_score_by_agg": {
+      "max": 0.668,
+      "mean": 0.176,
+      "median": 0.017,
+      "top2": 0.351
+     },
+     "depth_verdict": "uncertain",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3501",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3502",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3503",
+       "step_score": 0.034,
+       "debug": {
+        "plateau_rows": [
+         622,
+         636
+        ],
+        "dip": 0.141,
+        "recovery": 0.634,
+        "span": 1.0,
+        "consist": 0.386,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3504",
+       "step_score": 0.668,
+       "debug": {
+        "plateau_rows": [
+         623,
+         646
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.668,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-45": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3505",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3506",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3507",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3508",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3509",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-46": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3510",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3511",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3512",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3513",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3514",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3515",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-47": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3516",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3517",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3518",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3519",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3520",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3521",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-48": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.109,
+      "mean": 0.018,
+      "median": 0.0,
+      "top2": 0.054
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3522",
+       "step_score": 0.109,
+       "debug": {
+        "plateau_rows": [
+         597,
+         618
+        ],
+        "dip": 0.261,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.5,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3523",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3524",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3525",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3526",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3527",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-49": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.455,
+      "mean": 0.159,
+      "median": 0.0,
+      "top2": 0.42
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3528",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3529",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3530",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3531",
+       "step_score": 0.385,
+       "debug": {
+        "plateau_rows": [
+         519,
+         541
+        ],
+        "dip": 0.616,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.75,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3532",
+       "step_score": 0.27,
+       "debug": {
+        "plateau_rows": [
+         663,
+         693
+        ],
+        "dip": 1.0,
+        "recovery": 0.677,
+        "span": 1.0,
+        "consist": 0.478,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3533",
+       "step_score": 0.455,
+       "debug": {
+        "plateau_rows": [
+         537,
+         645
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 0.036,
+        "consist": 0.878,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3534",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-50": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3535",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3536",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3537",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3538",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3539",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3540",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-51": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.401,
+      "mean": 0.08,
+      "median": 0.0,
+      "top2": 0.201
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3541",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3542",
+       "step_score": 0.401,
+       "debug": {
+        "plateau_rows": [
+         466,
+         499
+        ],
+        "dip": 0.757,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.53,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3543",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3544",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3545",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-52": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3546",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3547",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3548",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3549",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3550",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3551",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-53": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3552",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3553",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3554",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3555",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3556",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-54": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.886,
+      "mean": 0.177,
+      "median": 0.0,
+      "top2": 0.443
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3557",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3558",
+       "step_score": 0.886,
+       "debug": {
+        "plateau_rows": [
+         507,
+         536
+        ],
+        "dip": 0.918,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.965,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3559",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3560",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3561",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-55": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3562",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3563",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3564",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3565",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3566",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3567",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-56": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.425,
+      "mean": 0.165,
+      "median": 0.0,
+      "top2": 0.413
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3568",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3569",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3570",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3571",
+       "step_score": 0.425,
+       "debug": {
+        "plateau_rows": [
+         552,
+         565
+        ],
+        "dip": 0.895,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.571,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3572",
+       "step_score": 0.401,
+       "debug": {
+        "plateau_rows": [
+         566,
+         581
+        ],
+        "dip": 0.722,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.666,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      }
+     ]
+    },
+    "door-57": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3573",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3574",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3575",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3576",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3577",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3578",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3579",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-58": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3580",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3581",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3582",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3583",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3584",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-59": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3585",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3586",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3587",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3588",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3589",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3590",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3591",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-60": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3592",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3593",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3594",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3595",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3596",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-61": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3597",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3598",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3599",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3600",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3601",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3602",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-62": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.014,
+      "mean": 0.004,
+      "median": 0.0,
+      "top2": 0.007
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3603",
+       "step_score": 0.014,
+       "debug": {
+        "plateau_rows": [
+         638,
+         648
+        ],
+        "dip": 0.059,
+        "recovery": 0.728,
+        "span": 0.833,
+        "consist": 0.432,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3604",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3605",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3606",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-63": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3607",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3608",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3609",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3610",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3611",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-64": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3612",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3613",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3614",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3615",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3616",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3617",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    }
+   }
+  },
+  "crop1036_last2views": {
+   "pass": "crop1036_last2views",
+   "depth_dir": "C:\\Users\\merit\\AppData\\Local\\Temp\\claude\\C--dev-curb-appeal\\171dd3c1-5cac-4ae8-acf4-5f2235f4490a\\scratchpad\\depth_crop1036_last2",
+   "model": "depth-anything/Depth-Anything-V2-Small-hf",
+   "params": {
+    "BAND_TOP": 0.55,
+    "COL": [
+     0.3,
+     0.7
+    ],
+    "SIGMA": 3.0,
+    "T_LOW": 0.3,
+    "T_HIGH": 0.55,
+    "MIN_PLATEAU": 6,
+    "MIN_RECOVERY": 10
+   },
+   "crop_top": 0.4,
+   "net_size": 1036,
+   "runtime_s_per_image": {
+    "mean": 5.41,
+    "median": 4.94,
+    "n_images": 103
+   },
+   "tuned": {
+    "aggregation": "max",
+    "threshold": 0.05,
+    "uncertain_band": [
+     0.0,
+     0.15
+    ],
+    "fusion_rule": "override_lowconf",
+    "fusion_X": 90
+   },
+   "halfA": {
+    "vlm": {
+     "correct": 22,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.846,
+     "acc_of_all": 0.846,
+     "abstained": 0
+    },
+    "depth_hard": {
+     "correct": 25,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.962,
+     "acc_of_all": 0.962,
+     "abstained": 0
+    },
+    "depth_with_uncertain": {
+     "correct": 25,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.962,
+     "acc_of_all": 0.962,
+     "abstained": 0
+    },
+    "fusion": {
+     "correct": 26,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 1.0,
+     "acc_of_all": 1.0,
+     "abstained": 0
+    }
+   },
+   "halfB": {
+    "vlm": {
+     "correct": 23,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.885,
+     "acc_of_all": 0.885,
+     "abstained": 0
+    },
+    "depth_hard": {
+     "correct": 24,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.923,
+     "acc_of_all": 0.923,
+     "abstained": 0
+    },
+    "depth_with_uncertain": {
+     "correct": 24,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.923,
+     "acc_of_all": 0.923,
+     "abstained": 0
+    },
+    "fusion": {
+     "correct": 25,
+     "committed": 26,
+     "n": 26,
+     "acc_of_committed": 0.962,
+     "acc_of_all": 0.962,
+     "abstained": 0
+    }
+   },
+   "fusion_sweep": {
+    "override_lowconf_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_lowconf_X70": {
+     "halfA": "22/26",
+     "halfB": "22/26"
+    },
+    "override_lowconf_X75": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "override_lowconf_X80": {
+     "halfA": "25/26",
+     "halfB": "25/26"
+    },
+    "override_lowconf_X85": {
+     "halfA": "25/26",
+     "halfB": "25/26"
+    },
+    "override_lowconf_X90": {
+     "halfA": "26/26",
+     "halfB": "25/26"
+    },
+    "override_lowconf_X101": {
+     "halfA": "25/26",
+     "halfB": "24/26"
+    },
+    "override_always_X101": {
+     "halfA": "25/26",
+     "halfB": "24/26"
+    },
+    "override_strong_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "override_strong_X70": {
+     "halfA": "22/26",
+     "halfB": "22/26"
+    },
+    "override_strong_X75": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "override_strong_X80": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "override_strong_X85": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "override_strong_X90": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "override_strong_X101": {
+     "halfA": "24/26",
+     "halfB": "24/26"
+    },
+    "control_flip_absent_X65": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X70": {
+     "halfA": "22/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X75": {
+     "halfA": "22/26",
+     "halfB": "22/26"
+    },
+    "control_flip_absent_X80": {
+     "halfA": "23/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X85": {
+     "halfA": "23/26",
+     "halfB": "23/26"
+    },
+    "control_flip_absent_X90": {
+     "halfA": "23/26",
+     "halfB": "21/26"
+    },
+    "control_flip_absent_X101": {
+     "halfA": "22/26",
+     "halfB": "19/26"
+    }
+   },
+   "known_misses": {
+    "door-18": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 85,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    },
+    "door-21": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.726,
+     "depth": "absent",
+     "fusion": "absent"
+    },
+    "door-29": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.606,
+     "depth": "absent",
+     "fusion": "absent"
+    },
+    "door-35": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 75,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    },
+    "door-41": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 1.0,
+     "depth": "absent",
+     "fusion": "absent"
+    },
+    "door-44": {
+     "truth": "absent",
+     "vlm": "present",
+     "vlm_conf": 70,
+     "depth_score": 0.845,
+     "depth": "absent",
+     "fusion": "absent"
+    },
+    "door-47": {
+     "truth": "present",
+     "vlm": "absent",
+     "vlm_conf": 75,
+     "depth_score": 0.0,
+     "depth": "present",
+     "fusion": "present"
+    }
+   },
+   "doors": {
+    "door-13": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3330",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3331",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-14": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3332",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-15": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3340",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3341",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-16": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3354",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3355",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-17": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3359",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3360",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-18": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3364",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3365",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-19": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3368",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3369",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-20": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.883,
+     "step_score_by_agg": {
+      "max": 0.883,
+      "mean": 0.442,
+      "median": 0.442,
+      "top2": 0.442
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3373",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3374",
+       "step_score": 0.883,
+       "debug": {
+        "plateau_rows": [
+         523,
+         550
+        ],
+        "dip": 1.0,
+        "recovery": 0.996,
+        "span": 1.0,
+        "consist": 0.886,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-21": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.726,
+     "step_score_by_agg": {
+      "max": 0.726,
+      "mean": 0.615,
+      "median": 0.615,
+      "top2": 0.615
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3377",
+       "step_score": 0.726,
+       "debug": {
+        "plateau_rows": [
+         566,
+         604
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.726,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3378",
+       "step_score": 0.503,
+       "debug": {
+        "plateau_rows": [
+         592,
+         626
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.503,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-22": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3383",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3384",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-23": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3386",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3387",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-24": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3392",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3393",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-25": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3397",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3398",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-26": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3402",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3403",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-27": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3407",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3408",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-28": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3411",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3412",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-29": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.606,
+     "step_score_by_agg": {
+      "max": 0.606,
+      "mean": 0.303,
+      "median": 0.303,
+      "top2": 0.303
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3416",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3417",
+       "step_score": 0.606,
+       "debug": {
+        "plateau_rows": [
+         639,
+         677
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.606,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-30": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3423",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3424",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-31": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3428",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3429",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-32": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3434",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3435",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-33": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3440",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3441",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-34": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 60,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3446",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3447",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-35": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3451",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3452",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-36": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3457",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3458",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-37": {
+     "half": "A",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3462",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3463",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-38": {
+     "half": "A",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3468",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3469",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-39": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 70,
+     "step_score": 1.0,
+     "step_score_by_agg": {
+      "max": 1.0,
+      "mean": 0.858,
+      "median": 0.858,
+      "top2": 0.858
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3475",
+       "step_score": 0.716,
+       "debug": {
+        "plateau_rows": [
+         563,
+         578
+        ],
+        "dip": 0.944,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.758,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3476",
+       "step_score": 1.0,
+       "debug": {
+        "plateau_rows": [
+         560,
+         575
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-40": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3480",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3481",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-41": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 1.0,
+     "step_score_by_agg": {
+      "max": 1.0,
+      "mean": 0.633,
+      "median": 0.633,
+      "top2": 0.633
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3487",
+       "step_score": 1.0,
+       "debug": {
+        "plateau_rows": [
+         578,
+         603
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3488",
+       "step_score": 0.266,
+       "debug": {
+        "plateau_rows": [
+         584,
+         604
+        ],
+        "dip": 0.392,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.679,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-42": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3493",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3494",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-43": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.833,
+     "step_score_by_agg": {
+      "max": 0.833,
+      "mean": 0.833,
+      "median": 0.833,
+      "top2": 0.833
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3499",
+       "step_score": 0.833,
+       "debug": {
+        "plateau_rows": [
+         475,
+         495
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3500",
+       "step_score": 0.833,
+       "debug": {
+        "plateau_rows": [
+         500,
+         520
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 1.0,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      }
+     ]
+    },
+    "door-44": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.845,
+     "step_score_by_agg": {
+      "max": 0.845,
+      "mean": 0.647,
+      "median": 0.647,
+      "top2": 0.647
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3503",
+       "step_score": 0.449,
+       "debug": {
+        "plateau_rows": [
+         610,
+         636
+        ],
+        "dip": 0.86,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.522,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3504",
+       "step_score": 0.845,
+       "debug": {
+        "plateau_rows": [
+         619,
+         647
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.845,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-45": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3508",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3509",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-46": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3514",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3515",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-47": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3520",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3521",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-48": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3526",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3527",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-49": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.582,
+     "step_score_by_agg": {
+      "max": 0.582,
+      "mean": 0.291,
+      "median": 0.291,
+      "top2": 0.291
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3533",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3534",
+       "step_score": 0.582,
+       "debug": {
+        "plateau_rows": [
+         507,
+         608
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 0.164,
+        "consist": 1.0,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-50": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3539",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3540",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-51": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3544",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3545",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-52": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3550",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3551",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-53": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3555",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3556",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-54": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3560",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3561",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-55": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3566",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3567",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-56": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.602,
+     "step_score_by_agg": {
+      "max": 0.602,
+      "mean": 0.506,
+      "median": 0.506,
+      "top2": 0.506
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3571",
+       "step_score": 0.41,
+       "debug": {
+        "plateau_rows": [
+         553,
+         566
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.492,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      },
+      {
+       "file": "IMG_3572",
+       "step_score": 0.602,
+       "debug": {
+        "plateau_rows": [
+         566,
+         582
+        ],
+        "dip": 1.0,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.723,
+        "clean": 0.833,
+        "crossings": 5
+       }
+      }
+     ]
+    },
+    "door-57": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3578",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3579",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-58": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3583",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3584",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-59": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3590",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3591",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-60": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3595",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3596",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-61": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3601",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3602",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-62": {
+     "half": "B",
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "step_score": 0.263,
+     "step_score_by_agg": {
+      "max": 0.263,
+      "mean": 0.212,
+      "median": 0.212,
+      "top2": 0.212
+     },
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "views": [
+      {
+       "file": "IMG_3605",
+       "step_score": 0.263,
+       "debug": {
+        "plateau_rows": [
+         482,
+         495
+        ],
+        "dip": 0.395,
+        "recovery": 1.0,
+        "span": 1.0,
+        "consist": 0.666,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      },
+      {
+       "file": "IMG_3606",
+       "step_score": 0.161,
+       "debug": {
+        "plateau_rows": [
+         487,
+         494
+        ],
+        "dip": 0.428,
+        "recovery": 1.0,
+        "span": 0.583,
+        "consist": 0.476,
+        "clean": 1.0,
+        "crossings": 3
+       }
+      }
+     ]
+    },
+    "door-63": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3610",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3611",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    },
+    "door-64": {
+     "half": "B",
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "step_score": 0.0,
+     "step_score_by_agg": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "top2": 0.0
+     },
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "views": [
+      {
+       "file": "IMG_3616",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      },
+      {
+       "file": "IMG_3617",
+       "step_score": 0.0,
+       "debug": {
+        "reason": "no interior plateau"
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}
