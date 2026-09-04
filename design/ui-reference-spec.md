@@ -91,6 +91,23 @@ Evidence ages by what it shows, gated by tenant turnover, not by the calendar al
 - Freshness amber thresholds therefore differ per chip class; every line still shows
   its actual date.
 
+## Processing feedback — always animated, always named (James, 2026-09-04)
+
+Every moment the app is working shows visible progress with NAMED steps — never a
+bare spinner, never a frozen screen. The user should always be able to read what
+is happening:
+- **Scan processing**: the ~7s ring with the three named checks (Doorway framed ·
+  Entry path visible · Photo quality checked), "Usually under 8 seconds."
+- **Double-check (agreement gating, verified tier)**: when a second model pass runs,
+  the ring gains a fourth named step — "Double-checking" — and the caption updates
+  ("Usually under 15 seconds"); the extra wait is explained, not hidden.
+- **Publish**: upload + storage shows "Saving your scan…" with the pin-drop animation
+  as the completion state.
+- **Map / data loads, claim submission, photo upload in the workspace**: skeleton or
+  progress states with a one-line label of the step.
+- All of it collapses to a simple progress bar under Reduce Motion; none of it may
+  block the bottom nav.
+
 ## Signature animation (live scan)
 
 Photo in → ~7s processing (progress ring, checklist items ticking in one by one) →
