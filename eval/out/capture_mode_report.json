@@ -1,0 +1,164 @@
+{
+ "heldout_multiview": {
+  "doors": 52,
+  "correct": 311,
+  "wrong": 11,
+  "abstain": 36,
+  "misses": [
+   [
+    "door-18",
+    "step_free_entry",
+    "absent",
+    "present"
+   ],
+   [
+    "door-20",
+    "lever_or_pull_hardware",
+    "absent",
+    "present"
+   ],
+   [
+    "door-21",
+    "step_free_entry",
+    "present",
+    "absent"
+   ],
+   [
+    "door-21",
+    "lever_or_pull_hardware",
+    "absent",
+    "present"
+   ],
+   [
+    "door-22",
+    "lever_or_pull_hardware",
+    "absent",
+    "present"
+   ],
+   [
+    "door-29",
+    "step_free_entry",
+    "present",
+    "absent"
+   ],
+   [
+    "door-35",
+    "step_free_entry",
+    "absent",
+    "present"
+   ],
+   [
+    "door-35",
+    "lever_or_pull_hardware",
+    "absent",
+    "present"
+   ],
+   [
+    "door-41",
+    "step_free_entry",
+    "present",
+    "absent"
+   ],
+   [
+    "door-44",
+    "step_free_entry",
+    "present",
+    "absent"
+   ],
+   [
+    "door-47",
+    "step_free_entry",
+    "absent",
+    "present"
+   ]
+  ],
+  "median_latency_s": 7.14
+ },
+ "heldout_per_criterion": {
+  "step_free_entry": {
+   "correct": 45,
+   "wrong": 7,
+   "abstain": 0
+  },
+  "ramp_present": {
+   "correct": 42,
+   "wrong": 0,
+   "abstain": 7
+  },
+  "handrails_present": {
+   "correct": 51,
+   "wrong": 0,
+   "abstain": 1
+  },
+  "auto_door_button": {
+   "correct": 36,
+   "wrong": 0,
+   "abstain": 13
+  },
+  "lever_or_pull_hardware": {
+   "correct": 47,
+   "wrong": 4,
+   "abstain": 1
+  },
+  "clear_approach": {
+   "correct": 52,
+   "wrong": 0,
+   "abstain": 0
+  },
+  "accessible_signage": {
+   "correct": 38,
+   "wrong": 0,
+   "abstain": 14
+  }
+ },
+ "normal_single": {
+  "images": 13,
+  "correct": 72,
+  "wrong": 0,
+  "abstain": 19,
+  "misses": []
+ },
+ "wide_single": {
+  "images": 9,
+  "correct": 45,
+  "wrong": 2,
+  "abstain": 16,
+  "misses": [
+   [
+    "door-13",
+    "step_free_entry",
+    "absent",
+    "present"
+   ],
+   [
+    "door-13",
+    "lever_or_pull_hardware",
+    "absent",
+    "present"
+   ]
+  ]
+ },
+ "walkup_video": {
+  "door": "door-15",
+  "frames": 5,
+  "correct": 4,
+  "wrong": 0,
+  "abstain": 3,
+  "misses": []
+ },
+ "multidoor_video": {
+  "doors": 6,
+  "correct": 28,
+  "wrong": 2,
+  "abstain": 10
+ },
+ "walkby_video": {
+  "windows": 14,
+  "scored_windows": 1,
+  "correct": 5,
+  "wrong": 0,
+  "abstain": 2,
+  "misses": [],
+  "commit_rate_all": 0.8163265306122449
+ }
+}

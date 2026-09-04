@@ -95,3 +95,419 @@ door-12,The Ashton lobby (E-012),lever_or_pull_hardware,present
 door-12,The Ashton lobby (E-012),clear_approach,present
 door-12,The Ashton lobby (E-012),accessible_signage,absent
 door-12,The Ashton lobby (E-012),door_width_adequate,appears_wide
+door-13,Jos. A. Bank,step_free_entry,present
+door-13,Jos. A. Bank,ramp_present,absent
+door-13,Jos. A. Bank,handrails_present,absent
+door-13,Jos. A. Bank,auto_door_button,absent
+door-13,Jos. A. Bank,lever_or_pull_hardware,present
+door-13,Jos. A. Bank,clear_approach,present
+door-13,Jos. A. Bank,accessible_signage,absent
+door-13,Jos. A. Bank,door_width_adequate,appears_wide
+door-14,Red Ash Italia,step_free_entry,present
+door-14,Red Ash Italia,ramp_present,absent
+door-14,Red Ash Italia,handrails_present,absent
+door-14,Red Ash Italia,auto_door_button,absent
+door-14,Red Ash Italia,lever_or_pull_hardware,present
+door-14,Red Ash Italia,clear_approach,present
+door-14,Red Ash Italia,accessible_signage,absent
+door-14,Red Ash Italia,door_width_adequate,appears_narrow
+door-15,Truluck's,step_free_entry,present
+door-15,Truluck's,ramp_present,absent
+door-15,Truluck's,handrails_present,absent
+door-15,Truluck's,auto_door_button,absent
+door-15,Truluck's,lever_or_pull_hardware,present
+door-15,Truluck's,clear_approach,present
+door-15,Truluck's,accessible_signage,absent
+door-15,Truluck's,door_width_adequate,appears_wide
+door-16,Labcorp/Quest Ste 100,step_free_entry,present
+door-16,Labcorp/Quest Ste 100,ramp_present,absent
+door-16,Labcorp/Quest Ste 100,handrails_present,absent
+door-16,Labcorp/Quest Ste 100,auto_door_button,absent
+door-16,Labcorp/Quest Ste 100,lever_or_pull_hardware,present
+door-16,Labcorp/Quest Ste 100,clear_approach,present
+door-16,Labcorp/Quest Ste 100,accessible_signage,present
+door-16,Labcorp/Quest Ste 100,door_width_adequate,appears_wide
+door-17,Bronze revolving-door lobby,step_free_entry,present
+door-17,Bronze revolving-door lobby,ramp_present,absent
+door-17,Bronze revolving-door lobby,handrails_present,absent
+door-17,Bronze revolving-door lobby,auto_door_button,
+door-17,Bronze revolving-door lobby,lever_or_pull_hardware,absent
+door-17,Bronze revolving-door lobby,clear_approach,present
+door-17,Bronze revolving-door lobby,accessible_signage,absent
+door-17,Bronze revolving-door lobby,door_width_adequate,appears_narrow
+door-18,Burger Bar,step_free_entry,present
+door-18,Burger Bar,ramp_present,absent
+door-18,Burger Bar,handrails_present,absent
+door-18,Burger Bar,auto_door_button,absent
+door-18,Burger Bar,lever_or_pull_hardware,present
+door-18,Burger Bar,clear_approach,present
+door-18,Burger Bar,accessible_signage,present
+door-18,Burger Bar,door_width_adequate,appears_wide
+door-19,Starbucks,step_free_entry,present
+door-19,Starbucks,ramp_present,absent
+door-19,Starbucks,handrails_present,absent
+door-19,Starbucks,auto_door_button,absent
+door-19,Starbucks,lever_or_pull_hardware,present
+door-19,Starbucks,clear_approach,present
+door-19,Starbucks,accessible_signage,absent
+door-19,Starbucks,door_width_adequate,appears_wide
+door-20,Swift Bldg 315 (Rogue Radish),step_free_entry,absent
+door-20,Swift Bldg 315 (Rogue Radish),ramp_present,absent
+door-20,Swift Bldg 315 (Rogue Radish),handrails_present,absent
+door-20,Swift Bldg 315 (Rogue Radish),auto_door_button,absent
+door-20,Swift Bldg 315 (Rogue Radish),lever_or_pull_hardware,present
+door-20,Swift Bldg 315 (Rogue Radish),clear_approach,present
+door-20,Swift Bldg 315 (Rogue Radish),accessible_signage,present
+door-20,Swift Bldg 315 (Rogue Radish),door_width_adequate,appears_wide
+door-21,319 Congress,step_free_entry,absent
+door-21,319 Congress,ramp_present,absent
+door-21,319 Congress,handrails_present,absent
+door-21,319 Congress,auto_door_button,absent
+door-21,319 Congress,lever_or_pull_hardware,present
+door-21,319 Congress,clear_approach,present
+door-21,319 Congress,accessible_signage,present
+door-21,319 Congress,door_width_adequate,appears_wide
+door-22,One Medical,step_free_entry,present
+door-22,One Medical,ramp_present,absent
+door-22,One Medical,handrails_present,absent
+door-22,One Medical,auto_door_button,present
+door-22,One Medical,lever_or_pull_hardware,present
+door-22,One Medical,clear_approach,present
+door-22,One Medical,accessible_signage,present
+door-22,One Medical,door_width_adequate,appears_wide
+door-23,Accenture 323 Congress,step_free_entry,present
+door-23,Accenture 323 Congress,ramp_present,absent
+door-23,Accenture 323 Congress,handrails_present,absent
+door-23,Accenture 323 Congress,auto_door_button,absent
+door-23,Accenture 323 Congress,lever_or_pull_hardware,present
+door-23,Accenture 323 Congress,clear_approach,present
+door-23,Accenture 323 Congress,accessible_signage,absent
+door-23,Accenture 323 Congress,door_width_adequate,appears_wide
+door-24,327 Congress lobby,step_free_entry,present
+door-24,327 Congress lobby,ramp_present,absent
+door-24,327 Congress lobby,handrails_present,absent
+door-24,327 Congress lobby,auto_door_button,absent
+door-24,327 Congress lobby,lever_or_pull_hardware,present
+door-24,327 Congress lobby,clear_approach,present
+door-24,327 Congress lobby,accessible_signage,absent
+door-24,327 Congress lobby,door_width_adequate,appears_wide
+door-25,SoulCycle Ste 100E,step_free_entry,present
+door-25,SoulCycle Ste 100E,ramp_present,absent
+door-25,SoulCycle Ste 100E,handrails_present,absent
+door-25,SoulCycle Ste 100E,auto_door_button,absent
+door-25,SoulCycle Ste 100E,lever_or_pull_hardware,present
+door-25,SoulCycle Ste 100E,clear_approach,present
+door-25,SoulCycle Ste 100E,accessible_signage,absent
+door-25,SoulCycle Ste 100E,door_width_adequate,appears_narrow
+door-26,Mexic-Arte Museum,step_free_entry,present
+door-26,Mexic-Arte Museum,ramp_present,absent
+door-26,Mexic-Arte Museum,handrails_present,absent
+door-26,Mexic-Arte Museum,auto_door_button,absent
+door-26,Mexic-Arte Museum,lever_or_pull_hardware,present
+door-26,Mexic-Arte Museum,clear_approach,present
+door-26,Mexic-Arte Museum,accessible_signage,absent
+door-26,Mexic-Arte Museum,door_width_adequate,appears_wide
+door-27,White-mullion glass lobby,step_free_entry,present
+door-27,White-mullion glass lobby,ramp_present,absent
+door-27,White-mullion glass lobby,handrails_present,absent
+door-27,White-mullion glass lobby,auto_door_button,absent
+door-27,White-mullion glass lobby,lever_or_pull_hardware,present
+door-27,White-mullion glass lobby,clear_approach,present
+door-27,White-mullion glass lobby,accessible_signage,absent
+door-27,White-mullion glass lobby,door_width_adequate,appears_wide
+door-28,Frameless glass lobby (planters),step_free_entry,present
+door-28,Frameless glass lobby (planters),ramp_present,absent
+door-28,Frameless glass lobby (planters),handrails_present,absent
+door-28,Frameless glass lobby (planters),auto_door_button,
+door-28,Frameless glass lobby (planters),lever_or_pull_hardware,present
+door-28,Frameless glass lobby (planters),clear_approach,present
+door-28,Frameless glass lobby (planters),accessible_signage,absent
+door-28,Frameless glass lobby (planters),door_width_adequate,appears_wide
+door-29,Allen Edmonds,step_free_entry,absent
+door-29,Allen Edmonds,ramp_present,
+door-29,Allen Edmonds,handrails_present,absent
+door-29,Allen Edmonds,auto_door_button,absent
+door-29,Allen Edmonds,lever_or_pull_hardware,present
+door-29,Allen Edmonds,clear_approach,present
+door-29,Allen Edmonds,accessible_signage,absent
+door-29,Allen Edmonds,door_width_adequate,appears_wide
+door-30,515 Congress lobby,step_free_entry,present
+door-30,515 Congress lobby,ramp_present,absent
+door-30,515 Congress lobby,handrails_present,absent
+door-30,515 Congress lobby,auto_door_button,present
+door-30,515 Congress lobby,lever_or_pull_hardware,present
+door-30,515 Congress lobby,clear_approach,present
+door-30,515 Congress lobby,accessible_signage,present
+door-30,515 Congress lobby,door_width_adequate,appears_wide
+door-31,Capital One Cafe,step_free_entry,present
+door-31,Capital One Cafe,ramp_present,absent
+door-31,Capital One Cafe,handrails_present,absent
+door-31,Capital One Cafe,auto_door_button,absent
+door-31,Capital One Cafe,lever_or_pull_hardware,present
+door-31,Capital One Cafe,clear_approach,present
+door-31,Capital One Cafe,accessible_signage,absent
+door-31,Capital One Cafe,door_width_adequate,appears_wide
+door-32,607 Congress cannabis bodega,step_free_entry,present
+door-32,607 Congress cannabis bodega,ramp_present,absent
+door-32,607 Congress cannabis bodega,handrails_present,absent
+door-32,607 Congress cannabis bodega,auto_door_button,absent
+door-32,607 Congress cannabis bodega,lever_or_pull_hardware,present
+door-32,607 Congress cannabis bodega,clear_approach,present
+door-32,607 Congress cannabis bodega,accessible_signage,absent
+door-32,607 Congress cannabis bodega,door_width_adequate,appears_narrow
+door-33,609 Congress sushi,step_free_entry,present
+door-33,609 Congress sushi,ramp_present,absent
+door-33,609 Congress sushi,handrails_present,absent
+door-33,609 Congress sushi,auto_door_button,absent
+door-33,609 Congress sushi,lever_or_pull_hardware,present
+door-33,609 Congress sushi,clear_approach,present
+door-33,609 Congress sushi,accessible_signage,absent
+door-33,609 Congress sushi,door_width_adequate,appears_wide
+door-34,7-Eleven 613,step_free_entry,present
+door-34,7-Eleven 613,ramp_present,absent
+door-34,7-Eleven 613,handrails_present,absent
+door-34,7-Eleven 613,auto_door_button,absent
+door-34,7-Eleven 613,lever_or_pull_hardware,present
+door-34,7-Eleven 613,clear_approach,present
+door-34,7-Eleven 613,accessible_signage,absent
+door-34,7-Eleven 613,door_width_adequate,appears_wide
+door-35,Music shop (piano landing),step_free_entry,present
+door-35,Music shop (piano landing),ramp_present,absent
+door-35,Music shop (piano landing),handrails_present,absent
+door-35,Music shop (piano landing),auto_door_button,absent
+door-35,Music shop (piano landing),lever_or_pull_hardware,present
+door-35,Music shop (piano landing),clear_approach,present
+door-35,Music shop (piano landing),accessible_signage,absent
+door-35,Music shop (piano landing),door_width_adequate,appears_wide
+door-36,Paramount box office 719,step_free_entry,present
+door-36,Paramount box office 719,ramp_present,absent
+door-36,Paramount box office 719,handrails_present,absent
+door-36,Paramount box office 719,auto_door_button,absent
+door-36,Paramount box office 719,lever_or_pull_hardware,present
+door-36,Paramount box office 719,clear_approach,present
+door-36,Paramount box office 719,accessible_signage,absent
+door-36,Paramount box office 719,door_width_adequate,appears_wide
+door-37,721 Congress,step_free_entry,absent
+door-37,721 Congress,ramp_present,
+door-37,721 Congress,handrails_present,present
+door-37,721 Congress,auto_door_button,absent
+door-37,721 Congress,lever_or_pull_hardware,present
+door-37,721 Congress,clear_approach,present
+door-37,721 Congress,accessible_signage,absent
+door-37,721 Congress,door_width_adequate,appears_wide
+door-38,Kruger's Jewelers,step_free_entry,present
+door-38,Kruger's Jewelers,ramp_present,absent
+door-38,Kruger's Jewelers,handrails_present,absent
+door-38,Kruger's Jewelers,auto_door_button,absent
+door-38,Kruger's Jewelers,lever_or_pull_hardware,present
+door-38,Kruger's Jewelers,clear_approach,present
+door-38,Kruger's Jewelers,accessible_signage,absent
+door-38,Kruger's Jewelers,door_width_adequate,appears_wide
+door-39,Levy Dykema (7th St entrance),step_free_entry,absent
+door-39,Levy Dykema (7th St entrance),ramp_present,absent
+door-39,Levy Dykema (7th St entrance),handrails_present,absent
+door-39,Levy Dykema (7th St entrance),auto_door_button,absent
+door-39,Levy Dykema (7th St entrance),lever_or_pull_hardware,absent
+door-39,Levy Dykema (7th St entrance),clear_approach,present
+door-39,Levy Dykema (7th St entrance),accessible_signage,present
+door-39,Levy Dykema (7th St entrance),door_width_adequate,appears_wide
+door-40,"Vacant storefront, black steel doors A",step_free_entry,present
+door-40,"Vacant storefront, black steel doors A",ramp_present,absent
+door-40,"Vacant storefront, black steel doors A",handrails_present,absent
+door-40,"Vacant storefront, black steel doors A",auto_door_button,absent
+door-40,"Vacant storefront, black steel doors A",lever_or_pull_hardware,present
+door-40,"Vacant storefront, black steel doors A",clear_approach,present
+door-40,"Vacant storefront, black steel doors A",accessible_signage,absent
+door-40,"Vacant storefront, black steel doors A",door_width_adequate,appears_wide
+door-41,"Vacant storefront, black steel doors B",step_free_entry,absent
+door-41,"Vacant storefront, black steel doors B",ramp_present,absent
+door-41,"Vacant storefront, black steel doors B",handrails_present,absent
+door-41,"Vacant storefront, black steel doors B",auto_door_button,absent
+door-41,"Vacant storefront, black steel doors B",lever_or_pull_hardware,present
+door-41,"Vacant storefront, black steel doors B",clear_approach,present
+door-41,"Vacant storefront, black steel doors B",accessible_signage,absent
+door-41,"Vacant storefront, black steel doors B",door_width_adequate,appears_wide
+door-42,Beacon residential lobby,step_free_entry,present
+door-42,Beacon residential lobby,ramp_present,absent
+door-42,Beacon residential lobby,handrails_present,absent
+door-42,Beacon residential lobby,auto_door_button,present
+door-42,Beacon residential lobby,lever_or_pull_hardware,present
+door-42,Beacon residential lobby,clear_approach,present
+door-42,Beacon residential lobby,accessible_signage,present
+door-42,Beacon residential lobby,door_width_adequate,appears_wide
+door-43,"Vacant storefront, green film, two steps",step_free_entry,absent
+door-43,"Vacant storefront, green film, two steps",ramp_present,absent
+door-43,"Vacant storefront, green film, two steps",handrails_present,present
+door-43,"Vacant storefront, green film, two steps",auto_door_button,absent
+door-43,"Vacant storefront, green film, two steps",lever_or_pull_hardware,present
+door-43,"Vacant storefront, green film, two steps",clear_approach,present
+door-43,"Vacant storefront, green film, two steps",accessible_signage,absent
+door-43,"Vacant storefront, green film, two steps",door_width_adequate,appears_wide
+door-44,"Vacant storefront, green film, raised slab",step_free_entry,absent
+door-44,"Vacant storefront, green film, raised slab",ramp_present,absent
+door-44,"Vacant storefront, green film, raised slab",handrails_present,absent
+door-44,"Vacant storefront, green film, raised slab",auto_door_button,absent
+door-44,"Vacant storefront, green film, raised slab",lever_or_pull_hardware,present
+door-44,"Vacant storefront, green film, raised slab",clear_approach,present
+door-44,"Vacant storefront, green film, raised slab",accessible_signage,absent
+door-44,"Vacant storefront, green film, raised slab",door_width_adequate,appears_wide
+door-45,Stair exit door bank (3 lever doors),step_free_entry,present
+door-45,Stair exit door bank (3 lever doors),ramp_present,absent
+door-45,Stair exit door bank (3 lever doors),handrails_present,absent
+door-45,Stair exit door bank (3 lever doors),auto_door_button,absent
+door-45,Stair exit door bank (3 lever doors),lever_or_pull_hardware,present
+door-45,Stair exit door bank (3 lever doors),clear_approach,present
+door-45,Stair exit door bank (3 lever doors),accessible_signage,absent
+door-45,Stair exit door bank (3 lever doors),door_width_adequate,appears_narrow
+door-46,Chick-fil-A (600 Congress),step_free_entry,present
+door-46,Chick-fil-A (600 Congress),ramp_present,absent
+door-46,Chick-fil-A (600 Congress),handrails_present,absent
+door-46,Chick-fil-A (600 Congress),auto_door_button,absent
+door-46,Chick-fil-A (600 Congress),lever_or_pull_hardware,present
+door-46,Chick-fil-A (600 Congress),clear_approach,present
+door-46,Chick-fil-A (600 Congress),accessible_signage,absent
+door-46,Chick-fil-A (600 Congress),door_width_adequate,appears_wide
+door-47,L&D ATX bar,step_free_entry,present
+door-47,L&D ATX bar,ramp_present,absent
+door-47,L&D ATX bar,handrails_present,absent
+door-47,L&D ATX bar,auto_door_button,absent
+door-47,L&D ATX bar,lever_or_pull_hardware,present
+door-47,L&D ATX bar,clear_approach,present
+door-47,L&D ATX bar,accessible_signage,absent
+door-47,L&D ATX bar,door_width_adequate,appears_narrow
+door-48,Revolving door lobby (503 Colorado redirect),step_free_entry,present
+door-48,Revolving door lobby (503 Colorado redirect),ramp_present,absent
+door-48,Revolving door lobby (503 Colorado redirect),handrails_present,absent
+door-48,Revolving door lobby (503 Colorado redirect),auto_door_button,absent
+door-48,Revolving door lobby (503 Colorado redirect),lever_or_pull_hardware,present
+door-48,Revolving door lobby (503 Colorado redirect),clear_approach,present
+door-48,Revolving door lobby (503 Colorado redirect),accessible_signage,absent
+door-48,Revolving door lobby (503 Colorado redirect),door_width_adequate,appears_narrow
+door-49,Ruth's Chris Steak House,step_free_entry,present
+door-49,Ruth's Chris Steak House,ramp_present,absent
+door-49,Ruth's Chris Steak House,handrails_present,absent
+door-49,Ruth's Chris Steak House,auto_door_button,absent
+door-49,Ruth's Chris Steak House,lever_or_pull_hardware,present
+door-49,Ruth's Chris Steak House,clear_approach,present
+door-49,Ruth's Chris Steak House,accessible_signage,absent
+door-49,Ruth's Chris Steak House,door_width_adequate,appears_wide
+door-50,Scarbrough Bldg brass doors (ECR),step_free_entry,present
+door-50,Scarbrough Bldg brass doors (ECR),ramp_present,absent
+door-50,Scarbrough Bldg brass doors (ECR),handrails_present,absent
+door-50,Scarbrough Bldg brass doors (ECR),auto_door_button,absent
+door-50,Scarbrough Bldg brass doors (ECR),lever_or_pull_hardware,present
+door-50,Scarbrough Bldg brass doors (ECR),clear_approach,present
+door-50,Scarbrough Bldg brass doors (ECR),accessible_signage,absent
+door-50,Scarbrough Bldg brass doors (ECR),door_width_adequate,appears_wide
+door-51,Velvet Taco (522 Congress),step_free_entry,present
+door-51,Velvet Taco (522 Congress),ramp_present,absent
+door-51,Velvet Taco (522 Congress),handrails_present,absent
+door-51,Velvet Taco (522 Congress),auto_door_button,absent
+door-51,Velvet Taco (522 Congress),lever_or_pull_hardware,present
+door-51,Velvet Taco (522 Congress),clear_approach,present
+door-51,Velvet Taco (522 Congress),accessible_signage,absent
+door-51,Velvet Taco (522 Congress),door_width_adequate,appears_wide
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),step_free_entry,present
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),ramp_present,absent
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),handrails_present,absent
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),auto_door_button,absent
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),lever_or_pull_hardware,present
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),clear_approach,present
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),accessible_signage,absent
+door-52,Scarbrough Bldg diner (522 Congress Ste 110),door_width_adequate,appears_wide
+door-53,506 Congress single door w/ intercom,step_free_entry,present
+door-53,506 Congress single door w/ intercom,ramp_present,absent
+door-53,506 Congress single door w/ intercom,handrails_present,absent
+door-53,506 Congress single door w/ intercom,auto_door_button,absent
+door-53,506 Congress single door w/ intercom,lever_or_pull_hardware,present
+door-53,506 Congress single door w/ intercom,clear_approach,present
+door-53,506 Congress single door w/ intercom,accessible_signage,absent
+door-53,506 Congress single door w/ intercom,door_width_adequate,appears_narrow
+door-54,DASA vacant storefront,step_free_entry,present
+door-54,DASA vacant storefront,ramp_present,absent
+door-54,DASA vacant storefront,handrails_present,absent
+door-54,DASA vacant storefront,auto_door_button,absent
+door-54,DASA vacant storefront,lever_or_pull_hardware,present
+door-54,DASA vacant storefront,clear_approach,present
+door-54,DASA vacant storefront,accessible_signage,absent
+door-54,DASA vacant storefront,door_width_adequate,appears_wide
+door-55,Robinson-Rosner Building (504 Congress),step_free_entry,present
+door-55,Robinson-Rosner Building (504 Congress),ramp_present,absent
+door-55,Robinson-Rosner Building (504 Congress),handrails_present,absent
+door-55,Robinson-Rosner Building (504 Congress),auto_door_button,absent
+door-55,Robinson-Rosner Building (504 Congress),lever_or_pull_hardware,present
+door-55,Robinson-Rosner Building (504 Congress),clear_approach,present
+door-55,Robinson-Rosner Building (504 Congress),accessible_signage,absent
+door-55,Robinson-Rosner Building (504 Congress),door_width_adequate,appears_wide
+door-56,CVS Pharmacy,step_free_entry,absent
+door-56,CVS Pharmacy,ramp_present,present
+door-56,CVS Pharmacy,handrails_present,present
+door-56,CVS Pharmacy,auto_door_button,
+door-56,CVS Pharmacy,lever_or_pull_hardware,present
+door-56,CVS Pharmacy,clear_approach,present
+door-56,CVS Pharmacy,accessible_signage,present
+door-56,CVS Pharmacy,door_width_adequate,appears_wide
+door-57,120 W 5th St frosted double doors,step_free_entry,present
+door-57,120 W 5th St frosted double doors,ramp_present,absent
+door-57,120 W 5th St frosted double doors,handrails_present,absent
+door-57,120 W 5th St frosted double doors,auto_door_button,absent
+door-57,120 W 5th St frosted double doors,lever_or_pull_hardware,present
+door-57,120 W 5th St frosted double doors,clear_approach,present
+door-57,120 W 5th St frosted double doors,accessible_signage,absent
+door-57,120 W 5th St frosted double doors,door_width_adequate,appears_wide
+door-58,415 Colorado residences (Door A),step_free_entry,absent
+door-58,415 Colorado residences (Door A),ramp_present,
+door-58,415 Colorado residences (Door A),handrails_present,present
+door-58,415 Colorado residences (Door A),auto_door_button,absent
+door-58,415 Colorado residences (Door A),lever_or_pull_hardware,present
+door-58,415 Colorado residences (Door A),clear_approach,present
+door-58,415 Colorado residences (Door A),accessible_signage,absent
+door-58,415 Colorado residences (Door A),door_width_adequate,appears_wide
+door-59,405 Colorado revolving door lobby,step_free_entry,present
+door-59,405 Colorado revolving door lobby,ramp_present,absent
+door-59,405 Colorado revolving door lobby,handrails_present,absent
+door-59,405 Colorado revolving door lobby,auto_door_button,absent
+door-59,405 Colorado revolving door lobby,lever_or_pull_hardware,present
+door-59,405 Colorado revolving door lobby,clear_approach,present
+door-59,405 Colorado revolving door lobby,accessible_signage,absent
+door-59,405 Colorado revolving door lobby,door_width_adequate,appears_narrow
+door-60,Sushi Roku,step_free_entry,present
+door-60,Sushi Roku,ramp_present,absent
+door-60,Sushi Roku,handrails_present,absent
+door-60,Sushi Roku,auto_door_button,absent
+door-60,Sushi Roku,lever_or_pull_hardware,present
+door-60,Sushi Roku,clear_approach,present
+door-60,Sushi Roku,accessible_signage,absent
+door-60,Sushi Roku,door_width_adequate,appears_narrow
+door-61,Quik Print (SW Telegraph & Telephone Bldg),step_free_entry,present
+door-61,Quik Print (SW Telegraph & Telephone Bldg),ramp_present,absent
+door-61,Quik Print (SW Telegraph & Telephone Bldg),handrails_present,absent
+door-61,Quik Print (SW Telegraph & Telephone Bldg),auto_door_button,absent
+door-61,Quik Print (SW Telegraph & Telephone Bldg),lever_or_pull_hardware,absent
+door-61,Quik Print (SW Telegraph & Telephone Bldg),clear_approach,present
+door-61,Quik Print (SW Telegraph & Telephone Bldg),accessible_signage,absent
+door-61,Quik Print (SW Telegraph & Telephone Bldg),door_width_adequate,appears_narrow
+door-62,Speakeasy main door (412 Congress),step_free_entry,absent
+door-62,Speakeasy main door (412 Congress),ramp_present,absent
+door-62,Speakeasy main door (412 Congress),handrails_present,absent
+door-62,Speakeasy main door (412 Congress),auto_door_button,absent
+door-62,Speakeasy main door (412 Congress),lever_or_pull_hardware,present
+door-62,Speakeasy main door (412 Congress),clear_approach,present
+door-62,Speakeasy main door (412 Congress),accessible_signage,absent
+door-62,Speakeasy main door (412 Congress),door_width_adequate,appears_narrow
+door-63,Speakeasy white double doors,step_free_entry,present
+door-63,Speakeasy white double doors,ramp_present,absent
+door-63,Speakeasy white double doors,handrails_present,absent
+door-63,Speakeasy white double doors,auto_door_button,absent
+door-63,Speakeasy white double doors,lever_or_pull_hardware,present
+door-63,Speakeasy white double doors,clear_approach,present
+door-63,Speakeasy white double doors,accessible_signage,absent
+door-63,Speakeasy white double doors,door_width_adequate,appears_wide
+door-64,416 Congress wooden door bank,step_free_entry,present
+door-64,416 Congress wooden door bank,ramp_present,absent
+door-64,416 Congress wooden door bank,handrails_present,absent
+door-64,416 Congress wooden door bank,auto_door_button,absent
+door-64,416 Congress wooden door bank,lever_or_pull_hardware,present
+door-64,416 Congress wooden door bank,clear_approach,present
+door-64,416 Congress wooden door bank,accessible_signage,absent
+door-64,416 Congress wooden door bank,door_width_adequate,appears_wide

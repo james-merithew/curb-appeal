@@ -1,0 +1,566 @@
+{
+ "door-01": {
+  "views": 5,
+  "latency_s": 8.22,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 80,
+    "evidence": "Oblique views 1 and 3 show sidewalk concrete running continuously to the metal threshold with no riser shadow"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No sloped surface or side ramp at any platform edge in the oblique views"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 75,
+    "evidence": "No steps or ramp served by rails in any view"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No push-button pad on jambs or adjacent wall in near views 4 and 5"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 92,
+    "evidence": "Offset D-pull handles on both leaves, clearest in close-up view 5"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Wide open sidewalk directly in front of doors in views 1 and 3"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 72,
+    "evidence": "Only hours, PULL, and logo decals on glass; no ISA symbol in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Pair of narrow-ish leaves; clear width not measurable from photos"
+   }
+  },
+  "overall_note": "The entrance looks level with the sidewalk and has graspable pull handles with a clear walking path, but there is no automatic door button or accessibility signage, and the actual door clear width needs to be measured on site."
+ },
+ "door-02": {
+  "views": 5,
+  "latency_s": 21.92,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 62,
+    "evidence": "Oblique near views (photos 3-5) show concrete apron feathering into brick pavers with no shadowed riser edge at the doorway"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 58,
+    "evidence": "No sloped surface or side ramp at the entrance edges in any view; distant railing in photos 1-2 belongs to another property down the block"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 65,
+    "evidence": "No steps or ramp at this entrance in the close oblique views, so no handrails serve it"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 55,
+    "evidence": "Close views (photos 3-5) show door jambs and adjacent black wall with no push-plate actuator"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "Offset vertical D-pull handles plus horizontal cross bar clearly visible on both leaves in photos 3 and 4"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Open paver sidewalk and bare concrete apron directly in front of the doors in photos 1, 2 and 5"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 60,
+    "evidence": "Door decals show hours, QR code and logos only; no ISA symbol in any close view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 80,
+    "evidence": "Clear width of the active leaf cannot be measured from photos"
+   }
+  },
+  "overall_note": "Your doorway looks flush with the sidewalk and has easy-to-grab pull handles, but there is no automatic door button or accessibility signage, and the actual door clear width still needs to be tape-measured."
+ },
+ "door-03": {
+  "views": 6,
+  "latency_s": 15.92,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 78,
+    "evidence": "Oblique views 1 and 6 show brick pavers running continuously and level to the door sill with no shadowed riser"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No sloped surface or side ramp at any platform edge in the oblique views; entry reads as at-grade"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 80,
+    "evidence": "No steps or ramp and no railings anywhere along the entrance in any view"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 62,
+    "evidence": "Door jambs and adjacent piers fully visible in close head-on views 4 and 5 with no push-button plate"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "absent",
+    "confidence": 68,
+    "evidence": "Close views 4 and 5 show only a flat brass push plate and a small round cylinder/latch, no lever or standoff pull"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 82,
+    "evidence": "Views 3 and 5 show open paver walking line straight to the doors; cafe tables sit to either side"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 65,
+    "evidence": "Door glass and windows legible in views 3-5 show menu and hours decals only, no ISA symbol"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Paired narrow leaves in head-on view 5; clear width not measurable from photos"
+   }
+  },
+  "overall_note": "The entrance looks level with the sidewalk and the path to the door is clear, but the doors have only a flat push plate with no lever, pull handle, automatic opener, or accessibility signage."
+ },
+ "door-04": {
+  "views": 5,
+  "latency_s": 18.51,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 62,
+    "evidence": "Near ground-level views (photos 4 and 5) show the concrete entry pad meeting the brick pavers with no shadowed riser edge"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 58,
+    "evidence": "No sloped surface or ramp edge at either side of the entry pad in any oblique view"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No steps or ramp and no railings at the doorway in any view"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 65,
+    "evidence": "Blue jambs and adjacent wall fully visible in close views with no push-button actuator"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 92,
+    "evidence": "Head-on close view shows tall brass D-pull handles standing off both door leaves"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 75,
+    "evidence": "Patio chairs and table sit to the right of the entry, not across the walking line (photos 1 and 3)"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 68,
+    "evidence": "Door and window decals show hours, no-smoking and no-trespassing only; no ISA symbol"
+   },
+   "door_width_adequate": {
+    "verdict": "appears_wide",
+    "confidence": 55,
+    "evidence": "Wide double wood doors in head-on view, but clear width cannot be measured from a photo"
+   }
+  },
+  "overall_note": "The entrance looks level with the sidewalk and has easy-to-grip pull handles, but there is no automatic door button and no accessibility signage; actual door clear width and any small threshold lip would need to be measured on site."
+ },
+ "door-05": {
+  "views": 6,
+  "latency_s": 20.6,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 62,
+    "evidence": "Oblique views (photos 1 and 6) show brick pavers meeting the concrete apron and running flat to the door sill with no shadowed riser"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No sloped surface or side ramp at either edge of the entrance in any view"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 80,
+    "evidence": "No steps or ramp and no railings anywhere near the doorway in all views"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 68,
+    "evidence": "Wall and frame beside doors fully visible in head-on and oblique views with no push-plate actuator"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 92,
+    "evidence": "Horizontal push bars across both leaves plus stand-off D-pull handles, clear in photos 3 and 5"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Open paver walkway straight to the doors, nothing standing in the path in any view"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 78,
+    "evidence": "Only address, hours and service decals on glass; no ISA symbol in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Paired glass doors; clear width of an active leaf cannot be measured from photos"
+   }
+  },
+  "overall_note": "The entry looks level with the sidewalk and the doors have easy-to-grab push bars and pulls, but there is no automatic door button and no accessibility signage \u2014 and the actual door width still needs to be measured on site."
+ },
+ "door-06": {
+  "views": 7,
+  "latency_s": 20.53,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 62,
+    "evidence": "Oblique views (photos 6-7) show the concrete apron meeting the brick pavers with no shadowed riser at the threshold"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No sloped surface or side ramp at any platform edge in the wide and oblique views"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 72,
+    "evidence": "No steps or ramp served by rails; the diagonal brass tube is a door pull, not a handrail (photos 1-3)"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 65,
+    "evidence": "Tiled wall and door jamb on both sides fully visible in photos 4-6 with no actuator plate"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Diagonal brass pull bar standing off the glass door face, graspable with a closed fist (photos 1, 3, 5)"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 75,
+    "evidence": "Cafe tables and stacked chairs sit to the right of the door; the straight line from sidewalk to threshold is open (photos 3-5)"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "Only address numerals, window lettering, and a No Trespassing notice visible; no ISA symbol in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Single glazed leaf; clear width cannot be measured from photos"
+   }
+  },
+  "overall_note": "The entry looks level with the sidewalk and has a graspable diagonal pull bar with a clear path to the door, but there is no automatic door button, no accessibility signage, and the door's clear width would need to be measured on site."
+ },
+ "door-07": {
+  "views": 4,
+  "latency_s": 14.33,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 68,
+    "evidence": "Oblique near view (photo 4) shows mosaic tile landing meeting brick pavers with no shadowed riser edge"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 62,
+    "evidence": "All four views show flat tile pad at door; no sloped surface or side ramp at platform edges"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 75,
+    "evidence": "No steps or ramp visible in any view, and no railings at the entrance"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 63,
+    "evidence": "Door jamb, sidelite and adjacent wall clearly shown in photos 1 and 4 with no push-button"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "Long vertical brass D-pull standing off door face, clear in head-on photo 1 and near view 4"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Walking line from brick sidewalk across tile pad to door is empty in all views"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "Only 'ONLINE ORDER PICK-UP' and no-smoking decals on sidelite; no ISA symbol in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Single swing leaf; clear width not measurable from photos"
+   }
+  },
+  "overall_note": "The entry looks flush with the sidewalk and has a good graspable pull handle with a clear path to the door, but there's no automatic door button or accessibility signage, and the actual door width would need to be measured on site."
+ },
+ "door-08": {
+  "views": 7,
+  "latency_s": 25.88,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 88,
+    "evidence": "Oblique views 6-7 show a raised concrete slab with a shadowed riser edge above the brick pavers"
+   },
+   "ramp_present": {
+    "verdict": "present",
+    "confidence": 55,
+    "evidence": "Railed sloped section at the right end of the platform in views 1, 6 and 7 (rail top slopes downward)"
+   },
+   "handrails_present": {
+    "verdict": "present",
+    "confidence": 75,
+    "evidence": "Black metal railings flanking the platform edge/side slope in views 1, 6, 7"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "Close head-on views 4-5 show only a keypad on the sidelite, no push-button opener"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "Vertical D-pull standing off the glass door in views 4 and 5"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 80,
+    "evidence": "Open concrete walkway straight to the doors in views 6-7; railings run parallel, not across"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 60,
+    "evidence": "No ISA symbol on glass or wall in any close view"
+   },
+   "door_width_adequate": {
+    "verdict": "appears_wide",
+    "confidence": 55,
+    "evidence": "Active leaf of the glass pair looks full-size in head-on view 4, but width cannot be measured"
+   }
+  },
+  "overall_note": "The doorway itself has good pull handles and a clear path, but the entrance sits on a raised concrete platform with a step up from the sidewalk, with only a possible side slope and railings serving as the accessible route - worth confirming on site."
+ },
+ "door-09": {
+  "views": 3,
+  "latency_s": 22.31,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 62,
+    "evidence": "Shadowed concrete riser edge of a raised landing visible below the doors in views 1 and 3"
+   },
+   "ramp_present": {
+    "verdict": "not_visible",
+    "confidence": 50,
+    "evidence": "Pipe railing suggests a sloped approach off-frame, but no sloped surface is actually shown in any view"
+   },
+   "handrails_present": {
+    "verdict": "present",
+    "confidence": 60,
+    "evidence": "Galvanized pipe railing with posts spans the raised landing edge in all three views"
+   },
+   "auto_door_button": {
+    "verdict": "not_visible",
+    "confidence": 45,
+    "evidence": "Small wall-mounted box left of the door in view 1 reads as a reader/keypad, no clear push-plate actuator"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 68,
+    "evidence": "Vertical stand-off pull bars on both door stiles visible in views 1 and 2"
+   },
+   "clear_approach": {
+    "verdict": "absent",
+    "confidence": 58,
+    "evidence": "Pipe railing runs across the frontage directly between sidewalk and doors in views 1 and 3"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 60,
+    "evidence": "Only address, ATP window lettering and a Welcome sign; no ISA symbol in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Clear width of the glass double doors cannot be measured from photos"
+   }
+  },
+  "overall_note": "The doors have good graspable pull handles, but they sit on a raised concrete landing with a railing across the front and no visible ramp, so a wheelchair user likely cannot get to the door directly."
+ },
+ "door-10": {
+  "views": 5,
+  "latency_s": 22.69,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 58,
+    "evidence": "Oblique views 1 and 5 show pavers meeting the concrete door apron with no distinct riser shadow"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 62,
+    "evidence": "No sloped surface or side ramp at any platform edge in the wide oblique view 1"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No steps or ramp, and no railings anywhere near the doorway in any view"
+   },
+   "auto_door_button": {
+    "verdict": "not_visible",
+    "confidence": 55,
+    "evidence": "No push-plate actuator seen on jambs or adjacent walls; side wall areas partly out of frame"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 93,
+    "evidence": "Long vertical tubular D-pulls standing off both doors, clear in close views 4 and 5"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 85,
+    "evidence": "Open paver sidewalk runs straight to the doors with nothing in the path in views 3 and 5"
+   },
+   "accessible_signage": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "International Symbol of Accessibility decal on lower right door in views 2-5"
+   },
+   "door_width_adequate": {
+    "verdict": "appears_wide",
+    "confidence": 70,
+    "evidence": "Pair of full-height glass doors, each leaf looks generous in head-on view 5"
+   }
+  },
+  "overall_note": "Your entrance looks level with the sidewalk, has easy-to-grab pull handles, a clear walking path, and an accessibility decal, but no automatic door opener button was visible in any photo."
+ },
+ "door-11": {
+  "views": 5,
+  "latency_s": 27.82,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 88,
+    "evidence": "Oblique views (photos 2, 4, 5) show a shadowed concrete riser where the raised entry platform meets the brick pavers"
+   },
+   "ramp_present": {
+    "verdict": "not_visible",
+    "confidence": 50,
+    "evidence": "Pipe railing running off the left edge of the platform in photos 1-3 hints at a ramp, but no sloped surface is actually in frame"
+   },
+   "handrails_present": {
+    "verdict": "present",
+    "confidence": 65,
+    "evidence": "Metal pipe handrail with posts along the left side of the raised platform, seen in all five views"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 62,
+    "evidence": "Door jambs and adjacent green wall are clearly shown in photos 3 and 4 with only FDC valves, no push-button"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "not_visible",
+    "confidence": 45,
+    "evidence": "Wood door hardware reads as a small dark knob/latch in photos 2 and 4; shape not resolvable"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 70,
+    "evidence": "Photos 3 and 5 show the walking line to the door open; A-frame sign and chairs sit to the right, railing runs parallel"
+   },
+   "accessible_signage": {
+    "verdict": "absent",
+    "confidence": 65,
+    "evidence": "No ISA symbol or directional sign on glazing or walls in any view; only hours, FDC and 'don't feed the birds' decals"
+   },
+   "door_width_adequate": {
+    "verdict": "cannot_tell",
+    "confidence": 90,
+    "evidence": "Single wood door in photos 3-4; clear width requires measurement"
+   }
+  },
+  "overall_note": "The entrance sits on a raised concrete platform with at least one step up from the sidewalk, and while a side railing suggests there may be a ramp just out of frame, no ramp is actually shown, so a wheelchair user may not be able to get to the door."
+ },
+ "door-12": {
+  "views": 4,
+  "latency_s": 17.51,
+  "criteria": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 82,
+    "evidence": "Oblique views show large tile paving running continuously from plaza to door sill with no shadowed riser edge"
+   },
+   "ramp_present": {
+    "verdict": "absent",
+    "confidence": 70,
+    "evidence": "No sloped surface or side ramp at any platform edge in the oblique or wide views; approach is already flat"
+   },
+   "handrails_present": {
+    "verdict": "absent",
+    "confidence": 78,
+    "evidence": "No steps or ramp present, and no railings anywhere near the entrance in any view"
+   },
+   "auto_door_button": {
+    "verdict": "absent",
+    "confidence": 50,
+    "evidence": "Left wall panel in near view reads as an intercom/keycard reader, no wheelchair-marked actuator seen"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "Vertical tubular stand-off pull handles on both glass doors, clearest in the head-on near view"
+   },
+   "clear_approach": {
+    "verdict": "present",
+    "confidence": 88,
+    "evidence": "Open tiled forecourt with only a floor mat between sidewalk and doors in all four views"
+   },
+   "accessible_signage": {
+    "verdict": "not_visible",
+    "confidence": 70,
+    "evidence": "Only office-hours and self-guided-tour decals on the glass; no ISA symbol readable in any view"
+   },
+   "door_width_adequate": {
+    "verdict": "appears_wide",
+    "confidence": 65,
+    "evidence": "Pair of full-height glass doors looks generously sized in head-on view, but width cannot be measured from a photo"
+   }
+  },
+  "overall_note": "The entrance looks flat and easy to reach with graspable pull handles and a clear path, but we saw no push-button door opener or accessibility signage, and the door width still needs to be tape-measured."
+ }
+}

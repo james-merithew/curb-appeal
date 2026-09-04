@@ -59,6 +59,9 @@ def build_door_prompt(n_views: int) -> str:
     return "\n".join(lines)
 
 
+MAX_TOKENS = 4000
+
+
 def assess_door(client, model: str, images_b64: list) -> tuple[dict, float]:
     content = [
         {"type": "image",
@@ -68,7 +71,7 @@ def assess_door(client, model: str, images_b64: list) -> tuple[dict, float]:
     content.append({"type": "text", "text": build_door_prompt(len(images_b64))})
     t0 = time.perf_counter()
     response = client.messages.create(
-        model=model, max_tokens=2000, system=SYSTEM,
+        model=model, max_tokens=MAX_TOKENS, system=SYSTEM,
         messages=[{"role": "user", "content": content}],
     )
     latency = time.perf_counter() - t0
@@ -91,7 +94,13 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="claude-opus-5")
     ap.add_argument("--doors", default="", help="comma-separated subset")
+    ap.add_argument("--out", default="door_results.json",
+                    help="results filename under eval/out")
+    ap.add_argument("--max-tokens", type=int, default=4000,
+                    help="sonnet truncates JSON under adaptive thinking at 2000")
     args = ap.parse_args()
+    global MAX_TOKENS
+    MAX_TOKENS = args.max_tokens
     load_env_key()
     client = anthropic.Anthropic()
 
@@ -114,7 +123,7 @@ def main() -> int:
         }
         print(f"{door.name}: {len(images)} views in one call, {latency:.1f}s")
 
-    (OUT_DIR / "door_results.json").write_text(
+    (OUT_DIR / args.out).write_text(
         json.dumps(results, indent=1), encoding="utf-8")
 
     truth = load_truth()

@@ -1,0 +1,1741 @@
+{
+ "wide_single": {
+  "IMG_3326.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "raised concrete platform with visible edge/lip transitioning from patterned sidewalk to door threshold"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp surface or railing visible at entrance edges"
+    },
+    "handrails_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no steps or ramp clearly visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no push-button visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 65,
+     "evidence": "door appears to have a pull/knob style handle, not a lever or bar"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "sidewalk path to door appears open with no obstructions in walking line"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no ISA symbol or directional accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door width cannot be measured from this angle"
+    }
+   },
+   "latency_s": 5.7
+  },
+  "IMG_3327.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "sidewalk pavers appear to run level up to the door threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp structure visible near entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails applicable"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button device visible on frame or nearby wall"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 55,
+     "evidence": "vertical bar/pull visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "open paved path from sidewalk directly to door with no obstructions in walking line"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible near entrance"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial double-door width but exact clearance not measurable"
+    }
+   },
+   "latency_s": 6.0
+  },
+  "IMG_3328.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers run level to the threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at or beside entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button device seen near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "round handle on door appears to stand off surface, resembling a pull"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "open tiled path from sidewalk directly to doors with no obstruction"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 90,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard width but no scale reference for measurement"
+    }
+   },
+   "latency_s": 6.3
+  },
+  "IMG_3337.HEIC": {
+   "door": "door-14",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers run level into threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at entrance or edges"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no steps or ramp visible, no handrails present"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no push-button device visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 60,
+     "evidence": "vertical bar/pull visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "clear stone walkway leads directly to open door with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 90,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "single glass door appears standard width but no measurement possible"
+    }
+   },
+   "latency_s": 5.1
+  },
+  "IMG_3342.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "floor tile appears to run level from sidewalk to threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical bar pull handles on glass doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "mat and tile path directly to door with no obstructions in line"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 75,
+     "evidence": "no ISA symbol or directional signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard size but width not measurable"
+    }
+   },
+   "latency_s": 6.5
+  },
+  "IMG_3343.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "flat tile flooring runs level from sidewalk area to door threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at entrance sides"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, no handrails present"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "vertical bar/loop pull handles visible on both door leaves"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "planters are to the sides, walking path to door is unobstructed"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard width but exact clear width not measurable"
+    }
+   },
+   "latency_s": 5.4
+  },
+  "IMG_3348.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "sidewalk pavers appear to run level into threshold with no visible riser or shadow line"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp structure visible at or beside entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible on walls or door frame in frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 60,
+     "evidence": "vertical pull-style handle visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "paved walkway leads directly to door with no obstructions in path"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 55,
+     "evidence": "wheelchair symbol visible reflected/printed on glass near door interior"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but no measurement reference available"
+    }
+   },
+   "latency_s": 5.8
+  },
+  "IMG_3349.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers appear to run level to threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at or beside entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push button visible on frame or nearby wall"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar/pull handle visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "open paved walkway leads directly to door with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "blue accessibility symbol visible on interior glass near door"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard size but width cannot be measured from photo"
+    }
+   },
+   "latency_s": 5.2
+  },
+  "IMG_3350.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers appear to run level into the tiled threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at entrance sides"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible, so no handrails present"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button panel visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar/pull visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "clear paved path from sidewalk directly to doors, no obstructions in line"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "wheelchair symbol decal on right door glass"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but exact measurement not possible from photo"
+    }
+   },
+   "latency_s": 6.0
+  }
+ },
+ "normal_single": {
+  "IMG_3329.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tile flooring appears level from sidewalk to threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp structure visible at or beside entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible on door frame or walls"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "lever-style handle visible on right door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "tile path leads directly to doors with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "no ISA symbol or directional signage visible, only store nameplate"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double door opening looks reasonably wide but no measurement possible"
+    }
+   },
+   "latency_s": 6.0
+  },
+  "IMG_3330.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tile floor appears to run level from sidewalk to threshold"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp or sloped surface visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "no push-button device visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "lever-style handle visible on right door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "tile path to door is unobstructed"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double door leaf width not measurable from photo"
+    }
+   },
+   "latency_s": 5.3
+  },
+  "IMG_3331.HEIC": {
+   "door": "door-13",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tile floor appears level with sidewalk, no visible riser at threshold"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp or slope visible at entrance sides"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no push-button visible on wall or door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "metal lever/pull handle visible on right door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "tiled walkway leads directly to doors with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard width but cannot measure from photo"
+    }
+   },
+   "latency_s": 5.5
+  },
+  "IMG_3332.HEIC": {
+   "door": "door-14",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk tile appears to run level into threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp structure visible on either side of entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button plate visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "vertical bar/pull handle visible on door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "open, unobstructed tile path leads directly to open door"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible in frame"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "single door leaf appears standard width but no measurement possible"
+    }
+   },
+   "latency_s": 5.3
+  },
+  "IMG_3338.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "flat pavers run continuously from sidewalk area to door threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at or beside entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button plate visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar/pull hardware visible on glass doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "open paved path from sidewalk to door with only planters off to the sides"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double glass doors appear standard width but no measurement possible"
+    }
+   },
+   "latency_s": 5.6
+  },
+  "IMG_3339.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "flooring transitions flush from tiled walkway to mat to threshold, no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp structure visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible requiring handrails"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar-style pull handles visible on both doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "open tiled path and mat lead directly to doors with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no ISA symbol or directional signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard commercial width but exact clearance not measurable"
+    }
+   },
+   "latency_s": 5.3
+  },
+  "IMG_3340.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "floor tile appears to run level from sidewalk to threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp or sloped surface visible in frame"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no steps or ramp visible, so no handrails present"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no push button visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical wooden bar pull handles on glass doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "mat and walkway directly to door are unobstructed"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 90,
+     "evidence": "no ISA symbol or accessibility signage visible"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard width but cannot measure from photo"
+    }
+   },
+   "latency_s": 5.5
+  },
+  "IMG_3341.HEIC": {
+   "door": "door-15",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "floor tile runs level from sidewalk to threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp present, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible near doors or walls"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical bar pull handles on both doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "mat and tile path directly to door with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "only firearms notice sign visible, no accessibility symbol"
+    },
+    "door_width_adequate": {
+     "verdict": "appears_wide",
+     "confidence": 55,
+     "evidence": "double doors appear to provide ample width per leaf"
+    }
+   },
+   "latency_s": 6.7
+  },
+  "IMG_3351.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tile threshold appears level with brick sidewalk, no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp or slope visible in frame"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible near door frame"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "horizontal push-bar visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "open tiled path from sidewalk to door, no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "blue ISA wheelchair decal on glass panel"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but no measurement possible"
+    }
+   },
+   "latency_s": 6.3
+  },
+  "IMG_3352.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers run level into threshold with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped or ramp surface visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible requiring rails"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible near doors"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical bar/pull handle visible on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "clear paved path leads directly to door"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "blue wheelchair symbol decal on glass door"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but not measurable"
+    }
+   },
+   "latency_s": 5.0
+  },
+  "IMG_3353.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "sidewalk pavers appear to meet threshold level with no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp or sloped surface visible at entrance"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed or shown"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible on door frame or wall"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "metal handle standing off door surface on glass door"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "clear paved path leads directly to door with no obstructions"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "blue wheelchair symbol decal on glass panel beside door"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but cannot be measured from photo"
+    }
+   },
+   "latency_s": 6.2
+  },
+  "IMG_3354.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tile threshold appears level with sidewalk pavers, no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp visible in frame, entrance appears flush"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible requiring handrails"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible on frame or nearby wall"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "horizontal push-bar/pull handle visible on doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "sidewalk leads directly to doors with no obstructions in path"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "blue ISA wheelchair symbol sign mounted on glass to the right"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door leaf appears standard width but no measurement reference"
+    }
+   },
+   "latency_s": 5.4
+  },
+  "IMG_3355.HEIC": {
+   "door": "door-16",
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "sidewalk and threshold appear level with tile floor, no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no ramp visible in frame, entrance appears flush"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible, so no handrails needed"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push button visible on door frame or wall"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "horizontal push-bar visible across both doors"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "clear paved path directly to doors, no obstructions in walking line"
+    },
+    "accessible_signage": {
+     "verdict": "present",
+     "confidence": 95,
+     "evidence": "blue ISA wheelchair symbol sign mounted on wall right of door"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door leaf appears standard commercial width but cannot measure from photo"
+    }
+   },
+   "latency_s": 5.4
+  }
+ },
+ "walkup": {
+  "IMG_3344": {
+   "business": "Truluck's (Ocean's Finest Seafood & Crab), 300 Colorado St, Suite 100",
+   "n_frames": 5,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "sidewalk pavers run flush to threshold with mat covering transition in all views, no riser shadow visible"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp structure visible at sides of entrance in any view; entrance appears level so ramp may not be needed"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible in any view, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 75,
+     "evidence": "no push button visible near door frame or wall in any of the 5 views"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical wood pull bars standing off door surface visible in all views, especially close-up final image"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "mat and walkway leading straight to doors unobstructed in head-on and oblique views"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no ISA symbol visible; only firearms notice signs seen in all views"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double doors appear standard commercial width in head-on view but exact clear width not measurable"
+    }
+   },
+   "latency_s": 7.6
+  }
+ },
+ "walkby": {
+  "v01": {
+   "business": "Kruger's Diamond Jewelers",
+   "description": "Kruger's Jewelers: deep recessed arcade entry, terrazzo floor with inlaid 'KRUGER'S' lettering, angled jewelry display cases, aluminum-framed glass entry door at rear right; 'hello love you' display card, No Trespassing sign in case.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "all views show continuous level tile/stone flooring from sidewalk pavers to door threshold with no visible riser or step edge"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no ramp structure visible; surface appears level so no ramp needed, but sides not fully shown"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp identified in any view, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible near door jambs in head-on or oblique views"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar/pull hardware visible on glass door in head-on view"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "flat unobstructed path from sidewalk pavers to door in all three views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no ISA symbol or directional signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double glass door appears standard width in head-on view but exact measurement not possible"
+    }
+   },
+   "latency_s": 6.4
+  },
+  "v02": {
+   "business": "Bar Grotta / Caprese, 720 Congress Ave",
+   "description": "Bar Grotta, 720 Congress: white stucco facade with two black steel arched-top glass doors, long black vertical pull handles, gold leaf 'GROTTA'/'Caprese' window lettering, patterned gray-white encaustic tile threshold, potted palms, blue-gray painted brick pier at south end.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "tile threshold appears flush with sidewalk level in all three views, no shadow riser visible"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp or sloped surface visible at entrance edges in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push button visible near doors in any view, wall area partially obscured by plant/hardware"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "vertical bar/pull handles visible on glass doors in head-on and near views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "tiled walkway from sidewalk to door appears open in near view, planter is set to the side not blocking path"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 90,
+     "evidence": "no ISA symbol or directional signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard width in head-on view but exact measurement not possible from photo"
+    }
+   },
+   "latency_s": 6.4
+  },
+  "v03": {
+   "business": "Jupiter Supper Club",
+   "description": "Jupiter Supper Club: single olive-green wood door with full glass panel, gold 'JUPITER SUPPER CLUB' lettering with arrow motif, ornate black vertical handle set, white classical millwork surround, marble base panels; green curtains in adjacent window.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers meet threshold flush in all three views with no visible riser shadow"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at sides of entrance in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "no push-button visible near door frame in any view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "ornate metal pull handle standing off door surface visible in all views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "unobstructed paver walkway leading directly to door in all views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "single door appears standard width but no measurement possible from photos"
+    }
+   },
+   "latency_s": 5.9
+  },
+  "v04": {
+   "business": "718 Congress Ave",
+   "description": "718 Congress (Townsend-Thompson Building, historic plaque above): olive-green wood door with woven-mesh security glass panel, bronze handle set with deadbolt, brass 'NO SMOKING' mail-slot plate, wall-mounted intercom/keypad box at left, address numerals '718' on adjacent window.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers appear level with door threshold in all three views, no visible riser or shadow line"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at sides of entrance in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible, so no handrails needed or present"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 65,
+     "evidence": "only a keypad/intercom box visible near door in head-on and oblique views, no push-button opener"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "ornate loop-style pull handle standing off door surface, clearly visible in head-on and near views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "sidewalk path to door appears unobstructed in all views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no accessibility symbol or signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard single-leaf width but exact measurement not possible from photos"
+    }
+   },
+   "latency_s": 6.4
+  },
+  "v05": {
+   "business": "716 Congress Ave (Johns-Hamilton Building)",
+   "description": "716 Congress Ave (Johns-Hamilton Building 1871, Austin Landmark plaque on Gothic limestone pier): pairs of weathered wood-and-glass double doors with divided lites, brass push plates and kick plates, gold '716 CONGRESS AVENUE' window lettering, barrel bolts at door bases.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "sidewalk pavers run flush to threshold in all three views, no riser visible"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible at base of columns or doors in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "no button or plate visible near doors in close or oblique views"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "only round knobs and brass push plates visible on doors in near/oblique views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "sidewalk directly in front of doors is clear in all views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door leaf appears standard width but no measurement possible from photos"
+    }
+   },
+   "latency_s": 6.1
+  },
+  "v06": {
+   "business": "714 Congress Ave, Suite 200",
+   "description": "714 Congress Ave, Suite 200 side door: single pale-yellow/cream aluminum door with full glass, silver offset pull handle, 'PLEASE RING DOORBELL for all deliveries / call 917 597-5412' sign and red NO TRESPASSING notice on sidelight, maroon storefront framing with marble base panels.",
+   "n_frames": 2,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk and threshold appear flush in both views, no visible riser"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no ramp structure visible at entrance in either view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp visible requiring rails"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible near door frame in either view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical bar pull handle visible on door in both views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "flat clear sidewalk leading directly to door, no obstructions in path"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no ISA or directional accessibility signage visible on door or walls"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width but no measurement possible"
+    }
+   },
+   "latency_s": 5.6
+  },
+  "v07": {
+   "business": "MyEyeDr, 714 Congress Ave Suite 100",
+   "description": "MyEyeDr optometrist: recessed entry with cream full-glass door lettered '714 Suite 100 / myeyedr. / Amanda Salazar, O.D. / (512) 477-9000', silver bar handle, OPEN sign with hours, maroon millwork surround, TOM FORD eyewear display window with marble bulkhead.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "ground-level views show flat sidewalk tile flush with threshold, no visible riser or shadow line"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or side ramp visible in any of the three views"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present, so no handrails expected or seen"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no push-button visible on door frame or adjacent wall in any view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical bar/loop pull handle clearly visible on door in head-on and oblique views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "flat unobstructed sidewalk and threshold area visible leading directly to door in all views"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 90,
+     "evidence": "no ISA symbol or accessibility signage visible in any photo"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "door appears standard commercial width in head-on view but exact measurement not assessable"
+    }
+   },
+   "latency_s": 5.8
+  },
+  "v08": {
+   "business": "710 Congress Ave",
+   "description": "710 Congress Ave: monumental entry with white fluted columns and multiple bays of tall golden-oak paneled double doors with glass uppers, brass hardware, 'Building Managed By One Management 512 916-0123' and '710 Congress Avenue' window lettering, FOR SALE broker sign in transom glass; stone step threshold.",
+   "n_frames": 4,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "all views show sidewalk pavers meeting threshold with no visible riser or step edge"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped or ramp surface visible at sides of entrance in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "no push-button visible near door frame in any close view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "curved pull handle visible on door in oblique/head-on views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk and threshold path clear of obstructions in all views"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no accessibility symbol or signage seen in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double door appears standard size but no measurement possible"
+    }
+   },
+   "latency_s": 5.6
+  },
+  "v09": {
+   "business": "uShip (Edward Tips Building)",
+   "description": "uShip offices (Edward Tips Building 1883, Austin Landmark plaque): gray-painted wood double doors with reeded/fluted privacy glass and white uShip logos, rectangular metal pull plates, raised bottom panels, plus a matching single gray door with intercom to the south; ornate white cast pilasters.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "oblique and close-up views show sidewalk meeting threshold with no visible riser or step edge"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped or railed surface visible at sides of entrance in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp identified, so no handrails applicable"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "small wall-mounted box near door in close-up view resembles an intercom/buzzer, not a marked accessible door button"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "head-on view shows metal plate handles and a round deadbolt/knob, not lever or pull hardware"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "sidewalk and threshold path clear of obstructions in all views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible in any view, only historic landmark plaque"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double door appears reasonably wide in head-on view but exact clear width not measurable"
+    }
+   },
+   "latency_s": 6.6
+  },
+  "v10": {
+   "business": "OnCongress, 706 Congress Ave",
+   "description": "706 Congress Ave (OnCongress): tall dark mahogany double doors with frosted glass upper panels, horizontal pull bars, small center knob, 'OnCongress / 706 Congress Ave' etched window lettering on the north leaf; limestone block piers. Frame gap f01377-f01494 (dropped/blurred frames mid-window).",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk pavers appear to run flush to threshold in near and far views, no visible riser shadow"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface or ramp visible in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no push-button visible on wall or door frame in any view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "only a small round knob visible on door in oblique view, no lever or pull bar"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "sidewalk to door path is unobstructed in near and far views"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no accessibility symbol or signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "double door appears moderately wide in head-on view but width cannot be measured"
+    }
+   },
+   "latency_s": 5.9
+  },
+  "v11": {
+   "business": "(vacant, for lease - 704 Congress ground retail)",
+   "description": "Vacant storefront: black aluminum-framed glass curtain wall with salmon granite bulkhead panels, 'FOR LEASE \u00e2\u20ac\u201d Weitzman 512-482-0094' window signage; no active business, door integrated in black frame at south end.",
+   "n_frames": 2,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "sidewalk pavers visible at bottom but threshold/ground junction obscured by reflections in both views"
+    },
+    "ramp_present": {
+     "verdict": "not_visible",
+     "confidence": 30,
+     "evidence": "no ramp or sloped surface visible at edges of storefront in either view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 30,
+     "evidence": "no steps or ramp visible, so no handrails expected"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "no push-button visible near door frame in second image"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "door hardware area obscured/reflective in second image, cannot confirm type"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 60,
+     "evidence": "sidewalk pavers lead directly to storefront with no obstructions in path, both views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "only 'For Lease' signage visible, no accessibility symbol seen"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 20,
+     "evidence": "door frame partially visible at edge of second image, width not measurable"
+    }
+   },
+   "latency_s": 7.1
+  },
+  "v12": {
+   "business": "704 Congress Ave (suites 100/200)",
+   "description": "704 Congress gated lobby entries: black/gray wrought-iron security gates with spear finials, ring motifs and Texas star medallions, suite placards '704-200' (with mailbox) and '704-100' over recessed glass lobby doors; white brick pier between.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "sidewalk tiles appear to meet gate threshold level in head-on and oblique views, no visible riser shadow"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 55,
+     "evidence": "no sloped surface or ramp structure visible at sides of entrance in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp identified, so no handrails applicable"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button device visible near gate or inner door in any view"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "only round knobs and latch hardware visible on gate in near and oblique views, no lever or pull"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "sidewalk path to gate appears unobstructed in far view"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 80,
+     "evidence": "no ISA symbol or directional signage seen in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "gate opening width cannot be measured from photos"
+    }
+   },
+   "latency_s": 6.1
+  },
+  "v13": {
+   "business": "700 Congress (Jones Center service entrance)",
+   "description": "700 Congress stainless-steel service alcove: brushed stainless solid door with lever handle and mortise lock in a fully steel-clad recess; adjacent glass wall etched with Texas 30.06/30.07 handgun notices and '700 Congress' lettering; red emergency button on pier.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "concrete floor of alcove appears flush with sidewalk pavers in near and far views"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no sloped surface visible in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "no steps or ramp present in any view"
+    },
+    "auto_door_button": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "only a keypad/card reader visible on wall in oblique view, no push button"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "lever handle with thumb-turn visible on door in head-on and far views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "unobstructed path from sidewalk to door in all views"
+    },
+    "accessible_signage": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "only legal/weapons signage visible on glass in oblique view, no ISA symbol"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "single door appears standard width but no measurement possible from photos"
+    }
+   },
+   "latency_s": 6.0
+  },
+  "v14": {
+   "business": "The Contemporary Austin (Jones Center), 700 Congress Ave",
+   "description": "The Contemporary Austin - Jones Center, 700 Congress: frameless glass entrance wall and sliding glass door with vertical bar pull, '700 CONGRESS' and exhibition signage (Sable Elyse Smith; Laguna Gloria), pink/red panel with script logo, black entry mat inside.",
+   "n_frames": 3,
+   "criteria": {
+    "step_free_entry": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "ground-level views show continuous concrete/tile plane from sidewalk to threshold, no visible riser edge"
+    },
+    "ramp_present": {
+     "verdict": "absent",
+     "confidence": 55,
+     "evidence": "no sloped surface or ramp visible at entrance or platform edges in any view"
+    },
+    "handrails_present": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "no steps or ramp identified, so no handrails expected or seen"
+    },
+    "auto_door_button": {
+     "verdict": "not_visible",
+     "confidence": 70,
+     "evidence": "no push-button visible on door frame or wall in any of the three views"
+    },
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar/pull hardware visible on glass door in near and oblique views"
+    },
+    "clear_approach": {
+     "verdict": "present",
+     "confidence": 80,
+     "evidence": "sidewalk to door path is open pavement with no barriers in any view"
+    },
+    "accessible_signage": {
+     "verdict": "not_visible",
+     "confidence": 85,
+     "evidence": "no ISA symbol or directional signage visible in any view"
+    },
+    "door_width_adequate": {
+     "verdict": "cannot_tell",
+     "confidence": 50,
+     "evidence": "width not measurable from photos; door appears standard single glass door in all views"
+    }
+   },
+   "latency_s": 5.9
+  }
+ }
+}
