@@ -85,6 +85,18 @@ prefers-reduced-motion collapses to end state.
    never stated as tax advice). Owner/verified-tier captures are in-app only with
    time+location attestation (anti-staging); camera-roll uploads cannot earn the
    owner tier.
+
+   **Claim flow (canonical, per James 2026-09-03):**
+   Public map → "For business owners" → Claim your door → find & select business →
+   submit ownership confirmation → pending review → approved → **My business workspace**.
+   - Ownership confirmation options (GBP-style): call/text to the number already on
+     the public listing, email at the business domain, or an in-store-delivered code
+     entered from the workspace. Demo scale: "pending review" = manual approval by us;
+     the flow is unchanged when it automates.
+   - A claim NEVER changes the public pin by itself — only the workspace's attested
+     capture can earn the Owner-confirmed ring.
+   - Workspace contents: the pin as customers see it, claim status, the guided
+     capture flow, correct/dispute channel, tax-credit explainer.
 6. **How trust grows** page: the tier ladder explained with receipts philosophy
    ("every badge opens into its evidence"), method + error-rate disclosure lives here
    once (Zestimate pattern), and the roadmap line: "as licensed accessibility
