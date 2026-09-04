@@ -93,6 +93,36 @@ prefers-reduced-motion collapses to end state.
 - **Open-now caveat (implementation)**: hours data comes from the place provider at
   display time (Google ToS: not storable) — the toggle works live-only.
 
+## Community scanning flow (canon from the community boards, 2026-09-04)
+
+- **Camera permission primer**: "Help map an entrance — a quick 7-second scan helps
+  neighbors plan ahead" + the privacy line "**Only the doorway is captured.**"
+  Allow camera / Not now.
+- **Capture guidance**: full-doorway frame guide with live coaching chips ("Center
+  the full doorway", "Step back a little") — the protocol's framing rules turned
+  into UI instead of instructions.
+- **Processing**: the ~7s ring with named, human steps — Doorway framed · Entry
+  path visible · Photo quality checked — "Usually under 8 seconds." Reduce Motion
+  collapses to a simple progress state.
+- **Review first, publish second**: the user sees their capture (the BLURRED
+  rendering — this screen doubles as privacy verification) + "Visually confirmed"
+  chips, then chooses **Retake** or **Publish scan**. Nothing publishes without
+  this consent gate. Confirmation: "Scan published — thanks for helping your
+  neighbors" + the tier legend.
+- **Empty areas invite**: "No entrances mapped here yet — be the first to help
+  neighbors plan ahead" → Scan an entrance / Try another area. Invite, don't shame.
+- **Suggest a correction** (form anatomy): business header → "What needs updating?"
+  dropdown → 300-char "What did you notice?" → optional photo → "We'll review your
+  note with the community." Corrections stay human.
+- **Re-check nudges**: staleness drives a gentle ask — "Could you take another
+  look? Last checked 11 months ago" (muted amber clock; age is context, not
+  failure) → Re-check entrance / Maybe later.
+- **Every state has a next step**: offline → "Saved for later — your scan uploads
+  when you're back online; keep exploring"; camera denied → "Turn it on when
+  you're ready" + Open settings; location denied → "Search the map" without
+  sharing location. Muted amber communicates time only; system states stay calm
+  and neutral.
+
 ## Baked-in elements beyond the mock (all previously agreed — required, not optional)
 
 1. **Map layers**: a "State records" toggle lighting every TABS-matched pin at once
