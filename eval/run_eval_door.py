@@ -114,7 +114,21 @@ def main() -> int:
         files = sorted(p for p in door.iterdir()
                        if p.suffix.lower() in IMAGE_EXTS)
         images = [prep_image(p)[0] for p in files]
-        parsed, latency = assess_door(client, args.model, images)
+        try:
+            parsed, latency = assess_door(client, args.model, images)
+        except Exception as exc:  # one bad response must not lose the run
+            for attempt in range(2):
+                try:
+                    parsed, latency = assess_door(client, args.model, images)
+                    break
+                except Exception as exc2:
+                    exc = exc2
+            else:
+                print(f"{door.name}: FAILED after retries: {exc}")
+                results[door.name] = {"views": len(images), "latency_s": None,
+                                      "criteria": {k: {"verdict": "", "confidence": "", "evidence": f"error: {exc}"} for k in CRITERIA_KEYS},
+                                      "overall_note": ""}
+                continue
         results[door.name] = {
             "views": len(images),
             "latency_s": round(latency, 2),

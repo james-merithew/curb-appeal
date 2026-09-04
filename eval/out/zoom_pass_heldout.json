@@ -1,0 +1,834 @@
+{
+ "door-13": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The threshold crops show a low metal saddle/sill strip flush with the tile pavers, with the sidewalk tiles running directly up to the door with no visible raised curb, lip, or step edge - just a thin metal transition strip at grade."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "The hardware-band crops clearly show a horizontal lever-style door handle mounted on the right-hand door, graspable with a closed fist, alongside a separate deadbolt cylinder."
+   }
+  },
+  "latency_s": 4.3,
+  "crops": 6
+ },
+ "door-14": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The stone paver sidewalk appears to run level up to the door threshold with only a thin metal sill strip visible at the base, no raised step or curb visible in the threshold crop."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "A vertical bar/tube-style pull handle mounted on the door, standing off the surface, is clearly visible in the hardware-band crop and could be gripped with a closed fist."
+   }
+  },
+  "latency_s": 3.5,
+  "crops": 2
+ },
+ "door-15": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.8,
+    "evidence": "The threshold crops show the paver sidewalk transitioning into a flat mat and directly to the door sill with no visible raised edge, curb, or shadow line indicating a step; the mat lies flush with the pavers and the door base appears level with the ground."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Both door leaves show long vertical wood-and-metal bar pulls mounted on the glass, clearly graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.5,
+  "crops": 8
+ },
+ "door-16": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "The tile threshold sits slightly raised above the brick paver sidewalk, with a visible shadow line/lip where the two surfaces meet across all threshold-band crops, indicating a small step or sill rather than a flush transition."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Doors show a horizontal D-shaped pull/loop handle mounted mid-door with a keyed cylinder lock box attached, clearly graspable with a closed fist."
+   }
+  },
+  "latency_s": 6.5,
+  "crops": 10
+ },
+ "door-17": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "There is a visible transition where the brick pavers meet a lighter concrete band just before the revolving door threshold, with a slight edge/shadow line and a change in material and level suggesting a small lip or raised sill leading into the wood-floored revolving door enclosure."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "not_visible",
+    "confidence": 0.7,
+    "evidence": "The entrance uses a Boon Edam revolving door; no separate lever, pull, or push bar is visible on the swing doors or side panels in any crop, and revolving doors typically lack graspable hardware, but no side-hinged door hardware is shown to confirm absence definitively."
+   }
+  },
+  "latency_s": 6.2,
+  "crops": 10
+ },
+ "door-18": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "The paver sidewalk runs level directly into the door threshold with only a thin metal saddle/sill strip flush at the base of the glass doors; no raised step, curb, or landing edge is visible at the entry line. The tall stone block to the right is a raised planter/bench curb, not part of the door threshold path."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Multiple crops show a vertical bar/tube pull mounted on the glass door that stands off the surface, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.9,
+  "crops": 10
+ },
+ "door-19": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.7,
+    "evidence": "A raised metal threshold/sill plate with a visible lip and shadow line spans the base of the doorway, sitting above the concrete sidewalk level, creating a small step at the entry."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Vertical stainless steel bar pulls and horizontal push bars are visible on the glass doors, both graspable with a closed fist."
+   }
+  },
+  "latency_s": 5.1,
+  "crops": 8
+ },
+ "door-20": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.9,
+    "evidence": "A raised concrete/stone sill or threshold band is visible running along the base of the black doors, sitting higher than the sidewalk pavers with a distinct shadow line and lip where the pavers meet it - this is a raised threshold, not a flush entry."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Both door leaves show ornate brass plate handles with horizontal grip pulls that stand off the door surface, operable with a closed fist."
+   }
+  },
+  "latency_s": 4.6,
+  "crops": 10
+ },
+ "door-21": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "A raised stone threshold/sill is visible at the base of the black doors, sitting above the sidewalk pavers with a distinct edge and height change (clearly seen in multiple crops where the stone slab steps up from the tile sidewalk)."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "A brass vertical bar/grip pull mounted on the door face, standing off the surface next to the deadbolt cylinder, visible in the hardware-band crops."
+   }
+  },
+  "latency_s": 5.1,
+  "crops": 8
+ },
+ "door-22": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "A raised concrete/stone sill runs along the base of the white doors, clearly elevated above the sidewalk pavers with a visible edge and shadow line; the door's aluminum threshold strip sits atop this raised sill, creating a lip/step at the entry."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Vertical brass pull handles mounted on the glass door panels are clearly visible, offering a graspable bar; additionally a wheelchair 'push to open' button is present for automatic operation."
+   }
+  },
+  "latency_s": 4.9,
+  "crops": 12
+ },
+ "door-23": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The tiled entry floor appears continuous and level with the doorway threshold, showing only a thin flat metal strip at the door base with no visible raised sill, curb, or step edge; the paver transition in front is flush."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Each door has a substantial vertical brass/bronze pull handle mounted on the surface, graspable with a closed fist, visible clearly in the hardware-band crops."
+   }
+  },
+  "latency_s": 4.0,
+  "crops": 6
+ },
+ "door-24": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.72,
+    "evidence": "Multiple threshold crops show the granite/terrazzo paving running flush up to the door frame with only a thin metal sill strip flush at the base of the glass doors; no raised step, curb, or lip is visible where pavement meets door."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Hardware-band crops clearly show black D-shaped pull handles mounted horizontally on the glass doors, as well as ornate metal pull/push plates on the wooden double doors in the first set of images."
+   }
+  },
+  "latency_s": 6.9,
+  "crops": 12
+ },
+ "door-25": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "Multiple threshold crops show the granite paver sidewalk running flush into the door and storefront base with no visible step, raised sill, or lip - the pavers meet the metal frame at the same level throughout."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "The entry door shows a horizontal bar/pull handle mounted on the glass door, clearly graspable with a closed fist, visible in multiple hardware-band crops."
+   }
+  },
+  "latency_s": 6.7,
+  "crops": 10
+ },
+ "door-26": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The tiled sidewalk/threshold mosaic ('KAROTKIN') runs flat and level directly up to the door frame with no visible raised sill, curb, or edge shadow line at the base of the doors."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "The dark metal double doors show curved loop/D-shaped pull handles mounted on each leaf, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.1,
+  "crops": 10
+ },
+ "door-27": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.7,
+    "evidence": "The sliding glass door section shows a raised aluminum sill/track with a visible edge and shadow line above the level of the granite pavers, indicating a small lip/step at the threshold; the swing door threshold also shows a metal saddle strip raised above the pavers."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The swing door shows a horizontal D-shaped pull handle mounted on the glass, graspable with a closed fist."
+   }
+  },
+  "latency_s": 5.9,
+  "crops": 10
+ },
+ "door-28": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "The granite paver sidewalk runs level up to a low metal threshold track at the base of the glass doors, with no visible raised sill, curb, or edge shadow indicating a step or lip at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Each glass door has a long vertical stainless steel bar/pull handle mounted horizontally at mid-height, clearly graspable with a closed fist."
+   }
+  },
+  "latency_s": 5.1,
+  "crops": 8
+ },
+ "door-29": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "A painted yellow curb/edge with 'CAUTION WATCH YOUR STEP' text runs directly in front of the doorway, with a visible height difference between the yellow riser and the tile landing at the threshold, indicating a step or raised edge at the entry line."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Each glass door shows a horizontal bar/loop pull handle mounted on the door face, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.0,
+  "crops": 10
+ },
+ "door-30": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.8,
+    "evidence": "Paver sidewalk appears to run flush into the threshold under the mats with no visible raised sill, curb, or shadow edge; the low-profile metal threshold strip visible under the doors sits flush with the floor level"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Horizontal bar pull handles are clearly visible mounted on the glass doors in multiple hardware-band crops, along with a wheelchair push-to-open button mounted on a pedestal beside the doors"
+   }
+  },
+  "latency_s": 4.6,
+  "crops": 12
+ },
+ "door-31": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "Multiple threshold crops show the paver sidewalk running flush up to the bronze door frame with only a thin metal transition strip flush with the ground; no raised sill, curb, or lip is visible at the doorway line."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Doors show substantial brass/bronze horizontal bar-style pull handles mounted on the glass doors, graspable with a closed fist, visible in multiple hardware-band crops."
+   }
+  },
+  "latency_s": 5.7,
+  "crops": 10
+ },
+ "door-32": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The paver sidewalk runs directly up to the door threshold with no visible raised sill, curb, or landing edge; the metal threshold strip at the door base appears flush with the pavers in multiple close-up shots."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Multiple crops show an ornate vertical brass/bronze pull handle mounted on the glass door, offset from the surface and graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.5,
+  "crops": 12
+ },
+ "door-33": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "The threshold crops show a distinct raised sill/landing with a stone slab step-up from the brick sidewalk to the darker tile threshold, with a visible edge and height change (shadow line) before reaching the rubber mat at the door."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The hardware-band crops clearly show brass offset pull handles labeled 'PULL' mounted on both door leaves, which stand off the surface and can be gripped with a closed fist."
+   }
+  },
+  "latency_s": 6.0,
+  "crops": 12
+ },
+ "door-34": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 90,
+    "evidence": "Multiple threshold crops show a distinct raised tile landing with a dark lip/edge and shadow line where it meets the lower sidewalk pavement, indicating a step or raised sill at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 95,
+    "evidence": "Hardware-band crops show vertical bar/pull handles on the glass doors, and the secondary entrance shows brass grip pull handles - both operable with a closed fist."
+   }
+  },
+  "latency_s": 9.2,
+  "crops": 12
+ },
+ "door-35": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 88,
+    "evidence": "The piano-key tiled threshold sits on a raised platform above the sidewalk pavers, with a distinct dark beveled edge/lip visible on all sides, plus a metal threshold strip at the door base - indicating a raised sill/step rather than a level transition."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 95,
+    "evidence": "Both doors have vertical brass D-shaped pull handles mounted on rectangular backplates, clearly graspable with a closed fist."
+   }
+  },
+  "latency_s": 7.1,
+  "crops": 10
+ },
+ "door-36": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "The dark maroon threshold slab sits above the granite paver sidewalk with a visible edge/shadow line running the length of the entrance, indicating a raised sill or landing lip where pavers meet the painted threshold."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Doors show vertical bar/loop pull handles mounted on the surface (visible metal handles on the film-strip decorated doors) that could be gripped with a closed fist."
+   }
+  },
+  "latency_s": 6.7,
+  "crops": 12
+ },
+ "door-37": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.95,
+    "evidence": "Multiple crops show a raised platform of dark tile steps (visible riser lines/nosing) leading up from the granite paver sidewalk to the glass doors; a clear step edge with handrails flanking it is visible in every threshold-band image."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The glass doors show a horizontal metal bar/push-pull handle spanning across the door at hand height, graspable with a closed fist, visible in the hardware-band crops."
+   }
+  },
+  "latency_s": 4.8,
+  "crops": 10
+ },
+ "door-38": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The granite paver sidewalk transitions to a smooth polished stone threshold directly at the glass doors with no visible step, curb, or raised sill; the surfaces appear level and continuous into the entrance."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "The glass double doors show vertical bar-style pull handles mounted on the frame, graspable with a closed fist, visible in the hardware-band crops."
+   }
+  },
+  "latency_s": 5.1,
+  "crops": 12
+ },
+ "door-39": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "Threshold crops show a raised concrete/stone slab with a distinct edge and shadow line above the paver sidewalk, creating a lip/step at the doorway rather than a level transition"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Doors show vertical metal pull plates/bars mounted on the surface that could be gripped, alongside a separate round deadbolt lock cylinder"
+   }
+  },
+  "latency_s": 4.4,
+  "crops": 12
+ },
+ "door-40": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.8,
+    "evidence": "The threshold-band crops show the stone sidewalk pavers transitioning directly into a smooth stone/tile threshold at the same level, with no visible raised sill, curb, or shadow line indicating a step at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "The hardware-band crops clearly show vertical wood/brass bar pulls mounted on each door leaf, standing off the door surface and graspable with a closed fist."
+   }
+  },
+  "latency_s": 5.9,
+  "crops": 10
+ },
+ "door-41": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.9,
+    "evidence": "A raised stone threshold/step with distinct edge and shadow line separates the sidewalk pavers from the doorway landing in every threshold crop; the landing sits noticeably higher than the brick pavers below."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Vertical wood/brass bar pulls mounted on the glass doors are visible in multiple hardware-band crops, offering a full-fist grip."
+   }
+  },
+  "latency_s": 5.5,
+  "crops": 12
+ },
+ "door-42": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "Threshold crops show the sidewalk pavers running level up to the door track with only a thin metal sill strip flush at the base; no raised curb, lip, or shadow line indicating a step is visible."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Each door has a long vertical wood-wrapped bar pull mounted on the glass, clearly graspable with a closed fist, visible in multiple hardware-band crops."
+   }
+  },
+  "latency_s": 5.9,
+  "crops": 12
+ },
+ "door-43": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.97,
+    "evidence": "Multiple crops show two concrete steps rising from the sidewalk pavers up to the door threshold, with clear riser edges/shadow lines between the pavement and the raised landing at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The door shows two vertical wooden bar-style pull handles mounted on the black door frame, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.4,
+  "crops": 12
+ },
+ "door-44": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.95,
+    "evidence": "A raised granite step/threshold with a distinct riser edge is visible spanning the doorway, elevated above the sidewalk pavers below, requiring a step up into the entrance."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "Two vertical wooden bar/pull handles stand off the door surface at mid-height, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.1,
+  "crops": 8
+ },
+ "door-45": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "Threshold-band crops show the granite sidewalk pavers running directly up to the door base with only a thin metal weather strip at the door bottom, no visible raised sill, curb, or edge shadow indicating a height change."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Hardware-band crops clearly show lever handles mounted on each door leaf, operable with a closed fist."
+   }
+  },
+  "latency_s": 5.4,
+  "crops": 10
+ },
+ "door-46": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "Threshold crops show pavers running directly up to a low metal sill/track with no visible raised step, curb, or landing edge; the flooring transitions to interior tile at nearly the same level with only a thin metal strip visible."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "Multiple hardware-band crops show a vertical bar/D-pull handle mounted on the black door stile, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.5,
+  "crops": 12
+ },
+ "door-47": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "At the doorway threshold there is a lighter-colored terrazzo/concrete landing that sits distinctly above the granite paver sidewalk, with a visible edge line and staining at the transition - indicating a raised sill or small step up into the entrance rather than a flush, level transition."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.55,
+    "evidence": "The dark metal door shows a vertical bar/rod running down its face that projects off the surface, consistent with a vertical pull bar; a round deadbolt cylinder is also visible above it, but the elongated bar element could be gripped with a closed fist."
+   }
+  },
+  "latency_s": 7.5,
+  "crops": 12
+ },
+ "door-48": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "Multiple threshold crops show the terrazzo sidewalk flush with the revolving door base and the adjacent swing door track, with no visible riser, lip, or shadow line indicating a step; the metal track at the swing door sits nearly level with the pavement."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The swing door beside the revolving door shows a vertical bar/loop pull mounted on the glass, clearly graspable with a closed fist, visible in several hardware-band crops labeled 'PULL'."
+   }
+  },
+  "latency_s": 4.6,
+  "crops": 12
+ },
+ "door-49": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 70,
+    "evidence": "The threshold-band crops show the sidewalk/pavement transitioning directly into the terrazzo/tile floor at the door line with no visible raised sill, curb, or shadow line indicating a riser - the revolving door base and the brass storefront doors both show a flush, continuous ground plane."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 90,
+    "evidence": "The hardware-band crops clearly show horizontal brass bar/pull handles mounted on the doors (both the revolving door leaf and the brass storefront doors) that stand off the surface and could be gripped with a closed fist."
+   }
+  },
+  "latency_s": 5.1,
+  "crops": 12
+ },
+ "door-50": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "Multiple threshold crops show a raised bronze sill/lip with a visible shadow line and small step-up from the sidewalk into the doorway, along with a distinct edge where the dark stone base meets the pavement."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Doors show substantial brass pull handles (vertical bar/grip style) mounted on the glass doors, clearly graspable with a closed fist, along with a horizontal push bar visible behind the glass."
+   }
+  },
+  "latency_s": 7.0,
+  "crops": 12
+ },
+ "door-51": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.72,
+    "evidence": "Threshold crops show a raised metal sill/track strip with visible bolts and a shadow line at the base of the door frame, sitting above the sidewalk level - indicating a small raised threshold/lip at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Doors show horizontal brass push/pull bars mounted across the glass at hand height, graspable with a closed fist, along with vertical brass handles visible on the door edges."
+   }
+  },
+  "latency_s": 5.4,
+  "crops": 10
+ },
+ "door-52": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The terrazzo threshold pattern appears to run continuously and flush from the sidewalk into the doorway with no visible raised sill, curb, or shadow line at the base of the bronze door frames; the metal kickplates sit flush at floor level."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Each door shows a vertical brass bar/loop pull mounted on the glass panel that stands off the surface and could be gripped with a closed fist, along with a horizontal push bar visible across the doors."
+   }
+  },
+  "latency_s": 6.7,
+  "crops": 12
+ },
+ "door-53": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "Dark tile threshold appears flush with door sill and transitions directly to sidewalk pavers with no visible raised lip, curb, or shadow line indicating a riser."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Door has a horizontal bar-style pull handle mounted on the glass door, graspable with a closed fist, visible in multiple hardware-band crops."
+   }
+  },
+  "latency_s": 3.6,
+  "crops": 10
+ },
+ "door-54": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "Threshold-band crops show dark tile flooring running level up to the door frame with only a thin metal saddle strip at the base of the doors; no raised sill, curb, or edge shadow indicating a step is visible."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Hardware-band crops clearly show large curved D-shaped pull handles mounted vertically on both doors, graspable with a closed fist, along with a keypad/lockbox device."
+   }
+  },
+  "latency_s": 4.2,
+  "crops": 10
+ },
+ "door-55": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "There is a visible raised sill/threshold strip (light-colored stone) between the granite pavers and the door, with a distinct edge/shadow line and slight lip where the door bottom rail and rubber sweep sit above the pavement level, indicating a small step/riser at the threshold."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.97,
+    "evidence": "The doors show large offset brass/bronze grip pulls mounted on backplates that stand off the door surface, operable with a closed fist, alongside a separate round deadbolt cylinder (not the operating handle)."
+   }
+  },
+  "latency_s": 4.8,
+  "crops": 12
+ },
+ "door-56": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.9,
+    "evidence": "Red-painted steps with visible risers lead up from the sidewalk to the entrance landing; a handrail is installed alongside the steps, indicating a raised entry rather than a level threshold."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.85,
+    "evidence": "The automatic sliding doors show vertical bar/loop pulls mounted on the frame stiles, and the adjacent door has an offset horizontal pull bar visible in several crops."
+   }
+  },
+  "latency_s": 6.0,
+  "crops": 10
+ },
+ "door-57": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.75,
+    "evidence": "The concrete threshold pad is slightly raised above the sidewalk pavers, with a visible edge/lip line and shadow where the two surfaces meet, indicating a small step or raised sill at the doorway."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Each door has a black D-shaped loop pull mounted horizontally on the glass, graspable with a closed fist; a padlock hasp is also attached near the handle."
+   }
+  },
+  "latency_s": 5.8,
+  "crops": 12
+ },
+ "door-58": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.95,
+    "evidence": "Multiple crops show a staircase of at least 3-4 steps leading up from the sidewalk to the entrance doors; the entry sits on a raised landing well above the pavers, with no level path visible."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "The glass doors show horizontal push/pull bar handles mounted across the doors, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.0,
+  "crops": 10
+ },
+ "door-59": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "Multiple threshold crops show the dark paver plaza flooring running flush and level into the revolving door base and the flat glass door thresholds, with no visible step, raised sill, or curb - just a continuous flat surface transitioning from patterned sidewalk pavers to the dark entrance flooring."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "The flat glass side door visible in several crops shows a vertical bar/push-pull style handle mounted on the door stile, graspable with a closed fist; the main entrance uses a revolving door which has no hardware to operate."
+   }
+  },
+  "latency_s": 6.5,
+  "crops": 12
+ },
+ "door-60": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 0.85,
+    "evidence": "Multiple crops show a raised threshold/sill with a visible step edge (gray stone slab with shadow line) between the paver sidewalk and the door, and the door frame shows a distinct riser above the mat/pavement level"
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Door shows a horizontal bar-style pull handle (crash/push bar style) mounted across the glass door, graspable with a closed fist"
+   }
+  },
+  "latency_s": 4.1,
+  "crops": 10
+ },
+ "door-61": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.75,
+    "evidence": "The brick/tile apron at the doorway threshold appears flush with the exterior granite pavers, with no visible step, raised sill, or shadow line at the transition; the surfaces meet at the same level across multiple crops."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "absent",
+    "confidence": 0.8,
+    "evidence": "The visible door hardware is a round knob-style handle with a keyed deadbolt above it, not a lever, bar, or pull that could be operated with a closed fist."
+   }
+  },
+  "latency_s": 4.3,
+  "crops": 12
+ },
+ "door-62": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "absent",
+    "confidence": 88,
+    "evidence": "Multiple crops show a raised granite step with painted yellow edge marking between the outdoor pavers and the interior white penny-tile floor; a visible height change/lip is present at the doorway threshold in every threshold-band image."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 75,
+    "evidence": "The door shows a metal bar-style mechanism (visible as a horizontal/angled bar with a latch mechanism in the hardware-band crops) consistent with a push/panic bar or lever handle that could be operated with a closed fist."
+   }
+  },
+  "latency_s": 6.0,
+  "crops": 8
+ },
+ "door-63": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.7,
+    "evidence": "Threshold crops show the granite/tile paving running directly up to the door frame with only a thin metal threshold strip flush at the base; no raised sill, curb, or step edge is visible at the door line."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.95,
+    "evidence": "Hardware-band crops clearly show a horizontal lever-style door handle mounted on the door above a deadbolt cylinder, graspable with a closed fist."
+   }
+  },
+  "latency_s": 4.0,
+  "crops": 10
+ },
+ "door-64": {
+  "zoom": {
+   "step_free_entry": {
+    "verdict": "present",
+    "confidence": 0.65,
+    "evidence": "The paver floor appears to run continuously from the exterior sidewalk area up to the door threshold with no visible raised sill, curb, or shadow line at the doorway edge; the transition at the door base looks flush in multiple angles."
+   },
+   "lever_or_pull_hardware": {
+    "verdict": "present",
+    "confidence": 0.9,
+    "evidence": "Both doors show black horizontal lever-style handles mounted at mid-height with an electronic keypad/lock unit above, clearly graspable with a closed fist."
+   }
+  },
+  "latency_s": 6.5,
+  "crops": 12
+ }
+}
