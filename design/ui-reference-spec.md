@@ -107,6 +107,11 @@ is happening:
   progress states with a one-line label of the step.
 - All of it collapses to a simple progress bar under Reduce Motion; none of it may
   block the bottom nav.
+- **Design bar: stunning yet simplistic.** One elegant motion idea executed
+  perfectly — not layered effects. The ring is the hero; steps tick in with a
+  single satisfying transition; no particle confetti, no spinners-on-spinners, no
+  copy that shouts. It should feel calm and certain on a projector at 30 feet and
+  on a phone at arm's length.
 
 ## Signature animation (live scan)
 
