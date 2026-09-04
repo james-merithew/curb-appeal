@@ -93,6 +93,14 @@ prefers-reduced-motion collapses to end state.
      the public listing, email at the business domain, or an in-store-delivered code
      entered from the workspace. Demo scale: "pending review" = manual approval by us;
      the flow is unchanged when it automates.
+   - **Proof-of-control mechanics**: the claimant NEVER supplies the contact point —
+     we resolve the business's canonical phone/domain from independent public sources
+     and deliver a one-time code there; the claimant only proves receipt. Backstops:
+     every claim passes human review before approval; the Owner-confirmed ring still
+     requires the attested at-the-door capture (a wrong approval cannot fabricate
+     data); claims are revocable on dispute with no public trace. Honest limit:
+     channels verify control of the business's communication surface, not legal
+     ownership — acceptable because this tier is attestation, not independence.
    - A claim NEVER changes the public pin by itself — only the workspace's attested
      capture can earn the Owner-confirmed ring.
    - Workspace contents: the pin as customers see it, claim status, the guided
