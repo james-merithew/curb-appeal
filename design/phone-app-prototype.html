@@ -440,6 +440,16 @@ body{
 #scan-capture .cancel-x{background:rgba(255,255,255,.16)}
 .scanscreen.light .cancel-x{background:#fff;color:var(--sub);box-shadow:var(--shadow)}
 
+/* live camera (real rear-camera viewfinder; silently absent on desktop) */
+.viewfinder video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#241F3A}
+.live-chip{
+  position:absolute;top:12px;right:10px;display:none;align-items:center;gap:5px;
+  background:rgba(23,20,31,.82);color:#fff;font-size:.68em;font-weight:900;letter-spacing:.08em;
+  border-radius:999px;padding:5px 10px;pointer-events:none;
+}
+.live-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--marigold)}
+.viewfinder.live .live-chip{display:flex}
+
 /* processing */
 .ringwrap{position:relative;width:150px;height:150px;margin-top:26px}
 .ringwrap svg{transform:rotate(-90deg)}
@@ -473,7 +483,17 @@ body{
   position:absolute;left:10px;bottom:10px;background:rgba(23,20,31,.82);color:#fff;font-size:.72em;
   font-weight:800;border-radius:999px;padding:6px 12px;display:flex;gap:6px;align-items:center;
 }
+.review-img img.captured{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vc-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;justify-content:center}
+.vc-notseen{width:100%;font-size:.78em;color:var(--sub);font-weight:700;text-align:center;margin-top:2px}
+.upload-note{display:none;font-size:.74em;color:var(--sub);font-weight:700;margin-top:8px;text-align:center;max-width:300px}
+.upload-note.on{display:block}
+.quarantine-note{
+  display:none;margin-top:12px;background:var(--purple-wash);border:1.5px solid var(--purple);
+  border-radius:14px;padding:12px 14px;font-size:.82em;font-weight:800;color:var(--purple-ink);
+  line-height:1.45;max-width:320px;
+}
+.quarantine-note.on{display:block}
 
 /* done */
 .mini-map{
@@ -690,9 +710,11 @@ body{
       <div class="scan-body">
         <div class="viewfinder" id="viewfinder">
           <div id="doorway-art"></div>
+          <video id="cam-video" autoplay playsinline muted hidden></video>
           <div class="frame-guide"><i></i><i></i><i></i><i></i></div>
           <div class="coach" style="top:12px">Center the full doorway</div>
           <div class="coach" style="bottom:12px">Include the path in front</div>
+          <div class="live-chip"><span class="dot"></span>LIVE</div>
         </div>
         <div class="scan-target">Scanning near W 3rd St · <b id="scan-target-name"></b></div>
         <button class="shutter" id="btn-shutter" aria-label="Capture photo"></button>
@@ -725,12 +747,15 @@ body{
         <p class="scan-p" style="margin-top:6px">This is exactly what neighbors will see.</p>
         <div class="review-img" style="margin-top:14px">
           <div id="doorway-art2"></div>
-          <div class="blurband"></div>
-          <div class="blur-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/></svg>Auto-blur applied</div>
+          <img class="captured" id="captured-img" alt="Your captured entrance photo" hidden>
+          <div class="blurband" id="blurband"></div>
+          <div class="blur-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/></svg><span id="blur-tag-text">Auto-blur applied</span></div>
         </div>
+        <p class="upload-note" id="upload-note">Faces are blurred automatically on upload — this preview shows your original frame.</p>
+        <div class="quarantine-note" id="quarantine-note"></div>
         <div class="chips-title" style="margin-top:16px">Visually confirmed</div>
         <div class="vc-chips" id="vc-chips"></div>
-        <p class="privacy-sub">One photo — got it. One more from further back would confirm a ramp, but this already helps.</p>
+        <p class="privacy-sub" id="review-hint">One photo — got it. One more from further back would confirm a ramp, but this already helps.</p>
         <div class="scan-actions" style="flex-direction:row">
           <button class="btn quiet" id="btn-retake">Retake</button>
           <button class="btn marigold" id="btn-publish">Publish scan</button>
@@ -1194,8 +1219,11 @@ function cardHTML(p){
   let photoStrip='';
   if(p.tier!=='est'){
     if(p.staged){
+      const hero = p.livePhoto
+        ? `<img src="${p.livePhoto}" alt="Your scan photo of ${esc(p.name)}">`
+        : `<span class="ps-illus">${doorwayArt(true, p.name)}</span>`;
       photoStrip = `<button class="photostrip" data-openrcpt aria-label="Your scan photo — open the evidence receipt">
-        <span class="ps-illus">${doorwayArt(true, p.name)}</span>
+        ${hero}
         <span class="ps-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">${GL.camera}</svg> your scan · just now · tap for the receipt</span>
       </button>`;
     } else if(PHOTOS[p.id]){
@@ -1329,7 +1357,9 @@ function openReceipt(p){
   const el=document.getElementById('rcpt-body');
   let photos='';
   if(p.staged){
-    photos=`<div class="rcpt-photos"><span class="ps-illus">${doorwayArt(true,p.name)}</span></div>`;
+    photos = p.livePhoto
+      ? `<div class="rcpt-photos"><img src="${p.livePhoto}" alt="Your scan photo of ${esc(p.name)}"></div>`
+      : `<div class="rcpt-photos"><span class="ps-illus">${doorwayArt(true,p.name)}</span></div>`;
   } else if(PHOTOS[p.id]){
     photos=`<div class="rcpt-photos">${PHOTOS[p.id].map((u,i)=>`<img src="${u}" alt="Entrance photo ${i+1} of ${esc(p.name)}">`).join('')}</div>`;
   }
@@ -1452,7 +1482,9 @@ function renderNearby(){
     b.className='nb-card';
     let thumb;
     if(p.staged){
-      thumb=`<span class="nb-thumb ps-illus" style="display:block;overflow:hidden;border-radius:10px">${doorwayArt(true,p.name)}</span>`;
+      thumb = p.livePhoto
+        ? `<img class="nb-thumb" src="${p.livePhoto}" alt="">`
+        : `<span class="nb-thumb ps-illus" style="display:block;overflow:hidden;border-radius:10px">${doorwayArt(true,p.name)}</span>`;
     } else if(PHOTOS[p.id]){
       thumb=`<img class="nb-thumb" src="${PHOTOS[p.id][0]}" alt="">`;
     } else {
@@ -1562,6 +1594,7 @@ document.getElementById('btn-correct-send').addEventListener('click',()=>{
 
 /* ===================== nav / screens ===================== */
 function showScreen(id){
+  if(id!=='scan-capture' && typeof stopCamera==='function') stopCamera();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   document.getElementById('nav-map').classList.toggle('on',id==='screen-map');
   document.getElementById('nav-profile').classList.toggle('on',id==='screen-profile');
@@ -1628,6 +1661,72 @@ function paintDoorway(){
 }
 paintDoorway();
 
+/* ===================== live camera + live screening (demo insurance) =====================
+   Real rear-camera capture inside the phone frame, POSTed to the real /screen endpoint.
+   Contract (frontdoor_server/screen_view.py): multipart/form-data, 1-6 image file parts
+   (any field name; image/jpeg|png|webp), optional entrance_id field. 200 response:
+   {mode:"integrated", assessment:{criteria:{ramp_or_bevel|handrails|
+   accessible_door_hardware|accessibility_signage: {verdict, confidence, evidence}}},
+   faces_blurred, face_check, quarantined, ...}. Every failure (no camera, denied,
+   CORS-blocked fetch, non-200, timeout) falls back silently to the staged flow.
+   Privacy: the captured frame lives in these variables only — never localStorage. */
+const SCREEN_API = 'https://frontdoor-measure.fly.dev/screen';
+const camVideo = document.getElementById('cam-video');
+let camStream = null;    /* active MediaStream while the viewfinder is live */
+let liveFrame = null;    /* {blob, dataUrl} of the captured frame — in-memory only */
+let liveUpload = null;   /* pending fetch promise */
+let liveSettled = true;  /* false while the POST is in flight */
+let liveResult = null;   /* parsed /screen JSON, or null → simulated verdicts */
+let liveAbort = null;
+
+function stopCamera(){
+  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+  camVideo.srcObject=null; camVideo.hidden=true;
+  document.getElementById('viewfinder').classList.remove('live');
+}
+function resetLive(){
+  if(liveAbort){liveAbort.abort();liveAbort=null;}
+  liveFrame=null; liveUpload=null; liveResult=null; liveSettled=true;
+}
+async function tryStartCamera(){
+  if(!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) return false;
+  try{
+    camStream = await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:{ideal:'environment'}, width:{ideal:1280}, height:{ideal:1706}},
+      audio:false
+    });
+    /* only attach if the capture screen is still up (user may have cancelled mid-prompt) */
+    if(!document.getElementById('scan-capture').classList.contains('active')){stopCamera();return false;}
+    camVideo.srcObject=camStream; camVideo.hidden=false;
+    document.getElementById('viewfinder').classList.add('live');
+    return true;
+  }catch(e){ stopCamera(); return false; } /* denied / unavailable → staged capture */
+}
+function captureFrame(){
+  const w=camVideo.videoWidth, h=camVideo.videoHeight;
+  if(!w||!h) return Promise.resolve(null);
+  const scale=Math.min(1, 1280/Math.max(w,h));
+  const c=document.createElement('canvas');
+  c.width=Math.round(w*scale); c.height=Math.round(h*scale);
+  c.getContext('2d').drawImage(camVideo,0,0,c.width,c.height);
+  const dataUrl=c.toDataURL('image/jpeg',.85);
+  return new Promise(res=>c.toBlob(b=>res(b?{blob:b,dataUrl}:null),'image/jpeg',.85));
+}
+function startLiveUpload(frame){
+  liveResult=null; liveSettled=false;
+  liveAbort = ('AbortController' in window) ? new AbortController() : null;
+  const fd=new FormData();
+  fd.append('images', frame.blob, 'scan.jpg');
+  /* no entrance_id: prototype targets are place ids, not frontdoor entrance ids —
+     an invalid id would 400 the whole request and cost us the live verdicts */
+  const timer=setTimeout(()=>{if(liveAbort)liveAbort.abort();},30000);
+  liveUpload = fetch(SCREEN_API,{method:'POST',body:fd,signal:liveAbort?liveAbort.signal:undefined})
+    .then(r=> r.ok ? r.json() : null)
+    .then(j=>{ liveResult=(j && j.assessment && j.assessment.criteria) ? j : null; })
+    .catch(()=>{ liveResult=null; }) /* CORS / network / abort → simulated fallback */
+    .then(()=>{ clearTimeout(timer); liveSettled=true; });
+}
+
 /* ===================== scan flow ===================== */
 let scanTimers=[];
 function cancelScanTimers(){scanTimers.forEach(clearTimeout);scanTimers=[];}
@@ -1635,6 +1734,7 @@ function after(ms,fn){scanTimers.push(setTimeout(fn,ms));}
 
 function startScan(){
   cancelScanTimers();
+  resetLive();
   if(scanTarget.tier!=='est'){ /* already upgraded: pick another estimated pin */
     const next = places.filter(p=>p.tier==='est').sort((a,b)=>(Math.hypot(a.lat-cx,a.lng-cy)-Math.hypot(b.lat-cx,b.lng-cy)))[0];
     if(next) scanTarget=next;
@@ -1644,13 +1744,37 @@ function startScan(){
   showScreen('scan-primer');
 }
 document.querySelectorAll('[data-scan-exit]').forEach(b=>b.addEventListener('click',()=>{
-  cancelScanTimers(); showScreen('screen-map'); renderMap();
+  cancelScanTimers(); resetLive(); showScreen('screen-map'); renderMap();
 }));
-document.getElementById('btn-allow-cam').addEventListener('click',()=>showScreen('scan-capture'));
-document.getElementById('btn-shutter').addEventListener('click',()=>{showScreen('scan-processing');runProcessing();});
-document.getElementById('btn-retake').addEventListener('click',()=>showScreen('scan-capture'));
+document.getElementById('btn-allow-cam').addEventListener('click',()=>{
+  showScreen('scan-capture');
+  tryStartCamera(); /* live viewfinder when granted; the illustrated capture stays otherwise */
+});
+document.getElementById('btn-shutter').addEventListener('click',async ()=>{
+  if(camStream){
+    const frame=await captureFrame();
+    stopCamera();
+    if(frame){ liveFrame=frame; startLiveUpload(frame); }
+    else resetLive();
+  } else resetLive();
+  showScreen('scan-processing');runProcessing();
+});
+document.getElementById('btn-retake').addEventListener('click',()=>{
+  const wasLive=!!liveFrame;
+  resetLive();
+  showScreen('scan-capture');
+  if(wasLive) tryStartCamera();
+});
 
 const CHECK_AT=[2000,4200,6300];
+function goReview(){ renderReview(); showScreen('scan-review'); }
+function waitForUploadThen(fn){
+  /* live POST still in flight: hold until it settles (its own 30s abort bounds this) */
+  if(liveUpload && !liveSettled) liveUpload.then(()=>{
+    if(document.getElementById('scan-processing').classList.contains('active')) after(200,fn);
+  });
+  else fn();
+}
 function runProcessing(){
   const ring=document.getElementById('ring-fg'), pct=document.getElementById('ring-pct');
   ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.remove('done'));
@@ -1659,34 +1783,114 @@ function runProcessing(){
     /* collapse to end state */
     ring.style.strokeDashoffset=0; pct.textContent='100%';
     ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.add('done'));
-    after(700,()=>showScreen('scan-review'));
+    after(700,()=>waitForUploadThen(goReview));
     return;
   }
   const T=7000, t0=performance.now();
+  let fired=false;
   function step(now){
-    const f=Math.min(1,(now-t0)/T);
+    const raw=Math.min(1,(now-t0)/T);
+    /* while the live upload is unsettled the ring holds at 96% instead of lying */
+    const f=(liveUpload && !liveSettled) ? Math.min(raw,.96) : raw;
     ring.style.strokeDashoffset=408*(1-f);
     pct.textContent=Math.round(f*100)+'%';
-    if(f<1 && document.getElementById('scan-processing').classList.contains('active')) requestAnimationFrame(step);
+    if(!document.getElementById('scan-processing').classList.contains('active')) return;
+    if(raw>=1 && !(liveUpload && !liveSettled)){
+      if(!fired){fired=true;after(300,goReview);}
+      return;
+    }
+    requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
   CHECK_AT.forEach((t,i)=>after(t,()=>document.getElementById('ck-'+(i+1)).classList.add('done')));
-  after(T+300,()=>showScreen('scan-review'));
 }
 
 /* review chips (the staged one-photo honest partial) */
 const STAGED = [['step_free',86],['hardware',90],['approach',84]];
-document.getElementById('vc-chips').innerHTML = STAGED.map(([k,c])=>
-  `<span class="fchip scan" style="cursor:default">${FEATS[k].label}${dotTriple(c,'var(--marigold-ink)')}</span>`).join('');
+/* the four real /screen criteria, in server order, mapped onto the chip vocabulary */
+const LIVE_CRITERIA = ['ramp_or_bevel','handrails','accessible_door_hardware','accessibility_signage'];
+function renderReviewChips(){
+  const el=document.getElementById('vc-chips');
+  if(liveResult){
+    const crit=liveResult.assessment.criteria;
+    const present=[], notSeen=[];
+    LIVE_CRITERIA.forEach(key=>{
+      const c=crit[key]; if(!c) return;
+      const ck=EST_KEYMAP[key], conf=+c.confidence||0;
+      if(c.verdict==='present')
+        present.push(`<span class="fchip scan" style="cursor:default">${FEATS[ck].label}${dotTriple(conf,'var(--marigold-ink)')}</span>`);
+      else notSeen.push(FEATS[ck].label);
+    });
+    el.innerHTML =
+      (present.length?present.join(''):`<span class="vc-notseen">No features confirmed from this photo yet — it still helps.</span>`) +
+      (notSeen.length?`<span class="vc-notseen">Not seen this time: ${notSeen.join(' · ')}</span>`:'');
+  } else {
+    el.innerHTML = STAGED.map(([k,c])=>
+      `<span class="fchip scan" style="cursor:default">${FEATS[k].label}${dotTriple(c,'var(--marigold-ink)')}</span>`).join('');
+  }
+}
+function renderReview(){
+  const art=document.getElementById('doorway-art2');
+  const img=document.getElementById('captured-img');
+  const band=document.getElementById('blurband');
+  const tagText=document.getElementById('blur-tag-text');
+  const note=document.getElementById('upload-note');
+  const qNote=document.getElementById('quarantine-note');
+  const hint=document.getElementById('review-hint');
+  qNote.classList.remove('on'); qNote.textContent='';
+  if(liveFrame){
+    img.src=liveFrame.dataUrl; img.hidden=false;
+    art.style.display='none'; band.style.display='none';
+    note.classList.add('on');
+    if(liveResult){
+      const n=liveResult.faces_blurred|0;
+      tagText.textContent = n>0 ? `${n} face${n===1?'':'s'} blurred at upload` : 'Blur checked at upload — no faces found';
+      hint.textContent = 'Live verdicts from your photo — statements about what is visible, never measurements.';
+      if(liveResult.quarantined){
+        qNote.classList.add('on');
+        qNote.textContent = 'Privacy hold: the automatic face check could not confirm every face is blurred, so this photo is quarantined. Your feature verdicts publish — the photo does not.';
+      }
+    } else {
+      tagText.textContent='Faces blurred at upload';
+      hint.textContent='One photo — got it. One more from further back would confirm a ramp, but this already helps.';
+    }
+  } else {
+    img.hidden=true; img.removeAttribute('src');
+    art.style.display=''; band.style.display='';
+    tagText.textContent='Auto-blur applied';
+    note.classList.remove('on');
+    hint.textContent='One photo — got it. One more from further back would confirm a ramp, but this already helps.';
+  }
+  renderReviewChips();
+}
+renderReviewChips();
 
+/* /screen criteria keys → the door-scan crit vocabulary featsOf() reads */
+const LIVE_TO_DOOR = {ramp_or_bevel:'ramp_present', handrails:'handrails_present',
+  accessible_door_hardware:'lever_or_pull_hardware', accessibility_signage:'accessible_signage'};
 document.getElementById('btn-publish').addEventListener('click',()=>{
-  /* upgrade the target pin with the staged scan */
+  /* upgrade the target pin with the scan — real verdicts when the live POST landed */
   const p=scanTarget;
   p.tier='scan'; p.views=1; p.staged=true; p.date='2026-09-04';
-  p.note='One photo from the sidewalk: level entry to the threshold, D-pull handles within reach, and a clear approach. A second photo from further back would confirm whether there is a ramp.';
-  p.crit={step_free_entry:{v:'present',c:86,e:'Sidewalk runs level to the threshold with no riser shadow in your photo'},
-          lever_or_pull_hardware:{v:'present',c:90,e:'D-pull handle visible on the leaf, graspable without twisting'},
-          clear_approach:{v:'present',c:84,e:'Open sidewalk directly in front of the doorway'}};
+  if(liveResult){
+    const crit={};
+    LIVE_CRITERIA.forEach(key=>{
+      const c=liveResult.assessment.criteria[key]; if(!c) return;
+      crit[LIVE_TO_DOOR[key]]={v:c.verdict, c:+c.confidence||0, e:String(c.evidence||'')};
+    });
+    p.crit=crit;
+    p.note='Live on-stage scan, screened by the real model just now. '+
+      (liveResult.quarantined
+        ? 'The photo is under a privacy hold (face check), so only the verdicts are published.'
+        : (liveResult.wording||''));
+  } else {
+    p.note='One photo from the sidewalk: level entry to the threshold, D-pull handles within reach, and a clear approach. A second photo from further back would confirm whether there is a ramp.';
+    p.crit={step_free_entry:{v:'present',c:86,e:'Sidewalk runs level to the threshold with no riser shadow in your photo'},
+            lever_or_pull_hardware:{v:'present',c:90,e:'D-pull handle visible on the leaf, graspable without twisting'},
+            clear_approach:{v:'present',c:84,e:'Open sidewalk directly in front of the doorway'}};
+  }
+  /* the captured frame becomes the pin's photo — in-memory only, and never when quarantined */
+  p.livePhoto = (liveFrame && !(liveResult && liveResult.quarantined)) ? liveFrame.dataUrl : null;
   p.f=featsOf(p);
   showScreen('scan-done');
   runDone(p);
