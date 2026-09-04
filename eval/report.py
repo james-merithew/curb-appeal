@@ -43,7 +43,7 @@ def main() -> int:
             if r.get("truth", "").strip():
                 truth[(r["door"], r["criterion"])] = r["truth"].strip().lower()
 
-    lines = ["# Curb Appeal - Vision Accuracy Report", ""]
+    lines = ["# EntryMap - Vision Accuracy Report", ""]
     lines.append(f"Model(s): {', '.join(sorted({r['model'] for r in rows}))} | "
                  f"images scored: {len(rows)} | "
                  f"doors: {len({r['door'] for r in rows})}")

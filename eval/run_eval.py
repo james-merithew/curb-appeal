@@ -1,4 +1,4 @@
-"""Curb Appeal vision-accuracy eval.
+"""EntryMap vision-accuracy eval.
 
 Walks photos/<door-id>/*, runs each image through the Claude vision checklist,
 records verdicts + confidence + latency, and emits a ground-truth template.
@@ -35,7 +35,7 @@ IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp"}
 MAX_DIM = 1568  # matches planned production pipeline: resize before upload
 EXIF_MODEL_TAG = 272
 
-SYSTEM = """You are the vision engine for Curb Appeal, an ADA storefront screening app.
+SYSTEM = """You are the vision engine for EntryMap, an ADA storefront screening app.
 You assess ONLY what is visible in a photo of a building entrance. You never guess
 measurements: slope percentages and widths in inches are not assessable from a photo.
 Presence/absence of visible features is your job. Be conservative: if a feature is

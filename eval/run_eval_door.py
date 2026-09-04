@@ -25,7 +25,7 @@ from run_eval import (
     prep_image, validate_verdicts,
 )
 
-SYSTEM = """You are the vision engine for Curb Appeal, an ADA storefront screening app.
+SYSTEM = """You are the vision engine for EntryMap, an ADA storefront screening app.
 You assess ONLY what is visible in photos of a building entrance. You never guess
 measurements: slope percentages and widths in inches are not assessable from a photo.
 Presence/absence of visible features is your job. Be conservative: if no view shows

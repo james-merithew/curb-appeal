@@ -1,4 +1,4 @@
-# Curb Appeal — UI reference spec (canon as of 2026-09-03)
+# EntryMap — UI reference spec (canon as of 2026-09-03)
 
 Derived from James's chosen reference mock (save the image alongside this file).
 This supersedes the exploratory pages (`map-ui-directions.html`, `map-ui-hybrids.html`);

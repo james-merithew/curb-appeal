@@ -1,4 +1,4 @@
-# Curb Appeal
+# EntryMap
 
 Point a phone at a storefront and know in 15 seconds if someone in a wheelchair
 can actually get in. This repo starts as the **vision-accuracy eval harness** —
