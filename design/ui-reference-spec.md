@@ -27,6 +27,28 @@ those remain as archives.
 - Match halo when a needs profile is set: labeled chip ("Good match") + halo;
   good=solid / partial=dashed / unknown=dotted (line style + color, never color alone).
 
+## Pin hierarchy — one pin, one message (James's correction, 2026-09-04)
+
+The map answers ONE question at a time; accessories that pile up on pins are
+banned. Strict layering:
+
+- **Level 0 — the pin IS the tier** (always, and nothing else by default):
+  silhouette + tier treatment only. The owner-confirmed check is INTEGRATED into
+  the pin design (a notch/badge within the silhouette), never floating beside it.
+- **Level 1 — one accessory slot, maximum one mark**, by priority:
+  1. Needs profile active → the MATCH HALO takes the slot (fit is now the map's
+     message; tier stays readable but secondary).
+  2. State-records layer toggled on → the lone-star highlight takes the slot.
+  Never both; toggling the layer while a profile is active shows match halos
+  with star-qualifying pins lifted (brightness/scale), not double-marked.
+- **Level 2 — card only, never on map pins**: sparkle/AI glyph, Texas tab,
+  neighbor counts, freshness, provenance of any kind. These render as card rows
+  and receipt content.
+- **Label chips ("Good match")**: only on the SELECTED pin and the top nearby-
+  match card — never on every matching pin.
+- Zoom rule: below full zoom, even Level 1 simplifies (halo tint only, no
+  outline style) — legibility beats completeness at distance.
+
 ## External-data accessories
 
 - **TABS/state record**: small Texas tab on the pin shoulder (reference shows the flag;
