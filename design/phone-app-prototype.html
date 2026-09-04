@@ -459,25 +459,50 @@ body{
 .live-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--marigold)}
 .viewfinder.live .live-chip{display:flex}
 
-/* processing */
-.ringwrap{position:relative;width:150px;height:150px;margin-top:26px}
-.ringwrap svg{transform:rotate(-90deg)}
-.ring-bg{fill:none;stroke:#DDD8F0;stroke-width:9}
-.ring-fg{fill:none;stroke:var(--marigold);stroke-width:9;stroke-linecap:round;
-  stroke-dasharray:408;stroke-dashoffset:408;transition:stroke-dashoffset .3s linear}
-.ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px}
-.ring-center .pct{font-size:1.5em;font-weight:900;color:var(--marigold-ink)}
-.checklist{margin-top:26px;display:flex;flex-direction:column;gap:12px;width:100%;max-width:280px}
-.checkitem{display:flex;align-items:center;gap:12px;font-weight:800;font-size:.95em;color:var(--faint);transition:color .3s}
-.checkitem .ci-dot{
-  width:30px;height:30px;border-radius:50%;border:2.5px dashed #C9C2E2;flex:0 0 auto;
-  display:flex;align-items:center;justify-content:center;transition:all .3s;color:transparent;
+/* processing — one motion idea: the ring draws itself as a single marigold stroke on the
+   lavender ground; each named check surfaces as the stroke passes its third; when the
+   stroke closes, the doorway mark lights and the screen settles into review (no bounce). */
+.ringwrap{position:relative;width:164px;height:164px;margin-top:30px}
+.ringwrap svg.ring{display:block;width:164px;height:164px;transform:rotate(-90deg);overflow:visible}
+.ring-bg{fill:none;stroke:#DDD8F0;stroke-width:8}
+.ring-fill{fill:var(--marigold-wash);opacity:0;transition:opacity .5s ease-out}
+.ring-fg{
+  fill:none;stroke:var(--marigold);stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:408.4;stroke-dashoffset:408.4;transition:stroke-dashoffset .25s linear;
+  filter:drop-shadow(0 0 5px rgba(240,163,47,.35));
 }
-.checkitem.done{color:var(--ink)}
-.checkitem.done .ci-dot{border:2.5px solid var(--marigold);background:var(--marigold-wash);color:var(--marigold-ink)}
-@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
-.checkitem.done .ci-dot{animation:pop .35s ease-out}
-.under8{margin-top:22px;font-size:.8em;color:var(--sub);font-weight:700}
+.ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--purple);transition:color .5s ease-out}
+.ring-center svg{display:block}
+.ringwrap.settled .ring-fill{opacity:1}
+.ringwrap.settled .ring-center{color:var(--marigold-ink)}
+.checklist{margin-top:30px;display:flex;flex-direction:column;gap:14px;width:100%;max-width:280px}
+.checkitem{
+  display:flex;align-items:center;gap:12px;font-weight:800;font-size:.95em;color:var(--ink);
+  opacity:.42;transform:translateY(4px);transition:opacity .55s ease-out,transform .55s ease-out;
+}
+.checkitem[hidden]{display:none}
+.checkitem .ci-dot{
+  width:26px;height:26px;border-radius:50%;border:2px solid #C9C2E2;flex:0 0 auto;font-size:.8em;
+  display:flex;align-items:center;justify-content:center;color:transparent;
+  transition:border-color .55s ease-out,background-color .55s ease-out,color .55s ease-out;
+}
+.checkitem.done{opacity:1;transform:none}
+.checkitem.done .ci-dot{border-color:var(--marigold);background:var(--marigold-wash);color:var(--marigold-ink)}
+.under8{margin-top:26px;font-size:.8em;color:var(--sub);font-weight:700;transition:opacity .3s}
+/* settle: the ring fades out, then the review rises in */
+#scan-processing .scan-body{transition:opacity .3s ease-in}
+#scan-processing.leaving .scan-body{opacity:0}
+@keyframes settle-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#scan-review.settle > *{animation:settle-in .42s cubic-bezier(.2,.7,.2,1) both}
+/* reduced motion: a plain determinate bar, same labels, no fades */
+.procbar{display:none;width:100%;max-width:280px;height:8px;border-radius:999px;background:#DDD8F0;margin-top:34px;overflow:hidden}
+.procbar-fill{height:100%;width:0;border-radius:999px;background:var(--marigold)}
+.scanscreen.reduced .ringwrap{display:none}
+.scanscreen.reduced .procbar{display:block}
+.scanscreen.reduced .checkitem{opacity:1;transform:none;transition:none;color:var(--faint)}
+.scanscreen.reduced .checkitem.done{color:var(--ink)}
+.scanscreen.reduced .ci-dot{transition:none}
+.scanscreen.reduced .scan-body{transition:none}
 
 /* review */
 .review-img{
@@ -970,19 +995,27 @@ body{
     <section class="screen scanscreen light" id="scan-processing">
       <div class="scan-body">
         <h2 class="scan-h" style="margin-top:8px">Checking the entrance</h2>
-        <div class="ringwrap">
-          <svg width="150" height="150" viewBox="0 0 150 150">
-            <circle class="ring-bg" cx="75" cy="75" r="65"/>
-            <circle class="ring-fg" id="ring-fg" cx="75" cy="75" r="65"/>
-          </svg>
-          <div class="ring-center"><span class="pct" id="ring-pct">0%</span></div>
+        <div id="proc-progress" role="progressbar" aria-label="Checking the entrance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="display:contents">
+          <div class="ringwrap" id="ringwrap">
+            <svg class="ring" viewBox="0 0 150 150" aria-hidden="true">
+              <circle class="ring-fill" cx="75" cy="75" r="58"/>
+              <circle class="ring-bg" cx="75" cy="75" r="65"/>
+              <circle class="ring-fg" id="ring-fg" cx="75" cy="75" r="65"/>
+            </svg>
+            <div class="ring-center" aria-hidden="true">
+              <!-- the logo's doorway mark: lintel + two jambs -->
+              <svg width="46" height="46" viewBox="0 0 40 40" fill="currentColor"><rect x="7" y="9" width="26" height="6" rx="3"/><rect x="10" y="17" width="6" height="16" rx="3"/><rect x="24" y="17" width="6" height="16" rx="3"/></svg>
+            </div>
+          </div>
+          <div class="procbar" id="procbar" aria-hidden="true"><div class="procbar-fill" id="procbar-fill"></div></div>
         </div>
         <div class="checklist">
           <div class="checkitem" id="ck-1"><span class="ci-dot">✓</span>Doorway framed</div>
           <div class="checkitem" id="ck-2"><span class="ci-dot">✓</span>Entry path visible</div>
           <div class="checkitem" id="ck-3"><span class="ci-dot">✓</span>Photo quality checked</div>
+          <div class="checkitem" id="ck-4" hidden><span class="ci-dot">✓</span>Double-checking</div>
         </div>
-        <div class="under8">Usually under 8 seconds.</div>
+        <div class="under8" id="proc-caption">Usually under 8 seconds.</div>
       </div>
     </section>
 
@@ -2378,55 +2411,101 @@ document.getElementById('btn-retake').addEventListener('click',()=>{
   if(wasLive) tryStartCamera();
 });
 
-const CHECK_AT=[2000,4200,6300];
-function goReview(){ renderReview(); showScreen('scan-review'); }
+/* ---- processing: the ring draws itself as one marigold stroke; the named checks surface
+   as the stroke passes each third (each quarter when a double-check pass is running) ---- */
+const PROC_T1=6400;      /* three checks — "Usually under 8 seconds." */
+const PROC_T2=12800;     /* four checks (gate2) — "Usually under 15 seconds." */
+const RING_CIRC=408.4;   /* 2π·65 */
+let gate2=false;         /* agreement gating (verified tier): adds "Double-checking", extends the ring */
+let procRun=null;        /* the active run's hooks (gate2 flipping mid-run extends, never restarts) */
+let procReduced=false;
+const procActive=()=>document.getElementById('scan-processing').classList.contains('active');
+function applyGate2(){
+  document.getElementById('ck-4').hidden=!gate2;
+  document.getElementById('proc-caption').textContent = gate2 ? 'Usually under 15 seconds.' : 'Usually under 8 seconds.';
+}
+function setGate2(on){ gate2=!!on; applyGate2(); if(procRun) procRun.extend(); }
+function goReview(){
+  if(!procActive()) return;
+  procRun=null;
+  const scr=document.getElementById('scan-processing');
+  scr.classList.add('leaving');            /* the ring fades out … */
+  after(procReduced?0:300,()=>{
+    scr.classList.remove('leaving');
+    renderReview();
+    const rv=document.getElementById('scan-review');
+    rv.classList.remove('settle');
+    if(!procReduced){ void rv.offsetWidth; rv.classList.add('settle'); }   /* … then the review rises in */
+    showScreen('scan-review');
+  });
+}
 function waitForUploadThen(fn){
   /* live POST still in flight: hold until it settles (its own 30s abort bounds this) */
-  if(liveUpload && !liveSettled) liveUpload.then(()=>{
-    if(document.getElementById('scan-processing').classList.contains('active')) after(200,fn);
-  });
+  if(liveUpload && !liveSettled) liveUpload.then(()=>{ if(procActive()) after(200,fn); });
   else fn();
 }
-function runProcessing(){
-  const ring=document.getElementById('ring-fg'), pct=document.getElementById('ring-pct');
-  ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.remove('done'));
-  ring.style.strokeDashoffset=408; pct.textContent='0%';
-  if(REDUCED){
-    /* collapse to end state */
-    ring.style.strokeDashoffset=0; pct.textContent='100%';
-    ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.add('done'));
-    after(700,()=>waitForUploadThen(goReview));
-    return;
+function runProcessing(forceReduced){
+  const scr=document.getElementById('scan-processing');
+  const ring=document.getElementById('ring-fg'), wrap=document.getElementById('ringwrap');
+  const bar=document.getElementById('procbar-fill'), prog=document.getElementById('proc-progress');
+  const reduced = REDUCED || !!forceReduced;
+  procReduced=reduced;
+  scr.classList.remove('leaving'); scr.classList.toggle('reduced',reduced);
+  wrap.classList.remove('settled');
+  applyGate2();
+  for(let i=1;i<=4;i++) document.getElementById('ck-'+i).classList.remove('done');
+
+  const t0=performance.now();
+  let fired=false, surfaced=0;
+  /* schedule: progress runs fBase→1 over tBase→tEnd; an extension re-bases so the arc never rewinds */
+  let fBase=0, tBase=t0, tEnd=t0+(gate2?PROC_T2:PROC_T1);
+  const progress=now=>Math.min(1, fBase+(1-fBase)*((now-tBase)/Math.max(1,tEnd-tBase)));
+  const held=()=>liveUpload && !liveSettled;    /* live POST still out: hold at 96% rather than lie */
+  function paint(f){
+    ring.style.strokeDashoffset=RING_CIRC*(1-f);
+    bar.style.width=(f*100).toFixed(1)+'%';
+    prog.setAttribute('aria-valuenow',Math.round(f*100));
   }
-  const T=7000, t0=performance.now();
-  let fired=false;
-  function step(now){
-    const raw=Math.min(1,(now-t0)/T);
-    /* while the live upload is unsettled the ring holds at 96% instead of lying */
-    const f=(liveUpload && !liveSettled) ? Math.min(raw,.96) : raw;
-    ring.style.strokeDashoffset=408*(1-f);
-    pct.textContent=Math.round(f*100)+'%';
-    if(!document.getElementById('scan-processing').classList.contains('active')) return;
-    if(raw>=1 && !(liveUpload && !liveSettled)){
-      if(!fired){fired=true;after(300,goReview);}
-      return;
+  function surface(f){
+    const n=gate2?4:3;
+    for(let i=surfaced+1;i<=n;i++){
+      const at = i<n ? i/n : .985;               /* the last check surfaces as the stroke closes */
+      if(f<at) break;
+      document.getElementById('ck-'+i).classList.add('done'); surfaced=i;
     }
+  }
+  function finish(){
+    if(fired) return; fired=true;
+    paint(1); surface(1);
+    wrap.classList.add('settled');               /* the doorway lights, the interior fills */
+    after(reduced?150:520,()=>waitForUploadThen(goReview));
+  }
+  procRun={ extend(){
+    const now=performance.now();
+    fBase=progress(now); tBase=now;
+    tEnd=Math.max(now+400, t0+(gate2?PROC_T2:PROC_T1));
+  }};
+
+  paint(0);
+  function step(now){
+    if(!procActive()||fired) return;
+    const raw=progress(now);
+    const f=held()?Math.min(raw,.96):raw;
+    paint(f); surface(f);
+    if(raw>=1 && !held()){ finish(); return; }
     requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
-  CHECK_AT.forEach((t,i)=>after(t,()=>document.getElementById('ck-'+(i+1)).classList.add('done')));
   /* watchdog: rAF can be throttled/frozen (backgrounded tab, occluded pane) —
      timers still run, so the flow never hangs on the ring */
   function watchdog(){
-    if(!document.getElementById('scan-processing').classList.contains('active')) return;
-    if(fired) return;
-    if(liveUpload && !liveSettled){ after(600,watchdog); return; }
-    fired=true;
-    ring.style.strokeDashoffset=0; pct.textContent='100%';
-    ['ck-1','ck-2','ck-3'].forEach(id=>document.getElementById(id).classList.add('done'));
-    after(250,goReview);
+    if(!procActive()||fired) return;
+    if(held()){ after(600,watchdog); return; }
+    const left=tEnd+1600-performance.now();      /* re-arm if the ring was extended */
+    if(left>0){ after(left,watchdog); return; }
+    finish();
   }
-  after(T+1600,watchdog);
+  after((gate2?PROC_T2:PROC_T1)+1600,watchdog);
 }
 
 /* review chips (the staged one-photo honest partial) */
