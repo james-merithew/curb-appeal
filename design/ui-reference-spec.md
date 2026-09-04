@@ -206,6 +206,20 @@ prefers-reduced-motion collapses to end state.
   tax-credit link and "View public listing." Owner data joins the stack; it never
   collapses it.
 
+## Capture modes — decided by the 2026-09-04 held-out experiments (James's call)
+
+Two modes only:
+1. **Photos for verification** (the Scan screen): one normal-lens photo yields an honest
+   partial checklist (100% committed / 79% coverage measured); five or six views yield
+   the verified result (97% / 90% held-out on 52 unseen doors). Ultra-wide loses to a
+   normal single (96% / 75%) — the one-photo instruction stays "the whole door, normal
+   lens." Walk-up video is dominated by a single photo (100% / 57%) and is dropped.
+2. **Walk-by video for coverage** (a separate "map your block" contributor mode): one
+   continuous portrait pass of a block face, auto-segmented per storefront, feeding the
+   Estimated tier — 82% commit rate vs 20% for Street View on the same engine. Short
+   multi-door clips are the same mechanism at small scale (93% / 75%), folded in.
+   Door inventory comes from the frames, never the walker's memory.
+
 ## Baked-in elements beyond the mock (all previously agreed — required, not optional)
 
 1. **Map layers**: a "State records" toggle lighting every TABS-matched pin at once
