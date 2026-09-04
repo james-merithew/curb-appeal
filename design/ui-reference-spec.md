@@ -123,6 +123,42 @@ prefers-reduced-motion collapses to end state.
   sharing location. Muted amber communicates time only; system states stay calm
   and neutral.
 
+## Owner experience (canon from the business-owner boards, 2026-09-04)
+
+**Claim flow (Start → Find → Confirm → Track):**
+- Owner tools live in **Profile** ("For business owners" → Claim your door card with
+  the tax-credit line → Start a claim). The user's own scans list sits beside it.
+- **Find**: search, then "choose the entrance you manage" — disambiguates multiple
+  locations of the same business (entrance-level, not business-level, claims).
+- **Confirm**: role dropdown (Owner/Manager — surface-control honesty), work email +
+  business phone fields, verification choice (Business email link / Call the
+  business), an explicit "I'm authorized to manage this business listing" checkbox,
+  and the secure-verification reassurance line.
+  **GUARDRAIL (spec overrides mock literalism): the typed contact is input, not
+  authority — codes are only ever sent to a contact matching the independently
+  resolved business domain or listed phone; an arbitrary personal address fails
+  validation.** (Proof-of-control invariant upheld.)
+- **Track**: visible claim timeline — Submitted ✓ → Business match ✓ → Ownership
+  review (in progress) — with "we'll email you when your workspace is ready" and an
+  Owner-confirmed preview. Progress stays visible; expectations set.
+
+**Owner workspace (Overview → Edit → Photos → Receipt):**
+- Overview: tier state, entrance features with checks, freshness ("Updated today"),
+  confidence, **community contribution count** (community scans shown beside owner
+  data, never replaced by it), Edit entrance / Manage photos.
+- Edit: "**Update only what you can see at the entrance**" — feature dropdowns are
+  Yes / No / **Not sure** (owner abstention is honest too); a 200-char "What should
+  visitors know?" free-text (door weight, buzzer location — the not-photo-assessable
+  facts get their honest home here); **state records render read-only-locked** —
+  owners edit observations, not state records.
+- Photos: "Show the full path from sidewalk to door"; primary photo; JPG/PNG ≤10MB;
+  review checklist ("2 photos ready", "Avoid faces and license plates" — guidance on
+  top of the automatic blur, not instead of it); Publish update.
+- Receipt: "Update published" with provenance **stacked and legible** — Owner update
+  · today / Scanned on-site · 4 neighbors / Texas record · read-only — plus the
+  tax-credit link and "View public listing." Owner data joins the stack; it never
+  collapses it.
+
 ## Baked-in elements beyond the mock (all previously agreed — required, not optional)
 
 1. **Map layers**: a "State records" toggle lighting every TABS-matched pin at once
