@@ -109,6 +109,17 @@ prefers-reduced-motion collapses to end state.
 - **My Needs picker**: optional, "choose any that help" — Wheelchair · Cane/walker ·
   Low vision · Limited grip · Stroller (exactly the researched personas), Continue /
   Skip for now. Needs are editable any time from Profile.
+- **Multi-need profiles (canon, 2026-09-04)**: selected needs STACK — the active
+  checklist is the union of each selected persona's critical features, deduped.
+  The map halo shows the COMBINED verdict (weakest link: good only when every
+  critical feature for every selected need is confirmed; partial/unknown
+  otherwise) — one message on the map. The CARD carries the per-need breakdown
+  ("For wheelchair access: 3 of 3 · For low vision: 1 of 2 — signage not yet
+  seen"), and match-card arithmetic ("N of M needs") uses the combined, deduped
+  M. Presence-features stack monotonically (no contradictions); the one real
+  preference tension (e.g. a cane user preferring one step + rail over a long
+  ramp) is handled by per-persona feature toggles after selection, never by the
+  combined-verdict logic guessing.
 - **Profile screen**: avatar, guest-vs-signed-in state ("Sign in to save"), My Needs
   chips with edit, Location toggle, **Text size**, **High contrast**, Privacy.
 - **Accessibility floor (product-wide)**: 44px touch targets, 7:1 text contrast.
