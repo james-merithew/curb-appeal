@@ -1,4 +1,8 @@
-# EntryMap — UI reference spec (canon as of 2026-09-03)
+# EntryMap — UI reference spec (visual tokens + measured decisions)
+
+> **Precedence:** `product-interaction-design.md` (James, 2026-09-04) is the authoritative product and
+> interaction spec. This file carries tokens, measured decisions, and build notes and defers to it
+> wherever they differ; see its reconciliation list.
 
 Derived from James's chosen reference mock (save the image alongside this file).
 This supersedes the exploratory pages (`map-ui-directions.html`, `map-ui-hybrids.html`);
@@ -38,9 +42,8 @@ banned. Strict layering:
 - **Level 1 — one accessory slot, maximum one mark**, by priority:
   1. Needs profile active → the MATCH HALO takes the slot (fit is now the map's
      message; tier stays readable but secondary).
-  2. State-records layer toggled on → the lone-star highlight takes the slot.
-  Never both; toggling the layer while a profile is active shows match halos
-  with star-qualifying pins lifted (brightness/scale), not double-marked.
+  2. (withdrawn) — the former state-records layer/lone-star accessory is removed per the
+  product doc; the accessory slot holds the match halo only.
 - **Level 2 — card only, never on map pins**: sparkle/AI glyph, Texas tab,
   neighbor counts, freshness, provenance of any kind. These render as card rows
   and receipt content.
@@ -51,9 +54,9 @@ banned. Strict layering:
 
 ## External-data accessories
 
-- **TABS/state record**: small Texas tab on the pin shoulder (reference shows the flag;
-  at small sizes prefer the lone-star outline — flags turn to noise below ~24px).
-  Card row: "Texas accessibility inspection on record · <year>" with chevron to receipt.
+- **TABS/state record**: WITHDRAWN from pins (product doc 2026-09-04) — the Texas flag
+  appears beside the state-record receipt line ONLY; it never alters the pin, never sits
+  on the pin shoulder, and there is no state-records map layer.
 - Other sources (OSM etc.): provenance rows on the card only, each with source glyph,
   label, and date. External data never fills ring segments or chips.
 
