@@ -55,6 +55,20 @@ those remain as archives.
   "verified accessible" semantics.
 - Amber = freshness aging only. Red does not exist in the product.
 
+## Evidence decay (per-criterion, not per-photo — James's correction, 2026-09-04)
+
+Evidence ages by what it shows, gated by tenant turnover, not by the calendar alone:
+- **Structural criteria** (step-free, ramp, rails, door width): long half-life — years.
+  A dated photo of an unaltered building is valid structural evidence.
+- **Tenancy-coupled criteria** (signage, hardware, clear approach, the business itself):
+  short half-life — months.
+- **Turnover gate**: place_id business_status + Austin certificate-of-occupancy records
+  detect tenant change at an address. Older imagery keeps structural weight while no
+  turnover is detected; a turnover event demotes ALL of that address's imagery-derived
+  evidence to needs-recheck (internally — publicly the pin simply invites a fresh scan).
+- Freshness amber thresholds therefore differ per chip class; every line still shows
+  its actual date.
+
 ## Signature animation (live scan)
 
 Photo in → ~7s processing (progress ring, checklist items ticking in one by one) →
