@@ -12,7 +12,8 @@ those remain as archives.
   soft blue (Estimated tier + feature icons), teal/green reserved — see rules below.
 - **Type**: rounded humanist sans throughout (reference uses a single family; the
   editorial-serif option from Field Notes was not carried into the reference).
-- **Nav**: bottom bar Map · **Scan** (large marigold circle, center) · Profile.
+- **Nav**: bottom bar Map · **Scan** (center: outlined circle with camera glyph, marigold
+  ring — the v2 treatment, James's pick 2026-09-03) · Profile.
 
 ## Trust tiers (three, fixed wording)
 
