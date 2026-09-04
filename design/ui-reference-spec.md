@@ -61,6 +61,38 @@ Photo in → ~7s processing (progress ring, checklist items ticking in one by on
 pin drops with bounce + ripple, chips populated, counter ticks. Under 8 seconds;
 prefers-reduced-motion collapses to end state.
 
+## Onboarding & profile (canon from the "universal access" boards, 2026-09-04)
+
+- **Guest-first**: "access starts before you arrive" welcome → **Sign in** OR
+  **Continue as guest**; the guest path stays fully usable and guest choices stay
+  on this device. Signed-in profiles sync; guests stay local. (Account model L1/L2
+  made concrete.)
+- **Location permission**: plain-language primer BEFORE the OS prompt ("We use your
+  location to center the map and show walking distance"), with **Not now** as a
+  real option and "You control this in Settings."
+- **My Needs picker**: optional, "choose any that help" — Wheelchair · Cane/walker ·
+  Low vision · Limited grip · Stroller (exactly the researched personas), Continue /
+  Skip for now. Needs are editable any time from Profile.
+- **Profile screen**: avatar, guest-vs-signed-in state ("Sign in to save"), My Needs
+  chips with edit, Location toggle, **Text size**, **High contrast**, Privacy.
+- **Accessibility floor (product-wide)**: 44px touch targets, 7:1 text contrast.
+
+## Discovery & filters (same boards)
+
+- **Universal map first**: the map with legend (three tiers) is the landing surface;
+  no login gate anywhere before it.
+- **Filter sheet**: My Needs chips + **Entrance features** (Step-free, Wide door,
+  Easy-grip) + **Freshness** (Any / 7 days / 30 days) + **Distance** slider +
+  **Open now** toggle → "Show N places" button. NO trust-tier facet — filters
+  describe needs, never trust tiers. Guests can filter now (temporarily);
+  sign in to save filters.
+- **Nearby matches**: photo result cards with match arithmetic in plain words —
+  "Good match" / "**3 of 3 needs**" + distance. Fit, not certainty.
+- **Evidence receipt**: its own card — camera row, "4 neighbors", "1 owner",
+  "Texas record · <year>", footer "Sources, dates, and confidence — not a badge."
+- **Open-now caveat (implementation)**: hours data comes from the place provider at
+  display time (Google ToS: not storable) — the toggle works live-only.
+
 ## Baked-in elements beyond the mock (all previously agreed — required, not optional)
 
 1. **Map layers**: a "State records" toggle lighting every TABS-matched pin at once
