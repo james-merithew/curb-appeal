@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EntryMap — profile, settings &amp; system states</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ======================================================================
+   SCREEN PACK: Profile (28) · Saved entrances (29) · My contributions (30)
+   · Accessibility settings (31) · Notification settings (32)
+   · Correction submitted (18) · Offline scan saved + sibling states (27)
+
+   Sections marked "VERBATIM" are copied unchanged from
+   design/phone-app-prototype.html so the pack drops into it by copy-paste.
+   Sections marked "PACK" are additions that only this pack needs.
+   ====================================================================== */
+
+/* ============ tokens (VERBATIM) ============ */
+:root{
+  --ground:#EDEBFA;          /* lavender map canvas */
+  --ground-deep:#E2DFF6;
+  --card:#FFFFFF;
+  --ink:#241F3A;             /* 15:1 on white */
+  --sub:#4A4463;             /* 8.4:1 on white */
+  --faint:#575170;
+  --blue:#5B8DEF;            /* Estimated tier accent (fills/strokes) */
+  --blue-ink:#1E3A8A;        /* Estimated text, 10:1 */
+  --blue-wash:#EAF1FE;
+  --marigold:#F0A32F;        /* Scanned tier / action */
+  --marigold-ink:#6E4A00;    /* 8:1 on white */
+  --marigold-wash:#FCF1DC;
+  --purple:#7053C5;          /* Owner tier / links */
+  --purple-ink:#4B2E9E;      /* 9:1 */
+  --purple-wash:#F0EBFC;
+  --teal-ink:#0E5E66;        /* neutral confidence alt */
+  --match-green:#1B7A3D;     /* ONLY match state */
+  --match-ink:#0F5228;
+  --match-wash:#DFF3E6;
+  --amber-ink:#6B4F00;       /* freshness aging ONLY */
+  --amber-wash:#FBF3DC;
+  --street:#FFFFFF;
+  --block:#F7F6FE;
+  --tree:#AFC2F2;
+  --bezel:#17141F;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(36,31,58,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(1200px 700px at 50% 0%, #f0eef4 0%, #e2e0e8 55%, #d8d6e0 100%);
+  font-family:'Nunito',system-ui,'Segoe UI',sans-serif;
+  color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px 12px;gap:14px;
+}
+.stage-caption{color:#4a465c;font-size:13px;font-weight:700;letter-spacing:.02em;text-align:center}
+.stage-caption b{color:#241F3A}
+
+/* ============ phone frame (VERBATIM) ============ */
+.phone-wrap{position:relative}
+.phone{
+  width:390px;height:844px;background:var(--ground);
+  border-radius:54px;border:11px solid var(--bezel);
+  box-shadow:0 24px 70px rgba(20,16,40,.4), 0 3px 10px rgba(20,16,40,.25);
+  overflow:hidden;position:relative;
+  font-size:15px;
+}
+.phone[data-textsize="large"]{font-size:16.2px}
+.phone[data-textsize="larger"]{font-size:17.4px}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--bezel);border-radius:16px;z-index:60}
+.statusbar{
+  position:absolute;top:0;left:0;right:0;height:46px;z-index:55;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 26px 0;font-weight:800;font-size:14px;color:var(--ink);
+  pointer-events:none;
+}
+.statusbar .sicons{display:flex;gap:5px;align-items:center}
+
+/* ============ screens (VERBATIM) ============ */
+.screen{position:absolute;inset:0;display:none;flex-direction:column}
+.screen.active{display:flex}
+.screen-body{flex:1;overflow-y:auto;padding:58px 16px 96px}
+
+/* ============ bottom nav (VERBATIM) ============ */
+.navbar{
+  position:absolute;left:0;right:0;bottom:0;height:86px;z-index:45;
+  background:rgba(255,255,255,.97);border-top:1px solid #E3E0F0;
+  display:flex;align-items:stretch;justify-content:space-around;
+  padding:6px 10px calc(14px);
+}
+.navbtn{
+  flex:1;background:none;border:none;cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  color:var(--sub);font-size:.72em;font-weight:800;min-width:44px;min-height:44px;
+}
+.navbtn.on{color:var(--purple-ink)}
+.navbtn.on svg{stroke:var(--purple-ink)}
+.navbtn svg{stroke:var(--sub)}
+.nav-scan{
+  flex:0 0 96px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  background:none;border:none;cursor:pointer;font-family:inherit;margin-top:-26px;
+  color:var(--marigold-ink);font-size:.72em;font-weight:900;gap:4px;
+}
+.nav-scan .ring{
+  width:62px;height:62px;border-radius:50%;background:#fff;
+  border:3px solid var(--marigold);box-shadow:0 6px 18px rgba(240,163,47,.45);
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-scan:active .ring{transform:scale(.95)}
+
+/* ============ card pieces (VERBATIM) ============ */
+.tierchip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:.72em;font-weight:900;margin-top:5px}
+.tierchip.est{background:var(--blue-wash);color:var(--blue-ink);border:1.5px dashed var(--blue)}
+.tierchip.scan{background:var(--marigold-wash);color:var(--marigold-ink);border:1.5px solid var(--marigold)}
+.tierchip.owner{background:var(--purple-wash);color:var(--purple-ink);border:1.5px solid var(--purple)}
+.matchchip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:.72em;font-weight:900;margin:5px 0 0 6px;background:var(--match-wash);color:var(--match-ink);border:1.5px solid var(--match-green)}
+.matchchip.partial{background:#E7F4F5;color:var(--teal-ink);border:1.5px dashed var(--teal-ink)}
+.matchchip.unknown{background:var(--blue-wash);color:var(--blue-ink);border:1.5px dotted var(--blue)}
+.dots{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}
+.dots i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.25}
+.dots i.f{opacity:1}
+.card-actions{display:flex;gap:10px;margin-top:12px}
+.btn{
+  flex:1;min-height:48px;border-radius:14px;font-family:inherit;font-weight:900;font-size:.95em;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;border:none;
+}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--purple);color:#fff}
+.btn.marigold{background:var(--marigold);color:#3A2A00}
+.btn.ghost{background:#F1EFFA;color:var(--purple-ink)}
+.btn.quiet{background:#F1EFFA;color:var(--sub)}
+.btn-textlink{
+  border:none;background:none;font-family:inherit;color:var(--purple-ink);font-weight:900;
+  font-size:.92em;cursor:pointer;min-height:44px;width:100%;
+}
+.sheet-h{font-size:1.2em;font-weight:900;margin-top:6px}
+.sheet-p{font-size:.86em;color:var(--sub);font-weight:700;margin-top:4px;line-height:1.45}
+.seg{display:flex;background:#F1EFFA;border-radius:12px;padding:3px;gap:3px}
+.seg button{
+  flex:1;min-height:44px;border:none;border-radius:10px;background:none;font-family:inherit;
+  font-weight:900;font-size:.84em;color:var(--sub);cursor:pointer;
+}
+.seg button.sel{background:#fff;color:var(--purple-ink);box-shadow:0 1px 5px rgba(36,31,58,.14)}
+
+/* ============ scan-flow pieces reused by the confirmation screens (VERBATIM) ============ */
+.scanscreen{background:var(--ground);z-index:40}
+.scan-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:70px 22px 104px;overflow-y:auto}
+.scan-h{font-size:1.45em;font-weight:900;text-align:center;line-height:1.2;margin-top:14px}
+.scan-p{font-size:.92em;color:var(--sub);font-weight:700;text-align:center;line-height:1.5;margin-top:10px;max-width:300px}
+.privacy-line{margin-top:14px;background:var(--purple-wash);color:var(--purple-ink);font-weight:900;font-size:.9em;border-radius:12px;padding:10px 14px;text-align:center}
+.privacy-sub{font-size:.78em;color:var(--sub);font-weight:700;margin-top:8px;text-align:center}
+.scan-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.big-icon{width:84px;height:84px;border-radius:50%;background:#fff;border:3px solid var(--marigold);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.whatsnext{
+  margin-top:20px;width:100%;background:#fff;border:2px solid #E6E2F4;border-radius:16px;padding:14px;
+}
+.tax-box{
+  display:flex;align-items:flex-start;gap:10px;background:var(--purple-wash);border-radius:12px;
+  padding:11px 12px;margin-top:11px;font-size:.82em;color:var(--purple-ink);font-weight:700;line-height:1.45;
+}
+.bizhead{
+  display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;
+  box-shadow:0 2px 10px rgba(36,31,58,.07);padding:12px 14px;
+}
+.cr-icon{flex:0 0 38px;height:38px;border-radius:12px;background:var(--purple-wash);display:flex;align-items:center;justify-content:center}
+.cr-name{font-weight:900;font-size:.95em;color:var(--ink)}
+.cr-sub{display:block;font-size:.78em;color:var(--sub);font-weight:700;margin-top:1px}
+
+/* ============ flow header (VERBATIM from the claim flow) ============ */
+.flowhead{display:flex;align-items:center;gap:6px;margin-bottom:10px;min-height:44px}
+.flowhead .backbtn{
+  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;background:#fff;cursor:pointer;
+  color:var(--sub);font-size:20px;font-weight:900;box-shadow:0 2px 10px rgba(36,31,58,.07);
+}
+.flowhead h2{flex:1;text-align:center;font-size:1.15em;font-weight:900;margin-right:44px}
+
+/* ============ profile (VERBATIM) ============ */
+.prof-card{background:#fff;border-radius:var(--radius);box-shadow:0 2px 10px rgba(36,31,58,.07);padding:16px;margin-bottom:12px}
+.prof-head{display:flex;align-items:center;gap:14px}
+.prof-avatar{width:56px;height:56px;border-radius:50%;background:var(--purple-wash);color:var(--purple-ink);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.3em}
+.prof-name{font-weight:900;font-size:1.15em}
+.prof-sub{font-size:.8em;color:var(--sub);font-weight:700;margin-top:2px}
+.prof-row{
+  display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 2px;width:100%;
+  border:none;background:none;font-family:inherit;cursor:pointer;text-align:left;
+  border-bottom:1px solid #F2F0FA;
+}
+.prof-row:last-child{border-bottom:none}
+.prof-row .rowicon{flex:0 0 34px;height:34px;border-radius:10px;background:#F4F2FC;display:flex;align-items:center;justify-content:center;color:var(--purple-ink)}
+.prof-row .rowmain{flex:1}
+.prof-row .rowlabel{display:block;font-weight:800;font-size:.95em;color:var(--ink)}
+.prof-row .rowsub{display:block;font-size:.76em;color:var(--sub);font-weight:700;margin-top:1px}
+.prof-row .chev{color:#A29BC4;font-weight:900}
+.sectionlabel{font-size:.72em;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin:16px 4px 8px}
+.needs-chiprow{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.needchip{background:var(--purple-wash);color:var(--purple-ink);border:1.5px solid #D8CCF3;border-radius:999px;padding:6px 12px;font-size:.8em;font-weight:800}
+.toggle{position:relative;width:52px;height:31px;border-radius:16px;background:#D9D5EC;border:none;cursor:pointer;transition:background .2s;flex:0 0 auto}
+.toggle::before{content:"";position:absolute;inset:-8px}/* 47px hit area */
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:25px;height:25px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.toggle.on{background:var(--purple)}
+.toggle.on::after{left:24px}
+.tsize-row{display:flex;gap:8px}
+.tsize-btn{min-width:48px;min-height:44px;border-radius:12px;border:2px solid #E6E2F4;background:#fff;font-family:inherit;font-weight:900;color:var(--sub);cursor:pointer}
+.tsize-btn:nth-child(1){font-size:14px}.tsize-btn:nth-child(2){font-size:17px}.tsize-btn:nth-child(3){font-size:20px}
+.tsize-btn.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
+.owner-tease{background:linear-gradient(120deg,var(--purple-wash),#fff 70%);border:1.5px solid #D8CCF3}
+.scanrow-tail{margin-left:auto;text-align:right}
+.scanrow-tail .dots{margin-left:0}
+
+/* toast (VERBATIM) */
+.toast{
+  position:absolute;left:50%;bottom:104px;transform:translate(-50%,20px);z-index:70;opacity:0;
+  background:var(--ink);color:#fff;font-size:.85em;font-weight:800;border-radius:999px;padding:11px 18px;
+  transition:all .3s;pointer-events:none;white-space:nowrap;max-width:92%;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* high contrast (VERBATIM + the pack's row/badge borders) */
+.phone.hc{--ink:#0E0B1C;--sub:#2E2947;--faint:#2E2947;--blue-ink:#122A6E;--marigold-ink:#4E3400;--purple-ink:#331F73;--amber-ink:#4E3900;--ground:#E4E1F6}
+.phone.hc .fchip,.phone.hc .persona,.phone.hc .tierchip,.phone.hc .field select,.phone.hc .field textarea{border-width:2px}
+.phone.hc .legend,.phone.hc .prof-card,.phone.hc .sheet{box-shadow:0 0 0 1.5px #2E2947, var(--shadow)}
+.phone.hc .prof-row{border-bottom-color:#C9C4DC}
+.phone.hc .prof-row .chev{color:var(--sub)}
+.phone.hc .toggle{background:#8E88A8}
+.phone.hc .toggle.on{background:var(--purple-ink)}
+.phone.hc .matchchip,.phone.hc .status-chip,.phone.hc .upd-badge,.phone.hc .state-card,.phone.hc .whatsnext,.phone.hc .tsize-btn{border-width:2px}
+.phone.hc .navbar{border-top:2px solid #2E2947}
+
+/* reduced motion — OS preference (VERBATIM) */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+/* fit-to-viewport scaling (VERBATIM) */
+.phone-wrap{transform-origin:center center}
+
+/* ============ real-phone mode (<768px) (VERBATIM) ============ */
+@media (max-width:767px){
+  body{padding:0;gap:0;display:block;background:var(--bezel);min-height:100dvh}
+  .stage-caption{display:none}
+  .phone-wrap{transform:none !important;margin:0 !important}
+  .phone{
+    width:100vw;height:100vh;height:100dvh;
+    border:none;border-radius:0;box-shadow:none;
+  }
+  .notch{display:none}
+}
+
+/* ======================================================================
+   PACK additions
+   ====================================================================== */
+
+/* reduced motion — the in-app toggle (screen 31). Same effect as the OS
+   preference, but driven by a class so guests can choose it locally. */
+.phone.reduced *,.phone.reduced *::before,.phone.reduced *::after{animation:none !important;transition:none !important}
+
+/* visible focus, everywhere (the prototype sets it per-control; the pack sets it once) */
+.phone :focus-visible{outline:3px solid var(--purple);outline-offset:2px;border-radius:8px}
+.phone .toggle:focus-visible{outline-offset:4px;border-radius:16px}
+.phone .backbtn:focus-visible,.phone .navbtn:focus-visible{border-radius:50%}
+.phone.hc :focus-visible{outline-color:var(--ink)}
+
+/* screen entrance — one calm rise, collapsed by Reduce motion */
+@keyframes screen-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.screen.active .screen-body,.screen.active .scan-body{animation:screen-in .28s cubic-bezier(.2,.7,.2,1) both}
+@keyframes icon-in{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+.screen.active .big-icon{animation:icon-in .5s cubic-bezier(.2,.9,.3,1.15) both}
+
+/* settings screens share the profile ground */
+.setscreen .screen-body{background:var(--ground)}
+
+/* rows that carry a control instead of a chevron */
+.prof-row.static{cursor:default}
+.prof-row .rowvalue{font-size:.82em;font-weight:800;color:var(--sub);margin-right:2px}
+.prof-row .rowsub.wrap{white-space:normal;line-height:1.4}
+
+/* saved entrances (29) */
+.saved-row{align-items:flex-start;padding:10px 2px}
+.saved-row .rowicon{background:none;width:34px}
+.saved-row .rowlabel{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.upd-badge{
+  display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 8px;
+  font-size:.7em;font-weight:900;background:var(--purple-wash);color:var(--purple-ink);border:1.5px solid var(--purple);
+}
+.rowmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:5px;font-size:.76em;font-weight:800;color:var(--sub)}
+.rowmeta .matchchip{margin:0;font-size:.95em;padding:2px 9px}
+.rowmeta .fresh{display:inline-flex;align-items:center;gap:4px}
+.rowmeta .fresh.aged{color:var(--amber-ink);background:var(--amber-wash);border-radius:999px;padding:2px 8px}
+.rowmeta .dist{color:var(--sub)}
+.saved-row .chev{align-self:center}
+.empty-box{
+  background:#fff;border-radius:var(--radius);box-shadow:0 2px 10px rgba(36,31,58,.07);padding:26px 20px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.empty-box .e-h{font-weight:900;font-size:1.05em;margin-top:12px}
+.empty-box .e-p{font-size:.85em;color:var(--sub);font-weight:700;margin-top:5px;line-height:1.45;max-width:280px}
+.empty-box .card-actions{width:100%}
+.demo-link{
+  margin-top:6px;border:none;background:none;font-family:inherit;color:var(--sub);font-weight:800;
+  font-size:.78em;cursor:pointer;min-height:44px;width:100%;
+}
+
+/* my contributions (30) */
+.tabpane[hidden]{display:none}
+.status-chip{
+  display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:.72em;font-weight:900;
+  white-space:nowrap;flex:0 0 auto;
+}
+.status-chip.review{background:var(--purple-wash);color:var(--purple-ink);border:1.5px solid var(--purple)}
+.status-chip.added{background:var(--marigold-wash);color:var(--marigold-ink);border:1.5px solid var(--marigold)}
+.status-chip.photo{background:var(--blue-wash);color:var(--blue-ink);border:1.5px dashed var(--blue)}
+.contrib-row{align-items:flex-start;padding:10px 2px}
+.contrib-row .rowlabel{line-height:1.25}
+.contrib-row .rowsub.quote{color:var(--ink);font-style:italic;font-weight:600;margin-top:3px;line-height:1.4}
+.priv-line{display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-size:.74em;font-weight:800;color:var(--purple-ink);background:var(--purple-wash);border-radius:999px;padding:2px 9px}
+.tabfoot{font-size:.78em;color:var(--sub);font-weight:700;text-align:center;margin:10px 8px 0;line-height:1.45}
+
+/* accessibility settings (31) */
+.a11y-note{
+  display:flex;align-items:flex-start;gap:9px;margin-top:2px;font-size:.8em;color:var(--sub);font-weight:700;line-height:1.45;
+  padding:2px 4px 0;
+}
+.preview{background:#F8F7FD;border-radius:14px;padding:12px;margin-top:4px}
+.preview .pv-label{font-size:.68em;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+.preview .pv-name{font-weight:900;font-size:1.05em;margin-top:6px}
+.preview .pv-sub{font-size:.8em;color:var(--sub);font-weight:700;margin-top:2px}
+.preview .pv-chips{display:flex;flex-wrap:wrap;gap:4px 0;align-items:center}
+.preview .fresh{display:inline-flex;align-items:center;gap:4px;font-size:.76em;font-weight:800;color:var(--amber-ink);background:var(--amber-wash);border-radius:999px;padding:3px 9px;margin:5px 0 0 6px}
+.preview .pv-body{font-size:.86em;color:var(--sub);font-weight:700;margin-top:8px;line-height:1.45}
+
+/* notification settings (32) */
+.notif-intro{font-size:.86em;color:var(--sub);font-weight:700;line-height:1.45;margin:0 4px 6px}
+.policy-line{
+  display:flex;align-items:center;gap:9px;margin-top:4px;background:#fff;border-radius:14px;padding:12px 14px;
+  font-size:.86em;font-weight:900;color:var(--ink);box-shadow:0 2px 10px rgba(36,31,58,.07);
+}
+
+/* correction submitted (18) */
+.next-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:10px}
+.next-list li{display:flex;gap:10px;align-items:flex-start;font-size:.86em;font-weight:700;color:var(--sub);line-height:1.45}
+.next-list li b{color:var(--ink)}
+.next-list .nl-dot{flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:var(--purple-wash);color:var(--purple-ink);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.wn-h{font-size:.72em;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+#scr-corr-done .scan-h{margin-top:18px}
+#scr-corr-done .bizhead{width:100%;margin-top:18px}
+
+/* offline + sibling states (27) */
+.state-stack{display:flex;flex-direction:column;gap:12px;width:100%;margin-top:14px}
+.state-card{
+  background:#fff;border:2px solid #E6E2F4;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;
+}
+.state-card.primary{border-color:var(--purple)}
+.state-card .sc-top{display:flex;align-items:flex-start;gap:12px}
+.state-card .sc-icon{flex:0 0 52px;width:52px;height:52px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center}
+.state-card .sc-h{font-weight:900;font-size:1.05em;line-height:1.2}
+.state-card .sc-p{font-size:.86em;color:var(--sub);font-weight:700;line-height:1.45;margin-top:3px}
+.state-card .sc-note{display:flex;align-items:flex-start;gap:7px;font-size:.78em;color:var(--purple-ink);font-weight:800;line-height:1.4;background:var(--purple-wash);border-radius:10px;padding:8px 10px}
+.state-card .btn{margin-top:2px}
+.state-card .btn.ghost{background:#fff;border:2px solid var(--purple);color:var(--purple-ink)}
+#scr-offline .scan-h{margin-top:4px}
+
+/* ============ screen switcher (outside the phone) ============ */
+.stage{display:flex;align-items:center;gap:26px}
+.switcher{
+  width:236px;background:rgba(255,255,255,.72);border-radius:18px;padding:14px 12px;
+  box-shadow:0 8px 24px rgba(36,31,58,.12);font-size:13px;
+}
+.switcher h1{font-size:14px;font-weight:900;color:var(--purple-ink);margin:0 6px 8px;letter-spacing:-.01em}
+.switcher .sw-sub{font-size:11.5px;color:#4a465c;font-weight:700;margin:0 6px 10px;line-height:1.4}
+.switcher a{
+  display:flex;align-items:center;gap:9px;min-height:44px;padding:6px 8px;border-radius:10px;text-decoration:none;
+  color:var(--ink);font-weight:800;font-size:12.5px;line-height:1.25;
+}
+.switcher a .num{flex:0 0 26px;height:22px;border-radius:7px;background:#EDEBFA;color:var(--purple-ink);font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.switcher a.on{background:var(--purple-ink);color:#fff}
+.switcher a.on .num{background:rgba(255,255,255,.2);color:#fff}
+.switcher a:focus-visible{outline:3px solid var(--purple);outline-offset:1px}
+.switcher .sw-group{font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#4a465c;margin:10px 8px 4px}
+.sw-fab{display:none}
+@media (max-width:767px){
+  .stage{display:block}
+  .switcher{
+    display:none;position:fixed;left:12px;right:12px;bottom:100px;z-index:90;width:auto;
+    background:rgba(255,255,255,.98);box-shadow:var(--shadow);max-height:60vh;overflow-y:auto;
+  }
+  .switcher.open{display:block}
+  .sw-fab{
+    display:flex;align-items:center;gap:6px;position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:95;min-height:36px;
+    border:none;border-radius:999px;background:var(--ink);color:#fff;font-family:inherit;font-weight:900;font-size:12px;
+    padding:0 12px;cursor:pointer;box-shadow:var(--shadow);
+  }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= SCREEN SWITCHER (outside the app) ================= -->
+  <button class="sw-fab" id="sw-fab" aria-expanded="false" aria-controls="switcher">Screens ▾</button>
+  <nav class="switcher" id="switcher" aria-label="Screen pack switcher">
+    <h1>EntryMap · screen pack</h1>
+    <div class="sw-sub">Profile, settings &amp; system states. Every row is also reachable inside the app.</div>
+    <div class="sw-group">Profile</div>
+    <a href="#profile" data-scr="scr-profile"><span class="num">28</span>Profile hub</a>
+    <a href="#saved" data-scr="scr-saved"><span class="num">29</span>Saved entrances</a>
+    <a href="#saved-empty" data-scr="scr-saved-empty"><span class="num">29</span>Saved entrances — empty</a>
+    <a href="#contributions" data-scr="scr-contrib" data-tab="scans"><span class="num">30</span>My contributions — scans</a>
+    <a href="#corrections" data-scr="scr-contrib" data-tab="corrections"><span class="num">30</span>My contributions — corrections</a>
+    <a href="#accessibility" data-scr="scr-a11y"><span class="num">31</span>Accessibility settings</a>
+    <a href="#notifications" data-scr="scr-notif"><span class="num">32</span>Notification settings</a>
+    <div class="sw-group">System states</div>
+    <a href="#correction-submitted" data-scr="scr-corr-done"><span class="num">18</span>Correction submitted</a>
+    <a href="#offline" data-scr="scr-offline"><span class="num">27</span>Offline scan saved + siblings</a>
+  </nav>
+
+  <div class="phone-wrap">
+    <div class="phone" id="phone" data-textsize="default">
+      <div class="notch"></div>
+      <div class="statusbar"><span>9:41</span>
+        <span class="sicons">
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="1" fill="#241F3A"/><rect x="4.5" y="5" width="3" height="7" rx="1" fill="#241F3A"/><rect x="9" y="2.5" width="3" height="9.5" rx="1" fill="#241F3A"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#241F3A"/></svg>
+          <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".8" y=".8" width="19" height="10.4" rx="3" stroke="#241F3A" stroke-width="1.4"/><rect x="2.6" y="2.6" width="13" height="6.8" rx="1.6" fill="#241F3A"/><path d="M21.5 4v4c1.1-.3 1.8-1 1.8-2s-.7-1.7-1.8-2z" fill="#241F3A"/></svg>
+        </span>
+      </div>
+
+      <!-- ================= 28 · PROFILE HUB ================= -->
+      <section class="screen setscreen active" id="scr-profile" aria-label="Profile">
+        <div class="screen-body">
+          <!-- Sign-in status -->
+          <div class="prof-card">
+            <div class="prof-head">
+              <div class="prof-avatar" aria-hidden="true">G</div>
+              <div style="flex:1">
+                <div class="prof-name">Guest</div>
+                <div class="prof-sub">Your choices stay on this device</div>
+              </div>
+            </div>
+            <div class="card-actions" style="margin-top:14px">
+              <button class="btn primary" id="btn-signin" style="min-height:44px">Sign in to save</button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">My needs</div>
+          <div class="prof-card">
+            <button class="prof-row" id="row-needs" aria-label="My Needs: Wheelchair, Limited grip. Edit">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.8-10-9.3C.4 8.6 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4h4.6C15.1 6.1 16.5 5 18.5 5 22 5 23.6 8.6 22 11.7 19.5 16.2 12 21 12 21z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">My Needs</span>
+                <span class="rowsub">Changes match information, not which places appear</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+            <div class="needs-chiprow" aria-hidden="true"><span class="needchip">Wheelchair</span><span class="needchip">Limited grip</span></div>
+          </div>
+
+          <div class="sectionlabel">Places &amp; contributions</div>
+          <div class="prof-card">
+            <button class="prof-row" data-go="scr-saved">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Saved entrances</span>
+                <span class="rowsub">6 saved · 1 updated since you saved it</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+            <button class="prof-row" data-go="scr-contrib" data-tab="scans">
+              <span class="rowicon" style="background:var(--marigold-wash);color:var(--marigold-ink)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">My scans</span>
+                <span class="rowsub">3 entrances scanned on-site</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+            <button class="prof-row" data-go="scr-contrib" data-tab="corrections">
+              <span class="rowicon"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">My corrections</span>
+                <span class="rowsub">3 notes · 1 in review</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+          </div>
+
+          <div class="sectionlabel">Display &amp; access</div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="10" r="3.2"/><path d="M12 21c4-4.5 7-8 7-11a7 7 0 10-14 0c0 3 3 6.5 7 11z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Location settings</span>
+                <span class="rowsub">While using · you control this in Settings</span>
+              </span>
+              <button class="toggle on" id="loc-toggle" role="switch" aria-checked="true" aria-label="Location while using"></button>
+            </div>
+            <button class="prof-row" data-go="scr-a11y" id="row-tsize">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 20L12 4l6 16M8.5 14h7"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Text size</span>
+                <span class="rowsub">Larger text never truncates a claim</span>
+              </span>
+              <span class="rowvalue" data-tsize-label>Default</span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18V4a8 8 0 010 16z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">High contrast</span>
+                <span class="rowsub">Stronger text and borders</span>
+              </span>
+              <button class="toggle" data-pref="hc" role="switch" aria-checked="false" aria-label="High contrast"></button>
+            </div>
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/><path d="M4 19h16" opacity=".55"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Reduce motion</span>
+                <span class="rowsub">Calm transitions · every state still readable</span>
+              </span>
+              <button class="toggle" data-pref="rm" role="switch" aria-checked="false" aria-label="Reduce motion"></button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">Privacy &amp; notifications</div>
+          <div class="prof-card">
+            <button class="prof-row" id="row-privacy">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Privacy</span>
+                <span class="rowsub">Faces auto-blurred · GPS stripped at upload</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+            <button class="prof-row" data-go="scr-notif">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Notifications</span>
+                <span class="rowsub" id="notif-summary">Optional · 2 of 5 on</span>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </button>
+          </div>
+
+          <div class="sectionlabel">For business owners</div>
+          <div class="prof-card owner-tease">
+            <div style="display:flex;align-items:center;gap:13px">
+              <span id="claim-illus" aria-hidden="true"></span>
+              <div>
+                <div style="font-weight:900;font-size:1.05em">Claim your door</div>
+                <div class="prof-sub" style="margin-top:3px;line-height:1.45">Get scanned, get seen. Manage the entrance details customers rely on.</div>
+              </div>
+            </div>
+            <div class="tax-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 auto;margin-top:1px" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5" stroke-linecap="round"/></svg>
+              Accessibility fixes may qualify for federal tax credits — ask your accountant.
+            </div>
+            <div class="card-actions" style="margin-top:12px">
+              <button class="btn primary" id="btn-claim" style="min-height:48px">Start a claim</button>
+            </div>
+          </div>
+          <div style="height:8px"></div>
+        </div>
+      </section>
+
+      <!-- ================= 29 · SAVED ENTRANCES ================= -->
+      <section class="screen setscreen" id="scr-saved" aria-label="Saved entrances">
+        <div class="screen-body">
+          <div class="flowhead">
+            <button class="backbtn" data-back aria-label="Back to Profile">‹</button>
+            <h2>Saved entrances</h2>
+          </div>
+          <p class="sheet-p" style="margin:0 4px 10px">Each entrance is saved on its own — a business with two doors is two rows.</p>
+          <div class="prof-card" id="saved-list" role="list"></div>
+          <p class="tabfoot">Freshness describes time, never the place. Trust pins only upgrade.</p>
+          <button class="demo-link" data-go="scr-saved-empty">Prototype: view the empty state</button>
+        </div>
+      </section>
+
+      <!-- 29 · SAVED ENTRANCES — EMPTY -->
+      <section class="screen setscreen" id="scr-saved-empty" aria-label="Saved entrances, empty">
+        <div class="screen-body">
+          <div class="flowhead">
+            <button class="backbtn" data-back aria-label="Back to Profile">‹</button>
+            <h2>Saved entrances</h2>
+          </div>
+          <div class="empty-box">
+            <span id="empty-pin" aria-hidden="true"></span>
+            <div class="e-h">No saved entrances yet</div>
+            <div class="e-p">Save an entrance from its card and we'll tell you when its information changes.</div>
+            <div class="card-actions">
+              <button class="btn primary" data-toast="Map lives in the main prototype">Find an entrance</button>
+            </div>
+          </div>
+          <button class="demo-link" data-go="scr-saved">Prototype: view the list</button>
+        </div>
+      </section>
+
+      <!-- ================= 30 · MY CONTRIBUTIONS ================= -->
+      <section class="screen setscreen" id="scr-contrib" aria-label="My contributions">
+        <div class="screen-body">
+          <div class="flowhead">
+            <button class="backbtn" data-back aria-label="Back to Profile">‹</button>
+            <h2>My contributions</h2>
+          </div>
+          <div class="seg" role="tablist" aria-label="Contribution type" style="margin-bottom:12px">
+            <button role="tab" id="tab-scans" aria-selected="true" aria-controls="pane-scans" class="sel">My scans</button>
+            <button role="tab" id="tab-corrections" aria-selected="false" aria-controls="pane-corrections">My corrections</button>
+          </div>
+          <div class="tabpane" id="pane-scans" role="tabpanel" aria-labelledby="tab-scans">
+            <div class="prof-card" id="scans-list" role="list"></div>
+            <p class="tabfoot">Faces are blurred and GPS is stripped before anything leaves your phone.</p>
+          </div>
+          <div class="tabpane" id="pane-corrections" role="tabpanel" aria-labelledby="tab-corrections" hidden>
+            <div class="prof-card" id="corr-list" role="list"></div>
+            <p class="tabfoot">A correction never erases earlier evidence — it becomes another dated source on the receipt.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 31 · ACCESSIBILITY SETTINGS ================= -->
+      <section class="screen setscreen" id="scr-a11y" aria-label="Accessibility settings">
+        <div class="screen-body">
+          <div class="flowhead">
+            <button class="backbtn" data-back aria-label="Back to Profile">‹</button>
+            <h2>Accessibility</h2>
+          </div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 20L12 4l6 16M8.5 14h7"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Text size</span>
+                <span class="rowsub" data-tsize-label>Default</span>
+              </span>
+              <span class="tsize-row" role="group" aria-label="Text size">
+                <button class="tsize-btn sel" data-tsize="default" aria-label="Default text size" aria-pressed="true">A</button>
+                <button class="tsize-btn" data-tsize="large" aria-label="Large text size" aria-pressed="false">A</button>
+                <button class="tsize-btn" data-tsize="larger" aria-label="Larger text size" aria-pressed="false">A</button>
+              </span>
+            </div>
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18V4a8 8 0 010 16z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">High contrast</span>
+                <span class="rowsub">Stronger text and borders</span>
+              </span>
+              <button class="toggle" data-pref="hc" role="switch" aria-checked="false" aria-label="High contrast"></button>
+            </div>
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/><path d="M4 19h16" opacity=".55"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Reduce motion</span>
+                <span class="rowsub wrap">Skips the pin bounce and ripple; scan results appear at once</span>
+              </span>
+              <button class="toggle" data-pref="rm" role="switch" aria-checked="false" aria-label="Reduce motion"></button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">Preview</div>
+          <div class="prof-card" style="padding:12px">
+            <div class="preview" aria-label="Preview of an entrance card with the current settings">
+              <div class="pv-label">Entrance card</div>
+              <div class="pv-name">Royal Blue Grocery</div>
+              <div class="pv-sub">Main entrance · W 3rd St</div>
+              <div class="pv-chips" id="pv-chips"></div>
+              <div class="pv-body">Step-free entry and easy-grip handles were seen in a neighbor's scan. Auto door button not yet seen — be the first to scan.</div>
+            </div>
+          </div>
+
+          <div class="a11y-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 auto;margin-top:1px" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5" stroke-linecap="round"/></svg>
+            <span>Guests keep these settings on this device. Signing in syncs them across your devices. Nothing in EntryMap relies on color alone.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 32 · NOTIFICATION SETTINGS ================= -->
+      <section class="screen setscreen" id="scr-notif" aria-label="Notification settings">
+        <div class="screen-body">
+          <div class="flowhead">
+            <button class="backbtn" data-back aria-label="Back to Profile">‹</button>
+            <h2>Notifications</h2>
+          </div>
+          <p class="notif-intro">All optional. Turn on only what helps you plan ahead.</p>
+
+          <div class="sectionlabel">Places you saved</div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Saved entrance updated</span>
+                <span class="rowsub wrap">A new scan, owner update, or correction on an entrance you saved</span>
+              </span>
+              <button class="toggle on" data-notif="saved" role="switch" aria-checked="true" aria-label="Saved entrance updated"></button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">Your contributions</div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Correction received a response</span>
+                <span class="rowsub wrap">When your note is added as a source or the owner replies</span>
+              </span>
+              <button class="toggle on" data-notif="correction" role="switch" aria-checked="true" aria-label="Correction received a response"></button>
+            </div>
+            <div class="prof-row static">
+              <span class="rowicon" style="background:var(--marigold-wash);color:var(--marigold-ink)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">A scan needs clarification</span>
+                <span class="rowsub wrap">Only when a photo of yours is unclear — one question, no deadline</span>
+              </span>
+              <button class="toggle" data-notif="scan" role="switch" aria-checked="false" aria-label="A scan needs clarification"></button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">Your business</div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon" id="notif-store-icon"></span>
+              <span class="rowmain">
+                <span class="rowlabel">Owner claim changed status</span>
+                <span class="rowsub wrap">Submitted · Business matched · Ownership review · Workspace ready</span>
+              </span>
+              <button class="toggle" data-notif="claim" role="switch" aria-checked="false" aria-label="Owner claim changed status"></button>
+            </div>
+          </div>
+
+          <div class="sectionlabel">Nearby</div>
+          <div class="prof-card">
+            <div class="prof-row static">
+              <span class="rowicon" style="background:var(--amber-wash);color:var(--amber-ink)"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+              <span class="rowmain">
+                <span class="rowlabel">Nearby entrance needs re-checking</span>
+                <span class="rowsub wrap">An occasional ask when older evidence near you could use a fresh photo</span>
+              </span>
+              <button class="toggle" data-notif="nearby" role="switch" aria-checked="false" aria-label="Nearby entrance needs re-checking"></button>
+            </div>
+          </div>
+
+          <div class="policy-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple-ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg>
+            No streaks, no guilt messages, no leaderboards.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 18 · CORRECTION SUBMITTED ================= -->
+      <section class="screen scanscreen light" id="scr-corr-done" aria-label="Correction submitted">
+        <div class="scan-body">
+          <div class="big-icon" style="border-color:var(--purple)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--purple-ink)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.9-2.8 3.2-4.3 6-4.3s5.1 1.5 6 4.3"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.3 14.6c.5-.2 1.1-.3 1.7-.3 2.2 0 4 1.2 4.7 3.4"/></svg>
+          </div>
+          <h2 class="scan-h">Thanks — we'll review your note with the community.</h2>
+          <div class="bizhead">
+            <span class="cr-icon" id="corr-biz-icon" aria-hidden="true"></span>
+            <div>
+              <div class="cr-name">DeSano Pizzeria Napoletana</div>
+              <span class="cr-sub">Main entrance · 301 Lavaca St</span>
+              <span class="cr-sub" style="color:var(--ink);font-style:italic;margin-top:3px">"The door now has a lever handle, not a knob."</span>
+            </div>
+          </div>
+          <div class="whatsnext">
+            <div class="wn-h">What happens next</div>
+            <ul class="next-list">
+              <li><span class="nl-dot"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>Your note becomes a <b>dated source</b> on this entrance's receipt — "Neighbor correction · Sep 4."</span></li>
+              <li><span class="nl-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg></span><span><b>Earlier evidence stays.</b> Nothing is erased; the receipt shows every source with its date.</span></li>
+              <li><span class="nl-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></span><span>If sources disagree, the card says <b>information differs</b> and invites a new scan. No blame, no red.</span></li>
+              <li><span class="nl-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/></svg></span><span>You'll hear back only if <b>"Correction received a response"</b> is on in Notifications.</span></li>
+            </ul>
+          </div>
+          <div class="scan-actions">
+            <button class="btn primary" data-toast="The entrance card lives in the main prototype">Back to entrance</button>
+            <button class="btn ghost" data-go="scr-contrib" data-tab="corrections">See my corrections</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 27 · OFFLINE SCAN SAVED + SIBLING STATES ================= -->
+      <section class="screen scanscreen light" id="scr-offline" aria-label="Offline scan saved and other states you control">
+        <div class="scan-body" style="padding-top:64px">
+          <h2 class="scan-h">You're still in control</h2>
+          <p class="scan-p" style="margin-top:6px">Every state has a next step. Nothing is lost, and nothing is a dead end.</p>
+          <div class="state-stack">
+            <div class="state-card primary" role="group" aria-label="Saved for later">
+              <div class="sc-top">
+                <span class="sc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 18.5h10a4 4 0 00.6-7.95A6 6 0 006.7 9.6 4.5 4.5 0 007.5 18.5z"/><path d="M12 15v-4.5M9.8 12.7 12 10.5l2.2 2.2"/></svg></span>
+                <div>
+                  <div class="sc-h">Saved for later</div>
+                  <div class="sc-p">Your scan will upload when you're back online.</div>
+                </div>
+              </div>
+              <div class="sc-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" style="flex:0 0 auto;margin-top:2px" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 018 0v2.5"/></svg>
+                <span>Your photo and draft stay encrypted on this device until they upload. The map still works from cache.</span>
+              </div>
+              <button class="btn primary" data-toast="Map lives in the main prototype">Keep exploring</button>
+            </div>
+
+            <div class="state-card" role="group" aria-label="Camera access is off">
+              <div class="sc-top">
+                <span class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg></span>
+                <div>
+                  <div class="sc-h">Camera access is off</div>
+                  <div class="sc-p">Turn it on when you're ready to scan. You can also choose an existing photo.</div>
+                </div>
+              </div>
+              <button class="btn ghost" data-toast="Prototype: opens the system Settings app">Open settings</button>
+            </div>
+
+            <div class="state-card" role="group" aria-label="Choose your area">
+              <div class="sc-top">
+                <span class="sc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="10" r="3.2"/><path d="M12 21c4-4.5 7-8 7-11a7 7 0 10-14 0c0 3 3 6.5 7 11z"/></svg></span>
+                <div>
+                  <div class="sc-h">Choose your area</div>
+                  <div class="sc-p">You can search the map without sharing your location.</div>
+                </div>
+              </div>
+              <button class="btn ghost" data-toast="Search lives in the main prototype">Search the map</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= NAV (VERBATIM) ================= -->
+      <nav class="navbar" id="navbar">
+        <button class="navbtn" id="nav-map" aria-label="Map">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M9 4L3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4zM9 4v14M15 6v14"/></svg>
+          Map
+        </button>
+        <button class="nav-scan" id="nav-scan" aria-label="Scan an entrance">
+          <span class="ring">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6E4A00" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/></svg>
+          </span>
+          Scan
+        </button>
+        <button class="navbtn on" id="nav-profile" aria-label="Profile">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.4-3.4 4.4-5 8-5s6.6 1.6 8 5"/></svg>
+          Profile
+        </button>
+      </nav>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div id="sr-announce" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+    </div>
+  </div>
+</div>
+<div class="stage-caption"><b>EntryMap</b> · profile, settings &amp; system states — pick a screen on the left, or navigate inside the app</div>
+
+<script>
+'use strict';
+/* ===================== glyphs + pins (VERBATIM from phone-app-prototype.html) ===================== */
+const GL = {
+  person:'<path d="M12 5.2a2.7 2.7 0 110 5.4 2.7 2.7 0 010-5.4zM6.7 18.2c.7-3 2.8-4.6 5.3-4.6s4.6 1.6 5.3 4.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>',
+  store:'<path d="M5.5 10.5v7h13v-7M4 7l1.6-2.8h12.8L20 7c0 1.3-.9 2.3-2.1 2.3-1 0-1.9-.7-2.1-1.7-.2 1-1.1 1.7-2.1 1.7h-3.4c-1 0-1.9-.7-2.1-1.7-.2 1-1.1 1.7-2.1 1.7C4.9 9.3 4 8.3 4 7zM10 17.5v-4h4v4" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+  camera:'<path d="M3 8.5A2.5 2.5 0 015.5 6h1.6l1.2-1.8c.3-.45.8-.7 1.3-.7h4.8c.5 0 1 .25 1.3.7L16.9 6h1.6A2.5 2.5 0 0121 8.5v8A2.5 2.5 0 0118.5 19h-13A2.5 2.5 0 013 16.5v-8z"/><circle cx="12" cy="12.4" r="3.4"/>',
+  pencil:'<path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+  clock:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+};
+const TEAR = 'M18 41.5C13.9 34.7 5.5 27.2 5.5 15.8a12.5 12.5 0 1125 0C30.5 27.2 22.1 34.7 18 41.5Z';
+function pinSVG(tier, size){
+  if(tier==='est'){
+    const s = size||26;
+    return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+      <path d="${TEAR}" fill="#fff" stroke="#5B8DEF" stroke-width="2.4" stroke-dasharray="4 3" stroke-linejoin="round"/>
+      <text x="18" y="21" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="14" fill="#1E3A8A">i</text>
+    </svg>`;
+  }
+  if(tier==='scan'){
+    const s = size||30;
+    return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+      <path d="${TEAR}" fill="#F0A32F" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="18" cy="15.8" r="10.2" fill="none" stroke="#fff" stroke-width="1.9" stroke-dasharray="8 5" stroke-linecap="round"/>
+      <g transform="translate(8.4 6.2) scale(.8)">${GL.person}</g>
+    </svg>`;
+  }
+  /* owner — check badge fused into the teardrop's shoulder */
+  const s = size||36;
+  return `<svg width="${s}" height="${Math.round(s*1.22)}" viewBox="0 0 36 44" aria-hidden="true">
+    <path d="${TEAR}" fill="#7053C5" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <g transform="translate(6.6 4.8) scale(.95)">${GL.store}</g>
+    <circle cx="28.5" cy="26.5" r="6.4" fill="#7053C5" stroke="#fff" stroke-width="2"/>
+    <path d="M25.7 26.5l2 2 3.5-3.9" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+function tierChip(t){
+  if(t==='scan') return `<span class="tierchip scan"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">${GL.person.replaceAll('#fff','#6E4A00')}</svg> Scanned on-site</span>`;
+  if(t==='owner') return `<span class="tierchip owner"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">${GL.store.replaceAll('#fff','#4B2E9E')}</svg> Owner-confirmed</span>`;
+  return `<span class="tierchip est">Estimated</span>`;
+}
+function iconSVG(glyph,color){
+  return `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${glyph.replaceAll('#fff',color).replaceAll('stroke="'+color+'" stroke-width="2"','stroke-width="2"')}</svg>`
+    .replaceAll('fill="none" stroke="none"','fill="none"');
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('on'),2800);
+}
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===================== PACK ===================== */
+const TIER_NAME={est:'Estimated',scan:'Scanned on-site',owner:'Owner-confirmed'};
+const MATCH_NAME={good:'Good match',partial:'Partial match',unknown:'Not yet seen'};
+const clock=(c)=>`<svg width="12" height="12" viewBox="0 0 24 24" style="color:${c||'currentColor'}" aria-hidden="true">${GL.clock}</svg>`;
+
+/* ---- 29 · saved entrances (pilot doors from the prototype's dataset; freshness worded about time only) ---- */
+const SAVED=[
+  {name:'DeSano Pizzeria Napoletana',entr:'Main entrance · Lavaca St',tier:'scan',match:'good',fresh:'Seen 3 weeks ago',aged:false,dist:'0.2 mi',updated:'New scan since you saved it'},
+  {name:'Royal Blue Grocery',entr:'Main entrance · W 3rd St',tier:'scan',match:'good',fresh:'Fresh today',aged:false,dist:'0.3 mi'},
+  {name:'Sweetgreen',entr:'W 2nd St entrance',tier:'scan',match:'good',fresh:'Seen 2 months ago',aged:false,dist:'0.4 mi'},
+  {name:'Which Wich',entr:'Main entrance · W 3rd St',tier:'scan',match:'partial',fresh:'Scanned 8 months ago',aged:true,dist:'0.3 mi'},
+  {name:'Sugarwolf Bakery',entr:'Street entrance · Colorado St',tier:'est',match:'unknown',fresh:'Estimated from street imagery · 2023',aged:true,dist:'0.5 mi'},
+  {name:'The Ashton',entr:'Lobby entrance · Colorado St (example)',tier:'owner',match:'good',fresh:'Owner update · Tuesday',aged:false,dist:'0.6 mi'}
+];
+function savedRow(p){
+  const label=[p.name,p.entr,TIER_NAME[p.tier],MATCH_NAME[p.match],p.fresh,p.dist+(p.updated?', '+p.updated:'')].join(', ');
+  return `<button class="prof-row saved-row" role="listitem" aria-label="${esc(label)}" data-toast="The entrance card lives in the main prototype">
+    <span class="rowicon">${pinSVG(p.tier,p.tier==='est'?24:28)}</span>
+    <span class="rowmain" aria-hidden="true">
+      <span class="rowlabel">${esc(p.name)}${p.updated?`<span class="upd-badge">Updated</span>`:''}</span>
+      <span class="rowsub">${esc(p.entr)}${p.updated?' · '+esc(p.updated):''}</span>
+      <span class="rowmeta">
+        <span class="matchchip ${p.match}">${MATCH_NAME[p.match]}</span>
+        <span class="fresh ${p.aged?'aged':''}">${clock(p.aged?'var(--amber-ink)':'var(--sub)')} ${esc(p.fresh)}</span>
+        <span class="dist">${esc(p.dist)}</span>
+      </span>
+    </span>
+    <span class="chev" aria-hidden="true">›</span>
+  </button>`;
+}
+document.getElementById('saved-list').innerHTML=SAVED.map(savedRow).join('');
+document.getElementById('empty-pin').innerHTML=pinSVG('est',44);
+
+/* ---- 30 · my contributions ---- */
+const SCANS=[
+  {name:'DeSano Pizzeria Napoletana',date:'Tuesday, Sep 1',faces:2},
+  {name:'Royal Blue Grocery',date:'Aug 27',faces:0},
+  {name:'Bill’s Oyster',date:'Aug 14',faces:1}
+];
+function scanRow(s){
+  const priv = s.faces? `${s.faces} face${s.faces>1?'s':''} blurred before upload` : 'No faces detected · GPS stripped';
+  const label=`${s.name}, scanned ${s.date}, earned Scanned on-site, ${priv}`;
+  return `<button class="prof-row contrib-row" role="listitem" aria-label="${esc(label)}" data-toast="The receipt lives in the main prototype">
+    <span class="rowicon" style="background:var(--marigold-wash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--marigold-ink)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GL.camera}</svg></span>
+    <span class="rowmain" aria-hidden="true">
+      <span class="rowlabel">${esc(s.name)}</span>
+      <span class="rowsub">Scanned ${esc(s.date)} · your scan</span>
+      <span>${tierChip('scan')}</span><br>
+      <span class="priv-line"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/></svg> ${priv}</span>
+    </span>
+    <span class="chev" aria-hidden="true">›</span>
+  </button>`;
+}
+const CORRECTIONS=[
+  {name:'DeSano Pizzeria Napoletana',what:'Entrance details',note:'The door now has a lever handle, not a knob.',date:'Sep 4',status:'review',statusLabel:'In review',sub:'Reviewed with the community'},
+  {name:'Royal Blue Grocery',what:'Auto door button',note:'There is a push-plate opener on the left post.',date:'Aug 21',status:'added',statusLabel:'Added as a source',sub:'On the receipt as "Neighbor correction · Aug 21"'},
+  {name:'Jo’s Coffee (Downtown)',what:'Which entrance',note:'A side ramp on the W 2nd St side leads to the door.',date:'Aug 12',status:'photo',statusLabel:'Needs a photo',sub:'Add a photo so neighbors can see it'}
+];
+function corrRow(c){
+  const label=`${c.name}, ${c.what}, ${c.note}, ${c.date}, ${c.statusLabel}. ${c.sub}`;
+  return `<button class="prof-row contrib-row" role="listitem" aria-label="${esc(label)}" data-toast="${c.status==='photo'?'Prototype: opens Add a photo':'The receipt lives in the main prototype'}">
+    <span class="rowicon"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">${GL.pencil}</svg></span>
+    <span class="rowmain" aria-hidden="true">
+      <span class="rowlabel">${esc(c.name)}</span>
+      <span class="rowsub">${esc(c.what)} · ${esc(c.date)}</span>
+      <span class="rowsub quote">“${esc(c.note)}”</span>
+      <span class="rowsub" style="margin-top:4px">${esc(c.sub)}</span>
+    </span>
+    <span class="status-chip ${c.status}" aria-hidden="true">${esc(c.statusLabel)}</span>
+  </button>`;
+}
+document.getElementById('scans-list').innerHTML=SCANS.map(scanRow).join('');
+document.getElementById('corr-list').innerHTML=CORRECTIONS.map(corrRow).join('');
+function setTab(name){
+  const scans=name!=='corrections';
+  document.getElementById('tab-scans').classList.toggle('sel',scans);
+  document.getElementById('tab-scans').setAttribute('aria-selected',scans);
+  document.getElementById('tab-corrections').classList.toggle('sel',!scans);
+  document.getElementById('tab-corrections').setAttribute('aria-selected',!scans);
+  document.getElementById('pane-scans').hidden=!scans;
+  document.getElementById('pane-corrections').hidden=scans;
+}
+document.getElementById('tab-scans').addEventListener('click',()=>{setTab('scans');try{history.replaceState(null,'','#contributions');}catch(e){}markSwitcher('#contributions');});
+document.getElementById('tab-corrections').addEventListener('click',()=>{setTab('corrections');try{history.replaceState(null,'','#corrections');}catch(e){}markSwitcher('#corrections');});
+/* arrow keys move between tabs (WAI-ARIA tabs pattern) */
+document.querySelectorAll('[role=tab]').forEach(t=>t.addEventListener('keydown',e=>{
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  const other=t.id==='tab-scans'?'tab-corrections':'tab-scans';
+  document.getElementById(other).click(); document.getElementById(other).focus();
+}));
+
+/* ---- static glyph slots ---- */
+document.getElementById('claim-illus').innerHTML=pinSVG('owner',40);
+document.getElementById('corr-biz-icon').innerHTML=iconSVG(GL.store,'var(--purple-ink)');
+document.getElementById('notif-store-icon').innerHTML=iconSVG(GL.store,'var(--purple-ink)').replace('width="20" height="20"','width="17" height="17"');
+document.getElementById('pv-chips').innerHTML=`${tierChip('scan')}<span class="matchchip">Good match</span><span class="fresh">${clock('var(--amber-ink)')} Scanned 8 months ago</span>`;
+
+/* ===================== preferences (shared by the hub and screen 31) ===================== */
+const phone=document.getElementById('phone');
+const TSIZE_LABEL={default:'Default',large:'Large',larger:'Larger'};
+const prefs={tsize:'default',hc:false,rm:REDUCED};
+function announce(msg){const el=document.getElementById('sr-announce');el.textContent='';setTimeout(()=>{el.textContent=msg;},30);}
+function applyPrefs(){
+  phone.dataset.textsize=prefs.tsize;
+  phone.classList.toggle('hc',prefs.hc);
+  phone.classList.toggle('reduced',prefs.rm);
+  document.querySelectorAll('[data-tsize-label]').forEach(el=>el.textContent=TSIZE_LABEL[prefs.tsize]);
+  document.querySelectorAll('.tsize-btn').forEach(b=>{const on=b.dataset.tsize===prefs.tsize;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on);});
+  document.querySelectorAll('[data-pref]').forEach(t=>{const on=!!prefs[t.dataset.pref];t.classList.toggle('on',on);t.setAttribute('aria-checked',on);});
+}
+document.querySelectorAll('.tsize-btn').forEach(b=>b.addEventListener('click',()=>{
+  prefs.tsize=b.dataset.tsize; applyPrefs(); announce('Text size '+TSIZE_LABEL[prefs.tsize]);
+}));
+document.querySelectorAll('[data-pref]').forEach(t=>t.addEventListener('click',()=>{
+  const k=t.dataset.pref; prefs[k]=!prefs[k]; applyPrefs();
+  announce((k==='hc'?'High contrast ':'Reduce motion ')+(prefs[k]?'on':'off'));
+}));
+applyPrefs();
+
+/* location toggle (VERBATIM behaviour) */
+const loct=document.getElementById('loc-toggle');
+loct.addEventListener('click',()=>{
+  const on=!loct.classList.contains('on');
+  loct.classList.toggle('on',on); loct.setAttribute('aria-checked',on);
+  toast(on?'Location on while using':'No problem — search the map instead');
+});
+
+/* notification toggles — five, grouped; the hub shows the count */
+const notif={saved:true,correction:true,scan:false,claim:false,nearby:false};
+function notifSummary(){
+  const n=Object.values(notif).filter(Boolean).length;
+  document.getElementById('notif-summary').textContent=n? `Optional · ${n} of 5 on` : 'Optional · all off';
+}
+document.querySelectorAll('[data-notif]').forEach(t=>t.addEventListener('click',()=>{
+  const k=t.dataset.notif; notif[k]=!notif[k];
+  t.classList.toggle('on',notif[k]); t.setAttribute('aria-checked',notif[k]);
+  notifSummary();
+}));
+notifSummary();
+
+/* ===================== navigation ===================== */
+const HASH={ 'scr-profile':'#profile','scr-saved':'#saved','scr-saved-empty':'#saved-empty','scr-contrib':'#contributions',
+  'scr-a11y':'#accessibility','scr-notif':'#notifications','scr-corr-done':'#correction-submitted','scr-offline':'#offline' };
+const MAP_ON={ 'scr-corr-done':true,'scr-offline':true };
+const stack=[];
+let current='scr-profile';
+function showScreen(id, tab){
+  if(id==='scr-contrib') setTab(tab||'scans');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+  document.getElementById('nav-map').classList.toggle('on',!!MAP_ON[id]);
+  document.getElementById('nav-profile').classList.toggle('on',!MAP_ON[id]);
+  current=id;
+  const h = id==='scr-contrib' && tab==='corrections' ? '#corrections' : HASH[id];
+  /* replaceState is refused in some sandboxed viewers (data: snapshots) — the app must still navigate */
+  try{ if(location.hash!==h) history.replaceState(null,'',h); }catch(e){}
+  markSwitcher(h);
+  const scr=document.getElementById(id);
+  const body=scr.querySelector('.screen-body,.scan-body'); if(body) body.scrollTop=0;
+  announce(scr.getAttribute('aria-label'));
+}
+function go(id,tab){ if(id!==current){ stack.push(current); } showScreen(id,tab); }
+function back(){ const prev=stack.pop()||'scr-profile'; showScreen(prev); }
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go,b.dataset.tab)));
+document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',back));
+document.querySelectorAll('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
+document.getElementById('btn-signin').addEventListener('click',()=>toast('Prototype: sign-in comes later — guests are first-class'));
+document.getElementById('btn-claim').addEventListener('click',()=>toast('The claim flow lives in the main prototype'));
+document.getElementById('row-needs').addEventListener('click',()=>toast('The My Needs sheet lives in the main prototype'));
+document.getElementById('row-privacy').addEventListener('click',()=>toast('Faces auto-blurred · GPS stripped at upload'));
+document.getElementById('nav-map').addEventListener('click',()=>toast('Map lives in the main prototype'));
+document.getElementById('nav-scan').addEventListener('click',()=>toast('Scan flow lives in the main prototype'));
+document.getElementById('nav-profile').addEventListener('click',()=>{stack.length=0;showScreen('scr-profile');});
+
+/* switcher + hash routing */
+function routeFromHash(){
+  const h=location.hash||'#profile';
+  const a=document.querySelector(`.switcher a[href="${h}"]`);
+  if(a){ showScreen(a.dataset.scr,a.dataset.tab); }
+}
+function markSwitcher(hash){
+  const h=hash||location.hash||'#profile';
+  document.querySelectorAll('.switcher a').forEach(a=>{
+    const on=a.getAttribute('href')===h;
+    a.classList.toggle('on',on); if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+  });
+}
+document.querySelectorAll('.switcher a').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault(); stack.length=0; showScreen(a.dataset.scr,a.dataset.tab);
+  document.getElementById('switcher').classList.remove('open');
+  document.getElementById('sw-fab').setAttribute('aria-expanded','false');
+}));
+addEventListener('hashchange',routeFromHash);
+const fab=document.getElementById('sw-fab');
+fab.addEventListener('click',()=>{
+  const open=!document.getElementById('switcher').classList.contains('open');
+  document.getElementById('switcher').classList.toggle('open',open);
+  fab.setAttribute('aria-expanded',open);
+});
+
+/* ===================== boot (fitPhone VERBATIM) ===================== */
+function fitPhone(){
+  const wrap=document.querySelector('.phone-wrap');
+  if(matchMedia('(max-width:767px)').matches){
+    wrap.style.transform=''; wrap.style.marginBottom=''; wrap.style.marginTop='';
+    return;
+  }
+  const avail=innerHeight-80, availW=innerWidth-24;
+  const s=Math.min(1, avail/866, availW/412);
+  wrap.style.transform = s<1 ? `scale(${s})` : '';
+  wrap.style.marginBottom = s<1 ? (-(866*(1-s))/2+8)+'px' : '';
+  wrap.style.marginTop = s<1 ? (-(866*(1-s))/2)+'px' : '';
+}
+fitPhone();
+routeFromHash();
+addEventListener('resize',fitPhone);
+</script>
+</body>
+</html>
