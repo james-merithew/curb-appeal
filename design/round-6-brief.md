@@ -171,3 +171,43 @@ screens. The largest text size clips nothing on any of 26 screens. And no Round 
 behaviour was removed by Rounds 2 to 4 — which is exactly why the Reduce Motion defect matters:
 the worst problem in the build is invisible to per-round review because it lives in a seam rather
 than in a diff.
+
+---
+
+## Everything reads purple, because lavender is the default surface
+
+The product owner's screenshot of `claim-confirm` makes it plain: the screen body, the field
+group containers, the selected radio and checkbox rows, and the error box are all lavender, and
+only the inputs themselves are white. The effect is a purple screen with white slots in it.
+
+Measured against the board:
+
+| | Board | Build |
+|---|---|---|
+| Screen body behind cards | `#FDFDFD` — effectively white | `--ground: #F2EEFF` lavender |
+| Map above an open sheet | `#C7C6D5` | our scrim computes to `#9A97AC` |
+
+**Two separate mistakes, both mine to own.**
+
+**The body should be near-white.** `lavender100` is a real token in the approved library, but the
+boards use it as an *accent wash*, not as the default surface. Round 4 mapped `--ground` onto it
+and every screen inherited a purple cast. Make the default body near-white; use lavender only
+where the board actually uses it, which is a selected chip, a quiet wash behind a note, and the
+faint cool tint of the map.
+
+**The scrim is roughly twice as heavy as the board's.** Ours is 42% of deep indigo, which over a
+near-white map computes to `#9A97AC`. The board measures `#C7C6D5`, which is about a 20% veil.
+The interaction spec is stricter still: a 7% veil, and only at the full sheet height. Take the
+spec's number, and stop veiling at the peek and half stops entirely.
+
+**Selection states should not fill a whole row with lavender.** The board's selected control is a
+filled violet disc with a white tick plus a violet border on an otherwise white row. Ours tints
+the entire row, which is what makes a form of five choices read as a block of purple.
+
+## Possible second defect in the same screenshot
+
+The screenshot shows the screen doubled: two status bars, two back chevrons, and a ghosted copy
+of the content offset to the left. That is either a mid-transition capture of the new outgoing
+screen movement, which would be harmless, or an outgoing screen that is never removed, which
+would be a real defect. Reproduce it before deciding, and if it is real it outranks everything in
+this section.
