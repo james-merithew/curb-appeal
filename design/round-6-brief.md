@@ -117,3 +117,57 @@ areas, the block-to-block variety — and change only the temperature and the va
 **Re-measure every pin against the new ground.** A near-white ground raises the contrast floor for
 the estimated pin's outline, which is the marker with no halo. Round 4's table was measured on the
 warm ground and does not carry over. Print the new table.
+
+---
+
+## From the QA sweep and change audit: the defect that outranks everything else here
+
+**Reduce Motion breaks focus into every sheet in the app.** Measured: 0 of 12 failures with the
+setting off, **12 of 12 with it on** — the entrance card, filters, needs and the trust legend.
+Focus is left on the document body.
+
+The mechanism is a seam, which is why four rounds of per-round verification missed it. Both
+reduced-motion blocks force `transition-duration` to `.01ms` and never touch `transition-delay`.
+The sheet's stale-transform guard is expressed *as* a delay: `visibility 0s var(--dur-fast)`. So
+the subtree is still `visibility:hidden` when the fixed 40ms focus timer fires, `focus()` silently
+no-ops, and nothing retries. One round owned the motion, another owned the focus, neither owned
+both.
+
+For modal sheets it is worse: all 26 screens are inert, so a screen-reader user is parked on the
+body with no announcement and no way back. The operating system's own setting triggers it, so a
+user never has to open our settings to hit it.
+
+On a product for disabled people, turning on the accessibility setting breaks the accessibility
+behaviour. Fix this first, and fix it by making the reduced-motion path a genuine replacement
+rather than a shortening — which is separately already required — and by making the focus move
+wait on readiness rather than on a fixed timer.
+
+## Controls that report state they do not have
+
+- **Open now** and **Distance** are wired to nothing. The filter function reads three inputs and
+  there is no state variable for either. `Open now` is a `role="switch"` reporting
+  `aria-checked="true"` while changing no result. That is a lie told to a screen reader.
+- **7 days** and **30 days** produce identical results, 12 places each.
+- Dragging the card **up** while it is already full collapses it to peek, because a tap-cycle
+  modulo wrap is applied to a directional gesture.
+- The claim form submits with no email and no phone, then says "We'll email you."
+
+## Two round reports were materially false, in the flattering direction
+
+Spot-checked five claims from previous rounds. The heaviest font weight is on **28** sites, not
+the 21 reported. Hand-drawn icons number **27**, not the four reported. Pin-tip accuracy checked
+out exactly. The pure-ASCII property held for four rounds and **broke after Round 4** — nine
+bytes, three literal glyphs inside JavaScript string comparisons.
+
+Treat round self-reports as claims to verify, not as evidence. Two of five were wrong and both
+erred toward success.
+
+## What survived deliberate attack, and must not be damaged
+
+The owner face-flag gate is genuinely solid: an ungated route into the review screen exists via
+Edit entrance, and the publish path re-checks independently, bounces back and names the offending
+photo. No injection anywhere. Eighteen interleaved navigation taps never produced two active
+screens. The largest text size clips nothing on any of 26 screens. And no Round 1 accessibility
+behaviour was removed by Rounds 2 to 4 — which is exactly why the Reduce Motion defect matters:
+the worst problem in the build is invisible to per-round review because it lives in a seam rather
+than in a diff.
