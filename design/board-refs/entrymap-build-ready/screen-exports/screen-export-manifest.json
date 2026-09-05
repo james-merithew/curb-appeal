@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "method": "Pixel-exact crops from immutable approved boards; no resampling or enhancement.",
+  "sourceCanvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "count": 25,
+  "screens": [
+    {
+      "id": "onboarding-welcome",
+      "kind": "screen",
+      "path": "screen-exports/png/onboarding-welcome.png",
+      "source": "01-onboarding-and-profile.png",
+      "crop": {
+        "x": 151,
+        "y": 100,
+        "width": 287,
+        "height": 650
+      },
+      "width": 287,
+      "height": 650,
+      "sha256": "9D43E62E3FCE9A86B0D6E26359814058892FB694BF1418EF5E49CE7BEA921D91"
+    },
+    {
+      "id": "onboarding-location",
+      "kind": "screen",
+      "path": "screen-exports/png/onboarding-location.png",
+      "source": "01-onboarding-and-profile.png",
+      "crop": {
+        "x": 519,
+        "y": 100,
+        "width": 294,
+        "height": 650
+      },
+      "width": 294,
+      "height": 650,
+      "sha256": "658B3245F14B9272503E4EF6D67BFA25C50CA2EEBB856D7EA7FF7F46BA3D4E10"
+    },
+    {
+      "id": "onboarding-needs",
+      "kind": "screen",
+      "path": "screen-exports/png/onboarding-needs.png",
+      "source": "01-onboarding-and-profile.png",
+      "crop": {
+        "x": 848,
+        "y": 100,
+        "width": 292,
+        "height": 650
+      },
+      "width": 292,
+      "height": 650,
+      "sha256": "B35AA6D42F681BD55E9FD447B560AC1C7DB08923C596BBBDC3314EFB8F787780"
+    },
+    {
+      "id": "profile-public",
+      "kind": "screen",
+      "path": "screen-exports/png/profile-public.png",
+      "source": "01-onboarding-and-profile.png",
+      "crop": {
+        "x": 1232,
+        "y": 100,
+        "width": 286,
+        "height": 650
+      },
+      "width": 286,
+      "height": 650,
+      "sha256": "03F8DE65213D2CC80B1B5631618DAC204D2A4648F8CC9524B2E1D832FCE3FCDF"
+    },
+    {
+      "id": "map-default",
+      "kind": "screen",
+      "path": "screen-exports/png/map-default.png",
+      "source": "02-map-filters-and-evidence.png",
+      "crop": {
+        "x": 49,
+        "y": 106,
+        "width": 322,
+        "height": 670
+      },
+      "width": 322,
+      "height": 670,
+      "sha256": "B06D49BC5B33BFC0F22BD3646F9076505D157DC35B662255EE05E43BC8D15698"
+    },
+    {
+      "id": "map-filters",
+      "kind": "sheet",
+      "path": "screen-exports/png/map-filters.png",
+      "source": "02-map-filters-and-evidence.png",
+      "crop": {
+        "x": 405,
+        "y": 106,
+        "width": 325,
+        "height": 670
+      },
+      "width": 325,
+      "height": 670,
+      "sha256": "1EEC2B5775BA4C5E0BF60A262F300BF3842AAC3B030997873F39406CE45D47A2"
+    },
+    {
+      "id": "map-filtered-results",
+      "kind": "screen",
+      "path": "screen-exports/png/map-filtered-results.png",
+      "source": "02-map-filters-and-evidence.png",
+      "crop": {
+        "x": 754,
+        "y": 106,
+        "width": 325,
+        "height": 670
+      },
+      "width": 325,
+      "height": 670,
+      "sha256": "CE0D573B66101CC242486FD3674D0E35D0989C640AC80153EC151B4F18FF67D1"
+    },
+    {
+      "id": "business-evidence",
+      "kind": "sheet",
+      "path": "screen-exports/png/business-evidence.png",
+      "source": "02-map-filters-and-evidence.png",
+      "crop": {
+        "x": 1111,
+        "y": 106,
+        "width": 325,
+        "height": 670
+      },
+      "width": 325,
+      "height": 670,
+      "sha256": "3681D82C2C845201177B18E7BD9ADAB26A34B97F4E1188AFEACA14612A353464"
+    },
+    {
+      "id": "evidence-receipt",
+      "kind": "receipt",
+      "path": "screen-exports/png/evidence-receipt.png",
+      "source": "02-map-filters-and-evidence.png",
+      "crop": {
+        "x": 1430,
+        "y": 471,
+        "width": 231,
+        "height": 279
+      },
+      "width": 231,
+      "height": 279,
+      "sha256": "E5FAA616CE4A8C7012CD7BA06BE39C714618891172E6F055F6681B31FC0DF916"
+    },
+    {
+      "id": "scan-primer",
+      "kind": "screen",
+      "path": "screen-exports/png/scan-primer.png",
+      "source": "03-community-scan-flow.png",
+      "crop": {
+        "x": 47,
+        "y": 134,
+        "width": 365,
+        "height": 735
+      },
+      "width": 365,
+      "height": 735,
+      "sha256": "D722268F8AAE6C0947146FADE29179454BAF7A915813C168F528F51C24C1CD17"
+    },
+    {
+      "id": "scan-camera",
+      "kind": "screen",
+      "path": "screen-exports/png/scan-camera.png",
+      "source": "03-community-scan-flow.png",
+      "crop": {
+        "x": 447,
+        "y": 134,
+        "width": 365,
+        "height": 735
+      },
+      "width": 365,
+      "height": 735,
+      "sha256": "666E0E6542FE23742E6016877850CF91559CC28F9A94B276C69E6F9DC094976E"
+    },
+    {
+      "id": "scan-processing",
+      "kind": "state",
+      "path": "screen-exports/png/scan-processing.png",
+      "source": "03-community-scan-flow.png",
+      "crop": {
+        "x": 870,
+        "y": 134,
+        "width": 336,
+        "height": 735
+      },
+      "width": 336,
+      "height": 735,
+      "sha256": "1B016421EFAC41DDE5EF416769603F3DD59EB6A3847E3DFC63DDEE95A273D461"
+    },
+    {
+      "id": "scan-published",
+      "kind": "sheet",
+      "path": "screen-exports/png/scan-published.png",
+      "source": "03-community-scan-flow.png",
+      "crop": {
+        "x": 1219,
+        "y": 134,
+        "width": 388,
+        "height": 770
+      },
+      "width": 388,
+      "height": 770,
+      "sha256": "40B6647DE7AE895FC464A6B6050DD077C25DAC8A92C45C1B7E0A0B6EA54D0C6A"
+    },
+    {
+      "id": "map-empty-area",
+      "kind": "state",
+      "path": "screen-exports/png/map-empty-area.png",
+      "source": "04-community-and-system-states.png",
+      "crop": {
+        "x": 41,
+        "y": 134,
+        "width": 374,
+        "height": 733
+      },
+      "width": 374,
+      "height": 733,
+      "sha256": "DF09550D3979F93730C4718DEB5A1B749D4D3DB5EFE1E4040B071839E4854379"
+    },
+    {
+      "id": "correction-form",
+      "kind": "screen",
+      "path": "screen-exports/png/correction-form.png",
+      "source": "04-community-and-system-states.png",
+      "crop": {
+        "x": 439,
+        "y": 134,
+        "width": 377,
+        "height": 733
+      },
+      "width": 377,
+      "height": 733,
+      "sha256": "5CBAFD0C650D1B3B52B0CD2C6469CB0FBD1A657E08884E83AC2A7D7648508010"
+    },
+    {
+      "id": "evidence-recheck",
+      "kind": "sheet",
+      "path": "screen-exports/png/evidence-recheck.png",
+      "source": "04-community-and-system-states.png",
+      "crop": {
+        "x": 829,
+        "y": 134,
+        "width": 378,
+        "height": 733
+      },
+      "width": 378,
+      "height": 733,
+      "sha256": "F5E93D9F2779E768D9936B124EB2C148F30533A5141002ECA1E873E561BBB622"
+    },
+    {
+      "id": "system-controls",
+      "kind": "state",
+      "path": "screen-exports/png/system-controls.png",
+      "source": "04-community-and-system-states.png",
+      "crop": {
+        "x": 1222,
+        "y": 134,
+        "width": 377,
+        "height": 733
+      },
+      "width": 377,
+      "height": 733,
+      "sha256": "2C9021F8C24C683F215C9EB081FDBF0DA49BDFAFF3B70698350566B6D1DAAE0D"
+    },
+    {
+      "id": "owner-claim-entry",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-claim-entry.png",
+      "source": "05-owner-claim-flow.png",
+      "crop": {
+        "x": 49,
+        "y": 55,
+        "width": 372,
+        "height": 714
+      },
+      "width": 372,
+      "height": 714,
+      "sha256": "798B6D57BF2AADAB11FDA8228A1AF7C8E3BBC6700BC72F061963D36382C4E945"
+    },
+    {
+      "id": "owner-find-business",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-find-business.png",
+      "source": "05-owner-claim-flow.png",
+      "crop": {
+        "x": 444,
+        "y": 55,
+        "width": 377,
+        "height": 714
+      },
+      "width": 377,
+      "height": 714,
+      "sha256": "77398AB7D65402E8D802520C55BD65A7D06CB202054B05261B39275C98D9E321"
+    },
+    {
+      "id": "owner-confirm-ownership",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-confirm-ownership.png",
+      "source": "05-owner-claim-flow.png",
+      "crop": {
+        "x": 839,
+        "y": 55,
+        "width": 377,
+        "height": 714
+      },
+      "width": 377,
+      "height": 714,
+      "sha256": "54A0C8B9F4099CB3D199DBCE392A3D97CF88A01F00EC092688ABC50BDDCB8185"
+    },
+    {
+      "id": "owner-claim-submitted",
+      "kind": "state",
+      "path": "screen-exports/png/owner-claim-submitted.png",
+      "source": "05-owner-claim-flow.png",
+      "crop": {
+        "x": 1234,
+        "y": 55,
+        "width": 375,
+        "height": 714
+      },
+      "width": 375,
+      "height": 714,
+      "sha256": "27C66E14B91C410572651BB91AB59AE89A65B799AE874FC7AB2E4C8DB2474359"
+    },
+    {
+      "id": "owner-workspace",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-workspace.png",
+      "source": "06-owner-workspace.png",
+      "crop": {
+        "x": 154,
+        "y": 94,
+        "width": 335,
+        "height": 792
+      },
+      "width": 335,
+      "height": 792,
+      "sha256": "8595CCA0FF9AC6F1BBA7F555AAA1929486D04B180C919DF276976F497B617D80"
+    },
+    {
+      "id": "owner-edit-entrance",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-edit-entrance.png",
+      "source": "06-owner-workspace.png",
+      "crop": {
+        "x": 498,
+        "y": 94,
+        "width": 337,
+        "height": 792
+      },
+      "width": 337,
+      "height": 792,
+      "sha256": "2534A4CB4271999802564062A355BED0F8B57CAB9F71143BC400905052FA4382"
+    },
+    {
+      "id": "owner-photos",
+      "kind": "screen",
+      "path": "screen-exports/png/owner-photos.png",
+      "source": "06-owner-workspace.png",
+      "crop": {
+        "x": 843,
+        "y": 94,
+        "width": 337,
+        "height": 792
+      },
+      "width": 337,
+      "height": 792,
+      "sha256": "D6FF722466CB160EEE24707E0BFDA696B5673785BCEA1B16B1EB25761E01CE1F"
+    },
+    {
+      "id": "owner-update-receipt",
+      "kind": "receipt",
+      "path": "screen-exports/png/owner-update-receipt.png",
+      "source": "06-owner-workspace.png",
+      "crop": {
+        "x": 1187,
+        "y": 94,
+        "width": 342,
+        "height": 792
+      },
+      "width": 342,
+      "height": 792,
+      "sha256": "D95AC949EBD0A9E40D1FDBC026834D94420060CBAB45F2531DA644F7358170CA"
+    }
+  ]
+}

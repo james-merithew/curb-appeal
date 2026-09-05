@@ -1,0 +1,1886 @@
+{
+  "generated": "2026-09-05T22:52:01.2405164Z",
+  "count": 235,
+  "exports": [
+    {
+      "category": "pins",
+      "id": "estimated",
+      "size": "48px",
+      "width": 44,
+      "height": 48,
+      "png": "png/pins/estimated-48px.png"
+    },
+    {
+      "category": "pins",
+      "id": "estimated",
+      "size": "72px",
+      "width": 66,
+      "height": 72,
+      "png": "png/pins/estimated-72px.png"
+    },
+    {
+      "category": "pins",
+      "id": "estimated",
+      "size": "96px",
+      "width": 89,
+      "height": 96,
+      "png": "png/pins/estimated-96px.png"
+    },
+    {
+      "category": "pins",
+      "id": "scanned-on-site",
+      "size": "48px",
+      "width": 44,
+      "height": 48,
+      "png": "png/pins/scanned-on-site-48px.png"
+    },
+    {
+      "category": "pins",
+      "id": "scanned-on-site",
+      "size": "72px",
+      "width": 66,
+      "height": 72,
+      "png": "png/pins/scanned-on-site-72px.png"
+    },
+    {
+      "category": "pins",
+      "id": "scanned-on-site",
+      "size": "96px",
+      "width": 89,
+      "height": 96,
+      "png": "png/pins/scanned-on-site-96px.png"
+    },
+    {
+      "category": "pins",
+      "id": "owner-confirmed",
+      "size": "48px",
+      "width": 52,
+      "height": 48,
+      "png": "png/pins/owner-confirmed-48px.png"
+    },
+    {
+      "category": "pins",
+      "id": "owner-confirmed",
+      "size": "72px",
+      "width": 78,
+      "height": 72,
+      "png": "png/pins/owner-confirmed-72px.png"
+    },
+    {
+      "category": "pins",
+      "id": "owner-confirmed",
+      "size": "96px",
+      "width": 103,
+      "height": 96,
+      "png": "png/pins/owner-confirmed-96px.png"
+    },
+    {
+      "category": "halos",
+      "id": "good-match",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/halos/good-match-48px.png"
+    },
+    {
+      "category": "halos",
+      "id": "good-match",
+      "size": "72px",
+      "width": 72,
+      "height": 72,
+      "png": "png/halos/good-match-72px.png"
+    },
+    {
+      "category": "halos",
+      "id": "good-match",
+      "size": "96px",
+      "width": 96,
+      "height": 96,
+      "png": "png/halos/good-match-96px.png"
+    },
+    {
+      "category": "halos",
+      "id": "partial-match",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/halos/partial-match-48px.png"
+    },
+    {
+      "category": "halos",
+      "id": "partial-match",
+      "size": "72px",
+      "width": 72,
+      "height": 72,
+      "png": "png/halos/partial-match-72px.png"
+    },
+    {
+      "category": "halos",
+      "id": "partial-match",
+      "size": "96px",
+      "width": 96,
+      "height": 96,
+      "png": "png/halos/partial-match-96px.png"
+    },
+    {
+      "category": "halos",
+      "id": "unknown-match",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/halos/unknown-match-48px.png"
+    },
+    {
+      "category": "halos",
+      "id": "unknown-match",
+      "size": "72px",
+      "width": 72,
+      "height": 72,
+      "png": "png/halos/unknown-match-72px.png"
+    },
+    {
+      "category": "halos",
+      "id": "unknown-match",
+      "size": "96px",
+      "width": 96,
+      "height": 96,
+      "png": "png/halos/unknown-match-96px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "map",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/map-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "map",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/map-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "map",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/map-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "scan",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/scan-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "scan",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/scan-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "scan",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/scan-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "profile",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/profile-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "profile",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/profile-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "profile",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/profile-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "my-needs",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/my-needs-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "my-needs",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/my-needs-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "my-needs",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/my-needs-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "camera",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/camera-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "camera",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/camera-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "camera",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/camera-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "storefront",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/storefront-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "storefront",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/storefront-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "storefront",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/storefront-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "person",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/person-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "person",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/person-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "person",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/person-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "info",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/info-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "info",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/info-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "info",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/info-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "correction",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/correction-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "correction",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/correction-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "correction",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/correction-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "freshness",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/freshness-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "freshness",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/freshness-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "freshness",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/freshness-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "confidence",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/confidence-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "confidence",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/confidence-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "confidence",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/confidence-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "location",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/location-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "location",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/location-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "location",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/location-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "menu",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/menu-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "menu",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/menu-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "menu",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/menu-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "close",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/close-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "close",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/close-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "close",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/close-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "chevron-right",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/chevron-right-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "chevron-right",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/chevron-right-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "chevron-right",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/chevron-right-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "check-outline",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/check-outline-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "check-outline",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/check-outline-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "check-outline",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/check-outline-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "search",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/search-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "search",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/search-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "search",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/search-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "filters",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/filters-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "filters",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/filters-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "filters",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/filters-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "photo",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/photo-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "photo",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/photo-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "photo",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/photo-48px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "receipt",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/ui-icons/receipt-24px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "receipt",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/ui-icons/receipt-32px.png"
+    },
+    {
+      "category": "ui-icons",
+      "id": "receipt",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/ui-icons/receipt-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "step-free-entry",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/step-free-entry-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "step-free-entry",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/step-free-entry-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "step-free-entry",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/step-free-entry-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "ramp-visible",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/ramp-visible-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "ramp-visible",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/ramp-visible-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "ramp-visible",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/ramp-visible-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "auto-door-button",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/auto-door-button-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "auto-door-button",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/auto-door-button-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "auto-door-button",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/auto-door-button-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "easy-grip-handle",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/easy-grip-handle-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "easy-grip-handle",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/easy-grip-handle-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "easy-grip-handle",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/easy-grip-handle-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "wide-door",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/wide-door-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "wide-door",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/wide-door-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "wide-door",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/wide-door-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "accessibility-signage",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/accessibility-signage-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "accessibility-signage",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/accessibility-signage-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "accessibility-signage",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/accessibility-signage-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "clear-approach",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/clear-approach-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "clear-approach",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/clear-approach-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "clear-approach",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/clear-approach-48px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "unknown",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/feature-icons/unknown-24px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "unknown",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/feature-icons/unknown-32px.png"
+    },
+    {
+      "category": "feature-icons",
+      "id": "unknown",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/feature-icons/unknown-48px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "texas-record",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/provenance/texas-record-24px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "texas-record",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/provenance/texas-record-32px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "texas-record",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/provenance/texas-record-48px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "community-source",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/provenance/community-source-24px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "community-source",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/provenance/community-source-32px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "community-source",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/provenance/community-source-48px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "owner-source",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/provenance/owner-source-24px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "owner-source",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/provenance/owner-source-32px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "owner-source",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/provenance/owner-source-48px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "photo-source",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/provenance/photo-source-24px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "photo-source",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/provenance/photo-source-32px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "photo-source",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/provenance/photo-source-48px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "public-record",
+      "size": "24px",
+      "width": 24,
+      "height": 24,
+      "png": "png/provenance/public-record-24px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "public-record",
+      "size": "32px",
+      "width": 32,
+      "height": 32,
+      "png": "png/provenance/public-record-32px.png"
+    },
+    {
+      "category": "provenance",
+      "id": "public-record",
+      "size": "48px",
+      "width": 48,
+      "height": 48,
+      "png": "png/provenance/public-record-48px.png"
+    },
+    {
+      "category": "badges",
+      "id": "estimated",
+      "size": "1x",
+      "width": 240,
+      "height": 48,
+      "png": "png/badges/estimated-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "estimated",
+      "size": "2x",
+      "width": 480,
+      "height": 96,
+      "png": "png/badges/estimated-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "scanned-on-site",
+      "size": "1x",
+      "width": 240,
+      "height": 48,
+      "png": "png/badges/scanned-on-site-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "scanned-on-site",
+      "size": "2x",
+      "width": 480,
+      "height": 96,
+      "png": "png/badges/scanned-on-site-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "owner-confirmed",
+      "size": "1x",
+      "width": 240,
+      "height": 48,
+      "png": "png/badges/owner-confirmed-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "owner-confirmed",
+      "size": "2x",
+      "width": 480,
+      "height": 96,
+      "png": "png/badges/owner-confirmed-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-current",
+      "size": "1x",
+      "width": 240,
+      "height": 48,
+      "png": "png/badges/freshness-current-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-current",
+      "size": "2x",
+      "width": 480,
+      "height": 96,
+      "png": "png/badges/freshness-current-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-recheck",
+      "size": "1x",
+      "width": 280,
+      "height": 48,
+      "png": "png/badges/freshness-recheck-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-recheck",
+      "size": "2x",
+      "width": 560,
+      "height": 96,
+      "png": "png/badges/freshness-recheck-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-1",
+      "size": "1x",
+      "width": 220,
+      "height": 48,
+      "png": "png/badges/confidence-1-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-1",
+      "size": "2x",
+      "width": 440,
+      "height": 96,
+      "png": "png/badges/confidence-1-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-2",
+      "size": "1x",
+      "width": 220,
+      "height": 48,
+      "png": "png/badges/confidence-2-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-2",
+      "size": "2x",
+      "width": 440,
+      "height": 96,
+      "png": "png/badges/confidence-2-2x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-3",
+      "size": "1x",
+      "width": 220,
+      "height": 48,
+      "png": "png/badges/confidence-3-1x.png"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-3",
+      "size": "2x",
+      "width": 440,
+      "height": 96,
+      "png": "png/badges/confidence-3-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "empty-area",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/empty-area-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "empty-area",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/empty-area-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "camera-permission",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/camera-permission-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "camera-permission",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/camera-permission-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "processing",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/processing-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "processing",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/processing-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "published",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/published-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "published",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/published-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "offline",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/offline-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "offline",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/offline-2x.png"
+    },
+    {
+      "category": "states",
+      "id": "recheck",
+      "size": "1x",
+      "width": 240,
+      "height": 180,
+      "png": "png/states/recheck-1x.png"
+    },
+    {
+      "category": "states",
+      "id": "recheck",
+      "size": "2x",
+      "width": 480,
+      "height": 360,
+      "png": "png/states/recheck-2x.png"
+    },
+    {
+      "category": "motion",
+      "id": "pin-drop-keyframes",
+      "size": "1x",
+      "width": 300,
+      "height": 150,
+      "png": "png/motion/pin-drop-keyframes-1x.png"
+    },
+    {
+      "category": "motion",
+      "id": "pin-drop-keyframes",
+      "size": "2x",
+      "width": 600,
+      "height": 300,
+      "png": "png/motion/pin-drop-keyframes-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-default",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/primary-default-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-default",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/primary-default-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-pressed",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/primary-pressed-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-pressed",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/primary-pressed-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-focus",
+      "size": "1x",
+      "width": 270,
+      "height": 66,
+      "png": "png/controls/primary-focus-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-focus",
+      "size": "2x",
+      "width": 540,
+      "height": 132,
+      "png": "png/controls/primary-focus-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-unavailable",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/primary-unavailable-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "primary-unavailable",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/primary-unavailable-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "scan-default",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/scan-default-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "scan-default",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/scan-default-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "scan-pressed",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/scan-pressed-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "scan-pressed",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/scan-pressed-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-default",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/secondary-default-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-default",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/secondary-default-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-pressed",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/secondary-pressed-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-pressed",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/secondary-pressed-2x.png"
+    },
+    {
+      "category": "controls",
+      "id": "quiet-action",
+      "size": "1x",
+      "width": 260,
+      "height": 56,
+      "png": "png/controls/quiet-action-1x.png"
+    },
+    {
+      "category": "controls",
+      "id": "quiet-action",
+      "size": "2x",
+      "width": 520,
+      "height": 112,
+      "png": "png/controls/quiet-action-2x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "map-active",
+      "size": "1x",
+      "width": 112,
+      "height": 74,
+      "png": "png/navigation-states/map-active-1x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "map-active",
+      "size": "2x",
+      "width": 224,
+      "height": 148,
+      "png": "png/navigation-states/map-active-2x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "scan-active",
+      "size": "1x",
+      "width": 112,
+      "height": 74,
+      "png": "png/navigation-states/scan-active-1x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "scan-active",
+      "size": "2x",
+      "width": 224,
+      "height": 148,
+      "png": "png/navigation-states/scan-active-2x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "profile-active",
+      "size": "1x",
+      "width": 112,
+      "height": 74,
+      "png": "png/navigation-states/profile-active-1x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "profile-active",
+      "size": "2x",
+      "width": 224,
+      "height": 148,
+      "png": "png/navigation-states/profile-active-2x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "keyboard-focus",
+      "size": "1x",
+      "width": 112,
+      "height": 74,
+      "png": "png/navigation-states/keyboard-focus-1x.png"
+    },
+    {
+      "category": "navigation-states",
+      "id": "keyboard-focus",
+      "size": "2x",
+      "width": 224,
+      "height": 148,
+      "png": "png/navigation-states/keyboard-focus-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-default",
+      "size": "1x",
+      "width": 220,
+      "height": 48,
+      "png": "png/chip-states/filter-default-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-default",
+      "size": "2x",
+      "width": 440,
+      "height": 96,
+      "png": "png/chip-states/filter-default-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-selected",
+      "size": "1x",
+      "width": 220,
+      "height": 48,
+      "png": "png/chip-states/filter-selected-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-selected",
+      "size": "2x",
+      "width": 440,
+      "height": 96,
+      "png": "png/chip-states/filter-selected-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-focus",
+      "size": "1x",
+      "width": 228,
+      "height": 56,
+      "png": "png/chip-states/filter-focus-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-focus",
+      "size": "2x",
+      "width": 456,
+      "height": 112,
+      "png": "png/chip-states/filter-focus-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-fresh",
+      "size": "1x",
+      "width": 260,
+      "height": 58,
+      "png": "png/chip-states/feature-fresh-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-fresh",
+      "size": "2x",
+      "width": 520,
+      "height": 116,
+      "png": "png/chip-states/feature-fresh-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-aging",
+      "size": "1x",
+      "width": 290,
+      "height": 58,
+      "png": "png/chip-states/feature-aging-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-aging",
+      "size": "2x",
+      "width": 580,
+      "height": 116,
+      "png": "png/chip-states/feature-aging-2x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-unknown",
+      "size": "1x",
+      "width": 320,
+      "height": 58,
+      "png": "png/chip-states/feature-unknown-1x.png"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-unknown",
+      "size": "2x",
+      "width": 640,
+      "height": 116,
+      "png": "png/chip-states/feature-unknown-2x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-empty",
+      "size": "1x",
+      "width": 320,
+      "height": 76,
+      "png": "png/field-states/text-empty-1x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-empty",
+      "size": "2x",
+      "width": 640,
+      "height": 152,
+      "png": "png/field-states/text-empty-2x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-focused",
+      "size": "1x",
+      "width": 320,
+      "height": 76,
+      "png": "png/field-states/text-focused-1x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-focused",
+      "size": "2x",
+      "width": 640,
+      "height": 152,
+      "png": "png/field-states/text-focused-2x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-filled",
+      "size": "1x",
+      "width": 320,
+      "height": 76,
+      "png": "png/field-states/text-filled-1x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "text-filled",
+      "size": "2x",
+      "width": 640,
+      "height": 152,
+      "png": "png/field-states/text-filled-2x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "needs-attention",
+      "size": "1x",
+      "width": 320,
+      "height": 98,
+      "png": "png/field-states/needs-attention-1x.png"
+    },
+    {
+      "category": "field-states",
+      "id": "needs-attention",
+      "size": "2x",
+      "width": 640,
+      "height": 196,
+      "png": "png/field-states/needs-attention-2x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "saved-toast",
+      "size": "1x",
+      "width": 340,
+      "height": 72,
+      "png": "png/feedback/saved-toast-1x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "saved-toast",
+      "size": "2x",
+      "width": 680,
+      "height": 144,
+      "png": "png/feedback/saved-toast-2x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "published-toast",
+      "size": "1x",
+      "width": 340,
+      "height": 72,
+      "png": "png/feedback/published-toast-1x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "published-toast",
+      "size": "2x",
+      "width": 680,
+      "height": 144,
+      "png": "png/feedback/published-toast-2x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "offline-banner",
+      "size": "1x",
+      "width": 340,
+      "height": 72,
+      "png": "png/feedback/offline-banner-1x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "offline-banner",
+      "size": "2x",
+      "width": 680,
+      "height": 144,
+      "png": "png/feedback/offline-banner-2x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "camera-permission-dialog",
+      "size": "1x",
+      "width": 340,
+      "height": 210,
+      "png": "png/feedback/camera-permission-dialog-1x.png"
+    },
+    {
+      "category": "feedback",
+      "id": "camera-permission-dialog",
+      "size": "2x",
+      "width": 680,
+      "height": 420,
+      "png": "png/feedback/camera-permission-dialog-2x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "peek",
+      "size": "1x",
+      "width": 240,
+      "height": 240,
+      "png": "png/sheet-states/peek-1x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "peek",
+      "size": "2x",
+      "width": 480,
+      "height": 480,
+      "png": "png/sheet-states/peek-2x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "half",
+      "size": "1x",
+      "width": 240,
+      "height": 240,
+      "png": "png/sheet-states/half-1x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "half",
+      "size": "2x",
+      "width": 480,
+      "height": 480,
+      "png": "png/sheet-states/half-2x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "full",
+      "size": "1x",
+      "width": 240,
+      "height": 240,
+      "png": "png/sheet-states/full-1x.png"
+    },
+    {
+      "category": "sheet-states",
+      "id": "full",
+      "size": "2x",
+      "width": 480,
+      "height": 480,
+      "png": "png/sheet-states/full-2x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-start",
+      "size": "1x",
+      "width": 160,
+      "height": 156,
+      "png": "png/scan-states/progress-start-1x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-start",
+      "size": "2x",
+      "width": 320,
+      "height": 312,
+      "png": "png/scan-states/progress-start-2x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-entry-path",
+      "size": "1x",
+      "width": 160,
+      "height": 156,
+      "png": "png/scan-states/progress-entry-path-1x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-entry-path",
+      "size": "2x",
+      "width": 320,
+      "height": 312,
+      "png": "png/scan-states/progress-entry-path-2x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-quality",
+      "size": "1x",
+      "width": 160,
+      "height": 156,
+      "png": "png/scan-states/progress-quality-1x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-quality",
+      "size": "2x",
+      "width": 320,
+      "height": 312,
+      "png": "png/scan-states/progress-quality-2x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-complete",
+      "size": "1x",
+      "width": 160,
+      "height": 156,
+      "png": "png/scan-states/progress-complete-1x.png"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-complete",
+      "size": "2x",
+      "width": 320,
+      "height": 312,
+      "png": "png/scan-states/progress-complete-2x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-photo",
+      "size": "1x",
+      "width": 380,
+      "height": 74,
+      "png": "png/receipt-elements/provenance-row-photo-1x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-photo",
+      "size": "2x",
+      "width": 760,
+      "height": 148,
+      "png": "png/receipt-elements/provenance-row-photo-2x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-texas",
+      "size": "1x",
+      "width": 420,
+      "height": 74,
+      "png": "png/receipt-elements/provenance-row-texas-1x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-texas",
+      "size": "2x",
+      "width": 840,
+      "height": 148,
+      "png": "png/receipt-elements/provenance-row-texas-2x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "suggest-correction",
+      "size": "1x",
+      "width": 380,
+      "height": 56,
+      "png": "png/receipt-elements/suggest-correction-1x.png"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "suggest-correction",
+      "size": "2x",
+      "width": 760,
+      "height": 112,
+      "png": "png/receipt-elements/suggest-correction-2x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "overview",
+      "size": "1x",
+      "width": 320,
+      "height": 152,
+      "png": "png/pin-hierarchy/overview-1x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "overview",
+      "size": "2x",
+      "width": 640,
+      "height": 304,
+      "png": "png/pin-hierarchy/overview-2x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "street",
+      "size": "1x",
+      "width": 320,
+      "height": 152,
+      "png": "png/pin-hierarchy/street-1x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "street",
+      "size": "2x",
+      "width": 640,
+      "height": 304,
+      "png": "png/pin-hierarchy/street-2x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "selected",
+      "size": "1x",
+      "width": 320,
+      "height": 158,
+      "png": "png/pin-hierarchy/selected-1x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "selected",
+      "size": "2x",
+      "width": 640,
+      "height": 316,
+      "png": "png/pin-hierarchy/selected-2x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "receipt",
+      "size": "1x",
+      "width": 320,
+      "height": 152,
+      "png": "png/pin-hierarchy/receipt-1x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "receipt",
+      "size": "2x",
+      "width": 640,
+      "height": 304,
+      "png": "png/pin-hierarchy/receipt-2x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "mixed-cluster",
+      "size": "1x",
+      "width": 96,
+      "height": 96,
+      "png": "png/pin-hierarchy/mixed-cluster-1x.png"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "mixed-cluster",
+      "size": "2x",
+      "width": 192,
+      "height": 192,
+      "png": "png/pin-hierarchy/mixed-cluster-2x.png"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "selected-keyline",
+      "size": "1x",
+      "width": 112,
+      "height": 112,
+      "png": "png/pin-overlays/selected-keyline-1x.png"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "selected-keyline",
+      "size": "2x",
+      "width": 224,
+      "height": 224,
+      "png": "png/pin-overlays/selected-keyline-2x.png"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "freshness-clock",
+      "size": "1x",
+      "width": 40,
+      "height": 40,
+      "png": "png/pin-overlays/freshness-clock-1x.png"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "freshness-clock",
+      "size": "2x",
+      "width": 80,
+      "height": 80,
+      "png": "png/pin-overlays/freshness-clock-2x.png"
+    }
+  ]
+}

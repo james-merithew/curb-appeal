@@ -1,0 +1,46 @@
+flow_id,step_id,role,auth_state,from_screen,action,condition,to_screen,transition,analytics_event,recovery,reduced_motion
+first-use,FU-01,everyone,unknown,system-launch,open app,first launch,onboarding-welcome,screen-260,app_first_open,reopen same screen,crossfade-80
+first-use,FU-02,public,guest,onboarding-welcome,continue as guest,always,onboarding-location,screen-260,guest_continue,back to welcome,crossfade-80
+first-use,FU-03,public,signed-in,onboarding-welcome,sign in,successful system authentication,onboarding-location,screen-260,sign_in_complete,return to welcome on cancel,crossfade-80
+first-use,FU-04,public,either,onboarding-location,allow location,before OS request,os-location-permission,system,location_prompt_opened,return to location primer,instant
+first-use,FU-05,public,either,onboarding-location,not now,always,onboarding-needs,screen-260,location_skipped,manual map search remains available,crossfade-80
+first-use,FU-06,public,either,os-location-permission,grant,permission granted,onboarding-needs,screen-260,location_granted,manual map search fallback,crossfade-80
+first-use,FU-07,public,either,os-location-permission,deny,permission denied,onboarding-needs,screen-260,location_denied,show choose-area recovery,crossfade-80
+first-use,FU-08,public,either,onboarding-needs,continue,one or more needs selected,map-default,screen-260,needs_saved,edit from Profile,crossfade-80
+first-use,FU-09,public,either,onboarding-needs,skip for now,always,map-default,screen-260,needs_skipped,set later from Profile,crossfade-80
+map,MAP-01,public,either,map-default,open My Needs,always,map-filters,sheet-320,filters_opened,close returns focus to control,instant destination
+map,MAP-02,public,either,map-filters,show places,valid temporary filters,map-filtered-results,sheet-320,filters_applied,reset returns defaults,instant destination
+map,MAP-03,public,either,map-filtered-results,select entrance,pin or result selected,business-evidence,map-450+sheet-320,entrance_selected,close returns to selected pin,instant camera and sheet
+map,MAP-04,public,either,map-default,select entrance,pin selected,business-evidence,map-450+sheet-320,entrance_selected,close returns to pin,instant camera and sheet
+evidence,EVD-01,public,either,business-evidence,open evidence receipt,claim or badge selected,evidence-receipt,receipt-240,evidence_opened,close returns focus to claim,instant expand
+evidence,EVD-02,public,either,business-evidence,suggest a correction,always,correction-form,screen-260,correction_started,back returns to business sheet,crossfade-80
+evidence,EVD-03,public,signed-in,correction-form,send suggestion,required category and note valid,business-evidence,screen-260,correction_sent,preserve draft on network interruption,crossfade-80
+evidence,EVD-04,public,guest,correction-form,send suggestion,authentication required,system-auth,system,correction_auth_required,return with draft preserved,instant
+evidence,EVD-05,public,either,business-evidence,open re-check prompt,evidence is aging,evidence-recheck,sheet-320,recheck_prompt_opened,maybe later closes sheet,instant destination
+evidence,EVD-06,contributor,signed-in,evidence-recheck,re-check entrance,camera permission granted,scan-camera,screen-260,recheck_started,return to prompt if canceled,crossfade-80
+scan,SCN-01,contributor,either,map-default,open Scan tab,always,scan-primer,peer-180,scan_tab_opened,Map tab returns to map,crossfade-80
+scan,SCN-02,contributor,either,scan-primer,allow camera,before OS request,os-camera-permission,system,camera_prompt_opened,return to primer,instant
+scan,SCN-03,contributor,signed-in,os-camera-permission,grant,permission granted,scan-camera,screen-260,camera_granted,close returns to primer,crossfade-80
+scan,SCN-04,contributor,either,os-camera-permission,deny,permission denied,system-controls,screen-260,camera_denied,Open settings or Keep exploring,crossfade-80
+scan,SCN-05,contributor,signed-in,scan-camera,capture,doorway framed,scan-processing,screen-260,scan_captured,retake before upload,crossfade-80
+scan,SCN-06,contributor,signed-in,scan-processing,processing completes,real checklist events complete,scan-published,scan-7600,scan_processed,saved-for-later if offline,instant completed state
+scan,SCN-07,contributor,signed-in,scan-published,publish scan,review accepted,map-default,pin-drop-620,scan_published,receipt retained in profile,pin appears instantly
+scan,SCN-08,contributor,guest,scan-camera,capture,authentication required,system-auth,system,scan_auth_required,return to camera with capture context,instant
+empty,EMP-01,public,either,map-empty-area,scan an entrance,always,scan-primer,peer-180,empty_scan_selected,back returns to empty area,crossfade-80
+empty,EMP-02,public,either,map-empty-area,try another area,always,map-default,map-450,empty_search_elsewhere,reopen empty state if no results,instant camera
+system,SYS-01,contributor,signed-in,system-controls,keep exploring,offline scan queued,map-default,peer-180,offline_keep_exploring,queued upload remains visible,crossfade-80
+system,SYS-02,contributor,either,system-controls,open settings,camera permission off,os-settings,system,settings_opened,return to system controls,instant
+system,SYS-03,public,either,system-controls,search the map,location permission off,map-default,peer-180,manual_area_search,map remains usable,crossfade-80
+profile,PRO-01,public,either,map-default,open Profile tab,always,profile-public,peer-180,profile_opened,Map returns to map,crossfade-80
+profile,PRO-02,public,either,profile-public,edit My Needs,always,onboarding-needs,screen-260,needs_edit_started,back preserves current profile,crossfade-80
+owner,OWN-01,owner,signed-in,profile-public,open business owners,always,owner-claim-entry,screen-260,owner_tools_opened,back returns to profile,crossfade-80
+owner,OWN-02,owner,signed-in,owner-claim-entry,start a claim,always,owner-find-business,screen-260,owner_claim_started,back returns to owner entry,crossfade-80
+owner,OWN-03,owner,signed-in,owner-find-business,continue,one exact entrance selected,owner-confirm-ownership,screen-260,owner_business_selected,selection stays available on back,crossfade-80
+owner,OWN-04,owner,signed-in,owner-confirm-ownership,submit claim,valid role contact method and authorization,owner-claim-submitted,screen-260,owner_claim_submitted,preserve form on network interruption,crossfade-80
+owner,OWN-05,owner,signed-in,owner-claim-submitted,back to Profile,always,owner-claim-entry,screen-260,owner_claim_status_closed,status remains available,crossfade-80
+owner,OWN-06,owner,signed-in,owner-claim-submitted,open workspace,claim approved,owner-workspace,screen-260,owner_workspace_opened,status screen remains fallback,crossfade-80
+owner,OWN-07,owner,signed-in,owner-workspace,edit entrance,approved claim,owner-edit-entrance,screen-260,owner_edit_started,back discards only after confirmation,crossfade-80
+owner,OWN-08,owner,signed-in,owner-workspace,manage photos,approved claim,owner-photos,screen-260,owner_photos_opened,back preserves local selection,crossfade-80
+owner,OWN-09,owner,signed-in,owner-edit-entrance,review changes,valid visible observations,owner-update-receipt,screen-260,owner_update_published,preserve unsent changes if offline,crossfade-80
+owner,OWN-10,owner,signed-in,owner-photos,publish update,two reviewed photos ready,owner-update-receipt,screen-260,owner_photos_published,preserve queued upload if offline,crossfade-80
+owner,OWN-11,owner,signed-in,owner-update-receipt,view public listing,always,business-evidence,screen-260,owner_public_listing_opened,back returns to receipt,crossfade-80

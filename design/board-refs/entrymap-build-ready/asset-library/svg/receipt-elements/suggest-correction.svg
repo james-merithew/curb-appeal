@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 380 56" role="img" aria-labelledby="title desc">
+  <title id="title">Suggest a correction receipt action</title><desc id="desc">EntryMap Suggest a correction receipt action asset.</desc>
+  
+  <rect x="2" y="2" width="376" height="52" rx="15" fill="#FFFFFF" stroke="#4F34DB" stroke-width="2"/><g transform="translate(17 12)"><g fill="none" stroke="#38239B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 25 5-1 14-14-4-4L7 20Z"/><path d="m18 9 4 4M5 28h22"/></g></g><text x="58" y="35" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="15" font-weight="700" fill="#38239B">Suggest a correction</text><path d="m350 18 9 10-9 10" fill="none" stroke="#38239B" stroke-width="2.5"/>
+</svg>

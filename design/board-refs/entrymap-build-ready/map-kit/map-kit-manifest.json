@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "dimensions": {
+    "width": 1170,
+    "height": 800
+  },
+  "disclaimer": "Illustrative demo artwork only; not geographic truth, routing data, or a production map provider.",
+  "layers": [
+    "land",
+    "blocks",
+    "roads",
+    "labels",
+    "places",
+    "halos",
+    "pins",
+    "selection",
+    "annotations"
+  ],
+  "canonicalColors": {
+    "indigo": "#1E1142",
+    "violet": "#4F34DB",
+    "sky": "#76BCFD",
+    "marigold": "#FDB327",
+    "path": "#CFBCEE",
+    "lavender": "#F5F2FC",
+    "lavender2": "#E8E1F7",
+    "white": "#FFFFFF"
+  },
+  "variants": [
+    {
+      "id": "base-map",
+      "description": "Editable base with stable map layers",
+      "svg": "map-kit/svg/base-map.svg",
+      "png": "map-kit/png/base-map.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "A26EEC8ED6977C56ECBD270EE8A9F0958726D6EF2DC7C973F6047B3291C3D898"
+    },
+    {
+      "id": "before-profile",
+      "description": "Trust pins before a needs profile is applied",
+      "svg": "map-kit/svg/before-profile.svg",
+      "png": "map-kit/png/before-profile.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "154001EB41E3C9343B5004E5736CA4F90703481774EFED035161F8BFDD0FF1D0"
+    },
+    {
+      "id": "after-profile",
+      "description": "The same pins with solid/dashed/dotted match halos",
+      "svg": "map-kit/svg/after-profile.svg",
+      "png": "map-kit/png/after-profile.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "FB1E025B3BA5B9CB1B78595F84080C106D3E1DB5A28DAFE475DEB97C658F05F5"
+    },
+    {
+      "id": "selected-business",
+      "description": "Selected Scanned on-site entrance with independent keyline",
+      "svg": "map-kit/svg/selected-business.svg",
+      "png": "map-kit/png/selected-business.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "694B465C014B18351CC054A74A1AEEEEA911726C5158DC2A4D93CEC8754DF247"
+    },
+    {
+      "id": "empty-area",
+      "description": "Invitation-led empty-area state",
+      "svg": "map-kit/svg/empty-area.svg",
+      "png": "map-kit/png/empty-area.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "3DA790583CC3DC63060A89F7BDA808C516F51443B2E559CF5B8818CAEDB72AE9"
+    },
+    {
+      "id": "mixed-cluster",
+      "description": "Mixed evidence cluster with composition arcs",
+      "svg": "map-kit/svg/mixed-cluster.svg",
+      "png": "map-kit/png/mixed-cluster.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "CCAF23B79AF4D41517869D05DE8EB4798725D6254AA321F8F762BFEBE342FE5F"
+    },
+    {
+      "id": "pin-placement",
+      "description": "Pin anchors, hierarchy, and halo placement",
+      "svg": "map-kit/svg/pin-placement.svg",
+      "png": "map-kit/png/pin-placement.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "2B83989FA7814B39415A02E6C06694746C1DD4D8FFE6BB86253FC8FEE41B47EB"
+    },
+    {
+      "id": "safe-areas",
+      "description": "Map visibility zones beneath chrome and sheets",
+      "svg": "map-kit/svg/safe-areas.svg",
+      "png": "map-kit/png/safe-areas.png",
+      "width": 1170,
+      "height": 800,
+      "sha256": "A1B3069D81642C7AC061D80D684DE2251D5C88FAD5DFE538C0E72A6E89549B66"
+    }
+  ]
+}

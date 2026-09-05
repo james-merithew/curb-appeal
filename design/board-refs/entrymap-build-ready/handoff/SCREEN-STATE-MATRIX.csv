@@ -1,0 +1,26 @@
+screen_id,loading,populated,empty,offline,permission_limited,aging_evidence,reduced_motion
+onboarding-welcome,logo and copy appear together,sign-in and guest actions visible,not applicable,guest path remains local,not applicable,not applicable,no entrance illustration movement
+onboarding-location,static primer,location benefits explained,manual search remains available,manual search remains available,Not now continues setup,not applicable,no map pulse
+onboarding-needs,static choices,selected needs show check and outline,no selection is valid,local choices remain editable,not applicable,not applicable,no stagger
+profile-public,profile skeleton,needs and controls populated,guest profile remains useful,local changes queue,location row explains state,not applicable,instant toggles
+map-default,map provider skeleton,pins cluster and render,route to map-empty-area,last cached map and offline banner,manual area search stays available,freshness clocks render without recoloring,instant pin placement
+map-filters,sheet skeleton,temporary filters populated,reset available,filters apply to cached data,not applicable,freshness range remains time-only,instant sheet stop
+map-filtered-results,result skeleton,matching pins and cards,no matches uses helpful clear-filters action,cached matches remain visible,not applicable,aging chips use amber clock,instant halo state
+business-evidence,sheet skeleton,trust features and provenance shown,unknown chips invite a scan,existing receipt remains readable,not applicable,aging copy asks for re-check,instant sheet and receipt
+evidence-receipt,receipt skeleton,photo date method and provenance shown,missing feature is not fabricated,cached receipts remain readable,not applicable,elapsed-time copy shown,instant expand
+scan-primer,static primer,camera action visible,not applicable,scan can start and queue locally,Open settings recovery shown,not applicable,no illustration movement
+scan-camera,camera initialization,doorway guide and shutter visible,not applicable,capture may queue after sign-in,camera-off routes to system controls,not applicable,guide remains static
+scan-processing,real checklist begins,completed events tick in order,not applicable,becomes Saved for later if upload unavailable,camera permission no longer requested,not applicable,textual progress only
+scan-published,publish result skeleton,confirmed chips and new pin shown,no claims are invented,queued state explains later upload,not applicable,freshness starts at today,pin appears immediately
+map-empty-area,map provider skeleton,invitation card over mapped area,no entrances is the intended state,cached area remains searchable,manual area search remains available,not applicable,instant card
+correction-form,business context skeleton,category note and photo controls visible,empty note shows direction not blame,draft stays local and send queues,photo remains optional,existing evidence age remains visible,instant completion feedback
+evidence-recheck,receipt skeleton,re-check reason and provenance visible,not applicable,prompt remains readable and scan queues,camera recovery available,muted amber time copy,instant sheet
+system-controls,static cards,only applicable recovery cards appear,not applicable,Saved for later card appears,permission cards explain next action,not applicable,no animated icons
+owner-claim-entry,owner context skeleton,claim CTA and scans visible,no scans still allows claim,claim start requires connection,sign-in required before entry,not applicable,instant expansion
+owner-find-business,search skeleton,entrance matches listed,no result offers corrected query,search retry retains query,location is optional,not applicable,instant list
+owner-confirm-ownership,business context skeleton,role contact and method populated,not applicable,form is preserved until retry,authentication and consent required,not applicable,instant control states
+owner-claim-submitted,status skeleton,three review stages visible,not applicable,last known status remains visible,not applicable,not applicable,no progress-line animation
+owner-workspace,workspace skeleton,features freshness confidence and sources shown,no owner observations uses invitation,cached workspace read-only,approved claim required,aging owner data asks for refresh,instant cards
+owner-edit-entrance,form skeleton,visible observations editable,unknown is a valid selection,unsent changes stay local,approved claim required,state records remain read-only,instant review transition
+owner-photos,photo skeleton,primary and supporting photos listed,no photos shows add-photo guidance,uploads queue locally,camera and library recovery shown,not applicable,no image rearrangement motion
+owner-update-receipt,receipt skeleton,owner community and state provenance stacked,not applicable,cached receipt remains readable,not applicable,freshness date remains explicit,instant check and rows

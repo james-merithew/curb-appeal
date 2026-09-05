@@ -1,0 +1,153 @@
+:root {
+  --entrymap-motion-press: 100ms;
+  --entrymap-motion-tab: 180ms;
+  --entrymap-motion-receipt: 240ms;
+  --entrymap-motion-screen: 260ms;
+  --entrymap-motion-sheet: 320ms;
+  --entrymap-motion-map: 450ms;
+  --entrymap-motion-pin: 620ms;
+  --entrymap-ease-standard: cubic-bezier(.2, .75, .25, 1);
+  --entrymap-ease-decelerate: cubic-bezier(.16, 1, .3, 1);
+  --entrymap-ease-sheet: cubic-bezier(.22, .9, .28, 1.08);
+  --entrymap-ease-pin: cubic-bezier(.2, .9, .25, 1.2);
+  --entrymap-indigo: #1e1142;
+  --entrymap-violet: #4f34db;
+  --entrymap-sky: #76bcfd;
+  --entrymap-marigold: #fdb327;
+  --entrymap-lavender: #f5f2fc;
+}
+
+.entrymap-button {
+  min-width: 48px;
+  min-height: 48px;
+  transform: scale(1);
+  transition:
+    transform var(--entrymap-motion-press) ease-out,
+    box-shadow var(--entrymap-motion-press) ease-out,
+    background-color var(--entrymap-motion-press) linear;
+}
+
+.entrymap-button:active {
+  transform: scale(.97);
+  box-shadow: 0 1px 2px rgb(30 17 66 / 18%);
+}
+
+.entrymap-button:focus-visible {
+  outline: 3px solid var(--entrymap-sky);
+  outline-offset: 3px;
+}
+
+.entrymap-screen-enter {
+  animation: entrymap-screen-enter var(--entrymap-motion-screen) var(--entrymap-ease-standard) both;
+}
+
+.entrymap-tab-enter {
+  animation: entrymap-tab-enter var(--entrymap-motion-tab) var(--entrymap-ease-decelerate) both;
+}
+
+.entrymap-sheet-settle {
+  transition: transform var(--entrymap-motion-sheet) var(--entrymap-ease-sheet);
+}
+
+.entrymap-pin-selected {
+  position: relative;
+  z-index: 60;
+  filter: drop-shadow(0 8px 8px rgb(30 17 66 / 24%));
+  transform: translateY(-6px) scale(1.12);
+  transition: transform 180ms var(--entrymap-ease-decelerate);
+}
+
+.entrymap-pin-drop {
+  position: relative;
+  z-index: 70;
+  animation: entrymap-pin-drop var(--entrymap-motion-pin) var(--entrymap-ease-pin) both;
+}
+
+.entrymap-pin-ripple {
+  animation: entrymap-pin-ripple 520ms var(--entrymap-ease-decelerate) both;
+  border: 3px solid var(--entrymap-sky);
+  border-radius: 999px;
+}
+
+.entrymap-processing-sweep {
+  animation: entrymap-processing-sweep 1100ms var(--entrymap-ease-standard) 1 both;
+  background: linear-gradient(100deg, transparent 20%, rgb(91 53 245 / 18%) 50%, transparent 80%);
+}
+
+.entrymap-check-draw path {
+  stroke-dasharray: 32;
+  stroke-dashoffset: 32;
+  animation: entrymap-check-draw 180ms var(--entrymap-ease-decelerate) forwards;
+}
+
+.entrymap-chip-enter {
+  animation: entrymap-chip-enter 220ms var(--entrymap-ease-decelerate) both;
+}
+
+.entrymap-toast-enter {
+  animation: entrymap-toast-enter 220ms var(--entrymap-ease-decelerate) both;
+}
+
+@keyframes entrymap-screen-enter {
+  from { opacity: .88; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes entrymap-tab-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entrymap-pin-drop {
+  0% { opacity: 0; transform: translateY(-48px) scale(.86, 1.08); }
+  62% { opacity: 1; transform: translateY(3px) scale(1.08, .91); }
+  82% { transform: translateY(-4px) scale(.97, 1.03); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes entrymap-pin-ripple {
+  from { opacity: .8; transform: scale(.35); }
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes entrymap-processing-sweep {
+  from { background-position: -180% 0; }
+  to { background-position: 180% 0; }
+}
+
+@keyframes entrymap-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes entrymap-chip-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entrymap-toast-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrymap-button,
+  .entrymap-screen-enter,
+  .entrymap-tab-enter,
+  .entrymap-sheet-settle,
+  .entrymap-pin-selected,
+  .entrymap-pin-drop,
+  .entrymap-pin-ripple,
+  .entrymap-processing-sweep,
+  .entrymap-check-draw path,
+  .entrymap-chip-enter,
+  .entrymap-toast-enter {
+    animation: none !important;
+    transition-duration: 0ms !important;
+    transform: none;
+  }
+
+  .entrymap-pin-ripple,
+  .entrymap-processing-sweep {
+    display: none;
+  }
+}

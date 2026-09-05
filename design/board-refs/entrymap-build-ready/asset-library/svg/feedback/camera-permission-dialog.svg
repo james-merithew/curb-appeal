@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 340 210" role="img" aria-labelledby="title desc">
+  <title id="title">Camera permission dialog</title><desc id="desc">EntryMap Camera permission dialog asset.</desc>
+  
+  <rect x="2" y="2" width="336" height="206" rx="24" fill="#FFFFFF" stroke="#1E1142" stroke-width="2"/><circle cx="170" cy="55" r="32" fill="#F5F2FC"/><g transform="translate(154 39)"><g fill="none" stroke="#38239B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h5l2-4h8l2 4h5v17H5Z"/><circle cx="16" cy="18" r="5"/></g></g><text x="170" y="103" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="18" font-weight="750" fill="#1E1142">Allow camera access</text><text x="170" y="127" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="13" fill="#1E1142">Only the doorway is captured.</text><rect x="26" y="145" width="288" height="44" rx="14" fill="#FDB327"/><text x="170" y="174" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="15" font-weight="700" fill="#1E1142">Allow camera</text>
+</svg>

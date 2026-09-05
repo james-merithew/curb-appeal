@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 160 156" role="img" aria-labelledby="title desc">
+  <title id="title">Scan progress entry path</title><desc id="desc">EntryMap Scan progress entry path asset.</desc>
+  
+  <circle cx="80" cy="78" r="52" fill="#FFFFFF" stroke="#E8E1F7" stroke-width="9"/><circle cx="80" cy="78" r="52" fill="none" stroke="#FDB327" stroke-width="9" stroke-linecap="round" stroke-dasharray="105.50399999999999 145.696" transform="rotate(-90 80 78)"/><text x="80" y="73" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="25" font-weight="750" fill="#1E1142">42%</text><text x="80" y="98" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="11" fill="#1E1142">Entry path visible</text>
+</svg>

@@ -1,0 +1,36 @@
+{
+  "sourceCanvas": { "width": 1672, "height": 941 },
+  "method": "Pixel-exact crops from immutable approved boards; no resampling or enhancement.",
+  "screens": [
+    { "id": "onboarding-welcome", "kind": "screen", "source": "01-onboarding-and-profile.png", "x": 151, "y": 100, "width": 287, "height": 650 },
+    { "id": "onboarding-location", "kind": "screen", "source": "01-onboarding-and-profile.png", "x": 519, "y": 100, "width": 294, "height": 650 },
+    { "id": "onboarding-needs", "kind": "screen", "source": "01-onboarding-and-profile.png", "x": 848, "y": 100, "width": 292, "height": 650 },
+    { "id": "profile-public", "kind": "screen", "source": "01-onboarding-and-profile.png", "x": 1232, "y": 100, "width": 286, "height": 650 },
+
+    { "id": "map-default", "kind": "screen", "source": "02-map-filters-and-evidence.png", "x": 49, "y": 106, "width": 322, "height": 670 },
+    { "id": "map-filters", "kind": "sheet", "source": "02-map-filters-and-evidence.png", "x": 405, "y": 106, "width": 325, "height": 670 },
+    { "id": "map-filtered-results", "kind": "screen", "source": "02-map-filters-and-evidence.png", "x": 754, "y": 106, "width": 325, "height": 670 },
+    { "id": "business-evidence", "kind": "sheet", "source": "02-map-filters-and-evidence.png", "x": 1111, "y": 106, "width": 325, "height": 670 },
+    { "id": "evidence-receipt", "kind": "receipt", "source": "02-map-filters-and-evidence.png", "x": 1430, "y": 471, "width": 231, "height": 279 },
+
+    { "id": "scan-primer", "kind": "screen", "source": "03-community-scan-flow.png", "x": 47, "y": 134, "width": 365, "height": 735 },
+    { "id": "scan-camera", "kind": "screen", "source": "03-community-scan-flow.png", "x": 447, "y": 134, "width": 365, "height": 735 },
+    { "id": "scan-processing", "kind": "state", "source": "03-community-scan-flow.png", "x": 870, "y": 134, "width": 336, "height": 735 },
+    { "id": "scan-published", "kind": "sheet", "source": "03-community-scan-flow.png", "x": 1219, "y": 134, "width": 388, "height": 770 },
+
+    { "id": "map-empty-area", "kind": "state", "source": "04-community-and-system-states.png", "x": 41, "y": 134, "width": 374, "height": 733 },
+    { "id": "correction-form", "kind": "screen", "source": "04-community-and-system-states.png", "x": 439, "y": 134, "width": 377, "height": 733 },
+    { "id": "evidence-recheck", "kind": "sheet", "source": "04-community-and-system-states.png", "x": 829, "y": 134, "width": 378, "height": 733 },
+    { "id": "system-controls", "kind": "state", "source": "04-community-and-system-states.png", "x": 1222, "y": 134, "width": 377, "height": 733 },
+
+    { "id": "owner-claim-entry", "kind": "screen", "source": "05-owner-claim-flow.png", "x": 49, "y": 55, "width": 372, "height": 714 },
+    { "id": "owner-find-business", "kind": "screen", "source": "05-owner-claim-flow.png", "x": 444, "y": 55, "width": 377, "height": 714 },
+    { "id": "owner-confirm-ownership", "kind": "screen", "source": "05-owner-claim-flow.png", "x": 839, "y": 55, "width": 377, "height": 714 },
+    { "id": "owner-claim-submitted", "kind": "state", "source": "05-owner-claim-flow.png", "x": 1234, "y": 55, "width": 375, "height": 714 },
+
+    { "id": "owner-workspace", "kind": "screen", "source": "06-owner-workspace.png", "x": 154, "y": 94, "width": 335, "height": 792 },
+    { "id": "owner-edit-entrance", "kind": "screen", "source": "06-owner-workspace.png", "x": 498, "y": 94, "width": 337, "height": 792 },
+    { "id": "owner-photos", "kind": "screen", "source": "06-owner-workspace.png", "x": 843, "y": 94, "width": 337, "height": 792 },
+    { "id": "owner-update-receipt", "kind": "receipt", "source": "06-owner-workspace.png", "x": 1187, "y": 94, "width": 342, "height": 792 }
+  ]
+}

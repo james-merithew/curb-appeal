@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 270 66" role="img" aria-labelledby="title desc">
+  <title id="title">Primary button keyboard focus</title><desc id="desc">EntryMap Primary button keyboard focus asset.</desc>
+  
+  <rect x="3" y="3" width="264" height="60" rx="21" fill="none" stroke="#76BCFD" stroke-width="3"/><rect x="10" y="10" width="250" height="46" rx="16" fill="#4F34DB" stroke="#4F34DB" stroke-width="2.5"/><text x="130" y="40" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">Continue</text>
+</svg>
