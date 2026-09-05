@@ -40,7 +40,7 @@ Revision history lives at the bottom. Update the scores in place each round.
 | 3.1 | The palette carries meaning, and meaning only. Blue estimated, marigold scanned, purple owner, green match, amber ageing, no red. | 4 | Enforced throughout and tested. |
 | 3.2 | No screen is monotone; each has a considered accent relationship. | 3 | Welcome fixed; some settings screens are still lavender-on-lavender. |
 | 3.3 | Elevation is consistent: the same surface level always reads the same. | 2 | Shadows vary between sheets, cards and pills. |
-| 3.4 | Contrast passes on every text and non-text indicator, including in high contrast mode. | 3 | Broadly verified; awaiting the audit. |
+| 3.4 | Contrast passes on every text and non-text indicator, including in high contrast mode. | 4 | Measured Round 1: text was already clean; every non-text indicator now clears 3:1 in both modes (see 7.2). |
 | 3.5 | Colour is never the only carrier of state. | 4 | Tiers carry shape, match carries text. |
 
 ## 4. Motion
@@ -63,7 +63,7 @@ Revision history lives at the bottom. Update the scores in place each round.
 | 5.3 | Touch feedback on every interactive element. | 2 | Buttons scale; rows and chips mostly do not. |
 | 5.4 | Icons share one grid, weight and terminal style. | 2 | Stroke widths vary between 2.2 and 2.4. |
 | 5.5 | Copy is plain, specific and human; no jargon, no cheerfulness the moment does not earn. | 4 | Consistently strong. |
-| 5.6 | Nothing is ASCII-fragile: no raw glyph that breaks without the right charset. | 1 | Raw arrows and chevrons appear as literals. |
+| 5.6 | Nothing is ASCII-fragile: no raw glyph that breaks without the right charset. | 4 | All 405 non-ASCII characters converted: HTML entities in markup, a CSS escape for the one `content:` glyph, `\uXXXX` in JS strings (entities would be double-escaped by `esc()`), plain ASCII in comments. The file is now byte-for-byte ASCII and renders identically. |
 
 ## 6. Product truth
 
@@ -80,20 +80,23 @@ This product is for disabled people. A defect here is a product defect, not a ch
 Content accessibility and behavioural accessibility are scored separately because this file
 is strong at the first and weak at the second.
 
+All Round 1 evidence below was measured in the browser at 390x844, served over
+`python -m http.server`, on the working copy as committed.
+
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
-| 7.1 | Text contrast passes everywhere, in both normal and high contrast. | 4 | Swept all 26 screens: every failure is a decorative glyph, not content. Hero 6.74:1, amber 6.91:1. |
-| 7.2 | Non-text indicators pass 3:1: toggle tracks, form borders, pins against the map, focus rings. | 1 | Toggle track 1.43:1, form borders 1.27:1, scanned pin 1.79:1. Focus ring 2.80:1, and high contrast makes it 1.23:1 because the override assumes a light background. |
-| 7.3 | Every screen announces what it is when it becomes active. | 1 | 12 of 26 screens have no label; six scan-flow transitions announce nothing. |
-| 7.4 | Focus moves sensibly on every screen and sheet change, and returns on close. | 0 | Focus lands on the document body after every transition. Sheets never receive focus, never trap it, never return it. |
-| 7.5 | Blocked actions and errors are announced, not only shown. | 0 | Two publish gates fail silently: no announcement, no invalid state, no focus move. A working live region exists and is never called. |
-| 7.6 | What is announced matches what is shown, at every moment. | 0 | The processing checklist announces all three checks complete before any has run. |
-| 7.7 | Every state a sighted user gets from the map is available as text. | 2 | The list view is a complete equivalent, but match state never reaches the pin itself. |
-| 7.8 | Keyboard alone completes every flow; Escape closes what it opens; nothing behind a scrim is reachable. | 1 | Escape is inert on all 8 sheets; 76 focusables stay reachable behind the scrim; 64 pins precede search in tab order. |
-| 7.9 | Roles are correct and never destroy a native one. | 1 | `role="listitem"` on buttons in three screens destroys the button role. The list view does it correctly. |
-| 7.10 | Reduced motion removes animation without removing feedback. | 4 | Every transition drops to near zero; the ring is replaced by a determinate bar, not frozen. |
-| 7.11 | Text scaling to the largest setting clips nothing. | 4 | Verified across all 26 screens at both settings. |
-| 7.12 | Touch targets meet 44x44 including expanded hit areas. | 3 | Near universal, two real failures. |
+| 7.1 | Text contrast passes everywhere, in both normal and high contrast. | 4 | Unchanged and not regressed. The decorative glyphs that were the only failures (`>`, `->`, the transparent tick) are now `aria-hidden`, and the two that stay visible were raised from 2.62:1 to 4.6:1. Checklist pending text went 2.47:1 -> 6.34:1 (`--faint` on the ground). |
+| 7.2 | Non-text indicators pass 3:1: toggle tracks, form borders, pins against the map, focus rings. | 4 | Every indicator the audit measured now passes in **both** modes. Normal / high contrast: toggle track 3.37 / 6.66, form and chip borders 3.37 / 6.66, dot outlines 3.37 / 6.66, scanned-pin rim 5.04 / 8.04, estimated-pin stroke 3.59 / 8.09, progress track vs ground 3.29 / 3.02, progress-arc rim vs track 3.39 / 3.39, nav current-tab bar 9.62 / 13.25. Four tokens (`--edge`, `--track`, `--marigold-edge`, `--ring-rim`) carry all of it. |
+| 7.3 | Every screen announces what it is when it becomes active. | 4 | All 26 screens now carry an `aria-label` (12 had none) and `tabindex="-1"`; `showScreen()` moves focus onto the screen, which is a labelled region, so the name is announced by the focus move. Walked all 26: `focusIsScreen: true` on every one. |
+| 7.4 | Focus moves sensibly on every screen and sheet change, and returns on close. | 4 | Screen change: `document.activeElement` is the new screen on all 26 (was `BODY`). Sheet open: focus lands on the sheet heading (`H3.sheet-h`; the card sheet lands on `H2.card-name`). Sheet close: focus returns to the opener - Filters FAB after Escape, and the originating **pin** after the card closes, re-found by id across the re-render. `closeSearch()` returns focus to `#search-btn`. A nav token abandons the restore if the app navigated instead. |
+| 7.5 | Blocked actions and errors are announced, not only shown. | 4 | `toast()` now routes through `announceUI()` - every toast reaches `#sr-announce` (verified: region text matches toast text). Submit claim unchecked: screen holds, `aria-invalid="true"`, `aria-describedby="claim-authz-err"`, inline error shown, focus on `#claim-authz`, announced "Claim not submitted...". Publish with the face-flagged photo (from both `ow-photos` and `ow-review`): inline error naming photo 3, `aria-invalid` on the publish button **and** on the Crop control, focus on Crop, announced. Checking the box / cropping clears all of it. |
+| 7.6 | What is announced matches what is shown, at every moment. | 4 | The transparent tick is `aria-hidden` in all three places (`.ci-dot`, `.p-ring`, `.tl-dot`). The checklist is a real list whose per-item state text is written by `setCheckState()` at the moment the class lands. At t=0: "Doorway framed - not checked yet ..." (was "tick Doorway framed tick Entry path visible tick Photo quality checked"). Sampled through a full run: **zero** frames where announced-done != visual-done. |
+| 7.7 | Every state a sighted user gets from the map is available as text. | 4 | One `placeSentence()` now feeds both the list row and the pin. 64/64 pins name their match state: "Royal Blue Grocery. 241 W 3rd St. Scanned on-site. Good match, 3 of 3 needs. Seen 2 days ago. 300 ft. Seen: Step-free entry, Wide door, Easy-grip handle, Clear approach." Was "Royal Blue Grocery - Scanned on-site". |
+| 7.8 | Keyboard alone completes every flow; Escape closes what it opens; nothing behind a scrim is reachable. | 4 | Escape closes the search overlay and all 8 sheets. With a modal sheet open: `aria-modal="true"`, background `inert` (live regions exempted), **0** focusables reachable outside the sheet (was 76), Tab trapped. Tab order on the map: search, list toggle, zoom, locate and both FABs at indexes 1-9, then a "Skip the 64 map pins" control, then the pins (first pin at index 10; was index 0 with 64 pins ahead of search). Scan flow walked with real Tab presses: primer -> Close scan -> Allow camera -> capture -> Cancel scan -> Capture photo. No element anywhere in the app has a click handler without a native control under it (swept: 0 non-native clickables), so Enter/Space activation is the UA's. |
+| 7.9 | Roles are correct and never destroy a native one. | 4 | 0 `button[role="listitem"]` in the document. Saved, My scans and My corrections are `UL role="list"` > `LI` > `BUTTON`, matching the list view. Seven labelled `<div>`s got a real role; 0 remain. The non-modal card sheet is `role="region"`, not `dialog`. Freshness is a labelled group with `aria-pressed`; the claim result is a `radiogroup` of `radio`s with a roving tabindex, arrow keys and a visible tick. |
+| 7.10 | Reduced motion removes animation without removing feedback. | 4 | Re-verified after the changes: sheet, checkitem and ring transitions all 1e-05s, `#ringwrap` `display:none`, the determinate bar at 100%, all three checks landed, "Checks complete. 3 features identified." still announced, checklist text agrees. |
+| 7.11 | Text scaling to the largest setting clips nothing. | 4 | Top step raised from 17.4px (+16%) to 18.9px (+26%). Swept all 26 screens at Default, Larger, and Larger + high contrast: the set of overflow findings is **identical** across all three and every entry is a `.sr-only` element or clipped map geometry - no visible text clips. The toast, the one failure in Round 0, now wraps: 358px wide, 3 lines, `scrollWidth == clientWidth`. |
+| 7.12 | Touch targets meet 44x44 including expanded hit areas. | 4 | The two failures are fixed. `#card-grip` 390x44 (padding grew, the 5px grip bar did not). `#search-clear` keeps its 34px disc with a `::before{inset:-5px}` hit area: all four `elementFromPoint` probes at +/-21px hit the button. |
 
 
 ---
@@ -119,3 +122,56 @@ gates fail in total silence, and the processing checklist announces success befo
 has run. On a product for disabled people this outranks every craft item.
 
 Order of work: accessibility behaviour first, then the four design systems, then motion.
+
+---
+
+**Round 1 (2026-09-05).** Accessibility behaviour. All ten blocking defects in
+design/a11y-audit.md closed, plus fifteen of the eighteen improvements and the ASCII sweep.
+
+Recounted the sheet while scoring: there are **45** criteria, not 44, so the Round 0
+figures restate as 2.53 average with 21 below 3. On that same count, Round 1 is
+**2.53 -> 3.22**, and criteria below 3 go **21 -> 12**.
+
+*What moved.* Section 7 went from an average of 1.75 to 4.00 and is the first section
+with nothing below 3. The three that mattered most:
+
+- **Silent refusals (7.5, 0 -> 4).** `toast()` now announces through the live region that
+  was already there and never called. Both publish gates render an inline error beside the
+  control that blocks them, mark it invalid, describe it, move focus onto it, and announce.
+  The refusal is now the same event in both channels.
+- **Screen changes (7.3/7.4, 1 and 0 -> 4).** Every screen has a name and takes focus. A
+  keyboard user no longer restarts at the document top 26 times; a screen-reader user is
+  told which screen they landed on.
+- **The lying checklist (7.6, 0 -> 4).** The tick is out of the accessibility tree and the
+  announced state is written when the check lands. Sampled across a full run there is no
+  moment where the two channels disagree.
+
+Also closed: match state, freshness and distance now reach the pin itself (7.7); sheets get
+focus in, a trap, Escape and focus return, with nothing reachable behind the scrim (7.8);
+the three row lists stopped destroying their buttons' role (7.9); every non-text indicator
+clears 3:1 in both modes, including the focus ring on the two dark screens where high
+contrast had been making it worse (7.2, 1.23:1 -> 15.76:1); both touch-target failures
+(7.12). 5.6 went 1 -> 4 with the ASCII sweep and 3.4 went 3 -> 4 on the measured contrast.
+
+*What did not move.* Nothing in sections 1, 2, 4 or 6 was touched this round, by design —
+the type, spacing, elevation and motion scales are still informal, and that is the next
+round's work. Fifteen of the eighteen improvements closed outright; three are only partly
+closed and are named here rather than claimed:
+
+- **I5 (headings).** Every screen that had none now has an `<h1>` and the section labels are
+  real `<h2>`s, but `.chips-title` inside the card and the sheets is still a `<div>`, so
+  heading navigation within a card is still shallow.
+- **I6 (the capture coach).** It no longer interrupts every 1.7s — `aria-live` is gone and
+  it announces once on entry — but the visible chip still rotates, so WCAG 2.2.2's pause
+  mechanism for auto-updating content is not there.
+- **I15 (200% text).** The app's own top step went +16% -> +26% and clips nothing at any of
+  its three settings, but a real 200% root is a layout project, not a token change.
+
+The `[proc]` `console.log` instrumentation stays: it is a development aid, not an error, and
+the console is otherwise clean.
+
+*Verification limit worth recording.* The browser pane could not synthesise Enter or Space
+key activation, so keyboard *activation* is evidenced structurally — a sweep found zero
+elements in the app with a click handler and no native control under them — rather than by
+observing a keypress fire a handler. Focus movement, tab order, Escape and the trap were
+all driven with real key events.
