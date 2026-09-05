@@ -82,3 +82,38 @@ which improves on the board by adding a sub-line saying what each choice does. `
 invention with no board panel and the most professionally designed information screen in the
 build. The Accessibility screen's self-demonstrating text-size control. And the zoomed-out map
 ground, which reads more like Austin than the boards' cooler version.
+
+---
+
+## The map ground is the wrong temperature, and this is a correction to my own decision
+
+The product owner has raised the map twice. Measured against the board rather than argued:
+
+| | Board (sampled from panel 1) | Build |
+|---|---|---|
+| Ground / blocks | `#F9F9FC` and `#FAF9FC` — near-white, faintly cool | `#EFE8DA` warm cream |
+| Block shading | barely present | `#E5DCCF` warm grey-beige |
+| Plazas | none visible at this scale | `#F8EACC` warm cream-yellow |
+| Overall | 85% of pixels sit in a cool near-white band | noticeably darker and yellow |
+
+The board's map is **almost white with a faint blue-violet cast**. The build's is warm cream and
+several steps darker. That difference is what "the background map is still wrong" means, and it
+is not subtle once the two are side by side.
+
+**How it happened, so it is not repeated.** Round 3 produced four ground variants and recommended
+"Terrain's colour on Relief's light" — warm sand ground, sage canopy, marigold plazas. I approved
+that without checking it against the board, which is the actual error: the recommendation was
+internally reasoned and simply aimed at the wrong target. Round 4 then re-solved those tones onto
+the official palette and reported that eight came back byte-identical "because Round 3's warm
+family was already on the marigold hue line". That was a true observation about the *tones* and it
+carried the wrong decision forward intact.
+
+**What Round 6 must do.** Rebuild the ground cool and light to match the board: near-white blocks
+with a faint violet cast, white streets, the light blue tree clusters the board uses, and shading
+steps small enough that the map reads as a pale field rather than a textured one. Keep everything
+structural that Round 3 earned — the road hierarchy, the implied light direction, the landcover
+areas, the block-to-block variety — and change only the temperature and the value range.
+
+**Re-measure every pin against the new ground.** A near-white ground raises the contrast floor for
+the estimated pin's outline, which is the marker with no halo. Round 4's table was measured on the
+warm ground and does not carry over. Print the new table.
