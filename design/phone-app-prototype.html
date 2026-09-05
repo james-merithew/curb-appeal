@@ -7,41 +7,96 @@
 <title>EntryMap &mdash; phone prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet">
+<!-- Round 4 type. The asset library names Atkinson Hyperlegible for UI and Nunito Sans
+     for the wordmark. Atkinson Hyperlegible is drawn for low vision -- unambiguous
+     letterforms, a wide aperture, distinct I/l/1 and 0/O -- which for an accessibility
+     product is a better face than Nunito on the merits, not only on brand. The
+     original family ships only 400/700, which cannot carry this file's three-weight
+     ladder, so the variable "Next" cut (200-800) is used; the ladder is re-pitched to
+     500/650/800 to fit its axis. Nunito Sans is loaded because the official wordmark
+     SVGs set it by name, and inline SVG uses the document's fonts. -->
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Nunito+Sans:wght@700..900&display=swap" rel="stylesheet">
 <style>
 /* ============ tokens ============ */
 :root{
-  --ground:#EDEBFA;          /* lavender map canvas */
-  --ground-deep:#E2DFF6;
-  --card:#FFFFFF;
-  --ink:#241F3A;             /* 15:1 on white */
-  --sub:#4A4463;             /* 8.4:1 on white */
-  --faint:#575170;
-  --blue:#5B8DEF;            /* Estimated tier accent (fills/strokes) */
-  --blue-ink:#1E3A8A;        /* Estimated text, 10:1 */
-  --blue-wash:#EAF1FE;
-  --marigold:#F0A32F;        /* Scanned tier / action */
-  --marigold-ink:#6E4A00;    /* 8:1 on white */
-  --marigold-wash:#FCF1DC;
-  /* Logo palette. These are BRAND colours for chrome the product owns -- the
-     wordmark, the bottom bar. They are never used on a marker, where the same
-     hues carry evidence state and must stay unambiguous. */
-  --brand-blue:#7CC4FA;        /* the mark's sky arc; on dark only */
-  --brand-blue-ink:#1D5FA8;    /* the same blue where it must hold on white, 6.4:1 */
-  --brand-amber:#F0A32F;       /* the mark's marigold arc */
-  --purple:#7053C5;          /* Owner tier / links */
-  --purple-ink:#4B2E9E;      /* 9:1 */
-  --purple-wash:#F0EBFC;
-  --teal-ink:#0E5E66;        /* neutral confidence alt */
-  --match-green:#1B7A3D;     /* ONLY match state */
-  --match-ink:#0F5228;
-  --match-wash:#DFF3E6;
-  --amber-ink:#6B4F00;       /* freshness aging ONLY */
-  --amber-wash:#FBF3DC;
-  --street:#FFFFFF;
-  --block:#F7F6FE;
-  --tree:#AFC2F2;
-  --bezel:#17141F;
+  /* ---- ROUND 4: THE OFFICIAL PALETTE ------------------------------------------
+     Copied verbatim from design/board-refs/mockups-final/asset-library/tokens/
+     variables.css. These eleven values are the ONLY colours in this file that are
+     authored rather than derived; everything below is either one of them or a
+     documented mix of two of them. The ad-hoc palette the build grew (#17103D ink,
+     #5B35F5 purple, #69B7FF sky, #FFBF24 marigold, #F2EEFF lavender) is gone. */
+  --indigo900:#17103D;   /* chrome, high-contrast text, dark surfaces */
+  --indigo800:#211054;
+  --violet600:#5B35F5;   /* brand mark, primary icons, Owner-confirmed */
+  --violet800:#4020B5;   /* links, labels, UI icons -- 10.04:1 on white */
+  --sky400:#69B7FF;      /* ON-DARK sky: 8.33:1 on indigo900, 2.14:1 on white */
+  --sky700:#1266A6;      /* ON-LIGHT sky: 6.04:1 on white. The answer to "the
+                            light blue is missing from light chrome" -- before the
+                            library there was no approved sky that held on white. */
+  --marigold400:#FFBF24; /* Scanned on-site, the Scan action */
+  --amber700:#9A5700;    /* non-body freshness icons (5.62:1); NOT small text */
+  --lavender100:#F2EEFF; /* canvas and quiet supporting surfaces */
+  --lavender200:#E2DAFF; /* hairlines and quiet strokes */
+  --white:#FFFFFF;
+
+  /* ---- ROLES, each mapped onto the official palette --------------------------
+     A role that the library ships a token for points at it. A role the library has
+     NO token for is derived as a mix of two official colours, solved numerically
+     against a stated contrast target, and the mix is written in the comment. */
+  --ground:var(--lavender100);      /* map canvas */
+  --ground-deep:var(--lavender200);
+  --card:var(--white);
+  --ink:var(--indigo900);           /* 17.83:1 on white, 15.66:1 on lavender100 */
+  /* DERIVED (no library token): the second and third inks. indigo900 lightened
+     toward white to the first step clearing 8:1 / 7:1 on lavender100, because the
+     library's report requires body text at 7:1 or better on its own surfaces. */
+  --sub:#494467;                    /* indigo900 -> white 27.5%, 8.00:1 on lavender100 */
+  --faint:#524C6E;                  /* indigo900 -> white 33.0%, 7.05:1 on lavender100 */
+  --blue:var(--sky400);             /* Estimated tier accent on DARK only */
+  /* DERIVED (no library token): an Estimated ink that clears 7:1. sky700 is
+     6.04:1 on white, which the report allows for icons and labels but not for
+     small body text, so the text ink is sky700 carried 22.7% toward indigo900. */
+  --blue-ink:#13528E;               /* 8.00:1 on white, 7.03:1 on lavender100 */
+  --blue-wash:#E4F2FF;              /* DERIVED: white -> sky400 18.3% */
+  --marigold:var(--marigold400);    /* Scanned tier / the scan action */
+  /* DERIVED (no library token): a Scanned ink that clears 7:1. amber700 is 5.62:1,
+     which the report names as an icon colour, so the text ink is amber700 carried
+     26.1% toward indigo900 -- the report's own "pair small text with deep indigo". */
+  --marigold-ink:#784410;           /* 7.98:1 on white, 7.01:1 on lavender100 */
+  --marigold-wash:#FFEFC7;          /* DERIVED: white -> marigold400 25.8% */
+  /* The brand's light blue, at both ends. On dark it is the library's sky400,
+     exactly as the on-dark wordmark uses it; on light it is the library's sky700,
+     which is what puts the light blue into light chrome at last. */
+  --brand-blue:var(--sky400);
+  --brand-blue-ink:var(--sky700);
+  --purple:var(--violet600);        /* Owner tier / the mark */
+  --purple-ink:var(--violet800);    /* 10.04:1 on white -- the report's link ink */
+  --purple-wash:var(--lavender100); /* the library's own quiet fill, over white */
+  /* Needs-match. Round 2 chose green because purple already meant owner-confirmed;
+     the library supersedes that with three approved halos that carry the state in
+     LINE STYLE first -- solid indigo900 (good), dashed violet600 (partial), dotted
+     sky700 (unknown). Adopted as shipped. --match-green is gone. */
+  --match-good:var(--indigo900);
+  --match-partial:var(--violet600);
+  --match-unknown:var(--sky700);
+  --match-ink:var(--indigo900);
+  --match-partial-ink:var(--violet800);
+  --match-wash:var(--lavender100);
+  /* Freshness ageing shared the Scanned ink's hue already (#784410 vs #784410 --
+     two names, one colour). Round 4 collapses them: one derived amber ink for text,
+     the library's own amber700 for the non-text freshness icon. */
+  --amber-ink:var(--marigold-ink);
+  --amber-wash:var(--marigold-wash);
+  --bezel:#0D0922;                  /* DERIVED: indigo900 -> black 45%, the shell */
+  /* Dark app chrome (the board's top bar and bottom nav). DERIVED: indigo900 carried
+     14% and 42% toward white, which is the first pair that puts the control fill
+     clearly inside the bar (1.48:1) and its edge over 3:1 against the bar (3.98:1)
+     while white text on the fill stays at 12.05:1. */
+  --chrome-bg:var(--indigo900);
+  --chrome-fill:#373158;
+  --chrome-edge:#78748E;
+  --chrome-ink:var(--white);
+  --chrome-quiet:var(--lavender200);  /* 13.33:1 on indigo900 -- unselected nav labels */
 
   /* ---- TYPE SCALE (design-systems-spec section 1) --------------------------
      Eight size steps, three weights. Every step names size, weight, leading and
@@ -54,10 +109,14 @@
   --fs-sub:     0.86em;  /* 12.9px */
   --fs-meta:    0.78em;  /* 11.7px */
   --fs-micro:   0.7em;   /* 10.5px -- the floor */
-  /* exactly three weights; 900 is a reserved resource, not a default */
-  --fw-body:    600;     /* things to read */
-  --fw-strong:  800;     /* controls and labels */
-  --fw-display: 900;     /* "this is the thing": wordmark, headings, headline numbers */
+  /* Exactly three weights; the top one is a reserved resource, not a default.
+     Round 4 re-pitched the ladder onto Atkinson Hyperlegible Next, whose variable
+     axis runs 200-800, so 600/800/900 becomes 500/650/800. The library's own
+     assets use 650 for badge labels and 750 for state headings, so the new middle
+     and top steps are the faces the approved boards are drawn in. */
+  --fw-body:    500;     /* things to read */
+  --fw-strong:  650;     /* controls and labels */
+  --fw-display: 800;     /* "this is the thing": wordmark, headings, headline numbers */
   /* leading tightens as size rises */
   --lh-display: 1.0;
   --lh-h1:      1.1;
@@ -85,51 +144,52 @@
   --r-4:20px;    /* large surface: popup, mini-map, viewfinder, toast */
   --r-5:24px;    /* a docked sheet's top corners */
   --radius:var(--r-3);  /* kept: the name 60 call sites already use */
-  --wash-quiet:#F8F7FD; /* the one quiet fill, was an undeclared literal at 5 sites */
+  --wash-quiet:#F9F7FF; /* DERIVED: white -> lavender100 62%, the one quiet fill */
   --float-white:rgba(255,255,255,.96); /* chrome floating over the map; was 4 alphas */
   /* Board sections 2-3: a card is a hairline lavender boundary plus generous padding,
      not a shadow doing the work alone. This is DECORATION on a container, never the
      thing that identifies a control -- every control edge still uses --edge, which is
      the token Round 1 measured at 3.37:1. Adding a hairline can only add an edge. */
-  --hairline:#DCD6F2;
-  --icon-box:#F0EBFC;    /* the one leading-icon box, so labels align down a column */
+  --hairline:var(--lavender200);  /* the library's own badge stroke */
+  --icon-box:var(--lavender100);  /* the one leading-icon box, so labels align down a column */
   --pad-card:18px;
-  --shadow:0 10px 30px rgba(36,31,58,.16);
-  /* non-text UI boundary: every control edge, track and unselected indicator uses this.
-     3.37:1 on white and 3.06:1 on the lavender ground -- WCAG 1.4.11 for both surfaces. */
-  --edge:#8E88A8;
-  --edge-strong:#6F688C;   /* boundaries that sit on the lavender map ground */
-  --marigold-edge:#8A5A00; /* dark rim that carries the marigold indicators to 3:1 */
-  --track:#847DA0;         /* progress track: 3.29:1 on the ground, 3.39:1 under the ring rim */
-  --ring-rim:#412D00;      /* the progress arc's own rim - must beat the track as well */
-  --ring-rim-purple:#2A1A5E; /* the same rim on the purple publish bar; was a literal */
-  /* ONE estimated-tier edge. design/pins-and-icons.html specifies #2C63C9 and
-     design/map-hierarchy.html used #3F79DC; the two committed files disagreed and the
-     teardrop's own inline fallback already read #2C63C9 while its token read #3F79DC.
-     Settled on #2C63C9, for three reasons: it is the pin gallery's canonical value; it
-     is what the level-3 ring -- the ONLY marker that touches raw ground with no white
-     halo -- already ships as; and it drops the ground's luminance floor from 0.690 to
-     0.459, which roughly doubles the tonal range the map ground may use and is what
-     makes the Terrain/Relief ground possible at 3:1. --blue-pin is gone; one name. */
-  --blue-edge:#2C63C9;
+  --shadow:0 10px 30px rgba(23,16,61,.16);
+  /* Non-text UI boundary: every control edge, track and unselected indicator uses
+     this. DERIVED (no library token): indigo900 -> white, stopped at the last step
+     that still clears 3:1 on BOTH white and lavender100. 3.42:1 / 3.01:1. */
+  --edge:#8C889F;
+  --edge-strong:#77728D;   /* DERIVED: indigo900 -> white 42%; 4.51:1 on the brightest street */
+  --marigold-edge:var(--indigo900); /* the library's own scanned-badge stroke: indigo900 on marigold400, 10.81:1 */
+  --track:#86839A;         /* DERIVED: indigo900 -> white 46%; 3.01:1 on the ground, 3.22:1 on lavender100 */
+  --ring-rim:var(--indigo900);      /* one rim for both progress arcs: 4.86:1 on the track,
+                                       10.81:1 on marigold400, 2.78:1 on violet600 */
+  --ring-rim-purple:var(--indigo900);
+  /* The estimated-tier edge is now the library's own on-light sky. Round 3 settled a
+     disagreement between two committed files on #1266A6; the library supersedes both
+     with sky700 #1266A6, which is what its OWN estimated pin already uses for the
+     italic i and the confidence dots' stroke. Relative luminance 0.1238 puts the map
+     ground's floor at 0.4715 for 3:1 -- slightly MORE headroom than #1266A6 had, so
+     the Round 3 ground survives the swap. --blue-pin and #1266A6 are both gone. */
+  --blue-edge:var(--sky700);
 
   /* ---- ELEVATION (design-systems-spec section 3) --------------------------------
      Four levels. Elevation is a claim about how far a surface sits from the map
      plane; it is NEVER used for emphasis. Each level is two shadows -- a tight
      contact shadow that anchors the object and a wide ambient one that gives it
      distance -- which is what makes one level read the same on white and on the
-     lavender ground. Opacity rises with the ladder: .07 -> .14 -> .20/.24. */
-  --elev-1:0 1px 2px rgba(36,31,58,.05), 0 2px 8px rgba(36,31,58,.07);
-  --elev-2:0 2px 6px rgba(36,31,58,.10), 0 10px 24px rgba(36,31,58,.14);
-  --elev-3-dock:0 -1px 0 rgba(36,31,58,.06), 0 -8px 28px rgba(36,31,58,.20);
-  --elev-3-dark:0 -1px 0 rgba(15,8,45,.10), 0 -8px 28px rgba(15,8,45,.34);
-  --elev-3-free:0 2px 8px rgba(36,31,58,.12), 0 16px 40px rgba(36,31,58,.24);
+     lavender ground. Opacity rises with the ladder: .07 -> .14 -> .20/.24.
+     Round 4: every shadow rgb is now indigo900 (23,16,61), not the retired #17103D. */
+  --elev-1:0 1px 2px rgba(23,16,61,.05), 0 2px 8px rgba(23,16,61,.07);
+  --elev-2:0 2px 6px rgba(23,16,61,.10), 0 10px 24px rgba(23,16,61,.14);
+  --elev-3-dock:0 -1px 0 rgba(23,16,61,.06), 0 -8px 28px rgba(23,16,61,.20);
+  --elev-3-dark:0 -1px 0 rgba(13,9,34,.10), 0 -8px 28px rgba(13,9,34,.34);
+  --elev-3-free:0 2px 8px rgba(23,16,61,.12), 0 16px 40px rgba(23,16,61,.24);
   /* two families that are NOT elevation, named so they stop competing with it */
-  --ring-action:0 4px 14px rgba(240,163,47,.42); /* the marigold capture glow */
+  --ring-action:0 4px 14px rgba(255,191,36,.42); /* the marigold capture glow */
   --ring-select:inset 0 0 0 2px var(--purple);   /* selected / saved */
-  --ring-quiet:inset 0 0 0 2px #E3DEF5;          /* ghost button on white */
-  --ring-needed:0 0 0 2px var(--match-green);    /* needs-match ONLY (colour rule) */
-  --knob:0 1px 3px rgba(36,31,58,.26);           /* a physical knob on a track */
+  --ring-quiet:inset 0 0 0 2px var(--lavender200); /* ghost button on white */
+  --ring-needed:0 0 0 2px var(--match-good);     /* needs-match ONLY (colour rule) */
+  --knob:0 1px 3px rgba(23,16,61,.26);           /* a physical knob on a track */
 
   /* ---- SPACING (design-systems-spec section 2) ----------------------------------
      Ten steps. 2-4-6-8 at the bottom where a 2px difference is visible, a 4pt grid
@@ -167,35 +227,46 @@
   --dur-check:1500ms;  /* processing: one named check */
   --dur-drop:700ms;    /* the pin lands */
   --dur-ripple:1000ms; /* the landing ripple, x2 */
-  /* press feedback (design-systems-spec section 5) */
-  --press-wash:#F1EFFA;
-  --press-wash-ground:#E6E2F4;
+  /* press feedback (design-systems-spec section 5)
+     DERIVED: lavender100/200 carried 6-7% toward violet600 -- a press is the surface
+     leaning toward the brand violet, not a grey. */
+  --press-wash:#E9E3FE;
+  --press-wash-ground:#D9CEFE;
 
   /* ---- MAP GROUND: Terrain's colour on Relief's light (design/map-ground.html) ---
-     Warm sand ground, sage canopy, marigold plazas, cool lavender towers standing
-     among warm putty low-rise. Saturation, not hue: no ground tone exceeds chroma
-     43 while the least saturated marker colour is chroma 95, so a marker is always
-     the most saturated thing in its own radius. Every tone here clears the
-     luminance floor the estimated ring needs (0.459 at --blue-edge #2C63C9). */
-  --g-ground:#EFE8DA;  /* warm sand */
-  --g-parcel:#EBE4D4;  /* the yard / service field buildings sit in */
+     ROUND 4 RE-DERIVATION. The library ships no map-ground tokens, so every tone
+     here is now solved as a two-step mix of official colours -- an official base
+     carried toward white (which sets chroma) and then toward indigo900 (which sets
+     lightness) -- with the solver targeting the Round 3 tone's exact CIE lightness
+     and chroma. That keeps the whole Round 3 contrast argument intact while moving
+     every hue onto the approved palette. Bases: marigold400 for the warm sand,
+     putty and plaza family; lavender200 for the cool towers; and, for the canopy,
+     a 50/50 marigold400 + sky400 mix, because the approved palette contains no
+     green and those are the only two official hues that make one.
+     Saturation, not hue: the loudest ground tone is the plaza at CIE chroma 16.3
+     while the least saturated marker colour is now sky700 at 40.9, so a marker is
+     still the most saturated thing in its own radius by a factor of 2.5. Every
+     tone clears the luminance floor the estimated ring needs -- 0.4715 at
+     --blue-edge sky700; the darkest tone drawn anywhere is 0.7235. */
+  --g-ground:#EFE8DA;  /* warm sand    -- marigold400 -> white 91.5% -> indigo900 1.0% */
+  --g-parcel:#ECE4D2;  /* the yard / service field buildings sit in */
   --g-s1:#FFFDF8;      /* primary street */
   --g-s2:#FCF9F2;      /* secondary */
   --g-s3:#F7F3EA;      /* minor */
   --g-s4:#F0EADD;      /* alley */
-  --g-casing:#E2DDCF;  /* the kerb channel a street is carved into */
+  --g-casing:#E5DCCF;  /* the kerb channel a street is carved into */
   --g-b1:#FFFCF5;      /* footprint tones, ramped by mass: biggest = brightest top face */
-  --g-b2:#FAF5EC;
-  --g-b3:#F3F0FA;      /* the cool lavender towers */
+  --g-b2:#FAF5EB;
+  --g-b3:#F3F0FB;      /* the cool lavender towers -- lavender200 based */
   --g-b4:#EDEAF6;
   --g-b5:#F6F1E5;      /* warm putty low-rise */
-  --g-shade:#E2DDCF;   /* Relief's cast shadow, step 2 */
-  --g-shade2:#E8E3D7;  /* Relief's cast shadow, step 1 (the outer, paler falloff) */
+  --g-shade:#E5DCCF;   /* Relief's cast shadow, step 2 */
+  --g-shade2:#EAE2D6;  /* Relief's cast shadow, step 1 (the outer, paler falloff) */
   --g-lit:#FFFFFF;     /* the lit top-and-left edge on every footprint */
-  --g-can:#D9E2D6;     /* sage canopy lobe */
-  --g-can2:#E8EEE4;    /* the band / grove the lobes sit on */
-  --g-plaza:#F8EACD;   /* marigold plaza, chroma 43 -- the most saturated ground tone */
-  --g-label:#4A4030;   /* street label ink */
+  --g-can:#DEE1D2;     /* canopy lobe -- marigold400 + sky400, the only official green */
+  --g-can2:#ECEDE3;    /* the band / grove the lobes sit on */
+  --g-plaza:#F8EACC;   /* marigold plaza -- the most saturated ground tone, CIE C 16.3 */
+  --g-label:var(--indigo900); /* street label ink: 14.62:1 on the sand, 17.54:1 on a street */
 }
 .ic{display:inline-flex;align-items:center;justify-content:center}
 /* 2.7 optical alignment: a tick sits optically low inside a circle, so the round
@@ -232,14 +303,22 @@
 html,body{height:100%}
 body{
   background:
-    radial-gradient(1200px 700px at 50% 0%, #f0eef4 0%, #e2e0e8 55%, #d8d6e0 100%);
-  font-family:'Nunito',system-ui,'Segoe UI',sans-serif;
+    radial-gradient(1200px 700px at 50% 0%, #F9F7FF 0%, #EDE7FB 55%, #DED6F0 100%);
+  font-family:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',system-ui,'Segoe UI',Arial,sans-serif;
+  /* Round 4 caught this: Nunito's figures were tabular BY DEFAULT, which is what
+     criterion 1.5 was measured on and why no `tabular-nums` was ever needed.
+     Atkinson Hyperlegible Next's are PROPORTIONAL -- ten 1s and ten 0s differ by
+     89.21px at 40px/650 -- so the font swap would have silently undone the column
+     alignment in every freshness, count and distance row. The face supports `tnum`:
+     with this declaration the same measurement is 0.00px. Set once, at the root,
+     because that is exactly the behaviour the old face gave everywhere. */
+  font-variant-numeric:tabular-nums;
   color:var(--ink);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   min-height:100vh;padding:var(--sp-7) var(--sp-5);gap:var(--sp-6);
 }
-.stage-caption{color:#4a465c;font-size:13px;font-weight:var(--fw-body);letter-spacing:.02em;text-align:center}
-.stage-caption b{color:#241F3A}
+.stage-caption{color:var(--sub);font-size:13px;font-weight:var(--fw-body);letter-spacing:.02em;text-align:center}
+.stage-caption b{color:#17103D}
 
 /* ============ phone frame ============ */
 .phone-wrap{position:relative}
@@ -301,7 +380,7 @@ body{
 .pinbtn.recede{opacity:.8}
 .pin-label{
   position:absolute;bottom:calc(var(--mh) + 4px);left:0;transform:translateX(-50%);
-  background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-green);
+  background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-good);
   border-radius:999px;padding:var(--sp-1) var(--sp-4);font-size:var(--fs-micro);font-weight:var(--fw-strong);
   line-height:var(--lh-micro);white-space:nowrap;pointer-events:none;letter-spacing:var(--ls-flat);}
 @keyframes dropIn{0%{transform:translate(-50%,-46px) scale(.6);opacity:0}62%{transform:translate(-50%,4px) scale(1.06);opacity:1}82%{transform:translate(-50%,-3px)}100%{transform:translateX(-50%) scale(1)}}
@@ -312,35 +391,43 @@ body{
 .rippler{position:absolute;left:0;top:calc(var(--mh) * -0.62);width:34px;height:34px;border-radius:50%;transform:translate(-50%,-50%);
   border:3px solid var(--marigold);animation:ripple var(--dur-ripple) var(--ease-enter) 2;pointer-events:none}
 
-.street-label{font-weight:var(--fw-strong);fill:var(--g-label,#4A4030);font-size:10.5px;letter-spacing:var(--ls-caps-wide)}
+.street-label{font-weight:var(--fw-strong);fill:var(--g-label,#17103D);font-size:10.5px;letter-spacing:var(--ls-caps-wide)}
 
 /* map overlays */
+/* ---- ROUND 4: THE APP CHROME IS THE BOARD'S DARK BAR ------------------------
+   Boards 01 and 02 both draw the top bar and the bottom nav as one solid indigo900
+   band, with the wordmark on it in the on-dark pairing -- sky400 "entry", white
+   "map". The build had a white wordmark pill floating over the map instead, which
+   is why the owner kept saying "entrymap in the top right is not the correct with
+   the light blue and white": on a white pill the light blue is unavailable. The bar
+   is the fix, and it is also where the brand's light blue finally lives in chrome
+   at its approved strength (sky400 on indigo900, 8.33:1 -- the exact pairing the
+   library's contrast report signs off for the dark-surface wordmark). */
 .apphead{
-  position:absolute;top:50px;left:12px;right:12px;z-index:43;
-  display:flex;align-items:center;gap:var(--sp-4);pointer-events:none;
+  position:absolute;top:0;left:0;right:0;z-index:43;
+  background:var(--indigo900);
+  padding:46px var(--sp-5) var(--sp-5);
+  display:flex;align-items:center;gap:var(--sp-4);
 }
-.apphead>*{pointer-events:auto}
-/* The wordmark is ALWAYS two-tone; which two tones depends on what it sits on.
-   On the logo's deep aubergine it is sky blue and white. On a white pill white
-   is unavailable, so the light-background pairing is used: a deeper blue that
-   holds on white, and the dark ink. It is never one flat colour. */
-.wordmark{
-  background:var(--float-white);border-radius:999px;padding:var(--sp-0) var(--sp-6);min-height:44px;
-  display:flex;align-items:center;font-weight:var(--fw-display);font-size:var(--fs-h3);letter-spacing:var(--ls-h3);
-  box-shadow:var(--elev-2);white-space:nowrap;line-height:var(--lh-h3);}
-.wordmark .w-entry{color:var(--brand-blue-ink)}
-.wordmark .w-map{color:var(--purple-ink)}
+.wordmark{flex:0 0 auto;display:flex;align-items:center}
 .locpill .lp-text{min-width:0;overflow-wrap:break-word}
 .locpill{
-  flex:1;min-height:44px;border:none;border-radius:999px;background:var(--float-white);
-  box-shadow:var(--elev-2);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);color:var(--ink);
+  flex:1;min-height:44px;border:1.5px solid var(--chrome-edge);border-radius:999px;
+  background:var(--chrome-fill);
+  font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);color:var(--chrome-ink);
   display:flex;align-items:center;justify-content:center;gap:var(--sp-3);cursor:pointer;min-width:0;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
-.locpill .chevd{color:var(--sub);font-size:var(--fs-sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);font-weight:var(--fw-body);}
+.locpill .chevd{color:var(--chrome-ink);font-size:var(--fs-sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);font-weight:var(--fw-body);}
 .hamb{
-  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;
-  background:var(--float-white);box-shadow:var(--elev-2);color:var(--ink);
+  flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--chrome-edge);border-radius:50%;cursor:pointer;
+  background:var(--chrome-fill);color:var(--chrome-ink);
   display:flex;align-items:center;justify-content:center;
 }
+/* the status bar rides on whatever chrome the current screen has */
+.phone[data-chrome="dark"] .statusbar{color:var(--white)}
+.apphead :focus-visible,.navbar :focus-visible{
+  outline-color:var(--sky400) !important;box-shadow:0 0 0 6px rgba(23,16,61,.92) !important;
+}
+.phone.hc .apphead :focus-visible,.phone.hc .navbar :focus-visible{outline-color:var(--white) !important}
 .map-top{position:absolute;top:104px;left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-4);pointer-events:none;align-items:flex-start}
 .legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-2);
@@ -355,8 +442,8 @@ body{
 .match-legend.on{display:flex}
 .match-legend .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
 .match-legend .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
-.sw.good{border:2px solid var(--match-green)}
-.sw.partial{border:2px dashed var(--teal-ink)}
+.sw.good{border:2px solid var(--match-good)}
+.sw.partial{border:2px dashed var(--match-partial)}
 .sw.unknown{border:2px dotted var(--blue)}
 .map-fabs{position:absolute;left:14px;bottom:110px;z-index:20;display:flex;gap:var(--sp-4);transition:bottom var(--dur-base) var(--ease-enter)}
 .map-fabs.lifted{bottom:214px}
@@ -387,13 +474,13 @@ body{
 .nb-name{display:block;font-weight:var(--fw-body);font-size:var(--fs-sub);color:var(--ink);max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .nb-match{font-size:var(--fs-meta);font-weight:var(--fw-strong);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .nb-match.good{color:var(--match-ink)}
-.nb-match.partial{color:var(--teal-ink)}
+.nb-match.partial{color:var(--match-partial-ink)}
 .nb-dist{font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 
 /* ============ bottom nav ============ */
 .navbar{
   position:absolute;left:0;right:0;bottom:0;height:86px;z-index:45;
-  background:var(--float-white);border-top:1px solid var(--hairline);
+  background:var(--chrome-bg);border-top:1px solid var(--chrome-fill);
   display:flex;align-items:stretch;justify-content:space-around;
   padding:var(--sp-3) var(--sp-5) var(--sp-6);
 }
@@ -416,18 +503,24 @@ body{
 }
 .navbtn svg{stroke:currentColor}
 .navbtn.on svg{stroke-width:2.6}
-#nav-map.on{color:var(--brand-blue-ink)}
-#nav-profile.on{color:var(--purple-ink)}
-.navbtn:not(.on){color:var(--sub)}
+/* On the board's dark bar the logo's own light blue is finally available at full
+   strength: sky400 on indigo900 is the 8.33:1 pairing the library's report approves.
+   Marigold and lavender carry the other two tabs. Every one of the four clears 4.5:1
+   on the bar, and the state is still carried by the rule above the tab and by the
+   weight, never by hue alone -- the 1.05:1 problem does not come back. */
+#nav-map.on{color:var(--sky400)}
+#nav-profile.on{color:var(--lavender200)}
+.navbtn:not(.on){color:var(--chrome-quiet)}
 .nav-scan.on .ring{border-width:5px}
 .nav-scan.on{font-weight:var(--fw-strong)}
 .nav-scan{
   flex:0 0 96px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   background:none;border:none;cursor:pointer;font-family:inherit;margin-top:-26px;/* the scan button's deliberate rise above the bar */
-  color:var(--marigold-ink);font-size:var(--fs-meta);font-weight:var(--fw-strong);gap:var(--sp-2);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+  color:var(--chrome-quiet);font-size:var(--fs-meta);font-weight:var(--fw-strong);gap:var(--sp-2);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+.nav-scan.on{color:var(--marigold)}
 .nav-scan .ring{
-  width:62px;height:62px;border-radius:50%;background:#fff;
-  border:3px solid var(--marigold);box-shadow:var(--ring-action);
+  width:62px;height:62px;border-radius:50%;background:var(--chrome-bg);
+  border:3px solid var(--marigold);color:var(--marigold);box-shadow:var(--ring-action);
   display:flex;align-items:center;justify-content:center;
 }
 
@@ -461,11 +554,18 @@ body{
 .card-name{font-size:var(--fs-h2);font-weight:var(--fw-display);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
 .card-sub{font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .tierchip{display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-2) var(--sp-5);font-size:var(--fs-micro);font-weight:var(--fw-strong);margin-top:var(--sp-3);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
-.tierchip.est{background:var(--blue-wash);color:var(--blue-ink);border:2px dashed var(--blue)}
-.tierchip.scan{background:var(--marigold-wash);color:var(--marigold-ink);border:2px solid var(--marigold)}
-.tierchip.owner{background:var(--purple-wash);color:var(--purple-ink);border:2px solid var(--purple)}
-.matchchip{display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-2) var(--sp-5);font-size:var(--fs-micro);font-weight:var(--fw-strong);margin:var(--sp-3) var(--sp-0) var(--sp-0) var(--sp-3);background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-green);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
-.matchchip.partial{background:#E7F4F5;color:var(--teal-ink);border:2px dashed var(--teal-ink)}
+/* ROUND 4: the fills are the library's badges, asset-library/svg/badges/*.svg --
+   Estimated is a WHITE pill with a sky400 hairline (kept dashed, because the tier
+   must not be carried by colour alone and dashed is what the Estimated pin uses);
+   Scanned is a solid marigold400 pill with indigo900 type at 10.81:1; Owner is a
+   solid violet600 pill with white type at 6.42:1, the pairing the library's report
+   approves for bold control labels and graphic marks. */
+.tierchip.est{background:var(--card);color:var(--ink);border:2px dashed var(--blue)}
+.tierchip.est .ic{color:var(--blue-edge)}
+.tierchip.scan{background:var(--marigold);color:var(--ink);border:2px solid var(--marigold)}
+.tierchip.owner{background:var(--purple);color:var(--white);border:2px solid var(--purple)}
+.matchchip{display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-2) var(--sp-5);font-size:var(--fs-micro);font-weight:var(--fw-strong);margin:var(--sp-3) var(--sp-0) var(--sp-0) var(--sp-3);background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-good);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
+.matchchip.partial{background:var(--match-wash);color:var(--match-partial-ink);border:2px dashed var(--match-partial)}
 .matchchip.unknown{background:var(--blue-wash);color:var(--blue-ink);border:2px dotted var(--blue)}
 
 .tiles{display:flex;gap:var(--sp-5);margin-top:var(--sp-6)}
@@ -475,8 +575,13 @@ body{
 .tile.aged .t-value{color:var(--amber-ink)}
 .tile.aged{background:var(--amber-wash)}
 .dots{display:inline-flex;gap:var(--sp-2);margin-left:var(--sp-3);vertical-align:middle}
-.dots i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.25}
-.dots i.f{opacity:1}
+/* ROUND 4: asset-library/svg/badges/confidence-*.svg -- an unfilled step is a
+   WHITE disc with the same violet800 rim as a filled one, not the same colour at
+   25% opacity. The rim is what makes an empty step visible at all, and it is the
+   library's answer: filled violet600, empty white, both ringed violet800. */
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--card);
+  box-shadow:inset 0 0 0 1.6px var(--purple-ink)}
+.dots i.f{background:var(--purple)}
 
 .prov{margin-top:var(--sp-6);border-top:1px solid var(--hairline);padding-top:var(--sp-2)}
 .prov-row{
@@ -498,8 +603,10 @@ body{
 .fchip{
   display:inline-flex;align-items:center;gap:var(--sp-4);border-radius:var(--r-2);padding:var(--sp-4) var(--sp-5);min-height:44px;
   font-size:var(--fs-sub);font-weight:var(--fw-strong);border:2px solid;cursor:pointer;background:#fff;font-family:inherit;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
-.fchip.est{border-color:#C4D5F8;color:var(--blue-ink);background:var(--blue-wash)}
-.fchip.scan{border-color:#F3D9A8;color:var(--marigold-ink);background:var(--marigold-wash)}
+/* the library's badge hairlines: sky400 on the Estimated chip, marigold400 on the
+   Scanned one. Both are flavour on a chip whose identity is its text label. */
+.fchip.est{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-wash)}
+.fchip.scan{border-color:var(--marigold);color:var(--marigold-ink);background:var(--marigold-wash)}
 .fchip.owner{border-color:var(--hairline);color:var(--purple-ink);background:var(--purple-wash)}
 .fchip.needed{box-shadow:var(--ring-needed)}
 .needed-badge{font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--match-ink);background:var(--match-wash);border-radius:var(--r-1);padding:var(--sp-1) var(--sp-3);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
@@ -518,7 +625,7 @@ body{
   flex:1;min-height:48px;border-radius:var(--r-3);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:var(--sp-4);border:none;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .btn.primary{background:var(--purple);color:#fff;font-weight:var(--fw-display);}
-.btn.marigold{background:var(--marigold);color:#3A2A00;font-weight:var(--fw-display);}
+.btn.marigold{background:var(--marigold);color:#533021;/* DERIVED amber700 -> indigo900 54%: 7.02:1 on marigold400 */font-weight:var(--fw-display);}
 /* secondary is white with a purple border -- never a grey fill (board section 4) */
 .btn.ghost{background:#fff;color:var(--purple-ink);box-shadow:var(--ring-select)}
 /* tertiary is plain purple text */
@@ -591,7 +698,7 @@ body{
 .filtchip .sel-dot{width:20px;height:20px;flex:0 0 20px;margin-left:-3px}/* optical nudge, not rhythm */
 .filtchip .sel-dot svg{width:12px;height:12px}
 .filtchip.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
-.seg{display:flex;background:#F1EFFA;border-radius:var(--r-2);padding:var(--sp-2);gap:var(--sp-2)}
+.seg{display:flex;background:#E9E3FE;border-radius:var(--r-2);padding:var(--sp-2);gap:var(--sp-2)}
 .seg button{
   flex:1;min-height:44px;border:none;border-radius:var(--r-2);background:none;font-family:inherit;
   font-weight:var(--fw-strong);font-size:var(--fs-sub);color:var(--sub);cursor:pointer;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
@@ -637,11 +744,11 @@ body{
 .big-icon{width:84px;height:84px;border-radius:50%;background:#fff;border:3px solid var(--marigold);display:flex;align-items:center;justify-content:center;box-shadow:var(--elev-2)}
 
 /* capture */
-#scan-capture{background:#241F3A}
+#scan-capture{background:#17103D}
 #scan-capture .scan-body{padding-top:var(--pad-top)}
 .viewfinder{
   position:relative;width:100%;max-width:330px;aspect-ratio:3/4;border-radius:var(--r-4);overflow:hidden;
-  background:linear-gradient(180deg,#CFE0FB 0% 46%, #E9E4F7 46% 78%, #C9C2E2 78% 100%);
+  background:linear-gradient(180deg,#E1F1FF 0% 46%, #EFEBFE 46% 78%, #E0DBF3 78% 100%);
 }
 .frame-guide{position:absolute;inset:26px;border-radius:var(--r-3);pointer-events:none}
 .frame-guide i{position:absolute;width:34px;height:34px;border:4px solid #fff;opacity:.95}
@@ -652,7 +759,7 @@ body{
 .coach{
   position:absolute;left:50%;transform:translateX(-50%);background:rgba(23,20,31,.82);color:#fff;
   font-size:var(--fs-meta);font-weight:var(--fw-strong);border-radius:999px;padding:var(--sp-4) var(--sp-6);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.scan-target{color:#EDEBFA;font-weight:var(--fw-body);font-size:var(--fs-sub);margin-top:var(--sp-6);text-align:center;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
+.scan-target{color:#F2EEFF;font-weight:var(--fw-body);font-size:var(--fs-sub);margin-top:var(--sp-6);text-align:center;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .scan-target b{color:#fff}
 .shutter{
   margin-top:var(--sp-6);width:76px;height:76px;border-radius:50%;background:#fff;border:5px solid var(--marigold);
@@ -666,7 +773,7 @@ body{
 .scanscreen.light .cancel-x{background:#fff;color:var(--sub);box-shadow:var(--elev-2)}
 
 /* live camera (real rear-camera viewfinder; silently absent on desktop) */
-.viewfinder video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#241F3A}
+.viewfinder video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#17103D}
 .live-chip{
   position:absolute;top:12px;right:10px;display:none;align-items:center;gap:var(--sp-3);
   background:rgba(23,20,31,.82);color:#fff;font-size:var(--fs-micro);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);
@@ -732,7 +839,7 @@ body{
 /* review */
 .review-img{
   position:relative;width:100%;max-width:320px;aspect-ratio:3/4;border-radius:var(--r-4);overflow:hidden;
-  background:linear-gradient(180deg,#CFE0FB 0% 46%, #E9E4F7 46% 78%, #C9C2E2 78% 100%);
+  background:linear-gradient(180deg,#E1F1FF 0% 46%, #EFEBFE 46% 78%, #E0DBF3 78% 100%);
 }
 .blurband{
   position:absolute;left:8%;bottom:20%;width:56px;height:96px;border-radius:var(--r-3);
@@ -820,18 +927,16 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 /* ---- welcome: the logo lockup IS the canvas (deep aubergine hero + white card).
    Two-tone wordmark per the logo (entry = sky, map = white); the skyline carries the
    mark's own accent arcs (sky + marigold) so the screen is not a field of purple. ---- */
-#ob-welcome{background:#1E1543}
+#ob-welcome{background:#17103D}
 .wl-hero{
   position:relative;flex:1 1 auto;padding:var(--pad-top) var(--inset-onboard) var(--sp-0);
   display:flex;flex-direction:column;align-items:center;gap:var(--sp-5);overflow:hidden;
 }
 .wl-lock{display:flex;flex-direction:column;align-items:center;gap:var(--sp-5);margin:auto var(--sp-0)}
-.wl-word{font-weight:var(--fw-display);font-size:var(--fs-display);letter-spacing:var(--ls-display);line-height:var(--lh-display);margin-bottom:var(--sp-1)}
-.wl-word .w-entry{color:#7CC4FA}
-.wl-word .w-map{color:#fff}
+.wl-word{margin-bottom:var(--sp-1);display:flex;justify-content:center}
 .wl-tag{
   font-size:var(--fs-micro);font-weight:var(--fw-strong);line-height:var(--lh-micro);letter-spacing:var(--ls-caps-wide);text-transform:uppercase;
-  color:#A99AE0;text-align:center;
+  color:#E2DAFF;text-align:center;
 }
 .wl-sky{display:block;width:100%;margin-top:var(--sp-6);margin-bottom:-2px}
 .wl-card{
@@ -971,7 +1076,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .search-bar{display:flex;align-items:center;gap:var(--sp-4)}
 .search-bar .searchfield{flex:1;margin:var(--sp-0);background:#fff;box-shadow:var(--elev-1);border-color:transparent}
 .search-bar .searchfield:focus-within{border-color:var(--purple)}
-.search-clear{position:relative;width:34px;height:34px;border:none;border-radius:50%;background:#F1EFFA;color:var(--sub);font-weight:var(--fw-strong);cursor:pointer;font-family:inherit}
+.search-clear{position:relative;width:34px;height:34px;border:none;border-radius:50%;background:#E9E3FE;color:var(--sub);font-weight:var(--fw-strong);cursor:pointer;font-family:inherit}
 .search-clear::before{content:"";position:absolute;inset:-5px}/* 44px hit area on a 34px disc */
 .search-body{flex:1;overflow-y:auto;margin-top:var(--sp-5)}
 .srow{
@@ -995,8 +1100,8 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
   padding:var(--sp-4) var(--sp-6);min-height:44px;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;
   box-shadow:var(--elev-1);margin:var(--sp-0) var(--sp-3) var(--sp-3) var(--sp-0);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .mstat{display:inline-flex;align-items:center;gap:var(--sp-2);border-radius:999px;padding:var(--sp-1) var(--sp-4);font-size:var(--fs-micro);font-weight:var(--fw-strong);margin-left:var(--sp-3);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
-.mstat.good{background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-green)}
-.mstat.partial{background:#E7F4F5;color:var(--teal-ink);border:2px dashed var(--teal-ink)}
+.mstat.good{background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-good)}
+.mstat.partial{background:var(--match-wash);color:var(--match-partial-ink);border:2px dashed var(--match-partial)}
 .mstat.unknown{background:var(--blue-wash);color:var(--blue-ink);border:2px dotted var(--blue)}
 
 /* ============ accessible list view (map <-> list) ============ */
@@ -1040,19 +1145,13 @@ button.legend{border:none;cursor:pointer;font-family:inherit;text-align:left}
 button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 
 /* ============ splash ============ */
-.splash{background:#1E1543;z-index:58;align-items:center;justify-content:center}
+.splash{background:#17103D;z-index:58;align-items:center;justify-content:center}
 .splash-body{display:flex;flex-direction:column;align-items:center;gap:var(--sp-6);animation:splashIn var(--dur-drop) var(--ease-enter) both}
-.splash-word{font-weight:var(--fw-display);font-size:var(--fs-display);letter-spacing:var(--ls-display);line-height:var(--lh-display)}
-.splash-word .w-entry{color:#7CC4FA}
-.splash-word .w-map{color:#fff}
+.splash-word{display:flex;justify-content:center}
 @keyframes splashIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes splashOut{to{opacity:0;transform:scale(1.04)}}
 .splash.leaving{animation:splashOut var(--dur-base) var(--ease-exit) forwards}
 .obscreen.enter .ob-body{animation:settle-in var(--dur-base) var(--ease-enter) both}
-.ob-mark{display:flex;align-items:center;gap:var(--sp-4)}
-.ob-mark .ob-word{font-size:var(--fs-h1)}
-.ob-mark .ob-word .w-entry{color:#3B8BD4}
-.ob-mark .ob-word .w-map{color:var(--purple-ink)}
 
 /* ============ scan intro bullets - single coach chip ============ */
 .intro-tips{display:flex;flex-direction:column;gap:var(--sp-3);margin-top:var(--sp-6);width:100%;max-width:300px}
@@ -1176,7 +1275,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 .tl-item{display:flex;gap:var(--sp-5);align-items:flex-start;position:relative;padding-bottom:var(--sp-7)}
 .tl-item:last-child{padding-bottom:var(--sp-0)}
 .tl-item::before{
-  content:"";position:absolute;left:13px;top:28px;bottom:0;width:2.5px;background:#DDD8F0;
+  content:"";position:absolute;left:13px;top:28px;bottom:0;width:2.5px;background:#DBD2FE;
 }
 .tl-item:last-child::before{display:none}
 .tl-dot{
@@ -1208,7 +1307,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 
 /* scan library option */
 .lib-link{
-  margin-top:var(--sp-6);border:none;background:none;font-family:inherit;color:#EDEBFA;font-weight:var(--fw-strong);
+  margin-top:var(--sp-6);border:none;background:none;font-family:inherit;color:#F2EEFF;font-weight:var(--fw-strong);
   font-size:var(--fs-body);cursor:pointer;min-height:44px;display:flex;align-items:center;gap:var(--sp-4);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 /* correction photo affordance */
 .photo-add{
@@ -1257,14 +1356,14 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
   box-shadow:0 0 0 6px rgba(255,255,255,.92);
 }
 #scan-capture :focus-visible,#ob-welcome :focus-visible,#ob-splash :focus-visible{
-  outline-color:#F0EDFB;box-shadow:0 0 0 6px rgba(20,14,44,.9);
+  outline-color:var(--lavender100);box-shadow:0 0 0 6px rgba(23,16,61,.92);
 }
 .phone.hc #scan-capture :focus-visible,.phone.hc #ob-welcome :focus-visible,
-.phone.hc #ob-splash :focus-visible{outline-color:#FFFFFF;box-shadow:0 0 0 6px #0E0B1C}
+.phone.hc #ob-splash :focus-visible{outline-color:#FFFFFF;box-shadow:0 0 0 6px #0E0A25}
 .phone .screen:focus,.phone .screen:focus-visible{outline:none;box-shadow:none}
 .phone .toggle:focus-visible{outline-offset:4px;border-radius:var(--r-3)}
 .phone .backbtn:focus-visible,.phone .navbtn:focus-visible{border-radius:50%}
-/* ---- 4.4 SCRvar(--ease-enter) CHANGE: motion says whether the user went deeper or came back.
+/* ---- 4.4 SCREEN CHANGE: motion says whether the user went deeper or came back.
    12px is deliberate: 8px reads as a fade with a wobble, 24px reads as a carousel.
    The direction is written by the three navigation functions, which already know. */
 @keyframes screen-fwd{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
@@ -1296,7 +1395,10 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 .rowmeta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-3) var(--sp-4);margin-top:var(--sp-3);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .rowmeta .mstat{margin:var(--sp-0)}
 .rowmeta .fresh{display:inline-flex;align-items:center;gap:var(--sp-2)}
-.rowmeta .fresh.aged{color:var(--amber-ink);background:var(--amber-wash);border-radius:999px;padding:var(--sp-1) var(--sp-4)}
+/* ROUND 4: asset-library/svg/badges/freshness-recheck.svg -- ageing is a marigold400
+   pill with an indigo900 rim and indigo900 type, not a pale amber wash. Time is
+   context, never a grade, so the word is still "re-check" and never a verdict. */
+.rowmeta .fresh.aged{color:var(--ink);background:var(--marigold);border:2px solid var(--ink);border-radius:999px;padding:var(--sp-1) var(--sp-4)}
 .saved-row .chev{align-self:center}
 .empty-box{
   background:#fff;border-radius:var(--r-3);box-shadow:var(--elev-1);padding:var(--sp-7) var(--sp-7);
@@ -1312,8 +1414,8 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
   display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-2) var(--sp-5);font-size:var(--fs-micro);font-weight:var(--fw-strong);
   white-space:nowrap;flex:0 0 auto;line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
 .status-chip.review{background:var(--purple-wash);color:var(--purple-ink);border:2px solid var(--purple)}
-.status-chip.added{background:var(--marigold-wash);color:var(--marigold-ink);border:2px solid var(--marigold)}
-.status-chip.photo{background:var(--blue-wash);color:var(--blue-ink);border:2px dashed var(--blue)}
+.status-chip.added{background:var(--marigold);color:var(--ink);border:2px solid var(--marigold)}
+.status-chip.photo{background:var(--card);color:var(--ink);border:2px dashed var(--blue)}
 .contrib-row{align-items:flex-start;padding:var(--sp-5) var(--sp-1)}
 .contrib-row .rowlabel{line-height:1.25}
 .contrib-row .rowsub.quote{color:var(--ink);font-style:italic;font-weight:var(--fw-body);margin-top:var(--sp-2);line-height:1.4}
@@ -1407,7 +1509,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 .ow-sel select option{direction:ltr;text-align:left}
 .ow-sel::after{content:"\25BE";position:absolute;right:4px;color:var(--sub);pointer-events:none;font-weight:var(--fw-strong)}
 .ow-locked{
-  display:flex;align-items:center;gap:var(--sp-5);background:#F4F2FC;border-radius:var(--r-3);padding:var(--sp-5) var(--sp-6);margin-top:var(--sp-5);
+  display:flex;align-items:center;gap:var(--sp-5);background:#F5F2FF;border-radius:var(--r-3);padding:var(--sp-5) var(--sp-6);margin-top:var(--sp-5);
   min-height:56px;
 }
 .ow-locked .lk-main{flex:1;font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
@@ -1476,7 +1578,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
   background:var(--float-white);border-radius:999px;box-shadow:var(--elev-2);padding:var(--sp-2) var(--sp-6) var(--sp-2) var(--sp-2);min-height:48px;
 }
 .ow-banner .backbtn{
-  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;background:#F1EFFA;cursor:pointer;
+  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;background:#E9E3FE;cursor:pointer;
   color:var(--purple-ink);font-size:var(--icon-glyph);font-weight:var(--fw-strong);
 }
 .ow-banner .bn-text{flex:1;font-size:var(--fs-sub);line-height:var(--lh-sub);font-weight:var(--fw-strong);color:var(--purple-ink)}
@@ -1497,38 +1599,44 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 .ow-note-card b{color:var(--ink);font-weight:var(--fw-strong)}
 
 /* high contrast */
-.phone.hc{--ink:#0E0B1C;--sub:#2E2947;--faint:#2E2947;--blue-ink:#122A6E;--marigold-ink:#4E3400;--purple-ink:#331F73;--amber-ink:#4E3900;--ground:#E4E1F6;
-  --edge:#5F5878;--edge-strong:#463F60;--marigold-edge:#5A3A00;--blue-edge:#1E3A8A;
+/* Round 4: every high-contrast value is now the official palette carried further --
+   an official base mixed toward indigo900 or black, never a hand-picked hex. */
+.phone.hc{--ink:#0E0A25;--sub:var(--indigo900);--faint:var(--indigo900);
+  --blue-ink:#15376C;--marigold-ink:#523022;--purple-ink:#301A85;
+  --amber-ink:var(--marigold-ink);--ground:var(--lavender200);
+  --edge:#5B566F;--edge-strong:#413B5C;--marigold-edge:var(--indigo900);--blue-edge:#15376C;
+  --match-good:var(--indigo900);--match-partial:var(--purple-ink);
+  --match-ink:var(--ink);--match-partial-ink:var(--purple-ink);--match-wash:var(--lavender100);
   /* One hairline, darkened centrally, instead of a single .prof-row patch that left
      six other row types un-darkened. */
-  --hairline:#C9C4DC;
+  --hairline:#BDB6DC;  /* lavender200 -> indigo900 18% */
   /* High contrast outlines every elevated surface by redefining the LEVEL tokens.
      Previously eleven components were hand-picked in two rules and everything else
      was missed; now a component that is at a level is outlined because it is at
      that level. */
-  --elev-1:0 0 0 1.5px #2E2947, 0 1px 2px rgba(36,31,58,.05), 0 2px 8px rgba(36,31,58,.07);
-  --elev-2:0 0 0 1.5px #2E2947, 0 2px 6px rgba(36,31,58,.10), 0 10px 24px rgba(36,31,58,.14);
-  --elev-3-dock:0 0 0 1.5px #2E2947, 0 -1px 0 rgba(36,31,58,.06), 0 -8px 28px rgba(36,31,58,.20);
-  --elev-3-dark:0 0 0 1.5px #2E2947, 0 -1px 0 rgba(15,8,45,.10), 0 -8px 28px rgba(15,8,45,.34);
-  --elev-3-free:0 0 0 1.5px #2E2947, 0 2px 8px rgba(36,31,58,.12), 0 16px 40px rgba(36,31,58,.24);
-  --press-wash:#E0DAF2;--press-wash-ground:#D5CEEA;
+  --elev-1:0 0 0 1.5px #373158, 0 1px 2px rgba(23,16,61,.05), 0 2px 8px rgba(23,16,61,.07);
+  --elev-2:0 0 0 1.5px #373158, 0 2px 6px rgba(23,16,61,.10), 0 10px 24px rgba(23,16,61,.14);
+  --elev-3-dock:0 0 0 1.5px #373158, 0 -1px 0 rgba(23,16,61,.06), 0 -8px 28px rgba(23,16,61,.20);
+  --elev-3-dark:0 0 0 1.5px #373158, 0 -1px 0 rgba(13,9,34,.10), 0 -8px 28px rgba(13,9,34,.34);
+  --elev-3-free:0 0 0 1.5px #373158, 0 2px 8px rgba(23,16,61,.12), 0 16px 40px rgba(23,16,61,.24);
+  --press-wash:#E3DCFE;--press-wash-ground:#D2C6FE;
   /* High contrast SIMPLIFIES the ground: one block tone, hard outlines, no shadow,
      no canopy, no plaza, no wash. Only the road hierarchy survives, because widths
      are structure rather than enrichment. Every ground key still resolves so no
      paint falls back to a warm tone. */
   --g-ground:#FFFFFF;--g-parcel:#FFFFFF;
-  --g-s1:#EDEDF1;--g-s2:#F3F3F6;--g-s3:#F6F6F9;--g-s4:#F9F9FB;--g-casing:#FFFFFF;
+  --g-s1:#E7E1F7;--g-s2:#EFEBFA;--g-s3:#F4F1FC;--g-s4:#F9F7FE;--g-casing:#FFFFFF;
   --g-b1:#FFFFFF;--g-b2:#FFFFFF;--g-b3:#FFFFFF;--g-b4:#FFFFFF;--g-b5:#FFFFFF;
   --g-shade:#FFFFFF;--g-shade2:#FFFFFF;--g-lit:#FFFFFF;
   --g-can:#FFFFFF;--g-can2:#FFFFFF;--g-plaza:#FFFFFF;
-  --g-line:#403B58;--g-label:#1B1830}
+  --g-line:#4A4568;--g-label:#140E34}
 .phone.hc .fchip,.phone.hc .persona,.phone.hc .tierchip,.phone.hc .field select,.phone.hc .field textarea{border-width:2px}
 .phone.hc .prof-row .chev{color:var(--sub)}
 .phone.hc .toggle{background:var(--edge)}
 .phone.hc .toggle.on{background:var(--purple-ink)}
 .phone.hc .matchchip,.phone.hc .mstat,.phone.hc .status-chip,.phone.hc .upd-badge,
 .phone.hc .state-card,.phone.hc .whatsnext,.phone.hc .tsize-btn,.phone.hc .ow-notseen{border-width:2px}
-.phone.hc .navbar{border-top:2px solid #2E2947}
+.phone.hc .navbar{border-top:2px solid #373158}
 .phone.hc :focus-visible{outline-color:var(--ink)}
 
 /* reduced motion */
@@ -1562,8 +1670,8 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
     <div class="notch"></div>
     <div class="statusbar"><span>9:41</span>
       <span class="sicons">
-        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="1" fill="#241F3A"/><rect x="4.5" y="5" width="3" height="7" rx="1" fill="#241F3A"/><rect x="9" y="2.5" width="3" height="9.5" rx="1" fill="#241F3A"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#241F3A"/></svg>
-        <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x=".8" y=".8" width="19" height="10.4" rx="3" stroke="#241F3A" stroke-width="1.4"/><rect x="2.6" y="2.6" width="13" height="6.8" rx="1.6" fill="#241F3A"/><path d="M21.5 4v4c1.1-.3 1.8-1 1.8-2s-.7-1.7-1.8-2z" fill="#241F3A"/></svg>
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none" aria-hidden="true"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+        <svg width="24" height="12" viewBox="0 0 24 12" fill="none" aria-hidden="true"><rect x=".8" y=".8" width="19" height="10.4" rx="3" stroke="currentColor" stroke-width="1.4"/><rect x="2.6" y="2.6" width="13" height="6.8" rx="1.6" fill="currentColor"/><path d="M21.5 4v4c1.1-.3 1.8-1 1.8-2s-.7-1.7-1.8-2z" fill="currentColor"/></svg>
       </span>
     </div>
 
@@ -1572,11 +1680,11 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
       <div class="screen-body">
         <h1 class="sr-only">Map of entrances near 2nd &amp; Colorado</h1>
         <div class="apphead">
-          <div class="wordmark"><span class="w-entry">entry</span><span class="w-map">map</span></div>
+          <div class="wordmark" id="head-wordmark"></div>
           <button class="locpill" id="locpill" aria-label="Location: 2nd and Colorado">
             <span class="ic" data-icon="pin" data-size="14" data-color="var(--purple-ink)" aria-hidden="true"></span>
             <span class="lp-text">2nd &amp; Colorado</span>
-            <span class="chevd" aria-hidden="true">&#x25BE;</span>
+            <span class="chevd ic" data-icon="chevron" data-size="13" aria-hidden="true" style="transform:rotate(90deg)"></span>
           </button>
           <button class="hamb" id="search-btn" aria-label="Search">
             <span class="ic" data-icon="search" data-size="19" aria-hidden="true"></span>
@@ -1673,7 +1781,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">My Needs</span>
               <span class="rowsub" id="prof-needs-sub">Choose any that help &mdash; optional</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <div class="needs-chiprow" id="prof-needs-chips"></div>
         </div>
@@ -1686,7 +1794,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Saved entrances</span>
               <span class="rowsub" id="prof-saved-sub">Nothing saved yet &mdash; Save lives on every card</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-go="screen-contrib" data-tab="scans">
             <span class="rowicon" style="background:var(--marigold-wash);color:var(--marigold-ink)"><span class="ic" data-icon="camera" data-size="16" aria-hidden="true"></span></span>
@@ -1694,7 +1802,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">My scans</span>
               <span class="rowsub" id="prof-scans-sub">Entrances you photographed on-site</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-go="screen-contrib" data-tab="corrections">
             <span class="rowicon"><span class="ic" data-icon="edit" data-size="17" aria-hidden="true"></span></span>
@@ -1702,7 +1810,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">My corrections</span>
               <span class="rowsub" id="prof-corr-sub">No corrections yet</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
         </div>
 
@@ -1715,7 +1823,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowsub">Text size &middot; high contrast &middot; reduce motion</span>
             </span>
             <span class="rowvalue" id="a11y-summary">Default</span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <div class="prof-row static">
             <span class="rowicon"><span class="ic" data-icon="pin" data-size="17" aria-hidden="true"></span></span>
@@ -1735,7 +1843,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Privacy</span>
               <span class="rowsub">Faces auto-blurred &middot; GPS stripped at upload</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-go="screen-notif">
             <span class="rowicon"><span class="ic" data-icon="bell" data-size="17" aria-hidden="true"></span></span>
@@ -1743,7 +1851,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Notifications</span>
               <span class="rowsub" id="notif-sub">Optional &middot; grouped &middot; no streaks or leaderboards</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-go="screen-states">
             <span class="rowicon"><span class="ic" data-icon="upload" data-size="17" aria-hidden="true"></span></span>
@@ -1751,7 +1859,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Offline &amp; permissions</span>
               <span class="rowsub">You're still in control &mdash; what happens when you're offline or a permission is off</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
         </div>
 
@@ -1777,7 +1885,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">My Business</span>
               <span class="rowsub" id="mybiz-sub">Workspace ready &mdash; staged for this demo</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
         </div>
         <div style="height:8px"></div>
@@ -1976,7 +2084,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
           <div style="position:relative;display:flex;flex-direction:column;align-items:center">
             <span id="primer-art" aria-hidden="true"></span>
             <div class="big-icon" style="margin-top:-48px;position:relative;z-index:2">
-              <span class="ic" data-icon="camera" data-size="38" data-color="#6E4A00" aria-hidden="true"></span>
+              <span class="ic" data-icon="camera" data-size="38" data-color="#784410" aria-hidden="true"></span>
             </div>
           </div>
           <h2 class="scan-h">Help map an entrance</h2>
@@ -2040,10 +2148,10 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
           <div class="procbar" id="procbar" aria-hidden="true"><div class="procbar-fill" id="procbar-fill"></div></div>
         </div>
         <ul class="checklist" role="list" aria-label="Checks on this photo">
-          <li class="checkitem" id="ck-1"><span class="ci-dot" aria-hidden="true">&#x2713;</span>Doorway framed<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
-          <li class="checkitem" id="ck-2"><span class="ci-dot" aria-hidden="true">&#x2713;</span>Entry path visible<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
-          <li class="checkitem" id="ck-3"><span class="ci-dot" aria-hidden="true">&#x2713;</span>Photo quality checked<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
-          <li class="checkitem" id="ck-4" hidden><span class="ci-dot" aria-hidden="true">&#x2713;</span>Double-checking<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
+          <li class="checkitem" id="ck-1"><span class="ci-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span>Doorway framed<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
+          <li class="checkitem" id="ck-2"><span class="ci-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span>Entry path visible<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
+          <li class="checkitem" id="ck-3"><span class="ci-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span>Photo quality checked<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
+          <li class="checkitem" id="ck-4" hidden><span class="ci-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span>Double-checking<span class="sr-only ck-state"> &mdash; not checked yet</span></li>
         </ul>
         <!-- 5.5-6.5 s: detected chips populate here, before review -->
         <div class="proc-chips" id="proc-chips" role="group" aria-label="Features identified"></div>
@@ -2078,7 +2186,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
     <section class="screen scanscreen light" id="scan-done" tabindex="-1" aria-label="Scan published">
       <div class="scan-body">
         <div class="big-icon" style="border-color:var(--marigold);background:var(--marigold-wash)">
-          <span class="ic" data-icon="check" data-size="36" data-color="#6E4A00" aria-hidden="true"></span>
+          <span class="ic" data-icon="check" data-size="36" data-color="#784410" aria-hidden="true"></span>
         </div>
         <h2 class="scan-h" style="font-size:var(--fs-h2)">Scan published &mdash; thanks for helping your neighbors</h2>
         <div class="mini-map" id="mini-map" aria-hidden="true"></div>
@@ -2094,7 +2202,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
     <section class="screen splash" id="ob-splash" tabindex="-1" aria-label="EntryMap">
       <div class="splash-body">
         <span id="splash-mark" aria-hidden="true"></span>
-        <div class="splash-word"><span class="w-entry">entry</span><span class="w-map">map</span></div>
+        <div class="splash-word" id="splash-word"></div>
       </div>
     </section>
 
@@ -2102,24 +2210,23 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
     <section class="screen obscreen" id="ob-welcome" tabindex="-1" aria-label="Welcome to EntryMap">
       <div class="wl-hero">
         <div class="wl-lock">
-        <span id="welcome-mark" aria-hidden="true"></span>
-        <div class="wl-word"><span class="w-entry">entry</span><span class="w-map">map</span></div>
+        <div class="wl-word" id="welcome-word"></div>
         <div class="wl-tag">Austin &middot; downtown</div>
         </div>
         <svg class="wl-sky" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
-          <rect x="6" y="34" width="44" height="58" rx="3" fill="#2A1E5C"/>
-          <rect x="56" y="18" width="38" height="74" rx="3" fill="#33256E"/>
-          <rect x="100" y="44" width="52" height="48" rx="3" fill="#2A1E5C"/>
-          <rect x="158" y="26" width="42" height="66" rx="3" fill="#382A78"/>
-          <rect x="206" y="50" width="46" height="42" rx="3" fill="#2A1E5C"/>
-          <rect x="258" y="30" width="56" height="62" rx="3" fill="#33256E"/>
-          <g fill="#7CC4FA" opacity=".85">
+          <rect x="6" y="34" width="44" height="58" rx="3" fill="#2E1E5E"/>
+          <rect x="56" y="18" width="38" height="74" rx="3" fill="#3E2F6A"/>
+          <rect x="100" y="44" width="52" height="48" rx="3" fill="#2E1E5E"/>
+          <rect x="158" y="26" width="42" height="66" rx="3" fill="#2A166E"/>
+          <rect x="206" y="50" width="46" height="42" rx="3" fill="#2E1E5E"/>
+          <rect x="258" y="30" width="56" height="62" rx="3" fill="#3E2F6A"/>
+          <g fill="#69B7FF" opacity=".85">
             <rect x="14" y="44" width="7" height="7" rx="1.5"/><rect x="28" y="44" width="7" height="7" rx="1.5"/>
             <rect x="64" y="28" width="7" height="7" rx="1.5"/><rect x="78" y="42" width="7" height="7" rx="1.5"/>
             <rect x="110" y="54" width="7" height="7" rx="1.5"/><rect x="166" y="36" width="7" height="7" rx="1.5"/>
             <rect x="266" y="40" width="7" height="7" rx="1.5"/><rect x="294" y="54" width="7" height="7" rx="1.5"/>
           </g>
-          <g fill="#F0A32F" opacity=".92">
+          <g fill="#FFBF24" opacity=".92">
             <rect x="42" y="58" width="7" height="7" rx="1.5"/><rect x="78" y="28" width="7" height="7" rx="1.5"/>
             <rect x="138" y="54" width="7" height="7" rx="1.5"/><rect x="184" y="36" width="7" height="7" rx="1.5"/>
             <rect x="238" y="60" width="7" height="7" rx="1.5"/><rect x="280" y="40" width="7" height="7" rx="1.5"/>
@@ -2252,16 +2359,16 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
         <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
           <svg width="86" height="86" viewBox="0 0 96 96" aria-hidden="true" style="margin-top:var(--sp-5)">
             <circle cx="48" cy="48" r="44" fill="#fff"/>
-            <circle cx="48" cy="48" r="30" fill="none" stroke="#7053C5" stroke-width="4"/>
-            <path d="M48 33v15l10 7" fill="none" stroke="#7053C5" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="74" cy="70" r="12" fill="#7053C5"/>
+            <circle cx="48" cy="48" r="30" fill="none" stroke="#5B35F5" stroke-width="4"/>
+            <path d="M48 33v15l10 7" fill="none" stroke="#5B35F5" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="74" cy="70" r="12" fill="#5B35F5"/>
             <path d="M68.5 70l4 4 7-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <h2 class="scan-h" style="font-size:var(--fs-h2);margin-top:var(--sp-6)">We're reviewing your claim</h2>
           <p class="scan-p" style="margin-top:var(--sp-3)">We'll email you when your workspace is ready.</p>
           <ul class="timeline" role="list" aria-label="Claim progress">
-            <li class="tl-item done"><span class="tl-dot" aria-hidden="true">&#x2713;</span><span><span class="tl-name">Submitted</span><span class="tl-sub">Just now &mdash; done</span></span></li>
-            <li class="tl-item done"><span class="tl-dot" aria-hidden="true">&#x2713;</span><span><span class="tl-name">Business match</span><span class="tl-sub">Just now &mdash; done</span></span></li>
+            <li class="tl-item done"><span class="tl-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span><span><span class="tl-name">Submitted</span><span class="tl-sub">Just now &mdash; done</span></span></li>
+            <li class="tl-item done"><span class="tl-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span><span><span class="tl-name">Business match</span><span class="tl-sub">Just now &mdash; done</span></span></li>
             <li class="tl-item now"><span class="tl-dot" aria-hidden="true">&middot;</span><span><span class="tl-name">Ownership review</span><span class="tl-sub">In progress</span></span></li>
           </ul>
           <div class="whatsnext">
@@ -2316,7 +2423,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel" id="ov-freshlabel">Updated today</span>
               <span class="rowsub">Owner update &middot; freshness is about time, not the place</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-ow-receipt>
             <span class="rowicon"><span class="ic" data-icon="bars" data-size="17" aria-hidden="true"></span></span>
@@ -2324,7 +2431,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Confidence &middot; High <span class="dots" style="color:var(--purple-ink)"><i class="f"></i><i class="f"></i><i class="f"></i></span></span>
               <span class="rowsub" id="ov-conf-sub">Neighbors and a state record agree</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <button class="prof-row" data-ow-receipt>
             <span class="rowicon"><span class="ic" data-icon="people" data-size="17" aria-hidden="true"></span></span>
@@ -2332,7 +2439,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
               <span class="rowlabel">Community contribution</span>
               <span class="rowsub">4 community scans &middot; shown beside your updates, never replaced</span>
             </span>
-            <span class="chev" aria-hidden="true">&rsaquo;</span>
+            <span class="chev ic" data-icon="chevron" data-size="14" aria-hidden="true"></span>
           </button>
           <div class="ow-scanline">
             <span id="ov-scanpin" aria-hidden="true" style="flex:0 0 34px;display:flex;justify-content:center"></span>
@@ -2382,7 +2489,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
         </div>
 
         <div class="ow-cta">
-          <button class="btn primary" style="width:100%" data-go="ow-review">Review changes <span aria-hidden="true">&rsaquo;</span></button>
+          <button class="btn primary" style="width:100%" data-go="ow-review">Review changes <span class="ic" data-icon="chevron" data-size="14" aria-hidden="true" style="margin-left:var(--sp-2)"></span></button>
         </div>
       </div>
     </section>
@@ -2644,7 +2751,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
       </button>
       <button class="nav-scan" id="nav-scan" aria-label="Scan an entrance">
         <span class="ring">
-          <span class="ic" data-icon="camera" data-size="28" data-color="#6E4A00" aria-hidden="true"></span>
+          <span class="ic" data-icon="camera" data-size="28" data-color="#784410" aria-hidden="true"></span>
         </span>
         Scan
       </button>
@@ -2697,15 +2804,19 @@ function distLabel(p){
 const EST_KEYMAP = {accessibility_signage:'signage', accessible_door_hardware:'hardware', handrails:'handrails', ramp_or_bevel:'ramp'};
 const DOOR_KEYMAP = {step_free_entry:'step_free', ramp_present:'ramp', handrails_present:'handrails', auto_door_button:'button',
   lever_or_pull_hardware:'hardware', clear_approach:'approach', accessible_signage:'signage', door_width_adequate:'width'};
+/* ROUND 4: `ic` names the library feature icon for each entrance feature. It
+   replaces eight decorative Unicode dingbats that no UI face carries, so every one
+   of them fell out to a system fallback. Handrails is the one feature the library
+   ships no icon for and keeps ours. */
 const FEATS = {
-  step_free:{label:'Step-free entry', icon:'\u2913'},
-  ramp:{label:'Ramp or bevel', icon:'\u27cb'},
-  handrails:{label:'Handrails', icon:'\u2562'},
-  button:{label:'Auto-door button', icon:'\u25c9'},
-  hardware:{label:'Easy-grip handle', icon:'\u2310'},
-  approach:{label:'Clear approach', icon:'\u21e2'},
-  signage:{label:'Access signage', icon:'\u267f'},
-  width:{label:'Wide door', icon:'\u21d4'}
+  step_free:{label:'Step-free entry', ic:'door'},
+  ramp:{label:'Ramp or bevel', ic:'ramp'},
+  handrails:{label:'Handrails', ic:'door-handle'},
+  button:{label:'Auto-door button', ic:'door-button'},
+  hardware:{label:'Easy-grip handle', ic:'door-handle'},
+  approach:{label:'Clear approach', ic:'approach'},
+  signage:{label:'Access signage', ic:'signage'},
+  width:{label:'Wide door', ic:'wide-door'}
 };
 const PERSONAS = {
   wheelchair:{label:'Wheelchair', phrase:'wheelchair access', sub:'Step-free entry, ramp, wide door', crit:['step_free','ramp','width']},
@@ -2789,104 +2900,109 @@ function sparkle(color){return SPARKLE.replace('CUR',color);}
    section 10: "a small dashed ring, no glyph, no teardrop").
    ================================================================ */
 
-/* One viewBox for all three tiers so `size` means the same thing everywhere and
-   the owner's detached tick badge has room to sit outside the body without moving
-   the anchor.  body 42x52 | head centre (21,18) r15 | tip/anchor (21,52) --
-   the bottom CENTRE of the box, which is what the CSS anchor transform assumes. */
-const PIN_VB = '-9 0 60 52';
-const PIN_AR = 60 / 52;
-/* teardrop: tangent lines from the tip to the head circle */
-const TEAR = 'M21 52 7.54 24.62A15 15 0 1 1 34.46 24.62Z';
+/* ---- ROUND 4: THE THREE PINS ARE NOW THE LIBRARY'S OWN ASSETS ----------------
+   asset-library/svg/pins/{estimated,scanned-on-site,owner-confirmed}.svg, path data
+   verbatim. The library draws all three on a 0 0 96 104 box (owner 0 0 112 104),
+   head centre (48,41.3) r36, tip (48,96.1), the owner's detached tick badge reaching
+   x=103.5. ONE viewBox re-frames all three so the tip is the BOTTOM CENTRE of the
+   box -- which is exactly what Round 2's tip anchoring and `transform-origin:50%
+   100%` assume, so the anchoring behaviour is unchanged while the artwork is the
+   approved one. The old hand-drawn teardrop, its 24-grid head glyphs and its
+   segmented "evidence" ring are gone; the library's 0-of-3 / 2-of-3 / 3-of-3 dot
+   ladder replaces the ring and is a strictly better non-colour carrier of tier. */
+const PIN_VB = '-8 1 112 95.1';
+const PIN_AR = 112 / 95.1;
+/* the library teardrop, verbatim */
+const TEAR = 'M48 6c-21 0-36 15.7-36 35.3 0 25.1 24.3 45.8 33.5 52.8a4 4 0 0 0 5 0C59.7 87.1 84 66.4 84 41.3 84 21.7 69 6 48 6Z';
+const PIN_HEAD = {x:48, y:41.3, r:36};
 
-/* soft white halo -- three stacked strokes, no filter, no defs */
+/* Soft white lift halo -- three stacked strokes, no filter, no defs. OURS, kept:
+   the library has no equivalent because its assets are drawn for a catalogue sheet,
+   not for a marker sitting on a drawn map. Widths are the Round 2 values re-scaled
+   by 95.1/52 so the rendered halo is the same thickness it has always been. */
 function pinHalo(d){
-  return '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="8.6" stroke-linejoin="round"/>'
-       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="5.6" stroke-linejoin="round"/>'
-       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round"/>';
+  return '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="15.7" stroke-linejoin="round"/>'
+       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="10.2" stroke-linejoin="round"/>'
+       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="5.9" stroke-linejoin="round"/>';
 }
-/* segmented ring inside the head -- the board's "evidence" texture */
-function pinRing(){
-  return '<circle cx="21" cy="18" r="11.9" fill="none" stroke="#fff" stroke-opacity=".92"'
-       + ' stroke-width="1.9" stroke-linecap="round" stroke-dasharray="14 4.7"'
-       + ' transform="rotate(-58 21 18)"/>';
+/* The library's confidence ladder: three dots across the top of the head, filled
+   0 / 2 / 3 of 3. Colour is never alone -- the count is the carrier. */
+function pinDots(filled, fill, stroke){
+  var out='', cx=[35,48,61];
+  for(var i=0;i<3;i++){
+    out += '<circle cx="'+cx[i]+'" cy="15" r="4.5" fill="'
+        + (i<filled ? fill : '#FFFFFF') + '" stroke="'+stroke+'" stroke-width="2"/>';
+  }
+  return out;
 }
-/* glyphs drawn on the shared 24 grid, then dropped into the head */
-function inHead(g, k){
-  k = k || .82;
-  return '<g transform="translate(21 18) scale('+k+') translate(-12 -12)">'+g+'</g>';
-}
-const PIN_GLYPH = {
-  /* information mark -- dot over a slanted stem (no font dependency) */
-  info: '<circle cx="13.3" cy="6.6" r="2.15" fill="var(--blue-ink,#1E3A8A)"/>'
-      + '<path d="M13.6 10.6 11.5 18.6" fill="none" stroke="var(--blue-ink,#1E3A8A)"'
-      + ' stroke-width="3.3" stroke-linecap="round"/>',
-  /* person -- ink, not white: white on marigold measures 1.9:1, ink 8.7:1 */
-  person: '<circle cx="12" cy="8.1" r="4.2" fill="var(--ink,#241F3A)"/>'
-        + '<path d="M5.2 19.6c1-4.5 3.5-6.7 6.8-6.7s5.8 2.2 6.8 6.7" fill="none"'
-        + ' stroke="var(--ink,#241F3A)" stroke-width="3" stroke-linecap="round"/>',
-  /* storefront -- white on purple */
-  store: '<path d="M4 9.4h16M5.9 9.4v9.4h12.2V9.4M5.7 9.4 7.4 5.2h9.2l1.7 4.2'
-       + 'M9.9 18.8v-4.6h4.2v4.6" fill="none" stroke="#fff" stroke-width="2"'
-       + ' stroke-linecap="round" stroke-linejoin="round"/>'
-};
 
-/* needs-match halo. Form carries the state, not colour:
-   good = continuous ring on a soft disc; partial = broken ring, no disc.
-   Neither implies a rating, and there is deliberately no "fails" form. */
+/* Needs-match halo -- asset-library/svg/halos/*.svg. The library supersedes Round
+   2's green: good is a SOLID indigo900 ring with a quiet sky400 inner ring, partial
+   is a DASHED violet600 ring, unknown is a DOTTED sky700 ring. Line style is the
+   primary carrier, exactly as the README requires, and the app also prints the
+   words, so colour is never alone. The radii are the library's 42/32 proportion
+   scaled to 50/38 so the ring clears this pin's head (r36) instead of cutting it. */
 function matchHalo(state){
-  /* --match-green, not the gallery's purple: purple already means owner-confirmed
-     here, and green means "matches your needs" and nothing else. 4.60:1 on the
-     lavender ground. The form (solid ring on a disc / broken ring) is the gallery's. */
-  var P = 'var(--match-green,#1B7A3D)';
+  var cx = PIN_HEAD.x, cy = PIN_HEAD.y;
   if(state === 'good'){
-    return '<circle cx="21" cy="21" r="25" fill="'+P+'" fill-opacity=".15"/>'
-         + '<circle cx="21" cy="21" r="25" fill="none" stroke="'+P+'" stroke-width="2.6"/>';
+    return '<circle cx="'+cx+'" cy="'+cy+'" r="50" fill="none"'
+         +   ' stroke="var(--match-good,#17103D)" stroke-width="6"/>'
+         + '<circle cx="'+cx+'" cy="'+cy+'" r="38" fill="none"'
+         +   ' stroke="var(--sky400,#69B7FF)" stroke-width="2.4" opacity=".65"/>';
   }
   if(state === 'partial'){
-    return '<circle cx="21" cy="21" r="25" fill="none" stroke="'+P+'" stroke-width="2.6"'
-         + ' stroke-linecap="round" stroke-dasharray="9.4 8.05" transform="rotate(-90 21 21)"/>';
+    return '<circle cx="'+cx+'" cy="'+cy+'" r="50" fill="none"'
+         + ' stroke="var(--match-partial,#5B35F5)" stroke-width="6"'
+         + ' stroke-dasharray="17.9 10.7" transform="rotate(-90 '+cx+' '+cy+')"/>';
+  }
+  if(state === 'unknown'){
+    return '<circle cx="'+cx+'" cy="'+cy+'" r="50" fill="none"'
+         + ' stroke="var(--match-unknown,#1266A6)" stroke-width="6" stroke-linecap="round"'
+         + ' stroke-dasharray="1.2 13.1"/>';
   }
   return '';
 }
 
 /* pinSVG(tier, size)  tier: 'est' | 'scan' | 'owner' | 'ring' | 'cluster'
-   optional opts: {match:'good'|'partial', count:Number}
+   optional opts: {match:'good'|'partial'|'unknown', count:Number}
    `size` is the drawn HEIGHT of the pin box; two-argument call sites are unaffected. */
 function pinSVG(tier, size, opts){
   opts = opts || {};
   if(tier === 'cluster'){
+    /* OURS: the library ships no cluster mark. Restated on the official palette. */
     var cs = size || 44;
     return '<svg width="'+cs+'" height="'+cs+'" viewBox="0 0 48 48" fill="none"'
       + ' aria-hidden="true" focusable="false" style="overflow:visible;display:block">'
       + '<circle cx="24" cy="24" r="17" fill="#fff" stroke="#fff" stroke-opacity=".55" stroke-width="8"/>'
-      + '<circle cx="24" cy="24" r="22.4" fill="none" stroke="var(--purple,#7053C5)"'
+      + '<circle cx="24" cy="24" r="22.4" fill="none" stroke="var(--purple,#5B35F5)"'
       +   ' stroke-width="2.2" stroke-linecap="round" stroke-dasharray="2.4 6"/>'
       + '<circle cx="24" cy="24" r="17" fill="var(--card,#FFFFFF)"'
-      +   ' stroke="var(--purple-ink,#4B2E9E)" stroke-width="2.8"/>'
+      +   ' stroke="var(--purple-ink,#4020B5)" stroke-width="2.8"/>'
       + '<text x="24" y="24" text-anchor="middle" dominant-baseline="central"'
-      +   ' fill="var(--purple-ink,#4B2E9E)" stroke="none"'
-      +   ' font-family="Nunito,system-ui,-apple-system,Segoe UI,Roboto,sans-serif"'
-      +   ' font-size="17" font-weight="900">' + (opts.count == null ? 8 : opts.count) + '</text>'
+      +   ' fill="var(--purple-ink,#4020B5)" stroke="none"'
+      +   ' font-family="inherit" font-size="17" font-weight="800">'
+      +   (opts.count == null ? 8 : opts.count) + '</text>'
       + '</svg>';
   }
   if(tier === 'ring'){
-    /* LEVEL 3 -- Estimated, on the map. Ground texture that happens to be tappable,
-       not a claim: no teardrop, no glyph, no lift halo. `size` is the OUTER diameter.
-       --blue-pin is 4.74:1 on the lavender ground, so it still clears 1.4.11 when a
-       selection or a needs profile recedes it to 80% opacity (3.35:1). */
+    /* LEVEL 3 -- Estimated, on the map. OURS: the library ships no level-3 form.
+       Ground texture that happens to be tappable, not a claim: no teardrop, no
+       glyph, no lift halo. `size` is the OUTER diameter. --blue-edge is now the
+       library's own on-light sky (sky700), which is 4.45:1 on the worst ground tone
+       and still clears 1.4.11 when a selection recedes it to 80% (3.02:1). */
     var rr = 7, rsw = 2.75, dia = rr * 2 + rsw;
     var rs = size || 14, rw = Math.round(rs * 40 / dia * 100) / 100;
     return '<svg width="'+rw+'" height="'+rw+'" viewBox="0 0 40 40" fill="none"'
       + ' aria-hidden="true" focusable="false" style="overflow:visible;display:block">'
       + (opts.match === 'good'
-          ? '<circle cx="20" cy="20" r="13.4" fill="var(--match-green,#1B7A3D)" fill-opacity=".15"/>'
-            + '<circle cx="20" cy="20" r="13.4" fill="none" stroke="var(--match-green,#1B7A3D)" stroke-width="2.4"/>'
+          ? '<circle cx="20" cy="20" r="13.4" fill="none" stroke="var(--match-good,#17103D)" stroke-width="2.4"/>'
+            + '<circle cx="20" cy="20" r="10.2" fill="none" stroke="var(--sky400,#69B7FF)" stroke-width="1" opacity=".65"/>'
           : opts.match === 'partial'
-          ? '<circle cx="20" cy="20" r="13.4" fill="none" stroke="var(--match-green,#1B7A3D)"'
-            + ' stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 4.4" transform="rotate(-90 20 20)"/>'
+          ? '<circle cx="20" cy="20" r="13.4" fill="none" stroke="var(--match-partial,#5B35F5)"'
+            + ' stroke-width="2.4" stroke-dasharray="4.8 2.9" transform="rotate(-90 20 20)"/>'
           : '')
       + '<circle cx="20" cy="20" r="'+rr+'" fill="var(--card,#FFFFFF)" fill-opacity=".72"'
-      +   ' stroke="var(--blue-pin,#2C63C9)" stroke-width="'+rsw+'"'
+      +   ' stroke="var(--blue-edge,#1266A6)" stroke-width="'+rsw+'"'
       +   ' stroke-linecap="round" stroke-dasharray="3.1 2.6"/>'
       + '</svg>';
   }
@@ -2899,60 +3015,113 @@ function pinSVG(tier, size, opts){
         + pinHalo(TEAR);
 
   if(tier === 'est'){
-    /* dashed outline, no fill -- provisional at a glance. */
-    s += '<path d="'+TEAR+'" fill="var(--card,#FFFFFF)" stroke="var(--blue-edge,#2C63C9)"'
-       + ' stroke-width="3" stroke-linejoin="round" stroke-linecap="round"'
-       + ' stroke-dasharray="4.7 3.7"/>'
-       + inHead(PIN_GLYPH.info, .88);
+    /* Library asset, with ONE substitution: the dashed outline is drawn in sky700
+       rather than sky400. The library's own contrast report lists sky400 as the
+       ON-DARK sky (8.33:1 on indigo900) and never as an on-light one -- it is
+       1.63:1 on this map's ground, which would fail 1.4.11 -- while sky700 is the
+       on-light sky the very same asset already uses for its italic i and its dot
+       strokes. Same asset, the library's own answer for a light surface. */
+    s += '<path d="'+TEAR+'" fill="var(--card,#FFFFFF)" stroke="var(--blue-edge,#1266A6)"'
+       + ' stroke-width="4" stroke-dasharray="7 6"/>'
+       + pinDots(0, 'var(--blue-edge,#1266A6)', 'var(--blue-edge,#1266A6)')
+       + '<text x="48" y="56" text-anchor="middle" font-family="Georgia,\'Times New Roman\',serif"'
+       +   ' font-size="39" font-weight="700" font-style="italic"'
+       +   ' fill="var(--blue-edge,#1266A6)" stroke="none">i</text>';
   } else if(tier === 'scan'){
-    /* filled marigold + dark rim. The rim, not the fill, carries 1.4.11. */
-    s += '<path d="'+TEAR+'" fill="var(--marigold,#F0A32F)" stroke="var(--marigold-edge,#8A5A00)"'
-       + ' stroke-width="3.2" stroke-linejoin="round"/>'
-       + pinRing()
-       + inHead(PIN_GLYPH.person, .82);
+    /* Library asset, with ONE substitution: the body rim is indigo900 rather than
+       white. marigold400 is 1.22:1 on the worst ground tone, so a white rim would
+       leave the mark with no boundary; indigo900 on marigold400 is 10.81:1 and is
+       what the library's OWN scanned-on-site badge and freshness-recheck badge
+       stroke that fill with. */
+    s += '<path d="'+TEAR+'" fill="var(--marigold,#FFBF24)" stroke="var(--marigold-edge,#17103D)"'
+       + ' stroke-width="4" stroke-linejoin="round"/>'
+       + pinDots(2, 'var(--marigold,#FFBF24)', 'var(--marigold-edge,#17103D)')
+       + '<g fill="none" stroke="var(--ink,#17103D)" stroke-width="4" stroke-linecap="round"'
+       +   ' stroke-linejoin="round"><circle cx="48" cy="34" r="9"/>'
+       +   '<path d="M30 69c1-15 8-23 18-23s17 8 18 23Z"/></g>';
   } else {
-    /* owner -- filled purple, plus a SEPARATE outlined tick badge at upper right,
-       as on the board: its own mark beside the pin, never merged into it. */
-    s += '<path d="'+TEAR+'" fill="var(--purple,#7053C5)" stroke="var(--purple-ink,#4B2E9E)"'
-       + ' stroke-width="2.4" stroke-linejoin="round"/>'
-       + pinRing()
-       + inHead(PIN_GLYPH.store, .79)
-       + '<circle cx="42.6" cy="6.2" r="6.5" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="6.4"/>'
-       + '<circle cx="42.6" cy="6.2" r="6.5" fill="var(--card,#FFFFFF)"'
-       +   ' stroke="var(--purple,#7053C5)" stroke-width="2.2"/>'
-       + '<path d="m39.4 6.3 2.3 2.3 4.2-4.6" fill="none" stroke="var(--purple-ink,#4B2E9E)"'
-       +   ' stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>';
+    /* Library asset, verbatim: violet600 body with the library's white rim (4.73:1
+       against the worst ground tone on the FILL, which is what a reader
+       discriminates), the white storefront, and the SEPARATE outlined tick badge at
+       upper right -- its own mark beside the pin, never merged into it. */
+    s += '<path d="'+TEAR+'" fill="var(--purple,#5B35F5)" stroke="#FFFFFF" stroke-width="4"/>'
+       + pinDots(3, 'var(--purple,#5B35F5)', 'var(--purple,#5B35F5)')
+       + '<g fill="none" stroke="#FFFFFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round">'
+       +   '<path d="M28 38h40l-4-12H32Z"/>'
+       +   '<path d="M30 38v30h36V38M42 68V51h13v17"/>'
+       +   '<path d="M28 38c0 5 6 7 10 3 4 4 9 4 13 0 4 4 9 4 13 0 4 4 10 2 10-3"/></g>'
+       + '<circle cx="88" cy="28" r="14" fill="#FFFFFF" stroke="var(--purple-ink,#4020B5)" stroke-width="3"/>'
+       + '<g fill="none" stroke="var(--purple-ink,#4020B5)" stroke-width="3" stroke-linecap="round"'
+       +   ' stroke-linejoin="round"><path d="m81 28 5 5 9-11"/></g>';
   }
   return s + '</svg>';
 }
 
 /* ================================================================
-   ICONS -- one 24 grid, one stroke width (2), round caps and joins.
-   Lifted from design/pins-and-icons.html section 6.
+   ICONS -- ONE 32 grid, one stroke width (2.3), round caps and joins.
+   Round 4 moved the grid from 24 to the library's 32. Thirty names are now the
+   library's own drawings (LIB_ICONS below); the twenty-seven that remain here are
+   the ones the library has no equivalent for, and they are re-expressed on the 32
+   grid by scaling the 24-grid path 4/3 and setting stroke-width 1.725, which paints
+   at exactly 2.3 -- so a legacy icon and a library icon are the same weight on the
+   same grid, which is what criterion 5.4 asks for.
    ================================================================ */
+/* ---- ROUND 4: the library's own icons -------------------------------------
+   asset-library/svg/ui-icons, feature-icons and provenance, path data verbatim,
+   on the library's 32 grid. Stroke is normalised to 2.3 -- the library itself
+   ships 2.3 on UI icons and 2.2 on feature icons, and criterion 5.4 asks for one
+   weight, so the 0.1 is levelled up rather than carried through. Note the library
+   already dedupes: provenance/owner-source IS ui-icons/storefront, photo-source IS
+   photo, and public-record IS receipt, so those three names point at one drawing. */
+const LIB_ICONS = {
+'map':'<path d="m4 7 7-3 7 3 7-3v22l-7 3-7-3-7 3Z"/><path d="M11 4v22M18 7v22"/>',
+'camera':'<path d="M5 10h5l2-4h8l2 4h5v17H5Z"/><circle cx="16" cy="18" r="5"/>',
+'profile':'<circle cx="16" cy="10" r="6"/><path d="M5 29c1-9 5-13 11-13s10 4 11 13Z"/>',
+'store':'<path d="M5 13h22L24 6H8Z"/><path d="M7 13v15h18V13M12 28v-9h8v9"/><path d="M5 13c0 4 5 5 7 2 3 3 6 3 8 0 3 3 6 3 8-2"/>',
+'search':'<circle cx="14" cy="14" r="9"/><path d="m21 21 7 7"/>',
+'filter':'<path d="M5 8h22M9 16h18M13 24h14"/><circle cx="9" cy="8" r="2"/><circle cx="13" cy="16" r="2"/><circle cx="17" cy="24" r="2"/>',
+'close':'<path d="m7 7 18 18M25 7 7 25"/>',
+'chevron':'<path d="m11 5 11 11-11 11"/>',
+'info':'<circle cx="16" cy="16" r="12"/><path d="M16 14v8M16 9h.01"/>',
+'photo':'<rect x="4" y="6" width="24" height="21" rx="3"/><circle cx="12" cy="13" r="3"/><path d="m7 24 7-7 5 5 3-3 4 5"/>',
+'clock':'<circle cx="16" cy="16" r="12"/><path d="M16 9v8l5 3"/>',
+'bars':'<path d="M7 27V19M13 27V14M19 27V9M25 27V5"/>',
+'edit':'<path d="m6 25 5-1 14-14-4-4L7 20Z"/><path d="m18 9 4 4M5 28h22"/>',
+'pin':'<path d="M16 29S6 21 6 12a10 10 0 0 1 20 0c0 9-10 17-10 17Z"/><circle cx="16" cy="12" r="3"/>',
+'document':'<path d="M8 4h16v25l-4-3-4 3-4-3-4 3Z"/><path d="M12 10h8M12 15h8M12 20h5"/>',
+'menu':'<path d="M5 8h22M5 16h22M5 24h22"/>',
+'scan':'<path d="M5 11V6a2 2 0 0 1 2-2h5M25 11V6a2 2 0 0 0-2-2h-5M5 21v5a2 2 0 0 0 2 2h5M25 21v5a2 2 0 0 1-2 2h-5"/><path d="M10 15h12M10 20h12"/>',
+'person':'<circle cx="16" cy="9" r="5"/><path d="M7 28c1-9 4-13 9-13s8 4 9 13Z"/>',
+'my-needs':'<path d="M16 28S4 20 4 11c0-7 9-10 12-4 3-6 12-3 12 4 0 9-12 17-12 17Z"/>',
+'check-outline':'<circle cx="16" cy="16" r="13"/><path d="m9 16 5 5 10-12"/>',
+'people':'<circle cx="11" cy="12" r="4"/><circle cx="21" cy="12" r="4"/><path d="M3 27c0-7 3-10 8-10s8 3 8 10M15 27c0-5 2-8 6-8s7 3 8 8"/>',
+'door':'<path d="M5 25h22M8 25V9h15v16M13 17h8"/>',
+'wide-door':'<path d="M4 27V5h10v22M18 27V5h10v22M14 16h4"/>',
+'door-double':'<path d="M4 27V5h10v22M18 27V5h10v22M14 16h4"/>',
+'door-handle':'<rect x="5" y="4" width="15" height="24" rx="2"/><path d="M18 15h7M25 12v8"/>',
+'door-button':'<rect x="5" y="4" width="14" height="24" rx="2"/><circle cx="23" cy="16" r="5"/><path d="M23 13v6M20 16h6"/>',
+'approach':'<path d="M5 27 12 5h8l7 22Z"/><path d="M16 9v4M16 18v4"/>',
+'ramp':'<path d="M4 26h24L28 12 4 26Z"/><path d="M9 23h15M14 20h10M19 17h5"/>',
+'signage':'<rect x="5" y="4" width="22" height="24" rx="3"/><circle cx="16" cy="10" r="2"/><path d="M16 13v7M11 16h10M16 20l-4 6M16 20l5 6"/>',
+'unknown':'<path d="M11 11a5 5 0 1 1 8 4c-2 1-3 3-3 5M16 26h.01"/><circle cx="16" cy="16" r="13" stroke-dasharray="4 4"/>',
+};
+
+/* OURS. The library ships no equivalent for any of these: the map's own controls
+   (list, zoom-in, zoom-out, locate, back), the bare tick that sits inside a filled
+   selection disc (the library only has the OUTLINED check, which is the owner
+   badge and means something else), bookmark, share, upload, external, phone,
+   directions, plus, minus, text-size, the five persona glyphs (wheelchair, cane,
+   eye, hand, stroller), the three settings glyphs (contrast, motion, shield),
+   lock, bell, sparkle, warning, and handrails. */
 const ICONS = {
-map:'<path d="M9 4.8 3.5 7.4v11.8L9 16.6l6 2.6 5.5-2.6V4.8L15 7.4 9 4.8Z"/><path d="M9 4.8v11.8M15 7.4v11.8"/>',
-camera:'<path d="M4 8.6a2.2 2.2 0 0 1 2.2-2.2h1.6l1.2-2a1.4 1.4 0 0 1 1.2-.7h3.6a1.4 1.4 0 0 1 1.2.7l1.2 2h1.6A2.2 2.2 0 0 1 20 8.6v8.6a2.2 2.2 0 0 1-2.2 2.2H6.2A2.2 2.2 0 0 1 4 17.2Z"/><circle cx="12" cy="12.6" r="3.5"/>',
-profile:'<circle cx="12" cy="8.4" r="3.7"/><path d="M4.6 20c1.2-3.7 4-5.6 7.4-5.6s6.2 1.9 7.4 5.6"/>',
-people:'<circle cx="9.3" cy="8.4" r="3.2"/><path d="M3.2 19.4c.9-3.3 3.1-5 6.1-5s5.2 1.7 6.1 5"/><circle cx="17.2" cy="9" r="2.5"/><path d="M16.2 14.6c2.3.2 3.9 1.8 4.7 4.6"/>',
-store:'<path d="M4 9.4h16M5.9 9.4v9.4h12.2V9.4M5.7 9.4 7.4 5.2h9.2l1.7 4.2M9.9 18.8v-4.6h4.2v4.6"/>',
-search:'<circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.4 15.4 4.4 4.4"/>',
-filter:'<path d="M4 7.4h4.1M12.4 7.4h7.6M4 16.6h7.6M15.9 16.6h4.1"/><circle cx="10.2" cy="7.4" r="2.2"/><circle cx="13.8" cy="16.6" r="2.2"/>',
 list:'<path d="M9 6.6h11M9 12h11M9 17.4h11"/><circle cx="4.6" cy="6.6" r="1.1"/><circle cx="4.6" cy="12" r="1.1"/><circle cx="4.6" cy="17.4" r="1.1"/>',
 'zoom-in':'<circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.4 15.4 4.4 4.4M8.4 10.8h4.8M10.8 8.4v4.8"/>',
 'zoom-out':'<circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.4 15.4 4.4 4.4M8.4 10.8h4.8"/>',
 locate:'<circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5"/><path d="M12 2.6v3.1M12 18.3v3.1M2.6 12h3.1M18.3 12h3.1"/>',
-chevron:'<path d="m9.5 5.6 6.6 6.4-6.6 6.4"/>',
 back:'<path d="M19.6 12H4.8m0 0 6.2-6.2M4.8 12l6.2 6.2"/>',
-close:'<path d="m6.2 6.2 11.6 11.6M17.8 6.2 6.2 17.8"/>',
 check:'<path d="m5 12.6 4.8 4.8L19 6.6"/>',
 bookmark:'<path d="M6.4 4.6h11.2v15L12 15.7 6.4 19.6Z"/>',
 share:'<circle cx="17.4" cy="6" r="2.8"/><circle cx="6.6" cy="12" r="2.8"/><circle cx="17.4" cy="18" r="2.8"/><path d="m9.1 10.6 5.8-3.2m0 9.2-5.8-3.2"/>',
-edit:'<path d="M4 20.1 5 15.8 16.4 4.4a2.25 2.25 0 0 1 3.2 3.2L8.2 19Z"/><path d="m14.5 6.3 3.2 3.2"/>',
-photo:'<rect x="3.5" y="5" width="17" height="14" rx="2.6"/><circle cx="8.8" cy="10.1" r="1.7"/><path d="m4.2 17.6 4.7-4.3 3.3 3 3.3-2.7 4.3 3.8"/>',
-document:'<path d="M6 3.6h7.4L18 8.2v12.2H6Z"/><path d="M13.3 3.7v4.5H18"/><path d="M9 12.6h6M9 16.3h4.4"/>',
-clock:'<circle cx="12" cy="12" r="8.4"/><path d="M12 7.2V12l3.2 2.1"/>',
-bars:'<path d="M5.6 19.6v-4.8M12 19.6V9.2M18.4 19.6V4.6"/>',
 lock:'<rect x="4.6" y="10.4" width="14.8" height="9.6" rx="2.4"/><path d="M8.2 10.4V7.9a3.8 3.8 0 0 1 7.6 0v2.5"/><path d="M12 14.2v1.9"/>',
 bell:'<path d="M6.4 16.4V11a5.6 5.6 0 0 1 11.2 0v5.4l1.6 2.2H4.8Z"/><path d="M10 19.7a2.2 2.2 0 0 0 4 0"/>',
 eye:'<path d="M2.7 12S6.2 5.9 12 5.9 21.3 12 21.3 12 17.8 18.1 12 18.1 2.7 12 2.7 12Z"/><circle cx="12" cy="12" r="2.9"/>',
@@ -2960,11 +3129,8 @@ hand:'<path d="M8.6 12.4V6a1.7 1.7 0 0 1 3.4 0v5.2"/><path d="M12 11.2V4.7a1.7 1
 wheelchair:'<circle cx="12.9" cy="4.3" r="2.1"/><path d="M11 7.9v5.8h5.4l2.4 5.7M16.5 19.6h4.3"/><path d="M9.4 9.7A6 6 0 1 0 17.4 14.3"/>',
 stroller:'<path d="M3.6 4h2.2l2.4 8.4h9.2a7.4 7.4 0 0 0 3-6.4"/><path d="M8.2 12.4 6.4 17.2h11"/><circle cx="8.6" cy="19.6" r="1.9"/><circle cx="16.4" cy="19.6" r="1.9"/>',
 cane:'<circle cx="9.8" cy="4.4" r="2.1"/><path d="M9.8 7.4 8.7 14.2l2.2 6.6"/><path d="m9.8 9.6 5 2 1.6 9.2"/><path d="M14.8 11.4a3.6 3.6 0 0 0 3.6-3.6"/>',
-info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11.4v5"/><circle cx="12" cy="7.9" r="1"/>',
 sparkle:'<path d="M12 3.2c.9 4.9 3.9 7.9 8.8 8.8-4.9.9-7.9 3.9-8.8 8.8-.9-4.9-3.9-7.9-8.8-8.8 4.9-.9 7.9-3.9 8.8-8.8Z"/>',
 warning:'<path d="M12 4.4 21 19.6H3Z"/><path d="M12 10.2v4.1"/><circle cx="12" cy="17.2" r="1"/>',
-door:'<path d="M6.6 20.4V5.4a1 1 0 0 1 1-1h8.8a1 1 0 0 1 1 1v15"/><path d="M3.4 20.4h17.2"/><circle cx="14.3" cy="12.8" r="1.1"/>',
-'wide-door':'<path d="M8.2 20.4V7.4a1 1 0 0 1 1-1h5.6a1 1 0 0 1 1 1v13"/><path d="M3.4 20.4h17.2"/><path d="M6.3 13.4H3.1m0 0 1.8-1.8M3.1 13.4l1.8 1.8M17.7 13.4h3.2m0 0-1.8-1.8m1.8 1.8-1.8 1.8"/>',
 plus:'<path d="M12 5.2v13.6M5.2 12h13.6"/>',
 minus:'<path d="M5.2 12h13.6"/>',
 'text-size':'<path d="M6 20 12 4l6 16M8.5 14h7"/>',
@@ -2974,25 +3140,23 @@ motion:'<path d="M3 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/><path d="M4 19h16"/>',
 external:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
 phone:'<rect x="6" y="3.5" width="12" height="17" rx="2.5"/><path d="M10.5 17.5h3"/>',
 directions:'<path d="M12 2.5 21.5 12 12 21.5 2.5 12Z"/><path d="M9.5 13.5V11h5l-1.8-1.8M14.5 11l-1.8 1.8"/>',
-'door-double':'<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M12 4v16"/><circle cx="9.4" cy="12" r="1"/><circle cx="14.6" cy="12" r="1"/>',
-'door-handle':'<rect x="6" y="3.5" width="12" height="17" rx="1.5"/><path d="M14.5 9.5v5"/><path d="M3 20.5h18"/>',
-'door-button':'<rect x="6" y="3.5" width="12" height="17" rx="1.5"/><circle cx="3.5" cy="12" r="1.6"/><path d="M14.6 12h.01"/>',
-approach:'<path d="M4 12h13"/><path d="m13 7.5 4.5 4.5-4.5 4.5"/><path d="M20 4.5v15"/>'
-,
 upload:'<path d="M7.5 18.5h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.7 9.6 4.5 4.5 0 0 0 7.5 18.5Z"/><path d="M12 15.4v-5M9.6 12.8 12 10.4l2.4 2.4"/>',
-pin:'<path d="M12 21c4-4.5 7-8 7-11a7 7 0 1 0-14 0c0 3 3 6.5 7 11Z"/><circle cx="12" cy="10" r="3.2"/>'
 };
 
 /* iconSVG(name, size, color) -- colour defaults to currentColor so the surrounding
-   CSS custom property drives it; pass a third argument to force one. */
+   CSS custom property drives it; pass a third argument to force one. One 32 grid and
+   one painted stroke weight (2.3) whichever family the name comes from: a library
+   icon is emitted as drawn, a legacy 24-grid icon is scaled 4/3 with a compensating
+   stroke-width so it paints at the same 2.3. */
 function iconSVG(name, size, color){
-  var d = ICONS[name];
+  var lib = LIB_ICONS[name], d = lib || ICONS[name];
   if(!d) return '';
   var s = size || 24;
-  return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none"'
-    + ' stroke="'+(color || 'currentColor')+'" stroke-width="2" stroke-linecap="round"'
-    + ' stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:block">'
-    + d + '</svg>';
+  var head = '<svg width="'+s+'" height="'+s+'" viewBox="0 0 32 32" fill="none"'
+    + ' stroke="'+(color || 'currentColor')+'" stroke-width="2.3" stroke-linecap="round"'
+    + ' stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:block">';
+  return head + (lib ? d
+    : '<g transform="scale(1.33333)" stroke-width="1.725">' + d + '</g>') + '</svg>';
 }
 
 
@@ -3003,13 +3167,13 @@ function iconSVG(name, size, color){
    redrawn. The two clip-path ids are made instance-unique at call time.
    ================================================================ */
 const ILLUS = {
-"door":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#7053C5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"207\" rx=\"96\" ry=\"9\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M46 72h148v114H46z\"/> <path d=\"M50 62h140v10H50z\"/> <path d=\"M44 50h152v12H44z\"/> <path d=\"M68 78h20v100H68zM152 78h20v100h-20z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".12\"/> <path d=\"M64 72h28v6H64zM148 72h28v6h-28zM64 178h28v8H64zM148 178h28v8h-28z\"/> <path d=\"M74 84v88M82 84v88M158 84v88M166 84v88\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M88 78h64v108H88z\"/> </g> <path d=\"M92 84h56v102H92z\" fill=\"var(--marigold,#F0A32F)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M100 94h18v30h-18zM122 94h18v30h-18zM100 134h18v42h-18zM122 134h18v42h-18z\"/> </g> <circle cx=\"142\" cy=\"136\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <g transform=\"translate(57 94)\"> <path d=\"M0 0v-5\" fill=\"none\"/><circle cx=\"0\" cy=\"-7.5\" r=\"2\"/> <path d=\"M-9 0h18l-3 7h-12z\"/> <path d=\"M-7.5 7h15l-1.5 17h-12z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".24\"/> <path d=\"M-6 24h12l-6 7z\"/> <path d=\"M0 7v17M-7 15h14\" fill=\"none\" stroke-opacity=\".3\"/> </g> <g transform=\"translate(183 94)\"> <path d=\"M0 0v-5\" fill=\"none\"/><circle cx=\"0\" cy=\"-7.5\" r=\"2\"/> <path d=\"M-9 0h18l-3 7h-12z\"/> <path d=\"M-7.5 7h15l-1.5 17h-12z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".24\"/> <path d=\"M-6 24h12l-6 7z\"/> <path d=\"M0 7v17M-7 15h14\" fill=\"none\" stroke-opacity=\".3\"/> </g> <path d=\"M84 186h72v8H84zM74 194h92v7H74zM62 201h116v8H62z\"/> <g transform=\"translate(28 203)\"> <path d=\"M0-24v-16\" fill=\"none\" stroke-opacity=\".45\"/> <path d=\"M0-37c-15 0-21-11-14-17-5-11 6-19 15-13 9-9 20 2 14 12 7 8 0 18-11 18z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".26\"/> <path d=\"M0-39v-25M0-50l-9-7M0-57l9-7\" fill=\"none\" stroke-opacity=\".42\"/> <path d=\"M-16-24h32v6h-32zM-14-18h28l-4 18h-20z\"/> </g> <g transform=\"translate(212 203)\"> <path d=\"M0-24v-16\" fill=\"none\" stroke-opacity=\".45\"/> <path d=\"M0-37c-15 0-21-11-14-17-5-11 6-19 15-13 9-9 20 2 14 12 7 8 0 18-11 18z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".26\"/> <path d=\"M0-39v-25M0-50l-9-7M0-57l9-7\" fill=\"none\" stroke-opacity=\".42\"/> <path d=\"M-16-24h32v6h-32zM-14-18h28l-4 18h-20z\"/> </g> </g>"],
-"street":["0 0 280 176","<defs><clipPath id=\"emField__U__\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\"/></clipPath></defs> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"var(--purple,#7053C5)\" opacity=\".13\"/> <g clip-path=\"url(#emField__U__)\"> <g fill=\"var(--purple,#7053C5)\" fill-opacity=\".13\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.6\" stroke-opacity=\".38\" stroke-linejoin=\"round\"> <path d=\"M6 30h44v104H6zM50 54h32v80H50zM212 24h40v110h-40zM252 54h28v80h-28z\"/> </g> <g fill=\"var(--card,#FFFFFF)\" fill-opacity=\".75\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.3\" stroke-opacity=\".3\"> <path d=\"M16 42h10v11H16zM34 42h10v11H34zM16 62h10v11H16zM34 62h10v11H34zM60 66h11v11H60zM222 38h10v12h-10zM236 38h10v12h-10zM222 60h10v12h-10zM236 60h10v12h-10zM260 66h11v11h-11z\"/> </g> <g fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".18\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-opacity=\".48\" stroke-linejoin=\"round\"> <path d=\"M176 34h38v100h-38z\"/> <path d=\"M184 46h9v12h-9zM199 46h9v12h-9zM184 66h9v12h-9zM199 66h9v12h-9zM184 86h9v12h-9zM199 86h9v12h-9z\" fill=\"var(--card,#FFFFFF)\" fill-opacity=\".85\"/> </g> <path d=\"M14 134h252l14 28H0z\" fill=\"var(--card,#FFFFFF)\" fill-opacity=\".6\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-opacity=\".42\" stroke-linejoin=\"round\"/> <path d=\"M-2 162h284v18H-2z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".13\"/> <path d=\"M60 134l-6 28M124 134l-2 28M198 134l5 28\" fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.4\" stroke-opacity=\".22\"/> <path d=\"M16 171h30M64 171h30M112 171h30M160 171h30M208 171h30M256 171h24\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"3.4\" stroke-opacity=\".85\" stroke-linecap=\"round\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-opacity=\".62\"> <path d=\"M22 78h70v56H22zM172 78h72v56h-72zM92 66h80v68H92z\"/> <path d=\"M22 78h70v13H22zM172 78h72v13h-72z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".13\"/> <path d=\"M30 100h36v26H30zM180 100h36v26h-36zM100 106h34v28h-34z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".2\"/> <path d=\"M72 102h14v32H72zM222 102h14v32h-14zM142 104h20v30h-20z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".09\"/> </g> <path d=\"M36 85h32M182 85h34\" fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.6\" stroke-opacity=\".22\" stroke-linecap=\"round\"/> <path d=\"M96 76h72l9 18H87z\" fill=\"var(--marigold,#F0A32F)\"/> <path d=\"M87 94q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0v-3H87z\" fill=\"var(--marigold,#F0A32F)\"/> <path d=\"M111 76l-4 18M132 76v18M153 76l4 18\" fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.8\" stroke-opacity=\".16\"/> <g fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".55\"> <g transform=\"translate(260 136)\"> <path d=\"M0 0v-32M0-19l-9-9M0-27l9-9\"/> <path d=\"M0-56c-12 0-18-8-13-16-4-9 6-17 13-11 7-6 17 2 13 11 5 8-1 16-13 16z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".26\"/> </g> <g transform=\"translate(13 137)\"> <path d=\"M0 0v-26M0-15l-7-8\"/> <path d=\"M0-45c-10 0-15-7-11-13-3-7 5-14 11-9 6-5 14 2 11 9 4 6-1 13-11 13z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".26\"/> </g> </g> <g transform=\"translate(62 148)\" stroke=\"var(--purple,#7053C5)\" stroke-opacity=\".6\" fill=\"none\" stroke-linecap=\"round\"> <circle cx=\"0\" cy=\"-29\" r=\"4.6\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".6\" stroke=\"none\"/> <path d=\"M0-22v11\" stroke-width=\"6\"/> <path d=\"M0-11l-4 11M0-11l4 11\" stroke-width=\"4.6\"/> <path d=\"M-6-19l6 3 6-3\" stroke-width=\"3.4\"/> </g> </g> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"none\" stroke=\"var(--purple,#7053C5)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/>"],
-"map":["0 0 280 176","<defs><clipPath id=\"emField__U__\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\"/></clipPath></defs> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"var(--ground,#EDEBFA)\"/> <g clip-path=\"url(#emField__U__)\"> <g transform=\"rotate(-11 140 88)\"> <rect x=\"-60\" y=\"-60\" width=\"400\" height=\"300\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".1\"/> <g fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".17\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"1.4\" stroke-opacity=\".45\"> <path d=\"M-20-30h84v70h-84zM80-30h86v70H80zM182-30h96v70h-96z\"/> <path d=\"M-20 56h84v76h-84zM80 56h86v76H80zM182 56h96v76h-96z\"/> <path d=\"M-20 148h84v84h-84zM80 148h86v84H80zM182 148h96v84h-96z\"/> </g> <g fill=\"none\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"1.2\" stroke-opacity=\".38\"> <path d=\"M20-30v70M-20 6h84M118-30v70M80 14h86M182 18h96M230 70V18M20 56v76M-20 96h84M124 56v76M182 96h96M240 96v36M52 148v84M80 190h86M182 190h96\"/> </g> <g stroke=\"var(--card,#FFFFFF)\" stroke-opacity=\".95\" fill=\"none\" stroke-linecap=\"square\"> <path d=\"M-60 48H340M-60 140H340\" stroke-width=\"15\"/> <path d=\"M72-60v300M174-60v300\" stroke-width=\"15\"/> <path d=\"M-60 94H340\" stroke-width=\"9\"/> </g> </g> <g fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".32\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"1.4\" stroke-opacity=\".55\" stroke-linejoin=\"round\"> <path d=\"M46 44c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M232 32c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M196 138c-11 0-17-9-10-15-4-9 6-15 12-10 6-6 16 0 12 9 7 6 2 16-8 16z\"/> <path d=\"M64 148c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M258 96c-9 0-13-7-8-11-3-6 4-11 9-7 4-4 11 0 9 7 4 4 1 11-7 11z\"/> <path d=\"M110 26c-9 0-13-7-8-11-3-6 4-11 9-7 4-4 11 0 9 7 4 4 1 11-7 11z\"/> </g> <circle cx=\"140\" cy=\"90\" r=\"38\" fill=\"var(--blue,#5B8DEF)\" opacity=\".09\"/> <circle cx=\"140\" cy=\"90\" r=\"24\" fill=\"var(--blue,#5B8DEF)\" opacity=\".17\"/> <circle cx=\"140\" cy=\"90\" r=\"24\" fill=\"none\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"1.4\" stroke-opacity=\".45\"/> <circle cx=\"140\" cy=\"90\" r=\"11.5\" fill=\"var(--card,#FFFFFF)\"/> <circle cx=\"140\" cy=\"90\" r=\"8\" fill=\"var(--blue,#5B8DEF)\"/> </g> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"none\" stroke=\"var(--purple,#7053C5)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/>"],
-"saved":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#7053C5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"204\" rx=\"94\" ry=\"9\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M86 60h68v130H86z\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".22\"/> <path d=\"M66 48h108v12H66z\"/> <path d=\"M70 60h16v130H70zM154 60h16v130h-16z\"/> <path d=\"M86 60L48 74v122l38-6z\"/> <path d=\"M62 190h116v10H62z\"/> </g> <g fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.8\" stroke-opacity=\".2\" stroke-linejoin=\"round\"> <path d=\"M56 88l22-8v36l-22 5zM56 132l22-5v38l-22 4z\"/> </g> <circle cx=\"53\" cy=\"136\" r=\"3\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.6\" stroke-opacity=\".3\"/> <path d=\"M86 150h68v40H86z\" fill=\"var(--card,#FFFFFF)\" opacity=\".32\"/> <path d=\"M120 60v16\" fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-opacity=\".4\"/> <path d=\"M110 76h20l-4 9h-12z\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-linejoin=\"round\" stroke-opacity=\".45\"/> <path d=\"M88 190h64l20 18H68z\" fill=\"var(--marigold,#F0A32F)\" opacity=\".28\"/> <g transform=\"rotate(-11 178 198)\"> <path d=\"M162 130h32v68l-16-12-16 12z\" fill=\"var(--marigold,#F0A32F)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <path d=\"M170 146h16M170 158h11\" fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"2.1\" stroke-opacity=\".22\" stroke-linecap=\"round\"/> </g> <ellipse cx=\"181\" cy=\"202\" rx=\"22\" ry=\"5\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/>"],
-"offline":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#7053C5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"205\" rx=\"92\" ry=\"9\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M60 78h120v112H60z\"/> <path d=\"M56 66h128v12H56z\"/> <path d=\"M64 82h22v108H64zM154 82h22v108h-22z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".12\"/> <path d=\"M70 94v84M164 94v84\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M86 78h68v112H86z\"/> <path d=\"M76 190h88v9H76zM64 199h112v9H64z\"/> </g> <path d=\"M90 84h60v106H90z\" fill=\"var(--marigold,#F0A32F)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M98 94h19v32H98zM123 94h19v32h-19zM98 136h19v44H98zM123 136h19v44h-19z\"/> </g> <circle cx=\"144\" cy=\"138\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <circle cx=\"176\" cy=\"52\" r=\"42\" fill=\"var(--blue,#5B8DEF)\" opacity=\".13\"/> <path d=\"M158 68h-4a13 13 0 0 1-1-26 19 19 0 0 1 35-4 12 12 0 0 1 8 22 12 12 0 0 1-4 8h-24\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".62\" stroke-dasharray=\"9 6\"/> <path d=\"M176 62V42M169 49l7-7 7 7\" fill=\"none\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> <path d=\"M156 84h7M170 84h10M187 84h7\" fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-opacity=\".34\"/>"],
-"camera":["0 0 240 240","<circle cx=\"120\" cy=\"112\" r=\"100\" fill=\"var(--purple,#7053C5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"196\" rx=\"80\" ry=\"9\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".72\"> <path d=\"M88 74a7 7 0 0 1 7-7h28a7 7 0 0 1 7 7v12H88z\"/> <rect x=\"150\" y=\"72\" width=\"24\" height=\"14\" rx=\"5\" fill=\"var(--marigold,#F0A32F)\" stroke-opacity=\".55\"/> <rect x=\"44\" y=\"86\" width=\"152\" height=\"102\" rx=\"18\"/> <rect x=\"58\" y=\"100\" width=\"22\" height=\"13\" rx=\"4\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".22\" stroke-opacity=\".4\"/> </g> <circle cx=\"120\" cy=\"137\" r=\"41\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".16\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.4\" stroke-opacity=\".72\"/> <circle cx=\"120\" cy=\"137\" r=\"32\" fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-opacity=\".34\"/> <circle cx=\"120\" cy=\"137\" r=\"25\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".2\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.2\" stroke-opacity=\".62\"/> <g fill=\"none\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-opacity=\".38\"> <path d=\"M126 137h17M123 142l8 15M117 142l-8 15M114 137H97M117 132l-8-15M123 132l8-15\"/> </g> <circle cx=\"120\" cy=\"137\" r=\"5.5\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"1.8\" stroke-opacity=\".5\"/> <path d=\"M104 118a25 25 0 0 1 22-5\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-opacity=\".7\"/> <circle cx=\"178\" cy=\"104\" r=\"4\" fill=\"var(--blue,#5B8DEF)\" fill-opacity=\".5\"/>"],
-"thanks":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#7053C5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"203\" rx=\"92\" ry=\"9\" fill=\"var(--purple,#7053C5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M58 66h124v122H58z\"/> <path d=\"M54 54h132v12H54z\"/> <path d=\"M62 70h22v118H62zM156 70h22v118h-22z\" fill=\"var(--purple,#7053C5)\" fill-opacity=\".12\"/> <path d=\"M68 82v90M166 82v90\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M84 66h72v122H84z\"/> <path d=\"M74 188h92v9H74zM62 197h116v9H62z\"/> </g> <path d=\"M88 72h64v116H88z\" fill=\"var(--marigold,#F0A32F)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M96 82h21v34H96zM123 82h21v34h-21zM96 126h21v52H96zM123 126h21v52h-21z\"/> </g> <circle cx=\"146\" cy=\"130\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#241F3A)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <g transform=\"rotate(-7 168 176)\"> <rect x=\"126\" y=\"150\" width=\"84\" height=\"52\" rx=\"8\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4B2E9E)\" stroke-width=\"2.2\" stroke-opacity=\".68\"/> <path d=\"M152 174h44M152 187h30\" fill=\"none\" stroke=\"var(--blue,#5B8DEF)\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-opacity=\".6\"/> <circle cx=\"133\" cy=\"156\" r=\"13\" fill=\"var(--purple,#7053C5)\"/> <path d=\"M127.5 156l4 4.5 7.5-8.5\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </g>"]
+"door":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#5B35F5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"207\" rx=\"96\" ry=\"9\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M46 72h148v114H46z\"/> <path d=\"M50 62h140v10H50z\"/> <path d=\"M44 50h152v12H44z\"/> <path d=\"M68 78h20v100H68zM152 78h20v100h-20z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".12\"/> <path d=\"M64 72h28v6H64zM148 72h28v6h-28zM64 178h28v8H64zM148 178h28v8h-28z\"/> <path d=\"M74 84v88M82 84v88M158 84v88M166 84v88\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M88 78h64v108H88z\"/> </g> <path d=\"M92 84h56v102H92z\" fill=\"var(--marigold,#FFBF24)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M100 94h18v30h-18zM122 94h18v30h-18zM100 134h18v42h-18zM122 134h18v42h-18z\"/> </g> <circle cx=\"142\" cy=\"136\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <g transform=\"translate(57 94)\"> <path d=\"M0 0v-5\" fill=\"none\"/><circle cx=\"0\" cy=\"-7.5\" r=\"2\"/> <path d=\"M-9 0h18l-3 7h-12z\"/> <path d=\"M-7.5 7h15l-1.5 17h-12z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".24\"/> <path d=\"M-6 24h12l-6 7z\"/> <path d=\"M0 7v17M-7 15h14\" fill=\"none\" stroke-opacity=\".3\"/> </g> <g transform=\"translate(183 94)\"> <path d=\"M0 0v-5\" fill=\"none\"/><circle cx=\"0\" cy=\"-7.5\" r=\"2\"/> <path d=\"M-9 0h18l-3 7h-12z\"/> <path d=\"M-7.5 7h15l-1.5 17h-12z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".24\"/> <path d=\"M-6 24h12l-6 7z\"/> <path d=\"M0 7v17M-7 15h14\" fill=\"none\" stroke-opacity=\".3\"/> </g> <path d=\"M84 186h72v8H84zM74 194h92v7H74zM62 201h116v8H62z\"/> <g transform=\"translate(28 203)\"> <path d=\"M0-24v-16\" fill=\"none\" stroke-opacity=\".45\"/> <path d=\"M0-37c-15 0-21-11-14-17-5-11 6-19 15-13 9-9 20 2 14 12 7 8 0 18-11 18z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".26\"/> <path d=\"M0-39v-25M0-50l-9-7M0-57l9-7\" fill=\"none\" stroke-opacity=\".42\"/> <path d=\"M-16-24h32v6h-32zM-14-18h28l-4 18h-20z\"/> </g> <g transform=\"translate(212 203)\"> <path d=\"M0-24v-16\" fill=\"none\" stroke-opacity=\".45\"/> <path d=\"M0-37c-15 0-21-11-14-17-5-11 6-19 15-13 9-9 20 2 14 12 7 8 0 18-11 18z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".26\"/> <path d=\"M0-39v-25M0-50l-9-7M0-57l9-7\" fill=\"none\" stroke-opacity=\".42\"/> <path d=\"M-16-24h32v6h-32zM-14-18h28l-4 18h-20z\"/> </g> </g>"],
+"street":["0 0 280 176","<defs><clipPath id=\"emField__U__\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\"/></clipPath></defs> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"var(--purple,#5B35F5)\" opacity=\".13\"/> <g clip-path=\"url(#emField__U__)\"> <g fill=\"var(--purple,#5B35F5)\" fill-opacity=\".13\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.6\" stroke-opacity=\".38\" stroke-linejoin=\"round\"> <path d=\"M6 30h44v104H6zM50 54h32v80H50zM212 24h40v110h-40zM252 54h28v80h-28z\"/> </g> <g fill=\"var(--card,#FFFFFF)\" fill-opacity=\".75\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.3\" stroke-opacity=\".3\"> <path d=\"M16 42h10v11H16zM34 42h10v11H34zM16 62h10v11H16zM34 62h10v11H34zM60 66h11v11H60zM222 38h10v12h-10zM236 38h10v12h-10zM222 60h10v12h-10zM236 60h10v12h-10zM260 66h11v11h-11z\"/> </g> <g fill=\"var(--blue,#69B7FF)\" fill-opacity=\".18\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-opacity=\".48\" stroke-linejoin=\"round\"> <path d=\"M176 34h38v100h-38z\"/> <path d=\"M184 46h9v12h-9zM199 46h9v12h-9zM184 66h9v12h-9zM199 66h9v12h-9zM184 86h9v12h-9zM199 86h9v12h-9z\" fill=\"var(--card,#FFFFFF)\" fill-opacity=\".85\"/> </g> <path d=\"M14 134h252l14 28H0z\" fill=\"var(--card,#FFFFFF)\" fill-opacity=\".6\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-opacity=\".42\" stroke-linejoin=\"round\"/> <path d=\"M-2 162h284v18H-2z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".13\"/> <path d=\"M60 134l-6 28M124 134l-2 28M198 134l5 28\" fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.4\" stroke-opacity=\".22\"/> <path d=\"M16 171h30M64 171h30M112 171h30M160 171h30M208 171h30M256 171h24\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"3.4\" stroke-opacity=\".85\" stroke-linecap=\"round\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2\" stroke-linejoin=\"round\" stroke-opacity=\".62\"> <path d=\"M22 78h70v56H22zM172 78h72v56h-72zM92 66h80v68H92z\"/> <path d=\"M22 78h70v13H22zM172 78h72v13h-72z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".13\"/> <path d=\"M30 100h36v26H30zM180 100h36v26h-36zM100 106h34v28h-34z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".2\"/> <path d=\"M72 102h14v32H72zM222 102h14v32h-14zM142 104h20v30h-20z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".09\"/> </g> <path d=\"M36 85h32M182 85h34\" fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.6\" stroke-opacity=\".22\" stroke-linecap=\"round\"/> <path d=\"M96 76h72l9 18H87z\" fill=\"var(--marigold,#FFBF24)\"/> <path d=\"M87 94q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0q5 6 10 0v-3H87z\" fill=\"var(--marigold,#FFBF24)\"/> <path d=\"M111 76l-4 18M132 76v18M153 76l4 18\" fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.8\" stroke-opacity=\".16\"/> <g fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".55\"> <g transform=\"translate(260 136)\"> <path d=\"M0 0v-32M0-19l-9-9M0-27l9-9\"/> <path d=\"M0-56c-12 0-18-8-13-16-4-9 6-17 13-11 7-6 17 2 13 11 5 8-1 16-13 16z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".26\"/> </g> <g transform=\"translate(13 137)\"> <path d=\"M0 0v-26M0-15l-7-8\"/> <path d=\"M0-45c-10 0-15-7-11-13-3-7 5-14 11-9 6-5 14 2 11 9 4 6-1 13-11 13z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".26\"/> </g> </g> <g transform=\"translate(62 148)\" stroke=\"var(--purple,#5B35F5)\" stroke-opacity=\".6\" fill=\"none\" stroke-linecap=\"round\"> <circle cx=\"0\" cy=\"-29\" r=\"4.6\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".6\" stroke=\"none\"/> <path d=\"M0-22v11\" stroke-width=\"6\"/> <path d=\"M0-11l-4 11M0-11l4 11\" stroke-width=\"4.6\"/> <path d=\"M-6-19l6 3 6-3\" stroke-width=\"3.4\"/> </g> </g> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"none\" stroke=\"var(--purple,#5B35F5)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/>"],
+"map":["0 0 280 176","<defs><clipPath id=\"emField__U__\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\"/></clipPath></defs> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"var(--ground,#F2EEFF)\"/> <g clip-path=\"url(#emField__U__)\"> <g transform=\"rotate(-11 140 88)\"> <rect x=\"-60\" y=\"-60\" width=\"400\" height=\"300\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".1\"/> <g fill=\"var(--blue,#69B7FF)\" fill-opacity=\".17\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"1.4\" stroke-opacity=\".45\"> <path d=\"M-20-30h84v70h-84zM80-30h86v70H80zM182-30h96v70h-96z\"/> <path d=\"M-20 56h84v76h-84zM80 56h86v76H80zM182 56h96v76h-96z\"/> <path d=\"M-20 148h84v84h-84zM80 148h86v84H80zM182 148h96v84h-96z\"/> </g> <g fill=\"none\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"1.2\" stroke-opacity=\".38\"> <path d=\"M20-30v70M-20 6h84M118-30v70M80 14h86M182 18h96M230 70V18M20 56v76M-20 96h84M124 56v76M182 96h96M240 96v36M52 148v84M80 190h86M182 190h96\"/> </g> <g stroke=\"var(--card,#FFFFFF)\" stroke-opacity=\".95\" fill=\"none\" stroke-linecap=\"square\"> <path d=\"M-60 48H340M-60 140H340\" stroke-width=\"15\"/> <path d=\"M72-60v300M174-60v300\" stroke-width=\"15\"/> <path d=\"M-60 94H340\" stroke-width=\"9\"/> </g> </g> <g fill=\"var(--blue,#69B7FF)\" fill-opacity=\".32\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"1.4\" stroke-opacity=\".55\" stroke-linejoin=\"round\"> <path d=\"M46 44c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M232 32c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M196 138c-11 0-17-9-10-15-4-9 6-15 12-10 6-6 16 0 12 9 7 6 2 16-8 16z\"/> <path d=\"M64 148c-10 0-15-8-9-13-4-8 5-13 11-9 5-5 14 0 11 8 6 5 2 14-8 14z\"/> <path d=\"M258 96c-9 0-13-7-8-11-3-6 4-11 9-7 4-4 11 0 9 7 4 4 1 11-7 11z\"/> <path d=\"M110 26c-9 0-13-7-8-11-3-6 4-11 9-7 4-4 11 0 9 7 4 4 1 11-7 11z\"/> </g> <circle cx=\"140\" cy=\"90\" r=\"38\" fill=\"var(--blue,#69B7FF)\" opacity=\".09\"/> <circle cx=\"140\" cy=\"90\" r=\"24\" fill=\"var(--blue,#69B7FF)\" opacity=\".17\"/> <circle cx=\"140\" cy=\"90\" r=\"24\" fill=\"none\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"1.4\" stroke-opacity=\".45\"/> <circle cx=\"140\" cy=\"90\" r=\"11.5\" fill=\"var(--card,#FFFFFF)\"/> <circle cx=\"140\" cy=\"90\" r=\"8\" fill=\"var(--blue,#69B7FF)\"/> </g> <rect x=\"1\" y=\"1\" width=\"278\" height=\"174\" rx=\"20\" fill=\"none\" stroke=\"var(--purple,#5B35F5)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/>"],
+"saved":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#5B35F5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"204\" rx=\"94\" ry=\"9\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M86 60h68v130H86z\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".22\"/> <path d=\"M66 48h108v12H66z\"/> <path d=\"M70 60h16v130H70zM154 60h16v130h-16z\"/> <path d=\"M86 60L48 74v122l38-6z\"/> <path d=\"M62 190h116v10H62z\"/> </g> <g fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.8\" stroke-opacity=\".2\" stroke-linejoin=\"round\"> <path d=\"M56 88l22-8v36l-22 5zM56 132l22-5v38l-22 4z\"/> </g> <circle cx=\"53\" cy=\"136\" r=\"3\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.6\" stroke-opacity=\".3\"/> <path d=\"M86 150h68v40H86z\" fill=\"var(--card,#FFFFFF)\" opacity=\".32\"/> <path d=\"M120 60v16\" fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-opacity=\".4\"/> <path d=\"M110 76h20l-4 9h-12z\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-linejoin=\"round\" stroke-opacity=\".45\"/> <path d=\"M88 190h64l20 18H68z\" fill=\"var(--marigold,#FFBF24)\" opacity=\".28\"/> <g transform=\"rotate(-11 178 198)\"> <path d=\"M162 130h32v68l-16-12-16 12z\" fill=\"var(--marigold,#FFBF24)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <path d=\"M170 146h16M170 158h11\" fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"2.1\" stroke-opacity=\".22\" stroke-linecap=\"round\"/> </g> <ellipse cx=\"181\" cy=\"202\" rx=\"22\" ry=\"5\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/>"],
+"offline":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#5B35F5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"205\" rx=\"92\" ry=\"9\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M60 78h120v112H60z\"/> <path d=\"M56 66h128v12H56z\"/> <path d=\"M64 82h22v108H64zM154 82h22v108h-22z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".12\"/> <path d=\"M70 94v84M164 94v84\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M86 78h68v112H86z\"/> <path d=\"M76 190h88v9H76zM64 199h112v9H64z\"/> </g> <path d=\"M90 84h60v106H90z\" fill=\"var(--marigold,#FFBF24)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M98 94h19v32H98zM123 94h19v32h-19zM98 136h19v44H98zM123 136h19v44h-19z\"/> </g> <circle cx=\"144\" cy=\"138\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <circle cx=\"176\" cy=\"52\" r=\"42\" fill=\"var(--blue,#69B7FF)\" opacity=\".13\"/> <path d=\"M158 68h-4a13 13 0 0 1-1-26 19 19 0 0 1 35-4 12 12 0 0 1 8 22 12 12 0 0 1-4 8h-24\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".62\" stroke-dasharray=\"9 6\"/> <path d=\"M176 62V42M169 49l7-7 7 7\" fill=\"none\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> <path d=\"M156 84h7M170 84h10M187 84h7\" fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-opacity=\".34\"/>"],
+"camera":["0 0 240 240","<circle cx=\"120\" cy=\"112\" r=\"100\" fill=\"var(--purple,#5B35F5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"196\" rx=\"80\" ry=\"9\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".72\"> <path d=\"M88 74a7 7 0 0 1 7-7h28a7 7 0 0 1 7 7v12H88z\"/> <rect x=\"150\" y=\"72\" width=\"24\" height=\"14\" rx=\"5\" fill=\"var(--marigold,#FFBF24)\" stroke-opacity=\".55\"/> <rect x=\"44\" y=\"86\" width=\"152\" height=\"102\" rx=\"18\"/> <rect x=\"58\" y=\"100\" width=\"22\" height=\"13\" rx=\"4\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".22\" stroke-opacity=\".4\"/> </g> <circle cx=\"120\" cy=\"137\" r=\"41\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".16\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.4\" stroke-opacity=\".72\"/> <circle cx=\"120\" cy=\"137\" r=\"32\" fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-opacity=\".34\"/> <circle cx=\"120\" cy=\"137\" r=\"25\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".2\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.2\" stroke-opacity=\".62\"/> <g fill=\"none\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-opacity=\".38\"> <path d=\"M126 137h17M123 142l8 15M117 142l-8 15M114 137H97M117 132l-8-15M123 132l8-15\"/> </g> <circle cx=\"120\" cy=\"137\" r=\"5.5\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"1.8\" stroke-opacity=\".5\"/> <path d=\"M104 118a25 25 0 0 1 22-5\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-opacity=\".7\"/> <circle cx=\"178\" cy=\"104\" r=\"4\" fill=\"var(--blue,#69B7FF)\" fill-opacity=\".5\"/>"],
+"thanks":["0 0 240 240","<circle cx=\"120\" cy=\"108\" r=\"100\" fill=\"var(--purple,#5B35F5)\" opacity=\".15\"/> <ellipse cx=\"120\" cy=\"203\" rx=\"92\" ry=\"9\" fill=\"var(--purple,#5B35F5)\" opacity=\".18\"/> <g fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".6\"> <path d=\"M58 66h124v122H58z\"/> <path d=\"M54 54h132v12H54z\"/> <path d=\"M62 70h22v118H62zM156 70h22v118h-22z\" fill=\"var(--purple,#5B35F5)\" fill-opacity=\".12\"/> <path d=\"M68 82v90M166 82v90\" fill=\"none\" stroke-opacity=\".26\"/> <path d=\"M84 66h72v122H84z\"/> <path d=\"M74 188h92v9H74zM62 197h116v9H62z\"/> </g> <path d=\"M88 72h64v116H88z\" fill=\"var(--marigold,#FFBF24)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.1\" stroke-linejoin=\"round\" stroke-opacity=\".68\"/> <g fill=\"none\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.9\" stroke-opacity=\".24\" stroke-linejoin=\"round\"> <path d=\"M96 82h21v34H96zM123 82h21v34h-21zM96 126h21v52H96zM123 126h21v52h-21z\"/> </g> <circle cx=\"146\" cy=\"130\" r=\"2.9\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--ink,#17103D)\" stroke-width=\"1.6\" stroke-opacity=\".32\"/> <g transform=\"rotate(-7 168 176)\"> <rect x=\"126\" y=\"150\" width=\"84\" height=\"52\" rx=\"8\" fill=\"var(--card,#FFFFFF)\" stroke=\"var(--purple-ink,#4020B5)\" stroke-width=\"2.2\" stroke-opacity=\".68\"/> <path d=\"M152 174h44M152 187h30\" fill=\"none\" stroke=\"var(--blue,#69B7FF)\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-opacity=\".6\"/> <circle cx=\"133\" cy=\"156\" r=\"13\" fill=\"var(--purple,#5B35F5)\"/> <path d=\"M127.5 156l4 4.5 7.5-8.5\" fill=\"none\" stroke=\"var(--card,#FFFFFF)\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </g>"]
 };
 let illusSeq = 0;
 /* illusSVG(name, width) -- height follows the viewBox, so a drawing never distorts. */
@@ -3025,26 +3189,71 @@ function illusSVG(name, width){
 }
 
 /* the Texas flag -- receipt state-record line only (heraldic colors: it is a flag, not a UI state) */
+/* asset-library/svg/provenance/texas-record.svg, verbatim. The library draws the
+   state record in the brand's OWN two colours -- indigo900 and white -- not in the
+   flag's heraldic red and blue, which is the right call: it is a provenance mark
+   inside a receipt, not a flag, and the palette must hold. #BF0A30 and #002868 are
+   gone from the file. Receipt state-record line only, as before. */
 function texasFlagSVG(){
-  return `<svg width="20" height="13" viewBox="0 0 30 20" aria-label="Texas" role="img" style="border-radius:2px;display:block">
-    <rect width="30" height="20" fill="#fff"/><rect x="10" width="20" height="10" fill="#fff"/><rect x="10" y="10" width="20" height="10" fill="#BF0A30"/>
-    <rect width="10" height="20" fill="#002868"/>
-    <path d="M5 4.6l1.1 2.4 2.6.3-1.9 1.7.5 2.6L5 10.3l-2.3 1.3.5-2.6L1.3 7.3l2.6-.3z" fill="#fff"/></svg>`;
+  return `<svg width="20" height="20" viewBox="0 0 32 32" role="img"
+      aria-label="Texas state record" style="display:block">
+    <rect x="2" y="6" width="28" height="20" rx="2" fill="#FFFFFF" stroke="var(--ink,#17103D)" stroke-width="1.5"/>
+    <path d="M2 6h10v20H2Z" fill="var(--ink,#17103D)"/>
+    <path d="M12 6h18v10H12Z" fill="var(--ink,#17103D)"/>
+    <path d="M12 16h18v10H12Z" fill="#FFFFFF"/>
+    <path d="m7 11 1.2 2.5 2.8.4-2 2 .5 2.8L7 17.3l-2.5 1.4.5-2.8-2-2 2.8-.4Z" fill="#FFFFFF"/></svg>`;
 }
-/* the EntryMap mark -- pin-doorway with the three tier-color arcs (splash + welcome) */
+/* ---- ROUND 4: THE BRAND MARKS ARE THE LIBRARY'S ----------------------------
+   asset-library/svg/brand/mark-primary.svg and wordmark-on-dark / wordmark-on-light,
+   path and text data verbatim. The hand-reconstructed mark (#5A4BE0 body, a clipped
+   doorway wedge, three arcs at different radii) is gone.
+
+   The wordmark ships in two official variants and the product owner raised it twice,
+   so all three sites now take the right one: splash and welcome are DARK surfaces and
+   get wordmark-on-dark (entry sky400, map white); the map header pill is a LIGHT
+   surface and gets wordmark-on-light (entry violet800, map indigo900). That is the
+   approved answer to "entrymap in the top right is not the correct with the light
+   blue and white" -- on light, the library does not use the light blue for the
+   wordmark at all, it uses dark violet, and the light blue reaches light chrome as
+   sky700 instead (the map tab, the Estimated tier, informational cues).
+
+   Two adaptations, both stated: the library's wordmark assets carry a full-bleed
+   background rect (indigo900 / lavender100) that exists to show the intended surface
+   on a catalogue sheet -- it is dropped, because here the real surface is behind the
+   SVG. And the text carries textLength/lengthAdjust, so the lockup cannot overflow
+   its box if Nunito Sans has not loaded yet and a fallback face is measuring. */
 function markSVG(size){
   const s=size||120;
-  return `<svg width="${s}" height="${Math.round(s*1.25)}" viewBox="0 0 120 150" aria-hidden="true">
-    <defs><clipPath id="mk-clip-${s}"><path d="M60 148C40 118 12 92 12 56a48 48 0 1 1 96 0c0 36-28 62-48 92Z"/></clipPath></defs>
-    <path d="M60 148C40 118 12 92 12 56a48 48 0 1 1 96 0c0 36-28 62-48 92Z" fill="#5A4BE0"/>
-    <circle cx="60" cy="56" r="34" fill="#fff"/>
-    <path d="M44 84h32l24 36-40 40-40-40z" fill="#CFC6EE" clip-path="url(#mk-clip-${s})"/>
-    <rect x="40" y="42" width="40" height="9" rx="4.5" fill="#5A4BE0"/>
-    <rect x="44" y="55" width="8" height="30" rx="4" fill="#5A4BE0"/>
-    <rect x="68" y="55" width="8" height="30" rx="4" fill="#5A4BE0"/>
-    <path d="M21.5 70A41 41 0 0 1 21.5 42" fill="none" stroke="#7CC4FA" stroke-width="5" stroke-linecap="round"/>
-    <path d="M42.7 18.8A41 41 0 0 1 77.3 18.8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-    <path d="M98.5 42A41 41 0 0 1 98.5 70" fill="none" stroke="#F0A32F" stroke-width="5" stroke-linecap="round"/>
+  return `<svg width="${s}" height="${Math.round(s*148/128)}" viewBox="0 0 128 148" aria-hidden="true" style="display:block">
+    <path d="M64 8C35.3 8 12 31.1 12 59.6c0 37.2 37.6 70.8 49.5 80.7a4 4 0 0 0 5 0C78.4 130.4 116 96.8 116 59.6 116 31.1 92.7 8 64 8Z" fill="#5B35F5" stroke="#FFFFFF" stroke-width="5"/>
+    <path d="M34 66V50h60v16M42 66v35M86 66v35M42 101l22 29 22-29" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M44 101 64 130 84 101Z" fill="#E2DAFF"/>
+    <path d="M30 53c1-11 5-19 12-26" fill="none" stroke="#69B7FF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M49 22c9-5 21-5 30 0" fill="none" stroke="#5B35F5" stroke-width="8" stroke-linecap="round"/>
+    <path d="M86 27c7 7 11 15 12 26" fill="none" stroke="#FFBF24" stroke-width="8" stroke-linecap="round"/>
+  </svg>`;
+}
+/* wordmarkSVG('dark'|'light', renderedWidth) -- the full lockup, mark plus word. */
+function wordmarkSVG(variant, width){
+  const w = width || 220;
+  const onDark = variant === 'dark';
+  const entry = onDark ? '#69B7FF' : 'var(--purple-ink,#4020B5)';
+  const word  = onDark ? '#FFFFFF' : 'var(--ink,#17103D)';
+  return `<svg width="${w}" height="${Math.round(w*150/520*100)/100}" viewBox="0 0 520 150"
+      role="img" aria-label="EntryMap" style="display:block">
+    <g transform="translate(8 1) scale(.86)">
+      <path d="M64 8C35.3 8 12 31.1 12 59.6c0 37.2 37.6 70.8 49.5 80.7a4 4 0 0 0 5 0C78.4 130.4 116 96.8 116 59.6 116 31.1 92.7 8 64 8Z" fill="#5B35F5" stroke="#FFFFFF" stroke-width="5"/>
+      <path d="M34 66V50h60v16M42 66v35M86 66v35M42 101l22 29 22-29" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M44 101 64 130 84 101Z" fill="#E2DAFF"/>
+      <path d="M30 53c1-11 5-19 12-26" fill="none" stroke="#69B7FF" stroke-width="8" stroke-linecap="round"/>
+      <path d="M49 22c9-5 21-5 30 0" fill="none" stroke="#5B35F5" stroke-width="8" stroke-linecap="round"/>
+      <path d="M86 27c7 7 11 15 12 26" fill="none" stroke="#FFBF24" stroke-width="8" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(150 16)">
+      <text x="0" y="70" textLength="352" lengthAdjust="spacingAndGlyphs"
+        font-family="'Nunito Sans',Aptos,Arial,sans-serif" font-size="68" font-weight="750"
+        letter-spacing="-3"><tspan fill="${entry}">entry</tspan><tspan fill="${word}">map</tspan></text>
+    </g>
   </svg>`;
 }
 function avatarHTML(tier){
@@ -3125,10 +3334,10 @@ function streetsFor(box){
 
    THE CONSTRAINT THAT SHAPES ALL OF IT. The level-3 estimated ring is the only
    marker that touches raw ground -- levels 1 and 2 sit on a white lift halo. At
-   --blue-edge #2C63C9 (relative luminance 0.145) every ground tone a ring can
+   --blue-edge #1266A6 (relative luminance 0.145) every ground tone a ring can
    land on must stay at or above luminance 0.459 for that ring to hold 3:1. The
-   darkest tone drawn below is --g-can #D9E2D6 at 0.716, which clears it with
-   room to spare. The ground this replaced did NOT: its tree dots were #AFC2F2
+   darkest tone drawn below is --g-can #DEE1D2 at 0.716, which clears it with
+   room to spare. The ground this replaced did NOT: its tree dots were #E2DAFF
    (L 0.541) and #C4D0F6 (L 0.635), and a ring landing on one measured 2.37:1. */
 function f1(v){ return Math.round(v*10)/10; }
 function mulberry(seed){
@@ -3160,10 +3369,10 @@ function splitRect(r, depth, rnd, out){
   }
 }
 /* one source of truth for every ground tone, so a fill is never a second guess */
-const G = {ground:'#EFE8DA', parcel:'#EBE4D4', s1:'#FFFDF8', s2:'#FCF9F2', s3:'#F7F3EA',
-  s4:'#F0EADD', casing:'#E2DDCF', b1:'#FFFCF5', b2:'#FAF5EC', b3:'#F3F0FA', b4:'#EDEAF6',
-  b5:'#F6F1E5', shade:'#E2DDCF', shade2:'#E8E3D7', lit:'#FFFFFF', can:'#D9E2D6',
-  can2:'#E8EEE4', plaza:'#F8EACD', line:'#403B58'};
+const G = {ground:'#EFE8DA', parcel:'#ECE4D2', s1:'#FFFDF8', s2:'#FCF9F2', s3:'#F7F3EA',
+  s4:'#F0EADD', casing:'#E5DCCF', b1:'#FFFCF5', b2:'#FAF5EB', b3:'#F3F0FB', b4:'#EDEAF6',
+  b5:'#F6F1E5', shade:'#E5DCCF', shade2:'#EAE2D6', lit:'#FFFFFF', can:'#DEE1D2',
+  can2:'#ECEDE3', plaza:'#F8EACC', line:'#4A4568'};
 function gc(k){ return 'var(--g-'+k+',' + G[k] + ')'; }
 
 const GROUND_CACHE = {};
@@ -3473,7 +3682,7 @@ function renderMap(){
     const match = m && m.state!=='unknown' ? m.state : null;
     const art = pinSVG(lvl3 ? 'ring' : p.tier, size, {match:match});
     let label='';
-    if(m && m.state==='good' && it.sel) label='<span class="pin-label" aria-hidden="true">\u2665 Good match</span>';
+    if(m && m.state==='good' && it.sel) label=`<span class="pin-label" aria-hidden="true">${iconSVG('my-needs',11)} Good match</span>`;
     b.innerHTML = '<span class="pin">'+art+'</span>' + label;
     b.addEventListener('click',()=>openCard(p.id));
     b.dataset.id=p.id;
@@ -3514,9 +3723,9 @@ function setZoom(out){
 }
 function tierName(t){return t==='est'?'Estimated':t==='scan'?'Scanned on-site':'Owner-confirmed';}
 function tierChip(t){
-  if(t==='est') return `<span class="tierchip est">${sparkle('#1E3A8A')} Estimated</span>`;
-  if(t==='scan') return `<span class="tierchip scan">${iconSVG('profile',11,'#6E4A00')} Scanned on-site</span>`;
-  return `<span class="tierchip owner">${iconSVG('store',11,'#4B2E9E')} Owner-confirmed</span>`;
+  if(t==='est') return `<span class="tierchip est">${sparkle('#13528E')} Estimated</span>`;
+  if(t==='scan') return `<span class="tierchip scan">${iconSVG('profile',11,'#784410')} Scanned on-site</span>`;
+  return `<span class="tierchip owner">${iconSVG('store',11,'#4020B5')} Owner-confirmed</span>`;
 }
 
 /* legend -- tier card, three rows (pin glyph + label); tapping opens "How trust grows" */
@@ -3617,7 +3826,7 @@ function openCard(id, pos){
 function cardHTML(p){
   const m = matchOf(p);
   const matchChip = m ? (
-    m.state==='good' ? `<span class="matchchip"><span aria-hidden="true">\u2665</span> Good match \u00b7 ${m.sat} of ${m.total} needs</span>` :
+    m.state==='good' ? `<span class="matchchip"><span class="ic" aria-hidden="true">${iconSVG('my-needs',13)}</span> Good match \u00b7 ${m.sat} of ${m.total} needs</span>` :
     m.state==='partial' ? `<span class="matchchip partial">${m.sat} of ${m.total} needs seen</span>` :
     `<span class="matchchip unknown">Needs not yet seen</span>`) : '';
 
@@ -3646,7 +3855,7 @@ function cardHTML(p){
   let prov='';
   if(p.tier==='est'){
     prov += provRow(
-      sparkle('#1E3A8A'),
+      sparkle('#13528E'),
       `Estimated by AI from street imagery \u00b7 ${fmtMonth(p.date)}`,
       `<span class="pr-sub invite">been here? Confirm in 30 seconds</span>`,
       'rcpt-est');
@@ -3670,7 +3879,7 @@ function cardHTML(p){
         `<span class="pr-sub" style="color:var(--sub)">state record \u2014 provenance, not a badge \u00b7 staged</span>`,'rcpt-scan');
     }
     if(p.tier==='owner'){
-      prov += provRow(sparkle('#1E3A8A'),
+      prov += provRow(sparkle('#13528E'),
         `Estimated by AI from street imagery \u00b7 earlier`,
         `<span class="pr-sub" style="color:var(--sub)">the first rung \u2014 now superseded above</span>`,'rcpt-est2');
     }
@@ -3793,7 +4002,7 @@ function cardHTML(p){
       </div>
       <button class="correct-btn" data-act="correct">${iconSVG('edit',16)} Suggest a correction</button>
       <div class="card-actions" style="margin-top:var(--sp-3)">
-        <button class="btn ghost" data-act="needs"><span aria-hidden="true">\u2665</span> My needs</button>
+        <button class="btn ghost" data-act="needs"><span class="ic" aria-hidden="true">${iconSVG('my-needs',13)}</span> My needs</button>
         <button class="btn quiet" data-act="trust">How trust grows</button>
       </div>
     </div>`;
@@ -3821,7 +4030,7 @@ function provRow(icon, main, sub, key){
   return `<button class="prov-row" data-rcpt="${key}">
     <span class="pr-icon">${icon}</span>
     <span class="pr-main">${main}${sub}</span>
-    <span class="chev" aria-hidden="true">\u203a</span></button>`;
+    <span class="chev ic" aria-hidden="true">${iconSVG('chevron',14)}</span></button>`;
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -3831,6 +4040,27 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function paintStaticIcons(root){
   (root||document).querySelectorAll('.ic[data-icon]').forEach(function(el){
     el.innerHTML = iconSVG(el.dataset.icon, parseFloat(el.dataset.size)||18, el.dataset.color||'currentColor');
+  });
+  /* ROUND 4: the back and close buttons drew a text glyph -- U+2039 and U+2715.
+     Measured over all 26 screens, those were the ONLY 19 text nodes in the phone
+     that fell out of the UI face, because Atkinson Hyperlegible Next carries
+     neither codepoint and they silently reverted to Arial. The library ships both
+     shapes (ui-icons/chevron-right and ui-icons/close), so they are drawings now:
+     one grid, one stroke weight, no font dependency. The aria-label is unchanged,
+     so nothing announced changes. */
+  (root||document).querySelectorAll('.backbtn,.ob-back,.cancel-x').forEach(function(el){
+    if(el.querySelector('svg')) return;
+    var t = el.textContent.trim();
+    if(t === '‹'){
+      el.innerHTML = '<span class="ic" style="transform:scaleX(-1)">'
+        + iconSVG('chevron', 18) + '</span>';
+    } else if(t === '✕'){
+      el.innerHTML = '<span class="ic">' + iconSVG('close', 18) + '</span>';
+    }
+  });
+  (root||document).querySelectorAll('.sheet-close').forEach(function(el){
+    if(el.querySelector('svg')) return;
+    if(el.textContent.trim() === '✕') el.innerHTML = '<span class="ic">' + iconSVG('close', 18) + '</span>';
   });
 }
 
@@ -4167,7 +4397,7 @@ function renderNearby(){
     }
     b.innerHTML=`${thumb}<span>
       <span class="nb-name">${esc(p.name)}</span>
-      <span class="nb-match ${m.state}">${(m.state==='good'&&idx===0)?'<span aria-hidden="true">\u2665</span> Good match':m.sat+' of '+m.total+' needs'}</span>
+      <span class="nb-match ${m.state}">${(m.state==='good'&&idx===0)?('<span class="ic" aria-hidden="true">'+iconSVG('my-needs',13)+'</span> Good match'):(m.sat+' of '+m.total+' needs')}</span>
       <span class="nb-dist">${distLabel(p)}</span></span>`;
     b.addEventListener('click',()=>openCard(p.id));
     nb.appendChild(b);
@@ -4579,7 +4809,7 @@ function renderSaved(){
           <span class="dist">${distLabel(p)}</span>
         </span>
       </span>
-      <span class="chev" aria-hidden="true">\u203a</span></button></li>`;
+      <span class="chev ic" aria-hidden="true">${iconSVG('chevron',14)}</span></button></li>`;
   }).join('');
   el.querySelectorAll('[data-saved-open]').forEach(b=>b.addEventListener('click',()=>{
     closeSheets(); showScreen('screen-map'); renderMap(); openCard(b.dataset.savedOpen,'medium');
@@ -4653,7 +4883,7 @@ function applyPrefs(){
 }
 function renderPreviewChips(){
   const el=document.getElementById('pv-chips'); if(!el) return;
-  el.innerHTML=`${tierChip('scan')}<span class="matchchip"><span aria-hidden="true">\u2665</span> Good match</span>`+
+  el.innerHTML=`${tierChip('scan')}<span class="matchchip"><span class="ic" aria-hidden="true">${iconSVG('my-needs',13)}</span> Good match</span>`+
     `<span class="fresh">${clockSVG('var(--amber-ink)')} Scanned 8 months ago</span>`;
 }
 document.querySelectorAll('.tsize-btn').forEach(b=>b.addEventListener('click',()=>{
@@ -4710,6 +4940,12 @@ function showScreen(id){
   /* I1: onboarding and the splash cover the nav completely -- take it out of the tab order */
   const nb=document.getElementById('navbar');
   if(/^ob-/.test(id)) nb.setAttribute('inert',''); else nb.removeAttribute('inert');
+  /* Round 4: the status bar rides on whatever chrome the screen has. The map now
+     carries the board's dark app bar, and the welcome and the capture screen were
+     already dark surfaces -- on those two the status bar was painting --ink on a
+     dark ground, which this also fixes. */
+  document.getElementById('phone').setAttribute('data-chrome',
+    (id==='screen-map'||id==='ob-welcome'||id==='ob-splash'||id==='scan-capture') ? 'dark' : 'light');
   currentScreen=id;
   if(id==='screen-profile'){ renderSaved(); renderCorrections(); renderYourScans(); }
   if(id==='screen-contrib') renderYourScans();
@@ -4835,24 +5071,24 @@ function doorwayArt(blur, name){
   const sign = signName(name);
   const fs = sign.length>12 ? 16 : 21;
   return `<svg width="100%" height="100%" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <rect width="300" height="400" fill="#DCE7FB"/>
-    <rect y="300" width="300" height="100" fill="#CBC4E4"/>
-    <rect y="296" width="300" height="8" fill="#BFB7DD"/>
-    <rect x="20" y="20" width="260" height="280" fill="#F0EDFB"/>
-    <rect x="20" y="20" width="260" height="16" fill="#E2DDF5"/>
-    <rect x="40" y="66" width="220" height="46" rx="6" fill="#7053C5"/>
+    <rect width="300" height="400" fill="#EAF5FF"/>
+    <rect y="300" width="300" height="100" fill="#D9D2F0"/>
+    <rect y="296" width="300" height="8" fill="#CBC3EB"/>
+    <rect x="20" y="20" width="260" height="280" fill="#F2EEFF"/>
+    <rect x="20" y="20" width="260" height="16" fill="#E2DAFF"/>
+    <rect x="40" y="66" width="220" height="46" rx="6" fill="#5B35F5"/>
     <text x="150" y="96" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="${fs}" fill="#fff">${esc(sign)}</text>
-    <rect x="86" y="128" width="128" height="172" rx="4" fill="#B9AEE0"/>
-    <rect x="93" y="135" width="55" height="158" rx="3" fill="#CFE0FB" stroke="#8F82C4" stroke-width="3"/>
-    <rect x="152" y="135" width="55" height="158" rx="3" fill="#CFE0FB" stroke="#8F82C4" stroke-width="3"/>
-    <rect x="141" y="190" width="7" height="52" rx="3.5" fill="#54497F"/>
-    <rect x="152" y="190" width="7" height="52" rx="3.5" fill="#54497F"/>
-    <rect x="40" y="150" width="34" height="90" rx="3" fill="#E4E9F8" stroke="#C3BBE3" stroke-width="2"/>
-    <rect x="226" y="150" width="34" height="90" rx="3" fill="#E4E9F8" stroke="#C3BBE3" stroke-width="2"/>
-    <path d="M60 300 L240 300 L252 316 L48 316 Z" fill="#D8D2EC"/>
-    <rect x="48" y="316" width="204" height="10" rx="2" fill="#CEC7E6"/>
-    <circle cx="262" cy="252" r="9" fill="#F0A32F" stroke="#fff" stroke-width="2.5"/>
-    ${blur?'<circle cx="46" cy="330" r="26" fill="#8F86B3" opacity=".6" filter="url(#b)"/><defs><filter id="b"><feGaussianBlur stdDeviation="7"/></filter></defs>':''}
+    <rect x="86" y="128" width="128" height="172" rx="4" fill="#C2B8E7"/>
+    <rect x="93" y="135" width="55" height="158" rx="3" fill="#DEEFFF" stroke="#A99BDE" stroke-width="3"/>
+    <rect x="152" y="135" width="55" height="158" rx="3" fill="#DEEFFF" stroke="#A99BDE" stroke-width="3"/>
+    <rect x="141" y="190" width="7" height="52" rx="3.5" fill="#836ECF"/>
+    <rect x="152" y="190" width="7" height="52" rx="3.5" fill="#836ECF"/>
+    <rect x="40" y="150" width="34" height="90" rx="3" fill="#F0F8FF" stroke="#CFC7EC" stroke-width="2"/>
+    <rect x="226" y="150" width="34" height="90" rx="3" fill="#F0F8FF" stroke="#CFC7EC" stroke-width="2"/>
+    <path d="M60 300 L240 300 L252 316 L48 316 Z" fill="#D5CEEF"/>
+    <rect x="48" y="316" width="204" height="10" rx="2" fill="#C6BCE9"/>
+    <circle cx="262" cy="252" r="9" fill="#FFBF24" stroke="#fff" stroke-width="2.5"/>
+    ${blur?'<circle cx="46" cy="330" r="26" fill="#9684D6" opacity=".6" filter="url(#b)"/><defs><filter id="b"><feGaussianBlur stdDeviation="7"/></filter></defs>':''}
   </svg>`;
 }
 function paintDoorway(){
@@ -5253,8 +5489,14 @@ function finishOnboarding(){
 }
 /* splash: the mark + wordmark on deep aubergine for ~1.2 s, then it resolves into the welcome
    (reduced motion: a static cut at the same moment) */
-document.getElementById('splash-mark').innerHTML=markSVG(128);
-document.getElementById('welcome-mark').innerHTML=markSVG(88);
+document.getElementById('splash-mark').innerHTML=markSVG(104);
+/* All three wordmark sites take an OFFICIAL variant: splash and welcome are dark
+   surfaces (wordmark-on-dark, entry sky400 / map white); the map header bar is now
+   dark too, so it takes the same one. wordmarkSVG('light') stays available and is
+   what any white-surface lockup would use -- entry violet800 / map indigo900. */
+document.getElementById('splash-word').innerHTML=wordmarkSVG('dark',236);
+document.getElementById('welcome-word').innerHTML=wordmarkSVG('dark',252);
+document.getElementById('head-wordmark').innerHTML=wordmarkSVG('dark',112);
 document.getElementById('wl-p1').innerHTML=pinSVG('est',30);
 document.getElementById('wl-p2').innerHTML=pinSVG('scan',30);
 document.getElementById('wl-p3').innerHTML=pinSVG('owner',30);
