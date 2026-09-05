@@ -181,3 +181,45 @@ clearly provisional.
 The result is a reading order the eye follows without instruction. The few purple pins first,
 the marigold ones next, and the estimated rings registering as ground texture rather than as
 sixty-four competing items.
+
+---
+
+## 11. Map ground: depth and colour
+
+Two complaints, and they are separate problems with a shared answer.
+
+**"The map is so flat."** Every block is the same tone, every street the same width, and the
+trees are token dots. There is no road hierarchy, no landcover, no implied light, and nothing
+sits on top of anything else. A real map reads as a place because it has all four.
+
+**"Use more of the icon colours within the map."** The ground is nearly monochrome while the
+palette carries five hues, so the map looks unrelated to the product sitting on top of it.
+
+**The constraint that shapes the answer.** Blue means estimated, marigold means scanned on-site,
+purple means owner-confirmed, green means needs-match and amber means ageing evidence. Those
+meanings are load-bearing and they live on markers. If the ground starts using the same hues at
+the same strength, a green park becomes indistinguishable from a match halo and the palette
+stops meaning anything.
+
+So the rule is **saturation, not hue**. The ground may echo the whole palette, but only at a
+saturation and value where it reads as terrain and never as state. A marker must always be the
+most saturated thing within its own radius. Concretely: ground hues stay well below the
+saturation of any semantic colour, and no ground element ever uses a semantic hue at full
+strength, ever carries a marker's shape, or ever sits inside a marker's halo.
+
+**Depth comes from four things, none of which is a drop shadow on the map.**
+
+1. **Road hierarchy.** Primary streets wider and brighter than side streets, alleys thinner
+   again. Currently every street is one width, which is most of why it reads as a diagram.
+2. **Block variety.** Building footprints in several close tones rather than one, so a block
+   reads as many buildings instead of one slab.
+3. **Implied light.** A consistent soft edge on the same side of every footprint. One direction,
+   applied everywhere, is what makes footprints sit on the ground rather than float on it.
+4. **Landcover.** Plazas, tree canopy, and water if any is in frame, as real areas rather than
+   scattered dots.
+
+**What must survive.** The three pins keep their measured contrast against whatever ground is
+chosen, at 3:1 or better; a richer ground is the most likely way to break the fix that just
+landed, so it is re-measured, not assumed. High contrast mode still simplifies the ground rather
+than enriching it. The ground never competes with the card sheet for attention, and street
+labels stay legible at phone size.
