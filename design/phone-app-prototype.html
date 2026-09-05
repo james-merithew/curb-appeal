@@ -23,6 +23,12 @@
   --marigold:#F0A32F;        /* Scanned tier / action */
   --marigold-ink:#6E4A00;    /* 8:1 on white */
   --marigold-wash:#FCF1DC;
+  /* Logo palette. These are BRAND colours for chrome the product owns -- the
+     wordmark, the bottom bar. They are never used on a marker, where the same
+     hues carry evidence state and must stay unambiguous. */
+  --brand-blue:#7CC4FA;        /* the mark's sky arc; on dark only */
+  --brand-blue-ink:#1D5FA8;    /* the same blue where it must hold on white, 6.4:1 */
+  --brand-amber:#F0A32F;       /* the mark's marigold arc */
   --purple:#7053C5;          /* Owner tier / links */
   --purple-ink:#4B2E9E;      /* 9:1 */
   --purple-wash:#F0EBFC;
@@ -213,10 +219,16 @@ body{
   display:flex;align-items:center;gap:8px;pointer-events:none;
 }
 .apphead>*{pointer-events:auto}
+/* The wordmark is ALWAYS two-tone; which two tones depends on what it sits on.
+   On the logo's deep aubergine it is sky blue and white. On a white pill white
+   is unavailable, so the light-background pairing is used: a deeper blue that
+   holds on white, and the dark ink. It is never one flat colour. */
 .wordmark{
   background:rgba(255,255,255,.95);border-radius:999px;padding:0 14px;min-height:44px;
   display:flex;align-items:center;font-weight:var(--fw-display);font-size:var(--fs-h3);letter-spacing:var(--ls-h3);
-  color:var(--purple-ink);box-shadow:var(--shadow);white-space:nowrap;line-height:var(--lh-h3);}
+  box-shadow:var(--shadow);white-space:nowrap;line-height:var(--lh-h3);}
+.wordmark .w-entry{color:var(--brand-blue-ink)}
+.wordmark .w-map{color:var(--purple-ink)}
 .locpill .lp-text{min-width:0;overflow-wrap:break-word}
 .locpill{
   flex:1;min-height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.95);
@@ -293,13 +305,21 @@ body{
   color:var(--sub);font-size:var(--fs-meta);font-weight:var(--fw-strong);min-width:44px;min-height:44px;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 /* selected vs unselected was a 1.05:1 hue change and nothing else. The bar and the
    weight change carry the state without relying on colour at all. */
-.navbtn.on{color:var(--purple-ink);font-weight:var(--fw-strong)}
+/* Each tab wears its own colour from the logo: the map takes the mark's deep
+   blue, scan its marigold, profile its purple. Brand, not state -- nothing in
+   this bar represents a place, so the hues cannot be confused with a tier. The
+   active state is still carried by the bar and the weight, never by hue alone,
+   which is why the 1.05:1 problem does not come back. */
+.navbtn.on{font-weight:var(--fw-strong)}
 .navbtn.on::before{
   content:"";position:absolute;top:-6px;left:24%;right:24%;height:4px;
-  border-radius:0 0 4px 4px;background:var(--purple-ink);
+  border-radius:0 0 4px 4px;background:currentColor;
 }
-.navbtn.on svg{stroke:var(--purple-ink);stroke-width:2.6}
-.navbtn svg{stroke:var(--sub)}
+.navbtn svg{stroke:currentColor}
+.navbtn.on svg{stroke-width:2.6}
+#nav-map.on{color:var(--brand-blue-ink)}
+#nav-profile.on{color:var(--purple-ink)}
+.navbtn:not(.on){color:var(--sub)}
 .nav-scan.on .ring{border-width:5px}
 .nav-scan.on{font-weight:var(--fw-strong)}
 .nav-scan{
@@ -1353,7 +1373,7 @@ button.legend:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
       <div class="screen-body">
         <h1 class="sr-only">Map of entrances near 2nd &amp; Colorado</h1>
         <div class="apphead">
-          <div class="wordmark">entrymap</div>
+          <div class="wordmark"><span class="w-entry">entry</span><span class="w-map">map</span></div>
           <button class="locpill" id="locpill" aria-label="Location: 2nd and Colorado">
             <span class="ic" data-icon="pin" data-size="14" data-color="var(--purple-ink)" aria-hidden="true"></span>
             <span class="lp-text">2nd &amp; Colorado</span>
