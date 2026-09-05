@@ -251,3 +251,50 @@ meaning, so in the navigation they must read as brand rather than as state. That
 because the bar is persistent chrome and nothing in it represents a place. Keep the active tab
 unambiguous, keep every label legible, and do not let the scan button's marigold ring read as
 the scanned-on-site tier.
+
+---
+
+## 13. The state record is not a filter, and the top tier is not "verified"
+
+Two related complaints, and both come from the same place: the map looks weak because nothing
+reaches the top, and the state record sits awkwardly in a list of needs where it does not belong.
+
+**The state record comes out of the filters.** Filters describe what a person needs to get
+through a door: step-free entry, a wide door, easy-grip hardware. "Has a Texas accessibility
+inspection on record" is not a need. Nobody needs a record. They need a doorway they can use,
+and a record is a fact about a construction project from some year, attached to whoever the
+tenant was then. Offering it as a filter invites people to filter by a proxy for quality, which
+is precisely the trust-as-a-filter mistake the design already rejects for our own tiers. If we
+will not let someone filter to Owner-confirmed, we certainly cannot let them filter to a state
+record that is weaker evidence about the current door.
+
+It stays where it is honest: a provenance line on the card, and a row in the evidence receipt.
+Source and date, like every other line.
+
+**There is no "100% verified", and the absence is deliberate.** The ladder runs Estimated,
+Scanned on-site, Owner-confirmed, and it stops there because the next rung would be a compliance
+claim we cannot make from photographs. That is the whole honesty position. But the complaint
+underneath is fair: a map where almost nothing reaches the top rung reads as a product that
+knows nothing.
+
+The fix is not a new tier. It is two things that are already in hand.
+
+1. **Publish the on-site scans.** 11 of 64 places show as Scanned on-site while the operator
+   photographed all 64. That is the map understating itself, and #333 corrects it.
+2. **Let confidence do the work the tier cannot.** Confidence is agreement between independent
+   sources, and it is already on the card. A place with an on-site scan, an OpenStreetMap tag
+   that agrees, and a state record on file is genuinely better evidenced than one with a single
+   scan, and the card can say so without inventing a rung. Three sources agreeing is the
+   strongest honest thing we can show.
+
+**The step-free problem specifically.** Step-free entry is the criterion people most need and the
+one street imagery evidences worst, so estimated places go quiet exactly where it matters. Also
+already in hand:
+
+- **On-site scans answer it.** A capture taken at the door shows the ground plane.
+- **Depth answers it where the model alone struggles.** Monocular depth took step-free from
+  88.5% to 96.2% on held-out entrances and caught all seven of the vision model's known misses.
+  It is the one enhancement of four that earned a place, and it belongs in the engine, gated.
+
+Between them, the criterion stops being the weak column. What is left unanswered stays "couldn't
+confirm yet", which is the honest state and not a failure.
