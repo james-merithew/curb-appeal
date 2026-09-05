@@ -298,3 +298,37 @@ already in hand:
 
 Between them, the criterion stops being the weak column. What is left unanswered stays "couldn't
 confirm yet", which is the honest state and not a failure.
+
+---
+
+## 14. What the approved library specifies about pins, and what it does not
+
+Checked against the library rather than assumed, because the two things are easy to conflate.
+
+**The library defines halos, and they mean needs-match, not evidence.** Three assets at a
+common 104-unit box: good, partial and unknown. Its README is explicit that they communicate
+state "through line style as well as color", which is the same colour-independence rule the
+build already follows. It also fixes the pin-drop at 620ms, collapsing to the end state under
+reduced motion.
+
+**The library does not define a size hierarchy by tier.** All three pins are drawn at the same
+scale: estimated and scanned on-site at 96 by 104, owner-confirmed at 112 by 104, and the extra
+width is the tick badge, not added importance. Drawn from the library alone, every pin on the
+map would be the same size, which is exactly the screen the product owner described as messy.
+
+**So the two systems answer different questions and both are needed.**
+
+| | Question it answers | Where it comes from |
+|---|---|---|
+| Halo, three line styles | Does this place fit *my* needs? | The approved library |
+| Size, four levels | How much do we *know* about this entrance? | This project, from the "all the same size" complaint |
+
+They compose without conflict: a small estimated ring can carry a good-match halo, and a large
+owner pin can carry none. One is about the person looking, the other about the evidence held.
+
+**The deviation, stated plainly.** Scaling the approved pin artwork by tier is a departure from
+a library that draws them at one size. It is deliberate and it is the product owner's own
+instruction. The artwork, the colours, the glyphs and the halo line styles all come from the
+library unchanged; only the rendered size varies, and it varies on evidence strength, never on
+how good an entrance is. If that deviation is ever revisited, the thing to preserve is the
+reading order, not the specific sizes.
