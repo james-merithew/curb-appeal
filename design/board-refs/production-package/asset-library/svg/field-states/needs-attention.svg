@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 320 98" role="img" aria-labelledby="title desc">
+  <title id="title">Field needing attention without red</title><desc id="desc">EntryMap Field needing attention without red asset.</desc>
+  
+  <text x="8" y="16" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="12" font-weight="700" fill="#17103D">Work email</text><rect x="5" y="23" width="310" height="46" rx="12" fill="#FFFFFF" stroke="#FFBF24" stroke-width="2.5"/><text x="18" y="52" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="15" fill="#17103D">owner@</text><circle cx="17" cy="86" r="5" fill="#FFBF24"/><text x="29" y="91" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="12" font-weight="650" fill="#17103D">Enter the complete email address</text>
+</svg>

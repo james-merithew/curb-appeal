@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 260 56" role="img" aria-labelledby="title desc">
+  <title id="title">Scan button pressed</title><desc id="desc">EntryMap Scan button pressed asset.</desc>
+  
+  <g transform="translate(4 2) scale(.97)"><rect x="5" y="5" width="250" height="46" rx="16" fill="#FFBF24" stroke="#17103D" stroke-width="2.5"/><rect x="5" y="5" width="250" height="46" rx="16" fill="#17103D" opacity=".08"/><g transform="translate(18 12) scale(.78)"><g fill="none" stroke="#17103D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h5l2-4h8l2 4h5v17H5Z"/><circle cx="16" cy="18" r="5"/></g></g><text x="130" y="35" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="17" font-weight="700" fill="#17103D">Scan an entrance</text></g>
+</svg>

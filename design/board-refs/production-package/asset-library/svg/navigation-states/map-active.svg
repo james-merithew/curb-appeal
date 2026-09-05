@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 112 74" role="img" aria-labelledby="title desc">
+  <title id="title">Map navigation active</title><desc id="desc">EntryMap Map navigation active asset.</desc>
+  
+  <rect x="11" y="8" width="90" height="58" rx="18" fill="#5B35F5"/><g transform="translate(40 12) scale(.9)" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 7 7-3 7 3 7-3v22l-7 3-7-3-7 3Z"/><path d="M11 4v22M18 7v22"/></g><text x="56" y="60" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="12" font-weight="750" fill="#FFFFFF">Map</text>
+</svg>

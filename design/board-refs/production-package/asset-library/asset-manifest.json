@@ -1,0 +1,917 @@
+{
+  "name": "EntryMap production asset library",
+  "version": "1.0.0",
+  "generated": "2026-09-05T21:26:54.738Z",
+  "principles": [
+    "Sky blue is Estimated; marigold is Scanned on-site; violet is Owner-confirmed.",
+    "Every tier is encoded with shape, icon, color, and ring fill.",
+    "Texas flag means state-record provenance only and is never a trust tier.",
+    "No red, gray, shield, legal compliance claim, or negative state."
+  ],
+  "assets": [
+    {
+      "category": "brand",
+      "id": "mark-primary",
+      "viewBox": "0 0 128 148",
+      "label": "Primary logo mark",
+      "svg": "asset-library/svg/brand/mark-primary.svg"
+    },
+    {
+      "category": "brand",
+      "id": "mark-on-light",
+      "viewBox": "0 0 128 148",
+      "label": "Logo mark for light surfaces",
+      "svg": "asset-library/svg/brand/mark-on-light.svg"
+    },
+    {
+      "category": "brand",
+      "id": "mark-monochrome-light",
+      "viewBox": "0 0 128 148",
+      "label": "Monochrome light logo mark",
+      "svg": "asset-library/svg/brand/mark-monochrome-light.svg"
+    },
+    {
+      "category": "brand",
+      "id": "mark-monochrome-dark",
+      "viewBox": "0 0 128 148",
+      "label": "Monochrome dark logo mark",
+      "svg": "asset-library/svg/brand/mark-monochrome-dark.svg"
+    },
+    {
+      "category": "brand",
+      "id": "wordmark-on-dark",
+      "viewBox": "0 0 520 150",
+      "label": "EntryMap wordmark on dark",
+      "background": "#17103D",
+      "svg": "asset-library/svg/brand/wordmark-on-dark.svg"
+    },
+    {
+      "category": "brand",
+      "id": "wordmark-on-light",
+      "viewBox": "0 0 520 150",
+      "label": "EntryMap wordmark on light",
+      "background": "#F2EEFF",
+      "svg": "asset-library/svg/brand/wordmark-on-light.svg"
+    },
+    {
+      "category": "brand",
+      "id": "wordmark-monochrome-light",
+      "viewBox": "0 0 520 150",
+      "label": "Monochrome EntryMap wordmark",
+      "background": "#17103D",
+      "svg": "asset-library/svg/brand/wordmark-monochrome-light.svg"
+    },
+    {
+      "category": "brand",
+      "id": "app-icon",
+      "viewBox": "0 0 256 256",
+      "label": "EntryMap app icon",
+      "svg": "asset-library/svg/brand/app-icon.svg"
+    },
+    {
+      "category": "brand",
+      "id": "favicon",
+      "viewBox": "0 0 64 64",
+      "label": "EntryMap favicon",
+      "svg": "asset-library/svg/brand/favicon.svg"
+    },
+    {
+      "category": "pins",
+      "id": "estimated",
+      "viewBox": "0 0 96 104",
+      "label": "Estimated entrance pin",
+      "tier": "Estimated",
+      "color": "#69B7FF",
+      "svg": "asset-library/svg/pins/estimated.svg"
+    },
+    {
+      "category": "pins",
+      "id": "scanned-on-site",
+      "viewBox": "0 0 96 104",
+      "label": "Scanned on-site entrance pin",
+      "tier": "Scanned on-site",
+      "color": "#FFBF24",
+      "svg": "asset-library/svg/pins/scanned-on-site.svg"
+    },
+    {
+      "category": "pins",
+      "id": "owner-confirmed",
+      "viewBox": "0 0 112 104",
+      "label": "Owner-confirmed entrance pin",
+      "tier": "Owner-confirmed",
+      "color": "#5B35F5",
+      "svg": "asset-library/svg/pins/owner-confirmed.svg"
+    },
+    {
+      "category": "halos",
+      "id": "good-match",
+      "viewBox": "0 0 104 104",
+      "label": "Good match halo",
+      "lineStyle": "solid",
+      "svg": "asset-library/svg/halos/good-match.svg"
+    },
+    {
+      "category": "halos",
+      "id": "partial-match",
+      "viewBox": "0 0 104 104",
+      "label": "Partial match halo",
+      "lineStyle": "dashed",
+      "svg": "asset-library/svg/halos/partial-match.svg"
+    },
+    {
+      "category": "halos",
+      "id": "unknown-match",
+      "viewBox": "0 0 104 104",
+      "label": "Unknown match halo",
+      "lineStyle": "dotted",
+      "svg": "asset-library/svg/halos/unknown-match.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "map",
+      "viewBox": "0 0 32 32",
+      "label": "map icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/map.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "scan",
+      "viewBox": "0 0 32 32",
+      "label": "scan icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/scan.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "profile",
+      "viewBox": "0 0 32 32",
+      "label": "profile icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/profile.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "my-needs",
+      "viewBox": "0 0 32 32",
+      "label": "my needs icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/my-needs.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "camera",
+      "viewBox": "0 0 32 32",
+      "label": "camera icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/camera.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "storefront",
+      "viewBox": "0 0 32 32",
+      "label": "storefront icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/storefront.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "person",
+      "viewBox": "0 0 32 32",
+      "label": "person icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/person.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "info",
+      "viewBox": "0 0 32 32",
+      "label": "info icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/info.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "correction",
+      "viewBox": "0 0 32 32",
+      "label": "correction icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/correction.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "freshness",
+      "viewBox": "0 0 32 32",
+      "label": "freshness icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/freshness.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "confidence",
+      "viewBox": "0 0 32 32",
+      "label": "confidence icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/confidence.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "location",
+      "viewBox": "0 0 32 32",
+      "label": "location icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/location.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "menu",
+      "viewBox": "0 0 32 32",
+      "label": "menu icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/menu.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "close",
+      "viewBox": "0 0 32 32",
+      "label": "close icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/close.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "chevron-right",
+      "viewBox": "0 0 32 32",
+      "label": "chevron right icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/chevron-right.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "check-outline",
+      "viewBox": "0 0 32 32",
+      "label": "check outline icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/check-outline.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "search",
+      "viewBox": "0 0 32 32",
+      "label": "search icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/search.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "filters",
+      "viewBox": "0 0 32 32",
+      "label": "filters icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/filters.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "photo",
+      "viewBox": "0 0 32 32",
+      "label": "photo icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/photo.svg"
+    },
+    {
+      "category": "ui-icons",
+      "id": "receipt",
+      "viewBox": "0 0 32 32",
+      "label": "receipt icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/ui-icons/receipt.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "step-free-entry",
+      "viewBox": "0 0 32 32",
+      "label": "step free entry feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/step-free-entry.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "ramp-visible",
+      "viewBox": "0 0 32 32",
+      "label": "ramp visible feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/ramp-visible.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "auto-door-button",
+      "viewBox": "0 0 32 32",
+      "label": "auto door button feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/auto-door-button.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "easy-grip-handle",
+      "viewBox": "0 0 32 32",
+      "label": "easy grip handle feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/easy-grip-handle.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "wide-door",
+      "viewBox": "0 0 32 32",
+      "label": "wide door feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/wide-door.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "accessibility-signage",
+      "viewBox": "0 0 32 32",
+      "label": "accessibility signage feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/accessibility-signage.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "clear-approach",
+      "viewBox": "0 0 32 32",
+      "label": "clear approach feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/clear-approach.svg"
+    },
+    {
+      "category": "feature-icons",
+      "id": "unknown",
+      "viewBox": "0 0 32 32",
+      "label": "unknown feature icon",
+      "recommendedSizes": [
+        24,
+        32,
+        48
+      ],
+      "svg": "asset-library/svg/feature-icons/unknown.svg"
+    },
+    {
+      "category": "provenance",
+      "id": "texas-record",
+      "viewBox": "0 0 32 32",
+      "label": "Texas public record provenance mark",
+      "meaning": "State record provenance only; never a trust tier",
+      "svg": "asset-library/svg/provenance/texas-record.svg"
+    },
+    {
+      "category": "provenance",
+      "id": "community-source",
+      "viewBox": "0 0 32 32",
+      "label": "Community provenance icon",
+      "svg": "asset-library/svg/provenance/community-source.svg"
+    },
+    {
+      "category": "provenance",
+      "id": "owner-source",
+      "viewBox": "0 0 32 32",
+      "label": "Owner provenance icon",
+      "svg": "asset-library/svg/provenance/owner-source.svg"
+    },
+    {
+      "category": "provenance",
+      "id": "photo-source",
+      "viewBox": "0 0 32 32",
+      "label": "Photo provenance icon",
+      "svg": "asset-library/svg/provenance/photo-source.svg"
+    },
+    {
+      "category": "provenance",
+      "id": "public-record",
+      "viewBox": "0 0 32 32",
+      "label": "Public record provenance icon",
+      "svg": "asset-library/svg/provenance/public-record.svg"
+    },
+    {
+      "category": "badges",
+      "id": "estimated",
+      "viewBox": "0 0 240 48",
+      "label": "Estimated badge",
+      "svg": "asset-library/svg/badges/estimated.svg"
+    },
+    {
+      "category": "badges",
+      "id": "scanned-on-site",
+      "viewBox": "0 0 240 48",
+      "label": "Scanned on-site badge",
+      "svg": "asset-library/svg/badges/scanned-on-site.svg"
+    },
+    {
+      "category": "badges",
+      "id": "owner-confirmed",
+      "viewBox": "0 0 240 48",
+      "label": "Owner-confirmed badge",
+      "svg": "asset-library/svg/badges/owner-confirmed.svg"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-current",
+      "viewBox": "0 0 240 48",
+      "label": "Current freshness badge",
+      "svg": "asset-library/svg/badges/freshness-current.svg"
+    },
+    {
+      "category": "badges",
+      "id": "freshness-recheck",
+      "viewBox": "0 0 280 48",
+      "label": "Re-check freshness badge",
+      "svg": "asset-library/svg/badges/freshness-recheck.svg"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-1",
+      "viewBox": "0 0 220 48",
+      "label": "Confidence 1 of 3 badge",
+      "svg": "asset-library/svg/badges/confidence-1.svg"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-2",
+      "viewBox": "0 0 220 48",
+      "label": "Confidence 2 of 3 badge",
+      "svg": "asset-library/svg/badges/confidence-2.svg"
+    },
+    {
+      "category": "badges",
+      "id": "confidence-3",
+      "viewBox": "0 0 220 48",
+      "label": "Confidence 3 of 3 badge",
+      "svg": "asset-library/svg/badges/confidence-3.svg"
+    },
+    {
+      "category": "states",
+      "id": "empty-area",
+      "viewBox": "0 0 240 180",
+      "label": "Empty area state",
+      "svg": "asset-library/svg/states/empty-area.svg"
+    },
+    {
+      "category": "states",
+      "id": "camera-permission",
+      "viewBox": "0 0 240 180",
+      "label": "Camera permission state",
+      "svg": "asset-library/svg/states/camera-permission.svg"
+    },
+    {
+      "category": "states",
+      "id": "processing",
+      "viewBox": "0 0 240 180",
+      "label": "Scan processing state",
+      "svg": "asset-library/svg/states/processing.svg"
+    },
+    {
+      "category": "states",
+      "id": "published",
+      "viewBox": "0 0 240 180",
+      "label": "Published success state",
+      "svg": "asset-library/svg/states/published.svg"
+    },
+    {
+      "category": "states",
+      "id": "offline",
+      "viewBox": "0 0 240 180",
+      "label": "Offline saved state",
+      "svg": "asset-library/svg/states/offline.svg"
+    },
+    {
+      "category": "states",
+      "id": "recheck",
+      "viewBox": "0 0 240 180",
+      "label": "Freshness re-check state",
+      "svg": "asset-library/svg/states/recheck.svg"
+    },
+    {
+      "category": "motion",
+      "id": "pin-drop-keyframes",
+      "viewBox": "0 0 300 150",
+      "label": "Pin drop motion keyframes",
+      "durationMs": 620,
+      "svg": "asset-library/svg/motion/pin-drop-keyframes.svg"
+    },
+    {
+      "category": "controls",
+      "id": "primary-default",
+      "viewBox": "0 0 260 56",
+      "label": "Primary button default",
+      "svg": "asset-library/svg/controls/primary-default.svg"
+    },
+    {
+      "category": "controls",
+      "id": "primary-pressed",
+      "viewBox": "0 0 260 56",
+      "label": "Primary button pressed",
+      "svg": "asset-library/svg/controls/primary-pressed.svg"
+    },
+    {
+      "category": "controls",
+      "id": "primary-focus",
+      "viewBox": "0 0 270 66",
+      "label": "Primary button keyboard focus",
+      "svg": "asset-library/svg/controls/primary-focus.svg"
+    },
+    {
+      "category": "controls",
+      "id": "primary-unavailable",
+      "viewBox": "0 0 260 56",
+      "label": "Unavailable primary button without gray",
+      "svg": "asset-library/svg/controls/primary-unavailable.svg"
+    },
+    {
+      "category": "controls",
+      "id": "scan-default",
+      "viewBox": "0 0 260 56",
+      "label": "Scan button default",
+      "svg": "asset-library/svg/controls/scan-default.svg"
+    },
+    {
+      "category": "controls",
+      "id": "scan-pressed",
+      "viewBox": "0 0 260 56",
+      "label": "Scan button pressed",
+      "svg": "asset-library/svg/controls/scan-pressed.svg"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-default",
+      "viewBox": "0 0 260 56",
+      "label": "Secondary button default",
+      "svg": "asset-library/svg/controls/secondary-default.svg"
+    },
+    {
+      "category": "controls",
+      "id": "secondary-pressed",
+      "viewBox": "0 0 260 56",
+      "label": "Secondary button pressed",
+      "svg": "asset-library/svg/controls/secondary-pressed.svg"
+    },
+    {
+      "category": "controls",
+      "id": "quiet-action",
+      "viewBox": "0 0 260 56",
+      "label": "Quiet text action",
+      "svg": "asset-library/svg/controls/quiet-action.svg"
+    },
+    {
+      "category": "navigation-states",
+      "id": "map-active",
+      "viewBox": "0 0 112 74",
+      "label": "Map navigation active",
+      "svg": "asset-library/svg/navigation-states/map-active.svg"
+    },
+    {
+      "category": "navigation-states",
+      "id": "scan-active",
+      "viewBox": "0 0 112 74",
+      "label": "Scan navigation active",
+      "svg": "asset-library/svg/navigation-states/scan-active.svg"
+    },
+    {
+      "category": "navigation-states",
+      "id": "profile-active",
+      "viewBox": "0 0 112 74",
+      "label": "Profile navigation active",
+      "svg": "asset-library/svg/navigation-states/profile-active.svg"
+    },
+    {
+      "category": "navigation-states",
+      "id": "keyboard-focus",
+      "viewBox": "0 0 112 74",
+      "label": "Bottom navigation keyboard focus",
+      "svg": "asset-library/svg/navigation-states/keyboard-focus.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-default",
+      "viewBox": "0 0 220 48",
+      "label": "Filter chip default",
+      "svg": "asset-library/svg/chip-states/filter-default.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-selected",
+      "viewBox": "0 0 220 48",
+      "label": "Filter chip selected",
+      "svg": "asset-library/svg/chip-states/filter-selected.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "filter-focus",
+      "viewBox": "0 0 228 56",
+      "label": "Filter chip keyboard focus",
+      "svg": "asset-library/svg/chip-states/filter-focus.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-fresh",
+      "viewBox": "0 0 260 58",
+      "label": "Fresh confirmed feature chip",
+      "svg": "asset-library/svg/chip-states/feature-fresh.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-aging",
+      "viewBox": "0 0 290 58",
+      "label": "Aging feature chip",
+      "svg": "asset-library/svg/chip-states/feature-aging.svg"
+    },
+    {
+      "category": "chip-states",
+      "id": "feature-unknown",
+      "viewBox": "0 0 320 58",
+      "label": "Unknown feature invitation chip",
+      "svg": "asset-library/svg/chip-states/feature-unknown.svg"
+    },
+    {
+      "category": "field-states",
+      "id": "text-empty",
+      "viewBox": "0 0 320 76",
+      "label": "Text field empty",
+      "svg": "asset-library/svg/field-states/text-empty.svg"
+    },
+    {
+      "category": "field-states",
+      "id": "text-focused",
+      "viewBox": "0 0 320 76",
+      "label": "Text field focused",
+      "svg": "asset-library/svg/field-states/text-focused.svg"
+    },
+    {
+      "category": "field-states",
+      "id": "text-filled",
+      "viewBox": "0 0 320 76",
+      "label": "Text field filled",
+      "svg": "asset-library/svg/field-states/text-filled.svg"
+    },
+    {
+      "category": "field-states",
+      "id": "needs-attention",
+      "viewBox": "0 0 320 98",
+      "label": "Field needing attention without red",
+      "svg": "asset-library/svg/field-states/needs-attention.svg"
+    },
+    {
+      "category": "feedback",
+      "id": "saved-toast",
+      "viewBox": "0 0 340 72",
+      "label": "Saved toast",
+      "svg": "asset-library/svg/feedback/saved-toast.svg"
+    },
+    {
+      "category": "feedback",
+      "id": "published-toast",
+      "viewBox": "0 0 340 72",
+      "label": "Published toast",
+      "svg": "asset-library/svg/feedback/published-toast.svg"
+    },
+    {
+      "category": "feedback",
+      "id": "offline-banner",
+      "viewBox": "0 0 340 72",
+      "label": "Offline banner",
+      "svg": "asset-library/svg/feedback/offline-banner.svg"
+    },
+    {
+      "category": "feedback",
+      "id": "camera-permission-dialog",
+      "viewBox": "0 0 340 210",
+      "label": "Camera permission dialog",
+      "svg": "asset-library/svg/feedback/camera-permission-dialog.svg"
+    },
+    {
+      "category": "sheet-states",
+      "id": "peek",
+      "viewBox": "0 0 240 240",
+      "label": "Bottom sheet peek stop",
+      "svg": "asset-library/svg/sheet-states/peek.svg"
+    },
+    {
+      "category": "sheet-states",
+      "id": "half",
+      "viewBox": "0 0 240 240",
+      "label": "Bottom sheet half stop",
+      "svg": "asset-library/svg/sheet-states/half.svg"
+    },
+    {
+      "category": "sheet-states",
+      "id": "full",
+      "viewBox": "0 0 240 240",
+      "label": "Bottom sheet full stop",
+      "svg": "asset-library/svg/sheet-states/full.svg"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-start",
+      "viewBox": "0 0 160 156",
+      "label": "Scan progress start",
+      "svg": "asset-library/svg/scan-states/progress-start.svg"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-entry-path",
+      "viewBox": "0 0 160 156",
+      "label": "Scan progress entry path",
+      "svg": "asset-library/svg/scan-states/progress-entry-path.svg"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-quality",
+      "viewBox": "0 0 160 156",
+      "label": "Scan progress quality",
+      "svg": "asset-library/svg/scan-states/progress-quality.svg"
+    },
+    {
+      "category": "scan-states",
+      "id": "progress-complete",
+      "viewBox": "0 0 160 156",
+      "label": "Scan progress complete",
+      "svg": "asset-library/svg/scan-states/progress-complete.svg"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-photo",
+      "viewBox": "0 0 380 74",
+      "label": "Photo provenance receipt row",
+      "svg": "asset-library/svg/receipt-elements/provenance-row-photo.svg"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "provenance-row-texas",
+      "viewBox": "0 0 420 74",
+      "label": "Texas provenance receipt row",
+      "svg": "asset-library/svg/receipt-elements/provenance-row-texas.svg"
+    },
+    {
+      "category": "receipt-elements",
+      "id": "suggest-correction",
+      "viewBox": "0 0 380 56",
+      "label": "Suggest a correction receipt action",
+      "svg": "asset-library/svg/receipt-elements/suggest-correction.svg"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "overview",
+      "viewBox": "0 0 320 138",
+      "label": "Pin hierarchy at overview zoom",
+      "svg": "asset-library/svg/pin-hierarchy/overview.svg"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "street",
+      "viewBox": "0 0 320 138",
+      "label": "Pin hierarchy at street zoom",
+      "svg": "asset-library/svg/pin-hierarchy/street.svg"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "selected",
+      "viewBox": "0 0 320 148",
+      "label": "Selected pin hierarchy with ripple",
+      "svg": "asset-library/svg/pin-hierarchy/selected.svg"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "receipt",
+      "viewBox": "0 0 320 138",
+      "label": "Pin hierarchy in cards and receipts",
+      "svg": "asset-library/svg/pin-hierarchy/receipt.svg"
+    },
+    {
+      "category": "pin-hierarchy",
+      "id": "mixed-cluster",
+      "viewBox": "0 0 96 96",
+      "label": "Mixed trust-tier cluster marker",
+      "meaning": "Count plus tier-composition arcs; never treated as one trust tier",
+      "svg": "asset-library/svg/pin-hierarchy/mixed-cluster.svg"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "selected-keyline",
+      "viewBox": "0 0 112 112",
+      "label": "Selected pin keyline overlay",
+      "svg": "asset-library/svg/pin-overlays/selected-keyline.svg"
+    },
+    {
+      "category": "pin-overlays",
+      "id": "freshness-clock",
+      "viewBox": "0 0 40 40",
+      "label": "Freshness clock pin overlay",
+      "svg": "asset-library/svg/pin-overlays/freshness-clock.svg"
+    }
+  ]
+}

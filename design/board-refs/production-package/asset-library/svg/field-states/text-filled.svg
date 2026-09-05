@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 320 76" role="img" aria-labelledby="title desc">
+  <title id="title">Text field filled</title><desc id="desc">EntryMap Text field filled asset.</desc>
+  
+  <text x="8" y="16" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="12" font-weight="700" fill="#17103D">Work email</text><rect x="5" y="23" width="310" height="46" rx="12" fill="#FFFFFF" stroke="#4020B5" stroke-width="2.5"/><g transform="translate(278 30) scale(.72)"><g fill="none" stroke="#4020B5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="m9 16 5 5 10-12"/></g></g><text x="18" y="52" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="15" fill="#17103D">owner@pageandspine.com</text>
+</svg>

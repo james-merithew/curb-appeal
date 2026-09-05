@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 112 74" role="img" aria-labelledby="title desc">
+  <title id="title">Scan navigation active</title><desc id="desc">EntryMap Scan navigation active asset.</desc>
+  
+  <rect x="11" y="8" width="90" height="58" rx="18" fill="#17103D"/><g transform="translate(40 12) scale(.9)" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V6a2 2 0 0 1 2-2h5M25 11V6a2 2 0 0 0-2-2h-5M5 21v5a2 2 0 0 0 2 2h5M25 21v5a2 2 0 0 1-2 2h-5"/><path d="M10 15h12M10 20h12"/></g><text x="56" y="60" text-anchor="middle" font-family="Atkinson Hyperlegible, Aptos, Arial, sans-serif" font-size="12" font-weight="550" fill="#FFFFFF">Scan</text><circle cx="56" cy="28" r="23" fill="none" stroke="#FFBF24" stroke-width="3"/>
+</svg>
