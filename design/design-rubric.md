@@ -15,32 +15,32 @@ Revision history lives at the bottom. Update the scores in place each round.
 
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
-| 1.1 | A real type scale, not ad-hoc sizes. Every size on screen traces to a defined step. | 2 | Sizes are largely em-based off one root but several one-off values exist. |
-| 1.2 | Weight carries hierarchy. No more than three weights doing real work; 900 is not the default. | 2 | 900 is used very widely, which flattens emphasis. |
-| 1.3 | Line length stays readable, roughly 45-75 characters for body copy. | 3 | Card and sheet copy is constrained. |
-| 1.4 | Line height rises for body copy and tightens for display sizes. | 2 | Display text uses body leading in places. |
-| 1.5 | Numerals align in tabular contexts (freshness, counts, distances). | 1 | No tabular-nums anywhere. |
-| 1.6 | Letter-spacing tightens on display sizes and opens on small caps labels. | 3 | Wordmark and kickers do this. |
+| 1.1 | A real type scale, not ad-hoc sizes. Every size on screen traces to a defined step. | 4 | Round 2: 177 selectors mapped onto the spec's 8 steps. **0** literal `font-size` values in `em` remain anywhere in the file (was 29 distinct values). The 8 remaining `px` sizes are exactly the spec's legitimate set: the 15px root and its two `[data-textsize]` overrides (16.2 / 18.9), the text-size picker's own 14/17/20 preview (it must not scale with the setting it controls), the 13px desktop stage caption outside the phone, and `.street-label` at 10.5px, the one deliberate non-scaling piece of content type because the map geometry is computed in px. The eight steps are also authored once as `.t-display` &hellip; `.t-micro`. |
+| 1.2 | Weight carries hierarchy. No more than three weights doing real work; 900 is not the default. | 4 | Round 2. CSS: **0** literal `font-weight` values remain; three tokens carry everything &mdash; `--fw-display` 900 on **21** component declarations (plus the 8 `.t-*` step classes), `--fw-strong` 800 on 112, `--fw-body` 600 on 71. 700 is gone from the stylesheet. Measured in the browser over all 26 screens on every text-bearing leaf element: weight 900 went **234 of 506 (46%) &rarr; 95 of 565 (17%)**, 800 went 82 &rarr; 281, 700 went 170 &rarr; 4 (and those 4 are the UA bolding `<b>`, not a rule). 900 now appears only on the wordmark, the eight heading steps, the one primary action label per screen, and the three headline numbers (`.counter-line`, `.tile .t-value`, `.ow-tierline`). |
+| 1.3 | Line length stays readable, roughly 45-75 characters for body copy. | 3 | Unchanged. Body sits at `--fs-body` 14.3px / `--lh-body` 1.5 in a 358px content column: 52-68 characters. |
+| 1.4 | Line height rises for body copy and tightens for display sizes. | 4 | Round 2: leading is named at every step and applied with the size, never left to inherit `normal`. Display 1.0, h1 1.1, h2 1.15, h3 1.22, body 1.5, sub 1.45, meta 1.35, micro 1.25, plus `--lh-row` 1.3 for one-line row labels that may wrap to two. |
+| 1.5 | Numerals align in tabular contexts (freshness, counts, distances). | 4 | Settled by measurement, not by code (design-systems-spec, decision 1). Nunito's default figures are already tabular: ten `1`s and ten `8`s render at identical width with no `font-variant-numeric` applied, difference 0.00px at 40px/700. The proposed `.tnum` class would have been a no-op on all 27 sites, so it was not added. The alignment the criterion asks for is already there. |
+| 1.6 | Letter-spacing tightens on display sizes and opens on small caps labels. | 4 | Round 2: 10 ad-hoc values collapse to 5 tokens &mdash; four negative display values (-0.025 / -0.02 / -0.015 / -0.01em), `--ls-caps` 0.08em on every uppercase micro label (replacing .05, .06 and .08em across 9 sites), `--ls-caps-wide` 0.14em on the two deliberately wide-tracked marks (welcome tagline, map street labels), and `--ls-flat` 0 elsewhere. The one negative value at 0.7em, which was invisible and harmful, is gone. |
 
 ## 2. Hierarchy and layout
 
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
-| 2.1 | One clear primary action per screen; secondary actions visibly subordinate. | 3 | Welcome and card follow this. |
-| 2.2 | Spacing follows one scale; no arbitrary gaps. | 2 | Mixed values, mostly a 4px grid but with strays. |
-| 2.3 | Related things are grouped by proximity before they are grouped by a box. | 2 | Several boxes do work proximity could do. |
-| 2.4 | The eye reaches the most important thing first on every screen. | 3 | Card and map are clear; some settings screens are flat lists. |
-| 2.5 | Density suits the job: the map is calm, the card is informative, settings are scannable. | 3 | Holds. |
-| 2.6 | Optical alignment where geometric alignment looks wrong (icons in rows, pin tips). | 2 | Not deliberately handled. |
+| 2.1 | One clear primary action per screen; secondary actions visibly subordinate. | 4 | Round 2, board section 4. Three button ranks now differ in kind, not only in tint: primary is the only filled control (solid purple, or marigold on the camera ask &mdash; the one moment the product asks rather than offers), secondary is white with a 2px purple border and never a grey fill, tertiary is plain purple text. The grey-lavender `.btn.ghost` fill and the grey `.btn.quiet` fill are both gone. `--fw-display` is reserved for the primary label, so the rank is carried by weight as well as by fill. |
+| 2.2 | Spacing follows one scale; no arbitrary gaps. | 2 | Unchanged and untouched by design &mdash; the spacing scale is Round 3's work. One token landed as a side effect of the card pass (`--pad-card` 18px), which is not a scale. |
+| 2.3 | Related things are grouped by proximity before they are grouped by a box. | 2 | Unchanged. Round 3. |
+| 2.4 | The eye reaches the most important thing first on every screen. | 4 | Round 2. The map had no reading order at all: 64 identical pins. It now has four levels that encode evidence strength and nothing else &mdash; 1 owner pin at 40px, 9-11 scanned at 30px, the rest as 14px dashed rings, and numbered discs for density. Counted at default zoom: 1 level-1, 9 level-2, 48 level-3 rings, 1 disc holding 6. The few purple marks read first, the marigold next, the rings as ground texture. |
+| 2.5 | Density suits the job: the map is calm, the card is informative, settings are scannable. | 4 | Round 2, measured the same way before and after (sum of each mark's rendered geometry bounding box, over the 390x844 map viewport): **34,321px&sup2;, 11.3% of the map &rarr; 14,905px&sup2;, 4.9%** &mdash; a 57% reduction in drawn mark area with **every one of the 64 places still on screen** (58 marks + 1 disc of 6). Zoomed out, estimated collapses entirely: 8 full pins + 14 discs holding 56 = 64, so the wide view answers "where has anyone actually been" instead of "where are there doors". Ceiling of 12 full pins at phone width is respected (10 drawn). |
+| 2.6 | Optical alignment where geometric alignment looks wrong (icons in rows, pin tips). | 4 | Round 2, both halves fixed and measured. **Pin tips:** the button is now a zero-size anchor on the projected coordinate and the art hangs from it by the tip; across all 58 pins the drawn tip's offset from the coordinate is max &#124;dx&#124; = 0.00px, max &#124;dy&#124; = 0.00px (previously the pin was placed by its box origin with no compensating transform, so it pointed roughly a storefront's width away from what it marked). Level-3 rings, which have no tip, are centred instead. **Row icons:** seven different leading-icon boxes (26/30/32/34/34/38/38px, two different radii, two different fills) collapse to one 36px box at radius 11 on `--icon-box`, so labels align down every column. |
 
 ## 3. Colour and depth
 
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
-| 3.1 | The palette carries meaning, and meaning only. Blue estimated, marigold scanned, purple owner, green match, amber ageing, no red. | 4 | Enforced throughout and tested. |
-| 3.2 | No screen is monotone; each has a considered accent relationship. | 3 | Welcome fixed; some settings screens are still lavender-on-lavender. |
-| 3.3 | Elevation is consistent: the same surface level always reads the same. | 2 | Shadows vary between sheets, cards and pills. |
-| 3.4 | Contrast passes on every text and non-text indicator, including in high contrast mode. | 4 | Measured Round 1: text was already clean; every non-text indicator now clears 3:1 in both modes (see 7.2). |
+| 3.1 | The palette carries meaning, and meaning only. Blue estimated, marigold scanned, purple owner, green match, amber ageing, no red. | 4 | Held, and defended once in Round 2: the pin gallery draws the needs-match halo in **purple**, which would have collided with owner-confirmed. The halo's *form* was taken from the gallery verbatim (solid ring on a soft disc for a good match, broken ring for partial, nothing at all for "not yet seen") and only the hue comes from `--match-green`. One new token, `--blue-pin` #2C63C9, is the level-3 ring and stays inside the estimated tier's own blue. |
+| 3.2 | No screen is monotone; each has a considered accent relationship. | 4 | Round 2: the seven finished illustrations landed, each with the two pale fills plus one marigold accent that the boards use. Scan primer (storefront doorway), location permission (map primer), empty saved list, offline / camera-off / choose-your-area on the states screen, correction submitted, and the map-empty invite. The lavender-on-lavender screens all now carry a drawing with a marigold element in it. |
+| 3.3 | Elevation is consistent: the same surface level always reads the same. | 3 | Round 2, partial and named as such. Every resting card now reads the same &mdash; `.prof-card`, `.srow`, `.lrow` and `.state-card` share one hairline (`--hairline` #DCD6F2) plus one shadow (`0 2px 10px rgba(36,31,58,.07)`), which is the board's "hairline border, not shadow doing the work" rule. Sheets, pills, FABs and the toast still carry four different shadows; the full elevation scale is Round 3's work, so this is a 3, not a 4. |
+| 3.4 | Contrast passes on every text and non-text indicator, including in high contrast mode. | 4 | Re-measured in Round 2 against the three map surfaces, because the pins were rebuilt. Normal / high contrast, on the lavender ground: estimated ring 4.78 / 4.39, scanned rim 5.04 / 8.04, owner rim and cluster-disc edge 8.18 / 10.35, match halo 4.58 / 4.21. On the block and street fills every figure is higher (estimated 5.24 and 5.62 normal). The worst case is a mark **receded** to 80% opacity by a selection or a needs profile, composited against the ground: estimated 3.37 / 3.17, scanned 3.48 / 4.94, owner 5.07 / 6.17 &mdash; all still over 3:1, which is why the recession step is 20% and not more. Round 1's text and indicator results are unchanged (see 7.1, 7.2). |
 | 3.5 | Colour is never the only carrier of state. | 4 | Tiers carry shape, match carries text. |
 
 ## 4. Motion
@@ -51,19 +51,19 @@ Revision history lives at the bottom. Update the scores in place each round.
 | 4.2 | Durations are consistent and short: roughly 150-250ms for UI, longer only for narrative beats. | 2 | Values vary widely. |
 | 4.3 | Easing is consistent and physical; nothing linear except progress. | 3 | Mostly one curve. |
 | 4.4 | The processing sequence is the one deliberate narrative moment and it earns its length. | 4 | The self-drawing ring with named checks. |
-| 4.5 | Reduced motion removes animation without removing meaning or feedback. | 4 | Verified: ring becomes a static bar. |
-| 4.6 | Nothing animates on load that the user did not ask for. | 3 | Splash only. |
+| 4.5 | Reduced motion removes animation without removing meaning or feedback. | 4 | Re-verified in Round 2 after the pin animations were rewritten for the new anchor: with Reduce motion on, `#ringwrap` is `display:none`, checkitem transition is 1e-05s, the determinate bar reads 100%, all three checks land, the live region still says "Checks complete. 3 features identified.", and the checklist text agrees ("Doorway framed &mdash; done"). The flow completes to Review. |
+| 4.6 | Nothing animates on load that the user did not ask for. | 3 | Unchanged. Splash only. |
 
 ## 5. Craft details
 
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
-| 5.1 | Empty states say what to do, not that something is empty. | 3 | Saved empty state does this. |
-| 5.2 | Loading, offline and permission-denied states are designed, not default. | 3 | The states screen exists. |
-| 5.3 | Touch feedback on every interactive element. | 2 | Buttons scale; rows and chips mostly do not. |
-| 5.4 | Icons share one grid, weight and terminal style. | 2 | Stroke widths vary between 2.2 and 2.4. |
-| 5.5 | Copy is plain, specific and human; no jargon, no cheerfulness the moment does not earn. | 4 | Consistently strong. |
-| 5.6 | Nothing is ASCII-fragile: no raw glyph that breaks without the right charset. | 4 | All 405 non-ASCII characters converted: HTML entities in markup, a CSS escape for the one `content:` glyph, `\uXXXX` in JS strings (entities would be double-escaped by `esc()`), plain ASCII in comments. The file is now byte-for-byte ASCII and renders identically. |
+| 5.1 | Empty states say what to do, not that something is empty. | 4 | Round 2. The copy was already right; the drawing was missing. The saved-list empty state now opens on the "empty shelf" illustration above "No saved entrances yet &mdash; save an entrance from its card and we'll tell you when its information changes", and the map-empty invite opens on the street scene above "No entrances mapped here yet / Be the first to help neighbors plan ahead", with a marigold **Scan an entrance** beside an outlined **Try another area**. Neither says a place or a person failed. |
+| 5.2 | Loading, offline and permission-denied states are designed, not default. | 4 | Round 2. All three states screen cards carry their own finished drawing at one size (offline storefront with a cloud, camera, map), replacing three 52px glyph discs; the scan primer opens on the storefront doorway; the correction-submitted screen opens on the note-and-tick drawing. Every one is drawn from tokens, so it re-tints itself in high contrast rather than being redrawn. |
+| 5.3 | Touch feedback on every interactive element. | 2 | Unchanged and untouched by design &mdash; touch feedback is Round 3's work with the motion scale. |
+| 5.4 | Icons share one grid, weight and terminal style. | 4 | Round 2, measured. One 24 grid, one stroke width (2), one terminal style (round cap, round join), rendered by one function. 38 named icons; 56 static chrome glyphs are painted at boot from a `data-icon` attribute and 40 more are `iconSVG()` calls in JS. Hand-written 24-grid `<svg>` blocks went **50 &rarr; 4** and the four that remain are deliberate: two are the match **heart**, which is a mark like the pins and the Texas flag rather than an icon, and two are the `.ie-icon` inline-error glyph, which the accessibility round owns and this round was told not to touch. Stroke widths in the swept set ranged 1.8-2.8 before; there is now exactly one. |
+| 5.5 | Copy is plain, specific and human; no jargon, no cheerfulness the moment does not earn. | 4 | Consistently strong. Unchanged. |
+| 5.6 | Nothing is ASCII-fragile: no raw glyph that breaks without the right charset. | 4 | Held through Round 2, which added ~17KB of new SVG. Re-measured on the committed file: **0 bytes above 127**. Still one inline `<script>`, no external scripts, single self-contained HTML. |
 
 ## 6. Product truth
 
@@ -175,3 +175,85 @@ key activation, so keyboard *activation* is evidenced structurally — a sweep f
 elements in the app with a click handler and no native control under them — rather than by
 observing a keypress fire a handler. Focus movement, tab order, Escape and the trap were
 all driven with real key events.
+
+---
+
+**Round 2 (2026-09-05).** Board fidelity and the type scale. Everything measured below was
+driven in a browser at 390x844 over `python -m http.server`, walking all 26 screens.
+
+**2.53 (R0) -> 3.22 (R1) -> 3.69.** Criteria below 3 go **12 -> 5**, and three whole
+sections (1, 3, 5) now have nothing below 3.
+
+*What moved.*
+
+- **The map (2.4, 2.5, 2.6: 3/3/2 -> 4/4/4).** This was the round's real work. Sixty-four
+  identical pins became a four-level hierarchy that encodes evidence strength and nothing
+  else. Owner-confirmed is the largest full pin, scanned on-site is medium, estimated is
+  demoted from a full teardrop to a 14px dashed ring with no glyph, and everything that
+  yields becomes a numbered disc. Measured: drawn mark area fell from 11.3% of the map
+  viewport to 4.9% while all 64 places stayed on screen. Zoomed out, estimated collapses
+  entirely (8 pins + 14 discs holding 56). Selection scales the chosen pin up and steps the
+  rest back by 20% without hiding anything; a needs profile lets matching places hold full
+  opacity and take a match ring while the rest recede; **no mark anywhere says a place
+  fails**. The density rules run on the real dataset: weaker levels yield on overlap, the
+  ceiling of a dozen full pins holds (10 drawn), the selected place is exempt and always on
+  top, and every mark keeps a 44x44 tap target whatever its drawn size.
+- **Pin anchoring (part of 2.6).** Pins were placed by their box origin with no compensating
+  transform, so they pointed roughly a storefront's width away from what they marked. The
+  button is now a zero-size anchor on the projected coordinate; measured across 58 pins, the
+  drawn tip lands on the coordinate with max offset 0.00px in both axes. `revealSelected()`
+  was updated in the same change, since it reads the same box and that box now means the tip.
+- **Type (1.1, 1.2, 1.4, 1.6: 2/2/2/3 -> 4).** 177 selectors onto 8 steps; zero literal
+  `font-weight` and zero literal `em` font-sizes left in the file. The weight rule is the
+  part that mattered: 900 went from 94 CSS sites to 21, and on screen from 46% of all
+  text-bearing elements to 17%. Row labels dropped to 800 and reading copy to 600.
+- **Icons (5.4: 2 -> 4).** The gallery's 36-icon set landed and every call site moved onto
+  it, plus 12 glyphs that only existed by hand and were added to the same grid. Hand-written
+  24-grid SVG blocks: 50 -> 4.
+- **Illustrations (3.2, 5.1, 5.2: 3 -> 4).** All seven placed.
+- **Components (2.1: 3 -> 4; 3.3: 2 -> 3).** One selection component everywhere &mdash; empty
+  ring on white, filled purple disc with a white tick plus a tinted, purple-bordered row when
+  selected &mdash; replacing the inverted solid blocks the needs picker and filter chips used.
+  Cards took a hairline plus generous padding. Secondary buttons became white with a purple
+  border; the camera permission is marigold.
+
+*What did not move, and why.* Sections 4 (motion) and 2.2 / 2.3 / 5.3 are untouched on
+purpose: the brief scoped this round to type only, leaving elevation, spacing and motion for
+Round 3. 3.3 rose to 3 rather than 4 because resting cards now agree but sheets, pills and
+FABs still carry four different shadows. Section 6 is unchanged at 4s. Section 7 was
+re-verified, not re-scored.
+
+*Three judgement calls made against the galleries, each recorded rather than quietly taken.*
+
+1. **The match halo is green, not the gallery's purple.** `pins-and-icons.html` draws it in
+   purple. In this product purple already means owner-confirmed and green means "matches your
+   needs" and nothing else (3.1, settled in Round 0). Colliding those two would have cost more
+   than it bought, so the halo's form is the gallery's verbatim and only the hue is ours.
+2. **Level 3 is a new tier on `pinSVG`, not a gallery drawing.** The pin gallery has no
+   glyph-less ring, because visual-language section 10 asks for one and the gallery predates
+   it. Rather than keep two pin modules, `pinSVG('ring', size)` was added alongside the three
+   the gallery ships, in the same idiom, on a new `--blue-pin` token chosen so the ring still
+   clears 3:1 after the 20% recession a selection applies (3.37:1 measured).
+3. **The welcome hero keeps its aubergine, and the street scene went to the map-empty
+   state.** The illustration agent rates the street scene the weakest of the seven, and
+   visual-language is explicit that the dark hero is newer canon than the boards. Replacing it
+   would have contradicted the document this round is meant to follow. The drawing was not
+   wasted: "No entrances mapped here yet / be the first" is a street with nothing marked on it,
+   which is what that illustration is a picture of.
+
+*Round 1 re-verified, nothing regressed.* All 26 screens still take focus on change
+(26/26); 0 duplicate ids; 0 `button[role="listitem"]`; 58/58 pin accessible names still
+carry match state, freshness and distance; `toast()` still reaches the live region; the
+Filters sheet still lands focus on its heading, traps it (0 focusables reachable behind the
+scrim), closes on Escape and returns focus to the FAB; the card sheet still returns focus to
+the originating pin, re-found by id across the re-render. Reduced motion re-verified through
+a full scan run. Text scaling swept at Default / Larger / Larger+high-contrast: the overflow
+finding count is **17 at every setting, identical to the pre-round file at every setting** —
+one new 2px flex finding on the location pill appeared and was fixed before commit. Non-text
+contrast re-measured for the rebuilt pins (3.4). File is still 0 non-ASCII bytes, one inline
+script, no external scripts. Console is clean on load and across the sweep.
+
+*Known and unchanged.* Seven pins on the map have their 44x44 centre covered by floating map
+chrome (the legend card, the FABs, the nav bar). That is the pre-existing overlay behaviour,
+not a product of the new anchoring, and the list view is the canon-mandated equivalent path.
+The two 20x20 inputs on the claim screen remain inside 44px+ labels, as in Round 1.
