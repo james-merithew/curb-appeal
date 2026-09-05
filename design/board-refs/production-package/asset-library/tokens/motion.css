@@ -1,8 +1,0 @@
-.entrymap-pin-drop { animation: entrymap-pin-drop 620ms cubic-bezier(.2,.9,.25,1.2) both; }
-@keyframes entrymap-pin-drop {
-  0% { transform: translateY(-48px) scale(.86,1.08); opacity: 0; }
-  62% { transform: translateY(3px) scale(1.08,.91); opacity: 1; }
-  82% { transform: translateY(-4px) scale(.97,1.03); }
-  100% { transform: translateY(0) scale(1); }
-}
-@media (prefers-reduced-motion: reduce) { .entrymap-pin-drop { animation: none; } }
