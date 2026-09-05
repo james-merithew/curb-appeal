@@ -129,3 +129,55 @@ body leading.
 - Pins communicate evidence source and strength, never a rating.
 - "Sources, dates, and confidence — not a badge" is printed on board 02. That sentence governs
   every surface.
+
+---
+
+## 10. Map hierarchy and density
+
+The map currently renders every place as the same pin at the same size. With sixty-four of them
+in a few blocks the screen reads as noise: no focal point, no reading order, and no way to tell
+at a glance which markers are worth attending to. Same-size pins also waste the one thing a map
+has that a list does not, which is the ability to say what matters by how it looks.
+
+**The hierarchy encodes evidence strength, and nothing else.** Not accessibility quality, not a
+rating, not a recommendation. This is the board's own rule, printed on board 02: pins
+communicate evidence source and strength. A bigger pin means we know more about that entrance,
+never that the entrance is better. Stated that way the hierarchy is not only defensible, it is
+the most honest thing the map can do, because the weakest evidence currently shouts as loudly as
+the strongest.
+
+**Four levels.**
+
+| Level | Tier | Treatment | Why |
+|---|---|---|---|
+| 1 | Owner-confirmed | Full pin, largest, purple, storefront glyph, tick badge, halo | Rarest and strongest evidence: someone at the door attested to it |
+| 2 | Scanned on-site | Full pin, medium, marigold, person glyph, halo | Somebody stood there and photographed it |
+| 3 | Estimated | A small dashed ring, no glyph, no teardrop | It marks that a door is probably there without borrowing the visual weight of evidence |
+| 4 | Cluster | One numbered disc | Density, not a place |
+
+Level 3 is the change that does most of the work. Estimated is both the most numerous tier and
+the weakest claim, and drawing it as a full pin is what makes the map look busy and overclaim at
+the same time. As a quiet dashed dot it becomes texture: present, countable, tappable, and
+clearly provisional.
+
+**State modifiers, applied on top of the level.**
+
+- **Selected** scales up and takes a stronger halo; everything else drops slightly in opacity.
+  Nothing is ever hidden.
+- **Needs match**, when a needs profile is set: matching places hold full opacity and take the
+  match ring; non-matching recede in opacity only. Recession is not a negative verdict, and no
+  mark is ever added to say a place fails.
+- **Zoom out** collapses estimated entirely into cluster counts, leaving only levels 1 and 2 as
+  pins, so the wide view answers "where has anyone actually been" rather than "where are there
+  doors".
+
+**Density rules.**
+
+- Where two markers overlap by more than about 40%, the weaker level yields: an estimated ring
+  merges into a cluster before a scanned pin does, and a scanned pin yields before an owner pin.
+- Around a dozen full pins is the ceiling at phone width. Past that, cluster.
+- The selected place is exempt from every rule above: it is always drawn, always on top.
+
+The result is a reading order the eye follows without instruction. The few purple pins first,
+the marigold ones next, and the estimated rings registering as ground texture rather than as
+sixty-four competing items.
