@@ -367,6 +367,25 @@ def main():
         notes="Weakest of the three: these doors set the threshold. Reported for "
               "completeness only.")
 
+    # ---- TEST 4/5: fairness check on T2 ----------------------------------------
+    # T2 hands depth only the views the shipping pass skipped, which are the WIDER
+    # frames, while the vision baseline saw every view in one call.  If depth's
+    # collapse were an artefact of that asymmetry it would disappear when depth
+    # aggregates over every view too.  It does not.
+    def all_views(door):
+        return sorted(os.path.basename(p)[:-4] for p in
+                      glob.glob(os.path.join(all_dir, door, "*.npy")))
+
+    for lo, hi, tag in [(39, 64, "T4_heldoutB_allviews"), (13, 38, "T5_heldoutA_allviews")]:
+        ds = sorted(d for d in all_doors
+                    if lo <= int(d.split("-")[1]) <= hi and d not in sealed)
+        results[tag], _ = evaluate(
+            f"doors {lo}-{hi}, depth over every view", ds, all_dir,
+            vlm, truth, all_views,
+            notes="Fairness control for the capture-robustness replicate: depth now "
+                  "aggregates over the same views the vision call saw. Half A is the "
+                  "tuning half and is not evidence; half B is.")
+
     for key, res in results.items():
         leaked = sorted(set(res["doors"]) & sealed)
         assert not leaked, f"SEALED LEAK in {key}: {leaked}"

@@ -40,6 +40,7 @@ the confidence gate — exactly as the earlier pass left them. Nothing was retun
 |---|---|---|---|
 | Control: the original doors, the original two views | nothing — reproduction check | 89.5% (34/38) | **97.4% (37/38)** |
 | The same doors, photographs the pass never read | new pixels, same entrances | 90.0% (18/20) | **80.0% (16/20)** |
+| The same doors, depth over *every* view | fairness control on the row above | 90.0% (18/20) | **80.0% (16/20)** |
 | Doors the depth pipeline had never seen | new entrances | 85.7% (6/7) | **75.0% (6/8)** |
 
 The control matters most. Re-running the frozen gate on its own cached inputs reproduces the
@@ -49,6 +50,14 @@ is not a reimplementation artefact. It is the finding.
 **The 96.2% was a property of two photographs, not of the entrances.** Handed different views
 of the *same* doors, the same gate lands ten points below the vision model it was meant to
 improve. Six overrides fired: two fixes, four breaks.
+
+**The obvious objection does not hold.** The second row hands depth only the frames the
+shipping pass skipped, which are the wider ones, while the vision baseline saw every frame in
+one call. Level that up — let depth aggregate over every view too — and the number does not
+move: still 80.0% against vision's 90.0%. It arrives there differently, which is the more
+damaging detail. With the near frames back in, depth recovers the two steps it had missed and
+manufactures two fresh false positives instead. Under `max` aggregation the two error modes
+trade off against each other and there is no setting of the view count that wins.
 
 **No parameter setting rescues it.** Sweeping the confidence gate from 65 to 90, with and
 without the handrail veto, the best available fusion on the largest slice is 90.0% — reached

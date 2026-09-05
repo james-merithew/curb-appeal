@@ -10348,6 +10348,1333 @@
      }
     }
    }
+  },
+  "T4_heldoutB_allviews": {
+   "label": "doors 39-64, depth over every view",
+   "notes": "Fairness control for the capture-robustness replicate: depth now aggregates over the same views the vision call saw. Half A is the tuning half and is not evidence; half B is.",
+   "depth_dir": "C:/Users/merit/AppData/Local/Temp/claude/C--dev-curb-appeal/171dd3c1-5cac-4ae8-acf4-5f2235f4490a/scratchpad\\depth_crop1036_all",
+   "n_doors": 20,
+   "fusion_X": 90,
+   "handrail_veto": false,
+   "n_stepped_truth": 5,
+   "vision_alone": {
+    "correct": 18,
+    "committed": 20,
+    "n": 20,
+    "abstained": 0,
+    "acc_of_committed": 0.9,
+    "acc_of_all": 0.9,
+    "errors": [
+     "door-41",
+     "door-47"
+    ]
+   },
+   "depth_alone": {
+    "correct": 14,
+    "committed": 19,
+    "n": 20,
+    "abstained": 1,
+    "acc_of_committed": 0.7368,
+    "acc_of_all": 0.7,
+    "errors": [
+     "door-42",
+     "door-49",
+     "door-51",
+     "door-54",
+     "door-58"
+    ]
+   },
+   "fusion": {
+    "correct": 16,
+    "committed": 20,
+    "n": 20,
+    "abstained": 0,
+    "acc_of_committed": 0.8,
+    "acc_of_all": 0.8,
+    "errors": [
+     "door-42",
+     "door-49",
+     "door-51",
+     "door-54"
+    ]
+   },
+   "overrides": {
+    "door-41": {
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers run level into threshold in multiple views, small curb transition visible but flush at door line",
+     "handrails_vlm": "absent",
+     "step_score": 1.0,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3483",
+      "IMG_3484",
+      "IMG_3485",
+      "IMG_3486",
+      "IMG_3487",
+      "IMG_3488"
+     ],
+     "view_scores": {
+      "IMG_3483": 0.579,
+      "IMG_3484": 0.335,
+      "IMG_3485": 0.0,
+      "IMG_3486": 0.0,
+      "IMG_3487": 1.0,
+      "IMG_3488": 0.266
+     }
+    },
+    "door-42": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "vlm_evidence": "sidewalk pavers run flush to threshold in head-on and oblique views, no visible riser edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.261,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3489",
+      "IMG_3490",
+      "IMG_3491",
+      "IMG_3492",
+      "IMG_3493",
+      "IMG_3494"
+     ],
+     "view_scores": {
+      "IMG_3489": 0.0,
+      "IMG_3490": 0.261,
+      "IMG_3491": 0.0,
+      "IMG_3492": 0.0,
+      "IMG_3493": 0.0,
+      "IMG_3494": 0.0
+     }
+    },
+    "door-47": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "vlm_evidence": "oblique views show raised threshold/platform with distinct edge line where sidewalk meets lighter entrance slab",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3516",
+      "IMG_3517",
+      "IMG_3518",
+      "IMG_3519",
+      "IMG_3520",
+      "IMG_3521"
+     ],
+     "view_scores": {
+      "IMG_3516": 0.0,
+      "IMG_3517": 0.0,
+      "IMG_3518": 0.0,
+      "IMG_3519": 0.0,
+      "IMG_3520": 0.0,
+      "IMG_3521": 0.0
+     }
+    },
+    "door-49": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk and threshold appear flush in head-on and oblique views of gold door entrance",
+     "handrails_vlm": "absent",
+     "step_score": 0.582,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3528",
+      "IMG_3529",
+      "IMG_3530",
+      "IMG_3531",
+      "IMG_3532",
+      "IMG_3533",
+      "IMG_3534"
+     ],
+     "view_scores": {
+      "IMG_3528": 0.0,
+      "IMG_3529": 0.0,
+      "IMG_3530": 0.0,
+      "IMG_3531": 0.0,
+      "IMG_3532": 0.0,
+      "IMG_3533": 0.0,
+      "IMG_3534": 0.582
+     }
+    },
+    "door-51": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk meets threshold flush with no visible riser in all views",
+     "handrails_vlm": "absent",
+     "step_score": 0.288,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3541",
+      "IMG_3542",
+      "IMG_3543",
+      "IMG_3544",
+      "IMG_3545"
+     ],
+     "view_scores": {
+      "IMG_3541": 0.0,
+      "IMG_3542": 0.288,
+      "IMG_3543": 0.0,
+      "IMG_3544": 0.0,
+      "IMG_3545": 0.0
+     }
+    },
+    "door-54": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk tile appears flush with threshold in head-on and oblique views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 1.0,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3557",
+      "IMG_3558",
+      "IMG_3559",
+      "IMG_3560",
+      "IMG_3561"
+     ],
+     "view_scores": {
+      "IMG_3557": 0.0,
+      "IMG_3558": 1.0,
+      "IMG_3559": 0.0,
+      "IMG_3560": 0.0,
+      "IMG_3561": 0.0
+     }
+    }
+   },
+   "retune_on_this_data": {
+    "aggregation": "mean",
+    "threshold": 0.2,
+    "balanced_accuracy": 0.9,
+    "correct": 19,
+    "n": 20
+   },
+   "doors": {
+    "door-40": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers appear to run flush to threshold in wide/head-on views with no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3477",
+      "IMG_3478",
+      "IMG_3479",
+      "IMG_3480",
+      "IMG_3481"
+     ],
+     "view_scores": {
+      "IMG_3477": 0.0,
+      "IMG_3478": 0.0,
+      "IMG_3479": 0.0,
+      "IMG_3480": 0.0,
+      "IMG_3481": 0.0
+     }
+    },
+    "door-41": {
+     "truth": "absent",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers run level into threshold in multiple views, small curb transition visible but flush at door line",
+     "handrails_vlm": "absent",
+     "step_score": 1.0,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3483",
+      "IMG_3484",
+      "IMG_3485",
+      "IMG_3486",
+      "IMG_3487",
+      "IMG_3488"
+     ],
+     "view_scores": {
+      "IMG_3483": 0.579,
+      "IMG_3484": 0.335,
+      "IMG_3485": 0.0,
+      "IMG_3486": 0.0,
+      "IMG_3487": 1.0,
+      "IMG_3488": 0.266
+     }
+    },
+    "door-42": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "vlm_evidence": "sidewalk pavers run flush to threshold in head-on and oblique views, no visible riser edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.261,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3489",
+      "IMG_3490",
+      "IMG_3491",
+      "IMG_3492",
+      "IMG_3493",
+      "IMG_3494"
+     ],
+     "view_scores": {
+      "IMG_3489": 0.0,
+      "IMG_3490": 0.261,
+      "IMG_3491": 0.0,
+      "IMG_3492": 0.0,
+      "IMG_3493": 0.0,
+      "IMG_3494": 0.0
+     }
+    },
+    "door-43": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "vlm_evidence": "oblique views show two distinct steps/risers leading up to threshold",
+     "handrails_vlm": "present",
+     "step_score": 0.833,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3495",
+      "IMG_3496",
+      "IMG_3497",
+      "IMG_3498",
+      "IMG_3499",
+      "IMG_3500"
+     ],
+     "view_scores": {
+      "IMG_3495": 0.0,
+      "IMG_3496": 0.645,
+      "IMG_3497": 0.655,
+      "IMG_3498": 0.833,
+      "IMG_3499": 0.833,
+      "IMG_3500": 0.833
+     }
+    },
+    "door-45": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers meet door threshold level in all views, no visible riser or shadow line",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3505",
+      "IMG_3506",
+      "IMG_3507",
+      "IMG_3508",
+      "IMG_3509"
+     ],
+     "view_scores": {
+      "IMG_3505": 0.0,
+      "IMG_3506": 0.0,
+      "IMG_3507": 0.0,
+      "IMG_3508": 0.0,
+      "IMG_3509": 0.0
+     }
+    },
+    "door-47": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "vlm_evidence": "oblique views show raised threshold/platform with distinct edge line where sidewalk meets lighter entrance slab",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3516",
+      "IMG_3517",
+      "IMG_3518",
+      "IMG_3519",
+      "IMG_3520",
+      "IMG_3521"
+     ],
+     "view_scores": {
+      "IMG_3516": 0.0,
+      "IMG_3517": 0.0,
+      "IMG_3518": 0.0,
+      "IMG_3519": 0.0,
+      "IMG_3520": 0.0,
+      "IMG_3521": 0.0
+     }
+    },
+    "door-48": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk and entrance tile appear flush in oblique views (photo 2, photo 3)",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3522",
+      "IMG_3523",
+      "IMG_3524",
+      "IMG_3525",
+      "IMG_3526",
+      "IMG_3527"
+     ],
+     "view_scores": {
+      "IMG_3522": 0.0,
+      "IMG_3523": 0.0,
+      "IMG_3524": 0.0,
+      "IMG_3525": 0.0,
+      "IMG_3526": 0.0,
+      "IMG_3527": 0.0
+     }
+    },
+    "door-49": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk and threshold appear flush in head-on and oblique views of gold door entrance",
+     "handrails_vlm": "absent",
+     "step_score": 0.582,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3528",
+      "IMG_3529",
+      "IMG_3530",
+      "IMG_3531",
+      "IMG_3532",
+      "IMG_3533",
+      "IMG_3534"
+     ],
+     "view_scores": {
+      "IMG_3528": 0.0,
+      "IMG_3529": 0.0,
+      "IMG_3530": 0.0,
+      "IMG_3531": 0.0,
+      "IMG_3532": 0.0,
+      "IMG_3533": 0.0,
+      "IMG_3534": 0.582
+     }
+    },
+    "door-50": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk meets threshold with no visible riser in head-on and oblique views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3535",
+      "IMG_3536",
+      "IMG_3537",
+      "IMG_3538",
+      "IMG_3539",
+      "IMG_3540"
+     ],
+     "view_scores": {
+      "IMG_3535": 0.0,
+      "IMG_3536": 0.0,
+      "IMG_3537": 0.0,
+      "IMG_3538": 0.0,
+      "IMG_3539": 0.0,
+      "IMG_3540": 0.0
+     }
+    },
+    "door-51": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk meets threshold flush with no visible riser in all views",
+     "handrails_vlm": "absent",
+     "step_score": 0.288,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3541",
+      "IMG_3542",
+      "IMG_3543",
+      "IMG_3544",
+      "IMG_3545"
+     ],
+     "view_scores": {
+      "IMG_3541": 0.0,
+      "IMG_3542": 0.288,
+      "IMG_3543": 0.0,
+      "IMG_3544": 0.0,
+      "IMG_3545": 0.0
+     }
+    },
+    "door-53": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "dark tile floor appears continuous from sidewalk to threshold in near and far views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3552",
+      "IMG_3553",
+      "IMG_3554",
+      "IMG_3555",
+      "IMG_3556"
+     ],
+     "view_scores": {
+      "IMG_3552": 0.0,
+      "IMG_3553": 0.0,
+      "IMG_3554": 0.0,
+      "IMG_3555": 0.0,
+      "IMG_3556": 0.0
+     }
+    },
+    "door-54": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk tile appears flush with threshold in head-on and oblique views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 1.0,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3557",
+      "IMG_3558",
+      "IMG_3559",
+      "IMG_3560",
+      "IMG_3561"
+     ],
+     "view_scores": {
+      "IMG_3557": 0.0,
+      "IMG_3558": 1.0,
+      "IMG_3559": 0.0,
+      "IMG_3560": 0.0,
+      "IMG_3561": 0.0
+     }
+    },
+    "door-55": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "oblique views show sidewalk pavers meeting threshold with no visible riser edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3562",
+      "IMG_3563",
+      "IMG_3564",
+      "IMG_3565",
+      "IMG_3566",
+      "IMG_3567"
+     ],
+     "view_scores": {
+      "IMG_3562": 0.0,
+      "IMG_3563": 0.0,
+      "IMG_3564": 0.0,
+      "IMG_3565": 0.0,
+      "IMG_3566": 0.0,
+      "IMG_3567": 0.0
+     }
+    },
+    "door-56": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "vlm_evidence": "red-painted steps visible at main entrance in all views",
+     "handrails_vlm": "present",
+     "step_score": 0.602,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3568",
+      "IMG_3569",
+      "IMG_3570",
+      "IMG_3571",
+      "IMG_3572"
+     ],
+     "view_scores": {
+      "IMG_3568": 0.0,
+      "IMG_3569": 0.0,
+      "IMG_3570": 0.0,
+      "IMG_3571": 0.41,
+      "IMG_3572": 0.602
+     }
+    },
+    "door-57": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk and threshold appear continuous, slight worn concrete transition visible in close-up views but no distinct riser or step edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3573",
+      "IMG_3574",
+      "IMG_3575",
+      "IMG_3576",
+      "IMG_3577",
+      "IMG_3578",
+      "IMG_3579"
+     ],
+     "view_scores": {
+      "IMG_3573": 0.0,
+      "IMG_3574": 0.0,
+      "IMG_3575": 0.0,
+      "IMG_3576": 0.0,
+      "IMG_3577": 0.0,
+      "IMG_3578": 0.0,
+      "IMG_3579": 0.0
+     }
+    },
+    "door-58": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "vlm_evidence": "multiple views show 3-step staircase with visible risers leading to entrance",
+     "handrails_vlm": "present",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3580",
+      "IMG_3581",
+      "IMG_3582",
+      "IMG_3583",
+      "IMG_3584"
+     ],
+     "view_scores": {
+      "IMG_3580": 0.0,
+      "IMG_3581": 0.0,
+      "IMG_3582": 0.0,
+      "IMG_3583": 0.0,
+      "IMG_3584": 0.0
+     }
+    },
+    "door-60": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "vlm_evidence": "brick paving appears to run level to the door mat threshold in near and far views",
+     "handrails_vlm": "absent",
+     "step_score": 0.138,
+     "depth_verdict": "uncertain",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3592",
+      "IMG_3593",
+      "IMG_3594",
+      "IMG_3595",
+      "IMG_3596"
+     ],
+     "view_scores": {
+      "IMG_3592": 0.138,
+      "IMG_3593": 0.0,
+      "IMG_3594": 0.0,
+      "IMG_3595": 0.0,
+      "IMG_3596": 0.0
+     }
+    },
+    "door-61": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "vlm_evidence": "brick pavers run level from sidewalk to door threshold in all views, no visible riser or step edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3597",
+      "IMG_3598",
+      "IMG_3599",
+      "IMG_3600",
+      "IMG_3601",
+      "IMG_3602"
+     ],
+     "view_scores": {
+      "IMG_3597": 0.0,
+      "IMG_3598": 0.0,
+      "IMG_3599": 0.0,
+      "IMG_3600": 0.0,
+      "IMG_3601": 0.0,
+      "IMG_3602": 0.0
+     }
+    },
+    "door-62": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "vlm_evidence": "oblique views show a raised step/threshold with yellow hazard stripe and riser edge leading up from sidewalk to door",
+     "handrails_vlm": "absent",
+     "step_score": 0.338,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3603",
+      "IMG_3604",
+      "IMG_3605",
+      "IMG_3606"
+     ],
+     "view_scores": {
+      "IMG_3603": 0.309,
+      "IMG_3604": 0.338,
+      "IMG_3605": 0.263,
+      "IMG_3606": 0.161
+     }
+    },
+    "door-63": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "sidewalk pavers appear to meet threshold flush in head-on and oblique views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3607",
+      "IMG_3608",
+      "IMG_3609",
+      "IMG_3610",
+      "IMG_3611"
+     ],
+     "view_scores": {
+      "IMG_3607": 0.0,
+      "IMG_3608": 0.0,
+      "IMG_3609": 0.0,
+      "IMG_3610": 0.0,
+      "IMG_3611": 0.0
+     }
+    }
+   }
+  },
+  "T5_heldoutA_allviews": {
+   "label": "doors 13-38, depth over every view",
+   "notes": "Fairness control for the capture-robustness replicate: depth now aggregates over the same views the vision call saw. Half A is the tuning half and is not evidence; half B is.",
+   "depth_dir": "C:/Users/merit/AppData/Local/Temp/claude/C--dev-curb-appeal/171dd3c1-5cac-4ae8-acf4-5f2235f4490a/scratchpad\\depth_crop1036_all",
+   "n_doors": 18,
+   "fusion_X": 90,
+   "handrail_veto": false,
+   "n_stepped_truth": 2,
+   "vision_alone": {
+    "correct": 16,
+    "committed": 18,
+    "n": 18,
+    "abstained": 0,
+    "acc_of_committed": 0.8889,
+    "acc_of_all": 0.8889,
+    "errors": [
+     "door-18",
+     "door-35"
+    ]
+   },
+   "depth_alone": {
+    "correct": 16,
+    "committed": 18,
+    "n": 18,
+    "abstained": 0,
+    "acc_of_committed": 0.8889,
+    "acc_of_all": 0.8889,
+    "errors": [
+     "door-31",
+     "door-37"
+    ]
+   },
+   "fusion": {
+    "correct": 17,
+    "committed": 18,
+    "n": 18,
+    "abstained": 0,
+    "acc_of_committed": 0.9444,
+    "acc_of_all": 0.9444,
+    "errors": [
+     "door-31"
+    ]
+   },
+   "overrides": {
+    "door-18": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "vlm_evidence": "raised stone platform with visible riser edge separating brick sidewalk from door threshold in oblique views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3361",
+      "IMG_3362",
+      "IMG_3363",
+      "IMG_3364",
+      "IMG_3365"
+     ],
+     "view_scores": {
+      "IMG_3361": 0.0,
+      "IMG_3362": 0.0,
+      "IMG_3363": 0.0,
+      "IMG_3364": 0.0,
+      "IMG_3365": 0.0
+     }
+    },
+    "door-31": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers run level into threshold in near/head-on views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.372,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3425",
+      "IMG_3426",
+      "IMG_3427",
+      "IMG_3428",
+      "IMG_3429"
+     ],
+     "view_scores": {
+      "IMG_3425": 0.0,
+      "IMG_3426": 0.372,
+      "IMG_3427": 0.0,
+      "IMG_3428": 0.0,
+      "IMG_3429": 0.0
+     }
+    },
+    "door-35": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "vlm_evidence": "oblique/near views show a raised black-edged threshold platform with a distinct riser edge above sidewalk level",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3448",
+      "IMG_3449",
+      "IMG_3450",
+      "IMG_3451",
+      "IMG_3452"
+     ],
+     "view_scores": {
+      "IMG_3448": 0.0,
+      "IMG_3449": 0.0,
+      "IMG_3450": 0.0,
+      "IMG_3451": 0.0,
+      "IMG_3452": 0.0
+     }
+    }
+   },
+   "retune_on_this_data": {
+    "aggregation": "max",
+    "threshold": 0.375,
+    "balanced_accuracy": 0.75,
+    "correct": 17,
+    "n": 18
+   },
+   "doors": {
+    "door-13": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk tiles appear to run level to threshold in all three views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3329",
+      "IMG_3330",
+      "IMG_3331"
+     ],
+     "view_scores": {
+      "IMG_3329": 0.0,
+      "IMG_3330": 0.0,
+      "IMG_3331": 0.0
+     }
+    },
+    "door-17": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers meet threshold level in all views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3356",
+      "IMG_3357",
+      "IMG_3358",
+      "IMG_3359",
+      "IMG_3360"
+     ],
+     "view_scores": {
+      "IMG_3356": 0.0,
+      "IMG_3357": 0.0,
+      "IMG_3358": 0.0,
+      "IMG_3359": 0.0,
+      "IMG_3360": 0.0
+     }
+    },
+    "door-18": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "vlm_evidence": "raised stone platform with visible riser edge separating brick sidewalk from door threshold in oblique views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3361",
+      "IMG_3362",
+      "IMG_3363",
+      "IMG_3364",
+      "IMG_3365"
+     ],
+     "view_scores": {
+      "IMG_3361": 0.0,
+      "IMG_3362": 0.0,
+      "IMG_3363": 0.0,
+      "IMG_3364": 0.0,
+      "IMG_3365": 0.0
+     }
+    },
+    "door-19": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk and threshold appear level and continuous in head-on and oblique views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3366",
+      "IMG_3367",
+      "IMG_3368",
+      "IMG_3369"
+     ],
+     "view_scores": {
+      "IMG_3366": 0.0,
+      "IMG_3367": 0.0,
+      "IMG_3368": 0.0,
+      "IMG_3369": 0.0
+     }
+    },
+    "door-20": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 85,
+     "vlm_evidence": "raised threshold/curb visible at door base in near and oblique views, small step up from sidewalk",
+     "handrails_vlm": "not_visible",
+     "step_score": 0.883,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3370",
+      "IMG_3371",
+      "IMG_3372",
+      "IMG_3373",
+      "IMG_3374"
+     ],
+     "view_scores": {
+      "IMG_3370": 0.0,
+      "IMG_3371": 0.0,
+      "IMG_3372": 0.0,
+      "IMG_3373": 0.0,
+      "IMG_3374": 0.883
+     }
+    },
+    "door-22": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk tiles run level to threshold in oblique views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3379",
+      "IMG_3380",
+      "IMG_3381",
+      "IMG_3382",
+      "IMG_3383",
+      "IMG_3384"
+     ],
+     "view_scores": {
+      "IMG_3379": 0.0,
+      "IMG_3380": 0.0,
+      "IMG_3381": 0.0,
+      "IMG_3382": 0.0,
+      "IMG_3383": 0.0,
+      "IMG_3384": 0.0
+     }
+    },
+    "door-23": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "all views show flat tile floor flush with sidewalk into threshold, no riser visible",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3385",
+      "IMG_3386",
+      "IMG_3387"
+     ],
+     "view_scores": {
+      "IMG_3385": 0.0,
+      "IMG_3386": 0.0,
+      "IMG_3387": 0.0
+     }
+    },
+    "door-24": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "vlm_evidence": "ground-level floor tiles run flush to threshold in all views, no visible riser or step edge",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3388",
+      "IMG_3389",
+      "IMG_3390",
+      "IMG_3391",
+      "IMG_3392",
+      "IMG_3393"
+     ],
+     "view_scores": {
+      "IMG_3388": 0.0,
+      "IMG_3389": 0.0,
+      "IMG_3390": 0.0,
+      "IMG_3391": 0.0,
+      "IMG_3392": 0.0,
+      "IMG_3393": 0.0
+     }
+    },
+    "door-25": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "vlm_evidence": "sidewalk pavers run level to threshold with no visible riser edge in oblique/near views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3394",
+      "IMG_3395",
+      "IMG_3396",
+      "IMG_3397",
+      "IMG_3398"
+     ],
+     "view_scores": {
+      "IMG_3394": 0.0,
+      "IMG_3395": 0.0,
+      "IMG_3396": 0.0,
+      "IMG_3397": 0.0,
+      "IMG_3398": 0.0
+     }
+    },
+    "door-26": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 65,
+     "vlm_evidence": "tile floor appears continuous from sidewalk to threshold in near/far views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3399",
+      "IMG_3400",
+      "IMG_3401",
+      "IMG_3402",
+      "IMG_3403"
+     ],
+     "view_scores": {
+      "IMG_3399": 0.0,
+      "IMG_3400": 0.0,
+      "IMG_3401": 0.0,
+      "IMG_3402": 0.0,
+      "IMG_3403": 0.0
+     }
+    },
+    "door-27": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "vlm_evidence": "sidewalk pavers meet threshold level with no visible riser in head-on and oblique views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3404",
+      "IMG_3405",
+      "IMG_3406",
+      "IMG_3407",
+      "IMG_3408"
+     ],
+     "view_scores": {
+      "IMG_3404": 0.0,
+      "IMG_3405": 0.0,
+      "IMG_3406": 0.0,
+      "IMG_3407": 0.0,
+      "IMG_3408": 0.0
+     }
+    },
+    "door-30": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 80,
+     "vlm_evidence": "sidewalk pavers meet threshold flush with no visible riser in multiple oblique views",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3418",
+      "IMG_3419",
+      "IMG_3420",
+      "IMG_3421",
+      "IMG_3422",
+      "IMG_3423",
+      "IMG_3424"
+     ],
+     "view_scores": {
+      "IMG_3418": 0.0,
+      "IMG_3419": 0.0,
+      "IMG_3420": 0.0,
+      "IMG_3421": 0.0,
+      "IMG_3422": 0.0,
+      "IMG_3423": 0.0,
+      "IMG_3424": 0.0
+     }
+    },
+    "door-31": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk pavers run level into threshold in near/head-on views, no visible riser shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.372,
+     "depth_verdict": "absent",
+     "fusion_verdict": "absent",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3425",
+      "IMG_3426",
+      "IMG_3427",
+      "IMG_3428",
+      "IMG_3429"
+     ],
+     "view_scores": {
+      "IMG_3425": 0.0,
+      "IMG_3426": 0.372,
+      "IMG_3427": 0.0,
+      "IMG_3428": 0.0,
+      "IMG_3429": 0.0
+     }
+    },
+    "door-33": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 70,
+     "vlm_evidence": "sidewalk tile and threshold appear continuous/flush across all angled and head-on views, no shadow line indicating riser",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3436",
+      "IMG_3437",
+      "IMG_3438",
+      "IMG_3439",
+      "IMG_3440",
+      "IMG_3441"
+     ],
+     "view_scores": {
+      "IMG_3436": 0.0,
+      "IMG_3437": 0.0,
+      "IMG_3438": 0.0,
+      "IMG_3439": 0.0,
+      "IMG_3440": 0.0,
+      "IMG_3441": 0.0
+     }
+    },
+    "door-34": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 60,
+     "vlm_evidence": "tile floor appears continuous from sidewalk to threshold in oblique shots (views 2-5)",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3442",
+      "IMG_3443",
+      "IMG_3444",
+      "IMG_3445",
+      "IMG_3446",
+      "IMG_3447"
+     ],
+     "view_scores": {
+      "IMG_3442": 0.0,
+      "IMG_3443": 0.0,
+      "IMG_3444": 0.0,
+      "IMG_3445": 0.0,
+      "IMG_3446": 0.0,
+      "IMG_3447": 0.0
+     }
+    },
+    "door-35": {
+     "truth": "present",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 75,
+     "vlm_evidence": "oblique/near views show a raised black-edged threshold platform with a distinct riser edge above sidewalk level",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "override",
+     "views_used": [
+      "IMG_3448",
+      "IMG_3449",
+      "IMG_3450",
+      "IMG_3451",
+      "IMG_3452"
+     ],
+     "view_scores": {
+      "IMG_3448": 0.0,
+      "IMG_3449": 0.0,
+      "IMG_3450": 0.0,
+      "IMG_3451": 0.0,
+      "IMG_3452": 0.0
+     }
+    },
+    "door-37": {
+     "truth": "absent",
+     "vlm_verdict": "absent",
+     "vlm_confidence": 90,
+     "vlm_evidence": "oblique views show two step risers leading up from sidewalk to entrance platform",
+     "handrails_vlm": "present",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "absent",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3459",
+      "IMG_3460",
+      "IMG_3461",
+      "IMG_3462",
+      "IMG_3463"
+     ],
+     "view_scores": {
+      "IMG_3459": 0.0,
+      "IMG_3460": 0.0,
+      "IMG_3461": 0.0,
+      "IMG_3462": 0.0,
+      "IMG_3463": 0.0
+     }
+    },
+    "door-38": {
+     "truth": "present",
+     "vlm_verdict": "present",
+     "vlm_confidence": 75,
+     "vlm_evidence": "multiple views show flat continuous tile/granite plane from sidewalk to entrance doors with no visible riser or edge shadow",
+     "handrails_vlm": "absent",
+     "step_score": 0.0,
+     "depth_verdict": "present",
+     "fusion_verdict": "present",
+     "fusion_action": "no_override",
+     "views_used": [
+      "IMG_3464",
+      "IMG_3465",
+      "IMG_3466",
+      "IMG_3467",
+      "IMG_3468",
+      "IMG_3469"
+     ],
+     "view_scores": {
+      "IMG_3464": 0.0,
+      "IMG_3465": 0.0,
+      "IMG_3466": 0.0,
+      "IMG_3467": 0.0,
+      "IMG_3468": 0.0,
+      "IMG_3469": 0.0
+     }
+    }
+   }
   }
  }
 }
