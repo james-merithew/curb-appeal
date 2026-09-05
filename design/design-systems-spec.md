@@ -1273,3 +1273,40 @@ else here.
 
 *Written 2026-09-05 against `phone-app-prototype.html` at 4,695 lines, read while the accessibility
 round was mid-edit. Counts are exact as of that read. This document changes no file but itself.*
+
+---
+
+# Decisions on the open questions
+
+Settled so the implementation round is not blocked. Two were measured rather than reasoned.
+
+**1. Tabular figures: no work needed.** Measured in the browser with Nunito loaded from Google:
+ten `1`s and ten `8`s render at identical width with no `font-variant-numeric` applied
+(difference 0.00px at 40px/700). Nunito's default figures are already tabular, so the proposed
+`.tnum` class would be a no-op. **Drop all 27 sites.** Rubric line 1.5 is therefore already
+satisfied by the typeface and should be rescored to 4 with this measurement as its evidence,
+not implemented and then rescored.
+
+**2. Pin anchoring: fix it.** Pins are placed with `left`/`top` and no compensating transform,
+on a 36x44 viewBox whose tip is at the bottom centre. A pin that does not point at the thing it
+marks is a correctness defect on a map product, not a polish item: at phone scale the reported
+offset is roughly the width of a storefront, so the pin can sit over its neighbour. Anchor the
+tip: translate by -50% horizontally and -100% vertically, and update `revealSelected()` in the
+same change since it computes from the same box.
+
+**3. Card-position animation: defer to a later round.** Animating the three-position card sheet
+with a `0fr → 1fr` grid row keeps collapsed content in the accessibility tree, which directly
+contradicts the round now closing the screen-reader defects. Accessibility correctness wins.
+Revisit once the focus and announcement work has landed and can be re-tested against it, and
+until then let the card positions change without a height animation.
+
+**4. Ordering.** Elevation, then spacing, then type, then motion, as the spec proposes. Motion
+is the only one that depends on the accessibility round, and it is last.
+
+**5. Scope boundary with the accessibility round.** Focus rings, `aria-invalid`, inline error
+styling and form-control borders stay owned by that round and are not touched here, even where
+they carry a shadow or a border that would otherwise be unified.
+
+**6. Colour is untouched.** Where a shadow or border carries a hue, the hue is preserved
+verbatim and only the geometry is unified. The palette rules are settled and are not in scope
+for any round of this loop.
