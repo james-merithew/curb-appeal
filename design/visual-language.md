@@ -301,7 +301,7 @@ confirm yet", which is the honest state and not a failure.
 
 ---
 
-## 14. What the approved library specifies about pins, and what it does not
+## 14. What the approved library specified about pins (SUPERSEDED by section 15)
 
 Checked against the library rather than assumed, because the two things are easy to conflate.
 
@@ -332,3 +332,53 @@ instruction. The artwork, the colours, the glyphs and the halo line styles all c
 library unchanged; only the rendered size varies, and it varies on evidence strength, never on
 how good an entrance is. If that deviation is ever revisited, the thing to preserve is the
 reading order, not the specific sizes.
+
+
+---
+
+## 15. The approved pin hierarchy, and where our build conflicts with it
+
+The complete production package adds `tokens/pin-hierarchy.json`, which section 14 was written
+before. It supersedes that section, and it conflicts with what Rounds 2 and 3 built. The
+conflict is worth stating exactly rather than resolving quietly, because both sides have a
+real argument.
+
+**What the library specifies.**
+
+| Context | Estimated | Scanned | Owner |
+|---|---|---|---|
+| Overview | 32 | 36 | 40 |
+| Street | 40 | 44 | 48 |
+| Selected | 52 | 56 | 60 |
+| Receipt | 24 | 28 | 32 |
+
+Cluster 48, live scan drop 64. A full z-index order, from clusters at the bottom through the
+tiers to matched, selected and the live drop on top. Overlays are specified too: selected is a
+white keyline with an indigo outer line and a 12% lift that *preserves tier colour and icon*;
+match is solid, dashed or dotted; freshness is a small amber clock that **never recolours the
+pin**; the Texas record appears in the receipt and never on the pin face.
+
+**The principle it opens with is the crux:** *"Trust tier and contextual prominence are
+independent. Context may scale a pin but never changes its tier encoding."*
+
+**Where our build breaks it.** Round 2 demoted Estimated from a pin to a 14px dashed ring with
+no glyph. That is not a scale change, it is a change of tier encoding, which the library
+forbids. Our spread is roughly three to one; the library's is 1.25 to one.
+
+**But the library's spread alone does not solve the problem it was asked to solve.** Fifty-two
+estimated places in three blocks, drawn at 32px, is still fifty-two full pins. That is the
+screen that was called messy, and 32 against 40 will not separate it.
+
+**The reconciliation, and it is available inside the library's own vocabulary.** Put the density
+work where the library already puts it: clustering. The token set gives clusters a size and the
+lowest z-index, and the package ships a `mixed-cluster` asset, so a cluster holding several
+tiers is an anticipated state rather than an invention. Cluster aggressively at overview and the
+visible mark count falls without any tier being re-encoded.
+
+So: **adopt the library's sizes, z-index, overlap order and overlays exactly, restore Estimated
+to a real pin, and move the calm-down from shrinking a tier to clustering.** That keeps the
+approved encoding intact and still answers the original complaint, which shrinking never had to
+be the only way to answer.
+
+If clustering at overview does not calm the map enough on the real dataset, the honest next
+lever is the zoom-level scale the library already defines, not a further deviation from it.
