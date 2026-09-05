@@ -382,3 +382,47 @@ be the only way to answer.
 
 If clustering at overview does not calm the map enough on the real dataset, the honest next
 lever is the zoom-level scale the library already defines, not a further deviation from it.
+
+---
+
+## 16. The updated boards change the app's chrome, and our build has it wrong
+
+The boards in the final package are not the ones earlier sections were written against. They
+show a structurally different app, and the difference is exactly what "use more of the icon
+colours" was asking for. This section is the target; where it disagrees with sections 1 to 9,
+this wins.
+
+**The chrome is dark indigo, top and bottom.**
+
+| | Board | Our build |
+|---|---|---|
+| Header | A solid deep-indigo bar across the top, carrying the two-tone wordmark at the left, the location pill, and a menu button | A floating white pill over the map |
+| Bottom navigation | A solid deep-indigo bar, labels in white, the scan control a marigold ring | White, with coloured labels |
+| Screen titles | Centred in the dark header with a back chevron beside them | Various |
+
+That single change is most of the brand presence the build is missing. A white floating pill on
+a pale map is the design of an app that is trying not to be noticed; the indigo bar is the
+product asserting itself, and it is what makes the sky blue in the wordmark legible, which was
+the specific complaint that could not be answered on white.
+
+**Pins on the board.** Estimated is a white-filled teardrop with a dashed outline and an
+italic information mark. Scanned on-site is marigold with a dark person glyph, sitting on a soft
+lavender halo disc. Owner-confirmed is violet with a white storefront glyph and a **separate
+outlined tick badge floating clear at the upper right**, not merged into the pin. The halo is a
+soft filled disc behind the pin, not a ring drawn around it.
+
+**The card.** Freshness and Confidence sit side by side as two tiles, each with a leading icon,
+above a list of feature rows with chevrons. The evidence receipt is its own card, opened from a
+full-width outlined button, and it lists photographed date, neighbour count, owner count and the
+state record as icon rows.
+
+**One conflict to settle rather than absorb.** The boards draw the Texas flag on the map, beside
+the scanned pin, on three of four panels, while `tokens/pin-hierarchy.json` says the state
+record is "receipt provenance only; never placed on the pin face", and our own canon withdrew
+the pin accessory deliberately because icon soup around pins was the original complaint. The
+board's own caption says "Texas flag = provenance only", so the board is arguably illustrating
+provenance rather than sanctioning a map accessory.
+
+**Default to the token spec: no flag on the map.** It is the machine-readable rule, it agrees
+with our canon, and the pin accessory is the thing that was already rejected once. Worth putting
+to the product owner rather than deciding silently, because the boards are what he approved.
