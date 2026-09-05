@@ -1,0 +1,1956 @@
+{
+ "summary": {
+  "detector": "google/owlvit-base-patch32",
+  "queries": [
+   "door handle",
+   "door",
+   "step",
+   "ramp",
+   "handrail",
+   "wheelchair symbol sign"
+  ],
+  "min_score": {
+   "door handle": 0.08,
+   "door": 0.08,
+   "step": 0.08,
+   "ramp": 0.08,
+   "handrail": 0.08,
+   "wheelchair symbol sign": 0.08
+  },
+  "topk_per_query": 3,
+  "vlm_model": "claude-sonnet-5",
+  "price_per_mtok": {
+   "input": 2.0,
+   "output": 10.0
+  },
+  "doors": 52,
+  "detection": {
+   "doors": 52,
+   "doors_with_handle_box": 39,
+   "doors_with_door_box": 51,
+   "doors_with_no_crops": 1,
+   "views_total": 203,
+   "views_with_handle_box": 122,
+   "views_with_door_box": 184,
+   "label_box_counts": {
+    "door handle": 228,
+    "door": 408,
+    "step": 25,
+    "ramp": 3,
+    "handrail": 48,
+    "wheelchair symbol sign": 7
+   }
+  },
+  "runtime": {
+   "doors": 52,
+   "detect_s_mean": 58.8,
+   "detect_s_max": 110.3,
+   "vlm_s_mean": 2.7,
+   "vlm_s_max": 6.63,
+   "per_door_total_s_mean": 61.5,
+   "tokens": {
+    "input": 156173,
+    "output": 7359
+   },
+   "usd_total": 0.3859,
+   "usd_per_door": 0.00742
+  },
+  "tokens": {
+   "input": 156173,
+   "output": 7359
+  },
+  "tables": {
+   "all_52": {
+    "baseline_target": {
+     "lever_or_pull_hardware": {
+      "correct": 47,
+      "wrong": 4,
+      "abstain": 1,
+      "n": 52,
+      "acc_of_committed": 92.2,
+      "acc_of_all": 90.4,
+      "misses": [
+       "door-20: said absent, truth present",
+       "door-21: said absent, truth present",
+       "door-22: said absent, truth present",
+       "door-35: said absent, truth present"
+      ]
+     },
+     "step_free_entry": {
+      "correct": 45,
+      "wrong": 7,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 86.5,
+      "acc_of_all": 86.5,
+      "misses": [
+       "door-18: said absent, truth present",
+       "door-21: said present, truth absent",
+       "door-29: said present, truth absent",
+       "door-35: said absent, truth present",
+       "door-41: said present, truth absent",
+       "door-44: said present, truth absent",
+       "door-47: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 92,
+      "wrong": 11,
+      "abstain": 1,
+      "n": 104,
+      "acc_of_committed": 89.3,
+      "acc_of_all": 88.5
+     }
+    },
+    "grounded_target": {
+     "lever_or_pull_hardware": {
+      "correct": 47,
+      "wrong": 5,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 90.4,
+      "acc_of_all": 90.4,
+      "misses": [
+       "door-21: said absent, truth present",
+       "door-46: said absent, truth present",
+       "door-49: said absent, truth present",
+       "door-56: said absent, truth present",
+       "door-59: said absent, truth present"
+      ]
+     },
+     "step_free_entry": {
+      "correct": 46,
+      "wrong": 6,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 88.5,
+      "acc_of_all": 88.5,
+      "misses": [
+       "door-18: said absent, truth present",
+       "door-29: said present, truth absent",
+       "door-35: said absent, truth present",
+       "door-41: said present, truth absent",
+       "door-44: said present, truth absent",
+       "door-47: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 93,
+      "wrong": 11,
+      "abstain": 0,
+      "n": 104,
+      "acc_of_committed": 89.4,
+      "acc_of_all": 89.4
+     }
+    },
+    "baseline_all7": {
+     "correct": 311,
+     "wrong": 11,
+     "abstain": 36,
+     "n": 358,
+     "acc_of_committed": 96.6,
+     "acc_of_all": 86.9
+    },
+    "grounded_all7": {
+     "correct": 312,
+     "wrong": 11,
+     "abstain": 35,
+     "n": 358,
+     "acc_of_committed": 96.6,
+     "acc_of_all": 87.2
+    }
+   },
+   "half_A_13_38": {
+    "baseline_target": {
+     "lever_or_pull_hardware": {
+      "correct": 21,
+      "wrong": 4,
+      "abstain": 1,
+      "n": 26,
+      "acc_of_committed": 84.0,
+      "acc_of_all": 80.8,
+      "misses": [
+       "door-20: said absent, truth present",
+       "door-21: said absent, truth present",
+       "door-22: said absent, truth present",
+       "door-35: said absent, truth present"
+      ]
+     },
+     "step_free_entry": {
+      "correct": 22,
+      "wrong": 4,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 84.6,
+      "acc_of_all": 84.6,
+      "misses": [
+       "door-18: said absent, truth present",
+       "door-21: said present, truth absent",
+       "door-29: said present, truth absent",
+       "door-35: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 43,
+      "wrong": 8,
+      "abstain": 1,
+      "n": 52,
+      "acc_of_committed": 84.3,
+      "acc_of_all": 82.7
+     }
+    },
+    "grounded_target": {
+     "lever_or_pull_hardware": {
+      "correct": 25,
+      "wrong": 1,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 96.2,
+      "acc_of_all": 96.2,
+      "misses": [
+       "door-21: said absent, truth present"
+      ]
+     },
+     "step_free_entry": {
+      "correct": 23,
+      "wrong": 3,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 88.5,
+      "acc_of_all": 88.5,
+      "misses": [
+       "door-18: said absent, truth present",
+       "door-29: said present, truth absent",
+       "door-35: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 48,
+      "wrong": 4,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 92.3,
+      "acc_of_all": 92.3
+     }
+    },
+    "baseline_all7": {
+     "correct": 148,
+     "wrong": 8,
+     "abstain": 22,
+     "n": 178,
+     "acc_of_committed": 94.9,
+     "acc_of_all": 83.1
+    },
+    "grounded_all7": {
+     "correct": 153,
+     "wrong": 4,
+     "abstain": 21,
+     "n": 178,
+     "acc_of_committed": 97.5,
+     "acc_of_all": 86.0
+    }
+   },
+   "half_B_39_64": {
+    "baseline_target": {
+     "lever_or_pull_hardware": {
+      "correct": 26,
+      "wrong": 0,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 100.0,
+      "acc_of_all": 100.0,
+      "misses": []
+     },
+     "step_free_entry": {
+      "correct": 23,
+      "wrong": 3,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 88.5,
+      "acc_of_all": 88.5,
+      "misses": [
+       "door-41: said present, truth absent",
+       "door-44: said present, truth absent",
+       "door-47: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 49,
+      "wrong": 3,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 94.2,
+      "acc_of_all": 94.2
+     }
+    },
+    "grounded_target": {
+     "lever_or_pull_hardware": {
+      "correct": 22,
+      "wrong": 4,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 84.6,
+      "acc_of_all": 84.6,
+      "misses": [
+       "door-46: said absent, truth present",
+       "door-49: said absent, truth present",
+       "door-56: said absent, truth present",
+       "door-59: said absent, truth present"
+      ]
+     },
+     "step_free_entry": {
+      "correct": 23,
+      "wrong": 3,
+      "abstain": 0,
+      "n": 26,
+      "acc_of_committed": 88.5,
+      "acc_of_all": 88.5,
+      "misses": [
+       "door-41: said present, truth absent",
+       "door-44: said present, truth absent",
+       "door-47: said absent, truth present"
+      ]
+     },
+     "_total": {
+      "correct": 45,
+      "wrong": 7,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 86.5,
+      "acc_of_all": 86.5
+     }
+    },
+    "baseline_all7": {
+     "correct": 163,
+     "wrong": 3,
+     "abstain": 14,
+     "n": 180,
+     "acc_of_committed": 98.2,
+     "acc_of_all": 90.6
+    },
+    "grounded_all7": {
+     "correct": 159,
+     "wrong": 7,
+     "abstain": 14,
+     "n": 180,
+     "acc_of_committed": 95.8,
+     "acc_of_all": 88.3
+    }
+   }
+  },
+  "per_half": {
+   "all_52": {
+    "detection": {
+     "doors": 52,
+     "doors_with_handle_box": 39,
+     "doors_with_door_box": 51,
+     "doors_with_no_crops": 1,
+     "views_total": 203,
+     "views_with_handle_box": 122,
+     "views_with_door_box": 184,
+     "label_box_counts": {
+      "door handle": 228,
+      "door": 408,
+      "step": 25,
+      "ramp": 3,
+      "handrail": 48,
+      "wheelchair symbol sign": 7
+     }
+    },
+    "cost_runtime": {
+     "doors": 52,
+     "detect_s_mean": 58.8,
+     "detect_s_max": 110.3,
+     "vlm_s_mean": 2.7,
+     "vlm_s_max": 6.63,
+     "per_door_total_s_mean": 61.5,
+     "tokens": {
+      "input": 156173,
+      "output": 7359
+     },
+     "usd_total": 0.3859,
+     "usd_per_door": 0.00742
+    },
+    "fixed": [
+     "door-17/lever_or_pull_hardware",
+     "door-20/lever_or_pull_hardware",
+     "door-21/step_free_entry",
+     "door-22/lever_or_pull_hardware",
+     "door-35/lever_or_pull_hardware"
+    ],
+    "new_errors": [
+     "door-46/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-49/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-56/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-59/lever_or_pull_hardware: baseline present -> grounded absent (truth present)"
+    ],
+    "still_missed": [
+     "door-18/step_free_entry: baseline absent, grounded absent (truth present)",
+     "door-21/lever_or_pull_hardware: baseline absent, grounded absent (truth present)",
+     "door-29/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-35/step_free_entry: baseline absent, grounded absent (truth present)",
+     "door-41/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-44/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-47/step_free_entry: baseline absent, grounded absent (truth present)"
+    ],
+    "counts": {
+     "fixed": 5,
+     "new_errors": 4,
+     "still_missed": 7
+    },
+    "gated": {
+     "rule": "override lever_or_pull_hardware only when a handle box scores >= 0.01",
+     "target": {
+      "correct": 96,
+      "wrong": 8,
+      "abstain": 0,
+      "n": 104,
+      "acc_of_committed": 92.3,
+      "acc_of_all": 92.3
+     },
+     "counts": {
+      "fixed": 5,
+      "new_errors": 1,
+      "still_missed": 7
+     },
+     "new_errors": [
+      "door-49/lever_or_pull_hardware: baseline present -> grounded absent (truth present)"
+     ]
+    }
+   },
+   "half_A_13_38": {
+    "detection": {
+     "doors": 26,
+     "doors_with_handle_box": 20,
+     "doors_with_door_box": 26,
+     "doors_with_no_crops": 0,
+     "views_total": 99,
+     "views_with_handle_box": 61,
+     "views_with_door_box": 89,
+     "label_box_counts": {
+      "door handle": 109,
+      "door": 196,
+      "step": 16,
+      "ramp": 1,
+      "handrail": 20,
+      "wheelchair symbol sign": 2
+     }
+    },
+    "cost_runtime": {
+     "doors": 26,
+     "detect_s_mean": 61.5,
+     "detect_s_max": 110.3,
+     "vlm_s_mean": 2.7,
+     "vlm_s_max": 6.63,
+     "per_door_total_s_mean": 64.2,
+     "tokens": {
+      "input": 76845,
+      "output": 3698
+     },
+     "usd_total": 0.1907,
+     "usd_per_door": 0.00733
+    },
+    "fixed": [
+     "door-17/lever_or_pull_hardware",
+     "door-20/lever_or_pull_hardware",
+     "door-21/step_free_entry",
+     "door-22/lever_or_pull_hardware",
+     "door-35/lever_or_pull_hardware"
+    ],
+    "new_errors": [],
+    "still_missed": [
+     "door-18/step_free_entry: baseline absent, grounded absent (truth present)",
+     "door-21/lever_or_pull_hardware: baseline absent, grounded absent (truth present)",
+     "door-29/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-35/step_free_entry: baseline absent, grounded absent (truth present)"
+    ],
+    "counts": {
+     "fixed": 5,
+     "new_errors": 0,
+     "still_missed": 4
+    },
+    "gated": {
+     "rule": "override lever_or_pull_hardware only when a handle box scores >= 0.01",
+     "target": {
+      "correct": 48,
+      "wrong": 4,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 92.3,
+      "acc_of_all": 92.3
+     },
+     "counts": {
+      "fixed": 5,
+      "new_errors": 0,
+      "still_missed": 4
+     },
+     "new_errors": []
+    }
+   },
+   "half_B_39_64": {
+    "detection": {
+     "doors": 26,
+     "doors_with_handle_box": 19,
+     "doors_with_door_box": 25,
+     "doors_with_no_crops": 1,
+     "views_total": 104,
+     "views_with_handle_box": 61,
+     "views_with_door_box": 95,
+     "label_box_counts": {
+      "door handle": 119,
+      "door": 212,
+      "step": 9,
+      "ramp": 2,
+      "handrail": 28,
+      "wheelchair symbol sign": 5
+     }
+    },
+    "cost_runtime": {
+     "doors": 26,
+     "detect_s_mean": 56.1,
+     "detect_s_max": 85.2,
+     "vlm_s_mean": 2.6,
+     "vlm_s_max": 3.82,
+     "per_door_total_s_mean": 58.7,
+     "tokens": {
+      "input": 79328,
+      "output": 3661
+     },
+     "usd_total": 0.1953,
+     "usd_per_door": 0.00751
+    },
+    "fixed": [],
+    "new_errors": [
+     "door-46/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-49/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-56/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+     "door-59/lever_or_pull_hardware: baseline present -> grounded absent (truth present)"
+    ],
+    "still_missed": [
+     "door-41/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-44/step_free_entry: baseline present, grounded present (truth absent)",
+     "door-47/step_free_entry: baseline absent, grounded absent (truth present)"
+    ],
+    "counts": {
+     "fixed": 0,
+     "new_errors": 4,
+     "still_missed": 3
+    },
+    "gated": {
+     "rule": "override lever_or_pull_hardware only when a handle box scores >= 0.01",
+     "target": {
+      "correct": 48,
+      "wrong": 4,
+      "abstain": 0,
+      "n": 52,
+      "acc_of_committed": 92.3,
+      "acc_of_all": 92.3
+     },
+     "counts": {
+      "fixed": 0,
+      "new_errors": 1,
+      "still_missed": 3
+     },
+     "new_errors": [
+      "door-49/lever_or_pull_hardware: baseline present -> grounded absent (truth present)"
+     ]
+    }
+   }
+  },
+  "fixed": [
+   "door-17/lever_or_pull_hardware",
+   "door-20/lever_or_pull_hardware",
+   "door-21/step_free_entry",
+   "door-22/lever_or_pull_hardware",
+   "door-35/lever_or_pull_hardware"
+  ],
+  "known_misses_fixed": [
+   "door-20/lever_or_pull_hardware",
+   "door-21/step_free_entry",
+   "door-22/lever_or_pull_hardware",
+   "door-35/lever_or_pull_hardware"
+  ],
+  "known_misses_not_fixed": [
+   "door-18/step_free_entry",
+   "door-21/lever_or_pull_hardware",
+   "door-29/step_free_entry",
+   "door-35/step_free_entry",
+   "door-41/step_free_entry",
+   "door-44/step_free_entry",
+   "door-47/step_free_entry"
+  ],
+  "new_errors": [
+   "door-46/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+   "door-49/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+   "door-56/lever_or_pull_hardware: baseline present -> grounded absent (truth present)",
+   "door-59/lever_or_pull_hardware: baseline present -> grounded absent (truth present)"
+  ],
+  "still_missed": [
+   "door-18/step_free_entry: baseline absent, grounded absent (truth present)",
+   "door-21/lever_or_pull_hardware: baseline absent, grounded absent (truth present)",
+   "door-29/step_free_entry: baseline present, grounded present (truth absent)",
+   "door-35/step_free_entry: baseline absent, grounded absent (truth present)",
+   "door-41/step_free_entry: baseline present, grounded present (truth absent)",
+   "door-44/step_free_entry: baseline present, grounded present (truth absent)",
+   "door-47/step_free_entry: baseline absent, grounded absent (truth present)"
+  ]
+ },
+ "per_door": {
+  "door-13": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 41.4,
+   "vlm_s": 2.76,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "crop 1 and crop 2 show a lever handle standing off the door below the deadbolt"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 4 shows flat tile up to threshold but no oblique angle confirms no riser"
+    }
+   },
+   "usage": {
+    "input_tokens": 3257,
+    "output_tokens": 144
+   }
+  },
+  "door-14": {
+   "crops": 1,
+   "crop_kinds": [
+    "door"
+   ],
+   "detect_s": 16.2,
+   "vlm_s": 2.17,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical bar pull handle visible on door in crop 1"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "threshold strip visible but ground plane transition to sidewalk not clearly shown"
+    }
+   },
+   "usage": {
+    "input_tokens": 1676,
+    "output_tokens": 130
+   }
+  },
+  "door-15": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 54.9,
+   "vlm_s": 2.19,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical wooden bar handles on both doors, crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "mat covers threshold area in both crops, ground plane not visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 1846,
+    "output_tokens": 131
+   }
+  },
+  "door-16": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 60.1,
+   "vlm_s": 2.29,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "horizontal push-bar and loop pull visible on door in crop 3 and crop 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 shows tile threshold but ground plane transition to outer sidewalk not clearly continuous"
+    }
+   },
+   "usage": {
+    "input_tokens": 2865,
+    "output_tokens": 148
+   }
+  },
+  "door-17": {
+   "crops": 3,
+   "crop_kinds": [
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 59.3,
+   "vlm_s": 2.53,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "This is a revolving door; crop 1 shows a round disk/knob-like object, not a lever or pull"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "Crops 2 and 3 show a raised wood threshold at the revolving door base but no clear continuous ground plane from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 2091,
+    "output_tokens": 167
+   }
+  },
+  "door-18": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 56.7,
+   "vlm_s": 2.51,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 70,
+     "evidence": "vertical bar handles visible on both doors in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "threshold sill visible but no clear view of ground plane transition from sidewalk to door"
+    }
+   },
+   "usage": {
+    "input_tokens": 2758,
+    "output_tokens": 137
+   }
+  },
+  "door-19": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 55.1,
+   "vlm_s": 2.84,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "horizontal push-bar visible across both doors in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "ground shown at threshold but no clear continuous sidewalk-to-door plane visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 2930,
+    "output_tokens": 139
+   }
+  },
+  "door-20": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 54.4,
+   "vlm_s": 3.16,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "brass D-shaped pull handles visible on doors in crops 3 and 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "raised threshold sill visible but ground plane from sidewalk to door not clearly shown in any crop"
+    }
+   },
+   "usage": {
+    "input_tokens": 4678,
+    "output_tokens": 143
+   }
+  },
+  "door-21": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 90.7,
+   "vlm_s": 3.97,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 65,
+     "evidence": "crops 3/4 show a flat brass pull plate and round knob/deadbolt, no lever or standoff pull visible"
+    },
+    "step_free_entry": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "crops 1/2/3/4 show a raised stone threshold/step below the door distinct from sidewalk level"
+    }
+   },
+   "usage": {
+    "input_tokens": 4740,
+    "output_tokens": 159
+   }
+  },
+  "door-22": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 109.2,
+   "vlm_s": 2.69,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "brass vertical pull handles standing off door surface in crops 1-4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 shows tile ground but no clear continuous plane from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 3901,
+    "output_tokens": 138
+   }
+  },
+  "door-23": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 83.1,
+   "vlm_s": 2.32,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical loop pull handles visible on both doors in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 and crop 4 show tiled threshold but no clear view of sidewalk-to-door ground plane transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3665,
+    "output_tokens": 151
+   }
+  },
+  "door-24": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 110.3,
+   "vlm_s": 2.81,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "Crop 2 shows large D-shaped pull handles standing off door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "Crop 3 shows tiled ground near threshold but no clear continuous plane from sidewalk to door confirming absence of riser"
+    }
+   },
+   "usage": {
+    "input_tokens": 3473,
+    "output_tokens": 152
+   }
+  },
+  "door-25": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 88.2,
+   "vlm_s": 6.63,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 95,
+     "evidence": "D-shaped pull handle standing off door surface in crops 1 and 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crops 3 and 4 show threshold and pavers but no clear continuous ground plane view to confirm level transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3928,
+    "output_tokens": 146
+   }
+  },
+  "door-26": {
+   "crops": 3,
+   "crop_kinds": [
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 36.9,
+   "vlm_s": 2.66,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "twisted loop-style pull handles visible on both door leaves in crops 2 and 3"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "tile floor visible at threshold in crops 2 and 3 but no clear view of sidewalk-to-threshold transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3701,
+    "output_tokens": 153
+   }
+  },
+  "door-27": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 34.4,
+   "vlm_s": 2.4,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 95,
+     "evidence": "D-shaped pull handles visible on both doors in crop 1"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "door crops show threshold but no clear sidewalk-to-door ground plane transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3846,
+    "output_tokens": 132
+   }
+  },
+  "door-28": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 23.7,
+   "vlm_s": 2.11,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "curved horizontal pull handle visible on door in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "ground strip shown but no clear sidewalk-to-threshold plane visible in either crop"
+    }
+   },
+   "usage": {
+    "input_tokens": 1575,
+    "output_tokens": 140
+   }
+  },
+  "door-29": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 38.9,
+   "vlm_s": 2.48,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 95,
+     "evidence": "D-shaped pull handles visible on doors in crops 1 and 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crop 3 shows threshold and sidewalk tile but no clear riser edge visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 3464,
+    "output_tokens": 137
+   }
+  },
+  "door-30": {
+   "crops": 3,
+   "crop_kinds": [
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 94.7,
+   "vlm_s": 2.55,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 55,
+     "evidence": "crop 1 shows a knob-like standoff handle on door frame"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 0,
+     "evidence": "no crop shows ground plane from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 1717,
+    "output_tokens": 126
+   }
+  },
+  "door-31": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 106.8,
+   "vlm_s": 2.76,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "brass loop pull handles visible on doors in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 shows threshold flush with pavers but no oblique angle confirming no riser"
+    }
+   },
+   "usage": {
+    "input_tokens": 3348,
+    "output_tokens": 139
+   }
+  },
+  "door-32": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 54.4,
+   "vlm_s": 2.51,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "ornate vertical pull handle standing off door in crops 1, 2, 3, 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "red mat covers threshold-to-sidewalk transition in crop 3, no clear ground plane view"
+    }
+   },
+   "usage": {
+    "input_tokens": 3275,
+    "output_tokens": 146
+   }
+  },
+  "door-33": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 23.6,
+   "vlm_s": 2.33,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "Crop 1 shows brass D-shaped pull handles standing off door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "Crop 4 shows threshold area but ground plane continuity to sidewalk unclear"
+    }
+   },
+   "usage": {
+    "input_tokens": 2199,
+    "output_tokens": 140
+   }
+  },
+  "door-34": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 26.1,
+   "vlm_s": 2.63,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "crop 1 & 2 show a D-shaped pull handle standing off the door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "crop 3 shows tiled ground at threshold but no clear sidewalk-to-door level view"
+    }
+   },
+   "usage": {
+    "input_tokens": 3809,
+    "output_tokens": 144
+   }
+  },
+  "door-35": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 59.1,
+   "vlm_s": 2.39,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "brass loop-style pull handles standing off door surface in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 shows floor mat at threshold but no clear view of sidewalk-to-threshold transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 2937,
+    "output_tokens": 147
+   }
+  },
+  "door-36": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 57.3,
+   "vlm_s": 2.61,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "vertical bar-style pull handle visible on doors in crop 1 and crop 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "ground shown in crop 2 and crop 4 but no clear sidewalk-to-threshold plane or riser edge visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 2039,
+    "output_tokens": 153
+   }
+  },
+  "door-37": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 57.2,
+   "vlm_s": 2.38,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "vertical bar handle on door in crop 2 and crop 3"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "no crop shows ground plane from sidewalk to threshold clearly"
+    }
+   },
+   "usage": {
+    "input_tokens": 1928,
+    "output_tokens": 128
+   }
+  },
+  "door-38": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 106.5,
+   "vlm_s": 2.3,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "door hardware area obscured by reflections in both crops"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "no clear view of ground plane from sidewalk to threshold in either crop"
+    }
+   },
+   "usage": {
+    "input_tokens": 1199,
+    "output_tokens": 128
+   }
+  },
+  "door-39": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 57.3,
+   "vlm_s": 2.93,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 75,
+     "evidence": "crops show round deadbolt knob plus flat surface-mounted plates, no lever or pull visible"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 and crop 4 show a raised concrete platform/sill at threshold but no clear ground-level view from sidewalk to door"
+    }
+   },
+   "usage": {
+    "input_tokens": 4636,
+    "output_tokens": 163
+   }
+  },
+  "door-40": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 61.5,
+   "vlm_s": 2.88,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical wood-toned door pulls standing off door surface in both crops"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "ground shown only close to threshold, no clear sidewalk-to-door plane visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 2632,
+    "output_tokens": 135
+   }
+  },
+  "door-41": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 61.3,
+   "vlm_s": 2.39,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "vertical wooden bar handles standing off door surface in crop 1 and crop 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "both crops show only tile threshold at base, no clear sidewalk-to-door ground plane"
+    }
+   },
+   "usage": {
+    "input_tokens": 3161,
+    "output_tokens": 142
+   }
+  },
+  "door-42": {
+   "crops": 3,
+   "crop_kinds": [
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 55.4,
+   "vlm_s": 2.48,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "wooden vertical pull handles visible on both doors in crops 1, 2, and 3"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "ground shown at threshold in crops 2 and 3 appears level but no clear view from sidewalk edge to threshold confirming no riser"
+    }
+   },
+   "usage": {
+    "input_tokens": 3071,
+    "output_tokens": 158
+   }
+  },
+  "door-43": {
+   "crops": 3,
+   "crop_kinds": [
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 58.9,
+   "vlm_s": 2.39,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "wooden vertical pull bars standing off door surface in crops 1-3"
+    },
+    "step_free_entry": {
+     "verdict": "absent",
+     "confidence": 80,
+     "evidence": "raised platform with visible riser/step edge below threshold in all door crops"
+    }
+   },
+   "usage": {
+    "input_tokens": 2867,
+    "output_tokens": 129
+   }
+  },
+  "door-44": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 53.2,
+   "vlm_s": 2.44,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "wooden vertical bar handles standing off door surface in crops 1-4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "door crops show step/platform edge at threshold but no clear level run from sidewalk"
+    }
+   },
+   "usage": {
+    "input_tokens": 7338,
+    "output_tokens": 135
+   }
+  },
+  "door-45": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 53.4,
+   "vlm_s": 2.39,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "crop 1 and 2 show a lever handle standing off the door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crop 3 and 4 show floor tile at threshold but no clear ground-to-sidewalk transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 2858,
+    "output_tokens": 142
+   }
+  },
+  "door-46": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 60.4,
+   "vlm_s": 2.52,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 65,
+     "evidence": "both crops show a small dark knob/latch bracket near mid-door, not a lever or pull bar"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "brick paver ground visible below door in both crops but threshold/sill transition not clearly shown"
+    }
+   },
+   "usage": {
+    "input_tokens": 2407,
+    "output_tokens": 147
+   }
+  },
+  "door-47": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 60.5,
+   "vlm_s": 3.05,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "long vertical bar pull standing off door surface in crops 3 and 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "ground shown but no clear view of sidewalk-to-threshold transition; only floor tile directly at door base in crops 3 and 4"
+    }
+   },
+   "usage": {
+    "input_tokens": 3244,
+    "output_tokens": 152
+   }
+  },
+  "door-48": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 60.1,
+   "vlm_s": 2.8,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "Crop 1 shows a horizontal D-pull handle standing off the glass door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "Crop 3 and 4 show floor/threshold but no clear oblique view of sidewalk-to-threshold transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3533,
+    "output_tokens": 153
+   }
+  },
+  "door-49": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 60.1,
+   "vlm_s": 2.92,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "Crop 4 shows surface-mounted latch brackets/deadbolt hardware and a flat mail slot/push plate, no lever or pull visible"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "Crop 3 shows revolving door base and floor but no clear sidewalk-to-threshold transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3472,
+    "output_tokens": 169
+   }
+  },
+  "door-50": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 38.3,
+   "vlm_s": 2.76,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 75,
+     "evidence": "crop 2 shows vertical bar/pull handles standing off door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crop 3 and 4 show threshold but ground plane transition to sidewalk not clearly visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 3448,
+    "output_tokens": 141
+   }
+  },
+  "door-51": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 25.4,
+   "vlm_s": 2.25,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "vertical pull handle standing off door surface in crops 1 and 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "no crop shows ground plane running from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 3382,
+    "output_tokens": 128
+   }
+  },
+  "door-52": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 25.3,
+   "vlm_s": 2.59,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 65,
+     "evidence": "crop 2 shows a horizontal bar/pull handle mounted on door"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "floor tile visible at base but no clear sidewalk-to-threshold plane shown"
+    }
+   },
+   "usage": {
+    "input_tokens": 1366,
+    "output_tokens": 137
+   }
+  },
+  "door-53": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 33.9,
+   "vlm_s": 2.47,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "crop 2 shows a D-shaped pull handle standing off the door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 55,
+     "evidence": "crop 3/4 show tile floor at threshold but no clear view of sidewalk-to-threshold transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 3568,
+    "output_tokens": 145
+   }
+  },
+  "door-54": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 58.2,
+   "vlm_s": 2.64,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "D-shaped loop pull handles visible on door in crops 1, 2, 3, 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 and 4 show threshold and tile floor but no clear continuous ground plane from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 3985,
+    "output_tokens": 154
+   }
+  },
+  "door-55": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 85.2,
+   "vlm_s": 2.78,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "curved D-shaped pull handles visible on both doors in crops 1, 2, 3, 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crops 3 and 4 show threshold and pavement but no clear level ground plane transition, possible slight raised sill"
+    }
+   },
+   "usage": {
+    "input_tokens": 4805,
+    "output_tokens": 154
+   }
+  },
+  "door-56": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 61.2,
+   "vlm_s": 2.27,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 60,
+     "evidence": "crop 1 shows metal bracket/pull latch, not a lever; crop 2 shows similar flat hardware"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "neither crop shows ground plane from sidewalk to threshold clearly"
+    }
+   },
+   "usage": {
+    "input_tokens": 1253,
+    "output_tokens": 147
+   }
+  },
+  "door-57": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 58.9,
+   "vlm_s": 3.82,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "D-shaped pull handle visible on door in crops 1 and 2, standing off door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crop 3 shows sidewalk and threshold but no clear unobstructed view of ground plane transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 4137,
+    "output_tokens": 148
+   }
+  },
+  "door-58": {
+   "crops": 0,
+   "crop_kinds": [],
+   "detect_s": 61.4,
+   "vlm_s": null,
+   "grounded": null,
+   "usage": null,
+   "error": "no detections -> no crops -> no re-ask"
+  },
+  "door-59": {
+   "crops": 2,
+   "crop_kinds": [
+    "door",
+    "door"
+   ],
+   "detect_s": 76.0,
+   "vlm_s": 2.55,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 55,
+     "evidence": "revolving door in crop 2 shows only metal frame/mullions, no lever or pull hardware visible"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 40,
+     "evidence": "crop 1 shows floor mat and dark flooring at threshold but no clear ground plane connecting to sidewalk level"
+    }
+   },
+   "usage": {
+    "input_tokens": 1819,
+    "output_tokens": 159
+   }
+  },
+  "door-60": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 62.0,
+   "vlm_s": 2.34,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "crop 1 and crop 2 show a horizontal bar-style pull handle standing off the door surface"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "crop 3 shows a mat at threshold obscuring ground plane transition from sidewalk"
+    }
+   },
+   "usage": {
+    "input_tokens": 2211,
+    "output_tokens": 148
+   }
+  },
+  "door-61": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 63.8,
+   "vlm_s": 2.83,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "absent",
+     "confidence": 70,
+     "evidence": "crops 1,2,4 show round knob with flat mail slot/plate, no lever or pull"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "crop 3 shows brick floor at threshold but no clear sidewalk-to-door ground plane transition"
+    }
+   },
+   "usage": {
+    "input_tokens": 2145,
+    "output_tokens": 151
+   }
+  },
+  "door-62": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 63.4,
+   "vlm_s": 2.14,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "crop 1 & 3 show horizontal push-bar hardware mounted on door"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "no crop clearly shows ground plane from sidewalk to threshold"
+    }
+   },
+   "usage": {
+    "input_tokens": 2364,
+    "output_tokens": 134
+   }
+  },
+  "door-63": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 49.9,
+   "vlm_s": 2.66,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 90,
+     "evidence": "lever handle visible below deadbolt in crops 1 and 2"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 60,
+     "evidence": "door crops 3 and 4 show only tile threshold, no clear sidewalk-to-door ground plane"
+    }
+   },
+   "usage": {
+    "input_tokens": 3298,
+    "output_tokens": 141
+   }
+  },
+  "door-64": {
+   "crops": 4,
+   "crop_kinds": [
+    "handle",
+    "handle",
+    "door",
+    "door"
+   ],
+   "detect_s": 54.7,
+   "vlm_s": 2.79,
+   "grounded": {
+    "lever_or_pull_hardware": {
+     "verdict": "present",
+     "confidence": 85,
+     "evidence": "black lever handle visible on doors in crops 1, 2, 3, and 4"
+    },
+    "step_free_entry": {
+     "verdict": "not_visible",
+     "confidence": 50,
+     "evidence": "ground level near threshold shown in crops 3 and 4 but no clear sidewalk-to-threshold plane visible"
+    }
+   },
+   "usage": {
+    "input_tokens": 2328,
+    "output_tokens": 149
+   }
+  }
+ }
+}
