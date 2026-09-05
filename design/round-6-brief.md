@@ -211,3 +211,52 @@ of the content offset to the left. That is either a mid-transition capture of th
 screen movement, which would be harmless, or an outgoing screen that is never removed, which
 would be a real defect. Reproduce it before deciding, and if it is real it outranks everything in
 this section.
+
+---
+
+## The incoming handoff package changes the palette again, and settles three open questions
+
+`design/board-refs/BUILD-READY-HANDOFF-DESIGN.md` is the design for the full handoff package the
+product owner is generating. It names a **canonical palette that differs from the one Round 4
+adopted**, so Round 4's token values are already superseded.
+
+| Role | Round 4 adopted | Handoff canonical |
+|---|---|---|
+| Deep indigo | `#17103D` | `#1E1142` |
+| Violet | `#5B35F5` | `#4F34DB` |
+| Sky blue | `#69B7FF` | `#76BCFD` |
+| Marigold | `#FFBF24` | `#FDB327` |
+| UI lavender | `#F2EEFF` | `#F5F2FC` |
+| UI lavender, second step | `#E2DAFF` | `#E8E1F7` |
+
+Every one differs. **Wait for the package rather than retyping these by hand** — it ships a
+manifest with hashes and a verification step, and hand-transcribing six colours from prose is how
+a seventh palette gets invented. But do not deepen the current values either: this is why the
+purple problem must be fixed by *reducing where lavender is used*, not by hand-picking a new
+lavender.
+
+Note also the distinction the handoff draws and the build does not: **"UI lavender"** at
+`#F5F2FC` and `#E8E1F7` is for surfaces, while **"lavender path"** `#CFBCEE` is the pin's base.
+The build currently uses one lavender family for both.
+
+**Three open questions are settled by this document, in our favour:**
+
+1. **"Texas state information is provenance, not a trust tier and not a map-pin decoration."** The
+   conflict between the boards drawing a flag beside map pins and the token spec saying receipt
+   only is resolved: no flag on the map. The default taken was correct.
+2. **"Evidence strength affects tier size within each map context."** The size hierarchy is
+   sanctioned. The earlier rule that context may scale a pin but never change its *encoding* means
+   exactly that — size is allowed, re-encoding Estimated as a glyphless ring is not. Both halves
+   of Round 5's pin work are confirmed correct.
+3. **"Estimated: hollow, dashed sky pin, italic information symbol, no check."** Confirms restoring
+   the real pin, and names the symbol.
+
+**Two requirements the build currently misses:**
+
+- **Targets are 48px, not 44.** Every audit so far has measured against 44. Re-measure.
+- **Body contrast targets 7:1**, which the build mostly meets but has not been held to as a floor.
+
+**And one thing to expect:** the package ships a `map-kit` with "map base with pale-lavender land
+and high-contrast streets". That is independent confirmation that the ground should be pale and
+cool, and it will arrive as usable layers rather than as a description, so the ground rebuild
+should use the kit rather than being hand-tuned first.
