@@ -426,3 +426,28 @@ provenance rather than sanctioning a map accessory.
 **Default to the token spec: no flag on the map.** It is the machine-readable rule, it agrees
 with our canon, and the pin accessory is the thing that was already rejected once. Worth putting
 to the product owner rather than deciding silently, because the boards are what he approved.
+
+
+---
+
+## 17. Do not adopt the asset library's brand mark
+
+Recorded prominently because it has already cost an hour once and will cost it again.
+
+The approved logo and the asset library's reproduction of it disagree, and **the library is the
+one that is wrong**. The logo has three colours arcing above the doorway — sky blue left, **white**
+centre, marigold right — over a white disc behind the doorway. `svg/brand/mark-primary.svg` drops
+the disc and draws the middle arc in `#5B35F5`, the same violet as the pin body it sits on, so it
+shows one colour above the entry instead of three and reads as a bucket rather than a doorway. Its
+PNG exports at every size carry the identical defect.
+
+Round 4 adopted it faithfully during the token pass. The product owner's first reaction on seeing
+the result was that he could no longer see the three colours above the entry, which is exactly
+what the asset does.
+
+**Use `07-entrymap-approved-logo.png`.** `design/logo-mark.png` is that artwork cropped with the
+background keyed out. If vector is needed, redraw from the image, and confirm three colours are
+visible above the entry before calling it done.
+
+This is flagged in the frontdoor repository too, on the native handoff ticket, so nobody adopting
+the library there reproduces it.
