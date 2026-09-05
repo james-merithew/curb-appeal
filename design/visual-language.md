@@ -223,3 +223,31 @@ chosen, at 3:1 or better; a richer ground is the most likely way to break the fi
 landed, so it is re-measured, not assumed. High contrast mode still simplifies the ground rather
 than enriching it. The ground never competes with the card sheet for attention, and street
 labels stay legible at phone size.
+
+---
+
+## 12. The wordmark and the bottom bar
+
+Two specific corrections from the product owner, both about the palette being absent from the
+app's own furniture.
+
+**The wordmark in the map header is wrong.** It renders as one flat colour. The logo is
+two-tone: *entry* in light blue, *map* in white. The header pill is white, so white-on-white is
+not available there and the light-background pairing has to be used instead: *entry* in a blue
+dark enough to hold on white, *map* in the dark ink. Both halves must be legible and the
+two-tone reading must survive. The onboarding mark already defines this pairing; the header
+should use the same one rather than inventing a third.
+
+The rule underneath: the wordmark is always two-tone, and which two tones depends on what it
+sits on. On deep aubergine it is light blue and white. On white it is deep blue and dark ink.
+It is never one colour.
+
+**The bottom bar is monochrome and should not be.** It is purple on purple. The logo carries
+deep blue, light blue, marigold and white, and none of that reaches the one component visible
+on nearly every screen. Bring the palette into it.
+
+The constraint is the same one that governs the map ground: on markers those hues carry
+meaning, so in the navigation they must read as brand rather than as state. That is achievable
+because the bar is persistent chrome and nothing in it represents a place. Keep the active tab
+unambiguous, keep every label legible, and do not let the scan button's marigold ring read as
+the scanned-on-site tier.
