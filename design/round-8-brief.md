@@ -50,10 +50,28 @@ the live map again: "the three circles above each icon is stupid" (D38). D38 win
   open". The legend must stay one screen at the largest text size.
 - Make the cluster disc's accessible name say what the number is, if it does not already.
 
-Gallery 1's mark A (`design/estimated-mark-gallery.html`) is **not** the default: the owner asked
-for something other than a teardrop-with-glyph (D39). Gallery 2
-(`design/estimated-mark-gallery-2.html`) holds the candidates; take the one the owner names, or
-its recommendation if no name is given, and record which.
+**The owner chose J1** (2026-09-05, 23:5x), from `design/estimated-mark-gallery-4.html`: the
+teardrop with a **solid** sky700 outline, white fill, and the owner's own glyph — two rounded
+vertical posts and one short lintel, with three small dots across the open threshold. No door
+leaf, storefront, checkmark, question mark or warning symbol. The gallery's asset source is
+copyable from that page; take it verbatim rather than redrawing it.
+
+Geometry as drawn and measured there: library frame 96x104, head centre 48/41.3, path
+`M32 60V22h32v38` with round caps and joins at stroke 4 (the pin outline weight), three r2.2 dots
+at x 40/48/56 on y 60, all sky700 `#1B6599`.
+
+Two things the gallery measured that this round must carry:
+
+- At 32px on a 1x display the three threshold dots read as a faint broken line rather than three
+  countable dots, and the posts' round caps square off on the pixel grid. Posts and lintel stay
+  distinct. If the owner later judges those dots to be the clutter the confidence dots were, J3
+  is the same mark with one attribute removed; do not pre-empt that, but keep the dots in their
+  own group so removing them is one line.
+- The outline's floor is 3.08:1 against the sky400 place accent, the same for every candidate,
+  mitigated by the build's white lift strokes (6.24:1). Re-measure on the real ground anyway.
+
+Galleries 1 to 3 are superseded for this decision and stay in the repo as the record of what was
+tried and rejected.
 
 ## 3. Score the two new criteria
 
