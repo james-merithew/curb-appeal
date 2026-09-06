@@ -90,7 +90,51 @@ result, with the measurements.
 
 ## Round 7 re-audit findings marked for this round
 
-_(qa and a11y appended when they land)_
+From `design/a11y-audit-r7.md`. It closed **10 of 10** prior blocking defects and 14 of 18
+improvements, and the contrast work is finished: zero text pairs below the package's 7:1 floor in
+either mode, zero pins or halos below 3:1 on any ground, 189 of 189 controls at the 48px floor by
+effective target. Three new blocking defects are this round's.
+
+**9. A sub-sheet closes its parent card and drops focus to the pin (a11y N2, 100% reproducible).**
+`openSheet()` captures the opener as `if(!openSheetId && active && active!==document.body)
+sheetOpener=active` — verified at the line. A sheet opened while another is open is treated as a
+hand-off, so the evidence receipt and the correction sheet inherit the **pin** as their opener.
+Closing either returns focus to the pin and `closeSheets()` clears every sheet including the card.
+A blind user who expands a card to full, reads the provenance and opens the receipt loses the
+entire card and every action on it. Card to sub-sheet is a **stack**, not a hand-off: keep an
+opener stack, pop one level on close, restore the card at the position it held, and return focus
+to the button that opened the sub-sheet.
+
+**10. Focus return strands the user on a closed sheet's heading, about 1 close in 20 (a11y N1).**
+60 close trials, 3 failures, `activeElement` left on `H3.sheet-h` inside a `visibility:hidden`
+sheet: nothing to read, nothing to activate, Tab restarts from the document top. The rate is the
+same with reduced motion on and off, so this is a general race, not a motion seam.
+`focusWhenReady()` polls a frame budget and then falls back — but on the failing runs neither the
+opener nor the fallback took focus. Make the fallback unconditional (a `[tabindex="-1"]` labelled
+section is always focusable) and **assert after**: if focus is still inside a closed sheet, force
+it. Intermittent means a keyboard user cannot learn around it.
+
+**11. The capture coach rotates forever and reduced motion does not stop it (a11y N3, WCAG 2.2.2).**
+Confirmed at the call site: `startCoach()` branches on `isReduced()` only to skip the `.swap`
+fade; `setInterval(…, 1700)` keeps changing the text in both modes. So the setting makes the
+change instant instead of stopping it, on the one screen where the user must hold still and aim a
+camera. Under reduced motion, stop the rotation and show the guidance statically — replace, do not
+shorten, exactly as the processing ring already does. Independently, the rotation needs a pause,
+stop or hide mechanism, or it should stop after one cycle.
+
+**12. Two small ones with measured numbers.** Under reduced motion the "Checks complete"
+announcement fires **20ms after** the app has already left the processing screen (a11y N4); fire it
+before the navigation or drop it. And toggling high contrast is the only action in the app that
+blanks the map ground, for 39 to 79ms, reproduced on the live build (a11y N5) — `applyPrefs()`
+re-renders the ground while the map is `display:none`; re-render on the map's own visibility
+instead.
+
+**Do not** act on a11y N6 (duplicate `ev-box` id). It was checked against `eb056fe` and is false:
+the id appears once. It stays in the report as a record of the audit's reliability.
+
+Everything else on the accessibility punch list is Round 9.
+
+
 
 From `design/interaction-audit-r7.md` (verified independently at the three call sites named). The
 audit closed 29 of 39 previous items; these are what Round 8 owns. **Everything else on its punch
