@@ -72,4 +72,41 @@ result, with the measurements.
 
 ## Round 7 re-audit findings marked for this round
 
-_(appended when `qa-report-r7.md`, `a11y-audit-r7.md` and `interaction-audit-r7.md` land)_
+_(qa and a11y appended when they land)_
+
+From `design/interaction-audit-r7.md` (verified independently at the three call sites named). The
+audit closed 29 of 39 previous items; these are what Round 8 owns. **Everything else on its punch
+list is deferred to Round 9** so this round stays the size of its brief.
+
+**5. Draw the dotted unknown halo on the map (N1, violation).** `renderPins` computes
+`const match = m && m.state!=='unknown' ? m.state : null`, so the unknown state is deliberately
+dropped and `match-unknown` renders zero times on the map, while `matchHalo('unknown')` already
+draws the library's dotted sky700 ring correctly and the list view keeps a dotted carrier for the
+same state. What stands in for it today is `.pinbtn.recede{opacity:.8}` — a 20% dim. Pass the
+state through, and correct the legend line that currently *documents* the omission ("not yet seen
+— no halo"). Reconsider whether `recede` should still dim once a positive mark exists.
+
+**6. Give reduced motion a CSS floor (N2, structural).** There is no
+`@media (prefers-reduced-motion: reduce)` rule in the file at all: the only media query is
+`(max-width:767px)`, and the whole reduced-motion contract hangs on a `.phone.rm` class written by
+`applyPrefs()`. Measured: first paint at 296ms, class applied at 388ms warm and **804ms cold** — a
+92 to 500ms window in which an OS-reduce user gets the full motion system, with nothing underneath
+if `applyPrefs()` ever throws. Either mirror the `.phone.rm` essentials in a real media query, or
+set the class from an inline head script before first paint.
+
+**7. Stop reduced motion deleting the scan's pacing (N3, structural).** `defer()` and `after()`
+return 0 under reduce, so the scan runs **420ms instead of 7,439ms**, all three checks land at
+once, and the `PROC_CHIPS+600` hold — whose own comment says it exists "so 'Checks complete' is
+spoken before the screen changes" — is skipped. Reduced motion should drop the sweep, the scale
+and the rotation, and keep the cadence and the announce-then-hold. As written, the clause that
+protects screen-reader users is the one the setting turns off.
+
+**8. Test clusters against pins in the collision pass (N4, violation).** Pin-to-pin overlap
+respects the build's 10% rule (worst 0.100), but cluster-to-pin is untested: **43.3%** of one pin
+is covered by a 48px cluster at overview, 21.0% of another at street. The mark that exists to
+resolve density is creating it.
+
+**Note for whoever measures Round 8:** this audit describes the Estimated mark and the confidence
+dots as they were. Both change in this round, so re-measure the tier rows rather than carrying
+these figures forward.
+
