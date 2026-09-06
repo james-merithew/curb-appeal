@@ -202,3 +202,11 @@ Add to **§5 Map** (or wherever the trust-legend criterion lives):
 | # | Criterion | Score | Evidence |
 |---|---|---|---|
 | 5.x | **Every mark on a pin or in place of a pin is taught where it is seen.** The confidence dots and the cluster count are readable without explanation: "what are the numbers on the map? why do the icons have 3 circles above each of them?" | — | Directive ledger pass 3. The product owner, who approved the pin artwork, could not name either mark from the running map. The legend keys the three tiers and the match halos and nothing else. Satisfying this: the legend gains a confidence row and a cluster row, or the dots are dropped from overview zoom and shown only at street zoom beside the card, or the confidence ladder moves to the card entirely. **Ask-point:** the package's screen exports draw confidence as segmented arcs around the head; the asset library draws three dots; the build follows the library (9.11 item 6). The owner chooses which is canonical before Round 8 redraws anything. |
+
+| D37 | "the dashes around the estimates and it also meaning partial is confusing. maybe estimated needs a new icon?" | **Nowhere** until now. Verified in the package itself, not only the build: `asset-library/svg/pins/estimated.svg` dashes the pin outline (`7 6`) and `halos/partial-match.svg` dashes the halo (`15 9`); `unknown-match.svg` dots it (`1 11`). Two different meanings on one line style, shipped side by side by the same library. |
+
+### Proposed criterion for D37
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 5.y | **One line style, one meaning.** A dashed stroke means exactly one thing on the map: "the dashes around the estimates and it also meaning partial is confusing." | — | Directive ledger pass 3. Today dashed = Estimated tier (pin outline) AND dashed = partial match (halo), both from the library. Satisfying this: either the Estimated pin stops using a dash (solid sky700 outline, or a new mark as the owner suggests), or the partial halo stops (e.g. a half ring, or a solid violet ring at reduced weight). The tier mark is the more frequently seen of the two, so whichever changes, the legend row changes with it. **Ask-point:** the owner suggested a new Estimated icon; the board's own Estimated pin (screen-exports `map-default.png`) is the reference for whether it was ever meant to be dashed. |
