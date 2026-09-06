@@ -35,16 +35,42 @@
                             library there was no approved sky that held on white. */
   --marigold400:#FFBF24; /* Scanned on-site, the Scan action */
   --amber700:#9A5700;    /* non-body freshness icons (5.62:1); NOT small text */
-  --lavender100:#F2EEFF; /* canvas and quiet supporting surfaces */
+  --lavender100:#F2EEFF; /* quiet supporting surfaces -- NOT the default surface */
   --lavender200:#E2DAFF; /* hairlines and quiet strokes */
   --white:#FFFFFF;
+
+  /* ---- ROUND 6: TWO LAVENDER FAMILIES, NOT ONE -------------------------------
+     The incoming handoff package draws a distinction this build did not: "UI
+     lavender" is a SURFACE accent, and "lavender path" is the map pin's BASE.
+     One family was serving both, so a palette swap could only move them together
+     and any correction to one dragged the other with it. They are separated here
+     BY ROLE, with both still pointing at the current official values -- when the
+     package lands, each family is a one-line swap and the two cannot be conflated.
+     Nothing below this line reaches past these two names into lavender100/200. */
+  --ui-lavender-1:var(--lavender100);  /* accent wash: a selected chip, a quiet note */
+  --ui-lavender-2:var(--lavender200);  /* accent stroke: hairline, quiet keyline */
+  --lavender-path:var(--lavender200);  /* the soft disc a map pin sits on. NOT a surface. */
 
   /* ---- ROLES, each mapped onto the official palette --------------------------
      A role that the library ships a token for points at it. A role the library has
      NO token for is derived as a mix of two official colours, solved numerically
      against a stated contrast target, and the mix is written in the comment. */
-  --ground:var(--lavender100);      /* map canvas */
-  --ground-deep:var(--lavender200);
+  /* ROUND 6: the default surface is near-white, not lavender. Round 4 mapped
+     --ground onto lavender100 and every screen in the app inherited a purple cast
+     with white slots cut into it; the board's screen body behind cards measures
+     #FDFDFD, effectively white. Lavender is an ACCENT in the boards -- a selected
+     chip, a quiet wash behind a note, the faint cool tint of the map -- and it is
+     only those three things here now. This is a structural change, not a new
+     colour: --white is already one of the eleven official values, so it survives
+     the palette swap that is coming, where a hand-picked lavender would not.
+     Every contrast number stated in this file was solved against lavender100, and
+     white is LIGHTER than lavender100, so all of them rise. None falls. */
+  --ground:var(--white);            /* the default screen surface */
+  --ground-deep:var(--ui-lavender-2);
+  /* the map's own canvas keeps the faint cool tint the boards give it -- the one
+     large area where lavender is still correct. The drawn map ground (--g-*) is
+     unchanged and is rebuilt from the handoff's map-kit, not hand-tuned here. */
+  --map-tint:var(--ui-lavender-1);
   --card:var(--white);
   --ink:var(--indigo900);           /* 17.83:1 on white, 15.66:1 on lavender100 */
   /* DERIVED (no library token): the second and third inks. indigo900 lightened
@@ -71,7 +97,7 @@
   --brand-blue-ink:var(--sky700);
   --purple:var(--violet600);        /* Owner tier / the mark */
   --purple-ink:var(--violet800);    /* 10.04:1 on white -- the report's link ink */
-  --purple-wash:var(--lavender100); /* the library's own quiet fill, over white */
+  --purple-wash:var(--ui-lavender-1); /* the library's own quiet fill, over white */
   /* Needs-match. Round 2 chose green because purple already meant owner-confirmed;
      the library supersedes that with three approved halos that carry the state in
      LINE STYLE first -- solid indigo900 (good), dashed violet600 (partial), dotted
@@ -81,7 +107,7 @@
   --match-unknown:var(--sky700);
   --match-ink:var(--indigo900);
   --match-partial-ink:var(--violet800);
-  --match-wash:var(--lavender100);
+  --match-wash:var(--ui-lavender-1);
   /* Freshness ageing shared the Scanned ink's hue already (#784410 vs #784410 --
      two names, one colour). Round 4 collapses them: one derived amber ink for text,
      the library's own amber700 for the non-text freshness icon. */
@@ -96,19 +122,26 @@
   --chrome-fill:#373158;
   --chrome-edge:#78748E;
   --chrome-ink:var(--white);
-  --chrome-quiet:var(--lavender200);  /* 13.33:1 on indigo900 -- unselected nav labels */
+  --chrome-quiet:var(--ui-lavender-2);  /* 13.33:1 on indigo900 -- unselected nav labels */
 
   /* ---- TYPE SCALE (design-systems-spec section 1) --------------------------
      Eight size steps, three weights. Every step names size, weight, leading and
      tracking, so a step lands as one block and nothing is left to judgement.  */
-  --fs-display: 2.3em;   /* 34.5px @15 */
-  --fs-h1:      1.5em;   /* 22.5px */
-  --fs-h2:      1.2em;   /* 18px   */
-  --fs-h3:      1.05em;  /* 15.8px */
-  --fs-body:    0.95em;  /* 14.3px */
-  --fs-sub:     0.86em;  /* 12.9px */
-  --fs-meta:    0.78em;  /* 11.7px */
-  --fs-micro:   0.7em;   /* 10.5px -- the floor */
+  /* ROUND 6 -- THE SCALE IS ANCHORED, NOT RELATIVE.
+     These eight steps were `em`, which means each one is a multiplier on WHATEVER
+     font-size its container happens to have. Nest a --fs-sub row inside a --fs-sub
+     card and the second one is 0.86 x 0.86; nest it three deep and the step has no
+     fixed meaning left. Measured across all 26 screens before this change: seven
+     roles rendered at NINETEEN distinct pixel sizes -- --fs-sub alone at 12.9,
+     12.255, 11.467, 11.094 and 9.861, and --fs-body at four sizes including the
+     12.255 that is smaller than the step below it. Nothing in the file asked for
+     any of that; it is arithmetic nobody wrote.
+     The steps now multiply ONE anchor, --root-fs, which is the only font-size the
+     text-size preference moves. A step means one size everywhere, at every text
+     size, however deeply it is nested. The ratios are unchanged, so the default
+     rendering of a top-level element is byte-identical -- only the compounding is
+     gone. They live on .phone rather than :root because --root-fs does, and a
+     custom property can only resolve another one declared on the same element. */
   /* Exactly three weights; the top one is a reserved resource, not a default.
      Round 4 re-pitched the ladder onto Atkinson Hyperlegible Next, whose variable
      axis runs 200-800, so 600/800/900 becomes 500/650/800. The library's own
@@ -144,14 +177,29 @@
   --r-4:20px;    /* large surface: popup, mini-map, viewfinder, toast */
   --r-5:24px;    /* a docked sheet's top corners */
   --radius:var(--r-3);  /* kept: the name 60 call sites already use */
+  /* ---- ROUND 6: ONE TOUCH TARGET, AND IT IS 48 ---------------------------------
+     Every audit before this one measured against 44px, which is WCAG 2.5.5 AAA and
+     the platform minimum. The handoff package sets 48. The number was written out
+     literally at ~60 sites, which is why it could not be raised in one move; it is
+     a token now, so the next change to it is one line. Sites that are geometry
+     rather than a target (a 5px grip bar, a 20px glyph) keep their own numbers. */
+  --tap:48px;
+  /* ---- ROUND 6: ONE VEIL ---------------------------------------------------------
+     The interaction spec states a single number: "The map dims with a 7% deep-indigo
+     veil only at full height." Round 4 had a 42% modal scrim -- over the ground that
+     computes to #9691AE against the board's measured #C7C6D5, roughly twice the
+     board's weight and three times the spec's -- and Round 5 added the correct 7%
+     veil for the card's full stop beside it, so the file carried two answers. One
+     token, one number, used by both, and no veil at the peek or medium stop. */
+  --veil:rgba(23,16,61,.07);
   --wash-quiet:#F9F7FF; /* DERIVED: white -> lavender100 62%, the one quiet fill */
   --float-white:rgba(255,255,255,.96); /* chrome floating over the map; was 4 alphas */
   /* Board sections 2-3: a card is a hairline lavender boundary plus generous padding,
      not a shadow doing the work alone. This is DECORATION on a container, never the
      thing that identifies a control -- every control edge still uses --edge, which is
      the token Round 1 measured at 3.37:1. Adding a hairline can only add an edge. */
-  --hairline:var(--lavender200);  /* the library's own badge stroke */
-  --icon-box:var(--lavender100);  /* the one leading-icon box, so labels align down a column */
+  --hairline:var(--ui-lavender-2);  /* the library's own badge stroke */
+  --icon-box:var(--ui-lavender-1);  /* the one leading-icon box, so labels align down a column */
   --pad-card:18px;
   --shadow:0 10px 30px rgba(23,16,61,.16);
   /* Non-text UI boundary: every control edge, track and unselected indicator uses
@@ -187,7 +235,7 @@
   /* two families that are NOT elevation, named so they stop competing with it */
   --ring-action:0 4px 14px rgba(255,191,36,.42); /* the marigold capture glow */
   --ring-select:inset 0 0 0 2px var(--purple);   /* selected / saved */
-  --ring-quiet:inset 0 0 0 2px var(--lavender200); /* ghost button on white */
+  --ring-quiet:inset 0 0 0 2px var(--ui-lavender-2); /* ghost button on white */
   --ring-needed:0 0 0 2px var(--match-good);     /* needs-match ONLY (colour rule) */
   --knob:0 1px 3px rgba(23,16,61,.26);           /* a physical knob on a track */
 
@@ -288,13 +336,25 @@
 .ic{display:inline-flex;align-items:center;justify-content:center}
 /* 2.7 optical alignment: a tick sits optically low inside a circle, so the round
    glyph containers carry a 1px bottom pad on their flex centring. */
-.tl-dot,.ow-tick,.checkitem .ci-dot,.next-list .nl-dot,.persona .p-ring,.claim-result .cr-mark{padding-bottom:1px}
+.tl-dot,.ow-tick,.checkitem .ci-dot,.next-list .nl-dot,.claim-result .cr-mark{padding-bottom:1px}
 .ic svg{display:block}
 /* ---- ONE selection component (board section 3) -------------------------------
    Unselected: an empty ring on white. Selected: a filled purple disc with a white
-   tick, AND the whole row takes a pale purple tint with a purple border. Used by
-   the needs picker, the filter chips and the freshness segment -- one component,
-   three places, so the state reads the same everywhere. -------------------------- */
+   tick. Used by the needs picker, the filter chips and the freshness segment --
+   one component, three places, so the state reads the same everywhere.
+
+   ROUND 6 -- A ROW IS NOT A CHIP. Round 4 gave both the same treatment: fill the
+   whole thing with lavender. On a full-width row that is what makes a form of five
+   choices read as a block of purple, which is the single loudest source of the
+   build's purple cast after --ground. The board fills a selected CHIP (a small
+   inline pill, where the fill IS the object) and marks a selected ROW with the
+   violet disc and a violet keyline on an otherwise white row. Split accordingly:
+   the rows (.persona, .verify-opt) go white with a violet keyline; the chips
+   (.filtchip, .tsize-btn, the freshness segment) keep the wash. The carrier of the
+   state is unchanged either way -- the filled disc with the tick, plus
+   aria-pressed / aria-checked -- so nothing here depends on colour alone.
+   .sel-row/.sel-chip are deliberately NOT authored: neither had markup, and the
+   file has enough rules whose markup a later round removed. */
 .sel-dot{
   flex:0 0 22px;width:22px;height:22px;border-radius:50%;
   border:2px solid var(--edge);background:#fff;color:transparent;
@@ -302,7 +362,6 @@
 }
 .sel-dot svg{width:13px;height:13px}
 .sel > .sel-dot,.sel .sel-dot{background:var(--purple);border-color:var(--purple-ink);color:#fff}
-.sel-row{background:var(--purple-wash);border-color:var(--purple)}
 *{box-sizing:border-box;margin:var(--sp-0);padding:var(--sp-0)}
 
 /* ---- the eight steps, authored once (design-systems-spec 1.2) ---- */
@@ -344,10 +403,21 @@ body{
   border-radius:54px;border:11px solid var(--bezel);
   box-shadow:0 24px 70px rgba(20,16,40,.4), 0 3px 10px rgba(20,16,40,.25);
   overflow:hidden;position:relative;
-  font-size:15px;
+  --root-fs:15px;
+  font-size:var(--root-fs);
+  --fs-display: calc(2.3  * var(--root-fs));  /* 34.5px @15 */
+  --fs-h1:      calc(1.5  * var(--root-fs));  /* 22.5px */
+  --fs-h2:      calc(1.2  * var(--root-fs));  /* 18px   */
+  --fs-h3:      calc(1.05 * var(--root-fs));  /* 15.75px */
+  --fs-body:    calc(0.95 * var(--root-fs));  /* 14.25px */
+  --fs-sub:     calc(0.86 * var(--root-fs));  /* 12.9px */
+  --fs-meta:    calc(0.78 * var(--root-fs));  /* 11.7px */
+  --fs-micro:   calc(0.7  * var(--root-fs));  /* 10.5px -- the floor */
 }
-.phone[data-textsize="large"]{font-size:16.2px}
-.phone[data-textsize="larger"]{font-size:18.9px}
+/* the text-size preference moves the anchor, and the eight steps follow it. One
+   number changes, and every step keeps its ratio and its single meaning. */
+.phone[data-textsize="large"]{--root-fs:16.2px}
+.phone[data-textsize="larger"]{--root-fs:18.9px}
 .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--bezel);border-radius:16px;z-index:60}
 .statusbar{
   position:absolute;top:0;left:0;right:0;height:46px;z-index:55;
@@ -368,7 +438,18 @@ body{
 
 /* ============ map ============ */
 #screen-map .screen-body{padding:var(--sp-0);overflow:hidden;position:relative}
-#map{position:absolute;inset:0;bottom:0}
+/* ROUND 6 -- THE MAP IS ITS OWN PAINT LAYER.
+   `.pinbtn.selected{z-index:60}` was competing in whatever stacking context it
+   happened to find. #map is position:absolute with z-index:auto, so it creates no
+   context of its own EXCEPT while it is mid-pan, when the transform makes one.
+   The result was a selected pin whose paint order changed depending on whether the
+   map had been panned: unpanned, its 60 beat the app header (43) and the map
+   controls (42) inside the same screen, and a violet pin painted over the dark
+   chrome bar. `isolation:isolate` gives the map a stacking context unconditionally,
+   so every PIN_Z value is what it claims to be -- an order among the marks -- and
+   the pan no longer changes the answer. This is the fix rather than a bigger number
+   on the header, because a number only moves the collision somewhere else. */
+#map{position:absolute;inset:0;bottom:0;isolation:isolate}
 #map-ground{position:absolute;inset:0}
 #pins{position:absolute;inset:0}
 /* ---- ANCHORING: a pin points at the thing it marks --------------------------
@@ -383,8 +464,8 @@ body{
   background:none;border:none;cursor:pointer;--mh:30px;
 }
 .pinbtn::before{
-  content:'';position:absolute;width:44px;height:44px;left:-22px;
-  top:calc(var(--mh) / -2 - 22px);border-radius:50%;
+  content:'';position:absolute;width:var(--tap);height:var(--tap);left:calc(var(--tap) / -2);
+  top:calc(var(--mh) / -2 - var(--tap) / 2);border-radius:50%;
 }
 .pinbtn:focus-visible{outline:none}
 .pinbtn:focus-visible::before{outline:3px solid var(--brand-blue-ink);outline-offset:-3px}
@@ -399,7 +480,8 @@ body{
    growth is a real size change rather than a magnified 40px drawing, adds the
    6px lift here, and draws the library's keyline inside pinSVG. Nothing about
    the pin's fill, stroke or glyph changes -- selection is still never a colour. */
-.pinbtn.selected{z-index:60 !important}
+/* no !important: inside #map's own stacking context this is simply PIN_Z.selected. */
+.pinbtn.selected{z-index:60}
 .pinbtn.selected .pin{transform:translateX(-50%) translateY(-6px)}
 /* Recession is never a verdict: a place that does not match, or that is not the
    selected one, only steps back. Nothing is hidden and no mark is added. */
@@ -438,18 +520,30 @@ body{
   position:absolute;top:0;left:0;right:0;z-index:43;
   background:var(--indigo900);
   padding:46px var(--sp-5) var(--sp-5);
-  display:flex;align-items:center;gap:var(--sp-4);
+  /* ROUND 6: the map bar carries a wordmark, a location pill and two round chrome
+     controls; raising the controls from 44 to 48 took 8px out of the row and the
+     pill's place name wrapped. The bar keeps the same 12px inset as the flow header
+     (one header geometry, not two) and gives the width back from the gap, which is
+     one step down the same spacing scale. The pill's label holds one line again. */
+  display:flex;align-items:center;gap:var(--sp-3);
 }
 .wordmark{flex:0 0 auto;display:flex;align-items:center}
-.locpill .lp-text{min-width:0;overflow-wrap:break-word}
+/* ROUND 6: the 48px target costs 8px of width in the densest row in the app (two
+   round chrome buttons went 44 -> 48), and the location pill is what gave -- its
+   label wrapped to two lines. The label is a place name, so truncating it is worse
+   than the wrap; it holds one line and the pill shrinks to its content instead of
+   claiming all the leftover space, which is what a pill is. If a name is genuinely
+   too long for the row it ellipsizes, and the full name is on the button's own
+   accessible name either way. */
+.locpill .lp-text{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .locpill{
-  flex:1;min-height:44px;border:1.5px solid var(--chrome-edge);border-radius:999px;
+  flex:1;min-height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:999px;
   background:var(--chrome-fill);
   font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);color:var(--chrome-ink);
   display:flex;align-items:center;justify-content:center;gap:var(--sp-3);cursor:pointer;min-width:0;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .locpill .chevd{color:var(--chrome-ink);font-size:var(--fs-sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);font-weight:var(--fw-body);}
 .hamb{
-  flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--chrome-edge);border-radius:50%;cursor:pointer;
+  flex:0 0 var(--tap);width:var(--tap);height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:50%;cursor:pointer;
   background:var(--chrome-fill);color:var(--chrome-ink);
   display:flex;align-items:center;justify-content:center;
 }
@@ -479,11 +573,11 @@ body{
 .map-fabs{position:absolute;left:14px;bottom:110px;z-index:20;display:flex;gap:var(--sp-4);transition:bottom var(--dur-base) var(--ease-enter)}
 .map-fabs.lifted{bottom:214px}
 .fab-needs{
-  min-height:48px;border:none;border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-6);
+  min-height:var(--tap);border:none;border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-6);
   background:var(--purple);color:#fff;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
   display:flex;align-items:center;gap:var(--sp-4);box-shadow:var(--elev-2);cursor:pointer;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .fab-filters{
-  min-height:48px;border:none;border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-5);
+  min-height:var(--tap);border:none;border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-5);
   background:var(--float-white);color:var(--purple-ink);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
   display:flex;align-items:center;gap:var(--sp-4);box-shadow:var(--elev-2);cursor:pointer;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .fab-filters .fcount{background:var(--purple);color:#fff;border-radius:999px;font-size:var(--fs-meta);padding:var(--sp-1) var(--sp-4);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);font-weight:var(--fw-strong);}
@@ -519,7 +613,7 @@ body{
   position:relative;
   flex:1;background:none;border:none;cursor:pointer;font-family:inherit;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-2);
-  color:var(--sub);font-size:var(--fs-meta);font-weight:var(--fw-strong);min-width:44px;min-height:44px;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+  color:var(--sub);font-size:var(--fs-meta);font-weight:var(--fw-strong);min-width:var(--tap);min-height:var(--tap);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 /* selected vs unselected was a 1.05:1 hue change and nothing else. The bar and the
    weight change carry the state without relying on colour at all. */
 /* Each tab wears its own colour from the logo: the map takes the mark's deep
@@ -528,9 +622,18 @@ body{
    active state is still carried by the bar and the weight, never by hue alone,
    which is why the 1.05:1 problem does not come back. */
 .navbtn.on{font-weight:var(--fw-strong)}
-.navbtn.on::before{
-  content:"";position:absolute;top:-6px;left:24%;right:24%;height:4px;
-  border-radius:0 0 4px 4px;background:currentColor;
+/* ROUND 6 -- spec: the bottom-navigation indicator travels beneath the tabs. It was
+   a ::before on whichever tab was active, so it vanished from one and appeared on
+   another -- a blink, which says two things happened rather than one. It is now a
+   single element the bar moves, on the spec's peer-navigation duration. The state
+   is still carried by weight and by aria-current as well, so nothing depends on the
+   bar being seen, and it is aria-hidden because it says nothing a label does not.
+   It hides for the scan tab, which has its own marigold ring instead of a rule. */
+.nav-ind{
+  position:absolute;top:var(--sp-3);height:4px;border-radius:0 0 4px 4px;
+  left:0;width:0;opacity:0;pointer-events:none;
+  transition:left var(--dur-peer) var(--ease-enter),width var(--dur-peer) var(--ease-enter),
+             background-color var(--dur-peer) var(--ease-enter),opacity var(--dur-fast) var(--ease-enter);
 }
 .navbtn svg{stroke:currentColor}
 .navbtn.on svg{stroke-width:2.6}
@@ -559,7 +662,7 @@ body{
 /* the modal scrim, restated on indigo900 (23,16,61) -- #17141F was not a palette
    colour. Its 42% is unchanged: this is the MODAL dim, a different thing from the
    card sheet's 7% veil, which the spec scopes to full height only. */
-.scrim{position:absolute;inset:0;background:rgba(23,16,61,.42);opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease-enter);z-index:46}
+.scrim{position:absolute;inset:0;background:var(--veil);opacity:0;pointer-events:none;transition:opacity var(--dur-fast) var(--ease-enter);z-index:46}
 .scrim.on{opacity:1;pointer-events:auto}
 .sheet{
   position:absolute;left:0;right:0;bottom:0;z-index:48;
@@ -577,7 +680,7 @@ body{
 .sheet-grip{width:44px;height:5px;border-radius:999px;background:var(--edge);margin:var(--sp-5) auto var(--sp-1);flex:0 0 auto}
 .sheet-scroll{overflow-y:auto;padding:var(--sp-5) var(--inset-sheet) var(--sp-7)}
 .sheet-close{
-  position:absolute;top:10px;right:12px;width:44px;height:44px;border:none;background:none;cursor:pointer;
+  position:absolute;top:10px;right:12px;width:var(--tap);height:var(--tap);border:none;background:none;cursor:pointer;
   color:var(--sub);font-size:var(--icon-glyph);font-weight:var(--fw-strong);border-radius:50%;
 }
 
@@ -616,11 +719,26 @@ body{
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--card);
   box-shadow:inset 0 0 0 1.6px var(--purple-ink)}
 .dots i.f{background:var(--purple)}
+/* ROUND 6 -- spec, Receipts and feature chips: "Confidence dots fill from left to
+   right, 70 ms apart." They were static final states. This fills them, and only on
+   a surface the reader just opened -- a sheet, the evidence box, or the scan review
+   -- so nothing animates on a screen nobody asked for (4.6). The empty step keeps
+   its rim throughout: the rim is what makes an unfilled step visible, so it is the
+   FILL that arrives, not the dot. */
+@keyframes dot-fill{
+  0%  {background-color:var(--card);transform:scale(.7)}
+  62% {transform:scale(1.08)}
+  100%{background-color:var(--purple);transform:scale(1)}
+}
+.sheet.on .dots i.f,.evidence.on .dots i.f,#scan-review.settle .dots i.f{
+  animation:dot-fill 150ms var(--ease-enter) both}
+.sheet.on .dots i.f:nth-child(2),.evidence.on .dots i.f:nth-child(2),#scan-review.settle .dots i.f:nth-child(2){animation-delay:70ms}
+.sheet.on .dots i.f:nth-child(3),.evidence.on .dots i.f:nth-child(3),#scan-review.settle .dots i.f:nth-child(3){animation-delay:140ms}
 
 .prov{margin-top:var(--sp-6);border-top:1px solid var(--hairline);padding-top:var(--sp-2)}
 .prov-row{
   display:flex;align-items:flex-start;gap:var(--sp-5);padding:var(--sp-5) var(--sp-1);border:none;background:none;width:100%;
-  text-align:left;font-family:inherit;cursor:pointer;border-bottom:1px solid var(--hairline);min-height:44px;
+  text-align:left;font-family:inherit;cursor:pointer;border-bottom:1px solid var(--hairline);min-height:var(--tap);
 }
 
 .prov-row .pr-main{flex:1;font-size:var(--fs-sub);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
@@ -629,13 +747,11 @@ body{
 .pr-sub.aged{color:var(--amber-ink)}
 .prov-row .chev{color:var(--sub);font-weight:var(--fw-strong);padding-top:var(--sp-1)}
 /* 2.6: it belongs to the .prov-row above it and was detaching from it. */
-.receipt-note{background:none;border-radius:0;padding:var(--sp-0);margin:var(--sp-1) 0 var(--sp-4);font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);line-height:var(--lh-sub);display:none;letter-spacing:var(--ls-flat);}
-.receipt-note.on{display:block}
 
 .chips-title{font-size:var(--fs-micro);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--sub);margin:var(--sp-6) var(--sp-0) var(--sp-4);line-height:var(--lh-micro);}
 .chips{display:flex;flex-wrap:wrap;gap:var(--sp-4)}
 .fchip{
-  display:inline-flex;align-items:center;gap:var(--sp-4);border-radius:var(--r-2);padding:var(--sp-4) var(--sp-5);min-height:44px;
+  display:inline-flex;align-items:center;gap:var(--sp-4);border-radius:var(--r-2);padding:var(--sp-4) var(--sp-5);min-height:var(--tap);
   font-size:var(--fs-sub);font-weight:var(--fw-strong);border:2px solid;cursor:pointer;background:#fff;font-family:inherit;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 /* the library's badge hairlines: sky400 on the Estimated chip, marigold400 on the
    Scanned one. Both are flavour on a chip whose identity is its text label. */
@@ -644,21 +760,31 @@ body{
 .fchip.owner{border-color:var(--hairline);color:var(--purple-ink);background:var(--purple-wash)}
 .fchip.needed{box-shadow:var(--ring-needed)}
 .needed-badge{font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--match-ink);background:var(--match-wash);border-radius:var(--r-1);padding:var(--sp-1) var(--sp-3);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
-.evidence{display:none;background:none;border-left:3px solid var(--marigold);border-radius:0;padding:var(--sp-1) 0 var(--sp-1) var(--sp-5);margin-top:var(--sp-4);font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
-.evidence.on{display:block}
+/* ROUND 6 -- spec, Receipts and feature chips: "Receipt height animates over 240 ms
+   without moving the selected chip offscreen." It was a display toggle, so the box
+   appeared at full height in one frame. A one-row grid eased from 0fr to 1fr gives
+   the real height an easing without a magic max-height that could clip the text at
+   the largest text size, and the chips above it do not move. --dur-receipt is the
+   spec's own 240ms token, which was already in the file with no consumer. */
+.evidence{display:grid;grid-template-rows:0fr;background:none;border-left:3px solid var(--marigold);border-radius:0;
+  padding:0 0 0 var(--sp-5);margin-top:var(--sp-0);font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);
+  border-left-color:transparent;
+  transition:grid-template-rows var(--dur-receipt) var(--ease-enter),margin-top var(--dur-receipt) var(--ease-enter),padding var(--dur-receipt) var(--ease-enter),border-left-color var(--dur-fast) var(--ease-enter);}
+.evidence .ev-inner{overflow:hidden;min-height:0}
+.evidence.on{grid-template-rows:1fr;margin-top:var(--sp-4);padding:var(--sp-1) 0 var(--sp-1) var(--sp-5);border-left-color:var(--marigold)}
 .unknown-row{
   margin-top:var(--sp-5);background:var(--blue-wash);border:2px dashed var(--blue);border-radius:var(--r-3);
   padding:var(--sp-5) var(--sp-6);font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--blue-ink);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .unknown-row .ur-cta{margin-top:var(--sp-4)}
 .softlist{font-weight:var(--fw-body);color:var(--sub);font-size:var(--fs-body);display:block;margin-top:var(--sp-2);line-height:var(--lh-body);letter-spacing:var(--ls-flat);}
 .correct-btn{
-  display:flex;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);min-height:44px;border:none;background:none;
+  display:flex;align-items:center;gap:var(--sp-4);margin-top:var(--sp-6);min-height:var(--tap);border:none;background:none;
   color:var(--purple-ink);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);cursor:pointer;padding:var(--sp-3) var(--sp-1);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 /* the receipt's own control: full width, outlined, its own block */
 .rcpt-open{width:100%;margin-top:var(--sp-6)}
 .card-actions{display:flex;gap:var(--sp-5);margin-top:var(--sp-5)}
 .btn{
-  flex:1;min-height:48px;border-radius:var(--r-3);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);cursor:pointer;
+  flex:1;min-height:var(--tap);border-radius:var(--r-3);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:var(--sp-4);border:none;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .btn.primary{background:var(--purple);color:#fff;font-weight:var(--fw-display);}
 .btn.marigold{background:var(--marigold);color:#533021;/* DERIVED amber700 -> indigo900 54%: 7.02:1 on marigold400 */font-weight:var(--fw-display);}
@@ -724,14 +850,14 @@ body{
 .rcpt-photos .ps-illus{flex:1;height:220px}
 .rcpt-photos .ps-illus svg{width:100%;height:100%}
 .rcpt-row{
-  display:flex;align-items:center;gap:var(--sp-5);min-height:48px;padding:var(--sp-5) var(--sp-1);
+  display:flex;align-items:center;gap:var(--sp-5);min-height:var(--tap);padding:var(--sp-5) var(--sp-1);
   border-bottom:1px solid var(--hairline);font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 
 .rcpt-row .rc-sub{display:block;font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .rcpt-foot{margin-top:var(--sp-5);font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);font-style:italic;text-align:center;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .rcpt-back{
   display:inline-flex;align-items:center;gap:var(--sp-2);border:none;background:none;font-family:inherit;
-  color:var(--purple-ink);font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;min-height:44px;padding:var(--sp-0) var(--sp-2);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
+  color:var(--purple-ink);font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;min-height:var(--tap);padding:var(--sp-0) var(--sp-2);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 
 /* needs sheet */
 .persona-grid{display:flex;flex-direction:column;gap:var(--sp-4);margin-top:var(--sp-5)}
@@ -743,32 +869,53 @@ body{
 .persona .p-name{font-weight:var(--fw-display);font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:var(--ls-h3);}
 .persona .p-sub{font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .persona .sel-dot{margin-left:auto}
-.persona.sel{border-color:var(--purple);background:var(--purple-wash)}
+/* ROUND 6: a persona is a full-width row, so it takes the row treatment -- white
+   ground, violet keyline, filled violet disc. Five of these stacked were the
+   "block of purple" the product owner saw. */
+.persona.sel{border-color:var(--purple);background:var(--card);box-shadow:inset 0 0 0 1px var(--purple)}
 .persona.sel .p-name{color:var(--purple-ink)}
-.persona.sel .p-icon{background:#fff;color:var(--purple-ink)}
+.persona.sel .p-icon{background:var(--purple-wash);color:var(--purple-ink)}
 .btn-textlink{
   border:none;background:none;font-family:inherit;color:var(--purple-ink);font-weight:var(--fw-strong);
-  font-size:var(--fs-body);cursor:pointer;min-height:44px;width:100%;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+  font-size:var(--fs-body);cursor:pointer;min-height:var(--tap);width:100%;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .sheet-h{font-size:var(--fs-h2);font-weight:var(--fw-display);margin-top:var(--sp-3);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
 .sheet-p{font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-2);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 
 /* filter sheet */
 .filt-head{display:flex;align-items:center;justify-content:space-between;margin-top:var(--sp-3);padding-right:var(--sp-8)}
-.filt-reset{border:none;background:none;font-family:inherit;color:var(--purple-ink);font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;min-height:44px;padding:var(--sp-0) var(--sp-3);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
+/* ROUND 6: the action the sheet exists for was 20px below the fold and needed a
+   scroll to be seen at all -- measured, button bottom 864 against a sheet bottom of
+   844. Removing the inert Open-now row bought some of that back; the rest is a
+   docked footer, which is what a filter sheet's apply control should be anyway:
+   the count on it changes as you touch the controls above, so it is feedback, not
+   just a button, and feedback you cannot see is not feedback. It sits OUTSIDE the
+   scroll container (the sheet is already a flex column) rather than being sticky
+   inside it, because a sticky child is pulled out of flow within its parent and can
+   cover the control above it -- which it did, hiding the distance slider. */
+#sheet-filters .sheet-scroll{flex:1 1 auto;min-height:0;padding-bottom:var(--sp-5)}
+.filt-apply{
+  flex:0 0 auto;background:var(--card);display:flex;flex-direction:column;
+  padding:var(--sp-5) var(--inset-sheet) var(--sp-7);
+  border-top:1px solid var(--hairline);
+}
+.filt-apply .btn{width:100%}
+.filt-apply .filt-caption{margin-top:var(--sp-4)}
+.filt-reset{border:none;background:none;font-family:inherit;color:var(--purple-ink);font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;min-height:var(--tap);padding:var(--sp-0) var(--sp-3);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .filtchip{
-  display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-4) var(--sp-6);min-height:44px;
+  display:inline-flex;align-items:center;gap:var(--sp-3);border-radius:999px;padding:var(--sp-4) var(--sp-6);min-height:var(--tap);
   font-size:var(--fs-sub);font-weight:var(--fw-strong);border:2px solid var(--edge);background:#fff;color:var(--sub);
   cursor:pointer;font-family:inherit;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .filtchip .sel-dot{width:20px;height:20px;flex:0 0 20px;margin-left:-3px}/* optical nudge, not rhythm */
 .filtchip .sel-dot svg{width:12px;height:12px}
+/* a chip is small and inline: the board fills it, and it stays filled. */
 .filtchip.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
 .seg{display:flex;background:#E9E3FE;border-radius:var(--r-2);padding:var(--sp-2);gap:var(--sp-2)}
 .seg button{
-  flex:1;min-height:44px;border:none;border-radius:var(--r-2);background:none;font-family:inherit;
+  flex:1;min-height:var(--tap);border:none;border-radius:var(--r-2);background:none;font-family:inherit;
   font-weight:var(--fw-strong);font-size:var(--fs-sub);color:var(--sub);cursor:pointer;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .seg button.sel{background:#fff;color:var(--purple-ink);box-shadow:var(--knob)}
 .dist-row{display:flex;align-items:center;gap:var(--sp-5)}
-.dist-row input[type=range]{flex:1;accent-color:var(--purple);min-height:44px}
+.dist-row input[type=range]{flex:1;accent-color:var(--purple);min-height:var(--tap)}
 .dist-label{font-weight:var(--fw-strong);font-size:var(--fs-body);color:var(--ink);min-width:58px;text-align:right;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .filt-caption{font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);text-align:center;margin-top:var(--sp-4);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 
@@ -787,7 +934,7 @@ body{
 .field label,.field .field-label{display:block;font-size:var(--fs-meta);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--sub);margin-bottom:var(--sp-3);line-height:var(--lh-meta);}
 .field select,.field textarea{
   width:100%;border:2px solid var(--edge);border-radius:var(--r-2);padding:var(--sp-5) var(--sp-5);font-family:inherit;font-size:var(--fs-body);
-  color:var(--ink);font-weight:var(--fw-body);background:#fff;min-height:44px;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+  color:var(--ink);font-weight:var(--fw-body);background:#fff;min-height:var(--tap);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .field textarea{resize:none;height:84px}
 .charcount{font-size:var(--fs-micro);color:var(--sub);font-weight:var(--fw-strong);text-align:right;margin-top:var(--sp-2);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
 
@@ -830,7 +977,7 @@ body{
   cursor:pointer;box-shadow:var(--ring-action);
 }
 .cancel-x{
-  position:absolute;top:54px;left:14px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  position:absolute;top:54px;left:14px;width:var(--tap);height:var(--tap);border-radius:50%;border:none;cursor:pointer;
   background:rgba(255,255,255,.16);color:#fff;font-size:var(--icon-glyph);font-weight:var(--fw-strong);z-index:5;
 }
 #scan-capture .cancel-x{background:rgba(255,255,255,.16)}
@@ -881,6 +1028,13 @@ body{
   transition:border-color var(--dur-base) var(--ease-enter),background-color var(--dur-base) var(--ease-enter),color var(--dur-base) var(--ease-enter);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);font-weight:var(--fw-strong);}
 .checkitem.done{transform:none}
 .checkitem.done .ci-dot{border-color:var(--marigold-edge);background:var(--marigold-wash);color:var(--marigold-ink)}
+/* ROUND 6 -- spec, Feedback and system states: "Outlined checks draw over 180 ms."
+   The check was fading in on a colour transition, which reads as an image
+   appearing rather than as a mark being made. The tick is one path 20.98 units long
+   in a 32 viewBox (measured with getTotalLength), so the dash carries it exactly. */
+@keyframes check-draw{from{stroke-dashoffset:21}to{stroke-dashoffset:0}}
+.checkitem.done .ci-dot svg path{
+  stroke-dasharray:21;animation:check-draw 180ms var(--ease-enter) both}
 .under8{margin-top:var(--sp-7);font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-strong);transition:opacity var(--dur-fast) var(--ease-enter);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 /* settle: the ring fades out, then the review rises in */
 #scan-processing .scan-body{transition:opacity var(--dur-fast) var(--ease-exit)}
@@ -940,7 +1094,7 @@ body{
 .prof-name{font-weight:var(--fw-display);font-size:var(--fs-h2);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
 .prof-sub{font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .prof-row{
-  display:flex;align-items:center;gap:var(--sp-5);min-height:48px;padding:var(--sp-4) var(--sp-1);width:100%;
+  display:flex;align-items:center;gap:var(--sp-5);min-height:var(--tap);padding:var(--sp-4) var(--sp-1);width:100%;
   border:none;background:none;font-family:inherit;cursor:pointer;text-align:left;
   border-bottom:1px solid var(--hairline);
 }
@@ -961,12 +1115,12 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .needs-chiprow{display:flex;flex-wrap:wrap;gap:var(--sp-4);margin-top:var(--sp-4)}
 .needchip{background:var(--purple-wash);color:var(--purple-ink);border:1px solid var(--hairline);border-radius:999px;padding:var(--sp-3) var(--sp-5);font-size:var(--fs-sub);font-weight:var(--fw-strong);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .toggle{position:relative;width:52px;height:31px;border-radius:var(--r-3);background:var(--edge);border:none;cursor:pointer;transition:background-color var(--dur-fast) var(--ease-enter);flex:0 0 auto}
-.toggle::before{content:"";position:absolute;inset:-8px}/* 47px hit area */
+.toggle::before{content:"";position:absolute;inset:-8.5px -0px}/* 48px tall hit area on a 31px switch */
 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:25px;height:25px;border-radius:50%;background:#fff;transition:left var(--dur-fast) var(--ease-enter);box-shadow:var(--knob)}
 .toggle.on{background:var(--purple)}
 .toggle.on::after{left:24px}
 .tsize-row{display:flex;gap:var(--sp-4)}
-.tsize-btn{min-width:48px;min-height:44px;border-radius:var(--r-2);border:2px solid var(--edge);background:#fff;font-family:inherit;font-weight:var(--fw-strong);color:var(--sub);cursor:pointer}
+.tsize-btn{min-width:48px;min-height:var(--tap);border-radius:var(--r-2);border:2px solid var(--edge);background:#fff;font-family:inherit;font-weight:var(--fw-strong);color:var(--sub);cursor:pointer}
 .tsize-btn:nth-child(1){font-size:14px}.tsize-btn:nth-child(2){font-size:17px}.tsize-btn:nth-child(3){font-size:20px}
 .tsize-btn.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
 .owner-tease{background:linear-gradient(120deg,var(--purple-wash),#fff 70%);border:1px solid var(--hairline)}
@@ -974,14 +1128,13 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 /* ============ onboarding ============ */
 .obscreen{background:var(--ground);z-index:52}
 .ob-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:var(--pad-top-hero) var(--inset-onboard) var(--sp-8);overflow-y:auto}
-.ob-word{font-weight:var(--fw-display);font-size:var(--fs-h1);letter-spacing:var(--ls-h1);color:var(--purple-ink);line-height:var(--lh-h1);}
 .ob-h{font-size:var(--fs-h1);font-weight:var(--fw-display);text-align:center;line-height:var(--lh-h1);margin-top:var(--sp-7);color:var(--ink);letter-spacing:var(--ls-h1);}
 .ob-p{font-size:var(--fs-body);color:var(--sub);font-weight:var(--fw-body);text-align:center;line-height:var(--lh-body);margin-top:var(--sp-5);max-width:300px;letter-spacing:var(--ls-flat);}
 .ob-illus{margin-top:var(--sp-7)}
 .ob-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:var(--sp-5);padding-top:var(--sp-7)}
 .ob-foot{font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);text-align:center;margin-top:var(--sp-5);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .ob-back{
-  position:absolute;top:54px;left:14px;width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  position:absolute;top:54px;left:14px;width:var(--tap);height:var(--tap);border-radius:50%;border:none;cursor:pointer;
   background:#fff;color:var(--sub);font-size:var(--icon-glyph);font-weight:var(--fw-strong);z-index:5;box-shadow:var(--elev-2);
 }
 .ob-kicker{font-size:var(--fs-micro);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--sub);margin-top:var(--sp-1);line-height:var(--lh-micro);}
@@ -1090,7 +1243,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
   display:inline-flex;align-items:center;gap:var(--sp-3);background:var(--purple-ink);color:#fff;
   border:none;border-radius:999px;padding:var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-5);font-size:var(--fs-meta);font-weight:var(--fw-strong);
   cursor:pointer;font-family:inherit;box-shadow:var(--elev-2);min-height:32px;position:relative;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.achip::before{content:"";position:absolute;inset:-6px}/* 44px hit area on a 32px chip */
+.achip::before{content:"";position:absolute;inset:-8px}/* 48px hit area on a 32px chip */
 .achip .x{
   width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.22);
   display:inline-flex;align-items:center;justify-content:center;font-size:var(--icon-glyph-sm);line-height:1;
@@ -1100,7 +1253,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .map-ctls{position:absolute;top:104px;right:12px;z-index:42;display:flex;flex-direction:column;gap:var(--sp-4)}
 .ctl-btn[hidden]{display:none}
 .ctl-btn{
-  width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;
+  width:var(--tap);height:var(--tap);border:none;border-radius:50%;cursor:pointer;
   background:var(--float-white);box-shadow:var(--elev-2);color:var(--sub);
   display:flex;align-items:center;justify-content:center;font-family:inherit;font-weight:var(--fw-strong);
 }
@@ -1113,7 +1266,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .cluster{
   position:absolute;width:0;height:0;padding:var(--sp-0);margin:var(--sp-0);border:none;background:none;cursor:pointer;
 }
-.cluster::before{content:'';position:absolute;width:44px;height:44px;left:-22px;top:-22px;border-radius:50%}
+.cluster::before{content:'';position:absolute;width:var(--tap);height:var(--tap);left:calc(var(--tap) / -2);top:calc(var(--tap) / -2);border-radius:50%}
 .cluster .disc{position:absolute;left:0;top:0;transform:translate(-50%,-50%);pointer-events:none;transition:transform var(--dur-fast) var(--ease-enter)}
 .cluster:focus-visible{outline:none}
 .cluster:focus-visible::before{outline:3px solid var(--brand-blue-ink);outline-offset:1px}
@@ -1161,8 +1314,14 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 #sheet-card.dragging{transition:none}
 /* spec: "The map dims with a 7% deep-indigo veil only at full height." Round 4
    had no veil on the card at any stop, and the modal scrim it did have was 42%
-   of a colour that is not in the palette. Both are restated here. */
-#map-veil{position:absolute;inset:0;z-index:42;pointer-events:none;background:rgba(23,16,61,.07);
+   of a colour that is not in the palette. Both are restated here.
+   ROUND 6: both now read --veil, so there is one number. The card's veil is bound
+   to data-card="full" below, so the peek and medium stops carry no veil at all --
+   which is the other half of the spec's sentence. A modal sheet's separation from
+   the background is carried by inert, the focus trap and --elev-3-dock, not by
+   darkness: 42% was doing a job the semantics already do, at three times the
+   spec's weight and twice the board's. */
+#map-veil{position:absolute;inset:0;z-index:42;pointer-events:none;background:var(--veil);
   opacity:0;transition:opacity var(--dur-sheet) var(--ease-enter)}
 .phone[data-card="full"] #map-veil{opacity:1}
 #sheet-card[data-pos="peek"] .cs-medium,#sheet-card[data-pos="peek"] .cs-full{display:none}
@@ -1177,7 +1336,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 #sheet-card[data-pos="full"] .pos-hint{display:none}
 /* 44px target: the padding grows, the 5px grip bar does not (I9 / B9a) */
 .sheet-grip-btn{
-  display:block;width:100%;min-height:44px;padding:var(--sp-6) var(--sp-0) var(--sp-5);border:none;background:none;cursor:grab;
+  display:block;width:100%;min-height:var(--tap);padding:var(--sp-6) var(--sp-0) var(--sp-5);border:none;background:none;cursor:grab;
   touch-action:none;font-family:inherit;
 }
 .sheet-grip-btn:focus-visible{outline:none}
@@ -1194,12 +1353,16 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 
 /* ============ search (full-width) ============ */
 .search-ov{position:absolute;inset:0;z-index:44;background:var(--ground);display:flex;flex-direction:column;padding:var(--pad-top) var(--inset-x) var(--pad-bottom)}
+/* ROUND 6: a 2,000-character query with no spaces gave #search-body a 17,251px
+   horizontal scroll and ran the empty-state message off the side. The phone frame
+   clips, so it was contained rather than catastrophic -- and it is one property. */
+.search-ov .sheet-p,.search-ov .sr-name,#search-body{overflow-wrap:anywhere}
 .search-ov[hidden]{display:none}
 .search-bar{display:flex;align-items:center;gap:var(--sp-4)}
 .search-bar .searchfield{flex:1;margin:var(--sp-0);background:#fff;box-shadow:var(--elev-1);border-color:transparent}
 .search-bar .searchfield:focus-within{border-color:var(--purple)}
 .search-clear{position:relative;width:34px;height:34px;border:none;border-radius:50%;background:#E9E3FE;color:var(--sub);font-weight:var(--fw-strong);cursor:pointer;font-family:inherit}
-.search-clear::before{content:"";position:absolute;inset:-5px}/* 44px hit area on a 34px disc */
+.search-clear::before{content:"";position:absolute;inset:-7px}/* 48px hit area on a 34px disc */
 .search-body{flex:1;overflow-y:auto;margin-top:var(--sp-5)}
 .srow{
   display:flex;align-items:center;gap:var(--sp-5);width:100%;background:#fff;border:none;border-radius:var(--r-3);
@@ -1216,10 +1379,10 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .sgroup{background:#fff;border-radius:var(--r-3);margin-top:var(--sp-4);box-shadow:var(--elev-1);padding:var(--sp-2) var(--sp-0)}
 .sgroup .sg-head{padding:var(--sp-5) var(--sp-5) var(--sp-2);font-weight:var(--fw-strong);font-size:var(--fs-body);display:flex;align-items:center;gap:var(--sp-4);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .sgroup .sg-count{font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--purple-ink);background:var(--purple-wash);border-radius:999px;padding:var(--sp-1) var(--sp-4);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.sgroup .srow{box-shadow:none;margin:var(--sp-0);border-radius:var(--r-2);min-height:48px}
+.sgroup .srow{box-shadow:none;margin:var(--sp-0);border-radius:var(--r-2);min-height:var(--tap)}
 .recent-chip{
   display:inline-flex;align-items:center;gap:var(--sp-3);border:none;border-radius:999px;background:#fff;color:var(--ink);
-  padding:var(--sp-4) var(--sp-6);min-height:44px;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;
+  padding:var(--sp-4) var(--sp-6);min-height:var(--tap);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);cursor:pointer;
   box-shadow:var(--elev-1);margin:var(--sp-0) var(--sp-3) var(--sp-3) var(--sp-0);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .mstat{display:inline-flex;align-items:center;gap:var(--sp-2);border-radius:999px;padding:var(--sp-1) var(--sp-4);font-size:var(--fs-micro);font-weight:var(--fw-strong);margin-left:var(--sp-3);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
 .mstat.good{background:var(--match-wash);color:var(--match-ink);border:2px solid var(--match-good)}
@@ -1292,7 +1455,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ringwrap .ring-center{opacity:0;transition:opacity var(--dur-settle) var(--ease-enter),color var(--dur-settle) var(--ease-enter)}
 .ringwrap.settled .ring-center{opacity:1}
 .ringwrap.settled .ring-photo{opacity:.35}
-.proc-chips{display:flex;flex-wrap:wrap;gap:var(--sp-4);justify-content:center;margin-top:var(--sp-6);min-height:44px;width:100%}
+.proc-chips{display:flex;flex-wrap:wrap;gap:var(--sp-4);justify-content:center;margin-top:var(--sp-6);min-height:var(--tap);width:100%}
 @keyframes chipIn{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes chipOut{from{opacity:1;transform:none}to{opacity:0;transform:scale(.96)}}
 .achip.arriving{animation:chipIn var(--dur-base) var(--ease-enter) both}
@@ -1302,7 +1465,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 /* the 64 pins are one Tab each; this lets a keyboard user step over them to the bottom nav.
    Hidden until it takes focus, then it is a real, visible control. */
 .skiplink{
-  position:absolute;left:12px;top:-100px;z-index:60;min-height:44px;padding:var(--sp-0) var(--sp-6);border:none;
+  position:absolute;left:12px;top:-100px;z-index:60;min-height:var(--tap);padding:var(--sp-0) var(--sp-6);border:none;
   border-radius:999px;background:var(--purple-ink);color:#fff;font-family:inherit;font-weight:var(--fw-strong);
   font-size:var(--fs-sub);line-height:var(--lh-sub);cursor:pointer;box-shadow:var(--elev-2);
 }
@@ -1338,7 +1501,20 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
    class and cannot disagree. RM_MEDIA has a change listener, so an OS change
    mid-session lands immediately. There is no second copy of these rules under
    @media to drift from this one. */
-.phone.rm *,.phone.rm *::before,.phone.rm *::after{transition-duration:0s !important}
+/* ROUND 6 -- THE DELAY IS PART OF THE MOTION. Every reduced-motion block this file
+   has ever had overrode transition-duration and left transition-delay alone. That
+   is not a duration bug, it is a category error: a delay is time the user waits,
+   so a "no motion" rule that keeps the delay has not removed the wait. It mattered
+   because .sheet and .popup write their stale-transform guard AS a delay
+   (`visibility 0s var(--dur-fast)`), so under reduced motion the transform snapped
+   while the subtree stayed visibility:hidden -- and focus() on a hidden element is
+   a silent no-op. Round 5's move from .01ms to 0s happens to make the browser skip
+   the transition entirely, which is why this no longer reproduces; that is luck,
+   not construction, and one edit back to a near-zero duration would return it.
+   Delays are zeroed here so the property is true by rule, and openSheet() no longer
+   depends on it either -- it waits on the element being focusable, not on a clock. */
+.phone.rm *,.phone.rm *::before,.phone.rm *::after{
+  transition-duration:0s !important;transition-delay:0s !important;animation-delay:0s !important}
 /* screen change: the spec asks for a crossfade, not for nothing. 80ms, opacity
    only, no travel -- an instant equivalent that still says "the screen changed". */
 @keyframes rm-fade{from{opacity:0}to{opacity:1}}
@@ -1370,6 +1546,18 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .phone.rm .achip.arriving,
 .phone.rm .proc-chips .fchip{animation:none !important;opacity:1;transform:none}
 .phone.rm .achip.leaving{animation:none !important;opacity:0}
+/* ROUND 6, and the spec names these two itself: "Checks and confidence dots appear
+   in their final states." Not shortened -- asserted. */
+.phone.rm .dots i.f{animation:none !important;background-color:var(--purple);transform:none}
+.phone.rm .checkitem.done .ci-dot svg path{animation:none !important;stroke-dasharray:none;stroke-dashoffset:0}
+/* the stale clock's message is the copy beside it, which reduced motion does not
+   touch; the turn is the decoration, so it simply rests. */
+.phone.rm .nudge .n-age svg{animation:none !important;transform:none}
+/* the receipt still opens, at its destination, with no height easing -- the same
+   answer sheets get. Swiping the toast away still works. */
+.phone.rm .evidence{transition:none !important}
+/* the indicator arrives beneath the new tab rather than sliding to it */
+.phone.rm .nav-ind{transition:none !important}
 
 /* ============ nearby matches rail title ============ */
 .nearby-title{
@@ -1395,6 +1583,13 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
   margin-top:var(--sp-5);background:var(--amber-wash);border-radius:var(--r-3);padding:var(--sp-5) var(--sp-6);
 }
 .nudge .n-h{font-weight:var(--fw-strong);font-size:var(--fs-body);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+/* ROUND 6 -- spec, Feedback and system states: "A stale claim gains a muted-amber
+   clock rotation of 20 degrees and returns to rest. Copy describes time, not the
+   place." The copy already described time ("Last scan ... years ago"); the clock
+   was still. It now turns 20 degrees and comes back, once, in the amber ink it is
+   already drawn in -- no colour is added and nothing about the pin changes. */
+@keyframes stale-clock{0%{transform:rotate(0)}45%{transform:rotate(20deg)}100%{transform:rotate(0)}}
+.nudge .n-age svg{animation:stale-clock var(--dur-map) var(--ease-enter) both;transform-origin:50% 50%}
 .nudge .n-age{
   display:inline-flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-3);background:#fff;
   border-radius:999px;padding:var(--sp-2) var(--sp-5);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--amber-ink);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
@@ -1402,6 +1597,13 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .nudge .card-actions{margin-top:var(--sp-5)}
 
 /* ============ claim flow ============ */
+/* ROUND 6: a column flex container shrinks its items by default, so at the largest
+   text size the claim form's verify-options were compressed to their min-height
+   while their text needed 26px more, and overflow:visible spilled the description
+   onto the control below. The owner screens' locked panel did the same, 9px. The
+   items simply do not shrink; the body already scrolls, which is the correct answer
+   for "there is more content than screen". Same mechanism as .flowhead above. */
+.claimscreen .screen-body > *,.ownerscreen .screen-body > *{flex-shrink:0}
 .claimscreen .screen-body{background:var(--ground);display:flex;flex-direction:column}
 /* ---- ROUND 5: A PUSHED SCREEN'S TITLE ROW IS THE BOARD'S DARK HEADER --------
    Every board screen has a solid deep-indigo bar across the top; on a pushed
@@ -1426,15 +1628,20 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
   margin:var(--sp-0) calc(-1 * var(--inset-x)) var(--sp-6);
   padding:46px var(--sp-5) var(--sp-5);
   background:var(--chrome-bg);
-  display:flex;align-items:center;gap:var(--sp-3);min-height:44px;
+  display:flex;align-items:center;gap:var(--sp-3);min-height:var(--tap);
+  /* ROUND 6: the header is a flex ITEM of the column .screen-body, so it inherited
+     flex-shrink:1 and was compressed below its content at the largest text size --
+     the same mechanism the QA sweep found on .verify-opt. 58px of box for 70px of
+     wrapped title on four owner screens. It grows instead. */
+  flex:0 0 auto;
 }
 .flowhead .backbtn{
-  flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--chrome-edge);border-radius:50%;
+  flex:0 0 var(--tap);width:var(--tap);height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:50%;
   background:var(--chrome-fill);cursor:pointer;
   color:var(--chrome-ink);font-size:var(--icon-glyph);font-weight:var(--fw-strong);
   display:flex;align-items:center;justify-content:center;
 }
-.flowhead h2{flex:1;text-align:center;color:var(--chrome-ink);font-size:var(--fs-h2);font-weight:var(--fw-display);margin-right:44px;line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
+.flowhead h2{flex:1;text-align:center;color:var(--chrome-ink);font-size:var(--fs-h2);font-weight:var(--fw-display);margin-right:var(--tap);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
 /* the dark bar takes the same sky focus ring the app bar and the nav already use */
 .flowhead :focus-visible{
   outline-color:var(--sky400) !important;box-shadow:0 0 0 6px rgba(23,16,61,.92) !important;
@@ -1442,11 +1649,11 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .phone.hc .flowhead :focus-visible{outline-color:var(--white) !important}
 .searchfield{
   display:flex;align-items:center;gap:var(--sp-4);background:#fff;border:2px solid var(--edge);border-radius:var(--r-3);
-  padding:var(--sp-0) var(--sp-6);min-height:48px;margin-top:var(--sp-1);
+  padding:var(--sp-0) var(--sp-6);min-height:var(--tap);margin-top:var(--sp-1);
 }
 .searchfield input{
   flex:1;border:none;outline:none;font-family:inherit;font-size:var(--fs-body);font-weight:var(--fw-body);color:var(--ink);
-  background:none;min-width:0;min-height:44px;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+  background:none;min-width:0;min-height:var(--tap);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .claim-result{
   display:flex;align-items:center;gap:var(--sp-5);width:100%;background:#fff;border:2px solid var(--edge);
   border-radius:var(--r-3);padding:var(--sp-5) var(--sp-6);margin-top:var(--sp-4);cursor:pointer;font-family:inherit;text-align:left;
@@ -1469,19 +1676,19 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 }
 .field input[type=email],.field input[type=tel],.field input[type=text]{
   width:100%;border:2px solid var(--edge);border-radius:var(--r-2);padding:var(--sp-5) var(--sp-5);font-family:inherit;font-size:var(--fs-body);line-height:var(--lh-row);
-  color:var(--ink);font-weight:var(--fw-body);background:#fff;min-height:44px;
+  color:var(--ink);font-weight:var(--fw-body);background:#fff;min-height:var(--tap);
 }
 .verify-opt{
   display:flex;align-items:flex-start;gap:var(--sp-5);width:100%;background:#fff;border:2px solid var(--edge);
   border-radius:var(--r-3);padding:var(--sp-5) var(--sp-5);margin-top:var(--sp-4);cursor:pointer;min-height:56px;
 }
 .verify-opt input{accent-color:var(--purple);width:20px;height:20px;margin-top:var(--sp-1);flex:0 0 auto;cursor:pointer}
-.verify-opt.sel{border-color:var(--purple)}
+.verify-opt.sel{border-color:var(--purple);box-shadow:inset 0 0 0 1px var(--purple)}
 .verify-opt .vo-name{font-weight:var(--fw-strong);font-size:var(--fs-body);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .verify-opt .vo-sub{display:block;font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .authz{
   display:flex;align-items:flex-start;gap:var(--sp-5);margin-top:var(--sp-6);cursor:pointer;
-  font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--ink);line-height:var(--lh-sub);min-height:44px;letter-spacing:var(--ls-flat);}
+  font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--ink);line-height:var(--lh-sub);min-height:var(--tap);letter-spacing:var(--ls-flat);}
 .authz input{accent-color:var(--purple);width:20px;height:20px;flex:0 0 auto;margin-top:var(--sp-0);cursor:pointer}
 .timeline{display:flex;flex-direction:column;margin-top:var(--sp-6);width:100%;max-width:300px;list-style:none}
 .tl-item{display:flex;gap:var(--sp-5);align-items:flex-start;position:relative;padding-bottom:var(--sp-7)}
@@ -1520,7 +1727,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 /* scan library option */
 .lib-link{
   margin-top:var(--sp-6);border:none;background:none;font-family:inherit;color:#F2EEFF;font-weight:var(--fw-strong);
-  font-size:var(--fs-body);cursor:pointer;min-height:44px;display:flex;align-items:center;gap:var(--sp-4);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+  font-size:var(--fs-body);cursor:pointer;min-height:var(--tap);display:flex;align-items:center;gap:var(--sp-4);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 /* correction photo affordance */
 .photo-add{
   display:flex;align-items:center;justify-content:center;gap:var(--sp-4);width:100%;min-height:52px;
@@ -1536,19 +1743,26 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
    needed nowrap. Insetting both edges lets the toast use the full width and wrap. */
 .toast{
   position:absolute;left:16px;right:16px;bottom:104px;margin:var(--sp-0) auto;width:fit-content;
-  transform:translateY(20px);z-index:70;opacity:0;
+  /* spec: "Toasts rise 12 px above bottom navigation over 220 ms ... and can be
+     swiped away." --dur-base is the 220ms; the rise was 20px. */
+  transform:translateY(12px);z-index:70;opacity:0;
   background:var(--ink);color:#fff;font-size:var(--fs-sub);font-weight:var(--fw-body);border-radius:var(--r-4);padding:var(--sp-5) var(--sp-6);
   box-shadow:var(--elev-3-free);
   transition:opacity var(--dur-fast) var(--ease-enter),transform var(--dur-base) var(--ease-enter);pointer-events:none;white-space:normal;max-width:100%;
   text-align:center;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
-.toast.on{opacity:1;transform:translateY(0)}
+.toast.on{opacity:1;transform:translateY(0);pointer-events:auto;touch-action:none;cursor:grab}
+.toast.swiped{opacity:0;transform:translateY(24px)}
 
 /* ============ inline errors for blocked actions (B2b) ============
    A blocked publish now says so next to the control that blocks it, is referenced by
    aria-describedby, and takes focus -- the toast is the echo, not the only channel. */
+/* ROUND 6: an error box is a message, not a quiet accent wash. It was filled with
+   the same lavender as a selected chip, which both muddied the screen and made the
+   one thing that must be noticed the same weight as the calmest thing on it. White
+   ground, the violet keyline it already had, violet ink. */
 .inline-err{
   display:none;align-items:flex-start;gap:var(--sp-4);margin-top:var(--sp-5);padding:var(--sp-5) var(--sp-5);
-  background:var(--purple-wash);border:2px solid var(--purple);border-radius:var(--r-2);
+  background:var(--card);border:2px solid var(--purple);border-radius:var(--r-2);
   font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--purple-ink);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .inline-err.on{display:flex}
 .inline-err .ie-icon{flex:0 0 auto;margin-top:var(--sp-1)}
@@ -1633,7 +1847,9 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 
 /* saved entrances (29) + its empty state */
 .saved-row{align-items:flex-start;padding:var(--sp-5) var(--sp-1)}
-.saved-row .rowicon{background:none;width:34px}
+/* the shared row-icon rule sets flex:0 0 36px, and flex-basis beats width on a
+   flex item, so the 34px here could never take effect. Only the fill was real. */
+.saved-row .rowicon{background:none}
 .saved-row .rowlabel{display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap}
 .upd-badge{
   display:inline-flex;align-items:center;gap:var(--sp-2);border-radius:999px;padding:var(--sp-1) var(--sp-4);
@@ -1681,7 +1897,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 /* 2.6: a single line of copy in a shadowed white card claimed a surface change
    that had not happened. It is a row. */
 .policy-line{
-  display:flex;align-items:center;gap:var(--sp-4);min-height:48px;margin-top:var(--sp-2);
+  display:flex;align-items:center;gap:var(--sp-4);min-height:var(--tap);margin-top:var(--sp-2);
   background:none;border-radius:0;padding:var(--sp-4) var(--sp-1) 0;border-top:1px solid var(--hairline);
   font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--ink);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 
@@ -1702,7 +1918,6 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 }
 .state-card.primary{border-color:var(--purple)}
 .state-card .sc-top{display:flex;align-items:flex-start;gap:var(--sp-5)}
-.state-card .sc-icon{flex:0 0 52px;width:52px;height:52px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center}
 .state-card .sc-h{font-weight:var(--fw-display);font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:var(--ls-h3);}
 .state-card .sc-p{font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);line-height:var(--lh-sub);margin-top:var(--sp-2);letter-spacing:var(--ls-flat);}
 .state-card .btn{margin-top:var(--sp-1)}
@@ -1716,13 +1931,13 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:var(--sp-6) var(--sp-6) var(--sp-6)}
 .ow-hero-mark{display:flex;align-items:center;gap:var(--sp-5)}
 .ow-check{
-  width:44px;height:44px;border-radius:50%;border:2px solid var(--purple);background:#fff;
+  width:var(--tap);height:var(--tap);border-radius:50%;border:2px solid var(--purple);background:#fff;
   display:flex;align-items:center;justify-content:center;color:var(--purple);
 }
 .ow-hero .card-name{margin-top:var(--sp-5)}
 .ow-hero .card-sub{margin-top:var(--sp-2)}
 .ow-attest{font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-strong);margin-top:var(--sp-3);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.ow-feat{display:flex;align-items:center;gap:var(--sp-5);min-height:44px;padding:var(--sp-3) var(--sp-1);border-bottom:1px solid var(--hairline);font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+.ow-feat{display:flex;align-items:center;gap:var(--sp-5);min-height:var(--tap);padding:var(--sp-3) var(--sp-1);border-bottom:1px solid var(--hairline);font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-feat:last-child{border-bottom:none}
 .ow-feat .fi{flex:0 0 24px;display:flex;justify-content:center;color:var(--blue)}
 .ow-feat .fname{flex:1}
@@ -1735,7 +1950,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-notseen{
   margin-top:var(--sp-5);background:var(--blue-wash);border:2px dashed var(--blue);border-radius:var(--r-2);
   padding:var(--sp-4) var(--sp-5);font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--blue-ink);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
-.ow-scanline{display:flex;align-items:center;gap:var(--sp-5);min-height:48px;padding:var(--sp-4) var(--sp-1)}
+.ow-scanline{display:flex;align-items:center;gap:var(--sp-5);min-height:var(--tap);padding:var(--sp-4) var(--sp-1)}
 .ow-scanline .rowmain{flex:1}
 .ow-scanline .rowlabel{display:block;font-weight:var(--fw-strong);font-size:var(--fs-body);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-scanline .rowsub{display:block;font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
@@ -1750,7 +1965,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-sel{position:relative;display:flex;align-items:center}
 .ow-sel select{
   appearance:none;-webkit-appearance:none;border:none;background:none;font-family:inherit;font-weight:var(--fw-strong);
-  font-size:var(--fs-body);color:var(--purple-ink);min-height:44px;padding:var(--sp-0) var(--sp-7) var(--sp-0) var(--sp-4);cursor:pointer;text-align:right;
+  font-size:var(--fs-body);color:var(--purple-ink);min-height:var(--tap);padding:var(--sp-0) var(--sp-7) var(--sp-0) var(--sp-4);cursor:pointer;text-align:right;
   direction:rtl;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-sel select option{direction:ltr;text-align:left}
 .ow-sel::after{content:"\25BE";position:absolute;right:4px;color:var(--sub);pointer-events:none;font-weight:var(--fw-strong)}
@@ -1761,7 +1976,6 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-locked .lk-main{flex:1;font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-locked .lk-sub{display:block;font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-1);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .ow-locked .lk-lock{flex:0 0 auto;display:flex;align-items:center;gap:var(--sp-3);font-size:var(--fs-meta);font-weight:var(--fw-body);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.ow-locked .lk-icon{background:#fff}
 .ow-cta{margin-top:auto;padding-top:var(--sp-6)}
 .ow-photo{display:flex;gap:var(--sp-5);align-items:stretch;background:#fff;border-radius:var(--r-3);box-shadow:var(--elev-1);padding:var(--sp-5);margin-top:var(--sp-5)}
 .ow-photo .ph-img{position:relative;width:136px;height:118px;border-radius:var(--r-2);overflow:hidden;flex:0 0 auto;background:var(--blue-wash)}
@@ -1773,7 +1987,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-photo .ph-side{flex:1;display:flex;flex-direction:column;justify-content:center;min-width:0}
 .ow-photo .ph-name{font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--ink);padding:var(--sp-0) var(--sp-2) var(--sp-2);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .ow-photo .ph-btn{
-  min-height:44px;border:none;background:none;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
+  min-height:var(--tap);border:none;background:none;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
   color:var(--purple-ink);text-align:left;padding:var(--sp-0) var(--sp-3);cursor:pointer;border-radius:var(--r-2);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-photo .ph-btn.quiet{color:var(--sub)}
 .ow-photo.flag{box-shadow:var(--ring-select), var(--elev-1)}
@@ -1785,7 +1999,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-review .rv-row .rv-i.info{background:var(--blue-wash);color:var(--blue-ink)}
 .ow-review .rv-row .rv-sub{display:block;font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .ow-diff{background:#fff;border-radius:var(--r-3);box-shadow:var(--elev-1);padding:var(--sp-2) var(--sp-6);margin-top:var(--sp-5)}
-.ow-diffrow{display:flex;flex-direction:column;gap:var(--sp-2);padding:var(--sp-5) 0;min-height:44px}
+.ow-diffrow{display:flex;flex-direction:column;gap:var(--sp-2);padding:var(--sp-5) 0;min-height:var(--tap)}
 .ow-diffrow .d-name{font-weight:var(--fw-strong);font-size:var(--fs-body);color:var(--ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .ow-diffrow .d-change{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--sub);flex-wrap:wrap;line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .ow-diffrow .d-before{text-decoration:line-through;text-decoration-thickness:1.5px}
@@ -1814,17 +2028,17 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .ow-pubhero .ow-check{width:48px;height:48px}
 .ow-tierline{display:flex;align-items:center;gap:var(--sp-3);font-weight:var(--fw-display);color:var(--purple-ink);font-size:var(--fs-h3);margin-top:var(--sp-4);line-height:var(--lh-h3);letter-spacing:var(--ls-h3);}
 .ow-taxlink{
-  display:inline-flex;align-items:center;gap:var(--sp-3);min-height:44px;color:var(--purple-ink);font-weight:var(--fw-strong);
+  display:inline-flex;align-items:center;gap:var(--sp-3);min-height:var(--tap);color:var(--purple-ink);font-weight:var(--fw-strong);
   text-decoration:none;font-size:var(--fs-body);padding:var(--sp-0) var(--sp-1);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 /* 44 - public-listing preview: the prototype's own card, docked at Full, under a preview banner */
 #ow-listing .screen-body{padding:0;overflow:hidden;position:relative;background:var(--ground);display:block}
 .ow-mapground{position:absolute;left:0;right:0;top:0;height:250px;overflow:hidden}
 .ow-banner{
   position:absolute;top:50px;left:12px;right:12px;z-index:22;display:flex;align-items:center;gap:var(--sp-4);
-  background:var(--float-white);border-radius:999px;box-shadow:var(--elev-2);padding:var(--sp-2) var(--sp-6) var(--sp-2) var(--sp-2);min-height:48px;
+  background:var(--float-white);border-radius:999px;box-shadow:var(--elev-2);padding:var(--sp-2) var(--sp-6) var(--sp-2) var(--sp-2);min-height:var(--tap);
 }
 .ow-banner .backbtn{
-  flex:0 0 44px;width:44px;height:44px;border:none;border-radius:50%;background:#E9E3FE;cursor:pointer;
+  flex:0 0 var(--tap);width:var(--tap);height:var(--tap);border:none;border-radius:50%;background:#E9E3FE;cursor:pointer;
   color:var(--purple-ink);font-size:var(--icon-glyph);font-weight:var(--fw-strong);
 }
 .ow-banner .bn-text{flex:1;font-size:var(--fs-sub);line-height:var(--lh-sub);font-weight:var(--fw-strong);color:var(--purple-ink)}
@@ -1981,8 +2195,8 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           <div class="me-h">No entrances mapped here yet</div>
           <div class="me-p">Be the first to help neighbors plan ahead.</div>
           <div class="card-actions">
-            <button class="btn marigold" id="me-scan" style="min-height:44px">Scan an entrance</button>
-            <button class="btn ghost" id="me-area" style="min-height:44px">Try another area</button>
+            <button class="btn marigold" id="me-scan" style="min-height:var(--tap)">Scan an entrance</button>
+            <button class="btn ghost" id="me-area" style="min-height:var(--tap)">Try another area</button>
           </div>
         </div>
         <div class="nearby-title" id="nearby-title">Nearby matches</div>
@@ -2016,7 +2230,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             </div>
           </div>
           <div class="card-actions" style="margin-top:var(--sp-6)">
-            <button class="btn primary" id="btn-signin" style="min-height:44px">Sign in to save</button>
+            <button class="btn primary" id="btn-signin" style="min-height:var(--tap)">Sign in to save</button>
           </div>
         </div>
 
@@ -2124,7 +2338,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             Accessibility fixes may qualify for federal tax credits &mdash; ask your accountant.
           </div>
           <div class="card-actions" style="margin-top:var(--sp-5)">
-            <button class="btn primary" id="btn-claim" style="min-height:48px">Start a claim</button>
+            <button class="btn primary" id="btn-claim" style="min-height:var(--tap)">Start a claim</button>
           </div>
           <button class="prof-row" data-go="ow-overview" style="margin-top:var(--sp-4);border-bottom:none">
             <span class="rowicon" id="mybiz-icon"></span>
@@ -2153,7 +2367,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           <div class="e-h">No saved entrances yet</div>
           <div class="e-p">Save an entrance from its card and we'll tell you when its information changes.</div>
           <div class="card-actions">
-            <button class="btn primary" id="saved-find" style="min-height:44px">Find an entrance</button>
+            <button class="btn primary" id="saved-find" style="min-height:var(--tap)">Find an entrance</button>
           </div>
         </div>
         <p class="tabfoot">Freshness describes time, never the place. Trust pins only upgrade.</p>
@@ -2568,6 +2782,10 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           <label for="claim-phone">Business phone</label>
           <input type="tel" id="claim-phone" placeholder="(512) 555-0137" autocomplete="off">
         </div>
+        <p class="inline-err" id="claim-contact-err">
+          <svg class="ie-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5" stroke-linecap="round"/></svg>
+          <span id="claim-contact-err-text">Add the address or number we should verify you on.</span>
+        </p>
         <div class="chips-title" style="margin-top:var(--sp-6)">How should we verify you?</div>
         <label class="verify-opt sel" id="vo-email">
           <input type="radio" name="claim-verify" value="email" checked>
@@ -2612,7 +2830,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             <path d="M68.5 70l4 4 7-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <h2 class="scan-h" style="font-size:var(--fs-h2);margin-top:var(--sp-6)">We're reviewing your claim</h2>
-          <p class="scan-p" style="margin-top:var(--sp-3)">We'll email you when your workspace is ready.</p>
+          <p class="scan-p" id="claim-track-how" style="margin-top:var(--sp-3)">We'll email you when your workspace is ready.</p>
           <ul class="timeline" role="list" aria-label="Claim progress">
             <li class="tl-item done"><span class="tl-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span><span><span class="tl-name">Submitted</span><span class="tl-sub">Just now &mdash; done</span></span></li>
             <li class="tl-item done"><span class="tl-dot ic" data-icon="check" data-size="12" aria-hidden="true"></span><span><span class="tl-name">Business match</span><span class="tl-sub">Just now &mdash; done</span></span></li>
@@ -2629,7 +2847,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             </div>
           </div>
           <div class="card-actions" style="margin-top:var(--sp-6);width:100%;flex-direction:column">
-            <button class="btn primary" data-go="ow-overview">Open My Business (staged)</button>
+            <button class="btn primary" data-go="ow-overview">Open My Business</button>
             <button class="btn ghost" data-goto="screen-profile">Back to Profile</button>
           </div>
         </div>
@@ -2898,20 +3116,14 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           <button data-fresh="7" aria-pressed="false">7 days</button>
           <button data-fresh="30" aria-pressed="false">30 days</button>
         </div>
-        <div class="chips-title">Distance</div>
+        <div class="chips-title">Walking distance</div>
         <div class="dist-row">
-          <input type="range" id="filt-dist" min="0.25" max="2" step="0.25" value="1" aria-label="Distance" aria-valuetext="1 mile">
-          <span class="dist-label" id="filt-dist-label">1 mile</span>
+          <input type="range" id="filt-dist" min="200" max="1000" step="100" value="1000" aria-label="Walking distance" aria-valuetext="Any distance">
+          <span class="dist-label" id="filt-dist-label">Any distance</span>
         </div>
-        <div class="prof-row" style="cursor:default;border-bottom:none;margin-top:var(--sp-2)">
-          <span class="rowmain">
-            <span class="rowlabel">Open now</span>
-          </span>
-          <button class="toggle" id="filt-open" role="switch" aria-checked="false" aria-label="Open now"></button>
-        </div>
-        <div class="card-actions" style="margin-top:var(--sp-5)">
-          <button class="btn primary" id="btn-filt-show">Show 64 places</button>
-        </div>
+      </div>
+      <div class="filt-apply">
+        <button class="btn primary" id="btn-filt-show">Show 64 places</button>
         <p class="filt-caption">Guests can filter now. Sign in to save.</p>
       </div>
     </div>
@@ -2968,6 +3180,10 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           </button>
           <input type="file" id="correct-photo" accept="image/*" hidden>
         </div>
+        <p class="inline-err" id="correct-err">
+          <svg class="ie-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5" stroke-linecap="round"/></svg>
+          <span id="correct-err-text">Tell us what you noticed, or add a photo, so the note has something to review.</span>
+        </p>
         <p class="sheet-p">We'll review your note with the community.</p>
         <div class="card-actions">
           <button class="btn primary" id="btn-correct-send">Send suggestion</button>
@@ -2992,6 +3208,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 
     <!-- ================= NAV ================= -->
     <nav class="navbar" id="navbar">
+      <span class="nav-ind" id="nav-ind" aria-hidden="true"></span>
       <button class="navbtn on" id="nav-map" aria-current="page" aria-label="Map">
         <span class="ic" data-icon="map" data-size="23" aria-hidden="true"></span>
         Map
@@ -3091,12 +3308,23 @@ function featsOf(p){
 /* places: estimated + doors (Jo's staged owner) */
 const places = [];
 DATA.est.forEach(e=>places.push({...e, tier:'est'}));
+/* ROUND 6: a scanned place carries the date it was actually scanned. Every one of
+   the twelve used to be dated 2026-09-02 and the card printed "Seen 2 days ago"
+   from a string literal, ignoring the field entirely -- so the freshness filter had
+   nothing to filter on and the card would have said "2 days" whatever the data
+   said. The four pilot doors the owner workspace is bound to keep their real date;
+   the rest of the pilot sweep is dated across the fortnight it took, which is what
+   a scanning pilot looks like and what makes 7 days and 30 days two windows rather
+   than one. Nothing here changes a tier: an older scan is still a scan. */
+const SCAN_DATE = {'door-01':'2026-09-02','door-02':'2026-09-02','door-03':'2026-09-02',
+  'door-04':'2026-09-02','door-05':'2026-08-31','door-06':'2026-08-29','door-07':'2026-08-24',
+  'door-08':'2026-08-21','door-09':'2026-08-18','door-10':'2026-08-14','door-12':'2026-08-11'};
 DATA.doors.forEach(d=>{
   const tier = d.id==='door-11' ? 'owner' : 'scan'; /* Jo's Coffee staged Owner-confirmed */
-  places.push({...d, tier, date:'2026-09-02'});
+  places.push({...d, tier, date: tier==='owner' ? '2026-09-04' : (SCAN_DATE[d.id]||'2026-09-02')});
 });
 places.forEach(p=>p.f = featsOf(p));
-/* State record (staged for demo): Royal Blue's receipt carries a Texas accessibility
+/* State record: Royal Blue's receipt carries a Texas accessibility
    inspection line. The flag sits beside that receipt line ONLY -- it never touches the
    pin, and there is no state-records map layer (product doc 2026-09-04). */
 const TABS_PLACE = places.find(p=>p.id==='door-04');
@@ -3170,7 +3398,21 @@ const PIN_HEAD = {x:48, y:41.3, r:36};
    not for a marker sitting on a drawn map. Widths are the Round 2 values re-scaled
    by 95.1/52 so the rendered halo is the same thickness it has always been. */
 function pinHalo(d){
-  return '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="15.7" stroke-linejoin="round"/>'
+  /* ROUND 6 adds the board's base underneath it. Visual language 16: "Scanned
+     on-site is marigold ... sitting on a soft lavender halo disc. The halo is a
+     soft filled disc behind the pin, not a ring drawn around it." The build had
+     only the ring. The disc is drawn FIRST, so the opaque white lift strokes still
+     sit directly against the teardrop and every contrast figure measured for the
+     pin outlines is against white exactly as before -- the disc only changes what
+     is under the outermost, most transparent stroke.
+     It is the same disc for all three tiers, so it carries no tier information and
+     recolours nothing: a pin's fill, stroke and glyph are untouched by selection,
+     match, freshness and provenance, and by this.
+     This is also the only consumer of --lavender-path, which is why that token is
+     a real role and not a name waiting for a palette. */
+  var cx=PIN_HEAD.x, cy=PIN_HEAD.y;
+  return '<circle cx="'+cx+'" cy="'+cy+'" r="47" fill="var(--lavender-path,#E2DAFF)" opacity=".55"/>'
+       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="15.7" stroke-linejoin="round"/>'
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="10.2" stroke-linejoin="round"/>'
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="5.9" stroke-linejoin="round"/>';
 }
@@ -4063,6 +4305,26 @@ document.getElementById('legend').addEventListener('click',e=>openSheet('sheet-t
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function fmtMonth(d){ if(!d) return 'date unavailable'; const [y,m]=d.split('-'); return MONTHS[+m-1]+' '+y; }
 function monthsOld(d){ if(!d) return 999; const [y,m]=d.split('-').map(Number); return (2026-y)*12+(9-m); }
+/* ROUND 6: the pilot's today, in one place. monthsOld() already assumed 2026-09 and
+   the card copy already assumed the 4th ("scanned Sep 2" / "seen 2 days ago"), so
+   this names what was scattered rather than introducing anything new. */
+const APP_TODAY=[2026,9,4];
+/* age of a record in whole days. A YYYY-MM date (street imagery has month precision
+   and nothing finer) is read at mid-month, which is only ever used to answer "is
+   this older than 30 days", and every such record is years old. */
+function ageDays(d){
+  if(!d) return 99999;
+  const a=d.split('-').map(Number);
+  const then=Date.UTC(a[0], a[1]-1, a[2]||15);
+  const now=Date.UTC(APP_TODAY[0], APP_TODAY[1]-1, APP_TODAY[2]);
+  return Math.max(0, Math.round((now-then)/86400000));
+}
+function daysAgoLabel(n){
+  if(n<=0) return 'today';
+  if(n===1) return 'yesterday';
+  return n+' days ago';
+}
+function fmtDay(d){ if(!d) return 'date unavailable'; const a=d.split('-'); return MONTHS[+a[1]-1]+' '+(+a[2]||1); }
 function ageLabel(d){
   const mo=monthsOld(d);
   if(mo>=999) return 'a while ago';
@@ -4105,10 +4367,27 @@ function setCardPos(pos,announce){
      instead of teleporting. The pan itself is now the spec's 450ms map camera while
      the sheet snaps in 320ms, so the sheet arrives and the ground is still easing
      under it -- which is what a camera move is supposed to feel like. Read once
-     immediately, and once again after the sheet has settled -- on a TIMER, never
-     `transitionend`, which at 0.01ms can fire before the listener attaches (4.7). */
+     immediately, and again once the sheet has settled.
+     ROUND 6: "settled" is MEASURED now, not timed. Round 5 read it again at a fixed
+     340ms -- a guess at --dur-sheet plus slack, wrong whenever the sheet takes a
+     different time to arrive (reduced motion, a stop whose content reflows, a
+     throttled frame). whenSettled() watches the height on animation frames and
+     fires when it stops changing, with a frame ceiling so it can never hang.
+     `transitionend` is still avoided deliberately: at a zeroed duration it can fire
+     before a listener attaches (4.7); a frame loop cannot miss its own event. */
   requestAnimationFrame(revealSelected);
-  defer(340, revealSelected);
+  whenSettled(sh, revealSelected);
+}
+/* fires fn once the element's box has stopped changing -- two identical frames, or
+   the ceiling, whichever comes first. The readiness answer for "after it moves". */
+function whenSettled(el, fn, maxFrames){
+  let last=-1, same=0, n=0, cap=maxFrames||40;
+  (function tick(){
+    const h=el.offsetHeight + el.getBoundingClientRect().top;
+    if(h===last){ if(++same>=2){ fn(); return; } } else { same=0; last=h; }
+    if(++n>=cap){ fn(); return; }
+    requestAnimationFrame(tick);
+  })();
 }
 function stepCard(dir){
   const i=CARD_POS.indexOf(cardPos);
@@ -4195,7 +4474,7 @@ function cardHTML(p){
     const nv = p.views||1;
     if(p.tier==='owner'){
       prov += provRow(iconSVG('store',20,'var(--purple-ink)'),
-        `Owner update \u00b7 today <span style="color:var(--sub);font-weight:var(--fw-body)">(staged for demo)</span>`,
+        'Owner update \u00b7 today',
         `<span class="pr-sub" style="color:var(--purple-ink)">confirmed at the door, attested in-app</span>`,'rcpt-owner');
     }
     /* neighbors = distinct contributors (receipt framing) */
@@ -4257,7 +4536,12 @@ function cardHTML(p){
         + `aria-expanded="false" aria-controls="ev-box">${FEATS[k].label}${dotTriple(f.c,tcol)}`
         + (needed?'<span class="needed-badge">needed</span>':'') + `</button>`;
     });
-    chips+='</div><div class="evidence ev-box" id="ev-box"></div>';
+    /* ROUND 6: the evidence box is a grid whose single row animates from 0fr to
+       1fr, so its HEIGHT eases over the spec's 240ms instead of switching on a
+       `display` toggle. The chips sit above it and do not move, which is the other
+       half of the clause ("keeps the chip anchored while its receipt expands
+       beneath it"). */
+    chips+='</div><div class="evidence ev-box" id="ev-box"><div class="ev-inner"></div></div>';
   }
   let softRows='';
   if(p.tier!=='est' && checked.length){
@@ -4271,7 +4555,7 @@ function cardHTML(p){
       : `Not yet seen from these photos.`;
     unknownRow = `<div class="unknown-row">${invite}
       <span class="softlist">${unknown.map(k=>FEATS[k].label).join(' \u00b7 ')}</span>
-      ${p.tier==='est'?'<div class="ur-cta"><button class="btn marigold" data-act="scan-this" style="min-height:44px">Scan this entrance</button></div>':''}
+      ${p.tier==='est'?'<div class="ur-cta"><button class="btn marigold" data-act="scan-this" style="min-height:var(--tap)">Scan this entrance</button></div>':''}
     </div>`;
   }
 
@@ -4283,8 +4567,8 @@ function cardHTML(p){
       <span class="n-age">${iconSVG('clock',13,'var(--amber-ink)')} Last scanned ${ageLabel(p.date)}</span>
       <div class="n-p">A fresh photo helps everyone plan with confidence.</div>
       <div class="card-actions">
-        <button class="btn marigold" data-act="recheck" style="min-height:44px">Re-check entrance</button>
-        <button class="btn ghost" data-act="recheck-later" style="min-height:44px">Maybe later</button>
+        <button class="btn marigold" data-act="recheck" style="min-height:var(--tap)">Re-check entrance</button>
+        <button class="btn ghost" data-act="recheck-later" style="min-height:var(--tap)">Maybe later</button>
       </div>
     </div>`;
   }
@@ -4368,7 +4652,9 @@ function freshLabel(p){
   }
   if(p.staged) return {t:'Fresh today', v:'Fresh today', sub:'scanned just now', aged:false};
   if(p.tier==='owner') return {t:'Updated today', v:'Updated today', sub:'owner update \u00b7 today', aged:false};
-  return {t:'Seen 2 days ago', v:'Seen 2 days ago', sub:'scanned Sep 2', aged:false};
+  /* ROUND 6: derived from p.date, not asserted. */
+  const dd=ageDays(p.date), lab='Seen '+daysAgoLabel(dd);
+  return {t:lab, v:lab, sub:'scanned '+fmtDay(p.date), aged:false};
 }
 function provRow(icon, main, sub, key){
   return `<button class="prov-row" data-rcpt="${key}">
@@ -4421,7 +4707,7 @@ function wireCard(el,p){
       const others=()=>el.querySelectorAll('.fchip[data-ev]').forEach(o=>o.setAttribute('aria-expanded','false'));
       if(box.classList.contains('on') && box.dataset.k===k){box.classList.remove('on');others();return;}
       box.dataset.k=k;
-      box.innerHTML = `<b>${FEATS[k].label}</b> \u00b7 confidence ${Math.round(f.c)}% \u2014 ${esc(txt)}`;
+      box.querySelector('.ev-inner').innerHTML = `<b>${FEATS[k].label}</b> \u00b7 confidence ${Math.round(f.c)}% \u2014 ${esc(txt)}`;
       box.classList.add('on');
       others(); ch.setAttribute('aria-expanded','true');
     });
@@ -4480,7 +4766,7 @@ function openReceipt(p){
     photos=`<div class="rcpt-photos">${PHOTOS[p.id].map((u,i)=>`<img src="${u}" alt="Entrance photo ${i+1} of ${esc(p.name)}">`).join('')}</div>`;
   }
   const when = p.staged ? 'Photographed just now' : 'Photographed Tuesday';
-  const whenSub = p.staged ? 'today \u00b7 your scan, at the door' : 'Sep 2 \u00b7 at the door, in-app';
+  const whenSub = p.staged ? 'today \u00b7 your scan, at the door' : (fmtDay(p.date)+' \u00b7 at the door, in-app');
   const nViews = p.views||1;
   let rows = `
     <div class="rcpt-row">
@@ -4495,7 +4781,7 @@ function openReceipt(p){
     rows += `
     <div class="rcpt-row">
       <span class="rc-icon">${iconSVG('profile',17,'var(--purple-ink)')}</span>
-      <span>1 owner<span class="rc-sub">attested at the door, in-app \u00b7 staged for demo</span></span>
+      <span>1 owner<span class="rc-sub">attested at the door, in-app</span></span>
     </div>`;
   }
   if(p.tabs){
@@ -4503,7 +4789,7 @@ function openReceipt(p){
     rows += `
     <div class="rcpt-row">
       <span class="rc-icon">${texasFlagSVG()}</span>
-      <span>Texas accessibility inspection on record \u00b7 ${p.tabs.year}<span class="rc-sub">independent state record \u00b7 staged for demo \u2014 informs the receipt, never the pin tier</span></span>
+      <span>Texas accessibility inspection on record \u00b7 ${p.tabs.year}<span class="rc-sub">independent state record \u2014 informs the receipt, never the pin tier</span></span>
     </div>`;
   }
   el.innerHTML = `
@@ -4536,6 +4822,63 @@ let sheetOpener=null, openSheetId=null;
 /* bumped by every screen change: a queued "return focus to the opener" is abandoned if
    the app navigated somewhere else in the meantime */
 var navToken=0;
+/* ---- ROUND 6: WAIT ON READINESS, NEVER ON A CLOCK ---------------------------
+   Every deferred focus in this file used to be a setTimeout sized to an animation:
+   40ms into a sheet, 20ms back to its opener. A timer is a GUESS about when the
+   element becomes focusable, and it is wrong in both directions -- too early under
+   any condition that delays paint (a transition-delay the reduced-motion rules did
+   not zero, a throttled frame, a slow first layout of a sheet's contents), and
+   pointlessly late otherwise. When it fires early, HTMLElement.focus() on a
+   visibility:hidden or display:none subtree is a SILENT no-op: no error, no
+   return value, nothing to check, and nothing retried. Focus was then left on
+   <body> -- with every screen inert behind a modal sheet, which is a screen-reader
+   user parked in an empty document with no announcement and no way out.
+
+   focusWhenReady() removes the whole class rather than re-timing it:
+     - it asks whether the element is actually focusable NOW (laid out, and no
+       ancestor hidden by visibility or display),
+     - it focuses and then VERIFIES that focus landed,
+     - if either check fails it retries on the next animation frame, up to ~1s,
+       so it tracks the real transition instead of predicting it,
+     - `stillWanted` is re-tested every frame, so a queued focus is abandoned the
+       moment the app navigates or the surface closes,
+     - and if the element never becomes focusable it falls back to the container,
+       which always has tabindex="-1". Focus cannot be dropped on the floor.
+   It resolves within one frame when the surface is already up, so the reduced-
+   motion path is not slower than the animated one -- it is the same path. */
+function isFocusable(el){
+  if(!el || !el.isConnected) return false;
+  if(!el.getClientRects().length) return false;      /* not laid out / display:none */
+  for(let n=el; n && n.nodeType===1; n=n.parentElement){
+    const cs=getComputedStyle(n);
+    if(cs.visibility==='hidden' || cs.visibility==='collapse' || cs.display==='none') return false;
+    if(n.hasAttribute('inert')) return false;
+  }
+  return true;
+}
+const FOCUS_MAX_FRAMES=60;   /* ~1s at 60fps: a ceiling, not a wait */
+function focusWhenReady(el, stillWanted, fallback){
+  let frames=0;
+  const want = stillWanted || (()=>true);
+  if(!el) frames=FOCUS_MAX_FRAMES;    /* nothing to wait for: go straight to the fallback */
+  (function attempt(){
+    if(!want()) return;                               /* the app moved on -- leave focus alone */
+    if(el && isFocusable(el)){
+      if(!el.hasAttribute('tabindex') && !el.matches(FOCUSABLE)) el.setAttribute('tabindex','-1');
+      el.focus({preventScroll:true});
+      if(document.activeElement===el || el.contains(document.activeElement)) return;  /* landed */
+    }
+    if(frames++>=FOCUS_MAX_FRAMES){
+      const fb = typeof fallback==='function' ? fallback() : fallback;
+      if(fb && isFocusable(fb)){
+        if(!fb.hasAttribute('tabindex')) fb.setAttribute('tabindex','-1');
+        fb.focus({preventScroll:true});
+      }
+      return;
+    }
+    requestAnimationFrame(attempt);
+  })();
+}
 function visibleFocusables(root){
   return [...root.querySelectorAll(FOCUSABLE)].filter(el=>!el.hidden && el.offsetParent!==null);
 }
@@ -4547,6 +4890,25 @@ function setBackgroundInert(on, exceptEl){
     if(on && el!==exceptEl && !INERT_EXEMPT.has(el.id)) el.setAttribute('inert','');
     else el.removeAttribute('inert');
   });
+}
+/* The sheets are direct children of .phone, so the rule above reaches them in one
+   level. The search overlay is NOT -- it lives inside #screen-map's body -- which is
+   why passing it to setBackgroundInert() would have inerted its own ancestor and
+   taken the overlay down with the background. This walks the ancestor chain and
+   inerts the siblings at every level instead, and it only ever removes the flags it
+   set itself, so it can never undo a sheet's inert. */
+let inertMarked=[];
+function clearInertOutside(){ inertMarked.forEach(c=>c.removeAttribute('inert')); inertMarked=[]; }
+function inertOutside(el){
+  clearInertOutside();
+  for(let node=el; node && node!==phoneEl; node=node.parentElement){
+    const parent=node.parentElement; if(!parent) break;
+    [...parent.children].forEach(c=>{
+      if(c===node || INERT_EXEMPT.has(c.id) || c.hasAttribute('inert')) return;
+      c.setAttribute('inert',''); inertMarked.push(c);
+    });
+    if(parent===phoneEl) break;
+  }
 }
 function openSheet(id, opener){
   const sh=document.getElementById(id);
@@ -4575,10 +4937,16 @@ function openSheet(id, opener){
   /* the card sheet never dims the map -- the selected pin stays visible above it */
   scrim.classList.toggle('on', modal);
   setBackgroundInert(modal, sh);
-  /* focus lands on the sheet's heading (announcing what opened) or its close button */
+  /* focus lands on the sheet's heading (announcing what opened) or its close button.
+     ROUND 6: this waits on the heading actually being focusable, re-checks that the
+     sheet is still the open one AND that the app has not navigated (the navToken
+     guard closeSheets already had, which openSheet was missing -- A3), and falls
+     back to the sheet element itself, which carries a role and an aria-label, so a
+     modal sheet can never leave a screen-reader user on <body> behind an inert app. */
   const target = sh.querySelector('.sheet-h, h2, h3') || sh.querySelector('.sheet-close') || sh;
   if(!target.hasAttribute('tabindex')) target.setAttribute('tabindex','-1');
-  setTimeout(()=>{ if(sh.classList.contains('on')) target.focus({preventScroll:true}); },40);
+  const tok=navToken;
+  focusWhenReady(target, ()=> tok===navToken && openSheetId===id && sh.classList.contains('on'), sh);
 }
 function closeSheets(){
   const wasOpen=!!openSheetId;
@@ -4591,13 +4959,19 @@ function closeSheets(){
   if(selectedId){selectedId=null;renderMap();}
   if(wasOpen && sheetOpener){
     const back=sheetOpener, tok=navToken; sheetOpener=null;
-    /* the pin that opened the card may have been re-rendered: re-find it by id */
-    setTimeout(()=>{
+    /* the pin that opened the card may have been re-rendered: re-find it by id.
+       ROUND 6: resolved on a frame rather than at 20ms, so the re-find happens
+       after the map has actually re-rendered rather than after a guess at it, and
+       the move is verified. If the opener is genuinely gone (its pin clustered
+       away, its screen replaced), focus goes to the current screen, which is
+       labelled -- it is never left on <body>. */
+    const resolve=()=> back.isConnected ? back
+      : (back.dataset && back.dataset.id ? pinsEl.querySelector('[data-id="'+back.dataset.id+'"]') : null);
+    requestAnimationFrame(()=>{
       if(tok!==navToken) return;               /* the app navigated instead -- leave focus alone */
-      const live = back.isConnected ? back
-        : (back.dataset && back.dataset.id ? pinsEl.querySelector('[data-id="'+back.dataset.id+'"]') : null);
-      if(live && live.offsetParent!==null) live.focus({preventScroll:true});
-    },20);
+      focusWhenReady(resolve(), ()=> tok===navToken && !openSheetId,
+                     ()=> document.querySelector('.screen.active'));
+    });
   }
 }
 scrim.addEventListener('click',closeSheets);
@@ -4810,10 +5184,23 @@ function renderNearby(){
 
 /* ===================== filter sheet ===================== */
 const FILT_FEATS=[['step_free','Step-free'],['width','Wide door'],['hardware','Easy-grip']];
-let filtFeats=new Set(), filtFresh='any', filterApplied=false;
+/* ROUND 6: filtDist is a real state variable and filterPass tests it. It is walking
+   distance in FEET, not miles, because every place in the pilot is inside a quarter
+   mile of the pin -- a 0.25-to-2-mile slider could not have excluded a single one,
+   so wiring it in miles would have produced a control that was technically
+   connected and still never changed an answer. Feet is also the unit the card, the
+   pin label and the list already speak in. FILT_DIST_MAX means "any distance". */
+const FILT_DIST_MAX=1000;
+let filtFeats=new Set(), filtFresh='any', filtDist=FILT_DIST_MAX, filterApplied=false;
+/* straight-line feet from the located point, the same arithmetic distLabel prints */
+function distFt(p){ return Math.hypot((p.lng-LOC.lng)*314000, (p.lat-LOC.lat)*364000); }
 function filterPass(p){
   for(const f of filtFeats){ if(!(p.f[f]&&p.f[f].v==='present')) return false; }
-  if(filtFresh!=='any' && p.tier==='est') return false; /* pilot scans are 2 days old; estimates are older imagery */
+  /* ROUND 6: freshness asks how old the evidence is, in days. It used to ask only
+     "is this an estimate?", which is why 7 days and 30 days returned the same 12
+     places -- two labels over one test. Now each window is its own answer. */
+  if(filtFresh!=='any' && ageDays(p.date) > Number(filtFresh)) return false;
+  if(filtDist<FILT_DIST_MAX && distFt(p) > filtDist) return false;
   if(personas.size){ const m=matchOf(p); if(m.state==='unknown') return false; }
   return true;
 }
@@ -4850,10 +5237,14 @@ function renderFilters(){
     b.classList.toggle('sel',on); b.setAttribute('aria-pressed',on);
   });
 }
+/* one definition of "a filter is on", so the button, the badge, the chip row and
+   the applied state cannot disagree about which controls count. */
+function anyFilter(){ return filtFeats.size>0 || filtFresh!=='any' || filtDist<FILT_DIST_MAX || personas.size>0; }
+function filterCount(){ return filtFeats.size+(filtFresh!=='any'?1:0)+(filtDist<FILT_DIST_MAX?1:0)+personas.size; }
 function updateFiltShow(){
   document.getElementById('btn-filt-show').textContent='Show '+filtCount()+' places';
   const badge=document.getElementById('filt-badge');
-  const n=filtFeats.size+(filtFresh!=='any'?1:0)+personas.size;
+  const n=filterCount();
   badge.hidden = !(filterApplied && n>0);
   if(!badge.hidden) badge.textContent=n;
 }
@@ -4861,26 +5252,31 @@ document.querySelectorAll('#filt-fresh button').forEach(b=>b.addEventListener('c
   filtFresh=b.dataset.fresh; renderFilters(); updateFiltShow();
 }));
 const distIn=document.getElementById('filt-dist');
-distIn.addEventListener('input',()=>{
+function distText(v){ return v>=FILT_DIST_MAX ? 'Any distance' : 'Within '+v+' ft'; }
+function syncDist(){
   const v=parseFloat(distIn.value);
-  document.getElementById('filt-dist-label').textContent = v===1?'1 mile':v+' mi';
-  /* otherwise the slider reads "1", not "1 mile" (I12) */
-  distIn.setAttribute('aria-valuetext', v===1?'1 mile':v+' miles');
-});
-const openT=document.getElementById('filt-open');
-openT.addEventListener('click',()=>{
-  const on=!openT.classList.contains('on');
-  openT.classList.toggle('on',on); openT.setAttribute('aria-checked',on);
-});
+  filtDist=v;
+  document.getElementById('filt-dist-label').textContent = distText(v);
+  /* otherwise the slider reads "600", not "within 600 feet" (I12) */
+  distIn.setAttribute('aria-valuetext', v>=FILT_DIST_MAX ? 'Any distance' : 'Within '+v+' feet');
+}
+distIn.addEventListener('input',()=>{ syncDist(); updateFiltShow(); });
+/* ROUND 6: the "Open now" switch is GONE, not hidden and not stubbed. It was a
+   role="switch" reporting aria-checked while changing no result -- a state claimed
+   to a screen reader that the app did not have. It could not be wired honestly
+   either: EntryMap holds entrance evidence, not opening hours, and no place record
+   in the pilot carries them. Inventing hours to make the control move would be a
+   worse defect than the inert switch, on a product whose whole claim is that every
+   line on a card can say where it came from. When hours arrive as real provenance,
+   the control comes back with them. */
 document.getElementById('filt-reset').addEventListener('click',()=>{
   filtFeats.clear(); filtFresh='any'; filterApplied=false;
-  distIn.value=1; document.getElementById('filt-dist-label').textContent='1 mile';
-  openT.classList.remove('on'); openT.setAttribute('aria-checked','false');
+  distIn.value=FILT_DIST_MAX; syncDist();
   personas.clear(); applyPersona();
   renderFilters(); updateFiltShow(); renderMap();
 });
 document.getElementById('btn-filt-show').addEventListener('click',()=>{
-  filterApplied = filtFeats.size>0 || filtFresh!=='any' || personas.size>0;
+  filterApplied = anyFilter();
   renderMap(); renderNearby(); updateFiltShow(); renderChipRow(); closeSheets();
   if(filterApplied) toast('Showing '+filtCount()+' places that fit');
 });
@@ -4918,14 +5314,21 @@ function renderChipRow(){
       const lbl=(FILT_FEATS.find(f=>f[0]===k)||[k,FEATS[k]?FEATS[k].label:k])[1];
       row.appendChild(chipEl(lbl,()=>{
         filtFeats.delete(k);
-        filterApplied = filtFeats.size>0 || filtFresh!=='any' || personas.size>0;
+        filterApplied = anyFilter();
         renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
       }));
     });
+    if(filtDist<FILT_DIST_MAX){
+      row.appendChild(chipEl('Within '+filtDist+' ft',()=>{
+        filtDist=FILT_DIST_MAX; distIn.value=FILT_DIST_MAX; syncDist();
+        filterApplied = anyFilter();
+        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+      }));
+    }
     if(filtFresh!=='any'){
       row.appendChild(chipEl(filtFresh+' days',()=>{
         filtFresh='any';
-        filterApplied = filtFeats.size>0 || personas.size>0;
+        filterApplied = anyFilter();
         renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
       }));
     }
@@ -5005,9 +5408,12 @@ function renderSearch(){
     const groups=groupPlaces(hits);
     if(!groups.length){
       html+=`<div class="sheet-p" style="margin-top:var(--sp-6);text-align:center">No entrances mapped for \u201c${esc(searchIn.value.trim())}\u201d yet. Be the first to help neighbors plan ahead.</div>
-        <div class="card-actions" style="margin-top:var(--sp-5)"><button class="btn marigold" id="search-scan" style="min-height:44px">Scan an entrance</button></div>`;
+        <div class="card-actions" style="margin-top:var(--sp-5)"><button class="btn marigold" id="search-scan" style="min-height:var(--tap)">Scan an entrance</button></div>`;
     }
-    html+=`<div class="chips-title" style="margin-top:var(--sp-5)">${hits.length} entrance${hits.length===1?'':'s'} \u00b7 ${groups.length} business${groups.length===1?'':'es'}</div>`;
+    /* ROUND 6: the count line used to render outside this branch, so a query with
+       no matches printed the friendly empty state and then, directly under it,
+       "0 entrances - 0 businesses". Two answers to the same question. */
+    else html+=`<div class="chips-title" style="margin-top:var(--sp-5)">${hits.length} entrance${hits.length===1?'':'s'} \u00b7 ${groups.length} business${groups.length===1?'':'es'}</div>`;
     groups.sort((a,b)=>Math.min(...a.items.map(p=>Math.hypot(p.lat-LOC.lat,p.lng-LOC.lng)))-Math.min(...b.items.map(p=>Math.hypot(p.lat-LOC.lat,p.lng-LOC.lng))));
     groups.forEach(g=>{
       if(g.items.length===1){ html+=searchRowHTML(g.items[0], entranceSub(g.items[0])); return; }
@@ -5030,21 +5436,46 @@ function selectSearchResult(id){
   openCard(p.id,'medium');           /* centers the entrance (pan-to-reveal) and opens its card */
 }
 let searchOpener=null;
+/* ROUND 6: the overlay declared role="dialog" aria-modal="true" and contained
+   nothing -- 72 focusable elements stayed reachable behind it and the document held
+   zero inert nodes, so Tab walked straight out into the map, the FABs and the
+   bottom nav while a screen reader was being told the rest of the app was gone.
+   That is the same defect class as the filter switch that reported a state it did
+   not have, in the one place where the claim is made to assistive technology only.
+   It gets the treatment .sheet already had: inert the background, trap Tab, and --
+   because openSearch is byte-identical to round one and this was never a
+   regression, just a gap -- the fix is additive. Focus waits on readiness like
+   every other deferred focus in the file now. */
 function openSearch(){
   const a=document.activeElement;
   if(a && a!==document.body && a.offsetParent!==null) searchOpener=a;
   searchOv.hidden=false; renderSearch();
-  setTimeout(()=>searchIn.focus(),50);
+  inertOutside(searchOv);
+  const tok=navToken;
+  focusWhenReady(searchIn, ()=> tok===navToken && !searchOv.hidden, searchOv);
 }
 function closeSearch(){
   const wasOpen=!searchOv.hidden;
   searchOv.hidden=true; searchIn.value='';
   if(!wasOpen) return;
+  clearInertOutside();
   const back = (searchOpener && searchOpener.isConnected && searchOpener.offsetParent!==null)
     ? searchOpener : document.getElementById('search-btn');
   searchOpener=null;
   if(back && back.offsetParent!==null) back.focus({preventScroll:true});
 }
+/* Tab trap for the overlay, mirroring the sheet trap above rather than a second
+   mechanism: inert already removes the background where it is supported, and this
+   covers the browsers where it is not. */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Tab' || searchOv.hidden || openSheetId) return;
+  const items=visibleFocusables(searchOv);
+  if(!items.length) return;
+  const first=items[0], last=items[items.length-1];
+  if(!searchOv.contains(document.activeElement)){ e.preventDefault(); first.focus(); return; }
+  if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+});
 searchIn.addEventListener('input',renderSearch);
 searchIn.addEventListener('keydown',e=>{
   if(e.key==='Escape') closeSearch();
@@ -5160,8 +5591,31 @@ function renderCorrections(){
   el.querySelectorAll('[data-corr-note]').forEach(b=>b.addEventListener('click',
     ()=>toast('Each correction stays on the receipt as its own dated source')));
 }
+/* ROUND 6: an empty correction used to submit and land in My corrections as a
+   dated source with nothing in it. Both selects carry a default, so "send" with
+   nothing typed recorded a category and no observation -- and every correction in
+   this product becomes a line on somebody's evidence receipt. The gate is the
+   narrow one: a note OR a photo, because a photo IS the observation. Same shape as
+   the claim gate that already works -- describe, show, focus, announce. */
+function setCorrectError(on){
+  const err=document.getElementById('correct-err');
+  err.classList.toggle('on',on);
+  cNote.setAttribute('aria-invalid', on?'true':'false');
+  if(on) cNote.setAttribute('aria-describedby','correct-err-text');
+  else { cNote.removeAttribute('aria-describedby'); cNote.removeAttribute('aria-invalid'); }
+}
+cNote.addEventListener('input',()=>{ if(cNote.value.trim()) setCorrectError(false); });
 document.getElementById('btn-correct-send').addEventListener('click',()=>{
   const note=cNote.value.trim();
+  const cpf=document.getElementById('correct-photo');
+  const hasPhoto=!!(cpf && cpf.files && cpf.files.length);
+  if(!note && !hasPhoto){
+    setCorrectError(true);
+    cNote.focus();
+    announceUI('Correction not sent. Tell us what you noticed, or add a photo.');
+    return;
+  }
+  setCorrectError(false);
   corrections.unshift({
     name: correctTarget ? correctTarget.name : 'Entrance',
     what: document.getElementById('correct-what').value + ' \u00b7 ' + document.getElementById('correct-which').value.toLowerCase(),
@@ -5174,7 +5628,7 @@ document.getElementById('btn-correct-send').addEventListener('click',()=>{
      <div><div class="cr-name">${esc(correctTarget?correctTarget.name:'This entrance')}</div>
      <span class="cr-sub">${esc(correctTarget?(correctTarget.addr||entranceSub(correctTarget)):'')}</span>
      ${note?`<span class="cr-sub" style="color:var(--ink);font-style:italic;margin-top:var(--sp-2)">\u201c${esc(note)}\u201d</span>`:''}</div>`;
-  cNote.value=''; document.getElementById('correct-count').textContent='0';
+  cNote.value=''; setCorrectError(false); document.getElementById('correct-count').textContent='0';
   const cp=document.getElementById('correct-photo'); if(cp) cp.value='';
   const cpl=document.getElementById('correct-photo-label'); if(cpl) cpl.textContent='Choose a photo';
   closeSheets();
@@ -5332,9 +5786,10 @@ function setDir(d){ phoneEl.dataset.dir = d; }
 /* the outgoing screen is held under .leaving for exactly one transition. The
    removal is on a TIMER, never `transitionend` / `animationend`, which at the
    reduced-motion durations can fire before a listener attaches (4.7). */
-let leavingEl=null, leavingTimer=null;
+let leavingEl=null, leavingTimer=null, leavingOff=null;
 function clearLeaving(){
   if(leavingTimer){ clearTimeout(leavingTimer); leavingTimer=null; }
+  if(leavingOff){ leavingOff(); leavingOff=null; }
   if(leavingEl){
     leavingEl.classList.remove('screen-out');
     /* a modal sheet inerts the whole background; do not undo its work from here --
@@ -5342,6 +5797,30 @@ function clearLeaving(){
     if(!openSheetId) leavingEl.removeAttribute('inert');
     leavingEl=null;
   }
+}
+/* ROUND 6: the departing screen is removed when its exit animation ENDS, not 20ms
+   after the duration token says it should have. The 280ms timer stays as a
+   watchdog for the cases animationend never arrives (a frozen tab, an animation
+   suppressed by another rule), so the ghost can never be stranded -- which is the
+   defect the product owner's doubled `claim-confirm` screenshot would have been if
+   it had been real. Reproduced and measured: the ghost is present at 50ms and
+   150ms and gone by 300ms, on every path including twelve interleaved navigations,
+   so the screenshot is a mid-transition capture of the exit Round 5 added. Making
+   the removal event-driven shortens the window to the animation's own length and
+   removes the class of failure the timer left open. */
+function holdLeaving(el){
+  leavingEl=el;
+  /* the listener is attached BEFORE the class that starts the animation, so the
+     event cannot be missed -- which is the failure mode that made earlier rounds
+     avoid transitionend/animationend entirely and reach for timers instead. The
+     280ms watchdog stays for the cases where the event never comes at all. */
+  const done=e=>{ if(e.target===el) clearLeaving(); };
+  el.addEventListener('animationend', done);
+  el.addEventListener('animationcancel', done);
+  leavingOff=()=>{ el.removeEventListener('animationend', done); el.removeEventListener('animationcancel', done); };
+  el.classList.add('screen-out');
+  el.setAttribute('inert','');
+  leavingTimer=setTimeout(clearLeaving, 280);   /* watchdog only */
 }
 function showScreen(id){
   if(id!=='scan-capture' && typeof stopCamera==='function') stopCamera();
@@ -5355,11 +5834,8 @@ function showScreen(id){
      the instant equivalent rather than a 0.01ms version of the same animation. */
   const ownsItsExit = outgoing && (outgoing.classList.contains('splash') || outgoing.classList.contains('obscreen'));
   if(outgoing && outgoing!==scrEl && !ownsItsExit && !isReduced()){
-    leavingEl=outgoing;
-    outgoing.classList.add('screen-out');
     /* out of the tab order while it is only a departing image of itself */
-    outgoing.setAttribute('inert','');
-    leavingTimer=setTimeout(clearLeaving, 280);
+    holdLeaving(outgoing);
   }
   /* B8a: the current tab is a real state, not only a 1.05:1 hue change */
   const tabOn={'nav-map':id==='screen-map','nav-scan':/^scan-/.test(id),'nav-profile':PROFILE_TAB.test(id)};
@@ -5368,6 +5844,7 @@ function showScreen(id){
     b.classList.toggle('on',tabOn[k]);
     if(tabOn[k]) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
   });
+  moveNavIndicator();
   /* I1: onboarding and the splash cover the nav completely -- take it out of the tab order */
   const nb=document.getElementById('navbar');
   if(/^ob-/.test(id)) nb.setAttribute('inert',''); else nb.removeAttribute('inert');
@@ -5403,6 +5880,19 @@ function showScreen(id){
     navToken++;
     scr.focus({preventScroll:true});
   }
+}
+/* the indicator's geometry is read from the live tab, so it tracks the bar's own
+   layout rather than a duplicated percentage, and it follows the text size. */
+function moveNavIndicator(){
+  const ind=document.getElementById('nav-ind'); if(!ind) return;
+  const b=document.querySelector('.navbtn.on');
+  if(!b){ ind.style.opacity='0'; return; }
+  const nb=document.getElementById('navbar').getBoundingClientRect(), r=b.getBoundingClientRect();
+  const w=r.width*0.52;
+  ind.style.left=(r.left-nb.left+(r.width-w)/2)+'px';
+  ind.style.width=w+'px';
+  ind.style.backgroundColor=getComputedStyle(b).color;
+  ind.style.opacity='1';
 }
 /* goScreen pushes a back crumb; returning to a screen already on the stack unwinds to it */
 function goScreen(id, tab){
@@ -6099,6 +6589,38 @@ function syncClaimGate(){
 }
 claimAuthz.addEventListener('change',()=>{ if(claimAuthz.checked) setClaimAuthzError(false); syncClaimGate(); });
 syncClaimGate();
+/* ROUND 6: the form used to submit with both contact fields empty and then land on
+   a screen reading "We'll email you when your workspace is ready." No address had
+   been collected, so the confirmation promised a message the app could not send --
+   and on the claim path, where the whole point is proving you are reachable at the
+   business's own contact, that is the one promise that must not be loose.
+   The authorization checkbox was the only validated field in the form; it is
+   untouched, and this is the same shape: mark invalid, describe, show, focus, and
+   announce why nothing was submitted. The rule is the narrow one -- whichever
+   channel the radio group selects must have a value -- so a claimant who picks the
+   phone route is not asked for an email they were never going to use. */
+const claimEmail=document.getElementById('claim-email'), claimPhone=document.getElementById('claim-phone');
+function claimChannel(){
+  const r=document.querySelector('input[name="claim-verify"]:checked');
+  return r && r.value==='call' ? 'call' : 'email';
+}
+function setClaimContactError(on, which){
+  const err=document.getElementById('claim-contact-err');
+  const field = which==='call' ? claimPhone : claimEmail;
+  const other = which==='call' ? claimEmail : claimPhone;
+  err.classList.toggle('on', on);
+  if(on){
+    document.getElementById('claim-contact-err-text').textContent = which==='call'
+      ? "Add the business phone we should call, or choose to verify by business email."
+      : "Add the work email we should send the link to, or choose to verify by phone.";
+    field.setAttribute('aria-invalid','true');
+    field.setAttribute('aria-describedby','claim-contact-err-text');
+  }
+  [field,other].forEach(f=>{ if(!on){ f.removeAttribute('aria-invalid'); f.removeAttribute('aria-describedby'); } });
+  if(on) other.removeAttribute('aria-invalid');
+}
+[claimEmail,claimPhone].forEach(f=>f.addEventListener('input',()=>{ if(f.value.trim()) setClaimContactError(false); }));
+document.querySelectorAll('input[name="claim-verify"]').forEach(r=>r.addEventListener('change',()=>setClaimContactError(false)));
 document.getElementById('btn-claim-submit').addEventListener('click',()=>{
   if(!claimAuthz.checked){
     setClaimAuthzError(true);
@@ -6107,6 +6629,22 @@ document.getElementById('btn-claim-submit').addEventListener('click',()=>{
     return;
   }
   setClaimAuthzError(false);
+  const ch=claimChannel();
+  const val=(ch==='call' ? claimPhone : claimEmail).value.trim();
+  if(!val){
+    setClaimContactError(true, ch);
+    (ch==='call' ? claimPhone : claimEmail).focus();
+    announceUI(ch==='call'
+      ? 'Claim not submitted. Add the business phone we should call.'
+      : 'Claim not submitted. Add the work email we should send the link to.');
+    return;
+  }
+  setClaimContactError(false);
+  /* the confirmation now names the channel it actually collected */
+  const say=document.getElementById('claim-track-how');
+  if(say) say.textContent = ch==='call'
+    ? "We'll call the business's listed phone when your workspace is ready."
+    : "We'll email you when your workspace is ready.";
   document.getElementById('track-pin').innerHTML=pinSVG('owner',38);
   showScreen('claim-track');
 });
@@ -6427,11 +6965,29 @@ cPhoto.addEventListener('change',()=>{
 let toastTimer=null;
 function toast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('on');
+  t.textContent=msg;t.classList.remove('swiped');t.classList.add('on');
   announceUI(msg);
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('on'),4200);
 }
+/* ROUND 6 -- spec, Feedback and system states: "Toasts ... can be swiped away."
+   Any direction past 24px, or a tap, dismisses it; the message has already been
+   announced to a screen reader by then, so nothing is lost by dismissing it, and
+   the toast is never the only channel for anything (B2b). It is not focusable and
+   carries no control, so this adds a shortcut, not a requirement. */
+(function(){
+  const t=document.getElementById('toast');
+  let x0=0,y0=0,down=false;
+  t.addEventListener('pointerdown',e=>{ if(!t.classList.contains('on')) return;
+    down=true; x0=e.clientX; y0=e.clientY; try{t.setPointerCapture(e.pointerId)}catch(_){} });
+  t.addEventListener('pointermove',e=>{ if(!down) return;
+    const dx=e.clientX-x0, dy=e.clientY-y0;
+    if(Math.hypot(dx,dy)>24){ down=false; dismissToast(); } });
+  const up=()=>{ if(!down) return; down=false; dismissToast(); };
+  t.addEventListener('pointerup',up); t.addEventListener('pointercancel',()=>{down=false});
+  function dismissToast(){ clearTimeout(toastTimer); t.classList.add('swiped');
+    setTimeout(()=>{ t.classList.remove('on'); t.classList.remove('swiped'); }, isReduced()?0:160); }
+})();
 
 /* ===================== boot ===================== */
 function fitPhone(){
