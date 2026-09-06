@@ -77,6 +77,16 @@ distinct tiers.
 **Gap.** Increase size and weight, put the real glyph inside each, add the halo, keep the
 dashed treatment for estimated.
 
+**Superseded on the dash, 2026-09-05 (D37, then D43).** The owner: "the dashes around the
+estimates and it also meaning partial is confusing. maybe estimated needs a new icon?" The
+partial-match halo is dashed too, so one line style carried two meanings side by side. Round 8
+replaced the mark with gallery-4 candidate J1: the same white-filled teardrop at the same
+sizes, but a SOLID sky700 outline and the owner's own doorway glyph (two rounded posts, one
+lintel, three dots across the open threshold) in place of the italic information mark. After
+Round 8 a dash on the map means partial match and nothing else. Everything else in this
+section still stands: size, weight, glyph-inside, halo. The rest of this document's
+"Estimated" passages are the record of what was tried, not the current mark.
+
 ## 6. The map itself
 
 **Boards.** Building footprints in two or three pale tones so blocks have texture, tree
@@ -406,7 +416,8 @@ product asserting itself, and it is what makes the sky blue in the wordmark legi
 the specific complaint that could not be answered on white.
 
 **Pins on the board.** Estimated is a white-filled teardrop with a dashed outline and an
-italic information mark. Scanned on-site is marigold with a dark person glyph, sitting on a soft
+italic information mark. *(Round 8: the dash and the italic "i" are both replaced &mdash; see
+the supersession note in section 5. The teardrop, the white fill and the halo are unchanged.)* Scanned on-site is marigold with a dark person glyph, sitting on a soft
 lavender halo disc. Owner-confirmed is violet with a white storefront glyph and a **separate
 outlined tick badge floating clear at the upper right**, not merged into the pin. The halo is a
 soft filled disc behind the pin, not a ring drawn around it.

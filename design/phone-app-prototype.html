@@ -636,23 +636,52 @@ body{
   outline-color:var(--sky400) !important;box-shadow:0 0 0 6px rgba(30,17,66,.92) !important;
 }
 .phone.hc .apphead :focus-visible,.phone.hc .navbar :focus-visible{outline-color:var(--white) !important}
-.map-top{position:absolute;top:104px;left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-4);pointer-events:none;align-items:flex-start}
+/* ROUND 8: the map key gained a fourth row (the cluster disc) and the band between
+   the app header and the FAB row did not grow. Measured on the live build: the
+   header ends at 106px, the FABs' lifted top is at 302px (they lift when a needs
+   profile puts the nearby rail up), so .map-top has 196px and the four-row card plus
+   the match strip wanted 228.4px at the largest text size -- it covered the strip
+   and 30.4px of the FAB row. The rhythm is tightened here rather than any mark being
+   shrunk: the tier ladder is carried by the pin SIZES (24 / 28 / 32), so the one
+   thing that must not pay for the new row is the artwork.
+   Cuts, all measured: card padding 12 -> 8 vertical (8px), row gap 8 -> 6 across
+   four gaps (8px), the CTA's 2px top margin (2px), the column gap 8 -> 6 (2px), and
+   the match strip's own padding 8 -> 6 (4px). */
+.map-top{position:absolute;top:104px;left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-3);pointer-events:none;align-items:flex-start}
 .legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-2);
-  padding:var(--sp-5) var(--sp-6);display:flex;flex-direction:column;gap:var(--sp-4);
+  padding:var(--sp-4) var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);max-width:100%;
 }
+/* and the last of it: when the match strip is up, the card sheds its written
+   call-to-action. The card is still a <button> and its accessible name still says it
+   opens "how trust grows"; what goes is 19px of duplicated prompt at exactly the
+   moment two floating elements are competing for the same band. */
+.legend.compact .legend-cta{display:none}
+/* and the card tightens its own rhythm while it is sharing the band. Measured with
+   a needs profile applied (which also raises the filter chip row AND lifts the FABs
+   to bottom:214px): at Round 7 HEAD the .map-top column already overran the FAB row
+   by 50.7 / 54.3 / 62.3px at the three text sizes -- a defect that predates this
+   round and is NOT on the Round 7 punch list. The fourth row costs 34px; the
+   compaction here gives back 46, so the overrun after Round 8 is 46.9 / 49.4 /
+   55.1px -- 3.8 to 7.2px SMALLER than it was found, with one more mark taught. The
+   residual is a real layout defect and is reported, not hidden: three floating
+   elements plus a 48px FAB row do not fit in 196px of map. */
+.legend.compact{gap:var(--sp-2);padding:var(--sp-3) var(--sp-5)}
 .legend .lg{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .legend .lg .lgpin{flex:0 0 40px;display:flex;justify-content:center}
 .match-legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-2);box-shadow:var(--elev-2);
-  padding:var(--sp-4) var(--sp-5);display:none;align-items:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);max-width:100%;
+  padding:var(--sp-3) var(--sp-5);display:none;align-items:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);max-width:100%;
   font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .match-legend.on{display:flex}
 .match-legend .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
 .match-legend .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
 .sw.good{border:2px solid var(--match-good)}
 .sw.partial{border:2px dashed var(--match-partial)}
-.sw.unknown{border:2px dotted var(--blue)}
+/* ROUND 8: the swatch was dotted sky400 (#76BCFD, 1.83:1 on the legend's white)
+   while the halo it stands for is dotted sky700. It now names the same token the
+   halo uses -- 6.24:1 on white -- so the legend key and the mark agree. */
+.sw.unknown{border:2px dotted var(--match-unknown)}
 .map-fabs{position:absolute;left:14px;bottom:110px;z-index:20;display:flex;gap:var(--sp-4);transition:bottom var(--dur-base) var(--ease-enter)}
 .map-fabs.lifted{bottom:214px}
 .fab-needs{
@@ -780,7 +809,15 @@ body{
    Scanned is a solid marigold400 pill with indigo900 type at 10.81:1; Owner is a
    solid violet600 pill with white type at 6.42:1, the pairing the library's report
    approves for bold control labels and graphic marks. */
-.tierchip.est{background:var(--card);color:var(--ink);border:2px dashed var(--blue)}
+/* ROUND 8: SOLID, and in the ink rather than the accent. The dash was justified in
+   this file by "dashed is what the Estimated pin uses" -- the pin's dash is gone
+   (J1), and dashed in this build now means partial match and only that: .sw.partial,
+   .matchchip.partial and .mstat.partial all use it for exactly that. The chip is a
+   tier badge that appears over the map inside the card, so a dashed sky pill there
+   was the same collision one surface further in. The tier is still not carried by
+   colour alone -- the chip prints the word "Estimated" and carries the sparkle icon.
+   The edge also gets legible: sky400 on white is 1.83:1, sky700 is 6.24:1. */
+.tierchip.est{background:var(--card);color:var(--ink);border:2px solid var(--blue-edge)}
 .tierchip.est .ic{color:var(--blue-edge)}
 .tierchip.scan{background:var(--marigold);color:var(--ink);border:2px solid var(--marigold)}
 .tierchip.owner{background:var(--purple);color:var(--white);border:2px solid var(--purple)}
@@ -1511,7 +1548,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .sheet.popup.on{transform:translateY(-50%) scale(1);opacity:1;
   transition:transform var(--dur-base) var(--ease-enter),opacity var(--dur-base) var(--ease-enter),visibility 0s 0s}
 .sheet.popup .sheet-scroll{padding:var(--inset-sheet) var(--inset-sheet) var(--sp-7)}
-.legend-cta{font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);margin-top:var(--sp-1);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
+.legend-cta{font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);margin-top:var(--sp-0);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
 button.legend{border:none;cursor:pointer;font-family:inherit;text-align:left}
 button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offset:3px}
 
@@ -1529,6 +1566,11 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .intro-tips span{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .intro-tips i{width:8px;height:8px;border-radius:50%;background:var(--marigold);flex:0 0 auto}
 .coach{transition:opacity var(--dur-fast) var(--ease-enter)}
+/* ROUND 8: the static form the coach takes under reduced motion -- all four lines
+   at once instead of a rotation. .coach is white-space:nowrap for the single-line
+   form, so the static form has to release that and stack. */
+.coach.static{white-space:normal;display:flex;flex-direction:column;gap:var(--sp-1);text-align:center;
+  max-width:84%;border-radius:var(--r-2);padding:var(--sp-3) var(--sp-5)}
 .coach.swap{opacity:0}
 
 /* ============ processing: captured image settles into the ring, chips populate ============ */
@@ -1581,7 +1623,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
    underlying style is the resting state, now asserted rather than assumed) or a
    different presentation. The iteration-count override is gone.
 
-   ONE SWITCH, TWO SOURCES. The rules live on .phone.rm, and applyPrefs() sets
+   ONE SWITCH, TWO SOURCES. The rules live on .rm .phone, and applyPrefs() sets
    that class from isReduced(), which is `RM_MEDIA.matches || rmPref` -- so the
    operating-system setting and the in-app toggle reach the CSS through the same
    class and cannot disagree. RM_MEDIA has a change listener, so an OS change
@@ -1599,51 +1641,61 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
    not construction, and one edit back to a near-zero duration would return it.
    Delays are zeroed here so the property is true by rule, and openSheet() no longer
    depends on it either -- it waits on the element being focusable, not on a clock. */
-.phone.rm *,.phone.rm *::before,.phone.rm *::after{
+.rm .phone *,.rm .phone *::before,.rm .phone *::after{
   transition-duration:0s !important;transition-delay:0s !important;animation-delay:0s !important}
 /* screen change: the spec asks for a crossfade, not for nothing. 80ms, opacity
    only, no travel -- an instant equivalent that still says "the screen changed". */
 @keyframes rm-fade{from{opacity:0}to{opacity:1}}
-.phone.rm .screen.active .screen-body,
-.phone.rm .screen.active .scan-body,
-.phone.rm .screen.active .ob-body{animation:rm-fade 80ms linear both !important}
+.rm .phone .screen.active .screen-body,
+.rm .phone .screen.active .scan-body,
+.rm .phone .screen.active .ob-body{animation:rm-fade 80ms linear both !important}
 /* the outgoing screen is never held under reduced motion -- showScreen() skips
    .screen-out entirely -- but the end state is declared anyway so the class
    cannot strand a screen at 88% if it is ever added by another path. */
-.phone.rm #screen-map .screen-body,
-.phone.rm #ob-splash .ob-body{animation:none !important}
-.phone.rm .screen.screen-out{animation:none !important;opacity:1;transform:none}
+.rm .phone #screen-map .screen-body,
+.rm .phone #ob-splash .ob-body{animation:none !important}
+.rm .phone .screen.screen-out{animation:none !important;opacity:1;transform:none}
 /* the pin appears immediately: no drop, no squash, no ripple. The JS already
    omits both the .pin-drop class and the ripple element; these declare the
    resting states so the omission is belt AND braces. */
-.phone.rm .pin-drop .pin{animation:none !important}
-.phone.rm .rippler{display:none !important}
-.phone.rm .pinbtn.selected .pin{animation:none !important;transform:translateX(-50%) translateY(-6px)}
+.rm .phone .pin-drop .pin{animation:none !important}
+.rm .phone .rippler{display:none !important}
+.rm .phone .pinbtn.selected .pin{animation:none !important;transform:translateX(-50%) translateY(-6px)}
 /* content settles: it is simply there */
-.phone.rm #scan-review.settle > *,
-.phone.rm .obscreen.enter .wl-card,
-.phone.rm .obscreen.enter .wl-hero,
-.phone.rm .obscreen.enter .ob-body{animation:none !important;opacity:1;transform:none}
+.rm .phone #scan-review.settle > *,
+.rm .phone .obscreen.enter .wl-card,
+.rm .phone .obscreen.enter .wl-hero,
+.rm .phone .obscreen.enter .ob-body{animation:none !important;opacity:1;transform:none}
 /* the splash is a still frame, and its exit is a state change the JS timer owns */
-.phone.rm .splash-body{animation:none !important;opacity:1;transform:none}
-.phone.rm .splash.leaving{animation:none !important;opacity:0}
+.rm .phone .splash-body{animation:none !important;opacity:1;transform:none}
+.rm .phone .splash.leaving{animation:none !important;opacity:0}
 /* chips appear in their final state; a leaving chip is removed by the JS, which
    already short-circuits its timer under reduced motion */
-.phone.rm .achip.arriving,
-.phone.rm .proc-chips .fchip{animation:none !important;opacity:1;transform:none}
-.phone.rm .achip.leaving{animation:none !important;opacity:0}
+.rm .phone .achip.arriving,
+.rm .phone .proc-chips .fchip{animation:none !important;opacity:1;transform:none}
+.rm .phone .achip.leaving{animation:none !important;opacity:0}
 /* ROUND 6, and the spec names these two itself: "Checks and confidence dots appear
    in their final states." Not shortened -- asserted. */
-.phone.rm .dots i.f{animation:none !important;background-color:var(--purple);transform:none}
-.phone.rm .checkitem.done .ci-dot svg path{animation:none !important;stroke-dasharray:none;stroke-dashoffset:0}
+.rm .phone .dots i.f{animation:none !important;background-color:var(--purple);transform:none}
+.rm .phone .checkitem.done .ci-dot svg path{animation:none !important;stroke-dasharray:none;stroke-dashoffset:0}
 /* the stale clock's message is the copy beside it, which reduced motion does not
    touch; the turn is the decoration, so it simply rests. */
-.phone.rm .nudge .n-age svg{animation:none !important;transform:none}
+.rm .phone .nudge .n-age svg{animation:none !important;transform:none}
 /* the receipt still opens, at its destination, with no height easing -- the same
    answer sheets get. Swiping the toast away still works. */
-.phone.rm .evidence{transition:none !important}
+.rm .phone .evidence{transition:none !important}
 /* the indicator arrives beneath the new tab rather than sliding to it */
-.phone.rm .nav-ind{transition:none !important}
+.rm .phone .nav-ind{transition:none !important}
+
+/* ---- ROUND 8: THE @MEDIA FLOOR -------------------------------------------
+   Deliberately NOT a second copy of the block above: it mirrors the universal
+   rule at the top of it and nothing else. Its job is to be true at first paint
+   and to survive the boot script being removed. Everything richer -- rm-fade,
+   the asserted resting states -- still lives in exactly one place, under .rm. */
+@media (prefers-reduced-motion: reduce){
+  .phone *,.phone *::before,.phone *::after{
+    transition-duration:0s !important;transition-delay:0s !important;animation-delay:0s !important}
+}
 
 /* ============ nearby matches rail title ============ */
 .nearby-title{
@@ -2188,7 +2240,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .phone.hc .navbar{border-top:2px solid var(--chrome-fill)}
 .phone.hc :focus-visible{outline-color:var(--ink)}
 
-/* reduced motion: see the .phone.rm block above. The operating-system setting
+/* reduced motion: see the .rm .phone block above. The operating-system setting
    reaches those rules through isReduced() -> applyPrefs() -> the .rm class, which
    is the same path the in-app preference uses, so there is exactly one copy of
    the reduced-motion answer in this file and the two sources cannot diverge. */
@@ -2212,6 +2264,38 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
   .notch{display:none}
 }
 </style>
+<script>
+/* ================================================================
+   ROUND 8 -- REDUCED MOTION HAS A FLOOR UNDER IT (interaction audit N2).
+   Before this, the entire reduced-motion contract hung on a class written by
+   applyPrefs(), which runs near the bottom of a 1.4 MB document. There was no
+   @media (prefers-reduced-motion: reduce) rule anywhere in the file, so an
+   OS-reduce user got the full motion system for however long parsing took --
+   and nothing at all if applyPrefs() ever threw.
+   Two things close it, in this order:
+     1. THIS script. It is the first thing in the document and it sets the same
+        single class the rules already use, on <html> rather than on .phone, so
+        it can run before .phone is parsed and therefore before first paint.
+        The rules moved from `.phone.rm X` to `.rm .phone X`: identical
+        specificity, identical order, ONE copy, so the two sources still cannot
+        drift apart -- which was the reason the file refused a second @media
+        copy in the first place.
+     2. The @media block beside the .rm rules, which mirrors ONLY the universal
+        transition/delay kill. That is the one declaration allowed to exist
+        twice, because it is the floor that has to hold if this script is ever
+        stripped, blocked or thrown out of.
+   Note the delay is zeroed as well as the duration. .sheet and .popup write
+   their stale-transform guard AS a delay (`visibility 0s var(--dur-fast)`), and
+   a floor that zeroed only durations would leave every sheet's subtree
+   visibility:hidden while its transform snapped -- focus() on a hidden element
+   is a silent no-op, which is the exact seam a previous round opened between
+   two separately-correct changes.
+   ================================================================ */
+(function(){try{
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)
+    document.documentElement.classList.add('rm');
+}catch(e){}})();
+</script>
 </head>
 <body>
 <div class="phone-wrap">
@@ -2244,12 +2328,12 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         </div>
         <div class="map-top">
           <div class="chiprow" id="chiprow" role="group" aria-label="Active filters"></div>
-          <button class="legend" id="legend" aria-label="How trust grows &mdash; the three pin tiers"></button>
+          <button class="legend" id="legend" aria-label="Map key: the three pin tiers and the numbered cluster disc &mdash; how trust grows"></button>
           <div class="match-legend" id="match-legend">
             <span id="ml-label"></span>
             <span class="lg"><span class="sw good"></span>good</span>
             <span class="lg"><span class="sw partial"></span>partial</span>
-            <span class="lg">not yet seen &mdash; no halo</span>
+            <span class="lg"><span class="sw unknown"></span>not yet seen</span>
           </div>
         </div>
         <div class="map-ctls">
@@ -3514,16 +3598,16 @@ function pinHalo(d, withDisc){
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="10.2" stroke-linejoin="round"/>'
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="5.9" stroke-linejoin="round"/>';
 }
-/* The library's confidence ladder: three dots across the top of the head, filled
-   0 / 2 / 3 of 3. Colour is never alone -- the count is the carrier. */
-function pinDots(filled, fill, stroke){
-  var out='', cx=[35,48,61];
-  for(var i=0;i<3;i++){
-    out += '<circle cx="'+cx[i]+'" cy="15" r="4.5" fill="'
-        + (i<filled ? fill : '#FFFFFF') + '" stroke="'+stroke+'" stroke-width="2"/>';
-  }
-  return out;
-}
+/* ROUND 8 REMOVES THE CONFIDENCE DOTS FROM THE PIN (D38).
+   The library's confidence ladder -- three dots across the top of the head, filled
+   0 / 2 / 3 of 3 -- used to be drawn here by pinDots(filled, fill, stroke) and was
+   composed into all three tiers at every size. The owner, reading the live map:
+   "the three circles above each icon is stupid". The function and the library's dot
+   geometry are DELETED rather than commented out or hidden behind a flag, so no
+   later round can switch them back on by accident. A pin now carries tier by shape
+   and fill, and match by halo line style, and nothing else.
+   Nothing about the confidence DATA changes: it is still on the card's Confidence
+   tile and still spoken in placeSentence(), which is where it is explained. */
 
 /* Needs-match halo -- asset-library/svg/halos/*.svg. The library supersedes Round
    2's green: good is a SOLID indigo900 ring with a quiet sky400 inner ring, partial
@@ -3646,12 +3730,41 @@ function pinSVG(tier, size, opts){
        is dark like the board's, is in the canonical twelve, and is what the very
        same asset already uses for its italic i and its confidence-dot strokes:
        5.64:1 on the land, 3.59:1 on the darkest tone, 6.24:1 on its own fill. */
+    /* ROUND 8 -- THE MARK IS J1 FROM design/estimated-mark-gallery-4.html, which the
+       owner chose ("do j1", D43). Path data lifted verbatim from that page's copyable
+       asset source: the library teardrop, a SOLID outline at the library weight (4),
+       white fill, and the owner's own glyph -- two rounded posts and one short lintel
+       as one open path `M32 60V22h32v38` with round caps and joins at stroke 4, and
+       three r2.2 dots at x 40/48/56 on y 60 across the open threshold.
+       The dashed `7 6` outline and the italic serif "i" are both gone: the dash
+       because the partial-match halo is now the only dashed thing on this map (5.y),
+       and the "i" because it reads "information point", which is what a map IS, not
+       what this tier is.
+       The three threshold dots are kept in their own <g class="est-threshold"> so
+       that removing them -- gallery candidate J3, the fallback if the owner judges
+       the 32px stipple to be the same clutter the confidence dots were -- is one
+       line and nothing else moves. Gallery 4 measured them as three faint blobs at
+       32px on a 1x grid and a clean three from 40 up; the posts and lintel are
+       distinct at every ladder size.
+       Colour is the same ONE substitution the dashed asset already carried: sky700
+       through --blue-edge rather than the library's sky400, which measures 1.83:1 on
+       the land and 2.02:1 against the pin's own white fill. Re-measured in Round 8
+       against the tones the ground actually paints. Normal mode (--blue-edge
+       #1B6599): land #F5F2FC 5.64, block #E8E1F7 4.91, block edge #CFBCEE 3.59,
+       place accent #76BCFD 3.08, white road #FFFFFF 6.24, own fill 6.24. High
+       contrast (--blue-edge #1C3D6F): 9.76 / 8.50 / 6.21 / 5.33 / 10.79, own fill
+       10.79. Floor 3.08:1, above the 3:1 non-text minimum on every ground in both
+       modes, and the white lift strokes put 6.24 (10.79 in HC) beside the outline
+       wherever the ground is darker. */
     s += '<path d="'+TEAR+'" fill="var(--card,#FFFFFF)" stroke="var(--blue-edge,#1B6599)"'
-       + ' stroke-width="4" stroke-dasharray="7 6"/>'
-       + pinDots(0, 'var(--blue-edge,#1B6599)', 'var(--blue-edge,#1B6599)')
-       + '<text x="48" y="56" text-anchor="middle" font-family="Georgia,\'Times New Roman\',serif"'
-       +   ' font-size="39" font-weight="700" font-style="italic"'
-       +   ' fill="var(--blue-edge,#1B6599)" stroke="none">i</text>';
+       + ' stroke-width="4"/>'
+       + '<path d="M32 60V22h32v38" fill="none" stroke="var(--blue-edge,#1B6599)"'
+       +   ' stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'
+       + '<g class="est-threshold">'
+       +   '<circle cx="40" cy="60" r="2.2" fill="var(--blue-edge,#1B6599)"/>'
+       +   '<circle cx="48" cy="60" r="2.2" fill="var(--blue-edge,#1B6599)"/>'
+       +   '<circle cx="56" cy="60" r="2.2" fill="var(--blue-edge,#1B6599)"/>'
+       + '</g>';
   } else if(tier === 'scan'){
     /* Library asset, with ONE substitution: the body rim is indigo900 rather than
        white. marigold400 is 1.22:1 on the worst ground tone, so a white rim would
@@ -3660,7 +3773,6 @@ function pinSVG(tier, size, opts){
        stroke that fill with. */
     s += '<path d="'+TEAR+'" fill="var(--marigold,#FDB327)" stroke="var(--marigold-edge,#1E1142)"'
        + ' stroke-width="4" stroke-linejoin="round"/>'
-       + pinDots(2, 'var(--marigold,#FDB327)', 'var(--marigold-edge,#1E1142)')
        + '<g fill="none" stroke="var(--ink,#1E1142)" stroke-width="4" stroke-linecap="round"'
        +   ' stroke-linejoin="round"><circle cx="48" cy="34" r="9"/>'
        +   '<path d="M30 69c1-15 8-23 18-23s17 8 18 23Z"/></g>';
@@ -3670,7 +3782,6 @@ function pinSVG(tier, size, opts){
        discriminates), the white storefront, and the SEPARATE outlined tick badge at
        upper right -- its own mark beside the pin, never merged into it. */
     s += '<path d="'+TEAR+'" fill="var(--purple,#4F34DB)" stroke="#FFFFFF" stroke-width="4"/>'
-       + pinDots(3, 'var(--purple,#4F34DB)', 'var(--purple,#4F34DB)')
        + '<g fill="none" stroke="#FFFFFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round">'
        +   '<path d="M28 38h40l-4-12H32Z"/>'
        +   '<path d="M30 38v30h36V38M42 68V51h13v17"/>'
@@ -4320,12 +4431,30 @@ function mapLayout(list, W, H){
   });
   /* A disc is a density indicator, not a place, so it may slide off its own centroid
      rather than sit on top of a pin -- covering the strongest mark with the weakest
-     kind of mark would undo the hierarchy it exists to serve. */
+     kind of mark would undo the hierarchy it exists to serve.
+
+     ROUND 8 CLOSES INTERACTION N4. The separation pass existed, but it pushed discs
+     away from `q.x, q.y` with radius `q.r` -- and those are the pin's TIP and a
+     radius struck about it, not the drawn head. A pin is anchored by its tip, so its
+     head sits 0.576 x size ABOVE that point: the pass was clearing a circle the mark
+     does not occupy and leaving the one it does. Measured on the live build before
+     this change, a disc covered 100.0% of one 44px pin's head at street zoom and
+     95.8% of a 36px head at overview (the Round 7 audit reported 43.3% / 21.0%, i.e.
+     it is worse than reported, not better). The mark that exists to resolve density
+     was creating it.
+     headOf() gives the circle the pin actually paints -- centre at
+     y - (1 - (41.3-1)/95.1) x size, radius (36/95.1) x size, plus the 6px lift the
+     selected pin gets from `.pinbtn.selected .pin` -- and the pass now clears that. */
   const discR = () => CLUSTER_PX/2 + 2;   /* spec: one cluster size, 48px */
-  for(let pass=0; pass<14; pass++){
+  const HEAD_TOP = (PIN_HEAD.y - 1) / 95.1;      /* head centre, as a fraction of the drawn box */
+  const HEAD_RAD = PIN_HEAD.r / 95.1;
+  const headOf = it => ({ x: it.x,
+                          y: it.y - (1 - HEAD_TOP) * it.size - (it.sel ? 6 : 0),
+                          r: HEAD_RAD * it.size });
+  for(let pass=0; pass<24; pass++){
     let moved = false;
     clusters.forEach(c=>{
-      const others = placed.map(q=>({x:q.x,y:q.y,r:q.r}))
+      const others = placed.map(headOf)
         .concat(clusters.filter(o=>o!==c).map(o=>({x:o.x,y:o.y,r:discR(o)})));
       others.forEach(q=>{
         const need = discR(c) + q.r + 3;
@@ -4338,6 +4467,34 @@ function mapLayout(list, W, H){
       c.y = Math.max(26, Math.min(H-26, c.y));
     });
     if(!moved) break;
+  }
+  /* POST-CONDITION, ASSERTED RATHER THAN HOPED FOR. The pass above is iterative and
+     is clamped to the frame, so in a tight corner it can run out of passes with a
+     disc still over a head. The same rule the rest of the collision uses then
+     applies -- the weaker mark yields -- and the pin is COUNTED INTO the disc that
+     was hiding it, so nothing is dropped and the disc's number stays true. The disc
+     does not move back to its new centroid: it is a density indicator, already
+     allowed to sit off-centre, and moving it would restart the problem. The selected
+     place is exempt everywhere else, so here the DISC yields to it instead, past the
+     frame clamp if it has to. */
+  for(let guard=0; guard<40; guard++){
+    let changed = false;
+    for(const c of clusters){
+      for(let k=placed.length-1; k>=0; k--){
+        const it = placed[k], h = headOf(it);
+        if(overlapFrac(c.x, c.y, discR(c), h.x, h.y, h.r) <= DENSITY.overlap) continue;
+        if(it.sel){
+          let dx=c.x-h.x, dy=c.y-h.y, d=Math.hypot(dx,dy);
+          if(d < .01){ dx=0; dy=-1; d=1; }
+          const need = discR(c) + h.r + 3;
+          c.x += dx/d*(need-d); c.y += dy/d*(need-d);
+        } else {
+          placed.splice(k,1); c.members.push(it);
+        }
+        changed = true;
+      }
+    }
+    if(!changed) break;
   }
   return {pins: placed, clusters};
 }
@@ -4360,7 +4517,17 @@ function armMapObserver(){
 }
 function renderMap(){
   const W = mapEl.clientWidth, H = mapEl.clientHeight;
-  if(!(W>40) || !(H>40)) _mapZeroPending = true;
+  /* ROUND 8 CLOSES a11y N5. Round 7 made a zero-box render re-run later; it still
+     WROTE the empty answer first. Toggling High Contrast from the Accessibility
+     screen calls applyPrefs() -> renderMap() while #screen-map is display:none, so
+     the ground was replaced by groundSVG's 54-byte empty guard and the map was blank
+     from the moment it appeared until the ResizeObserver fired -- measured on the
+     live build at 10.7ms here, 39-79ms in the audit's environment, and the only
+     action in the app that blanks the ground.
+     A render that cannot draw now leaves the last good ground standing and does
+     nothing else: the re-render is driven by the map's own visibility (the observer
+     below, plus showScreen), not by the toggle that happened while it was hidden. */
+  if(!(W>40) || !(H>40)){ _mapZeroPending = true; return; }
   document.getElementById('map-ground').innerHTML = groundSVG(W,H,22);
   pinsEl.innerHTML='';
   let shown = [...places];
@@ -4380,9 +4547,25 @@ function renderMap(){
     /* Recede -- never a fail mark. Two causes, one visual step back:
        a selection is in play and this is not it, or a needs profile is set and we
        have no evidence about those needs here. */
-    if(!it.sel && (selectedId || (m && m.state==='unknown'))) b.classList.add('recede');
+    /* ROUND 8: recede is now the SELECTION step back only. Round 5 also dimmed a
+       pin whose needs are unknown, as a stand-in for the halo the map never drew;
+       the dotted unknown halo is drawn below, so the 20% dim would be a second,
+       weaker carrier of the same fact -- and it would dim the very ring that now
+       carries it. One state, one mark. */
+    if(!it.sel && selectedId) b.classList.add('recede');
     b.setAttribute('aria-label', placeSentence(p));
-    const match = m && m.state!=='unknown' ? m.state : null;
+    /* ROUND 8 CLOSES INTERACTION N1. This read
+         `m && m.state!=='unknown' ? m.state : null`
+       so `match-unknown` rendered ZERO times on the map, while matchHalo('unknown')
+       already drew the library's dotted sky700 ring correctly and the list view kept
+       a dotted carrier for the same state. Two of three match states were drawn and
+       the third was documented as absent. All three now draw; the halo line style is
+       untouched (solid good, dashed partial, dotted unknown).
+       The z-order is deliberately NOT changed: PIN_Z.match still lifts only good and
+       partial. With a needs profile applied every place has SOME state, so promoting
+       unknown as well would put every pin on one plane and delete the tier order the
+       render list exists to hold. */
+    const match = m ? m.state : null;
     const art = pinSVG(p.tier, size, {match:match, selected:it.sel});
     let label='';
     if(m && m.state==='good' && it.sel) label=`<span class="pin-label" aria-hidden="true">${iconSVG('my-needs',11)} Good match</span>`;
@@ -4405,7 +4588,12 @@ function renderMap(){
     const tiers={};
     c.members.forEach(it=>{ const t=tierName(it.p.tier); tiers[t]=(tiers[t]||0)+1; });
     const breakdown=Object.entries(tiers).map(([k,v])=>v+' '+k.toLowerCase()).join(', ');
-    b.setAttribute('aria-label', n+' entrances here ('+breakdown+') \u2014 zoom in to see each one');
+      /* ROUND 8: the name now says what the NUMBER is, not only what is under it --
+       the owner could not read the disc off the map ("what are the numbers on the
+       map?") and neither could a screen-reader user, who was told "8 entrances
+       here" without being told that 8 is what the disc displays. */
+    b.setAttribute('aria-label', n+' places grouped here \u2014 the disc shows the count ('
+      +breakdown+') \u2014 tap to zoom in');
     b.addEventListener('click',()=>{ setZoom(false); });
     pinsEl.appendChild(b);
   });
@@ -4435,10 +4623,17 @@ function tierChip(t){
 }
 
 /* legend -- tier card, three rows (pin glyph + label); tapping opens "How trust grows" */
+/* ROUND 8 ADDS THE CLUSTER ROW (D36). The owner, reading the live map: "what are
+   the numbers on the map?" -- the legend keyed the three tiers and the match halos
+   and taught neither the numbered disc nor the confidence dots. The dots are gone
+   (D38); the disc is a real mark that stays, so it is keyed here, where it is seen.
+   The disc is drawn by the same pinSVG('cluster') the map draws, at the legend's
+   own size, with a representative count. */
 document.getElementById('legend').innerHTML =
   `<span class="lg"><span class="lgpin">${pinSVG('est',pinPx('est','receipt'))}</span> Estimated</span>
    <span class="lg"><span class="lgpin">${pinSVG('scan',pinPx('scan','receipt'))}</span> Scanned on-site</span>
    <span class="lg"><span class="lgpin">${pinSVG('owner',pinPx('owner','receipt'))}</span> Owner-confirmed</span>
+   <span class="lg"><span class="lgpin">${pinSVG('cluster',22,{count:8})}</span> 8 places here</span>
    <span class="legend-cta">How trust grows \u203a</span>`;
 document.getElementById('legend').addEventListener('click',e=>openSheet('sheet-trust', e.currentTarget));
 
@@ -4556,10 +4751,14 @@ function revealSelected(){
   const limit=sheetTop-14;                 /* the whole mark must sit above the sheet */
   panMap(y>limit ? Math.min(y-limit, H*0.7) : 0);
 }
-function openCard(id, pos){
+/* ROUND 8: `focusSel` and `openerOverride` exist for the stack's restore path --
+   closeTopSheet() re-opens the card at the position it held, focuses the control the
+   user activated rather than the heading, and keeps the card's ORIGINAL opener (the
+   pin) so that closing the card later still returns focus to the map correctly. */
+function openCard(id, pos, focusSel, openerOverride){
   /* whatever opened the card is where focus goes back to on close -- captured BEFORE
      renderMap() detaches the pin the user activated (B5d) */
-  const prevActive = document.activeElement;
+  const prevActive = openerOverride || document.activeElement;
   selectedId=id;
   const p = places.find(q=>q.id===id);
   if(listOpen) setListOpen(false);
@@ -4570,7 +4769,7 @@ function openCard(id, pos){
   const el = document.getElementById('card-content');
   el.innerHTML = cardHTML(p);
   wireCard(el,p);
-  openSheet('sheet-card', opener);
+  openSheet('sheet-card', opener, focusSel);
   el.parentElement.scrollTop=0; el.scrollTop=0;
   setCardPos(pos||'peek',false);
 }
@@ -4856,7 +5055,7 @@ function wireCard(el,p){
   el.querySelectorAll('[data-rcpt]').forEach(r=>{
     r.addEventListener('click',()=>{
       if(r.dataset.rcpt==='rcpt-scan'){
-        openReceipt(p);
+        openReceipt(p, r);
       } else if(r.dataset.rcpt==='rcpt-est'||r.dataset.rcpt==='rcpt-est2'){
         toast('Estimates come from public street imagery \u00b7 ' + (p.tier==='est'?fmtMonth(p.date):'see How trust grows'));
       } else if(r.dataset.rcpt==='rcpt-owner'){
@@ -4865,7 +5064,7 @@ function wireCard(el,p){
     });
   });
   const ps=el.querySelector('.photostrip[data-openrcpt]');
-  if(ps) ps.addEventListener('click',()=>openReceipt(p));
+  if(ps) ps.addEventListener('click',()=>openReceipt(p, ps));
   const act=(name,fn)=>{const b=el.querySelector(`[data-act="${name}"]`); if(b) b.addEventListener('click',fn);};
   act('scan-this',()=>{scanTarget=p; closeSheets(); startScan();});
   act('recheck',()=>{scanTarget=p; closeSheets(); startScan();});
@@ -4881,22 +5080,24 @@ function wireCard(el,p){
     b.innerHTML=`${saveIconHTML(on)} ${on?'Saved':'Save'}`;
     toast(on ? 'Saved \u2014 find it under Profile \u203a Saved entrances' : 'Removed from saved entrances');
   });
-  act('receipt',()=>openReceipt(p));
-  act('correct',()=>openCorrection(p));
-  act('needs',()=>openSheet('sheet-needs'));
+  /* ROUND 8: the opener is passed, not inferred. sheetStack records a selector for
+     it, so restoring this level can put focus back on the control that was used. */
+  act('receipt',e=>openReceipt(p, e&&e.currentTarget));
+  act('correct',e=>openCorrection(p, e&&e.currentTarget));
+  act('needs',e=>openSheet('sheet-needs', e&&e.currentTarget));
   act('trust',e=>openSheet('sheet-trust', e&&e.currentTarget));
 }
-function openCorrection(p){
+function openCorrection(p, opener){
   correctTarget=p;
   document.getElementById('correct-bizhead').innerHTML =
     `<span class="cr-icon">${iconSVG('store',20,'var(--purple-ink)')}</span>
      <span><span class="cr-name">${esc(p.name)}</span>
      <span class="cr-sub">${esc(p.addr||tierName(p.tier))}</span></span>`;
-  openSheet('sheet-correct');
+  openSheet('sheet-correct', opener);
 }
 
 /* ===================== evidence receipt ===================== */
-function openReceipt(p){
+function openReceipt(p, opener){
   const el=document.getElementById('rcpt-body');
   let photos='';
   if(p.staged){
@@ -4946,8 +5147,8 @@ function openReceipt(p){
          reaches precisely when they want to dispute something. -->
     <button class="correct-btn" id="rcpt-correct">${iconSVG('edit',16)} Suggest a correction</button>`;
   el.querySelector('#rcpt-back').addEventListener('click',()=>openCard(p.id,'full'));
-  el.querySelector('#rcpt-correct').addEventListener('click',()=>openCorrection(p));
-  openSheet('sheet-receipt');
+  el.querySelector('#rcpt-correct').addEventListener('click',e=>openCorrection(p, e&&e.currentTarget));
+  openSheet('sheet-receipt', opener);
   el.parentElement.scrollTop=0; el.scrollTop=0;
 }
 
@@ -4960,6 +5161,36 @@ const scrim=document.getElementById('scrim');
    returns it, but does not trap or inert the background. */
 const FOCUSABLE='a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 let sheetOpener=null, openSheetId=null;
+/* ---- ROUND 8: CARD -> SUB-SHEET IS A STACK, NOT A HAND-OFF (a11y N2) ---------
+   openSheet() captured its opener as
+     `if(!openSheetId && active && active!==document.body) sheetOpener=active`
+   so a sheet opened while another was open was treated as a HAND-OFF: the evidence
+   receipt and the correction sheet inherited the pin as their opener, closing either
+   ran closeSheets() over every sheet including the card, and focus went back to the
+   pin. Reproduced here 1 trial in 1 before the fix: expand a card to full, open the
+   receipt, close it -- the card and every action on it are gone.
+   Each level now remembers three things: which sheet it was, what originally opened
+   THAT sheet, the position it was holding (the card has three), and a selector for
+   the control inside it that opened the level above. Closing pops one level,
+   restores the parent at the position it held, and puts focus back on the control
+   that was activated -- not on the parent's heading and not on the pin.
+   Only the three close AFFORDANCES pop (the close buttons, the scrim, Escape).
+   Every navigation call site still calls closeSheets(), which clears the stack and
+   closes everything, so leaving for another screen is unchanged. */
+const sheetStack=[];
+/* a node reference is useless across a re-render (openCard rebuilds #card-content),
+   so a level remembers HOW to find its control again, not the node. */
+function sheetCtlSelector(el){
+  if(!el || el.nodeType!==1) return null;
+  if(el.id) return '#'+el.id.replace(/([^\w-])/g,'\\$1');
+  for(const a of ['data-act','data-rcpt','data-openrcpt']){
+    if(el.hasAttribute(a)){
+      const v=el.getAttribute(a);
+      return v ? '['+a+'="'+v+'"]' : '['+a+']';
+    }
+  }
+  return null;
+}
 /* bumped by every screen change: a queued "return focus to the opener" is abandoned if
    the app navigated somewhere else in the meantime */
 var navToken=0;
@@ -5010,14 +5241,66 @@ function focusWhenReady(el, stillWanted, fallback){
       if(document.activeElement===el || el.contains(document.activeElement)) return;  /* landed */
     }
     if(frames++>=FOCUS_MAX_FRAMES){
+      /* ---- ROUND 8: THE FALLBACK IS UNCONDITIONAL, AND ASSERTED AFTER (a11y N1)
+         The audit reproduced 3 strandings in 60 close trials -- activeElement left on
+         an H3.sheet-h inside a visibility:hidden sheet, nothing to read, nothing to
+         activate, Tab restarting from the document top -- at the same rate with
+         reduced motion on and off, so a general race rather than a motion seam. On
+         the failing runs neither the opener nor the fallback took focus, because the
+         fallback was gated on isFocusable(fb): if the fallback happened to be a
+         surface that was itself mid-transition, the whole branch did nothing and
+         returned.
+         The gate is gone. A `[tabindex="-1"]` labelled section is always focusable,
+         so the fallback is attempted unconditionally, then a LAST resort (the active
+         screen) is attempted, and then the post-condition is asserted rather than
+         assumed. Intermittent is worse than always-broken: a keyboard user cannot
+         learn their way around a 5% failure. */
       const fb = typeof fallback==='function' ? fallback() : fallback;
-      if(fb && isFocusable(fb)){
+      if(fb){
         if(!fb.hasAttribute('tabindex')) fb.setAttribute('tabindex','-1');
         fb.focus({preventScroll:true});
       }
+      assertFocusPlaced();
       return;
     }
     requestAnimationFrame(attempt);
+  })();
+}
+/* ---- ROUND 8: THE POST-CONDITION (a11y N1) ----------------------------------
+   Focus is "stranded" when it is nowhere a person can read or act: on <body>, on
+   nothing at all, or inside a .sheet that is no longer open (which is
+   visibility:hidden, so it is invisible AND unreachable by Tab). This checks for
+   exactly that and, if it finds it, forces focus onto the active screen -- every
+   screen carries tabindex="-1" and an aria-label, so it always announces where the
+   user has landed. It counts its own interventions on window.__focusAsserts so the
+   rate can be measured rather than asserted; a healthy build never increments it. */
+window.__focusAsserts = 0;
+function focusIsStranded(){
+  const a = document.activeElement;
+  if(!a || a === document.body) return true;
+  const sh = a.closest ? a.closest('.sheet') : null;
+  if(sh && !sh.classList.contains('on')) return true;
+  return !isFocusable(a);
+}
+function assertFocusPlaced(){
+  if(!focusIsStranded()) return false;
+  const scr = document.querySelector('.screen.active') || document.querySelector('.obscreen.active') || phoneEl;
+  if(scr){
+    if(!scr.hasAttribute('tabindex')) scr.setAttribute('tabindex','-1');
+    scr.focus({preventScroll:true});
+  }
+  window.__focusAsserts++;
+  return true;
+}
+/* run the assert a few frames after a focus move has been queued, so it judges the
+   settled state rather than the frame in the middle of it, and never while a sheet
+   is opening (openSheet owns focus then). */
+function assertFocusSoon(tok){
+  let n = 0;
+  (function again(){
+    if(tok !== navToken || openSheetId) return;
+    if(n++ < 6){ requestAnimationFrame(again); return; }
+    assertFocusPlaced();
   })();
 }
 function visibleFocusables(root){
@@ -5051,12 +5334,25 @@ function inertOutside(el){
     if(parent===phoneEl) break;
   }
 }
-function openSheet(id, opener){
+function openSheet(id, opener, focusSel){
   const sh=document.getElementById(id);
   const modal = id!=='sheet-card';
-  /* remember who opened it, but not if a sheet is handing off to another sheet */
   const active=opener || document.activeElement;
-  if(!openSheetId && active && active!==document.body) sheetOpener=active;
+  /* ROUND 8: push a level, pop back to one, or start a stack -- see sheetStack. */
+  const at = sheetStack.findIndex(f=>f.id===id);
+  if(at>=0){
+    /* going back UP to a sheet already on the stack (the receipt's "Back to ..."):
+       unwind to it and take its original opener back, rather than pushing a loop */
+    sheetOpener = sheetStack[at].opener || sheetOpener;
+    sheetStack.length = at;
+  } else if(openSheetId && openSheetId!==id){
+    sheetStack.push({id:openSheetId, opener:sheetOpener,
+                     pos: openSheetId==='sheet-card' ? cardPos : null,
+                     ctl: sheetCtlSelector(active)});
+    sheetOpener = (active && active!==document.body) ? active : sheetOpener;
+  } else if(!openSheetId && active && active!==document.body){
+    sheetOpener = active;
+  }
   document.querySelectorAll('.sheet').forEach(s=>{if(s.id!==id)s.classList.remove('on')});
   /* 4.5: a free-floating popup should grow FROM its opener, not from the screen
      centre, which explains nothing. The opener is already passed in for focus
@@ -5084,12 +5380,35 @@ function openSheet(id, opener){
      guard closeSheets already had, which openSheet was missing -- A3), and falls
      back to the sheet element itself, which carries a role and an aria-label, so a
      modal sheet can never leave a screen-reader user on <body> behind an inert app. */
-  const target = sh.querySelector('.sheet-h, h2, h3') || sh.querySelector('.sheet-close') || sh;
+  /* ROUND 8: when a level is being RESTORED, focus goes back to the control that was
+     activated rather than to the parent's heading -- the user did not re-open the
+     card, they finished with what they opened from it. */
+  const target = (focusSel && sh.querySelector(focusSel))
+              || sh.querySelector('.sheet-h, h2, h3') || sh.querySelector('.sheet-close') || sh;
   if(!target.hasAttribute('tabindex')) target.setAttribute('tabindex','-1');
   const tok=navToken;
   focusWhenReady(target, ()=> tok===navToken && openSheetId===id && sh.classList.contains('on'), sh);
 }
+/* the close AFFORDANCES pop one level; everything else still closes the lot */
+function closeTopSheet(){
+  if(!sheetStack.length){ closeSheets(); return; }
+  const parent = sheetStack.pop();
+  document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('on'));
+  scrim.classList.remove('on');
+  setBackgroundInert(false);
+  clearInertOutside();
+  openSheetId=null;
+  const back=parent.opener;
+  sheetOpener=null;
+  if(parent.id==='sheet-card' && selectedId){
+    openCard(selectedId, parent.pos||'peek', parent.ctl, back);
+  } else {
+    openSheet(parent.id, back && back.isConnected ? back : undefined, parent.ctl);
+    if(back) sheetOpener=back;
+  }
+}
 function closeSheets(){
+  sheetStack.length=0;          /* ROUND 8: closing outright closes every level */
   const wasOpen=!!openSheetId;
   document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('on'));
   scrim.classList.remove('on');
@@ -5132,16 +5451,17 @@ function closeSheets(){
       if(tok!==navToken) return;               /* the app navigated instead -- leave focus alone */
       focusWhenReady(resolve(), ()=> tok===navToken && !openSheetId,
                      ()=> document.querySelector('.screen.active'));
+      assertFocusSoon(tok);                    /* ROUND 8: post-condition, not a hope */
     });
   }
 }
-scrim.addEventListener('click',closeSheets);
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeSheets));
+scrim.addEventListener('click',closeTopSheet);
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeTopSheet));
 /* Escape closes the top-most thing it opened: search overlay first, then any sheet */
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
   if(!document.getElementById('search-ov').hidden){ e.preventDefault(); closeSearch(); return; }
-  if(openSheetId){ e.preventDefault(); closeSheets(); }
+  if(openSheetId){ e.preventDefault(); closeTopSheet(); }
 });
 /* Tab trap: while a modal sheet is up, Tab cycles inside it (inert already removes the
    background for browsers that support it -- this covers the ones that do not) */
@@ -5286,10 +5606,12 @@ function applyPersona(){
   const lbl=personaLabel();
   if(personas.size){
     ml.classList.add('on');
+    document.getElementById('legend').classList.add('compact');   /* ROUND 8: see .legend.compact */
     document.getElementById('ml-label').textContent=lbl+':';
     document.getElementById('fab-needs-label').textContent=lbl;
   } else {
     ml.classList.remove('on');
+    document.getElementById('legend').classList.remove('compact');
     document.getElementById('fab-needs-label').textContent='My needs';
   }
   document.getElementById('prof-needs-sub').textContent = personas.size?'Matching for '+[...personas].map(k=>PERSONAS[k].label).join(', '):'Choose any that help \u2014 optional';
@@ -5521,12 +5843,30 @@ function groupPlaces(list){
 /* B4a: ONE sentence describing a place -- name, entrance, tier, match, freshness, distance,
    and what has been seen. The list view built this and the map pin did not; now both read
    the same function, so the match state finally reaches the pin itself. */
+/* ROUND 8: CONFIDENCE MOVES INTO THE SENTENCE, BECAUSE IT LEFT THE PIN.
+   The pin used to draw the library's confidence ladder -- three dots, 0/2/3 filled --
+   which the owner removed as clutter (D38). Checked before removing it: this sentence
+   did NOT carry confidence, so taking the dots off would have deleted the only
+   sighted AND the only spoken carrier of it from the map at once. The brief says
+   confidence "stays" in placeSentence(); it was not there. It is now, in the same
+   words the card's Confidence tile uses (dotTriple's high / medium / low), computed
+   the same way the card computes it, so the map and the card cannot disagree. */
+function confWord(p){
+  const confs = Object.values(p.f||{}).filter(f=>f.v==='present').map(f=>f.c);
+  const avg = confs.length ? confs.reduce((a,b)=>a+b,0)/confs.length : 0;
+  /* the same three thresholds dotTriple() uses, so a place with nothing confirmed
+     reads "low" here and shows one filled dot there, rather than one surface being
+     silent while the other speaks */
+  return avg>=70 ? 'high' : avg>=40 ? 'medium' : 'low';
+}
 function placeSentence(p){
   const fr=freshLabel(p), m=matchOf(p), feats=relevantFeats(p,4);
+  const cw=confWord(p);
   const matchTxt = m ? (m.state==='good' ? `Good match, ${m.sat} of ${m.total} needs`
     : m.state==='partial' ? `${m.sat} of ${m.total} needs seen` : 'needs not yet seen') : '';
   return `${p.name}. ${entranceSub(p)}. ${tierName(p.tier)}.${matchTxt?' '+matchTxt+'.':''} `
-    + `${fr.t}. ${distLabel(p)}. ${feats.length?'Seen: '+feats.join(', ')+'.':'Nothing confirmed yet.'}`;
+    + `${fr.t}. ${cw?'Confidence '+cw+'. ':''}${distLabel(p)}. `
+    + `${feats.length?'Seen: '+feats.join(', ')+'.':'Nothing confirmed yet.'}`;
 }
 function matchStatHTML(p){
   const m=matchOf(p); if(!m) return '';
@@ -5715,7 +6055,8 @@ document.getElementById('me-area').addEventListener('click',()=>{
 document.getElementById('trust-ladder').innerHTML = `
   <div class="rung">${pinSVG('est',34)}<div class="r-body"><span class="r-name">Estimated</span><br>Early information that has not yet been photographed on-site.</div></div>
   <div class="rung">${pinSVG('scan',36)}<div class="r-body"><span class="r-name">Scanned on-site</span><br>A community member photographed the entrance in person.</div></div>
-  <div class="rung">${pinSVG('owner',38)}<div class="r-body"><span class="r-name">Owner-confirmed</span><br>The business owner has attested to the current entrance information.</div></div>`;
+  <div class="rung">${pinSVG('owner',38)}<div class="r-body"><span class="r-name">Owner-confirmed</span><br>The business owner has attested to the current entrance information.</div></div>
+  <div class="rung">${pinSVG('cluster',34,{count:8})}<div class="r-body"><span class="r-name">A numbered disc</span><br>Not a tier: the number is how many entrances are grouped at this spot, because they are too close together to draw separately here. Tap it to zoom in and see each one.</div></div>`;
 
 /* ===================== correction sheet -> "Correction submitted" (18) -> My contributions ===================== */
 const cNote=document.getElementById('correct-note');
@@ -5881,7 +6222,9 @@ function applyPrefs(){
   /* the class is the single carrier of Reduce Motion: isReduced() is
      `RM_MEDIA.matches || rmPref`, so the OS setting and the in-app toggle land on
      the same rules. RM_MEDIA has a change listener that calls back into here. */
-  phoneEl.classList.toggle('rm',isReduced());
+  /* ROUND 8: the class is on <html>, not on .phone, so an inline <head> script can
+     set it before .phone exists -- see the boot script at the top of this file. */
+  document.documentElement.classList.toggle('rm',isReduced());
   document.querySelectorAll('[data-tsize-label]').forEach(el=>el.textContent=TSIZE_LABEL[prefs.tsize]);
   document.querySelectorAll('.tsize-btn').forEach(b=>{const on=b.dataset.tsize===prefs.tsize;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on);});
   document.querySelectorAll('[data-pref]').forEach(t=>{
@@ -5921,18 +6264,44 @@ if(RM_MEDIA.addEventListener) RM_MEDIA.addEventListener('change',applyPrefs);
 /* capture coaching: one prompt at a time */
 const COACH=['Center the full doorway','Include the approach','Step back a little','Hold steady'];
 let coachTimer=null, coachIdx=0;
+/* ROUND 8 -- THE COACH STOPS (a11y N3, WCAG 2.2.2). Two defects, one call site.
+   (1) Under reduced motion the rotation carried on: startCoach() branched on
+       isReduced() only to skip the .swap fade, so the setting made the change
+       INSTANT rather than stopping it -- measured on the live build, 4 text changes
+       in 7.2s with the setting on, every 1,715ms, forever, on the one screen where
+       the user has to hold still and aim a camera. It is now replaced, not
+       shortened, exactly as the processing ring already is: all four lines are shown
+       at once, statically, and no timer is started at all.
+   (2) With motion, the rotation ran for the life of the screen with no pause, stop
+       or hide. It now runs ONE cycle and stops on the last line, and the beat moves
+       from 1,700ms to COACH_BEAT 1,500ms so the last change lands at 4,500ms --
+       under the five seconds past which 2.2.2 requires a mechanism, rather than the
+       5,100ms a single cycle at the old beat would have taken. Measured on the live
+       build after the change: exactly 3 text changes, the last completing at 4,471ms
+       with its 160ms opacity settle ending at ~4,631ms, and the interval cleared. */
+const COACH_BEAT=1400;
 function startCoach(){
   stopCoach(); coachIdx=0;
-  const c=document.getElementById('coach'); c.textContent=COACH[0]; c.classList.remove('swap');
+  const c=document.getElementById('coach');
+  c.classList.remove('swap');
+  if(isReduced()){
+    c.classList.add('static');
+    c.innerHTML=COACH.map(t=>'<span>'+t+'</span>').join('');
+    announceUI('Framing guide: '+COACH.join('. '));
+    return;
+  }
+  c.classList.remove('static');
+  c.textContent=COACH[0];
   /* announced ONCE on entry. The chip used to be aria-live and rotated every 1.7 s
      forever, interrupting a screen-reader user hunting for the shutter (I6). */
   announceUI('Framing guide: '+COACH[0]);
   coachTimer=setInterval(()=>{
-    coachIdx=(coachIdx+1)%COACH.length;
-    if(isReduced()){ c.textContent=COACH[coachIdx]; return; }
+    coachIdx++;
+    if(coachIdx>=COACH.length){ stopCoach(); return; }
+    const next=COACH[coachIdx];
     c.classList.add('swap');
-    setTimeout(()=>{ c.textContent=COACH[coachIdx]; c.classList.remove('swap'); },250);
-  },1700);
+    setTimeout(()=>{ c.textContent=next; c.classList.remove('swap'); },250);
+  },COACH_BEAT);
 }
 function stopCoach(){ if(coachTimer){ clearInterval(coachTimer); coachTimer=null; } }
 /* every screen under the Profile tab: the hub, its settings screens, the claim flow,
@@ -6020,6 +6389,11 @@ function showScreen(id){
   document.getElementById('phone').setAttribute('data-chrome',
     (id==='screen-map'||id==='ob-welcome'||id==='ob-splash'||id==='scan-capture'||hasDarkHead) ? 'dark' : 'light');
   currentScreen=id;
+  /* ROUND 8 (a11y N5): the map re-renders on its OWN visibility. renderMap() refuses
+     to draw into a zero box and leaves the last good ground up; this is where it gets
+     told the box is real again, on the same turn the screen becomes active, so the
+     ResizeObserver is a backstop rather than the mechanism. */
+  if(id==='screen-map' && _mapZeroPending){ _mapZeroPending=false; requestAnimationFrame(renderMap); }
   if(id==='screen-profile'){ renderSaved(); renderCorrections(); renderYourScans(); }
   if(id==='screen-contrib') renderYourScans();
   if(id==='screen-saved') renderSaved();
@@ -6388,15 +6762,48 @@ function runProcessing(forceReduced){
     populateChips(); procLog(t0,'chips populate');
     const n=chipsEl.querySelectorAll('.fchip').length;
     announce(`Checks complete. ${n} feature${n===1?'':'s'} identified. Review before publishing.`);
-    /* I16: hold long enough for "Checks complete" to be spoken before the screen changes */
-    after(reduced?0:PROC_CHIPS+600,()=>{ procLog(t0,'review'); waitForUploadThen(goReview); });
+    /* I16: hold long enough for "Checks complete" to be spoken before the screen
+       changes. ROUND 8 REMOVES THE `reduced?0:` (a11y N4). The comment on this line
+       said the hold exists so the announcement is spoken before the navigation --
+       and then reduced motion, the setting a screen-reader user is most likely to
+       have on, was the one thing that skipped it. Measured on the live build before
+       this change: under reduce the announcement landed 27.8ms AFTER the review
+       screen was already active (the audit reported 20ms); with motion it landed
+       1876.2ms before. A hold is not motion, so reduced motion has no business
+       deleting it. */
+    after(PROC_CHIPS+600,()=>{ procLog(t0,'review'); waitForUploadThen(goReview); });
   }
 
   if(reduced){
-    /* reduced motion: skip countdown/bounce/ripple -- present results immediately, announced */
+    /* ---- ROUND 8: REDUCED MOTION DROPS THE MOTION, NOT THE PACING (interaction N3)
+       Before this, the reduced branch called finish() synchronously: measured on the
+       live build, the whole check ran in 4.9ms with all three checks landing in the
+       same frame, against 7,419ms and 2,514 / 4,013 / 5,444ms with motion. A person
+       who asks for less motion was told three separate things at once and then moved
+       to another screen, and the clause whose own comment says it protects
+       screen-reader users was the clause the setting turned off.
+       What is motion here and is dropped: the ring's sweep (the ring itself is
+       already display:none under .scanscreen.reduced), the photo's settle scale, the
+       -90deg rotation, the chip stagger, the review screen's rise.
+       What is pacing and is kept: the checklist cadence -- one check every
+       PROC_CHECK, the first at PROC_SETTLE + PROC_CHECK -- and the announce-then-hold
+       in finish(). The progress bar is repainted at each landing as a discrete step,
+       not swept: transitions are 0s under .rm, so it jumps.
+       `n` is read at each tick rather than captured, so agreement gating (gate2)
+       flipping mid-run still adds its fourth beat instead of being ignored. */
     wrap.classList.add('captured');
     procRun={extend(){}};
-    finish();
+    paint(0);
+    const tick = k => function(){
+      if(!procActive() || fired) return;
+      const n = gate2 ? 4 : 3;
+      if(k > n) return;
+      paint(Math.min(1, k/n));
+      setCheckState(k, true); surfaced = Math.max(surfaced, k);
+      procLog(t0, CHECK_NAMES[k-1]);
+      if(k >= n) finish();
+    };
+    for(let i=1;i<=4;i++) after(PROC_SETTLE + i*PROC_CHECK, tick(i));
     return;
   }
 
