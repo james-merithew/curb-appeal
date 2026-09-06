@@ -50,8 +50,10 @@ the live map again: "the three circles above each icon is stupid" (D38). D38 win
   open". The legend must stay one screen at the largest text size.
 - Make the cluster disc's accessible name say what the number is, if it does not already.
 
-The gallery's recommended mark A (`design/estimated-mark-gallery.html`) was drawn with hollow
-dots because it predates D38; take A without the dots.
+Gallery 1's mark A (`design/estimated-mark-gallery.html`) is **not** the default: the owner asked
+for something other than a teardrop-with-glyph (D39). Gallery 2
+(`design/estimated-mark-gallery-2.html`) holds the candidates; take the one the owner names, or
+its recommendation if no name is given, and record which.
 
 ## 3. Score the two new criteria
 
