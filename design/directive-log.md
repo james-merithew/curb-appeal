@@ -184,3 +184,21 @@ Add to **§6 Product truth**, or open a §10 if Round 7 prefers — this is the 
 The two failures this pass found are the same failure at different scales: **a brief is not a
 record**, and **an answer in conversation is not a record**. D14 and D32 were both answered well
 and captured nowhere. Run this pass at every round boundary, not when asked.
+
+---
+
+## Pass 3 (2026-09-05, evening): directives given while Round 7's re-audit and two code workers run
+
+| # | Directive, in the owner's words | Stands |
+|---|---|---|
+| D34 | "always have a summary ready so you don't have to keep checking memory" | **Done** — `run/STATUS.md`, rewritten every cycle; memory `standing-summary`. Not a rubric matter. |
+| D35 | "1" — step-free entry is added to the engine **with an abstain path** (frontdoor #368, option 1) | **In flight** — engine worker dispatched; rubric 6.7 corrected to say so. |
+| D36 | "what are the numbers on the map? and why do the icons on the map have 3 circles above each of them?" | **Nowhere** until now. The numbers are cluster counts (places grouped at overview zoom); the three circles are the asset library's confidence ladder (0/2/3 of 3 filled). The owner could not read either from the map itself, and the trust legend teaches the three tier marks and neither of these. That is a legibility defect, not a question answered. |
+
+### Proposed criterion for D36
+
+Add to **§5 Map** (or wherever the trust-legend criterion lives):
+
+| # | Criterion | Score | Evidence |
+|---|---|---|---|
+| 5.x | **Every mark on a pin or in place of a pin is taught where it is seen.** The confidence dots and the cluster count are readable without explanation: "what are the numbers on the map? why do the icons have 3 circles above each of them?" | — | Directive ledger pass 3. The product owner, who approved the pin artwork, could not name either mark from the running map. The legend keys the three tiers and the match halos and nothing else. Satisfying this: the legend gains a confidence row and a cluster row, or the dots are dropped from overview zoom and shown only at street zoom beside the card, or the confidence ladder moves to the card entirely. **Ask-point:** the package's screen exports draw confidence as segmented arcs around the head; the asset library draws three dots; the build follows the library (9.11 item 6). The owner chooses which is canonical before Round 8 redraws anything. |
