@@ -451,3 +451,48 @@ visible above the entry before calling it done.
 
 This is flagged in the frontdoor repository too, on the native handoff ticket, so nobody adopting
 the library there reproduces it.
+
+## 18. Surfaces: the product has two, and one design system
+
+Recorded here in Round 7 because until then it existed only on GitHub and in conversation:
+`grep -i "emily|wliang|swift|hybrid"` across `design/*.md` returned nothing, so a reader of
+the design canon could not tell which surfaces were being designed for what. Detail lives on
+**frontdoor issue #367** (cross-linked on #275); this is the short version the canon needs.
+
+**The decision.** "how to get this in the app as well rather than remaining a web view" ->
+"okay lets do hybrid." Not a migration, and not a staged retirement of the web app.
+
+**The boundary.**
+
+| Surface | What runs there |
+|---|---|
+| Native | Camera capture, the privacy pass over a captured photo, and upload |
+| Native | The map, the business card and discovery |
+| Web | The whole product again, as the no-install route |
+
+**The rule that keeps it one product.** The web app is not a fallback and is not scheduled to
+be retired; a person who will not or cannot install anything gets the same product. Which
+means: **a token, an asset or a motion value changed for one surface is changed for both, in
+the same change.** There is one palette, one type scale, one spacing scale, one motion table
+and one asset library, and they are the ones in
+`design/board-refs/entrymap-build-ready/asset-library/`. A surface may differ in how it
+implements a control; it may not differ in what a control means, what colour carries which
+meaning, or how long anything takes.
+
+**Two live consequences, both recorded rather than assumed fixed.**
+
+1. The Swift design-system PR carries the **superseded** palette on all ten values that moved
+   in Round 7. It was flagged on the PR. There is no ticket and no owner for the correction.
+2. Anything native that adopts `asset-library/svg/brand/mark-primary.svg` reproduces the
+   broken mark described in section 17. Section 17 applies to both surfaces.
+
+**Section 5 amendment (Round 7).** Section 5 and the Round 6 reading of it say the trust pins
+sit on "a soft lavender halo disc". Checked against the package's own screen exports, that is
+a *state*, not a base: at the same 30x20px patch beside the Scanned pin,
+`screen-exports/png/map-default.png` measures `#F6F5FD` (plain land, no disc) and
+`screen-exports/png/map-filtered-results.png` measures `#D7D6FB` (a disc). The two differ only
+in that a needs profile has been applied. The map kit agrees from the other side: none of its
+eight variants draws a disc under a pin, and `after-profile.svg` fills the halo group with the
+three ring halos instead. The disc is therefore drawn only when a match state is present. It
+is the same disc for all three tiers, so it still carries no tier information and recolours
+nothing.
