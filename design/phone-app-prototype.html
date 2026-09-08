@@ -553,6 +553,41 @@ body{
 .screen.active{display:flex}
 .screen-body{flex:1;overflow-y:auto;padding:var(--pad-top) var(--inset-x) var(--pad-bottom)}
 
+/* ============ ROUND 13 -- THE TOUCH-ACTION POLICY, IN ONE PLACE ==============
+   Before this, `touch-action` appeared exactly twice in an 8,800-line file:
+   .sheet-grip-btn and .toast. Every scrolling surface in the app -- eight sheet
+   scrollers, every screen body, every scan body -- computed `touch-action: auto`,
+   which is the value that says "browser, you decide". On a mouse that is free;
+   under a finger it means the browser is guessing at the start of every gesture
+   whether this is a vertical pan, a horizontal pan, a pinch or a double-tap
+   zoom, and while it guesses it can hand the gesture to an ancestor and fire
+   `pointercancel` at whatever handler had started to run.
+
+   The policy, stated rather than guessed:
+     - a SCROLLING surface declares `pan-y`: it scrolls vertically, it owns
+       nothing else, and it does not chain its overscroll to whatever is behind
+       it (which on iOS is Safari's own rubber-band).
+     - a DRAG surface declares `none`: the handler owns the gesture outright.
+       That is .sheet-grip-btn (already), .toast (already), and -- only while its
+       content genuinely does not scroll -- the card sheet's body, below.
+   `pan-y` is deliberately NOT `none` here: touch-action intersects down the
+   ancestor chain, so `none` on a scroller (or on any ancestor of one) would
+   disable the very scrolling this ticket exists to restore.
+   MEASURED HOW: computed styles and scroll geometry, in a desktop browser. That
+   is evidence about a layout engine and NO evidence about a finger. The finger
+   test is in the ticket. ========================================================= */
+.screen-body,.scan-body,.ob-body,.search-body,.sheet-scroll{
+  touch-action:pan-y;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+}
+/* the map body is overflow:hidden and carries its own pan/zoom surface, and the two
+   HORIZONTAL rails live inside it -- so it stays `auto` (a `pan-y` ancestor would
+   have made both of them un-swipeable, which is the trap this policy is avoiding in
+   the other direction). The rails themselves declare the axis they do own. */
+#screen-map .screen-body{touch-action:auto;overscroll-behavior-y:auto}
+.nearby,.map-top.tight .legend{touch-action:pan-x;overscroll-behavior-x:contain}
+
 /* ============ map ============ */
 #screen-map .screen-body{padding:var(--sp-0);overflow:hidden;position:relative}
 /* ROUND 6 -- THE MAP IS ITS OWN PAINT LAYER.
@@ -1233,6 +1268,12 @@ body{
 .privacy-line{margin-top:var(--sp-6);background:var(--purple-wash);color:var(--purple-ink);font-weight:var(--fw-strong);font-size:var(--fs-body);border-radius:var(--r-2);padding:var(--sp-5) var(--sp-6);text-align:center;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .privacy-sub{font-size:var(--fs-meta);color:var(--sub);font-weight:var(--fw-strong);margin-top:var(--sp-4);text-align:center;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .scan-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:var(--sp-5);padding-top:var(--sp-7)}
+/* ROUND 13 -- the docked terminal action (see #scan-review markup). It sits OUTSIDE
+   .scan-body, so it carries the nav clearance and the scroller stops above it. */
+.scan-dock{flex:0 0 auto;background:var(--ground);border-top:1px solid var(--hairline);
+  padding:var(--sp-5) var(--inset-onboard) var(--pad-bottom)}
+.scan-dock .scan-actions{margin-top:var(--sp-0);padding-top:var(--sp-0)}
+#scan-review .scan-body{min-height:0;padding-bottom:var(--sp-5)}
 .sc-art{flex:0 0 104px;width:104px;min-height:104px;display:flex;align-items:center}
 .corr-art{display:block;width:224px;max-width:70%;margin:var(--sp-1) auto var(--sp-2)}
 #primer-art{display:block}
@@ -1864,6 +1905,10 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 #sheet-card[data-pos="full"]{height:92%;bottom:0}
 /* the sheet follows the finger: no transition while a pointer owns it */
 #sheet-card.dragging{transition:none}
+/* ROUND 13: written by syncDragSurface(). "body" = the card's content has nothing
+   to scroll, so the body IS the drag surface and says so. The grip is touch-action
+   :none at every stop, so the handle the aria-label promises always drags. */
+#sheet-card[data-drag="body"] .sheet-scroll{touch-action:none;overscroll-behavior-y:none}
 /* spec: "The map dims with a 7% deep-indigo veil only at full height." Round 4
    had no veil on the card at any stop, and the modal scrim it did have was 42%
    of a colour that is not in the palette. Both are restated here.
@@ -2735,6 +2780,17 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
    closed sheets showed through and scan screens painted past the bezel. Dropping
    the transform entirely (and the bezel) removes the failure mode. */
 @media (max-width:767px){
+  /* ROUND 13: the DOCUMENT is not a scrolling surface on a phone -- the app's own
+     containers are. html/body were `height:100%` with `overflow:visible`, so any
+     difference between the layout viewport and the visible one (which on iOS
+     Safari is the browser toolbar, and is not zero) made the page itself
+     scrollable. A page that can scroll is an ancestor scroller, and an ancestor
+     scroller is what a browser hands a touch gesture to when it takes it away
+     from a handler. Locking it leaves exactly one candidate for any vertical
+     swipe: the .screen-body / .scan-body / .sheet-scroll under the finger.
+     overscroll-behavior:none also removes Safari's rubber-band at the ends, which
+     is the other thing that eats the second half of a swipe. */
+  html,body{overflow:hidden;overscroll-behavior:none}
   body{padding:var(--sp-0);gap:var(--sp-0);display:block;background:var(--bezel);min-height:100dvh}
   .stage-caption{display:none}
   .phone-wrap{transform:none !important;margin:0 !important}
@@ -3336,6 +3392,17 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         <div class="chips-title" style="margin-top:var(--sp-6)">Visually confirmed</div>
         <div class="vc-chips" id="vc-chips"></div>
         <p class="privacy-sub" id="review-hint">One photo &mdash; got it. One more from further back would confirm a ramp, but this already helps.</p>
+      </div>
+      <!-- ROUND 13: the scan's terminal action is DOCKED, outside the scroller.
+           Measured at 320x568 (the shortest supported frame) at the 200% text step:
+           "Publish scan" sat 783px down a 568px frame and needed 319px of scroll to
+           reach, and the 86px navbar (z-index 45, above .scanscreen's 40, pointer-
+           events auto) covers the bottom 15% of that frame -- so a thumb swipe that
+           starts where a thumb rests scrolls nothing at all. Docking makes the
+           reach unconditional: no gesture is required to see or press it. Same
+           pattern, same reason as .filt-apply in Round 6. DOM order is unchanged,
+           so the tab order and the screen's focus entry are unchanged. -->
+      <div class="scan-dock">
         <div class="scan-actions" style="flex-direction:row">
           <button class="btn ghost" id="btn-retake">Retake</button>
           <button class="btn marigold" id="btn-publish">Publish scan</button>
@@ -6290,8 +6357,33 @@ document.getElementById('map-ground').addEventListener('click',()=>{
     return {peek:H*0.18, medium:H*0.54, full:H*0.92};
   }
   function endDrag(){ sh.classList.remove('dragging'); sh.style.transform=''; }
+  /* ROUND 13 -- THE DRAG SURFACE DECLARES ITSELF.
+     The pointerdown handler below has always decided, in script, whether this
+     gesture drags the sheet or scrolls its content: content that can actually
+     scroll scrolls, everything else drags. Nothing DECLARED that to the browser,
+     so under a finger the browser was making the same decision independently,
+     from `touch-action:auto`, and the two could disagree -- which ends in
+     pointercancel mid-drag. data-drag publishes the handler's own test as a CSS
+     hook: "body" means the card's content cannot scroll and the whole body is a
+     drag surface (touch-action:none); anything else leaves the scroller declared
+     pan-y. It is recomputed whenever the card's box or its content changes. */
+  const cardScroll=sh.querySelector('.sheet-scroll');
+  function syncDragSurface(){
+    if(!cardScroll) return;
+    const want = cardScroll.scrollHeight-cardScroll.clientHeight>1 ? 'grip' : 'body';
+    if(sh.getAttribute('data-drag')!==want) sh.setAttribute('data-drag',want);
+  }
+  try{ new ResizeObserver(syncDragSurface).observe(cardScroll); }catch(_){}
+  try{ new MutationObserver(syncDragSurface)
+        .observe(cardScroll,{childList:true,subtree:true,characterData:true}); }catch(_){}
+  /* data-pos changes the stop height, which changes what fits */
+  try{ new MutationObserver(syncDragSurface)
+        .observe(sh,{attributes:true,attributeFilter:['data-pos','class']}); }catch(_){}
+  addEventListener('resize',syncDragSurface);
+  syncDragSurface();
   sh.addEventListener('pointerdown',e=>{
     if(e.button!==undefined && e.button!==0) return;
+    syncDragSurface();                       /* belt: never let the hook go stale */
     const onGrip=!!e.target.closest('#card-grip');
     if(!onGrip){
       /* content that can actually scroll scrolls; the handle is what drags */
@@ -6324,11 +6416,23 @@ document.getElementById('map-ground').addEventListener('click',()=>{
     /* release velocity in px/ms, from the last move that carried real time */
     const dt=Math.max(1, e.timeStamp-tLast<40 ? e.timeStamp-t0 : e.timeStamp-tLast);
     const v=(e.clientY - (e.timeStamp-tLast<40 ? y0 : yLast))/dt;
+    settle(dy, v);
+  });
+  /* ROUND 13 -- AN INTERRUPTED DRAG LANDS WHERE THE FINGER WAS GOING.
+     The projection-and-snap was inline in pointerup and pointercancel did none of
+     it: it called endDrag() alone, which clears the transform and leaves the sheet
+     at the stop it started from -- the whole gesture silently discarded. On a mouse
+     that is invisible, because pointercancel essentially never fires. Under a
+     finger the browser fires it the moment it decides the pan belongs to it, which
+     is the most likely single reason a sheet "does not pull up seamlessly". The
+     settle is now one function, so a cancelled drag and a released one land on the
+     same valid stop -- never mid-transform. */
+  function settle(dy, v){
     /* where the sheet's TOP edge is heading: current height minus the drag, minus
        what the release velocity would still carry it over the next 140ms */
     const s=stopPx();
     const projected = sh.offsetHeight - dy - v*PROJECT_MS;
-    endDrag(); y0=null;
+    endDrag(); y0=null; moved=false; tapOnGrip=false;
     if(projected < s.peek*0.55){ closeSheets(); return; }
     let best='peek', bd=Infinity;
     ['peek','medium','full'].forEach(k=>{
@@ -6336,8 +6440,23 @@ document.getElementById('map-ground').addEventListener('click',()=>{
       if(d<bd){ bd=d; best=k; }
     });
     setCardPos(best);
-  });
-  sh.addEventListener('pointercancel',()=>{active=false;y0=null;endDrag();});
+  }
+  function cancelDrag(){
+    if(!active) return; active=false;
+    if(!moved){ endDrag(); y0=null; tapOnGrip=false; return; }
+    /* no release point exists, so the projection uses the gesture's own average
+       velocity from its last recorded move. It is clamped: a cancel can arrive one
+       millisecond after a 7px move, and an unclamped v would read that twitch as
+       7 px/ms and throw the sheet to full. 2.5 px/ms is a fast flick and is the
+       most this path is allowed to infer. */
+    const dy=yLast-y0, dt=Math.max(1, tLast-t0);
+    settle(dy, Math.max(-2.5, Math.min(2.5, dy/dt)));
+  }
+  sh.addEventListener('pointercancel',cancelDrag);
+  /* capture can also be lost without a cancel (the element being re-laid out, the
+     pointer leaving the document). After a normal pointerup active is already
+     false, so this is a no-op on the ordinary path. */
+  sh.addEventListener('lostpointercapture',cancelDrag);
   /* keyboard: Enter/Space on the handle cycles positions (pointer taps are handled above) */
   grip.addEventListener('click',e=>{ if(e.detail===0) stepCard(+1); });
   grip.addEventListener('keydown',e=>{
