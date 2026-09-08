@@ -1190,12 +1190,54 @@ body{
   position:relative;width:100%;max-width:330px;aspect-ratio:3/4;border-radius:var(--r-4);overflow:hidden;
   background:linear-gradient(180deg,#E6F3FF 0% 46%, #F0ECFB 46% 78%, #DFD7F2 78% 100%);
 }
-.frame-guide{position:absolute;inset:26px;border-radius:var(--r-3);pointer-events:none}
-.frame-guide i{position:absolute;width:34px;height:34px;border:4px solid #fff;opacity:.95}
-.frame-guide i:nth-child(1){left:0;top:0;border-right:none;border-bottom:none;border-radius:12px 0 0 0}
-.frame-guide i:nth-child(2){right:0;top:0;border-left:none;border-bottom:none;border-radius:0 12px 0 0}
-.frame-guide i:nth-child(3){left:0;bottom:0;border-right:none;border-top:none;border-radius:0 0 0 12px}
-.frame-guide i:nth-child(4){right:0;bottom:0;border-left:none;border-top:none;border-radius:0 0 12px 0}
+/* ROUND 10 -- THE FRAME GUIDE IS THE DOORWAY, NOT FOUR ANONYMOUS BRACKETS.
+   Four white corner brackets at inset:26px marked a rectangle that meant nothing
+   in particular. The guide is now the J1 Estimated pin's own glyph -- two rounded
+   posts, one lintel, three dots across the open threshold -- so the instruction is
+   self-evident (put the doorway inside the doorway) and the shape the user aims
+   through is the shape they then see on the map.
+   Geometry is the pin path verbatim, re-origined: the pin draws `M32 60V22h32v38`
+   in a 96 box with dots r2.2 at x40/48/56 on y60; subtracting the (32,22) origin
+   gives `M0 38V0h32v38` with dots at x8/16/24 on y38. Nothing about the silhouette
+   is redrawn.
+   WEIGHT -- a stated divergence. The pin's stroke is 4 units in a 96 viewBox, which
+   at the ladder sizes RENDERS at 4*size/96 = 1.00px (receipt 24), 1.33 (overview
+   32), 1.67 (street 40) and 2.17px (selected 52). A 1-2px line over a live camera
+   frame is not a guide, it is a scratch. The guide uses non-scaling-stroke at 3px
+   with a 7px indigo900 halo behind it, which is the "soft dark halo or thin scrim"
+   the ticket asks for; measured contrast on a light and a dark frontage is in the
+   round log. The SHAPE is the pin's, the WEIGHT is the viewfinder's. */
+/* top:47%, not 50%. Measured: at top:50% with the largest text size and Reduce
+   Motion on -- the case where the coach takes its two-line static form -- the pill
+   overlapped the guide's threshold dots by 5.4px. A 3% upward bias clears it by
+   7.2px at that setting and by 32-36px at every other, and is imperceptible as a
+   composition. */
+.frame-guide{
+  position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);
+  height:62%;aspect-ratio:32/42;pointer-events:none;
+  transition:transform var(--dur-peer) var(--ease-enter);
+}
+.frame-guide svg{display:block;width:100%;height:100%;overflow:visible}
+.fg-halo{fill:none;stroke:var(--ink);stroke-opacity:.6;stroke-width:9;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.fg-dot-halo{fill:var(--ink);fill-opacity:.6}
+.fg-line{fill:none;stroke:#FFFFFF;stroke-width:3;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;
+  transition:stroke var(--dur-peer) var(--ease-enter)}
+.fg-dot{fill:#FFFFFF;transition:fill var(--dur-peer) var(--ease-enter)}
+/* the capture beat: ONE contraction toward the frame that was taken, 3% over
+   --dur-peer 180ms -- the same 3% the processing ring's photo settles by, and the
+   same 180ms the shutter wash already runs, so the two halves of "got it" are one
+   beat rather than two. 180ms sits inside the spec's 90-320ms confirmation band. */
+.frame-guide.got{transform:translate(-50%,-50%) scale(.97)}
+.frame-guide.got .fg-line{stroke:var(--marigold)}
+.frame-guide.got .fg-dot{fill:var(--marigold)}
+/* Reduce Motion: the contraction is REPLACED, not shortened. The guide does not
+   move; the colour change alone carries the acknowledgement, and it is announced.
+   (The universal RM rule already zeroes the transition, so this only kills the
+   transform -- without it the guide would SNAP 3% smaller, which is a jump, not a
+   state.) */
+.rm .phone .frame-guide.got{transform:translate(-50%,-50%)}
 .coach{
   position:absolute;left:50%;transform:translateX(-50%);background:rgba(23,20,31,.82);color:#fff;
   font-size:var(--fs-meta);font-weight:var(--fw-strong);border-radius:999px;padding:var(--sp-4) var(--sp-6);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
@@ -1757,9 +1799,12 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 .intro-tips span{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 .intro-tips i{width:8px;height:8px;border-radius:50%;background:var(--marigold);flex:0 0 auto}
 .coach{transition:opacity var(--dur-fast) var(--ease-enter)}
-/* ROUND 8: the static form the coach takes under reduced motion -- all four lines
-   at once instead of a rotation. .coach is white-space:nowrap for the single-line
-   form, so the static form has to release that and stack. */
+/* The static form the coach takes under reduced motion. Round 8 used it to show
+   all four canned lines at once instead of rotating them; Round 10 deleted the
+   rotation entirely, so it now stacks the measured line above the resting
+   instruction -- the guidance is present as static text either way, and nothing
+   the user needs depends on a change happening. .coach is white-space:nowrap for
+   the single-line form, so the static form has to release that and stack. */
 .coach.static{white-space:normal;display:flex;flex-direction:column;gap:var(--sp-1);text-align:center;
   max-width:84%;border-radius:var(--r-2);padding:var(--sp-3) var(--sp-5)}
 .coach.swap{opacity:0}
@@ -2958,7 +3003,20 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         <div class="viewfinder" id="viewfinder">
           <div id="doorway-art"></div>
           <video id="cam-video" autoplay playsinline muted hidden></video>
-          <div class="frame-guide"><i></i><i></i><i></i><i></i></div>
+          <!-- the J1 Estimated pin's glyph, re-origined from `M32 60V22h32v38` in the
+               pin's 96 box. Halo first, mark on top; both non-scaling-stroke. -->
+          <div class="frame-guide" id="frame-guide">
+            <svg viewBox="-6 -6 44 50" aria-hidden="true">
+              <path class="fg-halo" d="M0 38V0h32v38"/>
+              <circle class="fg-dot-halo" cx="8" cy="38" r="3.8"/>
+              <circle class="fg-dot-halo" cx="16" cy="38" r="3.8"/>
+              <circle class="fg-dot-halo" cx="24" cy="38" r="3.8"/>
+              <path class="fg-line" d="M0 38V0h32v38"/>
+              <circle class="fg-dot" cx="8" cy="38" r="2.2"/>
+              <circle class="fg-dot" cx="16" cy="38" r="2.2"/>
+              <circle class="fg-dot" cx="24" cy="38" r="2.2"/>
+            </svg>
+          </div>
           <div class="coach" id="coach" style="bottom:12px">Center the full doorway</div>
           <div class="live-chip"><span class="dot"></span>LIVE</div>
         </div>
@@ -6642,49 +6700,278 @@ document.querySelectorAll('[data-pref]').forEach(t=>t.addEventListener('click',(
 if(RM_MEDIA.addEventListener) RM_MEDIA.addEventListener('change',applyPrefs);
 
 /* ===================== nav / screens ===================== */
-/* capture coaching: one prompt at a time */
-const COACH=['Center the full doorway','Include the approach','Step back a little','Hold steady'];
-let coachTimer=null, coachIdx=0;
-/* ROUND 8 -- THE COACH STOPS (a11y N3, WCAG 2.2.2). Two defects, one call site.
-   (1) Under reduced motion the rotation carried on: startCoach() branched on
-       isReduced() only to skip the .swap fade, so the setting made the change
-       INSTANT rather than stopping it -- measured on the live build, 4 text changes
-       in 7.2s with the setting on, every 1,715ms, forever, on the one screen where
-       the user has to hold still and aim a camera. It is now replaced, not
-       shortened, exactly as the processing ring already is: all four lines are shown
-       at once, statically, and no timer is started at all.
-   (2) With motion, the rotation ran for the life of the screen with no pause, stop
-       or hide. It now runs ONE cycle and stops on the last line, and the beat moves
-       from 1,700ms to COACH_BEAT 1,500ms so the last change lands at 4,500ms --
-       under the five seconds past which 2.2.2 requires a mechanism, rather than the
-       5,100ms a single cycle at the old beat would have taken. Measured on the live
-       build after the change: exactly 3 text changes, the last completing at 4,471ms
-       with its 160ms opacity settle ending at ~4,631ms, and the interval cleared. */
-const COACH_BEAT=1400;
-function startCoach(){
-  stopCoach(); coachIdx=0;
+/* ===================== capture coaching: measured, never timed ===================== */
+/* ROUND 10 -- THE COACH WAS A CLOCK (frontdoor #436).
+   What was here: COACH, four canned lines, cycled by setInterval(...,1400). It said
+   "Step back a little" whether or not the user was too close, and "Hold steady"
+   whether or not the phone was moving. getImageData appeared ZERO times in the
+   build and there was no devicemotion listener: nothing on this screen had ever
+   looked at anything. An overlay that appears to respond and does not is worse than
+   no overlay, because the user believes the app had an opinion.
+   Every line below is now earned by a signal sampled from the live preview or the
+   device, and the resting state is one static instruction that never changes.
+
+   THE RULE THAT KEEPS IT HONEST, and it governs everything in this block: speak
+   only when the signal is strong and sustained; stay silent when it is ambiguous.
+   The asymmetry is about the COST OF OBEDIENCE. A wrong "hold steady" costs a
+   second of stillness. A wrong "step back" costs the user a worse photograph than
+   the one they were about to take, because they will obey it. So the bar for a
+   framing line is not the same bar as for a steadiness line, and one of the two
+   did not clear it -- see FRAMING_SPEAKS below. */
+
+const COACH_REST = 'Center the doorway in the guide';
+const SENSE_MS   = 200;   /* 5 Hz. One 160-wide drawImage + getImageData per tick;
+                             measured cost is in the round log. */
+const SENSE_W    = 160;   /* sample canvas width -- the ticket's number */
+const SPEAK_N    = 6;     /* consecutive agreeing samples before a line appears: 1.2s */
+const CLEAR_N    = 3;     /* consecutive contrary samples before it goes: 0.6s */
+const COACH_DWELL= 1500;  /* once shown, a line stays at least this long -- no flicker */
+
+/* --- thresholds, each with the measurement behind it ---------------------------
+   DARK_LUMA 60/255. Mean luminance of the 335 real frontage photographs in
+   photos/door-01..64, sampled the same way this loop samples (160 wide, Rec.601
+   luma): minimum 100.0, 1st percentile 102.1, median 123.1. NOT ONE of the 335
+   falls below 100, so 60 sits 40 points below the darkest real capture in the
+   corpus and cannot fire on a daylight frontage. It is a floor for a genuinely
+   unlit entrance, not a judgement about a dim one.
+
+   MOTION_RMS 1.2 m/s^2, and "Hold steady" is gated on the ACCELEROMETER ALONE.
+   Total edge energy collapses under motion blur, which is why the ticket expects
+   blur to fall out of the same statistic, and it does: measured over the same 335
+   photographs, a Gaussian blur of sigma 1.0px at 160 wide -- about what a small
+   hand-shake does -- leaves energy at 0.504 to 0.739 of the sharp value, median
+   0.631, worst case 0.739. So a drop below 0.80 of a recent baseline really is a
+   blur signature.
+   It is not, however, a MOTION signature, and that is the difference that matters.
+   Measured on this build: cutting the preview from one sharp frontage to another
+   drops the ratio below 0.80 in 2 of 8 pairs tried (0.774 and 0.662) -- panning to
+   a flatter scene looks exactly like blurring the old one. Worse, a rolling
+   baseline self-cancels under a SUSTAINED shake, because every frame in the window
+   is blurred and the ratio returns to 1. A statistic that fires when the user
+   re-aims and goes quiet when the user is actually shaking is not a steadiness
+   detector, so it does not drive the line. Energy is still computed every tick, at
+   no extra cost, and is exposed at window.__lastSense.energy.
+   MOTION_RMS ITSELF IS NOT MEASURED. There is no accelerometer on the machine this
+   was built on, so 1.2 m/s^2 of variation about the mean is a starting value, and
+   it is the one threshold in this block without a corpus behind it. The rule path
+   was exercised with synthesised DeviceMotionEvents, so the listener, the window
+   and the threshold comparison are demonstrated; the VALUE is not.
+   Where motion is unavailable -- always on desktop, and on iOS until
+   DeviceMotionEvent permission is granted -- the line simply never appears. This
+   build does not request that permission: a second permission dialog on the
+   capture screen, to sharpen one hint, is not a trade worth making, and silence is
+   the correct resting state. */
+const DARK_LUMA    = 60;
+const STEADY_ENERGY= 0.80;   /* the measured blur signature -- reported, not a gate */
+const MOTION_RMS   = 1.2;
+
+/* --- the framing check, and why it does not speak ------------------------------
+   The border-band test from the ticket, implemented: downscale to 160 wide, take a
+   vertical-gradient magnitude (2-tap central difference along x), and compare the
+   energy in a band along the top edge against the interior. A doorway fully inside
+   the frame leaves the border band comparatively quiet; a doorway running out of
+   shot puts sustained vertical energy crossing it.
+   FRAME_TOP_R 1.30 and FRAME_ANISO 1.30 are the thresholds at which the rule
+   produced ZERO false positives on the 256 photographs in photos/ that are
+   correctly framed.
+   FRAMING_SPEAKS is false, and that is a measurement, not a hedge. At that
+   zero-false-positive operating point the rule also fires on 0 of the 24
+   photographs that ARE cut off, and on 23.4% of a synthetic positive set (every
+   one of the 256 well-framed photographs centre-cropped to 40%, which puts the
+   doorway out of frame by construction). Five variants were tried -- band depths
+   6/12/20%, vertical-to-horizontal anisotropy, band-versus-adjacent-stripe
+   continuity, a strongest-vertical-pair reach test, and an unnormalised band
+   energy. The two-condition rule above is the best zero-false-positive operating
+   point of the lot, at 23.4% of the synthetic positives and 0 of the 24 real ones;
+   each single feature on its own reaches at most 8.2% at its own
+   zero-false-positive threshold. Best separation of any variant on the real corpus
+   was AUC 0.72; a mean-brightness-only baseline scored 0.68, so the framing signal
+   is barely distinguishable from a scene confound.
+   The reason is structural rather than a tuning failure: a photograph that is too
+   close is a photograph in which the doorway FILLS the frame, so the interior is
+   as full of strong verticals as the border is, and the ratio normalises the
+   signal away. Meanwhile the well-framed wide shots of glass lobbies and mullioned
+   storefronts in this corpus -- doors 27, 40, 46, 58 -- put real sustained
+   verticals through the top band with the door head plainly visible.
+   The ticket set the acceptance criterion itself: "that false-positive rate is the
+   number that decides whether this ships speaking or stays silent." It stays
+   silent. The statistic is still computed every tick, at no measurable extra cost,
+   and is readable at window.__lastSense for the next round to re-tune against;
+   flipping FRAMING_SPEAKS is the only edit needed if a later corpus separates. */
+const FRAME_TOP_R   = 1.30;
+const FRAME_ANISO   = 1.30;
+const FRAMING_SPEAKS= false;
+const FRAMING_LINE  = 'Step back a little';
+
+let senseTimer=null, senseCanvas=null, senseCtx=null;
+let energyLog=[], motionLog=[], motionSeen=false;
+let coachHits={}, coachMisses={}, coachActive=null, coachShownAt=0, coachSaid=null;
+
+function senseReset(){
+  energyLog=[]; motionLog=[]; motionSeen=false;
+  coachHits={}; coachMisses={}; coachActive=null; coachShownAt=0; coachSaid=null;
+}
+function onDeviceMotion(e){
+  const a = e.accelerationIncludingGravity || e.acceleration;
+  if(!a) return;
+  motionSeen=true;
+  motionLog.push(Math.hypot(a.x||0,a.y||0,a.z||0));
+  if(motionLog.length>30) motionLog.shift();   /* ~0.5s at 60Hz */
+}
+function motionRMS(){
+  if(motionLog.length<8) return 0;
+  const m=motionLog.reduce((s,x)=>s+x,0)/motionLog.length;
+  return Math.sqrt(motionLog.reduce((s,x)=>s+(x-m)*(x-m),0)/motionLog.length);
+}
+
+/* One pass over a 160-wide greyscale frame. Returns null when there is no live
+   video to read -- the illustrated fallback capture is never sampled, so a user
+   who declined the camera is never coached about a picture that is a drawing. */
+function senseFrame(){
+  const v=document.getElementById('cam-video');
+  const vf=document.getElementById('viewfinder');
+  if(!v || !vf || !vf.classList.contains('live') || !v.videoWidth || !v.videoHeight) return null;
+  if(!senseCanvas){ senseCanvas=document.createElement('canvas'); senseCtx=senseCanvas.getContext('2d',{willReadFrequently:true}); }
+  const w=SENSE_W, h=Math.max(8, Math.round(SENSE_W*v.videoHeight/v.videoWidth));
+  if(senseCanvas.width!==w||senseCanvas.height!==h){ senseCanvas.width=w; senseCanvas.height=h; }
+  try{ senseCtx.drawImage(v,0,0,w,h); }catch(e){ return null; }
+  let d; try{ d=senseCtx.getImageData(0,0,w,h).data; }catch(e){ return null; }
+
+  const g=new Float32Array(w*h);
+  let lum=0;
+  for(let i=0,p=0;i<g.length;i++,p+=4){
+    const y=0.299*d[p]+0.587*d[p+1]+0.114*d[p+2];
+    g[i]=y; lum+=y;
+  }
+  lum/=g.length;
+
+  /* vv[y][x] = |g(x+1)-g(x-1)|, hh[y][x] = |g(y+1)-g(y-1)|, both over the interior
+     grid x in 1..w-2, y in 1..h-2 -- identical to the offline implementation the
+     thresholds above were measured with. */
+  const W=w-2, H=h-2;
+  if(W<16||H<16) return null;
+  const c0=Math.floor(0.12*W), c1=Math.floor(0.88*W);
+  const b =Math.max(3, Math.round(0.20*H));
+  const i0=Math.floor(0.25*H), i1=Math.floor(0.75*H);
+  let eSum=0, eN=0, vTop=0, vTopN=0, hTop=0, vInt=0, vIntN=0;
+  for(let y=0;y<H;y++){
+    const gy=y+1;
+    for(let x=0;x<W;x++){
+      const gx=x+1;
+      const vv=Math.abs(g[gy*w+gx+1]-g[gy*w+gx-1]);
+      const hh=Math.abs(g[(gy+1)*w+gx]-g[(gy-1)*w+gx]);
+      eSum+=vv+hh; eN++;
+      if(x>=c0 && x<c1){
+        if(y<b){ vTop+=vv; hTop+=hh; vTopN++; }
+        if(y>=i0 && y<i1){ vInt+=vv; vIntN++; }
+      }
+    }
+  }
+  const energy=eSum/eN;
+  const topMean=vTopN?vTop/vTopN:0, intMean=vIntN?vInt/vIntN:0, hTopMean=vTopN?hTop/vTopN:0;
+  return {
+    lum: lum,
+    energy: energy,
+    topR: topMean/(intMean+1e-6),
+    aniso: topMean/(hTopMean+1e-6),
+    portrait: v.videoHeight >= v.videoWidth
+  };
+}
+
+/* the three conditions that are allowed to speak, in priority order */
+function coachRules(s){
+  const base = energyLog.length>=5 ? energyLog.slice().sort((a,b)=>a-b)[energyLog.length>>1] : 0;
+  s.blurRatio = base>0 ? s.energy/base : 1;          /* reported; see STEADY_ENERGY */
+  const moving  = motionSeen && motionRMS() > MOTION_RMS;
+  return [
+    {id:'orient', line:'Turn the phone upright', on: !s.portrait},
+    {id:'dark',   line:"It's dark here",         on: s.lum < DARK_LUMA},
+    {id:'steady', line:'Hold steady',            on: moving},
+    {id:'frame',  line: FRAMING_LINE,
+                  on: FRAMING_SPEAKS && s.topR>FRAME_TOP_R && s.aniso>FRAME_ANISO}
+  ];
+}
+
+function senseTick(){
+  const s=senseFrame();
+  if(!s){ return; }
+  window.__lastSense=s;                       /* readable for calibration */
+  energyLog.push(s.energy); if(energyLog.length>15) energyLog.shift();  /* 3s */
+  const rules=coachRules(s);
+  let winner=null;
+  rules.forEach(r=>{
+    if(r.on){ coachHits[r.id]=(coachHits[r.id]||0)+1; coachMisses[r.id]=0; }
+    else    { coachMisses[r.id]=(coachMisses[r.id]||0)+1;
+              if(coachMisses[r.id]>=CLEAR_N) coachHits[r.id]=0; }
+    if(!winner && (coachHits[r.id]||0)>=SPEAK_N) winner=r;
+  });
+  setCoach(winner);
+}
+
+/* one line at a time, with a floor on how briefly it can be on screen */
+function setCoach(rule){
   const c=document.getElementById('coach');
-  c.classList.remove('swap');
+  if(!c) return;
+  const id = rule?rule.id:null;
+  if(id===coachActive) return;
+  const now=Date.now();
+  if(coachActive && now-coachShownAt < COACH_DWELL) return;   /* hold, do not flicker */
+  coachActive=id; coachShownAt=now;
+  const line = rule ? rule.line : COACH_REST;
+  paintCoach(line, rule ? COACH_REST : null);
+  /* announced only when the line actually changes, never on a tick. The chip is not
+     aria-live: it used to be, and it interrupted a screen-reader user hunting for
+     the shutter every 1.7 seconds (I6). */
+  if(line!==coachSaid){ coachSaid=line; announceUI(line); }
+}
+function paintCoach(line, sub){
+  const c=document.getElementById('coach');
+  /* Reduce Motion: the guidance is STATIC TEXT. No fade between lines (the RM rule
+     zeroes the transition anyway) and the resting instruction stays on screen under
+     any measured line, so nothing the user needs depends on a change happening. */
   if(isReduced()){
-    c.classList.add('static');
-    c.innerHTML=COACH.map(t=>'<span>'+t+'</span>').join('');
-    announceUI('Framing guide: '+COACH.join('. '));
+    c.classList.add('static'); c.classList.remove('swap');
+    c.innerHTML = sub ? '<span>'+line+'</span><span>'+sub+'</span>' : '<span>'+line+'</span>';
     return;
   }
   c.classList.remove('static');
-  c.textContent=COACH[0];
-  /* announced ONCE on entry. The chip used to be aria-live and rotated every 1.7 s
-     forever, interrupting a screen-reader user hunting for the shutter (I6). */
-  announceUI('Framing guide: '+COACH[0]);
-  coachTimer=setInterval(()=>{
-    coachIdx++;
-    if(coachIdx>=COACH.length){ stopCoach(); return; }
-    const next=COACH[coachIdx];
-    c.classList.add('swap');
-    setTimeout(()=>{ c.textContent=next; c.classList.remove('swap'); },250);
-  },COACH_BEAT);
+  c.classList.add('swap');
+  setTimeout(()=>{ c.textContent=line; c.classList.remove('swap'); },160);
 }
-function stopCoach(){ if(coachTimer){ clearInterval(coachTimer); coachTimer=null; } }
+
+function startCoach(){
+  stopCoach();
+  senseReset();
+  paintCoach(COACH_REST, null);
+  coachSaid=COACH_REST;
+  announceUI('Framing guide: '+COACH_REST);
+  const fg=document.getElementById('frame-guide'); if(fg) fg.classList.remove('got');
+  if(window.DeviceMotionEvent) window.addEventListener('devicemotion', onDeviceMotion);
+  /* The sample is SCHEDULED by the interval and RUN inside requestAnimationFrame.
+     getImageData is a GPU readback: called mid-frame it stalls on the compositor,
+     and called just after one it does not. Measured on this build, the readback
+     costs a fixed 16.6ms whether the region asked for is 160x213 or 8x8 -- a
+     size-independent cost is a synchronisation stall, not work, and rAF is where
+     it belongs. It also means the loop stops on its own when the app is
+     backgrounded, which is the cheapest possible answer to "must not heat the
+     phone". The arithmetic itself measures 0.41ms per frame. */
+  senseTimer=setInterval(()=>{ if(senseTimer) requestAnimationFrame(senseTick); }, SENSE_MS);
+}
+function stopCoach(){
+  if(senseTimer){ clearInterval(senseTimer); senseTimer=null; }
+  window.removeEventListener('devicemotion', onDeviceMotion);
+  senseReset();
+}
+/* the capture beat, in the guide: ONE 3% contraction to marigold over --dur-peer
+   180ms, inside the spec's 90-320ms confirmation band and the same length as the
+   shutter wash it plays with. Under Reduce Motion the contraction is replaced by
+   the colour state alone plus an announcement -- a state change, not a shortened
+   transition. */
+function ackCapture(){
+  const fg=document.getElementById('frame-guide');
+  if(fg){ fg.classList.add('got'); setTimeout(()=>fg.classList.remove('got'),320); }
+  if(isReduced()) announceUI('Photo captured');
+}
 /* every screen under the Profile tab: the hub, its settings screens, the claim flow,
    and the owner workspace. Each one has a back path, so nothing is a dead end. */
 const PROFILE_TAB=/^(screen-profile|screen-saved|screen-contrib|screen-a11y|screen-notif|screen-states|screen-corr-done|claim-|ow-)/;
@@ -7028,6 +7315,8 @@ document.getElementById('btn-allow-cam').addEventListener('click',()=>{
   tryStartCamera(); /* live viewfinder when granted; the illustrated capture stays otherwise */
 });
 document.getElementById('btn-shutter').addEventListener('click',async ()=>{
+  ackCapture();          /* the guide acknowledges the frame, on the press itself */
+  stopCoach();           /* nothing is coached about a photograph already taken */
   if(camStream){
     const frame=await captureFrame();
     stopCamera();
