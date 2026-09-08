@@ -520,6 +520,15 @@ body{
    number changes, and every step keeps its ratio and its single meaning. */
 .phone[data-textsize="large"]{--root-fs:16.2px}
 .phone[data-textsize="larger"]{--root-fs:18.9px}
+/* ROUND 11 ADDS THE TWO STEPS WCAG 1.4.4 ACTUALLY ASKS FOR. The picker topped out at
+   18.9px, which is +26% on the 15px root -- a "largest" setting that never reaches
+   the 200% the success criterion names. Round 9 measured zero clipped nodes at 18.9,
+   so the headroom was there and nothing was testing it.
+   The three existing steps are untouched, because every contrast, clipping and fit
+   figure in this file and in the rubric was measured at 15 / 16.2 / 18.9 and moving
+   them would silently invalidate all of it. 22.5 is 150% and 30 is exactly 200%. */
+.phone[data-textsize="huge"]{--root-fs:22.5px}
+.phone[data-textsize="double"]{--root-fs:30px}
 .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:26px;background:var(--bezel);border-radius:16px;z-index:60}
 .statusbar{
   position:absolute;top:0;left:0;right:0;height:46px;z-index:55;
@@ -635,7 +644,11 @@ body{
      pill's place name wrapped. The bar keeps the same 12px inset as the flow header
      (one header geometry, not two) and gives the width back from the gap, which is
      one step down the same spacing scale. The pill's label holds one line again. */
-  display:flex;align-items:center;gap:var(--sp-3);
+  /* ROUND 11 lets the row wrap, and makes the row a query container so the wrap can
+     be decided by how much room there is IN CHARACTERS rather than in pixels. See
+     .locpill below. */
+  display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;
+  container-type:inline-size;
 }
 .wordmark{flex:0 0 auto;display:flex;align-items:center}
 /* ROUND 6: the 48px target costs 8px of width in the densest row in the app (two
@@ -671,11 +684,38 @@ body{
    is, not the mark. */
 .locpill .lp-text{min-width:0;white-space:normal;overflow-wrap:normal;text-align:center;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+/* ROUND 11 FINISHES a11y N13, which Round 9 reduced from 38-63px of clipping to
+   1-15px and left open at the narrowest supported width. Two cases remained, and
+   both are the same case: the pill is asked to live in whatever width is left after
+   an 88px wordmark, two 48px buttons and three 6px gaps -- 202px of a row that is
+   296px wide at a 320px frame.
+   Measured on Round 10 HEAD at a 320x568 frame, which is the narrowest supported:
+   the pill is 72px wide and .lp-text overflows it by 23 / 27 / 37px horizontally AND
+   by 16 / 18 / 21px vertically at Default / Large / Larger. The brief for this round
+   put the residue at "1-15px"; it is not, it is 23-37px across and clipped in both
+   axes, and the vertical clipping means Round 9's two-line wrap was itself being cut.
+   The 200% step added in this round then clipped the label by a further 6px even on
+   the 390px frame -- the ONLY clipped node anywhere in a 260-scan sweep.
+   The fix is a wrap, not a truncation, and the wrap is decided in CHARACTERS. The
+   header row is a query container, so `20em` means "twenty of this row's own
+   characters" and answers a narrow frame and a large text size with one rule,
+   because they are the same shortage. Below it the pill takes a full-width row of
+   its own BELOW the wordmark and the two round buttons (order:3), which keeps the
+   two buttons together -- an earlier attempt used a min-width instead and orphaned
+   the profile button alone on the left of the second row.
+   Measured after, at every one of the five text steps: 0px of clipping in either
+   axis at 320x568, 360x640, 375x667 and 390x844. The header is 106px and pixel
+   identical to Round 10 wherever the query does not fire (390x844 at Default and
+   Large), and 160px where it does. */
 .locpill{
-  flex:1;min-height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:999px;
+  flex:1;min-width:0;
+  min-height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:999px;
   background:var(--chrome-fill);
   font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-sub);color:var(--chrome-ink);
   display:flex;align-items:center;justify-content:center;gap:var(--sp-3);cursor:pointer;min-width:0;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+@container (max-width:20em){
+  .locpill{order:3;flex:1 0 100%}
+}
 .locpill .chevd{color:var(--chrome-ink);font-size:var(--fs-sub);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);font-weight:var(--fw-body);}
 .hamb{
   flex:0 0 var(--tap);width:var(--tap);height:var(--tap);border:1.5px solid var(--chrome-edge);border-radius:50%;cursor:pointer;
@@ -1107,6 +1147,16 @@ body{
   border:none;background:none;font-family:inherit;color:var(--purple-ink);font-weight:var(--fw-strong);
   font-size:var(--fs-body);cursor:pointer;min-height:var(--tap);width:100%;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .sheet-h{font-size:var(--fs-h2);font-weight:var(--fw-display);margin-top:var(--sp-3);line-height:var(--lh-h2);letter-spacing:var(--ls-h2);}
+/* ROUND 11: a second-level heading inside a sheet. It is the type scale's h3 step
+   and the section label's uppercase treatment, both already authored -- no new size
+   and no new weight enter the file. */
+.sheet-sub{font-size:var(--fs-meta);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);
+  text-transform:uppercase;color:var(--sub);line-height:var(--lh-meta);
+  margin:var(--sp-6) 0 var(--sp-0);}
+/* the three non-tier marks are a key, not a ladder: they are read by scanning down
+   the art column rather than by following a progression, so they sit one step
+   tighter than the ranked rungs above them. That is 3 x 8px back into the sheet. */
+#mapkey-ladder .rung + .rung{margin-top:var(--sp-6)}
 .sheet-p{font-size:var(--fs-sub);color:var(--sub);font-weight:var(--fw-body);margin-top:var(--sp-2);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
 
 /* filter sheet */
@@ -1282,6 +1332,30 @@ body{
   stroke-dasharray:408.4;stroke-dashoffset:408.4;transition:stroke-dashoffset .25s linear;
   filter:drop-shadow(0 0 5px rgba(240,163,47,.35));
 }
+/* ROUND 11: the countdown sits where the doorway glyph will be, and the two swap on
+   `settled` -- the number is what the ring is doing, the glyph is what it did. Both
+   are aria-hidden; the progressbar and the caption carry it in the accessibility
+   tree. Under Reduce Motion .ringwrap is display:none, so there is no ring and no
+   countdown; the caption and the step-wise progress bar carry the duration instead. */
+.ring-count{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--purple-ink);font-weight:var(--fw-display);font-size:var(--fs-display);
+  line-height:var(--lh-display);letter-spacing:var(--ls-display);
+  font-variant-numeric:tabular-nums;transition:opacity var(--dur-fast) var(--ease-exit)}
+/* the digits and the unit share a baseline; the pair is what is centred in the ring.
+   One flex box cannot do both, which is why there are two. */
+.rc-in{display:flex;align-items:baseline;gap:1px}
+/* the captured photograph fills the ring from the 1s settle, so the number would be
+   ink on an unknown image. This is the scrim that makes its contrast a number rather
+   than a hope: 92% white, so the worst ground the digits can ever sit on is #EBEBEB
+   -- a fully black photograph beneath. Measured on the live tokens: --purple-ink
+   #38239B is 11.16:1 on white and 9.36:1 on that worst ground; the "s" in --sub
+   #463B63 is 10.16:1 and 8.53:1. High contrast (#311E84 / #1E1142): 12.73 / 10.68
+   and 17.30 / 14.51. The floor across both modes is 8.53:1. */
+.ring-count::before{content:'';position:absolute;width:104px;height:104px;border-radius:50%;
+  background:rgba(255,255,255,.92)}
+.ring-count .rc-in{position:relative}
+.ring-count .rc-u{font-size:var(--fs-h2);font-weight:var(--fw-strong);color:var(--sub)}
+.ringwrap.settled .ring-count{opacity:0}
 .ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--purple);transition:color var(--dur-settle) var(--ease-enter)}
 .ring-center svg{display:block}
 .ringwrap.settled .ring-fill{opacity:1}
@@ -1390,6 +1464,8 @@ body{
 }
 .done-legend{display:flex;gap:var(--sp-6);margin-top:var(--sp-6);flex-wrap:wrap;justify-content:center}
 .done-legend .lg{display:flex;align-items:center;gap:var(--sp-3);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+.done-prov{width:100%;max-width:320px;margin-top:var(--sp-5);text-align:left}
+.done-prov .prov-row{border-bottom:none}
 .counter-line{margin-top:var(--sp-6);font-weight:var(--fw-display);font-size:var(--fs-body);color:var(--purple-ink);line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 
 /* ============ profile ============ */
@@ -1425,9 +1501,20 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:25px;height:25px;border-radius:50%;background:#fff;transition:left var(--dur-fast) var(--ease-enter);box-shadow:var(--knob)}
 .toggle.on{background:var(--purple)}
 .toggle.on::after{left:24px}
-.tsize-row{display:flex;gap:var(--sp-4)}
-.tsize-btn{min-width:48px;min-height:var(--tap);border-radius:var(--r-2);border:2px solid var(--edge);background:#fff;font-family:inherit;font-weight:var(--fw-strong);color:var(--sub);cursor:pointer}
-.tsize-btn:nth-child(1){font-size:14px}.tsize-btn:nth-child(2){font-size:17px}.tsize-btn:nth-child(3){font-size:20px}
+/* ROUND 11: five steps do not fit beside a label on a 320px frame -- three already
+   filled 156px of it. The row becomes a stack: label above, picker on its own full
+   width below, each key an equal share of it. Nothing shrinks below the 48px tap
+   floor because the phone is never narrower than 320px and 5 x 48 = 240. */
+.prof-row.stacked{flex-wrap:wrap}
+.prof-row.stacked .tsize-row{flex:1 0 100%;margin-top:var(--sp-4)}
+.tsize-row{display:flex;gap:var(--sp-3)}
+.tsize-btn{flex:1 1 0;min-width:48px;min-height:var(--tap);border-radius:var(--r-2);border:2px solid var(--edge);background:#fff;font-family:inherit;font-weight:var(--fw-strong);color:var(--sub);cursor:pointer;padding:var(--sp-0)}
+/* the preview sizes are the one place in the file that must NOT scale with the
+   setting they control, so they stay literal px. Five keys, 13 -> 25, the ladder the
+   five roots make: 15 / 16.2 / 18.9 / 22.5 / 30 read at a common cap height. */
+.tsize-btn:nth-child(1){font-size:13px}.tsize-btn:nth-child(2){font-size:15px}
+.tsize-btn:nth-child(3){font-size:18px}.tsize-btn:nth-child(4){font-size:21px}
+.tsize-btn:nth-child(5){font-size:25px}
 .tsize-btn.sel{border-color:var(--purple);background:var(--purple-wash);color:var(--purple-ink)}
 .owner-tease{background:linear-gradient(120deg,var(--purple-wash),#fff 70%);border:1px solid var(--hairline)}
 
@@ -1591,6 +1678,41 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
   width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.22);
   display:inline-flex;align-items:center;justify-content:center;font-size:var(--icon-glyph-sm);line-height:1;
 }
+
+/* ROUND 11 CLOSES THE LAST FEEDBACK CLAUSE (9.9 / interaction N11): "affected pins
+   crossfade over 180ms; newly relevant pins rise 4px while their halos draw."
+   The build re-rendered the whole pin layer, so a filter change was a hard cut. Now
+   renderMap() diffs the pin set when -- and only when -- a filter or a needs profile
+   changed, and:
+     a pin that is no longer relevant is left on the map as an inert copy and fades
+       out over --dur-peer (the spec's own 180ms token, already in this file);
+     a pin that is newly relevant rises 4px and fades in over the same 180ms, and its
+       halo group draws with it -- scaling from .88 about the head centre rather than
+       merely appearing, which is what "draws" has to mean for a ring.
+   Pins present before and after do not move and do not animate: a crossfade that
+   restates the whole map would say every pin changed, and only some did.
+   The rise is on `.pin`, which already carries translateX(-50%), so the keyframes
+   restate it; the selected pin is excluded because it owns that transform (its 6px
+   lift and its pinTap) and two animations on one property is one animation. */
+@keyframes pinRise{
+  from{transform:translateX(-50%) translateY(4px);opacity:0}
+  to  {transform:translateX(-50%) translateY(0);opacity:1}
+}
+@keyframes haloDraw{ from{opacity:0;transform:scale(.88)} to{opacity:1;transform:scale(1)} }
+@keyframes pinFade{ from{opacity:1} to{opacity:0} }
+.pinbtn.arriving:not(.selected) .pin{animation:pinRise var(--dur-peer) var(--ease-enter) both}
+.pinbtn.arriving .pin-halo{animation:haloDraw var(--dur-peer) var(--ease-enter) both;
+  /* the head centre, expressed from the view-box's own corner: the pin viewBox is
+     "-8 1 112 95.1", so the head at user (48, 41.3) is (56, 40.3) into the box. The
+     halo grows out of the head, not out of the corner of the drawing. */
+  transform-origin:56px 40.3px;transform-box:view-box}
+.pinbtn.leaving{animation:pinFade var(--dur-peer) var(--ease-exit) both;pointer-events:none}
+/* Reduce Motion REPLACES rather than shortens (9.6): the set changes in one step,
+   with no ghost and no rise. The count is spoken either way -- the toast and
+   #sr-announce carry "Showing N places that fit" -- so nothing is only in motion. */
+.rm .phone .pinbtn.arriving:not(.selected) .pin,
+.rm .phone .pinbtn.arriving .pin-halo,
+.rm .phone .pinbtn.leaving{animation:none !important}
 
 /* ============ map controls (right stack): list toggle - zoom - locate ============ */
 .map-ctls{position:absolute;top:104px;right:12px;z-index:42;display:flex;flex-direction:column;gap:var(--sp-4)}
@@ -1770,7 +1892,11 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 
 /* ============ How trust grows -- white pop-up over the map ============ */
 .sheet.popup{
-  left:18px;right:18px;bottom:auto;top:50%;border-radius:var(--r-4);max-height:82%;
+  /* ROUND 11: 82% -> 88%. The map key gained the three marks it was missing, and the
+     popup was sized when it explained four. 88% of the 822px frame is 723px, which is
+     what makes the whole key readable without scrolling at the default text size --
+     measured at 715px of content. It is still a popup: 99px of map stays visible. */
+  left:18px;right:18px;bottom:auto;top:50%;border-radius:var(--r-4);max-height:88%;
   box-shadow:var(--elev-3-free);
   /* it is opened by button.legend on the map, so it grows FROM that button.
      openSheet() writes --pop-x / --pop-y from the opener's own rect. */
@@ -1787,6 +1913,14 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 
 /* ============ splash ============ */
 .splash{background:#1E1142;z-index:58;align-items:center;justify-content:center}
+/* ROUND 11: the splash IS the control. Full-bleed so the target is the screen rather
+   than a 48px corner of it, transparent so the artwork is unchanged, and the hint is
+   aria-hidden because the button's own name already says "Continue". */
+.splash-go{position:absolute;inset:0;width:100%;background:none;border:none;padding:var(--sp-0);
+  cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-7)}
+.splash-go:focus-visible{outline:3px solid var(--sky400);outline-offset:-6px;border-radius:var(--r-4)}
+.splash-hint{font-size:var(--fs-meta);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);
+  text-transform:uppercase;color:var(--sky400);line-height:var(--lh-meta)}
 .splash-body{display:flex;flex-direction:column;align-items:center;gap:var(--sp-6);animation:splashIn var(--dur-drop) var(--ease-enter) both}
 .splash-word{display:flex;justify-content:center}
 @keyframes splashIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
@@ -2230,7 +2364,15 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
 #screen-map .screen-body,#ob-splash .ob-body{animation:none}
 .prof-row.static{cursor:default}
 .prof-row .rowvalue{font-size:var(--fs-sub);font-weight:var(--fw-body);color:var(--sub);margin-right:var(--sp-1);line-height:var(--lh-sub);letter-spacing:var(--ls-flat);}
-.prof-row .rowsub.wrap{white-space:normal;line-height:1.4}
+/* ROUND 11 (1.3). Sub-copy that runs to a sentence is no longer confined to the
+   sub-column between a 36px icon box and a 52px switch. It is now a direct child of
+   the row, wrapped onto its own line, so it gets the row's whole width. Measured on
+   the a11y screen: the measure goes 168px -> 279px, 30 -> 50 characters; on the five
+   notification rows, 216px -> 279px, 39 -> 50. Nothing else about the row moves --
+   the label and the switch keep their line, and the sub-copy keeps its place in the
+   reading order, directly after the control it describes. */
+.prof-row .rowsub.wrap{white-space:normal;line-height:1.4;flex:1 0 100%;margin-top:var(--sp-2)}
+.prof-row:has(> .rowsub.wrap){flex-wrap:wrap}
 
 /* saved entrances (29) + its empty state */
 .saved-row{align-items:flex-start;padding:var(--sp-5) var(--sp-1)}
@@ -2586,7 +2728,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         </div>
         <div class="map-top">
           <div class="chiprow" id="chiprow" role="group" aria-label="Active filters"></div>
-          <button class="legend" id="legend" aria-label="Map key: the three pin tiers and the numbered cluster disc &mdash; how trust grows"></button>
+          <button class="legend" id="legend" aria-label="Map key: the three pin tiers, the numbered cluster disc, the pale disc behind a matched pin and the double ring on the one you have open"></button>
           <div class="match-legend" id="match-legend">
             <span id="ml-label"></span>
             <span class="lg"><span class="sw good"></span>good</span>
@@ -2835,7 +2977,7 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
           <h1>Accessibility</h1>
         </div>
         <div class="prof-card">
-          <div class="prof-row static">
+          <div class="prof-row static stacked">
             <span class="rowicon"><span class="ic" data-icon="text-size" data-size="17" aria-hidden="true"></span></span>
             <span class="rowmain">
               <span class="rowlabel">Text size</span>
@@ -2843,8 +2985,10 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             </span>
             <span class="tsize-row" role="group" aria-label="Text size">
               <button class="tsize-btn sel" data-tsize="default" aria-label="Default text size" aria-pressed="true">A</button>
-              <button class="tsize-btn" data-tsize="large" aria-label="Large text size" aria-pressed="false">A</button>
-              <button class="tsize-btn" data-tsize="larger" aria-label="Larger text size" aria-pressed="false">A</button>
+              <button class="tsize-btn" data-tsize="large" aria-label="Large text size, 108 percent" aria-pressed="false">A</button>
+              <button class="tsize-btn" data-tsize="larger" aria-label="Larger text size, 126 percent" aria-pressed="false">A</button>
+              <button class="tsize-btn" data-tsize="huge" aria-label="Huge text size, 150 percent" aria-pressed="false">A</button>
+              <button class="tsize-btn" data-tsize="double" aria-label="Double text size, 200 percent" aria-pressed="false">A</button>
             </span>
           </div>
           <div class="prof-row static">
@@ -2859,9 +3003,9 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             <span class="rowicon"><span class="ic" data-icon="motion" data-size="17" aria-hidden="true"></span></span>
             <span class="rowmain">
               <span class="rowlabel">Reduce motion</span>
-              <span class="rowsub wrap">Skips the pin bounce and ripple; the scan ring becomes a plain bar and results appear at once</span>
             </span>
             <button class="toggle" data-pref="rm" role="switch" aria-checked="false" aria-label="Reduce motion"></button>
+            <span class="rowsub wrap">Skips the pin bounce and ripple; the scan ring becomes a plain bar and results appear at once</span>
           </div>
         </div>
 
@@ -3048,6 +3192,18 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             <svg class="ring" viewBox="0 0 150 150" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
               <circle class="ring-fill" cx="75" cy="75" r="58"/>
             </svg>
+            <!-- ROUND 11 closes the first of the two beats 8.1 has been held on since
+                 Round 8: visual-language section 7 says "a large purple progress ring
+                 with the countdown inside it" and there was no countdown. It counts
+                 whole seconds to the review hand-off (PROC_SETTLE + ringDur() +
+                 PROC_CHIPS + PROC_HOLD = 7,360ms, which is what "Usually under 8
+                 seconds" beneath it is a rounding of), and it hands the ring's centre
+                 to the doorway glyph the moment the checks settle. It is aria-hidden
+                 because #proc-progress already carries the same fact as a progressbar
+                 with a live aria-valuenow, and #proc-caption says the duration in
+                 words: a ticking number in a live region would be eight
+                 interruptions of the four announcements that matter. -->
+            <div class="ring-count" id="ring-count" aria-hidden="true"><span class="rc-in"><span id="ring-count-n">8</span><span class="rc-u">s</span></span></div>
             <div class="ring-center" aria-hidden="true">
               <!-- the logo's doorway mark: lintel + two jambs -->
               <svg width="46" height="46" viewBox="0 0 40 40" fill="currentColor"><rect x="7" y="9" width="26" height="6" rx="3"/><rect x="10" y="17" width="6" height="16" rx="3"/><rect x="24" y="17" width="6" height="16" rx="3"/></svg>
@@ -3106,6 +3262,14 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         <div class="mini-map" id="mini-map" aria-hidden="true"></div>
         <div class="counter-line" id="counter-line"></div>
         <div class="done-legend" id="done-legend"></div>
+        <!-- ROUND 11 completes the board's Published panel (visual-language section 7:
+             "a mini map showing all three tiers with a legend, AND the provenance row").
+             The mini map and the legend were already here and three rounds of evidence
+             said they were not; the provenance row was the part genuinely missing. It
+             is the same provRow() the evidence receipt uses, so the first thing a
+             contributor is shown about their scan is the shape it will take on
+             somebody else's card: a dated source, never a badge. -->
+        <div class="done-prov" id="done-prov"></div>
         <div class="scan-actions">
           <button class="btn primary" id="btn-done-map">Back to the map</button>
         </div>
@@ -3113,12 +3277,23 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
     </section>
 
     <!-- ================= SPLASH (~1.2 s, resolves into the welcome; reduced motion cuts) ================= -->
+    <!-- ROUND 11 (a11y N18, WCAG 2.2.1). The splash advanced on a 1.2s timer with no
+         control of any kind. It is now a control: the whole surface is one button, it
+         takes focus on boot, and a tap, Enter or Space advances it at once. The timer
+         survives only as a fallback for a user who does nothing, it is CANCELLED
+         rather than raced the moment the user acts, and it lengthens from 1.2s to 4s
+         under Reduce Motion. What is still not done is named in the round log: a
+         persistent "skip the opening screen" setting, which is the full 2.2.1 remedy
+         and needs storage this prototype does not have. -->
     <section class="screen splash" id="ob-splash" tabindex="-1" aria-label="EntryMap">
       <h1 class="sr-only">EntryMap</h1>
-      <div class="splash-body">
-        <span id="splash-mark" aria-hidden="true"></span>
-        <div class="splash-word" id="splash-word"></div>
-      </div>
+      <button class="splash-go" id="splash-go" aria-label="EntryMap. Continue">
+        <span class="splash-body">
+          <span id="splash-mark" aria-hidden="true"></span>
+          <span class="splash-word" id="splash-word"></span>
+        </span>
+        <span class="splash-hint" aria-hidden="true">Tap to continue</span>
+      </button>
     </section>
 
     <!-- ================= ONBOARDING (first load; skippable; in-memory flag) ================= -->
@@ -3605,8 +3780,14 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
       <div class="sheet-scroll">
         <h3 class="sheet-h" style="margin-top:var(--sp-0);padding-right:36px">How trust grows</h3>
         <div class="ladder" id="trust-ladder"></div>
-        <p class="sheet-p" style="margin-top:var(--sp-6);color:var(--ink)">More direct sources strengthen the information. Trust can grow as neighbors scan and owners confirm.</p>
-        <p class="sheet-p" style="margin-top:var(--sp-4);font-size:var(--fs-meta)">Pins only move up. Every badge opens into its evidence &mdash; sources, dates, and confidence.</p>
+        <p class="sheet-p" style="margin-top:var(--sp-6);color:var(--ink)">Trust grows as neighbors scan and owners confirm. Pins only move up.</p>
+        <!-- ROUND 11. The three rungs above are the ladder: they are ranked, and the
+             order is the meaning. The disc, the pale disc and the double ring are not
+             ranked and are not tiers, and putting them in the same list said they
+             were. They now sit under their own heading, which is also where the two
+             marks Round 8 recorded as taught nowhere finally get taught. -->
+        <h4 class="sheet-sub" id="mapkey-h">Marks that are not tiers</h4>
+        <div class="ladder" id="mapkey-ladder" aria-labelledby="mapkey-h"></div>
       </div>
     </div>
 
@@ -3885,11 +4066,16 @@ function pinHalo(d, withDisc){
      The white lift strokes are ours and are kept: the board draws a white keyline
      round every teardrop, and the strokes are what put the pin outlines against
      white so every contrast figure in this file holds whatever tone is beneath. */
+  /* ROUND 11 wraps the halo in a named group. Nothing about the drawing changes; the
+     group exists so the 180ms filter transition can draw the halo (9.9 / N11) without
+     touching the pin body, which rises instead. */
   var cx=PIN_HEAD.x, cy=PIN_HEAD.y;
-  return (withDisc ? '<circle cx="'+cx+'" cy="'+cy+'" r="47" fill="var(--lavender-path,#CFBCEE)" opacity=".55"/>' : '')
+  return '<g class="pin-halo">'
+       + (withDisc ? '<circle cx="'+cx+'" cy="'+cy+'" r="47" fill="var(--lavender-path,#CFBCEE)" opacity=".55"/>' : '')
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="15.7" stroke-linejoin="round"/>'
        + '<path d="'+d+'" fill="none" stroke="#fff" stroke-opacity=".62" stroke-width="10.2" stroke-linejoin="round"/>'
-       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="5.9" stroke-linejoin="round"/>';
+       + '<path d="'+d+'" fill="none" stroke="#fff" stroke-width="5.9" stroke-linejoin="round"/>'
+       + '</g>';
 }
 /* ROUND 8 REMOVES THE CONFIDENCE DOTS FROM THE PIN (D38).
    The library's confidence ladder -- three dots across the top of the head, filled
@@ -4009,8 +4195,12 @@ function pinSVG(tier, size, opts){
     : '';
   var s = '<svg width="'+w+'" height="'+h+'" viewBox="'+PIN_VB+'" fill="none"'
         + ' aria-hidden="true" focusable="false" style="overflow:visible;display:block">'
-        + matchHalo(opts.match)
-        + pinHalo(TEAR, !!opts.match)
+        + (opts.match ? '<g class="pin-halo">'+matchHalo(opts.match)+'</g>' : '')
+        /* ROUND 11 adds `opts.disc`, which draws the lavender disc WITHOUT a match
+           ring. It exists for exactly one call site -- the map key's rung for the
+           disc itself -- because keying the disc with a ring round it would key the
+           ring instead. No map call site passes it, so nothing on the map changes. */
+        + pinHalo(TEAR, !!opts.match || !!opts.disc)
         + keyline;
 
   if(tier === 'est'){
@@ -4642,6 +4832,34 @@ function pinPx(tier, context){ return PIN_SIZE[context][tier]; }
    illegible." Measured at street zoom afterwards: 12 pins and 9 discs. */
 const DENSITY = {overlap:.10, cap:12, spacing:46};
 
+/* ROUND 11 -- THE COLLISION PASS NEVER TESTED THE THING A FINGER HITS.
+   Everything above is measured on DRAWN geometry: `overlap` is head-circle area,
+   `spacing` is a floor between two estimated TIPS. Neither is the tap target. Every
+   mark on this map carries a 48px hit circle -- `.pinbtn::before` and
+   `.cluster::before`, both `width:var(--tap)` -- and those circles were free to sit
+   on top of each other because nothing looked at them.
+   Measured on the live build before this change, centre-to-centre between hit
+   circles: street zoom minimum 28.9px with 8 pin-pin pairs under 44px; overview
+   minimum 23.6px with 14 pin-pin pairs under 44px (20 pairs under 44 counting the
+   discs). At 28.9px apart, two 48px circles share 44.5% of their area, so a tap in
+   the shared lens goes to whichever button the hit test reaches first -- which is
+   z-order, not proximity. That is a coin toss with a bias.
+   The floor is the tap diameter itself, 48px, which is the only value at which two
+   hit circles cannot overlap AT ALL. It is stricter than WCAG 2.5.8 (which these
+   48px targets already pass on size alone) because the defect here is ambiguity,
+   not size. Round 9 fixed disc-over-pin by making the weaker mark yield INTO the
+   disc; this uses the same shape, so nothing is dropped and every count stays true.
+
+   A pin's hit circle is NOT centred on the pin's anchor: `.pinbtn::before` sets
+   `top: calc(var(--mh) / -2 - var(--tap) / 2)`, so its centre is half the drawn
+   height ABOVE the tip. A disc's hit circle IS centred on the disc. Getting this
+   wrong is exactly the mistake Round 8 found in the disc separation pass, which
+   cleared a circle struck about the tip rather than the head. */
+const TAP_PX  = 48;                 /* --tap, on every pin and every disc */
+const TAP_SEP = TAP_PX;             /* centre-to-centre floor: zero overlap */
+const tapOfPin  = it => ({x: it.x, y: it.y - it.size/2, r: TAP_PX/2});
+const tapOfDisc = c  => ({x: c.x,  y: c.y,              r: TAP_PX/2});
+
 /* circle-intersection area over the smaller circle's area */
 function overlapFrac(x1,y1,r1,x2,y2,r2){
   const d = Math.hypot(x1-x2, y1-y2);
@@ -4699,6 +4917,17 @@ function mapLayout(list, W, H){
       for(const q of placed){
         if(q.p.tier!=='est' || q.sel) continue;
         if(Math.hypot(it.x-q.x, it.y-q.y) < DENSITY.spacing){ lost = true; break; }
+      }
+    }
+    /* ROUND 11: the tap-target floor, applied to EVERY tier pair rather than only to
+       estimate-versus-estimate, because a finger cannot tell the tiers apart. This
+       runs after the drawn-overlap test, so a pair that already yielded is unchanged
+       and this only catches pairs that were legible and still ambiguous. */
+    if(!lost){
+      const t = tapOfPin(it);
+      for(const q of placed){
+        const u = tapOfPin(q);
+        if(Math.hypot(t.x-u.x, t.y-u.y) < TAP_SEP){ lost = true; break; }
       }
     }
     if(lost) yielded.push(it); else placed.push(it);
@@ -4776,10 +5005,16 @@ function mapLayout(list, W, H){
   for(let pass=0; pass<24; pass++){
     let moved = false;
     clusters.forEach(c=>{
-      const others = placed.map(headOf)
-        .concat(clusters.filter(o=>o!==c).map(o=>({x:o.x,y:o.y,r:discR(o)})));
+      /* ROUND 11 gives every constraint its own `need` instead of deriving one from
+         `discR`, because two different circles are now being cleared: the pin's
+         drawn HEAD (so the disc does not cover the mark) and the pin's TAP circle
+         (so the disc does not steal the mark's taps). They are different centres and
+         different radii, and the tap one is the larger clearance at street sizes. */
+      const others = placed.map(it=>{ const h=headOf(it); h.need = discR(c) + h.r + 3; return h; })
+        .concat(placed.map(it=>{ const t=tapOfPin(it); t.need = TAP_SEP; return t; }))
+        .concat(clusters.filter(o=>o!==c).map(o=>({x:o.x,y:o.y,r:discR(o),need:discR(c)+discR(o)+3})));
       others.forEach(q=>{
-        const need = discR(c) + q.r + 3;
+        const need = q.need;
         let dx=c.x-q.x, dy=c.y-q.y, d=Math.hypot(dx,dy);
         if(d >= need) return;
         if(d < .01){ dx=1; dy=0; d=1; }
@@ -4789,6 +5024,29 @@ function mapLayout(list, W, H){
       c.y = Math.max(26, Math.min(H-26, c.y));
     });
     if(!moved) break;
+  }
+  /* ROUND 11 -- DISCS STACKED BY THE FRAME CLAMP. Measuring tap separation over 128
+     panned frames (every seeded place as the centre, both zooms) turned up 7 frames
+     where the minimum was below 48px, and every one of them was disc-versus-disc at
+     the clamp: `c.x = Math.max(26, ...)` is a wall, so the push loop shoves two or
+     three discs into the same corner and they sit exactly on top of each other.
+     Measured worst case before this change: three discs all at (26, 26) in the frame
+     centred on ChIJAc2DMIe1RIYRLq9Zr7joMNU -- 0.00px apart, one count legible.
+     That is not a new defect and the tap rule did not cause it; it is a defect the
+     tap rule was the first thing to look for. Two discs are two counts of the same
+     kind of thing, so the honest answer is to MERGE rather than to move: the survivor
+     keeps its position (already clear of every pin) and takes the other's members, so
+     the totals stay true and no place is dropped. */
+  for(let guard=0; guard<40; guard++){
+    let merged = false;
+    for(let i=0; i<clusters.length && !merged; i++){
+      for(let j=i+1; j<clusters.length; j++){
+        if(Math.hypot(clusters[i].x-clusters[j].x, clusters[i].y-clusters[j].y) >= TAP_SEP) continue;
+        clusters[i].members = clusters[i].members.concat(clusters[j].members);
+        clusters.splice(j,1); merged = true; break;
+      }
+    }
+    if(!merged) break;
   }
   /* POST-CONDITION, ASSERTED RATHER THAN HOPED FOR. The pass above is iterative and
      is clamped to the frame, so in a tight corner it can run out of passes with a
@@ -4803,12 +5061,19 @@ function mapLayout(list, W, H){
     let changed = false;
     for(const c of clusters){
       for(let k=placed.length-1; k>=0; k--){
-        const it = placed[k], h = headOf(it);
-        if(overlapFrac(c.x, c.y, discR(c), h.x, h.y, h.r) <= DENSITY.overlap) continue;
+        const it = placed[k], h = headOf(it), t = tapOfPin(it);
+        /* ROUND 11: two ways a disc can still be wrong after the push -- it can cover
+           the head, or it can overlap the tap circle. Whichever it is, the pin is the
+           one that yields, and the vector the selected-pin branch pushes along is the
+           one belonging to the constraint that actually failed. */
+        const headBad = overlapFrac(c.x, c.y, discR(c), h.x, h.y, h.r) > DENSITY.overlap;
+        const tapBad  = Math.hypot(c.x-t.x, c.y-t.y) < TAP_SEP;
+        if(!headBad && !tapBad) continue;
         if(it.sel){
-          let dx=c.x-h.x, dy=c.y-h.y, d=Math.hypot(dx,dy);
+          const a = headBad ? h : t;
+          let dx=c.x-a.x, dy=c.y-a.y, d=Math.hypot(dx,dy);
           if(d < .01){ dx=0; dy=-1; d=1; }
-          const need = discR(c) + h.r + 3;
+          const need = headBad ? discR(c) + h.r + 3 : TAP_SEP;
           c.x += dx/d*(need-d); c.y += dy/d*(need-d);
         } else {
           placed.splice(k,1); c.members.push(it);
@@ -4839,6 +5104,12 @@ function armMapObserver(){
     }
   }).observe(mapEl);
 }
+/* ROUND 11 (9.9 / N11): the one-shot arm for the filter crossfade. It is a flag and
+   not a parameter because renderMap() is called from twelve places and only four of
+   them are a change of RELEVANCE; the other eight are a change of view, which must
+   not animate. `_pinFluxLast` is left behind for measurement. */
+let _pinFlux = false, _pinFluxLast = null;
+function armPinFlux(){ _pinFlux = true; }
 function renderMap(){
   const W = mapEl.clientWidth, H = mapEl.clientHeight;
   /* ROUND 8 CLOSES a11y N5. Round 7 made a zero-box render re-run later; it still
@@ -4853,6 +5124,17 @@ function renderMap(){
      below, plus showScreen), not by the toggle that happened while it was hidden. */
   if(!(W>40) || !(H>40)){ _mapZeroPending = true; return; }
   document.getElementById('map-ground').innerHTML = groundSVG(W,H,22);
+  /* ROUND 11 (9.9 / N11). The pin layer is diffed ONLY when a filter or a needs
+     profile just changed -- _pinFlux is armed by those handlers and by nothing else,
+     so a zoom, a pan, a re-render from applyPrefs or the boot render still draw in
+     one step and 4.6 ("nothing animates on load that the user did not ask for") is
+     untouched. isReduced() disarms it at the source as well as in CSS. */
+  const flux = _pinFlux && !isReduced();
+  _pinFlux = false;
+  const before = flux
+    ? [...pinsEl.querySelectorAll('.pinbtn')].map(b=>({id:b.dataset.id, node:b}))
+    : [];
+  const beforeIds = new Set(before.map(b=>b.id));
   pinsEl.innerHTML='';
   let shown = [...places];
   if(filterApplied) shown = shown.filter(filterPass);
@@ -4951,6 +5233,32 @@ function renderMap(){
     pinsEl.appendChild(b);
   });
 
+  /* ROUND 11: the crossfade itself, once both sets exist. A pin that survived the
+     change is left alone; a pin that arrived rises and draws; a pin that left is put
+     back as an inert ghost that fades. The ghost is aria-hidden, not focusable and
+     not clickable, so the accessibility tree and the tab order match the NEW set
+     from the first frame -- the fade is for eyes only, which is why 7.6 ("what is
+     announced matches what is shown") survives it. */
+  if(flux){
+    const afterIds = new Set();
+    pinsEl.querySelectorAll('.pinbtn').forEach(b=>{
+      afterIds.add(b.dataset.id);
+      if(!beforeIds.has(b.dataset.id)) b.classList.add('arriving');
+    });
+    const ghosts = before.filter(b=>!afterIds.has(b.id));
+    ghosts.forEach(g=>{
+      const n = g.node;
+      n.classList.add('leaving');
+      n.classList.remove('arriving');
+      n.setAttribute('aria-hidden','true');
+      n.setAttribute('tabindex','-1');
+      n.disabled = true;
+      pinsEl.appendChild(n);
+    });
+    if(ghosts.length) defer(180, ()=>ghosts.forEach(g=>g.node.remove()));
+    _pinFluxLast = {arrived: pinsEl.querySelectorAll('.pinbtn.arriving').length,
+                    left: ghosts.length, ms: 180};
+  }
   /* empty-area invite: filtering (or panning) to zero pins invites, never shames */
   const me=document.getElementById('map-empty');
   if(me) me.classList.toggle('on', shown.length===0);
@@ -6004,7 +6312,7 @@ function applyPersona(){
   }
   document.getElementById('prof-needs-sub').textContent = personas.size?'Matching for '+[...personas].map(k=>PERSONAS[k].label).join(', '):'Choose any that help \u2014 optional';
   document.getElementById('prof-needs-chips').innerHTML = [...personas].map(k=>`<span class="needchip">${PERSONAS[k].label}</span>`).join('');
-  renderMap();
+  armPinFlux(); renderMap();
   renderNearby();
   renderChipRow();
   fitMapColumn();     /* ROUND 9: the match strip and the FAB lift both land here */
@@ -6145,11 +6453,11 @@ document.getElementById('filt-reset').addEventListener('click',()=>{
   filtFeats.clear(); filtFresh='any'; filterApplied=false;
   distIn.value=FILT_DIST_MAX; syncDist();
   personas.clear(); applyPersona();
-  renderFilters(); updateFiltShow(); renderMap();
+  renderFilters(); updateFiltShow(); armPinFlux(); renderMap();
 });
 document.getElementById('btn-filt-show').addEventListener('click',()=>{
   filterApplied = anyFilter();
-  renderMap(); renderNearby(); updateFiltShow(); renderChipRow(); closeSheets();
+  armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow(); closeSheets();
   if(filterApplied) toast('Showing '+filtCount()+' places that fit');
 });
 document.getElementById('fab-filters').addEventListener('click',()=>{renderFilters();updateFiltShow();openSheet('sheet-filters');});
@@ -6187,21 +6495,21 @@ function renderChipRow(){
       row.appendChild(chipEl(lbl,()=>{
         filtFeats.delete(k);
         filterApplied = anyFilter();
-        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
       }));
     });
     if(filtDist<FILT_DIST_MAX){
       row.appendChild(chipEl('Within '+filtDist+' ft',()=>{
         filtDist=FILT_DIST_MAX; distIn.value=FILT_DIST_MAX; syncDist();
         filterApplied = anyFilter();
-        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
       }));
     }
     if(filtFresh!=='any'){
       row.appendChild(chipEl(filtFresh+' days',()=>{
         filtFresh='any';
         filterApplied = anyFilter();
-        renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
+        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
       }));
     }
   }
@@ -6494,8 +6802,28 @@ document.getElementById('me-area').addEventListener('click',()=>{
 document.getElementById('trust-ladder').innerHTML = `
   <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'))}</span><div class="r-body"><span class="r-name">Estimated</span><br>Early information that has not yet been photographed on-site.</div></div>
   <div class="rung"><span class="r-pin">${pinSVG('scan',pinPx('scan','overview'))}</span><div class="r-body"><span class="r-name">Scanned on-site</span><br>A community member photographed the entrance in person.</div></div>
-  <div class="rung"><span class="r-pin">${pinSVG('owner',pinPx('owner','overview'))}</span><div class="r-body"><span class="r-name">Owner-confirmed</span><br>The business owner has attested to the current entrance information.</div></div>
-  <div class="rung"><span class="r-pin">${pinSVG('cluster',CLUSTER_PX,{count:8})}</span><div class="r-body"><span class="r-name">A numbered disc</span><br>Not a tier: the number is how many entrances are grouped at this spot, because they are too close together to draw separately here. Tap it and it opens: zoomed out it zooms in and centers on them, and when there is no closer zoom it lists them.</div></div>`;
+  <div class="rung"><span class="r-pin">${pinSVG('owner',pinPx('owner','overview'))}</span><div class="r-body"><span class="r-name">Owner-confirmed</span><br>The business owner has attested to the current entrance information.</div></div>`;
+
+/* ROUND 11 CLOSES 5.7. Round 8 named two marks that were drawn on the map and keyed
+   nowhere -- the selection keyline and the lavender match disc -- and Rounds 9 and 10
+   both re-recorded them unchanged. They are keyed here, in the sheet the map's own
+   key button opens, alongside the numbered disc which moves out of the trust ladder
+   for the same reason all three belong together: none of them is a tier, and a
+   ranked list said they were.
+   Each rung draws the mark the map draws, by the same function at the map's own size.
+   The pale disc needs `{disc:true}` because drawing it with a match ring would key
+   the ring; the keyline needs a real pin under it because it is only ever seen round
+   one, and Estimated is used so the rung cannot be read as "selection means scanned".
+   The pale disc measures 1.24:1 against this sheet's white and 1.28:1 against the
+   map land, which is why it is NOT given a swatch in the on-map match strip beside
+   the good / partial / not-yet-seen swatches: those are non-text indicators at 3:1 or
+   better and a pale fill next to them would be a 1.3:1 one. Here the full-contrast
+   name and body carry the meaning and the art illustrates it, which is how the four
+   rungs above already work. */
+document.getElementById('mapkey-ladder').innerHTML = `
+  <div class="rung"><span class="r-pin">${pinSVG('cluster',CLUSTER_PX,{count:8})}</span><div class="r-body"><span class="r-name">A numbered disc</span><br>How many entrances are grouped here, too close together to draw apart. Tap it: it zooms in on them, or lists them when there is no closer zoom.</div></div>
+  <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'),{disc:true})}</span><div class="r-body"><span class="r-name">A pale disc</span><br>Under every pin once you set <b>My needs</b>: this one has been checked against them. The ring says how well it fits.</div></div>
+  <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'),{selected:true})}</span><div class="r-body"><span class="r-name">A double ring</span><br>The entrance you have open. Drawn outside the pin, never in its color.</div></div>`;
 
 /* ===================== correction sheet -> "Correction submitted" (18) -> My contributions ===================== */
 const cNote=document.getElementById('correct-note');
@@ -6628,8 +6956,9 @@ function renderNotifs(){
   NOTIF_GROUPS.forEach(([k,grp,label,sub])=>{
     if(grp!==group){ if(group!==null) html+='</div>'; html+=`<h2 class="sectionlabel">${grp}</h2><div class="prof-card">`; group=grp; }
     html+=`<div class="prof-row static">
-      <span class="rowmain"><span class="rowlabel">${label}</span><span class="rowsub wrap">${sub}</span></span>
+      <span class="rowmain"><span class="rowlabel">${label}</span></span>
       <button class="toggle${notifOn.has(k)?' on':''}" data-notif="${k}" role="switch" aria-checked="${notifOn.has(k)}" aria-label="${esc(label)}"></button>
+      <span class="rowsub wrap">${sub}</span>
     </div>`;
   });
   if(group!==null) html+='</div>';
@@ -6648,7 +6977,14 @@ function syncNotifSub(){
    Text size scales the phone root (every screen is sized in em), High contrast re-tints the tokens
    AND the drawn map, Reduce motion feeds isReduced() so the scan ring collapses to its static bar. */
 const phoneEl=document.getElementById('phone');
-const TSIZE_LABEL={default:'Default',large:'Large',larger:'Larger'};
+/* ROUND 11: five steps, and the percentage is said out loud rather than left for the
+   user to infer from an A that is one point bigger than the last one. */
+const TSIZE_LABEL={default:'Default',large:'Large',larger:'Larger',huge:'Huge',double:'Double'};
+/* the percentage is said out loud in the row's own subtitle rather than left for the
+   user to infer from an A that is one point bigger than the last one. It is kept out
+   of TSIZE_LABEL because that string is also spoken by announceUI() and read into the
+   accessibility summary, where "Large 108 percent" is noise. */
+const TSIZE_PCT={default:'100%',large:'108%',larger:'126%',huge:'150%',double:'200%'};
 const prefs={tsize:'default', hc:false, rm:false};
 function announceUI(msg){
   const el=document.getElementById('sr-announce'); if(!el) return;
@@ -6664,7 +7000,8 @@ function applyPrefs(){
   /* ROUND 8: the class is on <html>, not on .phone, so an inline <head> script can
      set it before .phone exists -- see the boot script at the top of this file. */
   document.documentElement.classList.toggle('rm',isReduced());
-  document.querySelectorAll('[data-tsize-label]').forEach(el=>el.textContent=TSIZE_LABEL[prefs.tsize]);
+  document.querySelectorAll('[data-tsize-label]').forEach(el=>
+    el.textContent=TSIZE_LABEL[prefs.tsize]+' · '+TSIZE_PCT[prefs.tsize]);
   document.querySelectorAll('.tsize-btn').forEach(b=>{const on=b.dataset.tsize===prefs.tsize;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on);});
   document.querySelectorAll('[data-pref]').forEach(t=>{
     const on = t.dataset.pref==='rm' ? isReduced() : !!prefs[t.dataset.pref];
@@ -7293,7 +7630,7 @@ function startLiveUpload(frame){
 
 /* ===================== scan flow ===================== */
 let scanTimers=[];
-function cancelScanTimers(){scanTimers.forEach(clearTimeout);scanTimers=[];}
+function cancelScanTimers(){scanTimers.forEach(clearTimeout);scanTimers=[];if(typeof procCountStop==='function')procCountStop();}
 function after(ms,fn){scanTimers.push(setTimeout(fn,ms));}
 
 function startScan(){
@@ -7373,6 +7710,10 @@ let gate2=false;         /* agreement gating (verified tier): adds "Double-check
 let procRun=null;        /* the active run's hooks (gate2 flipping mid-run extends, never restarts) */
 let procReduced=false;
 const procActive=()=>document.getElementById('scan-processing').classList.contains('active');
+/* ROUND 11: the countdown's interval, held where cancelScanTimers() can reach it so a
+   cancelled scan never leaves a number ticking behind a screen that is gone. */
+let procCountTimer=null;
+function procCountStop(){ if(procCountTimer){ clearInterval(procCountTimer); procCountTimer=null; } }
 function applyGate2(){
   document.getElementById('proc-caption').textContent = gate2 ? 'Usually under 15 seconds.' : 'Usually under 8 seconds.';
 }
@@ -7434,6 +7775,22 @@ function runProcessing(forceReduced){
     : doorwayArt(false, scanTarget&&scanTarget.name);
 
   const t0=performance.now();
+  /* ROUND 11: the countdown's own clock. It counts to the hand-off, not to the ring
+     closing at 5.5s -- a counter that reached 0 with 1.86s of chips still to come
+     would be a lie about the wait. It is repainted 4x a second so the digit changes
+     within 250ms of the second it names, and it is stopped by finish(). */
+  const PROC_TOTAL = PROC_SETTLE + ringDur() + PROC_CHIPS + PROC_HOLD;
+  const countEl = document.getElementById('ring-count-n');
+  let _countLast = -1;
+  procCountStop();
+  if(countEl){
+    countEl.textContent = String(Math.ceil(PROC_TOTAL/1000));
+    procCountTimer = setInterval(()=>{
+      if(!procActive()){ procCountStop(); return; }
+      const left = Math.max(0, Math.ceil((PROC_TOTAL - (performance.now()-t0))/1000));
+      if(left!==_countLast){ _countLast=left; countEl.textContent=String(left); }
+    },250);
+  }
   let fired=false, surfaced=0;
   const held=()=>liveUpload && !liveSettled;    /* live POST still out: hold at 96% rather than lie */
   let lastPct=-1;
@@ -7460,6 +7817,7 @@ function runProcessing(forceReduced){
   }
   function finish(){
     if(fired) return; fired=true;
+    procCountStop();
     paint(1); surface(1);
     wrap.classList.add('settled');               /* the doorway lights, the interior fills */
     populateChips(); procLog(t0,'chips populate');
@@ -7659,6 +8017,16 @@ function runDone(p){
     d.innerHTML=`<span class="pin">${pinSVG(q.tier,pinPx(q.tier,'receipt'))}</span>`;
     mm.appendChild(d);
   });
+  /* ROUND 11: the provenance row, in the receipt's own words and its own component */
+  document.getElementById('done-prov').innerHTML = provRow(
+    iconSVG('camera',17,'var(--marigold-ink,#6B4014)'),
+    `<b>Your scan · ${fmtDay(APP_TODAY.join('-'))}</b>`,
+    `<span class="pr-sub">Added to this entrance's receipt as a dated source — sources, dates, and confidence, not a badge.</span>`,
+    'done-scan');
+  const dp=document.querySelector('#done-prov .prov-row');
+  if(dp){ dp.setAttribute('aria-label',
+    `Your scan, ${fmtDay(APP_TODAY.join('-'))} — added to this entrance's receipt as a dated source. Opens the receipt.`);
+    dp.addEventListener('click',()=>{ showScreen('screen-map'); openCard(p.id,'full'); }); }
   const d=document.createElement('div');
   d.style.cssText=`position:absolute;left:${W/2}px;top:${Hh/2}px;pointer-events:none;--mh:34px`;
   d.className='minipin pin-drop';
@@ -7697,21 +8065,34 @@ document.getElementById('head-wordmark').innerHTML=wordmarkSVG('dark',88);   /* 
 document.getElementById('wl-p1').innerHTML=pinSVG('est',30);
 document.getElementById('wl-p2').innerHTML=pinSVG('scan',30);
 document.getElementById('wl-p3').innerHTML=pinSVG('owner',30);
-function runSplash(){
+/* ROUND 11 (a11y N18). runSplash() owns its own timers so they can be cancelled by
+   the user rather than merely out-run. SPLASH_MS is the fallback for a user who does
+   nothing at all; leaveSplash() is what the button, Enter and Space call, and the
+   first of the two to fire cancels the other. */
+const SPLASH_MS = 1200, SPLASH_MS_RM = 4000;
+let _splashTimers = [], _splashDone = false;
+function leaveSplash(){
+  if(_splashDone) return;
+  _splashDone = true;
+  _splashTimers.forEach(clearTimeout); _splashTimers = [];
   const sp=document.getElementById('ob-splash'), wl=document.getElementById('ob-welcome');
-  showScreen('ob-splash');
-  if(isReduced()){
-    after(1200,()=>{ showScreen('ob-welcome'); });
-    return;
-  }
-  after(1200,()=>{ sp.classList.add('leaving'); });
-  after(1560,()=>{
+  if(isReduced()){ showScreen('ob-welcome'); return; }
+  sp.classList.add('leaving');
+  _splashTimers.push(setTimeout(()=>{
     wl.classList.add('enter');
     showScreen('ob-welcome');
     sp.classList.remove('leaving');
-    after(600,()=>wl.classList.remove('enter'));
-  });
+    setTimeout(()=>wl.classList.remove('enter'),600);
+  },360));
 }
+function runSplash(){
+  _splashDone = false; _splashTimers = [];
+  showScreen('ob-splash');
+  const go=document.getElementById('splash-go');
+  if(go) setTimeout(()=>go.focus({preventScroll:true}),0);
+  _splashTimers.push(setTimeout(leaveSplash, isReduced() ? SPLASH_MS_RM : SPLASH_MS));
+}
+document.getElementById('splash-go').addEventListener('click',leaveSplash);
 document.getElementById('ob-signin').addEventListener('click',()=>{
   toast('Prototype: sign-in comes later \u2014 continuing as guest');
   showScreen('ob-location');
