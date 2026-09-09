@@ -328,7 +328,25 @@
      GOING while the row is still transitioning toward it. Reading the live rect
      mid-transition is how the fit silently computed the wrong band. */
   --fab-bottom:110px;    /* the FAB row over the bottom navigation */
-  --fab-bottom-lift:214px; /* and again with the nearby rail up */
+  /* ROUND 15: the two floating map columns were pinned at a literal 104px while the
+     app bar they hang under is 106px at 390 wide at the two smallest text steps and
+     160px in every case where its row wraps -- 320 wide at every step, 390 wide from
+     Larger up. So the bar covered the top 56px of the map key and of the control
+     column in 15 of 25 frame x text-step cases. syncMapChromeTop() writes the
+     measured height less the 2px overlap the default layout already had, so 390 at
+     Default is unchanged at 104 and the wrapped cases move to 158. */
+  --map-chrome-top:104px;
+  /* ROUND 15: THIS CONSTANT WAS ALWAYS GOING TO BE WRONG AT FOUR OF FIVE TEXT STEPS,
+     and measuring it is what found that. The rail it has to clear is 90.3px tall at
+     Default and 138.6px at Double, so 214 cleared it by 29.7px at Default and
+     OVERLAPPED it by 18.6px at Double -- a 48px FAB sitting on a 48px card, which is
+     7.15's coin toss, at Round 14 HEAD and in 15 of 25 frame x text-step cases.
+     syncFabLift() now writes the real number from the rail's own height, which is
+     safe to read because the rail is a display toggle and not a transition -- unlike
+     the FAB row's own `bottom`, which is the reason Round 9 named these two offsets
+     as constants in the first place. The value below is the Default-step answer and
+     stays as the fallback. */
+  --fab-bottom-lift:196px; /* and again with the nearby rail up */
   --inset-x:16px;        /* screen side padding */
   --inset-sheet:18px;    /* sheet side padding */
   --inset-onboard:26px;  /* onboarding is single-column narrative, deliberately narrower */
@@ -593,13 +611,13 @@ body{
    have made both of them un-swipeable, which is the trap this policy is avoiding in
    the other direction). The rails themselves declare the axis they do own. */
 #screen-map .screen-body{touch-action:auto;overscroll-behavior-y:auto}
-.nearby,.map-top.tight .legend{touch-action:pan-x;overscroll-behavior-x:contain}
+.nearby,.map-top.tight .key-body{touch-action:pan-x;overscroll-behavior-x:contain}
 /* ROUND 14 -- THE MAP'S OWN POLICY, AND WHY IT IS SAFE HERE (#432).
    The map surface owns a two-finger gesture outright, so it declares `none`. This
    is the third value in Round 13's policy and the first surface to need it that is
    not a drag handle.
    It does NOT reach the horizontal rails. touch-action intersects DOWN the ancestor
-   chain, and #nearby / .legend are SIBLINGS of #map inside #screen-map .screen-body,
+   chain, and #nearby / .key-body are SIBLINGS of #map inside #screen-map .screen-body,
    not descendants of it -- which is why that body was held at `auto` in Round 13
    and why it can stay there. Verified by computed style rather than by reading the
    cascade -- after this change #map computes `none`, #nearby still computes `pan-x`,
@@ -803,59 +821,83 @@ body{
    Cuts, all measured: card padding 12 -> 8 vertical (8px), row gap 8 -> 6 across
    four gaps (8px), the CTA's 2px top margin (2px), the column gap 8 -> 6 (2px), and
    the match strip's own padding 8 -> 6 (4px). */
-.map-top{position:absolute;top:104px;left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-3);pointer-events:none;align-items:flex-start}
+/* ROUND 15: the column gap goes 6px -> 12px, which is a 7.15 fix and not rhythm.
+   .achip carries an `inset:-8px` pseudo-element to reach 48px on a 32px chip, so at a
+   6px gap the chip's HIT AREA overlapped the control under it by 2px -- 223 to 344px
+   of shared target in 25 of 25 frame x text-step scans, at Round 14 HEAD and before
+   it. 12px clears the 8px reach with 4px to spare. */
+.map-top{position:absolute;top:var(--map-chrome-top,104px);left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-5);pointer-events:none;align-items:flex-start}
+/* ============ ROUND 15: THE MAP KEY, ONE CONTROL, CLOSED BY DEFAULT ============
+   What was here: a permanently open four-row card (#legend) AND a permanently open
+   match strip (#match-legend), both floating, neither closable. Measured on the
+   running page at Round 14 HEAD, as a share of #map's own box with a needs profile
+   applied: card 7.14% + strip 2.91% at 390x844, and 7.41% + 8.35% at 320x568.
+   They are one thing now, and it is shut until asked for.
+   Nothing is hidden that lives nowhere else: the collapsed pill DRAWS the three
+   tier marks at the receipt sizes the expanded card already used (24/28/32 -- no new
+   size enters the token table), its accessible name still lists all six marks, and
+   the numbered disc is now taught ON the mark by the press-and-hold preview rather
+   than only in a row of a card. */
 .legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-2);
-  padding:var(--sp-4) var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);max-width:100%;
+  display:flex;flex-direction:column;max-width:100%;overflow:hidden;
 }
-/* and the last of it: when the match strip is up, the card sheds its written
-   call-to-action. The card is still a <button> and its accessible name still says it
-   opens "how trust grows"; what goes is 19px of duplicated prompt at exactly the
-   moment two floating elements are competing for the same band. */
-.legend.compact .legend-cta{display:none}
-/* and the card tightens its own rhythm while it is sharing the band. Measured with
-   a needs profile applied (which also raises the filter chip row AND lifts the FABs
-   to bottom:214px): at Round 7 HEAD the .map-top column already overran the FAB row
-   by 50.7 / 54.3 / 62.3px at the three text sizes -- a defect that predates this
-   round and is NOT on the Round 7 punch list. The fourth row costs 34px; the
-   compaction here gives back 46, so the overrun after Round 8 is 46.9 / 49.4 /
-   55.1px -- 3.8 to 7.2px SMALLER than it was found, with one more mark taught. The
-   residual is a real layout defect and is reported, not hidden: three floating
-   elements plus a 48px FAB row do not fit in 196px of map. */
-.legend.compact{gap:var(--sp-2);padding:var(--sp-3) var(--sp-5)}
-/* ---- ROUND 9 CLOSES THE OVERRUN Round 8 reduced and reported open. ------------
-   First, what actually reproduces. Round 8 recorded 46.9 / 49.4 / 55.1px of overrun
-   at the three text sizes and a 196px band; re-measured here on the live build at
-   five real frames -- 430x932, 390x844, 375x667, 390x664, 360x640 -- the column
-   CLEARS the FAB row at every one of them, by 42.2px at the tightest (360x640,
-   Larger) and by 246px at the default 390x844 stage. The band is 456px there, not
-   196. The 196px band corresponds to a 564px-tall map, which is a short browser
-   window rather than any device in the set. So Round 8's figure is not reproducible
-   as stated; the DEFECT is, on short frames: swept downward, the column first
-   touches the FAB row at a map height of about 600px and overruns it by 21.6 / 24.1
-   / 29.8px at 320x568, the smallest frame in the sweep.
-   The fix is therefore conditional on measurement rather than on a fixed number: the
-   column is laid out as a column while it fits, and .tight lays the map key's four
-   keys out as a wrapping ROW when it does not. No mark is dropped, no mark is
-   shrunk, nothing is hidden behind a control -- all four keys are still drawn and
-   still labelled (5.7), they just occupy two rows of two rather than four of one.
-   fitMapColumn() decides it from the live geometry on every render, persona change
-   and resize. */
-.map-top.tight .legend{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+.key-toggle{
+  pointer-events:auto;min-height:var(--tap);border:none;background:none;cursor:pointer;
+  display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-0) var(--sp-5);
+  font-family:inherit;font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);
+  line-height:var(--lh-meta);letter-spacing:var(--ls-flat);width:100%;text-align:left;
+}
+.key-art{display:flex;align-items:flex-end;gap:var(--sp-2);flex:0 0 auto}
+/* the pill's three marks ARE the key when it is shut; when it is open the three
+   labelled rows below say the same thing, so drawing them twice is decoration. */
+.legend:not(.closed) .key-art{display:none}
+.key-word{flex:1 1 auto;white-space:nowrap}
+/* the library ships one chevron and it points right; down is closed, up is open. */
+.key-chev{flex:0 0 auto;display:flex;align-items:center;transform:rotate(90deg);
+  transition:transform var(--dur-fast) var(--ease-enter)}
+.legend:not(.closed) .key-chev{transform:rotate(-90deg)}
+.key-body{
+  display:flex;flex-direction:column;gap:var(--sp-3);
+  padding:var(--sp-0) var(--sp-5) var(--sp-4);max-width:100%;
+}
+.key-body[hidden]{display:none}
+/* the match rows only exist while a needs profile does, and they live INSIDE the key
+   now instead of floating beside it. The swatch contrasts Round 8 raised to 3:1 are
+   the same declarations, on the same tokens, in a new parent. */
+.key-match{display:flex;align-items:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);
+  padding-top:var(--sp-3);border-top:1px solid var(--hairline);
+  font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);
+  line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+.key-match .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
+.key-match .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
+/* the sheet link is its own control now. It was a 19px span inside a 200x180 button
+   whose whole area did the same thing; as a real 48px row it is reachable, it is in
+   the tab order in its own right, and it stops being deleted the moment a needs
+   profile arrives (which is what .legend.compact used to do to it). */
+.key-cta{
+  min-height:var(--tap);border:none;background:none;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);width:100%;
+  padding:var(--sp-0);margin-top:var(--sp-1);border-top:1px solid var(--hairline);
+  font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);
+  line-height:var(--lh-micro);letter-spacing:var(--ls-flat);text-align:left;
+}
+/* ---- ROUND 9's .tight, kept, re-pointed at the body. The column and the FAB row are
+   anchored to opposite ends of the same map, so whether they collide is a fact about
+   the frame and the text size. When the EXPANDED key does not fit the band, its rows
+   lay out as one horizontally scrollable line rather than four stacked ones. No mark
+   is dropped, shrunk or hidden. ---- */
+.map-top.tight .key-body{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
   column-gap:var(--sp-6);align-items:center;width:100%}
-.map-top.tight .legend::-webkit-scrollbar{display:none}
-.map-top.tight .legend .lg{flex:0 0 auto}
-.map-top.tight .legend .lg .lgpin{flex:0 0 auto}
-.map-top.tight .match-legend{column-gap:var(--sp-4)}
-.legend .lg{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.legend .lg .lgpin{flex:0 0 40px;display:flex;justify-content:center}
-.match-legend{
-  pointer-events:auto;background:var(--float-white);border-radius:var(--r-2);box-shadow:var(--elev-2);
-  padding:var(--sp-3) var(--sp-5);display:none;align-items:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);max-width:100%;
-  font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.match-legend.on{display:flex}
-.match-legend .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
-.match-legend .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
+.map-top.tight .key-body::-webkit-scrollbar{display:none}
+.map-top.tight .key-body .lg{flex:0 0 auto}
+.map-top.tight .key-body .lg .lgpin{flex:0 0 auto}
+.map-top.tight .key-match{border-top:none;padding-top:0;column-gap:var(--sp-4);flex-wrap:nowrap}
+.map-top.tight .key-cta{border-top:none;width:auto;flex:0 0 auto;white-space:nowrap}
+/* the key's rows and the cluster preview's rows are the same object drawn in two
+   places, so they are one declaration. */
+.legend .lg,.cluster-peek .lg{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+.legend .lg .lgpin,.cluster-peek .lg .lgpin{flex:0 0 40px;display:flex;justify-content:center}
 .sw.good{border:2px solid var(--match-good)}
 .sw.partial{border:2px dashed var(--match-partial)}
 /* ROUND 8: the swatch was dotted sky400 (#76BCFD, 1.83:1 on the legend's white)
@@ -1934,19 +1976,19 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
    above; the map key card and the nearby card are in the ROW press group below,
    which washes rather than scales, so box-shadow is added to that group's own
    transition rather than declared here where the later group would replace it. */
-.ctl-btn:active,.fab-needs:active,.fab-filters:active,button.legend:active,
+.ctl-btn:active,.fab-needs:active,.fab-filters:active,.legend:has(.key-toggle:active),
 .nb-card:active,.sheet-close:active{box-shadow:var(--elev-1)}
 /* physically larger controls need a deeper press to read as one */
 .shutter:active{transform:scale(.93);transition:transform var(--dur-press) var(--ease-exit)}
 .toggle:active{transform:scale(.97);transition:transform var(--dur-press) var(--ease-exit)}
 .nav-scan:active .ring{transform:scale(.95);transition:transform var(--dur-press) var(--ease-exit)}
 .prof-row,.srow,.lrow,.nb-card,.prov-row,.persona,.claim-result,.verify-opt,.authz,
-.ow-editrow,.photostrip,.photo-add,button.legend,.navbtn,.ow-sel select,.rcpt-row{
+.ow-editrow,.photostrip,.photo-add,.key-toggle,.key-cta,.navbtn,.ow-sel select,.rcpt-row{
   transition:background-color var(--dur-fast) var(--ease-exit),
              box-shadow var(--dur-peer) var(--ease-sheet);   /* ROUND 9: N8, release */
 }
 .prof-row:active,.nb-card:active,.prov-row:active,.persona:active,.verify-opt:active,
-.authz:active,.ow-editrow:active,.photostrip:active,.photo-add:active,button.legend:active,
+.authz:active,.ow-editrow:active,.photostrip:active,.photo-add:active,.key-toggle:active,.key-cta:active,
 .navbtn:active,.ow-sel select:active,.rcpt-row:active{
   background-color:var(--press-wash);transition:background-color var(--dur-press) var(--ease-exit),
                                                 box-shadow var(--dur-press) var(--ease-exit)}
@@ -2014,7 +2056,13 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .rm .phone .pinbtn.leaving{animation:none !important}
 
 /* ============ map controls (right stack): list toggle - zoom - locate ============ */
-.map-ctls{position:absolute;top:104px;right:12px;z-index:42;display:flex;flex-direction:column;gap:var(--sp-4)}
+/* ROUND 15: the control column gets the same conditional the key column has had
+   since Round 9 -- when it does not fit the band between the app bar and the FAB
+   row, it tightens rather than sitting on top of a 48px target. 12px -> 6px of gap
+   is 12px of band recovered, which is what the measurement said was missing at the
+   first two text steps on the 320 frame. */
+.map-ctls{position:absolute;top:var(--map-chrome-top,104px);right:12px;z-index:42;display:flex;flex-direction:column;gap:var(--sp-5)}
+.map-ctls.tight{gap:var(--sp-3)}
 .ctl-btn[hidden]{display:none}
 /* ROUND 9 closes a11y N9. These discs were `border:0px none` over a map whose
    lightest tones are white road and #F5F2FC land, so the CONTROL was 1.00-1.26:1
@@ -2042,12 +2090,61 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
    never averages one, and it is centred on its own centroid, not tip-anchored. */
 .cluster{
   position:absolute;width:0;height:0;padding:var(--sp-0);margin:var(--sp-0);border:none;background:none;cursor:pointer;
+  /* ROUND 15: a press-and-hold is now a real gesture on this control, and a long
+     press on a control the browser thinks holds text is a selection or a callout. */
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
 }
 .cluster::before{content:'';position:absolute;width:var(--tap);height:var(--tap);left:calc(var(--tap) / -2);top:calc(var(--tap) / -2);border-radius:50%}
 .cluster .disc{position:absolute;left:0;top:0;transform:translate(-50%,-50%);pointer-events:none;transition:transform var(--dur-fast) var(--ease-enter)}
 .cluster:focus-visible{outline:none}
 .cluster:focus-visible::before{outline:3px solid var(--brand-blue-ink);outline-offset:1px}
 .cluster:active .disc{transform:translate(-50%,-50%) scale(.97);transition:transform var(--dur-press) var(--ease-exit)}
+/* the held/hovered/focused disc lifts slightly so the preview reads as belonging to
+   THAT disc and not to the map. A transform, never a colour: 9.1 and 9.7 both forbid
+   a cluster taking on any tier's encoding, and a hover state is context. */
+.cluster.peeked .disc{transform:translate(-50%,-50%) scale(1.08)}
+
+/* ============ ROUND 15: WHAT A NUMBER HOLDS, BEFORE YOU COMMIT TO IT ============
+   "hovering over the numbers should also do something" (owner). The disc answered
+   only a tap, and a tap is a navigation. This answers a hover, a press-and-hold and
+   a keyboard focus with the two facts the disc already encodes and never said out
+   loud: how many, and the mix of tiers. The mix bars are the same three tokens the
+   disc's own arcs are drawn in, in the same order, so the preview teaches the arc
+   ring rather than merely repeating the count. */
+.cluster-peek{
+  position:absolute;z-index:44;pointer-events:none;
+  background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-3-free);
+  padding:var(--sp-4) var(--sp-5);max-width:min(240px,86%);
+  opacity:0;transform:translateY(4px);
+  transition:opacity var(--dur-fast) var(--ease-enter),transform var(--dur-fast) var(--ease-enter);
+}
+.cluster-peek[hidden]{display:none}
+.cluster-peek.on{opacity:1;transform:translateY(0)}
+.cpk-h{font-size:var(--fs-sub);font-weight:var(--fw-strong);color:var(--ink);
+  line-height:var(--lh-sub);letter-spacing:var(--ls-flat)}
+.cpk-rows{display:flex;flex-direction:column;gap:var(--sp-2);margin-top:var(--sp-3)}
+.cpk-n{flex:0 0 auto;font-variant-numeric:tabular-nums;color:var(--ink);margin-right:var(--sp-1)}
+.cpk-f{margin-top:var(--sp-3);padding-top:var(--sp-3);border-top:1px solid var(--hairline);
+  font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);
+  line-height:var(--lh-micro);letter-spacing:var(--ls-flat)}
+
+/* ============ ROUND 15: WHERE YOU ARE ============
+   The map named a location in the header pill, measured every distance in the
+   product from it, sorted the nearby rail by it and gave a button that recentres on
+   it -- and never drew it. This is that mark. It is the locate button's own glyph,
+   so the control and the thing it returns to are the same drawing; it is 24px, the
+   smallest size in the pin table's receipt row, so it can never read as heavier than
+   the smallest evidence mark on the map (32px at overview, 40 at street); it is
+   pointer-events:none, so it takes no tap and 7.15 does not reach it.
+   Z-INDEX 80, WHICH IS A RECORDED DIVERGENCE AND NOT AN OVERSIGHT (9.10). The
+   approved render order -- cluster 10, Estimated 20, Scanned 30, Owner 40, match 50,
+   selected 60, live 70 -- is a table of EVIDENCE marks, and this is not one; it is
+   the user. Drawn under them it was measured 70% covered by one scanned pin's tail
+   at the pilot frame, which is a mark that adds nothing. Above them it is 24px of
+   the smallest size in the table with its own white halo, it never covers a glyph it
+   is not directly on, and it is the one thing on a map that must never be lost. */
+.you-here{position:absolute;z-index:80;pointer-events:none;transform:translate(-50%,-50%)}
+.you-here[hidden]{display:none}
 
 /* ============ selected pin: a squash on tap, growing from the anchored tip ============ */
 /* The selected pin is re-rendered at its selected SIZE, so this keyframe grows it
@@ -2201,7 +2298,8 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
      measured at 715px of content. It is still a popup: 99px of map stays visible. */
   left:18px;right:18px;bottom:auto;top:50%;border-radius:var(--r-4);max-height:88%;
   box-shadow:var(--elev-3-free);
-  /* it is opened by button.legend on the map, so it grows FROM that button.
+  /* it is opened by the key card's "How trust grows" row on the map, so it grows
+     FROM that row.
      openSheet() writes --pop-x / --pop-y from the opener's own rect. */
   transform-origin:var(--pop-x,50%) var(--pop-y,50%);
   transform:translateY(-50%) scale(.92);opacity:0;
@@ -2210,9 +2308,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .sheet.popup.on{transform:translateY(-50%) scale(1);opacity:1;
   transition:transform var(--dur-base) var(--ease-enter),opacity var(--dur-base) var(--ease-enter),visibility 0s 0s}
 .sheet.popup .sheet-scroll{padding:var(--inset-sheet) var(--inset-sheet) var(--sp-7)}
-.legend-cta{font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);margin-top:var(--sp-0);line-height:var(--lh-micro);letter-spacing:var(--ls-flat);}
-button.legend{border:none;cursor:pointer;font-family:inherit;text-align:left}
-button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offset:3px}
+.key-toggle:focus-visible,.key-cta:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offset:-3px}
 
 /* ============ splash ============ */
 .splash{background:#1E1142;z-index:58;align-items:center;justify-content:center}
@@ -2381,13 +2477,11 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
     transition-duration:0s !important;transition-delay:0s !important;animation-delay:0s !important}
 }
 
-/* ============ nearby matches rail title ============ */
-.nearby-title{
-  position:absolute;left:14px;bottom:186px;z-index:21;display:none;
-  background:var(--float-white);border-radius:999px;padding:var(--sp-3) var(--sp-5);
-  font-size:var(--fs-micro);font-weight:var(--fw-strong);letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--sub);
-  box-shadow:var(--elev-2);pointer-events:none;line-height:var(--lh-micro);}
-.nearby-title.on{display:block}
+/* ROUND 15 REMOVES THE "NEARBY MATCHES" LABEL. It floated a fourth band into the
+   bottom-left stack -- 1.06% of the map at 390x844 and 2.92% at the 200% text step --
+   over a rail whose every card already says a name, a match and a distance. Nothing
+   is lost to a screen reader: #nearby is role="group" aria-label="Nearby matches",
+   which is where that phrase was doing real work. */
 
 /* ============ empty-area invite ============ */
 .map-empty{
@@ -3065,12 +3159,23 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         </div>
         <div class="map-top">
           <div class="chiprow" id="chiprow" role="group" aria-label="Active filters"></div>
-          <button class="legend" id="legend" aria-label="Map key: the three pin tiers, the numbered cluster disc, the pale disc behind a matched pin and the double ring on the one you have open"></button>
-          <div class="match-legend" id="match-legend">
-            <span id="ml-label"></span>
-            <span class="lg"><span class="sw good"></span>good</span>
-            <span class="lg"><span class="sw partial"></span>partial</span>
-            <span class="lg"><span class="sw unknown"></span>not yet seen</span>
+          <!-- ROUND 15. ONE KEY, NOT TWO, AND IT IS CLOSED UNTIL IT IS ASKED FOR.
+               Two floating explainers stood over the map at once -- the tier card and
+               the match strip -- and both were open with no way to shut either. They
+               are one control now: a 48px pill that DRAWS the three tier marks (so the
+               marks are present where they are seen) and opens in place to the whole
+               key, match rows included when a needs profile is set. The card was also
+               one giant button whose only action was "open the trust sheet"; the
+               toggle and the sheet link are two separate controls now, which is why
+               .legend is a div and no longer a button. -->
+          <div class="legend closed" id="legend">
+            <button class="key-toggle" id="key-toggle" aria-expanded="false" aria-controls="key-body"
+                    aria-label="Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, the crosshair where you are, the pale disc behind a matched pin and the double ring on the one you have open. Show the key">
+              <span class="key-art" id="key-art" aria-hidden="true"></span>
+              <span class="key-word">Key</span>
+              <span class="key-chev" id="key-chev" aria-hidden="true"></span>
+            </button>
+            <div class="key-body" id="key-body" hidden></div>
           </div>
         </div>
         <div class="map-ctls">
@@ -3109,7 +3214,6 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
             <button class="btn ghost" id="me-area" style="min-height:var(--tap)">Try another area</button>
           </div>
         </div>
-        <div class="nearby-title" id="nearby-title">Nearby matches</div>
         <div class="map-fabs">
           <button class="fab-needs" id="fab-needs" aria-label="My needs">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 21s-7.5-4.8-10-9.3C.4 8.6 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4h4.6C15.1 6.1 16.5 5 18.5 5 22 5 23.6 8.6 22 11.7 19.5 16.2 12 21 12 21z" transform="scale(.9) translate(1.3 1.3)"/></svg>
@@ -3122,7 +3226,16 @@ button.legend:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offs
         </div>
         <div class="nearby" id="nearby" role="group" aria-label="Nearby matches"></div>
         <button class="skiplink" id="skip-pins">Skip the map pins</button>
-        <div id="map"><div id="map-ground" aria-hidden="true"></div><div id="pins" role="group" aria-label="Entrance pins on the map"></div></div>
+        <div id="map"><div id="map-ground" aria-hidden="true"></div><span class="you-here" id="you-here" aria-hidden="true" hidden></span><div id="pins" role="group" aria-label="Entrance pins on the map"></div></div>
+        <!-- ROUND 15. THE PREVIEW A NUMBER ANSWERS BEFORE YOU COMMIT TO IT.
+             Hover on a pointer, press-and-hold on a finger, focus on a keyboard: the
+             disc says how many and what mix, without navigating. aria-hidden, because
+             the disc's own accessible name already carries the count, the breakdown
+             and what a tap does -- a screen reader gets the whole thing without
+             hovering, which is the requirement, and duplicating it here would read it
+             twice. pointer-events:none, so it is not a tap target and 7.15 does not
+             apply to it. -->
+        <div class="cluster-peek" id="cluster-peek" aria-hidden="true" hidden></div>
         <div id="map-veil" aria-hidden="true"></div>
       </div>
     </section>
@@ -4299,8 +4412,13 @@ function isReduced(){ return RM_MEDIA.matches || rmPref; }
    parks its timers on scanTimers and would have them cancelled by a nav action. */
 function defer(ms, fn){ setTimeout(fn, isReduced() ? 0 : ms); }
 const LOC = {lat:30.26495, lng:-97.74530}; /* 2nd & Colorado */
+const LOC_NAME = '2nd & Colorado';
+/* ROUND 15 names the two constants distLabel() carried inline, because the scale bar
+   is the second reader of them and a scale that disagreed with the distances printed
+   on the cards would be worse than no scale at all. Values unchanged. */
+const FT_DEG_LAT = 364000, FT_DEG_LNG = 314000;
 function distLabel(p){
-  const dy=(p.lat-LOC.lat)*364000, dx=(p.lng-LOC.lng)*314000;
+  const dy=(p.lat-LOC.lat)*FT_DEG_LAT, dx=(p.lng-LOC.lng)*FT_DEG_LNG;
   const ft=Math.hypot(dx,dy);
   return ft<1000 ? Math.max(50,Math.round(ft/50)*50)+' ft' : (ft/5280).toFixed(1)+' mi';
 }
@@ -5572,6 +5690,10 @@ function renderMap(){
      nothing else: the re-render is driven by the map's own visibility (the observer
      below, plus showScreen), not by the toggle that happened while it was hidden. */
   if(!(W>40) || !(H>40)){ _mapZeroPending = true; return; }
+  /* ROUND 15: a preview describes ONE disc, and this line destroys every disc. It is
+     dropped before the new set is drawn rather than left pointing at a button that
+     no longer exists. */
+  hideClusterPeek();
   document.getElementById('map-ground').innerHTML = groundSVG(W,H,22);
   /* ROUND 11 (9.9 / N11). The pin layer is diffed ONLY when a filter or a needs
      profile just changed -- _pinFlux is armed by those handlers and by nothing else,
@@ -5640,9 +5762,13 @@ function renderMap(){
     const mix={est:0,scan:0,owner:0};
     c.members.forEach(it=>{ mix[it.p.tier]++; });
     b.innerHTML='<span class="disc">'+pinSVG('cluster', CLUSTER_PX, {count:n, mix:mix})+'</span>';
-    const tiers={};
-    c.members.forEach(it=>{ const t=tierName(it.p.tier); tiers[t]=(tiers[t]||0)+1; });
-    const breakdown=Object.entries(tiers).map(([k,v])=>v+' '+k.toLowerCase()).join(', ');
+    /* ROUND 15: the spoken breakdown is ordered est -> scan -> owner, which is the
+       order the disc's arcs are drawn in and the order the press-and-hold preview
+       lists them in. It used to follow whichever tier happened to appear first in
+       the member list, so the same disc could speak its mix in a different order
+       than it drew it. */
+    const breakdown=['est','scan','owner'].filter(t=>mix[t])
+      .map(t=>mix[t]+' '+tierName(t).toLowerCase()).join(', ');
       /* ROUND 8: the name now says what the NUMBER is, not only what is under it --
        the owner could not read the disc off the map ("what are the numbers on the
        map?") and neither could a screen-reader user, who was told "8 entrances
@@ -5674,6 +5800,9 @@ function renderMap(){
     b.setAttribute('aria-label', n+' places grouped here \u2014 the disc shows the count ('
       +breakdown+') \u2014 '+(resolveByZoom ? 'tap to zoom in on them' : 'tap to list them'));
     b.dataset.count = n;
+    /* ROUND 15: the preview reads the same three numbers the accessible name already
+       speaks, from the same object, so the two can never disagree. */
+    b._peek = {n:n, mix:mix, action: resolveByZoom ? 'Tap to zoom in on them' : 'Tap to list them'};
     b.addEventListener('click',()=>{
       if(resolveByZoom){
         setZoom(false, {lat:cLat, lng:cLng});
@@ -5722,9 +5851,190 @@ function renderMap(){
   const sk=document.getElementById('skip-pins');
   if(sk) sk.setAttribute('aria-label','Skip the '+pinsEl.querySelectorAll('.pinbtn,.cluster').length+
     ' map pins and go to the bottom navigation');
+  renderYouHere(W,H);
   fitMapColumn();
   if(listOpen) renderList();
 }
+/* ================= ROUND 15 -- THE PREVIEW A NUMBER ANSWERS ====================
+   "hovering over the numbers should also do something" (owner, on the map screen).
+   A disc answered a tap and nothing else, and a tap is a commitment: it opens a
+   sheet or it moves the whole map. This is the answer short of a commitment, and it
+   is the same answer on three inputs:
+     mouse    -- hover;
+     finger   -- press and hold (PEEK_HOLD_MS), and the release does NOT then navigate;
+     keyboard -- focus, via :focus-visible, so tabbing to a disc shows what it holds.
+   WHAT IT DRAWS. The count, and the mix as one row per tier: the tier's own pin at
+   the receipt size the map key already uses, its count, its name. Not a colour bar:
+   the disc's arcs are sky400 / marigold / violet600, and the first two measure well
+   under 3:1 on this popover's white, which is the reason Round 11 refused a swatch
+   below 3:1 in the match strip. The pins carry their own measured contrast and, more
+   to the point, they are the marks the number stands FOR -- so the preview teaches
+   "a number is a group of these" rather than repeating a count.
+   WHAT IT IS NOT. It adds no glyph to the disc (9.1, 9.7) and no colour to it; the
+   only thing that happens to the mark is an 8% scale, which is context, not
+   encoding. It is aria-hidden and pointer-events:none, so it is neither a second
+   voice for a screen reader -- the disc's name already carries count, breakdown and
+   what a tap does, hover or no hover -- nor a tap target that 7.15 would have to
+   separate from the disc under it.
+   REDUCED MOTION. Visibility is the `hidden` attribute, set synchronously; the
+   opacity transition is decoration on top of a state that has already changed. No
+   transitionend, no transition-delay, nothing that the reduced-motion floor's
+   zeroing of durations and delays can strand -- which is the seam this file has
+   opened once before. */
+const PEEK_HOLD_MS = 420;      /* long enough not to fire on a tap, short enough to feel like an answer */
+const PEEK_SLOP    = 10;       /* a hold that travels this far was a pan starting */
+let peekHeld = false;          /* endMapPointer reads this: a hold is not a tap */
+let peekTimer = null, peekOwner = null;
+let peekDown = null;
+
+function clusterPeekHTML(d){
+  const ROWS = [['est','Estimated'],['scan','Scanned on-site'],['owner','Owner-confirmed']];
+  let rows = '';
+  ROWS.forEach(function(r){
+    const v = d.mix[r[0]] || 0; if(!v) return;
+    rows += '<span class="lg"><span class="lgpin">' + pinSVG(r[0], pinPx(r[0],'receipt'))
+          + '</span><span class="cpk-n">' + v + '</span> ' + r[1] + '</span>';
+  });
+  return '<div class="cpk-h">' + d.n + ' places grouped here</div>'
+       + '<div class="cpk-rows">' + rows + '</div>'
+       + '<div class="cpk-f">' + d.action + '</div>';
+}
+function showClusterPeek(btn){
+  const d = btn && btn._peek; if(!d) return;
+  const el = document.getElementById('cluster-peek'); if(!el) return;
+  if(peekOwner === btn && !el.hidden) return;
+  if(peekOwner && peekOwner !== btn) peekOwner.classList.remove('peeked');
+  peekOwner = btn;
+  el.innerHTML = clusterPeekHTML(d);
+  el.hidden = false;
+  /* place it against the MAP's box, not the frame's: the popover belongs to the map
+     and must not spill over the app bar or the navigation. */
+  const host = el.offsetParent || document.querySelector('#screen-map .screen-body');
+  const hr = host.getBoundingClientRect();
+  const mr = mapEl.getBoundingClientRect();
+  const br = btn.getBoundingClientRect();     /* the anchor is a 0x0 box on the centroid */
+  const pw = el.offsetWidth, ph = el.offsetHeight;
+  const cx = br.left + br.width/2, cy = br.top + br.height/2;
+  const GAP = CLUSTER_PX/2 + 10;
+  let top = cy - GAP - ph;
+  if(top < mr.top + 8) top = cy + GAP;                       /* no room above: go below */
+  if(top + ph > mr.bottom - 8) top = Math.max(mr.top + 8, mr.bottom - 8 - ph);
+  let left = cx - pw/2;
+  left = Math.max(mr.left + 8, Math.min(left, mr.right - 8 - pw));
+  el.style.left = (left - hr.left) + 'px';
+  el.style.top  = (top  - hr.top ) + 'px';
+  btn.classList.add('peeked');
+  /* one reflow so the fade has two frames to run between; under reduced motion the
+     duration is already zero, so this is the same instant appearance either way. */
+  void el.offsetHeight;
+  el.classList.add('on');
+}
+function hideClusterPeek(){
+  const el = document.getElementById('cluster-peek');
+  if(peekOwner){ peekOwner.classList.remove('peeked'); peekOwner = null; }
+  if(peekTimer){ clearTimeout(peekTimer); peekTimer = null; }
+  if(el){ el.classList.remove('on'); el.hidden = true; }
+}
+/* delegated on #pins, which survives every re-render; the buttons do not. */
+pinsEl.addEventListener('pointerover', function(e){
+  if(e.pointerType && e.pointerType !== 'mouse') return;
+  const c = e.target.closest && e.target.closest('.cluster');
+  if(c) showClusterPeek(c); else hideClusterPeek();
+});
+pinsEl.addEventListener('pointerout', function(e){
+  if(e.pointerType && e.pointerType !== 'mouse') return;
+  const c = e.target.closest && e.target.closest('.cluster');
+  if(c && !c.contains(e.relatedTarget)) hideClusterPeek();
+});
+pinsEl.addEventListener('pointerdown', function(e){
+  if(e.pointerType === 'mouse') return;
+  const c = e.target.closest && e.target.closest('.cluster');
+  if(!c) return;
+  peekDown = {x:e.clientX, y:e.clientY, id:e.pointerId};
+  if(peekTimer) clearTimeout(peekTimer);
+  peekTimer = setTimeout(function(){
+    peekTimer = null; peekHeld = true; showClusterPeek(c);
+  }, PEEK_HOLD_MS);
+});
+pinsEl.addEventListener('pointermove', function(e){
+  if(!peekDown || e.pointerId !== peekDown.id) return;
+  if(Math.hypot(e.clientX-peekDown.x, e.clientY-peekDown.y) > PEEK_SLOP){
+    peekDown = null; hideClusterPeek();
+  }
+});
+function endPeekPointer(e){
+  if(e.pointerType === 'mouse') return;
+  peekDown = null;
+  if(peekTimer){ clearTimeout(peekTimer); peekTimer = null; }
+  if(peekOwner) hideClusterPeek();
+}
+pinsEl.addEventListener('pointerup', endPeekPointer);
+pinsEl.addEventListener('pointercancel', endPeekPointer);
+/* keyboard. :focus-visible is the browser own answer to "did a keyboard put focus
+   here", so a mouse click on a disc does not also raise the preview it is about to
+   navigate away from. */
+pinsEl.addEventListener('focusin', function(e){
+  const c = e.target.closest && e.target.closest('.cluster');
+  if(c && c.matches(':focus-visible')) showClusterPeek(c); else hideClusterPeek();
+});
+pinsEl.addEventListener('focusout', function(e){
+  const c = e.target.closest && e.target.closest('.cluster');
+  if(c === peekOwner) hideClusterPeek();
+});
+pinsEl.addEventListener('click', function(){ hideClusterPeek(); });
+
+/* ================= ROUND 15 -- WHERE YOU ARE ==================================
+   Every distance in this build is measured from LOC and the map never drew it. The
+   location pill names it, distLabel() measures from it, the nearby rail sorts by it,
+   the list sorts by it and #locate-btn recentres on it -- so it was the one anchor
+   the whole screen refers to and the one thing on the screen you could not see.
+
+   A SCALE BAR WAS BUILT HERE FIRST AND TAKEN BACK OUT, and the reason is a finding
+   rather than a preference. The pilot projection is not equal-aspect: measured on
+   the running page through the same two constants distLabel() uses, one pixel is
+   3.780 ft east-west and 2.433 ft north-south at k=1.0, a ratio of 1.554, and the
+   ratio is the same 1.554 at k=0.4, 2.2 and 3.3 -- so it is the view box's aspect,
+   not a zoom artefact. A single horizontal bar would have been right in one
+   direction and 55% wrong in the other, on a product whose 6.4 forbids implying
+   measurement. The projection is not this round's to change: every pin position,
+   every street and Round 14's byte-identical layout diff hang off it. It is
+   escalated in the round log instead.
+
+   WHAT THIS MARK IS NOT. Not a teardrop and not numbered, so it cannot be read as a
+   tier (9.1) or as a cluster (9.7). Not any tier's hue: it is indigo900 on white,
+   the chrome pair. It is taught in two places, which is what 5.7 asks: a row of the
+   map key, and a rung of "Marks that are not tiers" in the sheet that key opens. */
+function youHereSVG(){
+  /* the locate button's OWN glyph, reproduced through iconSVG's exact geometry --
+     same 24-unit source, same 1.33333 scale into the 32 viewBox, same 1.725 stroke
+     weight and round terminals -- so 5.4's one grid, one weight, one terminal style
+     holds and the control and the mark it returns to are literally one drawing.
+     The only addition is a white lift disc: indigo900 measures 17.30 / 15.64 / 13.63
+     / 9.95:1 against road, land, blocks and block edge, so the GLYPH is the carrier
+     on every ground the map has and the disc is a lift rather than the contrast. */
+  return '<svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"'
+    + ' focusable="false" style="display:block">'
+    + '<circle cx="16" cy="16" r="15" fill="#FFFFFF" fill-opacity=".94"/>'
+    + '<g stroke="var(--indigo900,#1E1142)" stroke-width="2.3" stroke-linecap="round"'
+    +   ' stroke-linejoin="round" fill="none">'
+    +   '<g transform="scale(1.33333)" stroke-width="1.725">' + ICONS.locate + '</g>'
+    + '</g></svg>';
+}
+function renderYouHere(W,H){
+  const el = document.getElementById('you-here'); if(!el) return;
+  if(!el.firstChild) el.innerHTML = youHereSVG();
+  const xy = proj(LOC.lat, LOC.lng, W, H, MAP_PAD);
+  const on = xy[0] >= -12 && xy[0] <= W+12 && xy[1] >= -12 && xy[1] <= H+12;
+  el.hidden = !on;
+  if(!on) return;
+  el.style.left = xy[0]+'px';
+  el.style.top  = xy[1]+'px';
+  /* 7.7: the mark's state as text, on the group a screen reader actually lands on. */
+  pinsEl.setAttribute('aria-label',
+    'Entrance pins on the map. Your location, ' + LOC_NAME + ', is marked'
+    + (on ? ' on the map.' : ' outside the current view.'));
+}
+
 /* ROUND 9. The floating column and the FAB row are anchored to opposite ends of the
    same map, so whether they collide is a fact about the frame's height and about the
    text size, not a constant that can be solved once in CSS. This measures it: the
@@ -5735,6 +6045,10 @@ function renderMap(){
 function fitMapColumn(){
   const col=document.querySelector('.map-top'), fabs=document.querySelector('.map-fabs');
   if(!col || !fabs || !mapEl.clientHeight) return;
+  /* ROUND 15: both of the numbers this function used to take on faith are measured
+     first -- where the app bar ends, and where the nearby rail's top edge is. */
+  syncMapChromeTop();
+  syncFabLift();
   col.classList.remove('tight');
   /* the FAB row's RESTING offset, not its animating one: `bottom` is transitioned
      over --dur-base, so a rect read during the lift reports a band that is up to
@@ -5745,6 +6059,13 @@ function fitMapColumn(){
   const fabTop = mapEl.clientHeight - lift - fabs.offsetHeight;
   const band = fabTop - col.offsetTop - 8;
   if(col.getBoundingClientRect().height > band) col.classList.add('tight');
+  /* ROUND 15: the control column is measured against the same band, because it is
+     anchored to the same two things and had no test at all. */
+  const ctls=document.querySelector('.map-ctls');
+  if(ctls){
+    ctls.classList.remove('tight');
+    if(ctls.getBoundingClientRect().height > fabTop - ctls.offsetTop - 8) ctls.classList.add('tight');
+  }
 }
 /* ROUND 9: setZoom takes the centre it should land on. Passing `undefined` keeps
    whatever centre is in play (the zoom button just changes scale); passing `null`
@@ -5894,7 +6215,12 @@ function endMapPointer(e){
   mapPtrs.delete(e.pointerId);
   if(mapPtrs.size===0){
     mapGest = null;
-    mapClickGuard = !!wasLive;
+    /* ROUND 15: a press-and-hold that opened a cluster preview is not a tap either.
+       It is ORed in here rather than guarded separately, because the click guard is
+       already the one place that decides whether a pointer sequence was a
+       navigation, and two mechanisms deciding that is how a seam opens. */
+    mapClickGuard = !!wasLive || peekHeld;
+    peekHeld = false;
     mapEl.classList.remove('map-gesture');
     /* DOUBLE TAP TO ZOOM IN, CENTRED ON THE TAP -- the other gesture people try.
        Never on a mark: a double tap on a pin is two taps on a pin, and the card it
@@ -5943,13 +6269,66 @@ function tierChip(t){
    (D38); the disc is a real mark that stays, so it is keyed here, where it is seen.
    The disc is drawn by the same pinSVG('cluster') the map draws, at the legend's
    own size, with a representative count. */
-document.getElementById('legend').innerHTML =
-  `<span class="lg"><span class="lgpin">${pinSVG('est',pinPx('est','receipt'))}</span> Estimated</span>
-   <span class="lg"><span class="lgpin">${pinSVG('scan',pinPx('scan','receipt'))}</span> Scanned on-site</span>
-   <span class="lg"><span class="lgpin">${pinSVG('owner',pinPx('owner','receipt'))}</span> Owner-confirmed</span>
-   <span class="lg"><span class="lgpin">${pinSVG('cluster',22,{count:8})}</span> 8 places here</span>
-   <span class="legend-cta">How trust grows \u203a</span>`;
-document.getElementById('legend').addEventListener('click',e=>openSheet('sheet-trust', e.currentTarget));
+/* ROUND 15. The card becomes a control that opens, and the two explainers become
+   one. Three things move and nothing is deleted:
+     - the collapsed pill draws the three tier marks at the RECEIPT sizes the card
+       already used (24/28/32), so no size enters the token table that 9.2 measures;
+     - the match strip's three swatches are rows of this key now, present exactly
+       when a needs profile is, which is when they were present before;
+     - "How trust grows" is its own 48px control instead of a 19px span inside a
+       200x180px button, and it stops being deleted the moment a profile is applied.
+   The key's open state is remembered for the session: a user who wants it up keeps
+   it up, and the DEFAULT is shut because the owner's screen had ten things on it. */
+let keyOpen = false;
+function renderKey(){
+  document.getElementById('key-art').innerHTML =
+    ['est','scan','owner'].map(function(t){return pinSVG(t, pinPx(t,'receipt'));}).join('');
+  document.getElementById('key-chev').innerHTML = iconSVG('chevron',13);
+  var lbl = personaLabel();
+  document.getElementById('key-body').innerHTML =
+    '<span class="lg"><span class="lgpin">'+pinSVG('est',pinPx('est','receipt'))+'</span> Estimated</span>'
+  + '<span class="lg"><span class="lgpin">'+pinSVG('scan',pinPx('scan','receipt'))+'</span> Scanned on-site</span>'
+  + '<span class="lg"><span class="lgpin">'+pinSVG('owner',pinPx('owner','receipt'))+'</span> Owner-confirmed</span>'
+  + '<span class="lg"><span class="lgpin">'+pinSVG('cluster',22,{count:8})+'</span> 8 places here</span>'
+  + '<span class="lg"><span class="lgpin">'+youHereSVG()+'</span> Where you are</span>'
+  + (personas.size
+      ? '<span class="key-match"><span>'+esc(lbl)+':</span>'
+        + '<span class="lg"><span class="sw good"></span>good</span>'
+        + '<span class="lg"><span class="sw partial"></span>partial</span>'
+        + '<span class="lg"><span class="sw unknown"></span>not yet seen</span></span>'
+      : '')
+  + '<button class="key-cta" id="key-cta">How trust grows <span aria-hidden="true">\u203a</span></button>';
+  document.getElementById('key-cta').addEventListener('click', function(e){
+    e.stopPropagation(); openSheet('sheet-trust', e.currentTarget);
+  });
+}
+function setKeyOpen(on, announce){
+  keyOpen = !!on;
+  var card=document.getElementById('legend'), tog=document.getElementById('key-toggle');
+  card.classList.toggle('closed', !keyOpen);
+  document.getElementById('key-body').hidden = !keyOpen;
+  tog.setAttribute('aria-expanded', keyOpen?'true':'false');
+  /* the name still lists every mark -- what changes is the verb, because the verb is
+     what the control will do next. */
+  tog.setAttribute('aria-label',
+    'Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, '
+    + 'the crosshair where you are, the pale disc behind a matched pin and the double '
+    + 'ring on the one you have open. '
+    + (keyOpen ? 'Hide the key' : 'Show the key'));
+  if(announce) announceUI(keyOpen ? 'Map key shown.' : 'Map key hidden.');
+  fitMapColumn();
+}
+renderKey();
+document.getElementById('key-toggle').addEventListener('click', function(){ setKeyOpen(!keyOpen, true); });
+/* 7.8: Escape closes what it opens. Scoped to the key rather than added to the global
+   handler, so it cannot reach a sheet's Escape or the search overlay's. */
+document.getElementById('legend').addEventListener('keydown', function(e){
+  if(e.key!=='Escape' || !keyOpen) return;
+  e.stopPropagation();
+  setKeyOpen(false, true);
+  document.getElementById('key-toggle').focus();
+});
+setKeyOpen(false);
 
 /* ===================== card ===================== */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -6976,18 +7355,21 @@ document.getElementById('btn-needs-skip').addEventListener('click',()=>{
   closeSheets();
 });
 function applyPersona(){
-  const ml=document.getElementById('match-legend');
   const lbl=personaLabel();
-  if(personas.size){
-    ml.classList.add('on');
-    document.getElementById('legend').classList.add('compact');   /* ROUND 8: see .legend.compact */
-    document.getElementById('ml-label').textContent=lbl+':';
-    document.getElementById('fab-needs-label').textContent=lbl;
-  } else {
-    ml.classList.remove('on');
-    document.getElementById('legend').classList.remove('compact');
-    document.getElementById('fab-needs-label').textContent='My needs';
-  }
+  /* ROUND 15. The match key is part of the map key now, so there is no second
+     floating strip to switch on and no .compact state to squeeze the first one with;
+     renderKey() puts the swatch row in exactly when a profile is set.
+     AND A DEFECT FOUND WHILE MEASURING, FIXED HERE. #fab-needs carried a static
+     aria-label of "My needs" while its VISIBLE text was rewritten to the persona --
+     "Wheelchair" on screen, "My needs" to a screen reader. That fails 7.6 and WCAG
+     2.5.3, and it also put the word "Wheelchair" on the map twice, because the
+     removable chip in #chiprow already says it. The button's visible text is now
+     constant, the chip stays the single place that names and un-names the profile,
+     and the accessible name CONTAINS the visible text and then adds the state. */
+  document.getElementById('fab-needs-label').textContent='My needs';
+  document.getElementById('fab-needs').setAttribute('aria-label',
+    personas.size ? 'My needs \u2014 matching for '+lbl+'. Change' : 'My needs');
+  renderKey();
   document.getElementById('prof-needs-sub').textContent = personas.size?'Matching for '+[...personas].map(k=>PERSONAS[k].label).join(', '):'Choose any that help \u2014 optional';
   document.getElementById('prof-needs-chips').innerHTML = [...personas].map(k=>`<span class="needchip">${PERSONAS[k].label}</span>`).join('');
   armPinFlux(); renderMap();
@@ -7003,8 +7385,7 @@ function renderNearby(){
   const nb=document.getElementById('nearby');
   if(!personas.size){
     nb.classList.remove('on');nb.innerHTML='';
-    document.getElementById('nearby-title').classList.remove('on');
-    document.querySelector('.map-fabs').classList.remove('lifted');
+    liftBottomRow(false);
     return;
   }
   const rank={good:0,partial:1};
@@ -7036,8 +7417,29 @@ function renderNearby(){
     nb.appendChild(b);
   });
   nb.classList.toggle('on',matches.length>0);
-  document.getElementById('nearby-title').classList.toggle('on',matches.length>0);
-  document.querySelector('.map-fabs').classList.toggle('lifted',matches.length>0);
+  liftBottomRow(matches.length>0);
+}
+function liftBottomRow(on){
+  syncFabLift(on);
+  document.querySelector('.map-fabs').classList.toggle('lifted',on);
+}
+/* the rail's bottom edge is 94px above the map's, so the FAB row has to sit at
+   94 + the rail's own height + a 12px gap. Both readings are of settled boxes. */
+function syncFabLift(on){
+  const nb=document.getElementById('nearby'), ph=document.getElementById('phone');
+  if(!nb||!ph) return;
+  if(on===undefined) on = nb.classList.contains('on');
+  if(!on){ ph.style.removeProperty('--fab-bottom-lift'); return; }
+  ph.style.setProperty('--fab-bottom-lift',
+    Math.round(94 + nb.getBoundingClientRect().height + 12) + 'px');
+}
+/* the app bar wraps, so its height is not a constant and the two columns hung off a
+   constant. This is the one place either of them learns where the bar ends. */
+function syncMapChromeTop(){
+  const bar=document.querySelector('#screen-map .apphead'), ph=document.getElementById('phone');
+  if(!bar||!ph) return;
+  const h=bar.getBoundingClientRect().height;
+  if(h>10) ph.style.setProperty('--map-chrome-top', Math.round(h-2)+'px');
 }
 
 /* ===================== filter sheet ===================== */
@@ -7051,7 +7453,9 @@ const FILT_FEATS=[['step_free','Step-free'],['width','Wide door'],['hardware','E
 const FILT_DIST_MAX=1000;
 let filtFeats=new Set(), filtFresh='any', filtDist=FILT_DIST_MAX, filterApplied=false;
 /* straight-line feet from the located point, the same arithmetic distLabel prints */
-function distFt(p){ return Math.hypot((p.lng-LOC.lng)*314000, (p.lat-LOC.lat)*364000); }
+/* ROUND 15: the third copy of the two constants distLabel() carried inline. Three
+   call sites, one pair of names, same values. */
+function distFt(p){ return Math.hypot((p.lng-LOC.lng)*FT_DEG_LNG, (p.lat-LOC.lat)*FT_DEG_LAT); }
 function filterPass(p){
   for(const f of filtFeats){ if(!(p.f[f]&&p.f[f].v==='present')) return false; }
   /* ROUND 6: freshness asks how old the evidence is, in days. It used to ask only
@@ -7431,11 +7835,12 @@ function openClusterSheet(list, opener){
   const ul=document.getElementById('cluster-rows');
   const sorted=[...list].sort((a,b)=>Math.hypot(a.lat-LOC.lat,a.lng-LOC.lng)-Math.hypot(b.lat-LOC.lat,b.lng-LOC.lng));
   document.getElementById('cluster-h').textContent = sorted.length+' entrances grouped here';
-  const tiers={};
-  sorted.forEach(p=>{ const t=tierName(p.tier); tiers[t]=(tiers[t]||0)+1; });
+  /* ROUND 15: same order as the disc's arcs, its accessible name and the preview. */
+  const tiers={est:0,scan:0,owner:0};
+  sorted.forEach(p=>{ tiers[p.tier]++; });
   document.getElementById('cluster-cap').textContent =
     'These are too close together to draw as separate pins at this zoom \u2014 '
-    + Object.entries(tiers).map(([k,v])=>v+' '+k.toLowerCase()).join(', ')
+    + ['est','scan','owner'].filter(t=>tiers[t]).map(t=>tiers[t]+' '+tierName(t).toLowerCase()).join(', ')
     + '. Tap one to open it.';
   ul.innerHTML = sorted.map(listRowHTML).join('');
   ul.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{
@@ -7506,7 +7911,8 @@ document.getElementById('trust-ladder').innerHTML = `
 document.getElementById('mapkey-ladder').innerHTML = `
   <div class="rung"><span class="r-pin">${pinSVG('cluster',CLUSTER_PX,{count:8})}</span><div class="r-body"><span class="r-name">A numbered disc</span><br>How many entrances are grouped here, too close together to draw apart. Tap it: it zooms in on them, or lists them when there is no closer zoom.</div></div>
   <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'),{disc:true})}</span><div class="r-body"><span class="r-name">A pale disc</span><br>Under every pin once you set <b>My needs</b>: this one has been checked against them. The ring says how well it fits.</div></div>
-  <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'),{selected:true})}</span><div class="r-body"><span class="r-name">A double ring</span><br>The entrance you have open. Drawn outside the pin, never in its color.</div></div>`;
+  <div class="rung"><span class="r-pin">${pinSVG('est',pinPx('est','overview'),{selected:true})}</span><div class="r-body"><span class="r-name">A double ring</span><br>The entrance you have open. Drawn outside the pin, never in its color.</div></div>
+  <div class="rung"><span class="r-pin">${youHereSVG()}</span><div class="r-body"><span class="r-name">A crosshair</span><br>Where you are &mdash; ${LOC_NAME}. Every distance in the app is measured from it, and the locate button returns the map to it.</div></div>`;
 
 /* ===================== correction sheet -> "Correction submitted" (18) -> My contributions ===================== */
 const cNote=document.getElementById('correct-note');
@@ -7684,7 +8090,7 @@ function applyPrefs(){
      set it before .phone exists -- see the boot script at the top of this file. */
   document.documentElement.classList.toggle('rm',isReduced());
   document.querySelectorAll('[data-tsize-label]').forEach(el=>
-    el.textContent=TSIZE_LABEL[prefs.tsize]+' · '+TSIZE_PCT[prefs.tsize]);
+    el.textContent=TSIZE_LABEL[prefs.tsize]+' \u00b7 '+TSIZE_PCT[prefs.tsize]);
   document.querySelectorAll('.tsize-btn').forEach(b=>{const on=b.dataset.tsize===prefs.tsize;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on);});
   document.querySelectorAll('[data-pref]').forEach(t=>{
     const on = t.dataset.pref==='rm' ? isReduced() : !!prefs[t.dataset.pref];
@@ -8749,12 +9155,12 @@ function runDone(p){
   /* ROUND 11: the provenance row, in the receipt's own words and its own component */
   document.getElementById('done-prov').innerHTML = provRow(
     iconSVG('camera',17,'var(--marigold-ink,#6B4014)'),
-    `<b>Your scan · ${fmtDay(APP_TODAY.join('-'))}</b>`,
-    `<span class="pr-sub">Added to this entrance's receipt as a dated source — sources, dates, and confidence, not a badge.</span>`,
+    `<b>Your scan \u00b7 ${fmtDay(APP_TODAY.join('-'))}</b>`,
+    `<span class="pr-sub">Added to this entrance's receipt as a dated source \u2014 sources, dates, and confidence, not a badge.</span>`,
     'done-scan');
   const dp=document.querySelector('#done-prov .prov-row');
   if(dp){ dp.setAttribute('aria-label',
-    `Your scan, ${fmtDay(APP_TODAY.join('-'))} — added to this entrance's receipt as a dated source. Opens the receipt.`);
+    `Your scan, ${fmtDay(APP_TODAY.join('-'))} \u2014 added to this entrance's receipt as a dated source. Opens the receipt.`);
     dp.addEventListener('click',()=>{ showScreen('screen-map'); openCard(p.id,'full'); }); }
   const d=document.createElement('div');
   d.style.cssText=`position:absolute;left:${W/2}px;top:${Hh/2}px;pointer-events:none;--mh:34px`;
