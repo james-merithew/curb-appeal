@@ -10611,23 +10611,31 @@ var CH=[
    is [data-tsize="double"], the fifth A. The demo has been showing 126% and
    calling it two hundred. */
 {name:'On itself', enter:preMap(), steps:[
- {t:'Its own settings', l:'All three of these change the running app.',
+ /* THE PROFILE BUTTON IS RUNG ONCE IN THE WHOLE ROUTE, and it is rung by the
+    owner chapter, because that chapter's thesis is the one that needs saying
+    while the room is still on the map. The app has exactly one entrance to both
+    the owner workspace and the settings and this layer may not navigate for him,
+    so this chapter passes through the same control silently and puts its own
+    thesis on the row that actually leads to the settings. That is the whole of
+    "Business and Accessibility both open on the profile screen with nearly the
+    same line": neither of them opens there now. */
+ {sil:1, t:'Your account', l:'Tap the profile button.',
   s:'#head-profile', sc:'screen-map'},
 
- {sil:1, t:'Accessibility', l:'Tap Accessibility.',
+ {t:'Its own settings', l:'All three of these change the running app.',
   s:'[data-go="screen-a11y"]', sc:'screen-profile'},
 
  {t:'Text size', l:'Two hundred percent of default.',
   s:'[data-tsize="double"]', sc:'screen-a11y', kc:'#screen-a11y .tsize-row',
-  done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
+  done:changed('aria-pressed'), tapOk:true},
 
  {t:'Nothing was cut', l:'No clipping, and nothing scrolled sideways.',
   s:'[data-tsize="default"]', sc:'screen-a11y', kc:'#screen-a11y .tsize-row',
-  done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
+  done:changed('aria-pressed'), tapOk:true},
 
  {t:'High contrast', l:'It redraws the map, not only the text.',
   s:'[data-pref="hc"]', sc:'screen-a11y', kc:'#screen-a11y .preview',
-  done:function(e){return e&&e.getAttribute('aria-checked')==='true';}},
+  done:changed('aria-checked'), tapOk:true},
 
  {sil:1, t:'Back to the map', l:'Tap Map.',
   s:'#nav-map', sc:'screen-a11y'}
@@ -10636,10 +10644,12 @@ var CH=[
 
 /* ---- flatten, and number by SPOKEN stops ---------------------------------
    Two numbers come out of this. `pos` is where the presenter is inside the
-   chapter and it counts only stops that say something; a silent transition
-   borrows the number of the stop it is on its way to, because that is what it
-   is. `nar` is the same count across the whole route and is what the progress
-   rule draws. Prelude steps are silent by construction. */
+   chapter and it counts only stops that say something. A silent transition does
+   not move it: it holds the number of the last spoken stop, or 1 if the chapter
+   opens on one. That is what "no counter increment" means -- the number is where
+   he is in the argument, and travelling between screens is not a place in it.
+   `nar` is the same count across the whole route and is what the progress rule
+   draws. Prelude steps are silent by construction. */
 var ROUTE=[], CHS=[], NARTOTAL=0;
 (function(){
   for(var c=0;c<CH.length;c++){
@@ -10692,6 +10702,24 @@ function dwellFor(s){
   if(!s||s.sil) return 0;
   var w=((s.t||'')+' '+(s.l||'')).trim().split(/\s+/).length;
   return Math.max(DWELL_MIN, Math.min(DWELL_MAX, w*WPM_MS + BEAT_MS));
+}
+
+/* A SETTING THAT WAS ALREADY ON IS NOT A SETTING HE JUST TURNED ON.  The three
+   stops in the last chapter used to test the control's own state, so entering
+   that chapter with high contrast already on -- which a presenter who ran the
+   chapter once and left it on does -- made the predicate true from the first
+   frame, `armed` could never go true, and the stop could not be completed by
+   tapping. Measured: a run started with high contrast on stalled on the High
+   contrast stop and never reached the end. These test for a CHANGE instead: the
+   attribute is sampled the first time the predicate runs and the stop ends when
+   it differs. */
+function changed(attr){
+  return function(e){
+    if(!e) return false;
+    var v=e.getAttribute(attr), s=step();
+    if(s._was===undefined){ s._was=v; return false; }
+    return v!==s._was;
+  };
 }
 
 /* ---- state ---------------------------------------------------------------- */
@@ -11087,7 +11115,7 @@ function skipSatisfied(){
     try{ ok=t.done($(selOf(t.s,t,'_cs')||' ')); }catch(e){ ok=false; }
     if(!ok) return;
     if(i>=nSteps()-1) return;
-    delete t._cs; delete t._cr;
+    delete t._cs; delete t._cr; delete t._was;
     i++;
   }
 }
@@ -11101,7 +11129,7 @@ function retarget(){
      motion turns it into an instant swap rather than a shortened one. */
   showCall(false);
   if(folded){ folded=false; call.classList.remove('mini'); foldBtn.setAttribute('aria-expanded','true'); }
-  var t=step(); delete t._cs; delete t._cr;
+  var t=step(); delete t._cs; delete t._cr; delete t._was;
   call.classList.toggle('silent', !!t.sil);
   ring.classList.remove('on');
   pending={until:Date.now()+SETTLE_MS, last:null, same:0};
@@ -11119,7 +11147,14 @@ document.addEventListener('click',function(e){
   if(t===e.target||t.contains(e.target)){
     var s=step();
     if(s.tap===false) return;
-    if(s.done) return;          /* satisfied by STATE, polled below */
+    /* A TAP THE APP IGNORES IS STILL A TAP HE MADE.  A stop with a `done`
+       predicate normally waits for the state rather than the click, because a
+       click can land before the app has done anything. The three settings stops
+       are the exception: tapping the 200% control when the app is ALREADY at
+       200% changes no attribute at all, so a route driven at that text size from
+       the start had nothing to wait for and stalled there -- measured. tapOk
+       says the tap is sufficient on its own. */
+    if(s.done && !s.tapOk) return;   /* satisfied by STATE, polled below */
     /* THE DOUBLE-ADVANCE. The tap is handled a frame late (the app has to do its
        navigation first), and in that frame the screen-change resync may already
        have moved the route on. So the queued advance carries the position it was
