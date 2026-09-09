@@ -131,16 +131,7 @@ up the ladder. There is no mechanism in the product for taking a place back down
 **Silent:** the *Key* pill again, to shut it. It stays open otherwise, and open it covers
 the biggest cluster on the frame.
 
-## 3/5 You are here
-
-**Tap:** the crosshair button on the right.
-
-**On screen:** "Same drawing as the button, so both agree."
-
-**Say:** "That mark is you. It is drawn by the same function that draws the button, so the
-two cannot disagree about what the symbol means."
-
-## 4/5 Grouped places
+## 3/4 Grouped places
 
 **Press and hold:** any numbered disc. On a laptop, hover it.
 
@@ -154,7 +145,7 @@ one."
 
 **Silent:** *Filters*.
 
-## 5/5 Never failing
+## 4/4 Never failing
 
 **Tap:** the button at the bottom of the sheet.
 
@@ -182,13 +173,13 @@ this product is 48 pixels with no two hit circles overlapping at all -- which is
 than the guideline asks for, and is the reason close places become a number instead of
 crowding."
 
-**Silent:** the handle at the top of the card, to open it up.
+**Silent:** DRAG the handle at the top of the card upward. A tap on it does nothing -- the card moves by drag.
 
 ## 2/3 The whole card
 
-**Tap:** the handle again.
+**Drag:** the handle up again, to the top. (Tapping it snaps the card back down.)
 
-**On screen:** "Confidence is agreement, not accuracy."
+**On screen:** "Drag it to the top. Confidence is agreement."
 
 **Say:** "Freshness and confidence, both of them dated. Confidence here is agreement --
 how often an independent model reading the same photographs reaches the same answer. It is
