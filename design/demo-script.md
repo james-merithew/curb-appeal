@@ -95,7 +95,7 @@ account."
 
 **Tap:** the *Wheelchair* card.
 
-**On screen:** "A place that misses fades. It never leaves."
+**On screen:** "No fit? It dims. It is never hidden."
 
 **Say:** "You say what matters to you, and that changes what we tell you about each place,
 not which places you get. A place that does not match your needs recedes in opacity. It is
