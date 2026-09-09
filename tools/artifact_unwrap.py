@@ -16,11 +16,12 @@ wins over the tool's own `title` parameter.
 import sys
 import pathlib
 
-# The host's skeleton already declares these; a second copy is harmless but noisy,
-# and the viewport one in particular should not be duplicated with different values.
+# Only the charset is stripped. The viewport meta is KEPT: a walkthrough round measured
+# what happens when the host does not supply one -- a 980px layout viewport, the desktop
+# phone-mock drawn 155 device pixels wide, and a page that scrolls. A duplicate viewport
+# meta is harmless; a missing one is the whole of "there shouldn't be a scroll".
 HOST_SUPPLIES = (
     '<meta charset="utf-8">',
-    '<meta name="viewport" content="width=device-width,initial-scale=1">',
 )
 
 

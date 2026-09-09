@@ -10613,7 +10613,23 @@ function scr(){ var a=document.querySelector('.screen.active'); return a?a.id:''
 function sheetOn(id){ var e=document.getElementById(id); return !!(e&&e.classList.contains('on')); }
 function noSheet(){ return !document.querySelector('.sheet.on'); }
 function cardPos(){ var e=document.getElementById('sheet-card'); return e?(e.dataset.pos||''):''; }
-function keyOpenNow(){ var e=document.getElementById('legend'); return !!(e&&!e.classList.contains('closed')); }
+/* ROUND 17 MOVED THE KEY INTO A MODAL SHEET, and this function did not move with
+   it. Through Round 15 the key expanded in place and "open" was the ABSENCE of a
+   .closed class on .legend. On Round 17 .legend is only the wrapper around the
+   179x48 pill; nothing ever puts .closed on it, so this returned TRUE on a map
+   whose key was shut -- measured at 390x844 and at 375x812, on a fresh map, with
+   no sheet open. Two stops died on that one word:
+     -- 'Every mark named' waits for keyOpenNow(). A stop may only fire after its
+        predicate has read FALSE at least once, and this one was true on the first
+        frame, so it could never arm. The presenter tapped Key, the sheet opened
+        OVER the pill the ring was on, the hit test then refused it, and 2s later
+        the callout read 'Just a moment. Waiting for this screen to settle.'
+     -- 'Shut the key' waits for !keyOpenNow(), which was false forever. Same
+        stall, one step later, and tapping the sheet's close button only put the
+        route back where it started -- which is what 'the x to close panels
+        doesn't work' looks like from the far side of the glass.
+   The key is open when its sheet is open. */
+function keyOpenNow(){ return sheetOn('sheet-key'); }
 function peekOn(){ var e=document.getElementById('cluster-peek'); return !!(e&&!e.hidden&&e.classList.contains('on')); }
 
 /* IS THIS THING ACTUALLY TAPPABLE.  A ring on a control that something else is
@@ -10760,6 +10776,8 @@ function toMap(){
      tap   false: nothing to tap; the stop ends when the app moves on
      ring  false: no ring at all on this stop
      round true: draw the ring as a circle whatever the target is
+     fresh true: re-run the selector resolver every frame instead of caching it
+           for the life of the stop -- see selOf()
      anchor the box the callout is placed against when there is no ring
    Everything the presenter SAYS is in demo-script.md. The line on screen is a
    label, not a script.
@@ -10782,7 +10800,7 @@ function preOnboard(){ return [
 ]; }
 function preMap(){ return preOnboard().concat([
  {sil:1,pass:1,t:'Close this',l:'Close what is open.',
-  s:openSheetClose,done:noSheet},
+  s:openSheetClose,fresh:1,done:noSheet},
  {sil:1,pass:1,t:'The map',l:'Back to the map.',
   s:toMap,done:function(){return scr()==='screen-map';}}
 ]); }
@@ -10792,7 +10810,7 @@ function preMap(){ return preOnboard().concat([
    open if it is not already. */
 function preCard(){ return preOnboard().concat([
  {sil:1,pass:1,t:'Close this',l:'Close what is open.',
-  s:openSheetClose,done:function(){return !document.querySelector('.sheet.on:not(#sheet-card)');}},
+  s:openSheetClose,fresh:1,done:function(){return !document.querySelector('.sheet.on:not(#sheet-card)');}},
  {sil:1,pass:1,t:'The map',l:'Back to the map.',
   s:toMap,done:function(){return scr()==='screen-map'||sheetOn('sheet-card');}},
  {sil:1,pass:1,t:'A door',l:'Tap any pin.',
@@ -10827,7 +10845,9 @@ var CH=[
 
 {name:'The map', enter:preOnboard(), steps:[
  /* ROUND 15 made the tier card and the match strip one control -- a 179x48 pill,
-    shut by default -- so the tiers are not drawn until the key is opened. */
+    shut by default -- so the tiers are not drawn until the key is opened.
+    ROUND 17 turned what that pill opens into a modal sheet, #sheet-key, which is
+    why the predicate is a sheet test now and not a class on .legend. */
  {t:'Every mark named', l:'Tier is shape and fill, never colour alone.',
   s:'#key-toggle', sc:'screen-map', done:function(){return keyOpenNow();}},
 
@@ -10839,13 +10859,15 @@ var CH=[
   s:'#sheet-trust .sheet-close', kc:'#trust-ladder',
   done:function(){return !sheetOn('sheet-trust');}},
 
- /* the key stays open once opened, and open it is 322 x 295px over the top-left
-    of the map -- which puts the 14-place disc underneath it and makes the hit
-    test refuse every good target for the stops that follow. Shutting it is
-    housekeeping, so it is silent. */
- {sil:1, t:'Shut the key', l:'Tap the key again.',
-  s:'#key-toggle', sc:'screen-map', kc:'#key-body',
-  done:function(){return !keyOpenNow();}},
+ /* CLOSING THE TRUST SHEET PUTS THE KEY SHEET BACK, measured: after the stop
+    above, .sheet.on reads ['sheet-key'] and not []. So the key has to be shut by
+    its own close button, and the pill cannot do it -- the pill is UNDER the sheet
+    and the hit test refuses it, which is exactly how the previous version of this
+    stop hung. A modal key sheet also covers the pins and the discs outright, so
+    every stop after this one depends on it being gone. Housekeeping, so silent. */
+ {sil:1, t:'Shut the key', l:'Close the key.',
+  s:'#sheet-key .sheet-close', sc:'screen-map', kc:'#key-body',
+  done:noSheet},
 
  /* the mark is pointer-events:none and aria-hidden, so it cannot be the tap; the
     control it is drawn from can, and the two are literally one drawing --
@@ -10853,9 +10875,25 @@ var CH=[
  {t:'You are here', l:'Same drawing as the button, so both agree.',
   s:'#locate-btn', sc:'screen-map', kc:'#you-here'},
 
+ /* ROUND 17 RESOLVED THE CLUSTER TAP INTO A SHEET, and #cluster-peek stopped being
+    what a phone gets. The peek is still in the markup and it is still correct --
+    but pinsEl's pointerover handler returns immediately for any pointerType that
+    is not a mouse, so on a thumb the tap goes to openClusterSheet() and raises the
+    modal #sheet-cluster instead. peekOn() was therefore false forever on a phone
+    and this stop hung on it: measured at 390x844 and at 375x812, 'Just a moment'
+    with the cluster sheet standing open behind the callout. Both are accepted --
+    the sheet is what a thumb produces, the peek is what a trackpad produces. */
  {t:'Grouped places', l:'The number counts places, not quality.',
-  s:clusterTarget, r:clusterRing, sc:'screen-map', round:true, kc:'#cluster-peek',
-  done:function(){return peekOn();}},
+  s:clusterTarget, r:clusterRing, sc:'screen-map', round:true,
+  kc:'#cluster-rows,#cluster-peek',
+  done:function(){return sheetOn('sheet-cluster')||peekOn();}},
+
+ /* and that sheet is modal, so it covers the Filters button the next stop rings.
+    pass:1 because a trackpad never opened a sheet at all: with nothing to close
+    the route walks through this without drawing anything. */
+ {sil:1, pass:1, t:'Close the group', l:'Close the group.',
+  s:'#sheet-cluster .sheet-close', sc:'screen-map', kc:'#cluster-rows',
+  done:noSheet},
 
  {sil:1, t:'Filters', l:'Tap Filters.',
   s:'#fab-filters', sc:'screen-map',
@@ -11098,7 +11136,7 @@ function changed(attr){
 var i=0, started=false, finished=false, lockUntil=0,
     missSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
     armed=false, folded=false, peeked=false, foldTimer=0, lastPlaced=null,
-    lastTick=0, shown0=false;
+    lastTick=0, shown0=false, nudged=false;
 
 function step(){ return ROUTE[i]; }
 function nSteps(){ return ROUTE.length; }
@@ -11109,6 +11147,13 @@ function silent(){ var s=step(); return !!(s&&s.sil); }
    stop is layout work for no new information. Cleared in retarget(). */
 function selOf(v,t,k){
   if(typeof v!=='function') return v;
+  /* fresh:1 OPTS OUT OF THE CACHE, and one resolver needs it. openSheetClose()
+     answers "the close button of whatever is open", and on Round 17 closing one
+     sheet can reveal another: closing #sheet-trust puts #sheet-key back, measured.
+     A cached '#sheet-trust .sheet-close' then points at a button that is no longer
+     drawn, the ring goes out and the stop reads 'Just a moment' -- reachable from
+     the chapter-skip control, which is on screen at every stop. */
+  if(t&&t.fresh) return v();
   if(t&&t[k]) return t[k];
   var r=v(); if(t&&r) t[k]=r;
   return r;
@@ -11158,12 +11203,50 @@ function inFrame(b){
   return b.x<W && b.x+b.w>0 && vis >= Math.min(b.h,44)*0.6;
 }
 function shown(node){ return !!(node && node.offsetParent!==null && !node.closest('[hidden]')); }
-function canScroll(node){
+/* THE NEAREST SCROLLING BOX, AND NEVER .phone.  The loop stops at wt.parentElement,
+   which IS .phone -- deliberately. .phone is overflow:hidden and 844px tall, but
+   its scrollHeight is 1518px at 390x844 because every closed sheet sits below the
+   frame at translateY(105%) and transformed boxes still count as scrollable
+   overflow. Anything that scrolls .phone therefore slides the entire app off the
+   top of its own frame; measured once, by accident, at scrollTop 664 -- the whole
+   map, the key, the pins and this layer's own #wt all at negative y. So .phone is
+   excluded by construction rather than by care. */
+function scroller(node){
   for(var n=node&&node.parentElement; n&&n!==wt.parentElement; n=n.parentElement){
     var ov=getComputedStyle(n).overflowY;
-    if((ov==='auto'||ov==='scroll'||ov==='overlay') && n.scrollHeight>n.clientHeight+1) return true;
+    if((ov==='auto'||ov==='scroll'||ov==='overlay') && n.scrollHeight>n.clientHeight+1) return n;
   }
-  return false;
+  return null;
+}
+/* ---- ONE NUDGE, RATHER THAN A SENTENCE ABOUT THE FOLD ----------------------
+   MEASURED, AND IT IS THE SECOND THING THE OWNER SAW.  Four stops draw no ring at
+   all on a phone because their control is inside a scrolling region and below its
+   fold: at 375x812 'The evidence' (#sheet-card [data-act="receipt"]), and at both
+   375x812 and 390x844 'Something changed' ([data-act="correct"]), 'My business'
+   ([data-go="ow-overview"] on screen-profile) and 'What only they know'
+   ([data-go="ow-edit"] on ow-overview). The layer said 'Further down: the next
+   control is below the fold' and then drew nothing, which is a caption on a
+   problem rather than a walkthrough.
+   Setting scrollTop on the region the control already lives in is not navigation
+   and it is not a write to the app's DOM: it is the same flick of the thumb the
+   presenter would make, and rule 3 of the contract above is untouched. It is done
+   ONCE per stop -- if the presenter scrolls away afterwards the layer does not
+   fight him, it goes back to naming the problem. Instant, never smoothed: a
+   scroll animation is motion, and this has to behave the same with Reduce Motion
+   on as with it off. */
+function reveal(node){
+  var sc=scroller(node);
+  if(!sc) return false;
+  var nb=node.getBoundingClientRect(), sb=sc.getBoundingClientRect();
+  if(!nb.height) return false;
+  var want=sc.scrollTop + (nb.top-sb.top) - Math.max(0,(sb.height-nb.height)/2);
+  var next=Math.max(0, Math.min(want, sc.scrollHeight-sc.clientHeight));
+  if(Math.abs(next-sc.scrollTop)<2) return false;
+  sc.scrollTop=next;
+  return true;
+}
+function canScroll(node){
+  return !!scroller(node);
 }
 function keepOutTop(target){
   var H=wt.offsetHeight, top=H;
@@ -11227,7 +11310,9 @@ function nearCircle(cs,b){
      H1  the whole card stays inside the frame and below the HUD's 46px band;
      H2  it never covers the box the ring is on -- the tap the step is waiting for
          has to stay reachable;
-     H3  it never crosses keepOutTop() -- the nav bar and the four docks.
+     H3  it never crosses keepOutTop() -- the nav bar and the four docks;
+     H4  it never covers the close button of an open sheet. Added after measuring
+         it covering one -- see the note in placeCall().
    Three are soft, surrendered in this order:
      S1  clear of the step's kc region, the content the step is ABOUT;
      S2  clear of the app's own floating furniture. Ranked below S1 on purpose:
@@ -11287,6 +11372,19 @@ function placeCall(b, target, kc){
      where the last step put it makes a card near the right edge wrap to two lines
      and then report that height as if it were the content's. */
   call.style.left='0px';
+  /* H4: THE WAY OUT IS NEVER UNDER THE CARD.  Measured, on this build, at 390x844:
+     on the 'Something changed' stop the card was placed at the top of the open
+     #sheet-card and elementFromPoint at the centre of that sheet's close button --
+     48x48 at (330,78) -- returned #wt-fold, over 1376 of its 2304 square pixels.
+     The close button still worked; there was simply a callout on top of it, and
+     from the far side of the glass that is a close button that does not work.
+     A soft cost is not enough for this one: every other soft rule can be traded
+     away and this one cannot, because it is the presenter's only way out of a
+     modal sheet that this layer put him in. When the close button IS the thing
+     being rung, H2 already protects it and this rule stands down. */
+  var xn=$('.sheet.on .sheet-close'), xb=null;
+  if(xn && shown(xn) && !(target&&(xn===target||xn.contains(target)||target.contains(xn))))
+    xb=box(xn);
   for(si=0; si<SCALES.length; si++){
     call.style.setProperty('--wt-scale',SCALES[si]);
     var cw=foldBtn.offsetWidth, ch=foldBtn.offsetHeight;
@@ -11302,6 +11400,7 @@ function placeCall(b, target, kc){
         var x=Math.round(xs[xi]);
         var r={x:x, y:y, w:cw, h:ch};
         if(b && areaOv(r,b)>0) continue;                  /* H2 */
+        if(xb && areaOv(r,xb)>0) continue;                /* H4 */
         var a=b?arrowFor(b,r):{side:'below',on:false};
         var cand={x:x, y:y, cw:cw, ch:ch, side:a.side, arrow:a.on, si:si,
                   cost:kc?areaOv(r,kc):0, soft:softCost(r,target),
@@ -11493,7 +11592,7 @@ function skipSatisfied(){
 }
 function retarget(){
   skipSatisfied();
-  missSince=0; waiting=false; lastKey=''; armed=false; lastPlaced=null;
+  missSince=0; waiting=false; lastKey=''; armed=false; lastPlaced=null; nudged=false;
   if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
   peeked=false;
   /* THE CALLOUT FADES BETWEEN STEPS. .on comes off here and goes back on when the
@@ -11651,6 +11750,8 @@ function tick(){
       return;
     }
     if(offscreen){
+      /* the nudge, once, before the layer settles for describing the problem */
+      if(!nudged){ nudged=true; if(reveal(rn)) return; }
       /* "further down" is only true if the screen CAN scroll. At 320x568 on the
          200% text step the welcome screen's own content is 774px tall inside a
          568px frame with overflow-y:visible -- nothing scrolls and the buttons
@@ -11676,7 +11777,19 @@ function tick(){
        fold" on screen while the control sat in the middle of the frame. The
        hint is re-decided every frame now; a covered target falls through to
        "Just a moment", which is what a covered target is. */
-    if(waiting==='scroll'||waiting==='nofit'){ waiting=false; missSince=0; }
+    /* AND IT HAS TO PUT THE WORDS BACK, which is a second measured lie in the same
+       three lines. Clearing `waiting` here only re-opens the decision; it does not
+       undo the setText() that the scroll hint made. The restore lives further down
+       and is guarded by `if(waiting)` -- so a target that went off-frame, got the
+       hint, then came back INTO frame by way of this branch left the ring drawn
+       correctly around the control and the callout still reading 'Further down.
+       The next control is below the fold.' Measured on 'Something changed' at both
+       390x844 and 375x812 after the reveal nudge landed: ring on, caption wrong,
+       for the whole of the stop. */
+    if(waiting==='scroll'||waiting==='nofit'){
+      waiting=false; missSince=0; lastKey='';
+      setText(s.t,s.l); call.classList.toggle('silent', !!s.sil);
+    }
     if(!missSince) missSince=now;
     if(now-missSince>MISS_MS&&!waiting){
       waiting=true;
