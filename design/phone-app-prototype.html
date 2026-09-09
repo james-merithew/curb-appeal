@@ -966,6 +966,26 @@ body{
    The pill itself is untouched except for its chevron, which pointed DOWN because
    the card expanded downward in place. It points right now, which is what this file
    uses for "opens something" (the same glyph the trust row uses). */
+/* ============ ROUND 17: WHAT THE SHEET HOLDS, AND WHAT THE PILL PROMISES ======
+   The rows are now the three tiers, the match strip when a needs profile is set,
+   and the route to "How trust grows" -- see the note above renderKey() for which
+   two rows left and where each is taught instead.
+   THE CHEVRON STAYS POINTING RIGHT, and this round looked at it rather than
+   inheriting it. The owner approved a pill whose chevron pointed DOWN, and Round 16
+   turned it right when the control stopped expanding in place. Right is still the
+   correct glyph: the control opens a modal sheet, `aria-haspopup="dialog"` says so,
+   and every other "opens something" row in this file (.key-cta, .prof-row, .rcpt-row)
+   uses the same right-pointing chevron. A down chevron on a control that opens a
+   sheet would be the only one in the build, and it would promise an expand-in-place
+   that Round 16 measured as unfixable in the band available. Not changed.
+   THE NON-MODAL QUESTION, MEASURED RATHER THAN GUESSED, AND ANSWERED NO. Round 16
+   noted that the key can no longer stand open BESIDE the map, and this round makes
+   the key shorter, which is the thing that would make a non-modal version viable if
+   anything could. It is not enough. See the numbers in the rubric log: the sheet's
+   own height falls but the band it would have to live in -- from the floating
+   column's top to the FAB row's top, which is what fitMapColumn() already measures
+   -- is unchanged, and it is that band, not the sheet's height, that Round 16 found
+   to be 62px in the worst case. Nothing non-modal was built. */
 .legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-2);
   display:flex;flex-direction:column;max-width:100%;overflow:hidden;
@@ -996,14 +1016,31 @@ body{
 .key-match .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
 .key-match .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
 /* the trust link is its own 48px control, in the tab order in its own right, and it
-   is present whether or not a needs profile is. */
+   is present whether or not a needs profile is.
+   ROUND 17: it carries a sub-line now. Two rows left this key, and a key that stops
+   listing a mark owes the reader a sentence saying where that mark is taught
+   instead -- otherwise the removal is a deletion. The sub-line is the same
+   label-over-sub-copy shape .prof-row and .rowsub already use, at --sp-1, which the
+   token table defines as exactly "a sub-line under its label". Vertical padding
+   replaces the 0 it had: with one line, min-height:var(--tap) centred it and the
+   padding never applied; with two, it is what keeps the second line off the
+   hairline at the large text steps. */
 .key-cta{
   min-height:var(--tap);border:none;background:none;cursor:pointer;font-family:inherit;
   display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);width:100%;
-  padding:var(--sp-0);margin-top:var(--sp-4);border-top:1px solid var(--hairline);
+  padding:var(--sp-4) var(--sp-0);margin-top:var(--sp-4);border-top:1px solid var(--hairline);
   font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--purple-ink);
   line-height:var(--lh-row);letter-spacing:var(--ls-flat);text-align:left;
 }
+.key-cta-main{display:flex;flex-direction:column;gap:var(--sp-1);min-width:0;flex:1 1 auto}
+/* the sub-line is body weight in the muted ink, so the purple label stays the thing
+   that reads as the control. --sub is the token every .rowsub already uses and it is
+   not a new colour: measured on the running sheet it is rgb(70,59,99) on white,
+   10.16:1, at --fs-meta (11.7px at the default step, weight 500) -- the same size,
+   weight and ink as the three tier rows above it. The label stays --purple-ink,
+   11.16:1. */
+.key-cta-sub{font-size:var(--fs-meta);font-weight:var(--fw-body);color:var(--sub);
+  line-height:var(--lh-meta);letter-spacing:var(--ls-flat)}
 /* the key's rows and the cluster preview's rows are the same object drawn in two
    places, so they are one declaration. `white-space:nowrap` came off: inside a card
    that could not grow, a wrapping label was a clipped label; inside a sheet that
@@ -3290,10 +3327,17 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
                It stopped being a disclosure, so aria-expanded and aria-controls came
                off (there is no controlled region beside it any more) and
                aria-haspopup="dialog" went on, which is what the control now does.
-               The name still lists every mark. -->
+               The name still lists every mark.
+               ROUND 17. The name is WRITTEN BY renderKey() now, from the same
+               condition that writes the rows, so it can only ever list what the key
+               contains. The attribute below is the pre-script value and is the
+               no-profile string verbatim; it is overwritten on the first render.
+               The name it replaced promised "the pale disc behind a matched pin and
+               the double ring on the one you have open", and neither of those was
+               ever a row of this key -- see the note above renderKey(). -->
           <div class="legend" id="legend">
             <button class="key-toggle" id="key-toggle" aria-haspopup="dialog"
-                    aria-label="Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, the crosshair where you are, the pale disc behind a matched pin and the double ring on the one you have open. Open the map key">
+                    aria-label="Map key. Estimated, Scanned on-site, Owner-confirmed, and how trust grows. Open the map key">
               <span class="key-art" id="key-art" aria-hidden="true"></span>
               <span class="key-word">Key</span>
               <span class="key-chev" id="key-chev" aria-hidden="true"></span>
@@ -4335,7 +4379,11 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
       <button class="sheet-close" data-close aria-label="Close">&#x2715;</button>
       <div class="sheet-scroll">
         <h3 class="sheet-h" style="margin-top:var(--sp-0);padding-right:36px">Map key</h3>
-        <p class="sheet-p" style="margin-top:var(--sp-2)" id="key-cap">Every mark the map can draw.</p>
+        <!-- ROUND 17: the pre-script value, and it is the no-profile string verbatim.
+             renderKey() rewrites it on the first render and on every persona change.
+             It used to read "Every mark the map can draw", which stopped being true
+             the moment two marks moved out of this sheet. -->
+        <p class="sheet-p" style="margin-top:var(--sp-2)" id="key-cap">What each pin&rsquo;s mark means.</p>
         <div class="key-body" id="key-body"></div>
       </div>
     </div>
@@ -6584,6 +6632,42 @@ function tierChip(t){
        a live-region "Map key shown." is what a disclosure needs, and a modal that
        moves focus onto its own heading has already said the same thing in the way
        every other sheet in this file says it. Announcing BOTH would say it twice. */
+/* ============ ROUND 17: THE KEY IS THE TIERS AND THE ROUTE ====================
+   The owner, having opened Round 16's sheet: "the key doesn't need to say 8 places
+   here when expanded to the location. mostly just needs the pins and how trust
+   grows."
+   FIRST, WHAT THE KEY ACTUALLY HELD, because the ticket for this round described
+   it wrongly and the wrong description would have licensed the wrong deletions. It
+   listed the seven rows as the three tiers, the numbered disc, the crosshair, the
+   PALE MATCH DISC, the DOUBLE SELECTION RING and the match strip. Measured on the
+   running page over 5 frames x 5 text steps x {no profile, wheelchair} = 50
+   configurations, #key-body's children were: Estimated, Scanned on-site,
+   Owner-confirmed, "8 places here", "Where you are", "How trust grows" (6 of 6
+   without a profile) plus the match strip (7 of 7 with one). There is no pale-disc
+   row and no double-ring row in this key and there never was one -- those two are
+   rungs of "Marks that are not tiers" in #sheet-trust, where Round 11 put them.
+   TWO ROWS COME OUT, and each keeps its teaching somewhere better or equal:
+     - THE NUMBERED DISC. Round 15 gave it a hover / press-and-hold / focus preview
+       that names the count and draws the mix one row per tier. That is teaching ON
+       the mark, which beats a row in a list, and the "A numbered disc" rung in
+       "Marks that are not tiers" is still there behind the row below. The key's row
+       was the third copy and it is the one the owner read out loud.
+     - THE CROSSHAIR. It is the user's own position: it is drawn where they are, the
+       control that recentres on it is named "Current location", the pins group's
+       accessible name says "Your location, 2nd & Colorado, is marked on the map",
+       and the "A crosshair" rung is still in "Marks that are not tiers". A mark
+       that means "you" does not need a legend line to be read as "you".
+   ONE ROW STAYS, and it stays for a measured reason rather than by omission. THE
+   MATCH STRIP is the only place in this file that pairs a halo LINE STYLE with its
+   meaning: solid = good, dashed = partial, dotted = not yet seen. Every other
+   pairing in the build (.matchchip in the card, .mstat in the list and the nearby
+   rail) is a chip with its own words, not the ring drawn round a pin. Delete it and
+   the three halo styles are named nowhere, and 5.7 would fail rather than hold. It
+   is also about the pins, which is what the owner asked the key to be about, and it
+   exists only while a needs profile does -- so the resting key is four rows.
+   THE ROUTE SAYS WHERE THE REST WENT. "How trust grows" gains one sub-line naming
+   what is behind it, because a key that no longer lists a mark has to say where
+   that mark is taught instead; without it the removal is a deletion. */
 function renderKey(){
   document.getElementById('key-art').innerHTML =
     ['est','scan','owner'].map(function(t){return pinSVG(t, pinPx(t,'receipt'));}).join('');
@@ -6593,23 +6677,35 @@ function renderKey(){
     '<span class="lg"><span class="lgpin">'+pinSVG('est',pinPx('est','receipt'))+'</span> Estimated</span>'
   + '<span class="lg"><span class="lgpin">'+pinSVG('scan',pinPx('scan','receipt'))+'</span> Scanned on-site</span>'
   + '<span class="lg"><span class="lgpin">'+pinSVG('owner',pinPx('owner','receipt'))+'</span> Owner-confirmed</span>'
-  + '<span class="lg"><span class="lgpin">'+pinSVG('cluster',22,{count:8})+'</span> 8 places here</span>'
-  + '<span class="lg"><span class="lgpin">'+youHereSVG()+'</span> Where you are</span>'
   + (personas.size
       ? '<span class="key-match"><span>'+esc(lbl)+':</span>'
         + '<span class="lg"><span class="sw good"></span>good</span>'
         + '<span class="lg"><span class="sw partial"></span>partial</span>'
         + '<span class="lg"><span class="sw unknown"></span>not yet seen</span></span>'
       : '')
-  + '<button class="key-cta" id="key-cta">How trust grows <span aria-hidden="true">\u203a</span></button>';
+  + '<button class="key-cta" id="key-cta"><span class="key-cta-main">How trust grows'
+    + '<span class="key-cta-sub">Plus the marks that are not tiers</span>'
+    + '</span><span aria-hidden="true">\u203a</span></button>';
   document.getElementById('key-cta').addEventListener('click', function(e){
     e.stopPropagation(); openSheet('sheet-trust', e.currentTarget);
   });
   /* the caption names whether the match rows are there, because their presence is a
-     fact about the user's profile and not about the key. */
+     fact about the user's profile and not about the key.
+     ROUND 17: "Every mark the map can draw" became a lie the moment two marks left,
+     so it is now a description of what is here. */
   document.getElementById('key-cap').textContent = personas.size
-    ? 'Every mark the map can draw, including how it shows fit for ' + lbl + '.'
-    : 'Every mark the map can draw.';
+    ? 'What each pin\u2019s mark means, and how the map shows fit for ' + lbl + '.'
+    : 'What each pin\u2019s mark means.';
+  /* ROUND 17. THE PILL'S NAME LISTS WHAT THE KEY CONTAINS. It was a static
+     attribute in the markup naming seven marks, and it was already over-promising
+     before this round: it named "the pale disc behind a matched pin and the double
+     ring on the one you have open", neither of which was ever a row of this key.
+     It is written here instead, from the same condition that writes the rows, so
+     the name and the contents cannot drift apart again. */
+  document.getElementById('key-toggle').setAttribute('aria-label',
+    'Map key. Estimated, Scanned on-site, Owner-confirmed'
+    + (personas.size ? ', and how a good, partial or not-yet-seen match is drawn' : '')
+    + ', and how trust grows. Open the map key');
 }
 renderKey();
 document.getElementById('key-toggle').addEventListener('click', function(e){

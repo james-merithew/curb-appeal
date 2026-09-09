@@ -1,0 +1,12866 @@
+{
+ "door-20": {
+  "views": [
+   "IMG_3370.HEIC",
+   "IMG_3371.HEIC",
+   "IMG_3373.HEIC",
+   "IMG_3374.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.187,
+      "box": [
+       350,
+       687,
+       388,
+       790
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.101,
+      "box": [
+       174,
+       872,
+       211,
+       906
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       252,
+       430,
+       482,
+       1045
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.087,
+      "box": [
+       264,
+       419,
+       384,
+       1015
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.145,
+      "box": [
+       128,
+       904,
+       174,
+       943
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.109,
+      "box": [
+       384,
+       687,
+       416,
+       816
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       414,
+       705,
+       453,
+       814
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.134,
+      "box": [
+       234,
+       9,
+       603,
+       1122
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.135,
+      "box": [
+       402,
+       632,
+       445,
+       787
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.132,
+      "box": [
+       457,
+       633,
+       499,
+       791
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.167,
+      "box": [
+       186,
+       44,
+       768,
+       1177
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       431,
+       147,
+       742,
+       1162
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.115,
+      "box": [
+       67,
+       1074,
+       805,
+       1290
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.143,
+      "box": [
+       629,
+       597,
+       679,
+       770
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.108,
+      "box": [
+       565,
+       598,
+       618,
+       771
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.203,
+      "box": [
+       300,
+       13,
+       995,
+       1174
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.119,
+      "box": [
+       196,
+       1120,
+       1044,
+       1283
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.187,
+    "det_box": [
+     350,
+     687,
+     388,
+     790
+    ],
+    "crop_box": [
+     159,
+     528,
+     579,
+     948
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-20_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.145,
+    "det_box": [
+     128,
+     904,
+     174,
+     943
+    ],
+    "crop_box": [
+     0,
+     713,
+     361,
+     1133
+    ],
+    "size": [
+     361,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-20_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.203,
+    "det_box": [
+     300,
+     13,
+     995,
+     1174
+    ],
+    "crop_box": [
+     195,
+     0,
+     1099,
+     1522
+    ],
+    "size": [
+     904,
+     1522
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-20_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.167,
+    "det_box": [
+     186,
+     44,
+     768,
+     1177
+    ],
+    "crop_box": [
+     98,
+     0,
+     855,
+     1516
+    ],
+    "size": [
+     757,
+     1516
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-20_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 54.4
+ },
+ "door-21": {
+  "views": [
+   "IMG_3375.HEIC",
+   "IMG_3376.HEIC",
+   "IMG_3377.HEIC",
+   "IMG_3378.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.193,
+      "box": [
+       12,
+       133,
+       399,
+       1179
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.143,
+      "box": [
+       32,
+       889,
+       171,
+       1079
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.192,
+      "box": [
+       165,
+       102,
+       675,
+       1301
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.084,
+      "box": [
+       395,
+       108,
+       669,
+       1286
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.212,
+      "box": [
+       188,
+       949,
+       632,
+       1232
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.112,
+      "box": [
+       182,
+       958,
+       355,
+       1123
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.085,
+      "box": [
+       437,
+       981,
+       633,
+       1203
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.139,
+      "box": [
+       186,
+       13,
+       871,
+       1218
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       480,
+       10,
+       877,
+       1211
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.114,
+      "box": [
+       214,
+       840,
+       418,
+       1104
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.099,
+      "box": [
+       520,
+       869,
+       762,
+       1096
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.098,
+      "box": [
+       222,
+       833,
+       430,
+       1012
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.09,
+      "box": [
+       306,
+       877,
+       543,
+       1096
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.082,
+      "box": [
+       649,
+       908,
+       931,
+       1179
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.177,
+      "box": [
+       237,
+       3,
+       1097,
+       1295
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.087,
+      "box": [
+       600,
+       10,
+       1097,
+       1315
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       252,
+       0,
+       606,
+       1189
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.12,
+      "box": [
+       306,
+       877,
+       543,
+       1096
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.12,
+      "box": [
+       649,
+       908,
+       931,
+       1179
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.09,
+    "det_box": [
+     306,
+     877,
+     543,
+     1096
+    ],
+    "crop_box": [
+     69,
+     631,
+     780,
+     1342
+    ],
+    "size": [
+     711,
+     711
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-21_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.082,
+    "det_box": [
+     649,
+     908,
+     931,
+     1179
+    ],
+    "crop_box": [
+     367,
+     620,
+     1176,
+     1466
+    ],
+    "size": [
+     809,
+     846
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-21_handle2_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.193,
+    "det_box": [
+     12,
+     133,
+     399,
+     1179
+    ],
+    "crop_box": [
+     0,
+     0,
+     457,
+     1492
+    ],
+    "size": [
+     457,
+     1492
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-21_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.192,
+    "det_box": [
+     165,
+     102,
+     675,
+     1301
+    ],
+    "crop_box": [
+     88,
+     0,
+     751,
+     1568
+    ],
+    "size": [
+     663,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-21_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 90.7
+ },
+ "door-13": {
+  "views": [
+   "IMG_3329.HEIC",
+   "IMG_3330.HEIC",
+   "IMG_3331.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.168,
+      "box": [
+       539,
+       836,
+       591,
+       882
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.131,
+      "box": [
+       166,
+       94,
+       525,
+       1225
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.125,
+      "box": [
+       540,
+       165,
+       823,
+       1197
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.221,
+      "box": [
+       610,
+       834,
+       672,
+       885
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       222,
+       78,
+       603,
+       1260
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       604,
+       125,
+       908,
+       1202
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       231,
+       70,
+       889,
+       1264
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.189,
+      "box": [
+       727,
+       782,
+       802,
+       868
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.134,
+      "box": [
+       733,
+       819,
+       829,
+       872
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.08,
+      "box": [
+       739,
+       820,
+       774,
+       862
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.16,
+      "box": [
+       367,
+       7,
+       725,
+       1295
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.138,
+      "box": [
+       741,
+       41,
+       1013,
+       1209
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.091,
+      "box": [
+       369,
+       6,
+       1015,
+       1296
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.221,
+    "det_box": [
+     610,
+     834,
+     672,
+     885
+    ],
+    "crop_box": [
+     431,
+     649,
+     851,
+     1069
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-13_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.189,
+    "det_box": [
+     727,
+     782,
+     802,
+     868
+    ],
+    "crop_box": [
+     554,
+     615,
+     974,
+     1035
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-13_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.16,
+    "det_box": [
+     367,
+     7,
+     725,
+     1295
+    ],
+    "crop_box": [
+     313,
+     0,
+     778,
+     1568
+    ],
+    "size": [
+     465,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-13_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.131,
+    "det_box": [
+     166,
+     94,
+     525,
+     1225
+    ],
+    "crop_box": [
+     112,
+     0,
+     578,
+     1564
+    ],
+    "size": [
+     466,
+     1564
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-13_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 41.4
+ },
+ "door-14": {
+  "views": [
+   "IMG_3332.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.142,
+      "box": [
+       422,
+       105,
+       761,
+       1169
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.142,
+    "det_box": [
+     422,
+     105,
+     761,
+     1169
+    ],
+    "crop_box": [
+     371,
+     0,
+     811,
+     1488
+    ],
+    "size": [
+     440,
+     1488
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-14_door1_v1.jpg"
+   }
+  ],
+  "detect_s": 16.2
+ },
+ "door-15": {
+  "views": [
+   "IMG_3338.HEIC",
+   "IMG_3339.HEIC",
+   "IMG_3340.HEIC",
+   "IMG_3341.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": []
+   },
+   {
+    "view": 2,
+    "boxes": []
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.144,
+      "box": [
+       531,
+       522,
+       774,
+       1012
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       404,
+       503,
+       591,
+       1010
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       1,
+       410,
+       298,
+       992
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.212,
+      "box": [
+       356,
+       463,
+       797,
+       1091
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.131,
+      "box": [
+       134,
+       430,
+       356,
+       1102
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       362,
+       474,
+       574,
+       1076
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.212,
+    "det_box": [
+     356,
+     463,
+     797,
+     1091
+    ],
+    "crop_box": [
+     289,
+     368,
+     863,
+     1279
+    ],
+    "size": [
+     574,
+     911
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-15_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.144,
+    "det_box": [
+     531,
+     522,
+     774,
+     1012
+    ],
+    "crop_box": [
+     494,
+     448,
+     810,
+     1159
+    ],
+    "size": [
+     316,
+     711
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-15_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 54.9
+ },
+ "door-16": {
+  "views": [
+   "IMG_3351.HEIC",
+   "IMG_3352.HEIC",
+   "IMG_3354.HEIC",
+   "IMG_3355.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.083,
+      "box": [
+       312,
+       655,
+       336,
+       690
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.155,
+      "box": [
+       303,
+       10,
+       664,
+       1090
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.095,
+      "box": [
+       509,
+       552,
+       666,
+       1074
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.093,
+      "box": [
+       332,
+       349,
+       505,
+       1032
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.106,
+      "box": [
+       327,
+       612,
+       356,
+       649
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.104,
+      "box": [
+       476,
+       669,
+       531,
+       768
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.124,
+      "box": [
+       323,
+       0,
+       707,
+       1048
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       696,
+       4,
+       1172,
+       1183
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.082,
+      "box": [
+       343,
+       257,
+       525,
+       984
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.1,
+      "box": [
+       182,
+       733,
+       214,
+       779
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.125,
+      "box": [
+       208,
+       22,
+       862,
+       1277
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.109,
+      "box": [
+       223,
+       401,
+       833,
+       1260
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       214,
+       447,
+       480,
+       1183
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.085,
+      "box": [
+       142,
+       719,
+       183,
+       768
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.137,
+      "box": [
+       177,
+       402,
+       488,
+       1215
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       182,
+       290,
+       900,
+       1277
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       488,
+       399,
+       857,
+       1254
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.106,
+    "det_box": [
+     327,
+     612,
+     356,
+     649
+    ],
+    "crop_box": [
+     131,
+     420,
+     551,
+     840
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-16_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.1,
+    "det_box": [
+     182,
+     733,
+     214,
+     779
+    ],
+    "crop_box": [
+     0,
+     546,
+     408,
+     966
+    ],
+    "size": [
+     408,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-16_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.155,
+    "det_box": [
+     303,
+     10,
+     664,
+     1090
+    ],
+    "crop_box": [
+     248,
+     0,
+     718,
+     1414
+    ],
+    "size": [
+     470,
+     1414
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-16_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.137,
+    "det_box": [
+     177,
+     402,
+     488,
+     1215
+    ],
+    "crop_box": [
+     130,
+     280,
+     534,
+     1458
+    ],
+    "size": [
+     404,
+     1178
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-16_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 60.1
+ },
+ "door-17": {
+  "views": [
+   "IMG_3356.HEIC",
+   "IMG_3357.HEIC",
+   "IMG_3359.HEIC",
+   "IMG_3360.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.185,
+      "box": [
+       1065,
+       656,
+       1119,
+       702
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.165,
+      "box": [
+       367,
+       241,
+       687,
+       883
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       387,
+       300,
+       508,
+       869
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       730,
+       41,
+       961,
+       920
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.16,
+      "box": [
+       424,
+       286,
+       741,
+       912
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       436,
+       329,
+       580,
+       906
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.087,
+      "box": [
+       615,
+       338,
+       713,
+       903
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.166,
+      "box": [
+       512,
+       356,
+       833,
+       998
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       894,
+       194,
+       1125,
+       1016
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       522,
+       393,
+       646,
+       975
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.174,
+      "box": [
+       473,
+       396,
+       811,
+       1050
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.108,
+      "box": [
+       509,
+       457,
+       646,
+       1027
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       643,
+       445,
+       774,
+       1024
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.185,
+    "det_box": [
+     1065,
+     656,
+     1119,
+     702
+    ],
+    "crop_box": [
+     882,
+     469,
+     1176,
+     889
+    ],
+    "size": [
+     294,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-17_handle1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.174,
+    "det_box": [
+     473,
+     396,
+     811,
+     1050
+    ],
+    "crop_box": [
+     422,
+     297,
+     861,
+     1246
+    ],
+    "size": [
+     439,
+     949
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-17_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.166,
+    "det_box": [
+     512,
+     356,
+     833,
+     998
+    ],
+    "crop_box": [
+     463,
+     259,
+     881,
+     1190
+    ],
+    "size": [
+     418,
+     931
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-17_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 59.3
+ },
+ "door-18": {
+  "views": [
+   "IMG_3361.HEIC",
+   "IMG_3362.HEIC",
+   "IMG_3364.HEIC",
+   "IMG_3365.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.163,
+      "box": [
+       346,
+       295,
+       704,
+       1009
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.148,
+      "box": [
+       324,
+       200,
+       754,
+       972
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       534,
+       228,
+       771,
+       929
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       306,
+       218,
+       788,
+       996
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.093,
+      "box": [
+       764,
+       934,
+       1097,
+       1202
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.09,
+      "box": [
+       614,
+       927,
+       1166,
+       1563
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.124,
+      "box": [
+       404,
+       68,
+       958,
+       967
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.152,
+      "box": [
+       511,
+       99,
+       1143,
+       1006
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       756,
+       143,
+       1087,
+       953
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       511,
+       157,
+       793,
+       946
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.163,
+    "det_box": [
+     346,
+     295,
+     704,
+     1009
+    ],
+    "crop_box": [
+     292,
+     187,
+     757,
+     1223
+    ],
+    "size": [
+     465,
+     1036
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-18_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.152,
+    "det_box": [
+     511,
+     99,
+     1143,
+     1006
+    ],
+    "crop_box": [
+     416,
+     0,
+     1176,
+     1278
+    ],
+    "size": [
+     760,
+     1278
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-18_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 56.7
+ },
+ "door-19": {
+  "views": [
+   "IMG_3366.HEIC",
+   "IMG_3367.HEIC",
+   "IMG_3368.HEIC",
+   "IMG_3369.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.136,
+      "box": [
+       301,
+       214,
+       764,
+       1013
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.08,
+      "box": [
+       470,
+       272,
+       575,
+       972
+      ]
+     },
+     {
+      "label": "ramp",
+      "score": 0.11,
+      "box": [
+       286,
+       718,
+       1176,
+       1564
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.232,
+      "box": [
+       266,
+       166,
+       750,
+       996
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       473,
+       226,
+       565,
+       940
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       0,
+       -6,
+       249,
+       984
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.234,
+      "box": [
+       356,
+       140,
+       880,
+       987
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       430,
+       90,
+       1044,
+       996
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.103,
+      "box": [
+       1,
+       200,
+       163,
+       904
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.234,
+    "det_box": [
+     356,
+     140,
+     880,
+     987
+    ],
+    "crop_box": [
+     277,
+     12,
+     958,
+     1241
+    ],
+    "size": [
+     681,
+     1229
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-19_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.232,
+    "det_box": [
+     266,
+     166,
+     750,
+     996
+    ],
+    "crop_box": [
+     193,
+     41,
+     822,
+     1245
+    ],
+    "size": [
+     629,
+     1204
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-19_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 55.1
+ },
+ "door-22": {
+  "views": [
+   "IMG_3379.HEIC",
+   "IMG_3381.HEIC",
+   "IMG_3382.HEIC",
+   "IMG_3384.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.162,
+      "box": [
+       447,
+       735,
+       496,
+       845
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.084,
+      "box": [
+       571,
+       833,
+       621,
+       901
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.106,
+      "box": [
+       333,
+       355,
+       615,
+       1127
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.082,
+      "box": [
+       350,
+       352,
+       480,
+       1085
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.198,
+      "box": [
+       364,
+       669,
+       441,
+       826
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.097,
+      "box": [
+       370,
+       569,
+       405,
+       617
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.082,
+      "box": [
+       359,
+       667,
+       399,
+       805
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.137,
+      "box": [
+       176,
+       42,
+       479,
+       1128
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       174,
+       15,
+       692,
+       1189
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.087,
+      "box": [
+       188,
+       -1,
+       777,
+       1209
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.192,
+      "box": [
+       485,
+       664,
+       529,
+       839
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.153,
+      "box": [
+       442,
+       655,
+       483,
+       813
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.14,
+      "box": [
+       211,
+       -10,
+       810,
+       1257
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.127,
+      "box": [
+       508,
+       10,
+       855,
+       1264
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       211,
+       15,
+       503,
+       1172
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.18,
+      "box": [
+       523,
+       578,
+       571,
+       716
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.12,
+      "box": [
+       522,
+       580,
+       545,
+       721
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.109,
+      "box": [
+       364,
+       240,
+       716,
+       961
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.198,
+    "det_box": [
+     364,
+     669,
+     441,
+     826
+    ],
+    "crop_box": [
+     167,
+     512,
+     638,
+     983
+    ],
+    "size": [
+     471,
+     471
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-22_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.192,
+    "det_box": [
+     485,
+     664,
+     529,
+     839
+    ],
+    "crop_box": [
+     244,
+     489,
+     769,
+     1014
+    ],
+    "size": [
+     525,
+     525
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-22_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.14,
+    "det_box": [
+     211,
+     -10,
+     810,
+     1257
+    ],
+    "crop_box": [
+     121,
+     0,
+     899,
+     1568
+    ],
+    "size": [
+     778,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-22_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.137,
+    "det_box": [
+     176,
+     42,
+     479,
+     1128
+    ],
+    "crop_box": [
+     130,
+     0,
+     524,
+     1453
+    ],
+    "size": [
+     394,
+     1453
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-22_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 109.2
+ },
+ "door-23": {
+  "views": [
+   "IMG_3385.HEIC",
+   "IMG_3386.HEIC",
+   "IMG_3387.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.235,
+      "box": [
+       572,
+       580,
+       624,
+       730
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.114,
+      "box": [
+       595,
+       571,
+       624,
+       716
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.106,
+      "box": [
+       921,
+       829,
+       957,
+       906
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.141,
+      "box": [
+       404,
+       208,
+       836,
+       987
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       597,
+       217,
+       833,
+       990
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.209,
+      "box": [
+       614,
+       543,
+       659,
+       705
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.198,
+      "box": [
+       589,
+       551,
+       623,
+       702
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.15,
+      "box": [
+       967,
+       836,
+       1015,
+       909
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       407,
+       183,
+       889,
+       999
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       612,
+       203,
+       878,
+       995
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.1,
+      "box": [
+       839,
+       921,
+       1172,
+       1287
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.081,
+      "box": [
+       -3,
+       849,
+       373,
+       1039
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.315,
+      "box": [
+       699,
+       539,
+       736,
+       698
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.271,
+      "box": [
+       722,
+       534,
+       776,
+       698
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.198,
+      "box": [
+       1114,
+       842,
+       1172,
+       921
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.193,
+      "box": [
+       479,
+       67,
+       1061,
+       1001
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       735,
+       197,
+       1036,
+       953
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       992,
+       4,
+       1176,
+       1094
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.099,
+      "box": [
+       -6,
+       845,
+       468,
+       1067
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.315,
+    "det_box": [
+     699,
+     539,
+     736,
+     698
+    ],
+    "crop_box": [
+     479,
+     380,
+     956,
+     857
+    ],
+    "size": [
+     477,
+     477
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-23_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.235,
+    "det_box": [
+     572,
+     580,
+     624,
+     730
+    ],
+    "crop_box": [
+     373,
+     430,
+     823,
+     880
+    ],
+    "size": [
+     450,
+     450
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-23_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.193,
+    "det_box": [
+     479,
+     67,
+     1061,
+     1001
+    ],
+    "crop_box": [
+     391,
+     0,
+     1148,
+     1281
+    ],
+    "size": [
+     757,
+     1281
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-23_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.141,
+    "det_box": [
+     404,
+     208,
+     836,
+     987
+    ],
+    "crop_box": [
+     339,
+     91,
+     900,
+     1220
+    ],
+    "size": [
+     561,
+     1129
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-23_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 83.1
+ },
+ "door-24": {
+  "views": [
+   "IMG_3388.HEIC",
+   "IMG_3390.HEIC",
+   "IMG_3391.HEIC",
+   "IMG_3393.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.249,
+      "box": [
+       722,
+       528,
+       759,
+       687
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.233,
+      "box": [
+       762,
+       531,
+       794,
+       701
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.18,
+      "box": [
+       725,
+       531,
+       757,
+       692
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.177,
+      "box": [
+       506,
+       114,
+       1050,
+       1002
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       750,
+       134,
+       1050,
+       989
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.109,
+      "box": [
+       514,
+       169,
+       745,
+       949
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.098,
+      "box": [
+       22,
+       877,
+       482,
+       1093
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.108,
+      "box": [
+       460,
+       725,
+       532,
+       820
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       261,
+       444,
+       754,
+       1038
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.292,
+      "box": [
+       535,
+       646,
+       614,
+       744
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.089,
+      "box": [
+       595,
+       658,
+       617,
+       736
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.081,
+      "box": [
+       358,
+       661,
+       390,
+       686
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.139,
+      "box": [
+       329,
+       339,
+       854,
+       960
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       333,
+       369,
+       569,
+       943
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       566,
+       375,
+       829,
+       923
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.141,
+      "box": [
+       520,
+       635,
+       604,
+       739
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.116,
+      "box": [
+       509,
+       574,
+       601,
+       843
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.122,
+      "box": [
+       286,
+       304,
+       834,
+       952
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.091,
+      "box": [
+       574,
+       327,
+       814,
+       917
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.292,
+    "det_box": [
+     535,
+     646,
+     614,
+     744
+    ],
+    "crop_box": [
+     364,
+     485,
+     784,
+     905
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-24_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.249,
+    "det_box": [
+     722,
+     528,
+     759,
+     687
+    ],
+    "crop_box": [
+     502,
+     369,
+     979,
+     846
+    ],
+    "size": [
+     477,
+     477
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-24_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.177,
+    "det_box": [
+     506,
+     114,
+     1050,
+     1002
+    ],
+    "crop_box": [
+     424,
+     0,
+     1131,
+     1268
+    ],
+    "size": [
+     707,
+     1268
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-24_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.139,
+    "det_box": [
+     329,
+     339,
+     854,
+     960
+    ],
+    "crop_box": [
+     250,
+     245,
+     932,
+     1146
+    ],
+    "size": [
+     682,
+     901
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-24_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 110.3
+ },
+ "door-25": {
+  "views": [
+   "IMG_3394.HEIC",
+   "IMG_3395.HEIC",
+   "IMG_3397.HEIC",
+   "IMG_3398.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.111,
+      "box": [
+       321,
+       702,
+       355,
+       767
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.153,
+      "box": [
+       251,
+       320,
+       370,
+       909
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.25,
+      "box": [
+       333,
+       656,
+       379,
+       753
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.136,
+      "box": [
+       222,
+       154,
+       388,
+       949
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       226,
+       196,
+       387,
+       967
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.333,
+      "box": [
+       463,
+       745,
+       539,
+       888
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.228,
+      "box": [
+       215,
+       42,
+       586,
+       1209
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.089,
+      "box": [
+       463,
+       745,
+       539,
+       888
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.289,
+      "box": [
+       689,
+       773,
+       773,
+       949
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.223,
+      "box": [
+       323,
+       19,
+       852,
+       1332
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.104,
+      "box": [
+       689,
+       773,
+       773,
+       949
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.333,
+    "det_box": [
+     463,
+     745,
+     539,
+     888
+    ],
+    "crop_box": [
+     286,
+     602,
+     715,
+     1031
+    ],
+    "size": [
+     429,
+     429
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-25_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.289,
+    "det_box": [
+     689,
+     773,
+     773,
+     949
+    ],
+    "crop_box": [
+     467,
+     597,
+     995,
+     1125
+    ],
+    "size": [
+     528,
+     528
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-25_handle2_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.228,
+    "det_box": [
+     215,
+     42,
+     586,
+     1209
+    ],
+    "crop_box": [
+     159,
+     0,
+     641,
+     1559
+    ],
+    "size": [
+     482,
+     1559
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-25_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.223,
+    "det_box": [
+     323,
+     19,
+     852,
+     1332
+    ],
+    "crop_box": [
+     243,
+     0,
+     931,
+     1568
+    ],
+    "size": [
+     688,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-25_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 88.2
+ },
+ "door-26": {
+  "views": [
+   "IMG_3399.HEIC",
+   "IMG_3400.HEIC",
+   "IMG_3402.HEIC",
+   "IMG_3403.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": []
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.096,
+      "box": [
+       395,
+       702,
+       419,
+       767
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.097,
+      "box": [
+       191,
+       217,
+       682,
+       1009
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       223,
+       220,
+       810,
+       1094
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       868,
+       313,
+       1051,
+       992
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.106,
+      "box": [
+       257,
+       168,
+       851,
+       1059
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       917,
+       212,
+       1122,
+       1027
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       519,
+       174,
+       843,
+       1035
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.096,
+    "det_box": [
+     395,
+     702,
+     419,
+     767
+    ],
+    "crop_box": [
+     197,
+     524,
+     617,
+     944
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-26_handle1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.119,
+    "det_box": [
+     223,
+     220,
+     810,
+     1094
+    ],
+    "crop_box": [
+     134,
+     88,
+     898,
+     1356
+    ],
+    "size": [
+     764,
+     1268
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-26_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.106,
+    "det_box": [
+     257,
+     168,
+     851,
+     1059
+    ],
+    "crop_box": [
+     167,
+     34,
+     940,
+     1326
+    ],
+    "size": [
+     773,
+     1292
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-26_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 36.9
+ },
+ "door-27": {
+  "views": [
+   "IMG_3404.HEIC",
+   "IMG_3405.HEIC",
+   "IMG_3407.HEIC",
+   "IMG_3408.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.177,
+      "box": [
+       212,
+       731,
+       257,
+       797
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.139,
+      "box": [
+       98,
+       206,
+       448,
+       1068
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       94,
+       266,
+       249,
+       999
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.233,
+      "box": [
+       349,
+       653,
+       413,
+       735
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.126,
+      "box": [
+       196,
+       29,
+       637,
+       1015
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       375,
+       55,
+       615,
+       1006
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       225,
+       136,
+       375,
+       911
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.207,
+      "box": [
+       289,
+       689,
+       396,
+       859
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.136,
+      "box": [
+       306,
+       753,
+       395,
+       859
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.127,
+      "box": [
+       335,
+       117,
+       710,
+       1198
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       99,
+       70,
+       707,
+       1206
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       94,
+       153,
+       370,
+       1127
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.37,
+      "box": [
+       335,
+       715,
+       425,
+       826
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.144,
+      "box": [
+       94,
+       -10,
+       784,
+       1153
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.139,
+      "box": [
+       90,
+       42,
+       387,
+       1127
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.139,
+      "box": [
+       384,
+       21,
+       805,
+       1171
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.37,
+    "det_box": [
+     335,
+     715,
+     425,
+     826
+    ],
+    "crop_box": [
+     170,
+     560,
+     590,
+     980
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-27_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.233,
+    "det_box": [
+     349,
+     653,
+     413,
+     735
+    ],
+    "crop_box": [
+     171,
+     484,
+     591,
+     904
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-27_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.144,
+    "det_box": [
+     94,
+     -10,
+     784,
+     1153
+    ],
+    "crop_box": [
+     0,
+     0,
+     887,
+     1501
+    ],
+    "size": [
+     887,
+     1501
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-27_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.139,
+    "det_box": [
+     98,
+     206,
+     448,
+     1068
+    ],
+    "crop_box": [
+     45,
+     76,
+     500,
+     1326
+    ],
+    "size": [
+     455,
+     1250
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-27_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 34.4
+ },
+ "door-28": {
+  "views": [
+   "IMG_3409.HEIC",
+   "IMG_3410.HEIC",
+   "IMG_3411.HEIC",
+   "IMG_3412.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       344,
+       405,
+       572,
+       1015
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       359,
+       220,
+       800,
+       895
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       312,
+       408,
+       551,
+       987
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.11,
+      "box": [
+       534,
+       312,
+       833,
+       976
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.127,
+      "box": [
+       388,
+       349,
+       612,
+       996
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       603,
+       324,
+       877,
+       973
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       580,
+       338,
+       656,
+       963
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.127,
+    "det_box": [
+     388,
+     349,
+     612,
+     996
+    ],
+    "crop_box": [
+     354,
+     251,
+     645,
+     1190
+    ],
+    "size": [
+     291,
+     939
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-28_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.114,
+    "det_box": [
+     312,
+     408,
+     551,
+     987
+    ],
+    "crop_box": [
+     276,
+     321,
+     586,
+     1160
+    ],
+    "size": [
+     310,
+     839
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-28_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 23.7
+ },
+ "door-29": {
+  "views": [
+   "IMG_3413.HEIC",
+   "IMG_3414.HEIC",
+   "IMG_3416.HEIC",
+   "IMG_3417.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.191,
+      "box": [
+       295,
+       762,
+       356,
+       851
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.124,
+      "box": [
+       318,
+       254,
+       612,
+       1149
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       166,
+       223,
+       618,
+       1165
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       140,
+       294,
+       353,
+       1087
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.292,
+      "box": [
+       395,
+       718,
+       474,
+       810
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.13,
+      "box": [
+       217,
+       168,
+       453,
+       1059
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.129,
+      "box": [
+       404,
+       119,
+       771,
+       1145
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       0,
+       99,
+       237,
+       995
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.355,
+      "box": [
+       483,
+       733,
+       588,
+       834
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.096,
+      "box": [
+       545,
+       747,
+       586,
+       834
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.165,
+      "box": [
+       231,
+       70,
+       589,
+       1148
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.156,
+      "box": [
+       509,
+       33,
+       1001,
+       1226
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.137,
+      "box": [
+       206,
+       19,
+       976,
+       1217
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.084,
+      "box": [
+       124,
+       966,
+       206,
+       1021
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.309,
+      "box": [
+       584,
+       689,
+       640,
+       791
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.172,
+      "box": [
+       647,
+       690,
+       693,
+       794
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.196,
+      "box": [
+       649,
+       3,
+       1168,
+       1166
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.187,
+      "box": [
+       295,
+       0,
+       678,
+       1108
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.159,
+      "box": [
+       286,
+       1,
+       1159,
+       1174
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.122,
+      "box": [
+       173,
+       932,
+       261,
+       984
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.355,
+    "det_box": [
+     483,
+     733,
+     588,
+     834
+    ],
+    "crop_box": [
+     325,
+     573,
+     745,
+     993
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-29_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.309,
+    "det_box": [
+     584,
+     689,
+     640,
+     791
+    ],
+    "crop_box": [
+     402,
+     530,
+     822,
+     950
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-29_handle2_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.196,
+    "det_box": [
+     649,
+     3,
+     1168,
+     1166
+    ],
+    "crop_box": [
+     571,
+     0,
+     1176,
+     1514
+    ],
+    "size": [
+     605,
+     1514
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-29_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.165,
+    "det_box": [
+     231,
+     70,
+     589,
+     1148
+    ],
+    "crop_box": [
+     177,
+     0,
+     642,
+     1471
+    ],
+    "size": [
+     465,
+     1471
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-29_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 38.9
+ },
+ "door-30": {
+  "views": [
+   "IMG_3418.HEIC",
+   "IMG_3420.HEIC",
+   "IMG_3422.HEIC",
+   "IMG_3424.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": []
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.088,
+      "box": [
+       588,
+       627,
+       629,
+       721
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       278,
+       316,
+       486,
+       960
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.08,
+      "box": [
+       574,
+       335,
+       914,
+       1067
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": []
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       486,
+       125,
+       690,
+       664
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.088,
+    "det_box": [
+     588,
+     627,
+     629,
+     721
+    ],
+    "crop_box": [
+     398,
+     464,
+     818,
+     884
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-30_handle1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.099,
+    "det_box": [
+     486,
+     125,
+     690,
+     664
+    ],
+    "crop_box": [
+     455,
+     44,
+     720,
+     825
+    ],
+    "size": [
+     265,
+     781
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-30_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.096,
+    "det_box": [
+     278,
+     316,
+     486,
+     960
+    ],
+    "crop_box": [
+     246,
+     219,
+     517,
+     1153
+    ],
+    "size": [
+     271,
+     934
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-30_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 94.7
+ },
+ "door-31": {
+  "views": [
+   "IMG_3425.HEIC",
+   "IMG_3426.HEIC",
+   "IMG_3428.HEIC",
+   "IMG_3429.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.119,
+      "box": [
+       369,
+       681,
+       421,
+       779
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.197,
+      "box": [
+       327,
+       667,
+       388,
+       787
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.138,
+      "box": [
+       159,
+       203,
+       595,
+       1096
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.093,
+      "box": [
+       393,
+       217,
+       604,
+       1067
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       55,
+       260,
+       179,
+       984
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.207,
+      "box": [
+       338,
+       693,
+       396,
+       828
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.155,
+      "box": [
+       396,
+       696,
+       433,
+       823
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.129,
+      "box": [
+       696,
+       30,
+       1074,
+       1283
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       114,
+       133,
+       404,
+       1119
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       399,
+       128,
+       757,
+       1165
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.191,
+      "box": [
+       431,
+       676,
+       476,
+       845
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.132,
+      "box": [
+       497,
+       704,
+       535,
+       843
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.131,
+      "box": [
+       496,
+       702,
+       539,
+       852
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.125,
+      "box": [
+       153,
+       38,
+       894,
+       1208
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       869,
+       39,
+       1171,
+       1258
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       522,
+       75,
+       885,
+       1208
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.207,
+    "det_box": [
+     338,
+     693,
+     396,
+     828
+    ],
+    "crop_box": [
+     157,
+     550,
+     577,
+     970
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-31_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.197,
+    "det_box": [
+     327,
+     667,
+     388,
+     787
+    ],
+    "crop_box": [
+     147,
+     517,
+     567,
+     937
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-31_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.138,
+    "det_box": [
+     159,
+     203,
+     595,
+     1096
+    ],
+    "crop_box": [
+     93,
+     69,
+     660,
+     1363
+    ],
+    "size": [
+     567,
+     1294
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-31_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.129,
+    "det_box": [
+     696,
+     30,
+     1074,
+     1283
+    ],
+    "crop_box": [
+     639,
+     0,
+     1130,
+     1568
+    ],
+    "size": [
+     491,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-31_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 106.8
+ },
+ "door-32": {
+  "views": [
+   "IMG_3430.HEIC",
+   "IMG_3432.HEIC",
+   "IMG_3433.HEIC",
+   "IMG_3435.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.108,
+      "box": [
+       307,
+       267,
+       519,
+       903
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.106,
+      "box": [
+       554,
+       632,
+       597,
+       799
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       1015,
+       998,
+       1174,
+       1160
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.242,
+      "box": [
+       287,
+       238,
+       638,
+       1081
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       290,
+       156,
+       629,
+       1090
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.15,
+      "box": [
+       725,
+       819,
+       937,
+       1044
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.093,
+      "box": [
+       1015,
+       998,
+       1174,
+       1160
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.082,
+      "box": [
+       294,
+       963,
+       561,
+       1090
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.095,
+      "box": [
+       600,
+       588,
+       640,
+       791
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.274,
+      "box": [
+       297,
+       125,
+       666,
+       1085
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.085,
+      "box": [
+       794,
+       790,
+       1064,
+       1016
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.188,
+      "box": [
+       681,
+       614,
+       713,
+       797
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.241,
+      "box": [
+       320,
+       56,
+       771,
+       1113
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.108,
+      "box": [
+       358,
+       179,
+       715,
+       1062
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.108,
+      "box": [
+       390,
+       840,
+       666,
+       1022
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.188,
+    "det_box": [
+     681,
+     614,
+     713,
+     797
+    ],
+    "crop_box": [
+     422,
+     431,
+     971,
+     980
+    ],
+    "size": [
+     549,
+     549
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-32_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.106,
+    "det_box": [
+     554,
+     632,
+     597,
+     799
+    ],
+    "crop_box": [
+     325,
+     465,
+     826,
+     966
+    ],
+    "size": [
+     501,
+     501
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-32_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.274,
+    "det_box": [
+     297,
+     125,
+     666,
+     1085
+    ],
+    "crop_box": [
+     241,
+     0,
+     721,
+     1373
+    ],
+    "size": [
+     480,
+     1373
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-32_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.242,
+    "det_box": [
+     287,
+     238,
+     638,
+     1081
+    ],
+    "crop_box": [
+     234,
+     111,
+     690,
+     1333
+    ],
+    "size": [
+     456,
+     1222
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-32_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 54.4
+ },
+ "door-33": {
+  "views": [
+   "IMG_3436.HEIC",
+   "IMG_3438.HEIC",
+   "IMG_3439.HEIC",
+   "IMG_3441.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.129,
+      "box": [
+       476,
+       532,
+       511,
+       637
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.123,
+      "box": [
+       471,
+       601,
+       491,
+       676
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.12,
+      "box": [
+       471,
+       604,
+       493,
+       681
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.135,
+      "box": [
+       65,
+       116,
+       241,
+       969
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       257,
+       165,
+       800,
+       1010
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       516,
+       194,
+       767,
+       998
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.137,
+      "box": [
+       486,
+       574,
+       508,
+       675
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.123,
+      "box": [
+       545,
+       574,
+       572,
+       679
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.127,
+      "box": [
+       9,
+       0,
+       205,
+       1068
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       215,
+       90,
+       868,
+       998
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       228,
+       114,
+       499,
+       970
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.104,
+      "box": [
+       609,
+       686,
+       630,
+       770
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.098,
+      "box": [
+       542,
+       684,
+       563,
+       774
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.107,
+      "box": [
+       927,
+       61,
+       1084,
+       1243
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       84,
+       81,
+       237,
+       1229
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       261,
+       194,
+       923,
+       1125
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.108,
+      "box": [
+       395,
+       699,
+       459,
+       788
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.097,
+      "box": [
+       177,
+       214,
+       644,
+       1113
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.137,
+    "det_box": [
+     486,
+     574,
+     508,
+     675
+    ],
+    "crop_box": [
+     287,
+     414,
+     707,
+     834
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-33_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.129,
+    "det_box": [
+     476,
+     532,
+     511,
+     637
+    ],
+    "crop_box": [
+     283,
+     374,
+     703,
+     794
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-33_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.135,
+    "det_box": [
+     65,
+     116,
+     241,
+     969
+    ],
+    "crop_box": [
+     38,
+     0,
+     267,
+     1224
+    ],
+    "size": [
+     229,
+     1224
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-33_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.127,
+    "det_box": [
+     9,
+     0,
+     205,
+     1068
+    ],
+    "crop_box": [
+     0,
+     0,
+     234,
+     1388
+    ],
+    "size": [
+     234,
+     1388
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-33_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 23.6
+ },
+ "door-34": {
+  "views": [
+   "IMG_3442.HEIC",
+   "IMG_3444.HEIC",
+   "IMG_3445.HEIC",
+   "IMG_3447.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.136,
+      "box": [
+       597,
+       643,
+       633,
+       736
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.132,
+      "box": [
+       554,
+       638,
+       589,
+       745
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.097,
+      "box": [
+       326,
+       241,
+       591,
+       1004
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       327,
+       111,
+       935,
+       1105
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.214,
+      "box": [
+       490,
+       699,
+       546,
+       813
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.091,
+      "box": [
+       166,
+       16,
+       952,
+       1159
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.121,
+      "box": [
+       529,
+       640,
+       629,
+       780
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.09,
+      "box": [
+       580,
+       659,
+       627,
+       759
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.083,
+      "box": [
+       529,
+       655,
+       568,
+       761
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       179,
+       36,
+       986,
+       1125
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       604,
+       243,
+       972,
+       1116
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.112,
+      "box": [
+       500,
+       601,
+       519,
+       626
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       304,
+       137,
+       517,
+       1062
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       304,
+       64,
+       846,
+       1202
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.214,
+    "det_box": [
+     490,
+     699,
+     546,
+     813
+    ],
+    "crop_box": [
+     308,
+     546,
+     728,
+     966
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-34_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.136,
+    "det_box": [
+     597,
+     643,
+     633,
+     736
+    ],
+    "crop_box": [
+     405,
+     479,
+     825,
+     899
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-34_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.101,
+    "det_box": [
+     179,
+     36,
+     986,
+     1125
+    ],
+    "crop_box": [
+     57,
+     0,
+     1107,
+     1451
+    ],
+    "size": [
+     1050,
+     1451
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-34_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.098,
+    "det_box": [
+     304,
+     137,
+     517,
+     1062
+    ],
+    "crop_box": [
+     272,
+     0,
+     548,
+     1339
+    ],
+    "size": [
+     276,
+     1339
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-34_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 26.1
+ },
+ "door-35": {
+  "views": [
+   "IMG_3448.HEIC",
+   "IMG_3449.HEIC",
+   "IMG_3451.HEIC",
+   "IMG_3452.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.16,
+      "box": [
+       552,
+       666,
+       594,
+       816
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.119,
+      "box": [
+       505,
+       663,
+       543,
+       814
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.094,
+      "box": [
+       523,
+       555,
+       545,
+       583
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.23,
+      "box": [
+       535,
+       643,
+       586,
+       797
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.218,
+      "box": [
+       482,
+       635,
+       529,
+       791
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.085,
+      "box": [
+       512,
+       512,
+       534,
+       542
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       885,
+       12,
+       1174,
+       1563
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.113,
+      "box": [
+       620,
+       721,
+       676,
+       906
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.093,
+      "box": [
+       635,
+       774,
+       663,
+       851
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.092,
+      "box": [
+       557,
+       722,
+       609,
+       888
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       241,
+       55,
+       584,
+       1176
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       591,
+       53,
+       1045,
+       1254
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       229,
+       1,
+       1146,
+       1247
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.149,
+      "box": [
+       693,
+       728,
+       750,
+       903
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.105,
+      "box": [
+       626,
+       719,
+       682,
+       891
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       640,
+       773,
+       664,
+       851
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.162,
+      "box": [
+       324,
+       462,
+       655,
+       1174
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.084,
+      "box": [
+       704,
+       548,
+       1111,
+       1237
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.23,
+    "det_box": [
+     535,
+     643,
+     586,
+     797
+    ],
+    "crop_box": [
+     329,
+     489,
+     791,
+     951
+    ],
+    "size": [
+     462,
+     462
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-35_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.16,
+    "det_box": [
+     552,
+     666,
+     594,
+     816
+    ],
+    "crop_box": [
+     348,
+     516,
+     798,
+     966
+    ],
+    "size": [
+     450,
+     450
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-35_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.162,
+    "det_box": [
+     324,
+     462,
+     655,
+     1174
+    ],
+    "crop_box": [
+     274,
+     355,
+     704,
+     1387
+    ],
+    "size": [
+     430,
+     1032
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-35_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.105,
+    "det_box": [
+     241,
+     55,
+     584,
+     1176
+    ],
+    "crop_box": [
+     189,
+     0,
+     635,
+     1512
+    ],
+    "size": [
+     446,
+     1512
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-35_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 59.1
+ },
+ "door-36": {
+  "views": [
+   "IMG_3453.HEIC",
+   "IMG_3455.HEIC",
+   "IMG_3456.HEIC",
+   "IMG_3458.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.163,
+      "box": [
+       294,
+       557,
+       448,
+       871
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       375,
+       670,
+       399,
+       736
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.207,
+      "box": [
+       281,
+       500,
+       493,
+       889
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.133,
+      "box": [
+       526,
+       459,
+       833,
+       952
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       292,
+       456,
+       483,
+       859
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       165,
+       482,
+       428,
+       918
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       459,
+       476,
+       813,
+       996
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.137,
+      "box": [
+       497,
+       695,
+       519,
+       754
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.086,
+      "box": [
+       505,
+       644,
+       526,
+       672
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.207,
+      "box": [
+       329,
+       425,
+       679,
+       955
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       725,
+       422,
+       1172,
+       1061
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       483,
+       448,
+       673,
+       943
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.137,
+    "det_box": [
+     497,
+     695,
+     519,
+     754
+    ],
+    "crop_box": [
+     298,
+     514,
+     718,
+     934
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-36_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.102,
+    "det_box": [
+     375,
+     670,
+     399,
+     736
+    ],
+    "crop_box": [
+     177,
+     493,
+     597,
+     913
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-36_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.207,
+    "det_box": [
+     281,
+     500,
+     493,
+     889
+    ],
+    "crop_box": [
+     249,
+     441,
+     524,
+     1005
+    ],
+    "size": [
+     275,
+     564
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-36_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.207,
+    "det_box": [
+     329,
+     425,
+     679,
+     955
+    ],
+    "crop_box": [
+     276,
+     345,
+     731,
+     1114
+    ],
+    "size": [
+     455,
+     769
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-36_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 57.3
+ },
+ "door-37": {
+  "views": [
+   "IMG_3459.HEIC",
+   "IMG_3460.HEIC",
+   "IMG_3462.HEIC",
+   "IMG_3463.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "step",
+      "score": 0.082,
+      "box": [
+       154,
+       947,
+       1166,
+       1280
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.38,
+      "box": [
+       387,
+       787,
+       624,
+       1192
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.1,
+      "box": [
+       398,
+       767,
+       577,
+       953
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.08,
+      "box": [
+       387,
+       787,
+       598,
+       1200
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.096,
+      "box": [
+       1076,
+       724,
+       1093,
+       777
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.167,
+      "box": [
+       852,
+       398,
+       1111,
+       967
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       99,
+       448,
+       267,
+       964
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       643,
+       304,
+       857,
+       976
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.098,
+      "box": [
+       12,
+       935,
+       1163,
+       1332
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.264,
+      "box": [
+       335,
+       768,
+       535,
+       1267
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.231,
+      "box": [
+       370,
+       773,
+       584,
+       1286
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.106,
+      "box": [
+       1042,
+       784,
+       1171,
+       1258
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.097,
+      "box": [
+       920,
+       715,
+       958,
+       757
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.095,
+      "box": [
+       989,
+       419,
+       1174,
+       987
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       399,
+       463,
+       610,
+       946
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.082,
+      "box": [
+       747,
+       321,
+       986,
+       1013
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.138,
+      "box": [
+       577,
+       791,
+       712,
+       1364
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.088,
+      "box": [
+       591,
+       787,
+       710,
+       964
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.136,
+      "box": [
+       347,
+       421,
+       563,
+       900
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.104,
+      "box": [
+       744,
+       338,
+       967,
+       957
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.084,
+      "box": [
+       578,
+       433,
+       754,
+       894
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.096,
+      "box": [
+       269,
+       917,
+       1182,
+       1287
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.155,
+      "box": [
+       666,
+       761,
+       731,
+       1048
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.097,
+    "det_box": [
+     920,
+     715,
+     958,
+     757
+    ],
+    "crop_box": [
+     729,
+     526,
+     1149,
+     946
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-37_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.096,
+    "det_box": [
+     1076,
+     724,
+     1093,
+     777
+    ],
+    "crop_box": [
+     874,
+     540,
+     1176,
+     960
+    ],
+    "size": [
+     302,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-37_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.167,
+    "det_box": [
+     852,
+     398,
+     1111,
+     967
+    ],
+    "crop_box": [
+     813,
+     312,
+     1149,
+     1137
+    ],
+    "size": [
+     336,
+     825
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-37_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.136,
+    "det_box": [
+     347,
+     421,
+     563,
+     900
+    ],
+    "crop_box": [
+     314,
+     349,
+     595,
+     1043
+    ],
+    "size": [
+     281,
+     694
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-37_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 57.2
+ },
+ "door-38": {
+  "views": [
+   "IMG_3464.HEIC",
+   "IMG_3466.HEIC",
+   "IMG_3467.HEIC",
+   "IMG_3469.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": []
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.125,
+      "box": [
+       465,
+       476,
+       664,
+       768
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": []
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.08,
+      "box": [
+       424,
+       441,
+       659,
+       787
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.125,
+    "det_box": [
+     465,
+     476,
+     664,
+     768
+    ],
+    "crop_box": [
+     435,
+     432,
+     693,
+     855
+    ],
+    "size": [
+     258,
+     423
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-38_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.08,
+    "det_box": [
+     424,
+     441,
+     659,
+     787
+    ],
+    "crop_box": [
+     388,
+     389,
+     694,
+     890
+    ],
+    "size": [
+     306,
+     501
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-38_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 106.5
+ },
+ "door-39": {
+  "views": [
+   "IMG_3471.HEIC",
+   "IMG_3473.HEIC",
+   "IMG_3474.HEIC",
+   "IMG_3476.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.083,
+      "box": [
+       382,
+       868,
+       404,
+       895
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.167,
+      "box": [
+       197,
+       56,
+       672,
+       1169
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       934,
+       0,
+       1180,
+       1336
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.148,
+      "box": [
+       174,
+       9,
+       779,
+       1208
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.161,
+      "box": [
+       183,
+       9,
+       875,
+       1197
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.091,
+      "box": [
+       635,
+       623,
+       682,
+       828
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.09,
+      "box": [
+       580,
+       623,
+       621,
+       834
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.166,
+      "box": [
+       284,
+       15,
+       995,
+       1151
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.091,
+    "det_box": [
+     635,
+     623,
+     682,
+     828
+    ],
+    "crop_box": [
+     351,
+     418,
+     966,
+     1033
+    ],
+    "size": [
+     615,
+     615
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-39_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.083,
+    "det_box": [
+     382,
+     868,
+     404,
+     895
+    ],
+    "crop_box": [
+     183,
+     671,
+     603,
+     1091
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-39_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.167,
+    "det_box": [
+     197,
+     56,
+     672,
+     1169
+    ],
+    "crop_box": [
+     125,
+     0,
+     743,
+     1502
+    ],
+    "size": [
+     618,
+     1502
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-39_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.166,
+    "det_box": [
+     284,
+     15,
+     995,
+     1151
+    ],
+    "crop_box": [
+     177,
+     0,
+     1101,
+     1491
+    ],
+    "size": [
+     924,
+     1491
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-39_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 57.3
+ },
+ "door-40": {
+  "views": [
+   "IMG_3477.HEIC",
+   "IMG_3478.HEIC",
+   "IMG_3480.HEIC",
+   "IMG_3481.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       209,
+       439,
+       456,
+       1042
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       194,
+       393,
+       730,
+       1114
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       384,
+       424,
+       580,
+       1076
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       384,
+       327,
+       618,
+       1045
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       376,
+       264,
+       695,
+       1073
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       136,
+       260,
+       416,
+       1035
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       237,
+       255,
+       800,
+       1084
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       520,
+       246,
+       859,
+       1090
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       243,
+       277,
+       554,
+       1029
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.117,
+    "det_box": [
+     376,
+     264,
+     695,
+     1073
+    ],
+    "crop_box": [
+     328,
+     142,
+     742,
+     1315
+    ],
+    "size": [
+     414,
+     1173
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-40_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.116,
+    "det_box": [
+     237,
+     255,
+     800,
+     1084
+    ],
+    "crop_box": [
+     152,
+     130,
+     884,
+     1332
+    ],
+    "size": [
+     732,
+     1202
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-40_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 61.5
+ },
+ "door-41": {
+  "views": [
+   "IMG_3483.HEIC",
+   "IMG_3485.HEIC",
+   "IMG_3486.HEIC",
+   "IMG_3488.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       275,
+       258,
+       543,
+       1067
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.086,
+      "box": [
+       534,
+       517,
+       770,
+       1085
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       427,
+       130,
+       791,
+       1061
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.109,
+      "box": [
+       166,
+       143,
+       765,
+       1065
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       735,
+       94,
+       1166,
+       1120
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.086,
+      "box": [
+       730,
+       373,
+       1162,
+       1099
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.14,
+      "box": [
+       171,
+       137,
+       839,
+       1079
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       612,
+       113,
+       941,
+       1035
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.097,
+      "box": [
+       294,
+       85,
+       932,
+       1053
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       284,
+       93,
+       640,
+       1051
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.14,
+    "det_box": [
+     171,
+     137,
+     839,
+     1079
+    ],
+    "crop_box": [
+     70,
+     0,
+     939,
+     1361
+    ],
+    "size": [
+     869,
+     1361
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-41_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.117,
+    "det_box": [
+     612,
+     113,
+     941,
+     1035
+    ],
+    "crop_box": [
+     562,
+     0,
+     990,
+     1311
+    ],
+    "size": [
+     428,
+     1311
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-41_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 61.3
+ },
+ "door-42": {
+  "views": [
+   "IMG_3489.HEIC",
+   "IMG_3491.HEIC",
+   "IMG_3492.HEIC",
+   "IMG_3494.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       260,
+       376,
+       494,
+       1042
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.113,
+      "box": [
+       442,
+       336,
+       647,
+       1062
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       13,
+       359,
+       218,
+       1058
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.087,
+      "box": [
+       208,
+       315,
+       643,
+       1055
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.194,
+      "box": [
+       176,
+       346,
+       624,
+       1073
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       425,
+       355,
+       637,
+       1084
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.091,
+      "box": [
+       180,
+       359,
+       413,
+       1084
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.096,
+      "box": [
+       0,
+       373,
+       169,
+       1120
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.096,
+      "box": [
+       457,
+       782,
+       473,
+       836
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.153,
+      "box": [
+       26,
+       249,
+       672,
+       1058
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.134,
+      "box": [
+       223,
+       306,
+       459,
+       1047
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.113,
+      "box": [
+       -4,
+       307,
+       226,
+       1064
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.138,
+      "box": [
+       1,
+       313,
+       202,
+       1081
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.096,
+    "det_box": [
+     457,
+     782,
+     473,
+     836
+    ],
+    "crop_box": [
+     255,
+     599,
+     675,
+     1019
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-42_handle1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.194,
+    "det_box": [
+     176,
+     346,
+     624,
+     1073
+    ],
+    "crop_box": [
+     108,
+     236,
+     691,
+     1291
+    ],
+    "size": [
+     583,
+     1055
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-42_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.153,
+    "det_box": [
+     26,
+     249,
+     672,
+     1058
+    ],
+    "crop_box": [
+     0,
+     127,
+     768,
+     1300
+    ],
+    "size": [
+     768,
+     1173
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-42_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 55.4
+ },
+ "door-43": {
+  "views": [
+   "IMG_3495.HEIC",
+   "IMG_3497.HEIC",
+   "IMG_3498.HEIC",
+   "IMG_3500.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       370,
+       267,
+       575,
+       810
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       263,
+       343,
+       482,
+       929
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.132,
+      "box": [
+       -1,
+       866,
+       960,
+       1209
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.115,
+      "box": [
+       505,
+       278,
+       725,
+       944
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       315,
+       298,
+       528,
+       926
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.102,
+      "box": [
+       -6,
+       912,
+       1163,
+       1180
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.081,
+      "box": [
+       493,
+       589,
+       565,
+       915
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.115,
+      "box": [
+       525,
+       336,
+       747,
+       1004
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       310,
+       344,
+       535,
+       993
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.105,
+      "box": [
+       -7,
+       987,
+       1159,
+       1267
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.081,
+    "det_box": [
+     493,
+     589,
+     565,
+     915
+    ],
+    "crop_box": [
+     40,
+     263,
+     1018,
+     1241
+    ],
+    "size": [
+     978,
+     978
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-43_handle1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.115,
+    "det_box": [
+     505,
+     278,
+     725,
+     944
+    ],
+    "crop_box": [
+     472,
+     178,
+     758,
+     1143
+    ],
+    "size": [
+     286,
+     965
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-43_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.115,
+    "det_box": [
+     525,
+     336,
+     747,
+     1004
+    ],
+    "crop_box": [
+     491,
+     235,
+     780,
+     1204
+    ],
+    "size": [
+     289,
+     969
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-43_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 58.9
+ },
+ "door-44": {
+  "views": [
+   "IMG_3501.HEIC",
+   "IMG_3502.HEIC",
+   "IMG_3503.HEIC",
+   "IMG_3504.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.164,
+      "box": [
+       307,
+       531,
+       390,
+       912
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.111,
+      "box": [
+       307,
+       540,
+       341,
+       918
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.084,
+      "box": [
+       359,
+       537,
+       392,
+       914
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.133,
+      "box": [
+       111,
+       166,
+       620,
+       1090
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.135,
+      "box": [
+       447,
+       497,
+       523,
+       901
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.112,
+      "box": [
+       483,
+       494,
+       520,
+       898
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.143,
+      "box": [
+       223,
+       113,
+       803,
+       1093
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.082,
+      "box": [
+       220,
+       148,
+       514,
+       1036
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.136,
+      "box": [
+       447,
+       496,
+       540,
+       943
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.106,
+      "box": [
+       497,
+       493,
+       539,
+       943
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.11,
+      "box": [
+       162,
+       111,
+       836,
+       1131
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       454,
+       133,
+       854,
+       1094
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.099,
+      "box": [
+       494,
+       523,
+       558,
+       966
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.16,
+      "box": [
+       228,
+       107,
+       920,
+       1131
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.164,
+    "det_box": [
+     307,
+     531,
+     390,
+     912
+    ],
+    "crop_box": [
+     0,
+     150,
+     920,
+     1293
+    ],
+    "size": [
+     920,
+     1143
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-44_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.136,
+    "det_box": [
+     447,
+     496,
+     540,
+     943
+    ],
+    "crop_box": [
+     0,
+     49,
+     1164,
+     1390
+    ],
+    "size": [
+     1164,
+     1341
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-44_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.16,
+    "det_box": [
+     228,
+     107,
+     920,
+     1131
+    ],
+    "crop_box": [
+     124,
+     0,
+     1023,
+     1438
+    ],
+    "size": [
+     899,
+     1438
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-44_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.143,
+    "det_box": [
+     223,
+     113,
+     803,
+     1093
+    ],
+    "crop_box": [
+     136,
+     0,
+     890,
+     1387
+    ],
+    "size": [
+     754,
+     1387
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-44_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 53.2
+ },
+ "door-45": {
+  "views": [
+   "IMG_3505.HEIC",
+   "IMG_3506.HEIC",
+   "IMG_3508.HEIC",
+   "IMG_3509.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.242,
+      "box": [
+       453,
+       728,
+       522,
+       817
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.214,
+      "box": [
+       223,
+       710,
+       290,
+       793
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.152,
+      "box": [
+       716,
+       753,
+       780,
+       852
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       76,
+       266,
+       287,
+       1030
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       277,
+       248,
+       535,
+       1088
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.281,
+      "box": [
+       199,
+       747,
+       275,
+       826
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.226,
+      "box": [
+       457,
+       768,
+       539,
+       863
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.186,
+      "box": [
+       753,
+       785,
+       822,
+       882
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.266,
+      "box": [
+       678,
+       669,
+       780,
+       771
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.25,
+      "box": [
+       1035,
+       684,
+       1110,
+       790
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.206,
+      "box": [
+       364,
+       655,
+       454,
+       756
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.106,
+      "box": [
+       136,
+       90,
+       437,
+       1035
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.09,
+      "box": [
+       430,
+       58,
+       764,
+       1073
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.173,
+      "box": [
+       681,
+       676,
+       774,
+       785
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.167,
+      "box": [
+       353,
+       652,
+       437,
+       754
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.167,
+      "box": [
+       1042,
+       707,
+       1111,
+       816
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       88,
+       55,
+       454,
+       1050
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.281,
+    "det_box": [
+     199,
+     747,
+     275,
+     826
+    ],
+    "crop_box": [
+     27,
+     576,
+     447,
+     996
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-45_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.266,
+    "det_box": [
+     678,
+     669,
+     780,
+     771
+    ],
+    "crop_box": [
+     519,
+     510,
+     939,
+     930
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-45_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.106,
+    "det_box": [
+     136,
+     90,
+     437,
+     1035
+    ],
+    "crop_box": [
+     90,
+     0,
+     482,
+     1318
+    ],
+    "size": [
+     392,
+     1318
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-45_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.086,
+    "det_box": [
+     88,
+     55,
+     454,
+     1050
+    ],
+    "crop_box": [
+     33,
+     0,
+     508,
+     1348
+    ],
+    "size": [
+     475,
+     1348
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-45_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 53.4
+ },
+ "door-46": {
+  "views": [
+   "IMG_3510.HEIC",
+   "IMG_3512.HEIC",
+   "IMG_3513.HEIC",
+   "IMG_3515.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       214,
+       159,
+       600,
+       1035
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.104,
+      "box": [
+       168,
+       375,
+       375,
+       976
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       3,
+       235,
+       194,
+       950
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.105,
+      "box": [
+       571,
+       656,
+       754,
+       1027
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       117,
+       323,
+       411,
+       1070
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       392,
+       289,
+       701,
+       1107
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       659,
+       260,
+       1160,
+       1189
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.13,
+      "box": [
+       36,
+       212,
+       344,
+       1044
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.124,
+      "box": [
+       362,
+       196,
+       731,
+       1081
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.134,
+      "box": [
+       117,
+       214,
+       516,
+       1171
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       514,
+       245,
+       906,
+       1186
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.134,
+    "det_box": [
+     117,
+     214,
+     516,
+     1171
+    ],
+    "crop_box": [
+     57,
+     70,
+     575,
+     1458
+    ],
+    "size": [
+     518,
+     1388
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-46_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.13,
+    "det_box": [
+     36,
+     212,
+     344,
+     1044
+    ],
+    "crop_box": [
+     0,
+     87,
+     390,
+     1293
+    ],
+    "size": [
+     390,
+     1206
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-46_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 60.4
+ },
+ "door-47": {
+  "views": [
+   "IMG_3516.HEIC",
+   "IMG_3518.HEIC",
+   "IMG_3519.HEIC",
+   "IMG_3521.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.087,
+      "box": [
+       453,
+       436,
+       496,
+       659
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       159,
+       192,
+       307,
+       828
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       336,
+       266,
+       410,
+       794
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       0,
+       200,
+       107,
+       773
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.107,
+      "box": [
+       267,
+       652,
+       404,
+       892
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.094,
+      "box": [
+       555,
+       512,
+       583,
+       552
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       267,
+       139,
+       516,
+       901
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       122,
+       196,
+       218,
+       802
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       10,
+       192,
+       145,
+       784
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.129,
+      "box": [
+       137,
+       68,
+       373,
+       975
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.128,
+      "box": [
+       94,
+       4,
+       494,
+       1171
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.103,
+      "box": [
+       4,
+       0,
+       506,
+       1182
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.094,
+    "det_box": [
+     555,
+     512,
+     583,
+     552
+    ],
+    "crop_box": [
+     359,
+     322,
+     779,
+     742
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-47_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.087,
+    "det_box": [
+     453,
+     436,
+     496,
+     659
+    ],
+    "crop_box": [
+     140,
+     213,
+     809,
+     882
+    ],
+    "size": [
+     669,
+     669
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-47_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.129,
+    "det_box": [
+     137,
+     68,
+     373,
+     975
+    ],
+    "crop_box": [
+     101,
+     0,
+     408,
+     1247
+    ],
+    "size": [
+     307,
+     1247
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-47_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.128,
+    "det_box": [
+     94,
+     4,
+     494,
+     1171
+    ],
+    "crop_box": [
+     34,
+     0,
+     554,
+     1521
+    ],
+    "size": [
+     520,
+     1521
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-47_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 60.5
+ },
+ "door-48": {
+  "views": [
+   "IMG_3522.HEIC",
+   "IMG_3524.HEIC",
+   "IMG_3525.HEIC",
+   "IMG_3527.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       277,
+       303,
+       525,
+       996
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.111,
+      "box": [
+       572,
+       641,
+       612,
+       790
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.15,
+      "box": [
+       130,
+       87,
+       575,
+       1237
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       511,
+       21,
+       1172,
+       1519
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.176,
+      "box": [
+       693,
+       718,
+       735,
+       885
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.085,
+      "box": [
+       695,
+       730,
+       738,
+       886
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.123,
+      "box": [
+       225,
+       62,
+       666,
+       1499
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       675,
+       10,
+       1179,
+       1538
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       0,
+       24,
+       679,
+       1515
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.173,
+      "box": [
+       107,
+       304,
+       506,
+       1177
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       511,
+       208,
+       912,
+       1362
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       917,
+       163,
+       1172,
+       1280
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.176,
+    "det_box": [
+     693,
+     718,
+     735,
+     885
+    ],
+    "crop_box": [
+     463,
+     551,
+     964,
+     1052
+    ],
+    "size": [
+     501,
+     501
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-48_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.111,
+    "det_box": [
+     572,
+     641,
+     612,
+     790
+    ],
+    "crop_box": [
+     368,
+     492,
+     815,
+     939
+    ],
+    "size": [
+     447,
+     447
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-48_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.173,
+    "det_box": [
+     107,
+     304,
+     506,
+     1177
+    ],
+    "crop_box": [
+     47,
+     173,
+     565,
+     1438
+    ],
+    "size": [
+     518,
+     1265
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-48_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.15,
+    "det_box": [
+     130,
+     87,
+     575,
+     1237
+    ],
+    "crop_box": [
+     63,
+     0,
+     641,
+     1568
+    ],
+    "size": [
+     578,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-48_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 60.1
+ },
+ "door-49": {
+  "views": [
+   "IMG_3528.HEIC",
+   "IMG_3530.HEIC",
+   "IMG_3532.HEIC",
+   "IMG_3534.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.167,
+      "box": [
+       252,
+       199,
+       626,
+       1111
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       267,
+       137,
+       998,
+       1231
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       638,
+       49,
+       1163,
+       1312
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.145,
+      "box": [
+       488,
+       1096,
+       615,
+       1212
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.162,
+      "box": [
+       401,
+       150,
+       805,
+       1407
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       234,
+       264,
+       437,
+       1189
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       1,
+       346,
+       105,
+       1006
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.166,
+      "box": [
+       641,
+       1408,
+       875,
+       1563
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.125,
+      "box": [
+       1082,
+       938,
+       1171,
+       1157
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.091,
+      "box": [
+       110,
+       684,
+       171,
+       822
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.151,
+      "box": [
+       85,
+       202,
+       568,
+       1564
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       528,
+       183,
+       1188,
+       1546
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.136,
+      "box": [
+       1024,
+       690,
+       1088,
+       852
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.12,
+      "box": [
+       431,
+       655,
+       477,
+       825
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.103,
+      "box": [
+       6,
+       673,
+       240,
+       837
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.157,
+      "box": [
+       477,
+       29,
+       1156,
+       1427
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.137,
+      "box": [
+       -9,
+       32,
+       503,
+       1388
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       4,
+       15,
+       1179,
+       1440
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.088,
+      "box": [
+       877,
+       1058,
+       966,
+       1136
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.166,
+    "det_box": [
+     641,
+     1408,
+     875,
+     1563
+    ],
+    "crop_box": [
+     407,
+     1134,
+     1109,
+     1568
+    ],
+    "size": [
+     702,
+     434
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-49_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.145,
+    "det_box": [
+     488,
+     1096,
+     615,
+     1212
+    ],
+    "crop_box": [
+     341,
+     944,
+     761,
+     1364
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-49_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.167,
+    "det_box": [
+     252,
+     199,
+     626,
+     1111
+    ],
+    "crop_box": [
+     195,
+     62,
+     682,
+     1384
+    ],
+    "size": [
+     487,
+     1322
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-49_door1_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.162,
+    "det_box": [
+     401,
+     150,
+     805,
+     1407
+    ],
+    "crop_box": [
+     340,
+     0,
+     865,
+     1568
+    ],
+    "size": [
+     525,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-49_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 60.1
+ },
+ "door-50": {
+  "views": [
+   "IMG_3535.HEIC",
+   "IMG_3537.HEIC",
+   "IMG_3538.HEIC",
+   "IMG_3540.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.138,
+      "box": [
+       367,
+       626,
+       427,
+       770
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.088,
+      "box": [
+       365,
+       690,
+       402,
+       751
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.12,
+      "box": [
+       188,
+       320,
+       399,
+       1074
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       399,
+       298,
+       650,
+       1179
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       -1,
+       358,
+       153,
+       989
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.125,
+      "box": [
+       514,
+       575,
+       595,
+       764
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.114,
+      "box": [
+       975,
+       540,
+       1004,
+       623
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.15,
+      "box": [
+       254,
+       143,
+       554,
+       1153
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.126,
+      "box": [
+       506,
+       62,
+       1065,
+       1310
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       0,
+       205,
+       202,
+       1019
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.116,
+      "box": [
+       568,
+       650,
+       653,
+       825
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.094,
+      "box": [
+       606,
+       765,
+       637,
+       808
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.137,
+      "box": [
+       200,
+       119,
+       614,
+       1272
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.113,
+      "box": [
+       528,
+       76,
+       1163,
+       1468
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       68,
+       424,
+       315,
+       998
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       75,
+       330,
+       731,
+       1180
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.113,
+      "box": [
+       142,
+       419,
+       315,
+       1002
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.086,
+      "box": [
+       730,
+       1045,
+       1180,
+       1433
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.092,
+      "box": [
+       584,
+       823,
+       666,
+       900
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.138,
+    "det_box": [
+     367,
+     626,
+     427,
+     770
+    ],
+    "crop_box": [
+     181,
+     482,
+     613,
+     914
+    ],
+    "size": [
+     432,
+     432
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-50_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.125,
+    "det_box": [
+     514,
+     575,
+     595,
+     764
+    ],
+    "crop_box": [
+     271,
+     386,
+     838,
+     953
+    ],
+    "size": [
+     567,
+     567
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-50_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.15,
+    "det_box": [
+     254,
+     143,
+     554,
+     1153
+    ],
+    "crop_box": [
+     209,
+     0,
+     599,
+     1456
+    ],
+    "size": [
+     390,
+     1456
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-50_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.137,
+    "det_box": [
+     200,
+     119,
+     614,
+     1272
+    ],
+    "crop_box": [
+     137,
+     0,
+     676,
+     1568
+    ],
+    "size": [
+     539,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-50_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 38.3
+ },
+ "door-51": {
+  "views": [
+   "IMG_3541.HEIC",
+   "IMG_3542.HEIC",
+   "IMG_3544.HEIC",
+   "IMG_3545.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.133,
+      "box": [
+       199,
+       767,
+       235,
+       819
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.083,
+      "box": [
+       473,
+       785,
+       500,
+       828
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.171,
+      "box": [
+       526,
+       315,
+       826,
+       1304
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.109,
+      "box": [
+       22,
+       393,
+       238,
+       1114
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       254,
+       365,
+       528,
+       1019
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.168,
+      "box": [
+       595,
+       751,
+       621,
+       820
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.148,
+      "box": [
+       595,
+       725,
+       629,
+       834
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.113,
+      "box": [
+       275,
+       750,
+       306,
+       806
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       641,
+       254,
+       1019,
+       1269
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       88,
+       327,
+       304,
+       1102
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.281,
+      "box": [
+       885,
+       747,
+       920,
+       854
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.171,
+      "box": [
+       113,
+       245,
+       485,
+       1194
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.164,
+      "box": [
+       903,
+       205,
+       1179,
+       1373
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.138,
+      "box": [
+       456,
+       228,
+       938,
+       1293
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.304,
+      "box": [
+       1085,
+       761,
+       1119,
+       865
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.165,
+      "box": [
+       565,
+       791,
+       600,
+       866
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.124,
+      "box": [
+       571,
+       715,
+       603,
+       849
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.231,
+      "box": [
+       588,
+       215,
+       1165,
+       1358
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.173,
+      "box": [
+       197,
+       258,
+       618,
+       1225
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.122,
+      "box": [
+       0,
+       260,
+       191,
+       1156
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.304,
+    "det_box": [
+     1085,
+     761,
+     1119,
+     865
+    ],
+    "crop_box": [
+     892,
+     603,
+     1176,
+     1023
+    ],
+    "size": [
+     284,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-51_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.281,
+    "det_box": [
+     885,
+     747,
+     920,
+     854
+    ],
+    "crop_box": [
+     692,
+     590,
+     1112,
+     1010
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-51_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.231,
+    "det_box": [
+     588,
+     215,
+     1165,
+     1358
+    ],
+    "crop_box": [
+     501,
+     43,
+     1176,
+     1568
+    ],
+    "size": [
+     675,
+     1525
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-51_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.171,
+    "det_box": [
+     526,
+     315,
+     826,
+     1304
+    ],
+    "crop_box": [
+     481,
+     166,
+     871,
+     1568
+    ],
+    "size": [
+     390,
+     1402
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-51_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 25.4
+ },
+ "door-52": {
+  "views": [
+   "IMG_3546.HEIC",
+   "IMG_3548.HEIC",
+   "IMG_3549.HEIC",
+   "IMG_3551.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": []
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       679,
+       471,
+       935,
+       950
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       356,
+       451,
+       531,
+       929
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": []
+   },
+   {
+    "view": 4,
+    "boxes": []
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.119,
+    "det_box": [
+     679,
+     471,
+     935,
+     950
+    ],
+    "crop_box": [
+     640,
+     399,
+     973,
+     1093
+    ],
+    "size": [
+     333,
+     694
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-52_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.083,
+    "det_box": [
+     356,
+     451,
+     531,
+     929
+    ],
+    "crop_box": [
+     329,
+     379,
+     557,
+     1072
+    ],
+    "size": [
+     228,
+     693
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-52_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 25.3
+ },
+ "door-53": {
+  "views": [
+   "IMG_3552.HEIC",
+   "IMG_3553.HEIC",
+   "IMG_3555.HEIC",
+   "IMG_3556.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.195,
+      "box": [
+       447,
+       754,
+       480,
+       845
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.148,
+      "box": [
+       439,
+       727,
+       494,
+       868
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.091,
+      "box": [
+       482,
+       785,
+       624,
+       842
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       278,
+       79,
+       661,
+       1182
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.102,
+      "box": [
+       444,
+       365,
+       659,
+       1154
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.221,
+      "box": [
+       424,
+       736,
+       470,
+       880
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.148,
+      "box": [
+       261,
+       301,
+       767,
+       1229
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.129,
+      "box": [
+       430,
+       330,
+       762,
+       1195
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.214,
+      "box": [
+       410,
+       721,
+       457,
+       839
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.142,
+      "box": [
+       408,
+       725,
+       456,
+       829
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.161,
+      "box": [
+       362,
+       246,
+       810,
+       1166
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.119,
+      "box": [
+       177,
+       243,
+       398,
+       1154
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.128,
+      "box": [
+       410,
+       721,
+       457,
+       839
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.198,
+      "box": [
+       424,
+       764,
+       480,
+       875
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.122,
+      "box": [
+       163,
+       10,
+       857,
+       1241
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       414,
+       223,
+       819,
+       1220
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       188,
+       257,
+       803,
+       1237
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.221,
+    "det_box": [
+     424,
+     736,
+     470,
+     880
+    ],
+    "crop_box": [
+     231,
+     592,
+     663,
+     1024
+    ],
+    "size": [
+     432,
+     432
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-53_handle1_v2.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.214,
+    "det_box": [
+     410,
+     721,
+     457,
+     839
+    ],
+    "crop_box": [
+     223,
+     570,
+     643,
+     990
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-53_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.161,
+    "det_box": [
+     362,
+     246,
+     810,
+     1166
+    ],
+    "crop_box": [
+     294,
+     108,
+     877,
+     1442
+    ],
+    "size": [
+     583,
+     1334
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-53_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.148,
+    "det_box": [
+     261,
+     301,
+     767,
+     1229
+    ],
+    "crop_box": [
+     185,
+     161,
+     842,
+     1507
+    ],
+    "size": [
+     657,
+     1346
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-53_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 33.9
+ },
+ "door-54": {
+  "views": [
+   "IMG_3557.HEIC",
+   "IMG_3558.HEIC",
+   "IMG_3560.HEIC",
+   "IMG_3561.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.267,
+      "box": [
+       381,
+       777,
+       490,
+       947
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.128,
+      "box": [
+       127,
+       336,
+       450,
+       1169
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.126,
+      "box": [
+       105,
+       338,
+       806,
+       1266
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.162,
+      "box": [
+       367,
+       796,
+       470,
+       923
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.122,
+      "box": [
+       361,
+       751,
+       421,
+       855
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.109,
+      "box": [
+       364,
+       528,
+       476,
+       908
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.129,
+      "box": [
+       59,
+       260,
+       822,
+       1214
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.108,
+      "box": [
+       71,
+       301,
+       444,
+       1128
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.081,
+      "box": [
+       388,
+       307,
+       797,
+       1172
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.291,
+      "box": [
+       467,
+       741,
+       580,
+       934
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       460,
+       750,
+       520,
+       894
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.086,
+      "box": [
+       451,
+       744,
+       580,
+       1197
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.153,
+      "box": [
+       96,
+       202,
+       535,
+       1198
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.128,
+      "box": [
+       506,
+       254,
+       917,
+       1198
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.196,
+      "box": [
+       465,
+       715,
+       575,
+       885
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.118,
+      "box": [
+       476,
+       713,
+       575,
+       826
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.165,
+      "box": [
+       79,
+       142,
+       546,
+       1180
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.083,
+      "box": [
+       107,
+       191,
+       871,
+       1172
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.291,
+    "det_box": [
+     467,
+     741,
+     580,
+     934
+    ],
+    "crop_box": [
+     234,
+     548,
+     813,
+     1127
+    ],
+    "size": [
+     579,
+     579
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-54_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.267,
+    "det_box": [
+     381,
+     777,
+     490,
+     947
+    ],
+    "crop_box": [
+     180,
+     607,
+     690,
+     1117
+    ],
+    "size": [
+     510,
+     510
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-54_handle2_v1.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.165,
+    "det_box": [
+     79,
+     142,
+     546,
+     1180
+    ],
+    "crop_box": [
+     8,
+     0,
+     616,
+     1491
+    ],
+    "size": [
+     608,
+     1491
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-54_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.153,
+    "det_box": [
+     96,
+     202,
+     535,
+     1198
+    ],
+    "crop_box": [
+     30,
+     52,
+     600,
+     1496
+    ],
+    "size": [
+     570,
+     1444
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-54_door2_v3.jpg"
+   }
+  ],
+  "detect_s": 58.2
+ },
+ "door-55": {
+  "views": [
+   "IMG_3562.HEIC",
+   "IMG_3564.HEIC",
+   "IMG_3565.HEIC",
+   "IMG_3567.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.15,
+      "box": [
+       378,
+       663,
+       447,
+       774
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.131,
+      "box": [
+       408,
+       676,
+       433,
+       756
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       379,
+       735,
+       402,
+       770
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.153,
+      "box": [
+       246,
+       156,
+       597,
+       1070
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.309,
+      "box": [
+       459,
+       686,
+       494,
+       817
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.23,
+      "box": [
+       414,
+       681,
+       453,
+       817
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.236,
+      "box": [
+       192,
+       33,
+       776,
+       1185
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       208,
+       116,
+       436,
+       1088
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.103,
+      "box": [
+       459,
+       61,
+       785,
+       1176
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.13,
+      "box": [
+       116,
+       450,
+       176,
+       561
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.337,
+      "box": [
+       546,
+       735,
+       586,
+       888
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.315,
+      "box": [
+       497,
+       735,
+       537,
+       880
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.082,
+      "box": [
+       555,
+       682,
+       578,
+       708
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.167,
+      "box": [
+       267,
+       70,
+       898,
+       1229
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.144,
+      "box": [
+       568,
+       108,
+       891,
+       1251
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.133,
+      "box": [
+       251,
+       142,
+       534,
+       1198
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.124,
+      "box": [
+       154,
+       503,
+       220,
+       620
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.262,
+      "box": [
+       552,
+       742,
+       591,
+       880
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.242,
+      "box": [
+       603,
+       742,
+       646,
+       883
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.146,
+      "box": [
+       598,
+       673,
+       650,
+       883
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.207,
+      "box": [
+       228,
+       32,
+       929,
+       1241
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.337,
+    "det_box": [
+     546,
+     735,
+     586,
+     888
+    ],
+    "crop_box": [
+     336,
+     582,
+     795,
+     1041
+    ],
+    "size": [
+     459,
+     459
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-55_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.309,
+    "det_box": [
+     459,
+     686,
+     494,
+     817
+    ],
+    "crop_box": [
+     266,
+     541,
+     686,
+     961
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-55_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.236,
+    "det_box": [
+     192,
+     33,
+     776,
+     1185
+    ],
+    "crop_box": [
+     104,
+     0,
+     863,
+     1530
+    ],
+    "size": [
+     759,
+     1530
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-55_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.207,
+    "det_box": [
+     228,
+     32,
+     929,
+     1241
+    ],
+    "crop_box": [
+     122,
+     0,
+     1034,
+     1568
+    ],
+    "size": [
+     912,
+     1568
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-55_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 85.2
+ },
+ "door-56": {
+  "views": [
+   "IMG_3568.HEIC",
+   "IMG_3569.HEIC",
+   "IMG_3571.HEIC",
+   "IMG_3572.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       430,
+       540,
+       540,
+       931
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.162,
+      "box": [
+       289,
+       751,
+       813,
+       1293
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.128,
+      "box": [
+       280,
+       802,
+       615,
+       1229
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.083,
+      "box": [
+       0,
+       733,
+       759,
+       1306
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.095,
+      "box": [
+       784,
+       491,
+       1038,
+       906
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.157,
+      "box": [
+       365,
+       750,
+       733,
+       1364
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.101,
+      "box": [
+       370,
+       797,
+       594,
+       1347
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "handrail",
+      "score": 0.108,
+      "box": [
+       681,
+       725,
+       782,
+       1494
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.107,
+      "box": [
+       376,
+       457,
+       594,
+       958
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       110,
+       471,
+       206,
+       960
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.203,
+      "box": [
+       620,
+       742,
+       865,
+       1492
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.091,
+      "box": [
+       589,
+       735,
+       852,
+       1508
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.085,
+      "box": [
+       615,
+       779,
+       859,
+       1509
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.107,
+    "det_box": [
+     376,
+     457,
+     594,
+     958
+    ],
+    "crop_box": [
+     343,
+     381,
+     626,
+     1108
+    ],
+    "size": [
+     283,
+     727
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-56_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.096,
+    "det_box": [
+     430,
+     540,
+     540,
+     931
+    ],
+    "crop_box": [
+     413,
+     481,
+     556,
+     1048
+    ],
+    "size": [
+     143,
+     567
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-56_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 61.2
+ },
+ "door-57": {
+  "views": [
+   "IMG_3573.HEIC",
+   "IMG_3575.HEIC",
+   "IMG_3577.HEIC",
+   "IMG_3579.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.246,
+      "box": [
+       407,
+       682,
+       463,
+       797
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       278,
+       344,
+       594,
+       1071
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.1,
+      "box": [
+       67,
+       226,
+       255,
+       1013
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.08,
+      "box": [
+       286,
+       431,
+       456,
+       996
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.197,
+      "box": [
+       356,
+       609,
+       434,
+       745
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.102,
+      "box": [
+       600,
+       773,
+       659,
+       806
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       131,
+       114,
+       741,
+       1096
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.156,
+      "box": [
+       411,
+       594,
+       512,
+       733
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.135,
+      "box": [
+       94,
+       4,
+       1007,
+       1149
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.186,
+      "box": [
+       539,
+       676,
+       646,
+       834
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.103,
+      "box": [
+       159,
+       21,
+       1116,
+       1241
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.246,
+    "det_box": [
+     407,
+     682,
+     463,
+     797
+    ],
+    "crop_box": [
+     225,
+     529,
+     645,
+     949
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-57_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.197,
+    "det_box": [
+     356,
+     609,
+     434,
+     745
+    ],
+    "crop_box": [
+     185,
+     467,
+     605,
+     887
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-57_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.135,
+    "det_box": [
+     94,
+     4,
+     1007,
+     1149
+    ],
+    "crop_box": [
+     0,
+     0,
+     1143,
+     1492
+    ],
+    "size": [
+     1143,
+     1492
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-57_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.118,
+    "det_box": [
+     278,
+     344,
+     594,
+     1071
+    ],
+    "crop_box": [
+     230,
+     234,
+     641,
+     1289
+    ],
+    "size": [
+     411,
+     1055
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-57_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 58.9
+ },
+ "door-58": {
+  "views": [
+   "IMG_3580.HEIC",
+   "IMG_3581.HEIC",
+   "IMG_3583.HEIC",
+   "IMG_3584.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "handrail",
+      "score": 0.121,
+      "box": [
+       392,
+       750,
+       531,
+       1156
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": []
+   },
+   {
+    "view": 3,
+    "boxes": []
+   },
+   {
+    "view": 4,
+    "boxes": []
+   }
+  ],
+  "crops": [],
+  "detect_s": 61.4
+ },
+ "door-59": {
+  "views": [
+   "IMG_3585.HEIC",
+   "IMG_3587.HEIC",
+   "IMG_3589.HEIC",
+   "IMG_3591.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.103,
+      "box": [
+       575,
+       315,
+       693,
+       751
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.115,
+      "box": [
+       467,
+       205,
+       828,
+       777
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.134,
+      "box": [
+       6,
+       134,
+       312,
+       814
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.112,
+      "box": [
+       313,
+       179,
+       623,
+       799
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.11,
+      "box": [
+       849,
+       246,
+       1093,
+       745
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.1,
+      "box": [
+       592,
+       670,
+       742,
+       1079
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.111,
+      "box": [
+       606,
+       177,
+       869,
+       770
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       843,
+       196,
+       1006,
+       719
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       254,
+       165,
+       572,
+       843
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.134,
+    "det_box": [
+     6,
+     134,
+     312,
+     814
+    ],
+    "crop_box": [
+     0,
+     32,
+     357,
+     1018
+    ],
+    "size": [
+     357,
+     986
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-59_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.115,
+    "det_box": [
+     467,
+     205,
+     828,
+     777
+    ],
+    "crop_box": [
+     412,
+     119,
+     882,
+     948
+    ],
+    "size": [
+     470,
+     829
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-59_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 76.0
+ },
+ "door-60": {
+  "views": [
+   "IMG_3592.HEIC",
+   "IMG_3593.HEIC",
+   "IMG_3595.HEIC",
+   "IMG_3596.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.223,
+      "box": [
+       561,
+       655,
+       594,
+       751
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.174,
+      "box": [
+       543,
+       402,
+       721,
+       917
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.105,
+      "box": [
+       425,
+       10,
+       759,
+       953
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.094,
+      "box": [
+       407,
+       104,
+       725,
+       926
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.287,
+      "box": [
+       592,
+       659,
+       621,
+       762
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.233,
+      "box": [
+       575,
+       379,
+       767,
+       891
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.098,
+      "box": [
+       387,
+       122,
+       594,
+       937
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.123,
+      "box": [
+       460,
+       909,
+       826,
+       1033
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.095,
+      "box": [
+       522,
+       911,
+       915,
+       1006
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.081,
+      "box": [
+       592,
+       659,
+       621,
+       762
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.357,
+      "box": [
+       591,
+       652,
+       626,
+       736
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.217,
+      "box": [
+       586,
+       327,
+       859,
+       958
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.169,
+      "box": [
+       297,
+       10,
+       888,
+       1021
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       304,
+       234,
+       430,
+       992
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.128,
+      "box": [
+       591,
+       652,
+       626,
+       736
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.281,
+      "box": [
+       560,
+       641,
+       598,
+       728
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.229,
+      "box": [
+       561,
+       712,
+       588,
+       744
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.241,
+      "box": [
+       534,
+       228,
+       852,
+       1019
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.155,
+      "box": [
+       1,
+       33,
+       439,
+       1079
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.141,
+      "box": [
+       370,
+       186,
+       555,
+       937
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.152,
+      "box": [
+       229,
+       915,
+       396,
+       1108
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.101,
+      "box": [
+       9,
+       949,
+       843,
+       1159
+      ]
+     },
+     {
+      "label": "step",
+      "score": 0.092,
+      "box": [
+       592,
+       771,
+       774,
+       897
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.084,
+      "box": [
+       560,
+       641,
+       598,
+       728
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.357,
+    "det_box": [
+     591,
+     652,
+     626,
+     736
+    ],
+    "crop_box": [
+     398,
+     484,
+     818,
+     904
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-60_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.287,
+    "det_box": [
+     592,
+     659,
+     621,
+     762
+    ],
+    "crop_box": [
+     396,
+     500,
+     816,
+     920
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-60_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.241,
+    "det_box": [
+     534,
+     228,
+     852,
+     1019
+    ],
+    "crop_box": [
+     486,
+     109,
+     899,
+     1256
+    ],
+    "size": [
+     413,
+     1147
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-60_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.233,
+    "det_box": [
+     575,
+     379,
+     767,
+     891
+    ],
+    "crop_box": [
+     546,
+     302,
+     795,
+     1044
+    ],
+    "size": [
+     249,
+     742
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-60_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 62.0
+ },
+ "door-61": {
+  "views": [
+   "IMG_3597.HEIC",
+   "IMG_3599.HEIC",
+   "IMG_3600.HEIC",
+   "IMG_3602.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.148,
+      "box": [
+       568,
+       633,
+       624,
+       656
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.095,
+      "box": [
+       1107,
+       747,
+       1160,
+       806
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.093,
+      "box": [
+       497,
+       603,
+       519,
+       679
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.185,
+      "box": [
+       482,
+       323,
+       672,
+       917
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       693,
+       217,
+       957,
+       878
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.109,
+      "box": [
+       540,
+       675,
+       606,
+       698
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.084,
+      "box": [
+       456,
+       646,
+       482,
+       727
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.194,
+      "box": [
+       433,
+       336,
+       678,
+       961
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.099,
+      "box": [
+       705,
+       301,
+       987,
+       937
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       315,
+       297,
+       421,
+       1015
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.13,
+      "box": [
+       473,
+       656,
+       534,
+       676
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.129,
+      "box": [
+       375,
+       624,
+       399,
+       704
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.228,
+      "box": [
+       359,
+       312,
+       612,
+       943
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       958,
+       166,
+       1177,
+       957
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.089,
+      "box": [
+       183,
+       220,
+       320,
+       1024
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.123,
+      "box": [
+       425,
+       601,
+       488,
+       624
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.085,
+      "box": [
+       315,
+       572,
+       343,
+       652
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.18,
+      "box": [
+       283,
+       255,
+       586,
+       894
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.101,
+      "box": [
+       4,
+       33,
+       290,
+       1041
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       554,
+       0,
+       1107,
+       900
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.148,
+    "det_box": [
+     568,
+     633,
+     624,
+     656
+    ],
+    "crop_box": [
+     386,
+     434,
+     806,
+     854
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-61_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.13,
+    "det_box": [
+     473,
+     656,
+     534,
+     676
+    ],
+    "crop_box": [
+     293,
+     456,
+     713,
+     876
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-61_handle2_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.228,
+    "det_box": [
+     359,
+     312,
+     612,
+     943
+    ],
+    "crop_box": [
+     321,
+     217,
+     649,
+     1132
+    ],
+    "size": [
+     328,
+     915
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-61_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.194,
+    "det_box": [
+     433,
+     336,
+     678,
+     961
+    ],
+    "crop_box": [
+     396,
+     242,
+     714,
+     1148
+    ],
+    "size": [
+     318,
+     906
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-61_door2_v2.jpg"
+   }
+  ],
+  "detect_s": 63.8
+ },
+ "door-62": {
+  "views": [
+   "IMG_3603.HEIC",
+   "IMG_3604.HEIC",
+   "IMG_3605.HEIC",
+   "IMG_3606.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.124,
+      "box": [
+       560,
+       661,
+       632,
+       731
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.142,
+      "box": [
+       592,
+       0,
+       777,
+       909
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.092,
+      "box": [
+       0,
+       9,
+       284,
+       1206
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.082,
+      "box": [
+       531,
+       9,
+       635,
+       1070
+      ]
+     },
+     {
+      "label": "ramp",
+      "score": 0.093,
+      "box": [
+       246,
+       1156,
+       601,
+       1528
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.19,
+      "box": [
+       1065,
+       695,
+       1176,
+       992
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.117,
+      "box": [
+       512,
+       784,
+       644,
+       1004
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.164,
+      "box": [
+       480,
+       644,
+       526,
+       742
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.112,
+      "box": [
+       4,
+       -6,
+       483,
+       1205
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.085,
+      "box": [
+       468,
+       7,
+       794,
+       938
+      ]
+     },
+     {
+      "label": "ramp",
+      "score": 0.083,
+      "box": [
+       -1,
+       1191,
+       353,
+       1569
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.107,
+      "box": [
+       1102,
+       744,
+       1172,
+       929
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.216,
+      "box": [
+       229,
+       586,
+       338,
+       675
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.202,
+      "box": [
+       215,
+       589,
+       338,
+       684
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.186,
+      "box": [
+       110,
+       -3,
+       359,
+       1107
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.096,
+      "box": [
+       231,
+       6,
+       653,
+       1007
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.088,
+      "box": [
+       551,
+       0,
+       652,
+       849
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.1,
+      "box": [
+       215,
+       589,
+       338,
+       684
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.097,
+      "box": [
+       229,
+       586,
+       338,
+       675
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.153,
+      "box": [
+       -1,
+       606,
+       191,
+       728
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       -1,
+       0,
+       246,
+       1195
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.116,
+      "box": [
+       19,
+       18,
+       519,
+       960
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.127,
+      "box": [
+       -1,
+       606,
+       191,
+       728
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 3,
+    "score": 0.216,
+    "det_box": [
+     229,
+     586,
+     338,
+     675
+    ],
+    "crop_box": [
+     73,
+     420,
+     493,
+     840
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-62_handle1_v3.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.164,
+    "det_box": [
+     480,
+     644,
+     526,
+     742
+    ],
+    "crop_box": [
+     293,
+     483,
+     713,
+     903
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-62_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 3,
+    "score": 0.186,
+    "det_box": [
+     110,
+     -3,
+     359,
+     1107
+    ],
+    "crop_box": [
+     72,
+     0,
+     396,
+     1440
+    ],
+    "size": [
+     324,
+     1440
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-62_door1_v3.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.142,
+    "det_box": [
+     592,
+     0,
+     777,
+     909
+    ],
+    "crop_box": [
+     564,
+     0,
+     804,
+     1181
+    ],
+    "size": [
+     240,
+     1181
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-62_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 63.4
+ },
+ "door-63": {
+  "views": [
+   "IMG_3607.HEIC",
+   "IMG_3608.HEIC",
+   "IMG_3610.HEIC",
+   "IMG_3611.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.236,
+      "box": [
+       791,
+       745,
+       845,
+       788
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.089,
+      "box": [
+       797,
+       692,
+       825,
+       725
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.153,
+      "box": [
+       800,
+       18,
+       1176,
+       1110
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.13,
+      "box": [
+       289,
+       -1,
+       759,
+       1119
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.114,
+      "box": [
+       271,
+       0,
+       1174,
+       1174
+      ]
+     },
+     {
+      "label": "handrail",
+      "score": 0.081,
+      "box": [
+       791,
+       745,
+       845,
+       788
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.178,
+      "box": [
+       647,
+       757,
+       710,
+       806
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.106,
+      "box": [
+       647,
+       702,
+       681,
+       739
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.143,
+      "box": [
+       638,
+       15,
+       1082,
+       1145
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.118,
+      "box": [
+       76,
+       0,
+       617,
+       1206
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.117,
+      "box": [
+       78,
+       4,
+       1093,
+       1211
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.084,
+      "box": [
+       474,
+       690,
+       503,
+       724
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.08,
+      "box": [
+       470,
+       747,
+       522,
+       787
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.138,
+      "box": [
+       -10,
+       6,
+       454,
+       1143
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.122,
+      "box": [
+       447,
+       15,
+       964,
+       1131
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.11,
+      "box": [
+       10,
+       7,
+       973,
+       1162
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door",
+      "score": 0.179,
+      "box": [
+       -7,
+       3,
+       496,
+       1133
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.135,
+      "box": [
+       430,
+       4,
+       972,
+       1133
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.086,
+      "box": [
+       9,
+       10,
+       989,
+       1151
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 1,
+    "score": 0.236,
+    "det_box": [
+     791,
+     745,
+     845,
+     788
+    ],
+    "crop_box": [
+     608,
+     556,
+     1028,
+     976
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-63_handle1_v1.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.178,
+    "det_box": [
+     647,
+     757,
+     710,
+     806
+    ],
+    "crop_box": [
+     468,
+     571,
+     888,
+     991
+    ],
+    "size": [
+     420,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-63_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.179,
+    "det_box": [
+     -7,
+     3,
+     496,
+     1133
+    ],
+    "crop_box": [
+     0,
+     0,
+     571,
+     1472
+    ],
+    "size": [
+     571,
+     1472
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-63_door1_v4.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 1,
+    "score": 0.153,
+    "det_box": [
+     800,
+     18,
+     1176,
+     1110
+    ],
+    "crop_box": [
+     743,
+     0,
+     1176,
+     1437
+    ],
+    "size": [
+     433,
+     1437
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-63_door2_v1.jpg"
+   }
+  ],
+  "detect_s": 49.9
+ },
+ "door-64": {
+  "views": [
+   "IMG_3612.HEIC",
+   "IMG_3614.HEIC",
+   "IMG_3615.HEIC",
+   "IMG_3617.HEIC"
+  ],
+  "detections": [
+   {
+    "view": 1,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.084,
+      "box": [
+       572,
+       523,
+       641,
+       702
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.121,
+      "box": [
+       493,
+       192,
+       780,
+       860
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.115,
+      "box": [
+       644,
+       235,
+       800,
+       848
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.095,
+      "box": [
+       519,
+       197,
+       670,
+       859
+      ]
+     }
+    ]
+   },
+   {
+    "view": 2,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.151,
+      "box": [
+       166,
+       606,
+       232,
+       686
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.131,
+      "box": [
+       163,
+       614,
+       191,
+       686
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.125,
+      "box": [
+       416,
+       177,
+       445,
+       310
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.193,
+      "box": [
+       450,
+       139,
+       751,
+       871
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.17,
+      "box": [
+       4,
+       6,
+       384,
+       909
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.138,
+      "box": [
+       182,
+       64,
+       427,
+       891
+      ]
+     }
+    ]
+   },
+   {
+    "view": 3,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.142,
+      "box": [
+       156,
+       588,
+       194,
+       672
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.133,
+      "box": [
+       591,
+       595,
+       633,
+       663
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.117,
+      "box": [
+       560,
+       623,
+       592,
+       652
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.174,
+      "box": [
+       467,
+       58,
+       773,
+       851
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.131,
+      "box": [
+       6,
+       3,
+       408,
+       906
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.112,
+      "box": [
+       154,
+       12,
+       392,
+       871
+      ]
+     }
+    ]
+   },
+   {
+    "view": 4,
+    "boxes": [
+     {
+      "label": "door handle",
+      "score": 0.18,
+      "box": [
+       0,
+       535,
+       78,
+       633
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.177,
+      "box": [
+       47,
+       535,
+       79,
+       626
+      ]
+     },
+     {
+      "label": "door handle",
+      "score": 0.158,
+      "box": [
+       603,
+       551,
+       635,
+       623
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.191,
+      "box": [
+       1,
+       -1,
+       315,
+       875
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.19,
+      "box": [
+       353,
+       10,
+       803,
+       848
+      ]
+     },
+     {
+      "label": "door",
+      "score": 0.145,
+      "box": [
+       575,
+       12,
+       811,
+       845
+      ]
+     },
+     {
+      "label": "wheelchair symbol sign",
+      "score": 0.087,
+      "box": [
+       304,
+       330,
+       367,
+       460
+      ]
+     }
+    ]
+   }
+  ],
+  "crops": [
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 4,
+    "score": 0.18,
+    "det_box": [
+     0,
+     535,
+     78,
+     633
+    ],
+    "crop_box": [
+     0,
+     374,
+     249,
+     794
+    ],
+    "size": [
+     249,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-64_handle1_v4.jpg"
+   },
+   {
+    "kind": "handle",
+    "label": "door handle",
+    "view": 2,
+    "score": 0.151,
+    "det_box": [
+     166,
+     606,
+     232,
+     686
+    ],
+    "crop_box": [
+     0,
+     436,
+     409,
+     856
+    ],
+    "size": [
+     409,
+     420
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-64_handle2_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 2,
+    "score": 0.193,
+    "det_box": [
+     450,
+     139,
+     751,
+     871
+    ],
+    "crop_box": [
+     404,
+     29,
+     796,
+     1090
+    ],
+    "size": [
+     392,
+     1061
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-64_door1_v2.jpg"
+   },
+   {
+    "kind": "door",
+    "label": "door",
+    "view": 4,
+    "score": 0.191,
+    "det_box": [
+     1,
+     -1,
+     315,
+     875
+    ],
+    "crop_box": [
+     0,
+     0,
+     362,
+     1137
+    ],
+    "size": [
+     362,
+     1137
+    ],
+    "path": "C:\\dev\\curb-appeal\\eval\\out\\grounded\\crops\\door-64_door2_v4.jpg"
+   }
+  ],
+  "detect_s": 54.7
+ }
+}

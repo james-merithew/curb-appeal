@@ -9859,6 +9859,48 @@ armMapObserver();
    reaching past the role names into the raw tokens (rubric 3.10).
    ========================================================================== */
 
+/* ============================================================================
+   ROUND 16 -- THE PUBLISHED PAGE IS FULL-BLEED UNLESS THE MOCK IS EARNED.
+
+   MEASURED, NOT ASSUMED.  tools/artifact_unwrap.py strips the file's own
+   <meta name="viewport"> on the stated ground that the artifact host supplies
+   one. Rebuilt locally through that same function and served to a Chrome mobile
+   context at 390x844, a host skeleton WITHOUT a viewport meta produced:
+   layout viewport 980 x 2121, (max-width:767px) false, .phone drawn as the
+   412 x 866 desktop mock at x=295 y=622 with its 11px bezel and its notch
+   showing, and documentElement.scrollHeight 2121 against clientHeight 2120 --
+   a scrolling document whose content is a picture of a phone about 155 device
+   pixels wide. The same skeleton WITH a viewport meta measured 390 x 844,
+   zero vertical scroll, zero horizontal scroll, on all five phone sizes tested.
+   That is the whole of "there shouldn't be a scroll on the main screen".
+
+   SO THE DEFAULT IS INVERTED HERE, on two independent grounds, because either
+   one alone can be defeated:
+     -- (pointer:coarse) / (hover:none) is a property of the DEVICE and survives
+        a wrong layout viewport, an iframe of any width, and a wrapper that
+        forgot the meta. A phone is a phone whatever width it thinks it is.
+     -- the size floor is 768 x 730 CSS px. The width is the prototype's own
+        phone/desktop boundary, kept exactly where it was so nothing about the
+        desktop presentation moves. The height is new and is the part the
+        published page never had: the mock's own footprint is 412 x 866 (the
+        390x844 .phone plus its 11px bezel on four sides) and fitPhone() reserves
+        80px of vertical room before it starts scaling, so at 730 the mock is
+        already drawn at 0.75 and below that it is a small picture of a phone
+        rather than a usable app. Measured: 1200x900 keeps the mock at scale
+        0.947, 800x600 no longer draws it at 0.60.
+   These rules are the prototype's own (max-width:767px) block, applied to the
+   negation of "there is demonstrably room". Nothing above this line changes. */
+@media (pointer:coarse),(hover:none),
+       not all and (min-width:768px) and (min-height:730px){
+  html,body{overflow:hidden;overscroll-behavior:none}
+  body{padding:0;gap:0;display:block;background:var(--bezel);min-height:100dvh}
+  .stage-caption{display:none}
+  .phone-wrap{transform:none !important;margin:0 !important}
+  .phone{width:100vw;height:100vh;height:100dvh;
+         border:none;border-radius:0;box-shadow:none}
+  .notch{display:none}
+}
+
 #wt{position:absolute;inset:0;z-index:200;pointer-events:none;
     font-family:inherit;color:var(--ink)}
 #wt[hidden]{display:none}
@@ -9868,15 +9910,16 @@ armMapObserver();
    screen's top edge happens to be, and that edge is the dark indigo app bar on
    the map and on the capture screen (1.86:1) as often as it is white. The track
    is the light lavender stroke the system already uses for a quiet keyline, so
-   the pair always has one member that carries. */
+   the pair always has one member that carries.
+   IT COUNTS SPOKEN STOPS, NOT ROUTE ENTRIES. The route carries silent
+   transitions and chapter preludes that are never announced and never counted;
+   a bar that moved for them would tell the presenter he had made progress he
+   has not made. */
 #wt-prog{position:absolute;left:0;right:0;top:0;height:2px;
   background:var(--ui-lavender-2);overflow:hidden}
 #wt-prog i{display:block;height:100%;width:calc(var(--wt-n,0) / var(--wt-of,1) * 100%);
   background:var(--violet600);
   transition:width var(--dur-base) var(--ease-enter)}
-/* a branch is a detour and says so: the rule runs marigold while one is open, so
-   the presenter can see at a glance that he is off the spine. */
-#wt.branch #wt-prog i{background:var(--marigold)}
 
 /* ---- the recovery HUD -----------------------------------------------------
    It lives in the ONE horizontal band that carries no app control on any screen:
@@ -9886,11 +9929,11 @@ armMapObserver();
    areas stop at 45px, so it covers nothing that can be pressed.
    The counter's type is capped rather than scaled: at the 200% text step a
    scaling counter would grow out of that band and over the app's own controls.
-   The number is aria-hidden and duplicated in both chevrons' labels, so nothing
-   is only available in 11px type. */
+   The chapter name and number are aria-hidden and duplicated in all three
+   buttons' labels, so nothing is only available in 11px type. */
 #wt-hud{position:absolute;left:6px;top:6px;height:34px;display:flex;align-items:center;
   gap:2px;padding:0 3px;background:var(--white);border:1px solid var(--ui-lavender-2);
-  border-radius:999px;box-shadow:var(--elev-1);pointer-events:none}
+  border-radius:999px;box-shadow:var(--elev-1);pointer-events:none;max-width:calc(100% - 12px)}
 #wt-hud button{position:relative;pointer-events:auto;width:30px;height:30px;flex:0 0 30px;
   border:none;border-radius:50%;background:none;
   color:var(--indigo900);font-family:inherit;font-size:15px;font-weight:var(--fw-strong);
@@ -9901,28 +9944,21 @@ armMapObserver();
 #wt-hud button:hover{background:var(--ui-lavender-1)}
 #wt-hud button:disabled{opacity:.4;cursor:default}
 #wt-hud button:disabled:hover{background:none}
-#wt-hud button[hidden]{display:none}
-#wt-count{pointer-events:none;color:var(--indigo900);padding:0 2px;
-  font-size:11px;font-weight:var(--fw-strong);line-height:1.2;
-  letter-spacing:var(--ls-flat);white-space:nowrap}
-/* the branch control. It is a separate disc with a keyline so it does not read as
-   a third chevron, it is only present on the map with nothing open, and it is
-   NEVER the blinking target -- no step in the route points at it. */
-#wt-more{border:1px solid var(--ui-lavender-2) !important;margin-left:3px;
-  font-size:13px !important;color:var(--violet800) !important}
-#wt-more[aria-expanded="true"]{background:var(--ui-lavender-1)}
+/* the chapter and the position inside it. ONE readout, two weights: the chapter
+   is the thing being taught and the number is where he is in it. */
+#wt-count{pointer-events:none;color:var(--indigo900);padding:0 4px;
+  font-size:11px;font-weight:var(--fw-body);line-height:1.2;
+  letter-spacing:var(--ls-flat);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;min-width:0}
+#wt-count b{font-weight:var(--fw-strong)}
 
-#wt-menu{position:absolute;left:6px;top:44px;min-width:172px;
-  background:var(--white);border:1px solid var(--ui-lavender-2);border-radius:var(--r-3);
-  box-shadow:var(--elev-2);padding:4px;pointer-events:auto;display:flex;
-  flex-direction:column;gap:2px}
-#wt-menu[hidden]{display:none}
-#wt-menu button{min-height:44px;text-align:left;border:none;background:none;cursor:pointer;
-  border-radius:12px;padding:6px 10px;font-family:inherit;font-size:var(--fs-sub);
-  font-weight:var(--fw-strong);color:var(--indigo900);line-height:var(--lh-sub)}
-#wt-menu button:hover{background:var(--ui-lavender-1)}
-#wt-menu button b{display:block;font-size:var(--fs-meta);font-weight:var(--fw-strong);
-  letter-spacing:var(--ls-caps);text-transform:uppercase;color:var(--violet800)}
+/* THE CHAPTER SKIP.  It is always present, in one place, in one state -- the
+   previous build's branch control appeared at some step numbers and vanished at
+   others, which is a technical constraint leaking into the field of view. It is
+   a separate disc with a keyline so it does not read as a third chevron, and it
+   is NEVER the blinking target -- no step in the route points at it. */
+#wt-skip{border:1px solid var(--ui-lavender-2) !important;margin-left:3px;
+  font-size:14px !important;color:var(--violet800) !important}
 
 /* ---- the ring -------------------------------------------------------------
    ONE SHAPE VOCABULARY, AND IT IS CHOSEN BY WHAT THE TARGET IS, NEVER BY ITS
@@ -9943,11 +9979,20 @@ armMapObserver();
         The band is 3px and not 5px because 5px reached into the label: measured on
         #key-cta, whose text starts 6px from its own left edge, the first glyph of
         "How trust grows" was clipped.
-     -- MARIGOLD anywhere in the fill or the keyline -> OUTSIDE, and in white then
-        --indigo900, never violet and never over the marigold. Painting inside was
-        tried first and was worse than the problem: it overpainted the shutter's
-        3px marigold keyline entirely, so the one control the product reserves that
-        colour for stopped being marigold for the length of the stop.
+     -- THE CONTROL IS ALREADY FILLED WITH ONE OF THE TWO COLOURS THIS LAYER CAN
+        PAINT -> OUTSIDE, and in white then --indigo900, never violet and never
+        over the marigold. Two fills qualify and both were measured on this build:
+        MARIGOLD, where painting inside was tried first and was worse than the
+        problem (it overpainted the shutter's 3px marigold keyline entirely, so
+        the one control the product reserves that colour for stopped being
+        marigold for the length of the stop); and --violet600, which is the fill
+        of every .btn.primary in the app AND the ring's own ink. Measured on
+        #ob-allow-loc at 390x844: background rgb(79,52,219), no border, no inset
+        shadow, so the ring fell through to the two-part treatment below and drew
+        rgb(79,52,219) 2px hard against an identical fill with a white halo
+        outside it on a white page. Neither member of the pair carried anything.
+        That is a ring the room cannot see, on a spoken stop, and it is a
+        different failure from the hidden-document one with the same symptom.
      -- anything else -> OUTSIDE, the two-part ring: --violet600 hugging the box
         with a white halo outside it, so one of the two always clears 3:1 -- the
         violet on the pale sheets and the pale map ground, the white on the indigo
@@ -9958,7 +10003,7 @@ armMapObserver();
   box-shadow:0 0 0 2px var(--wt-ink), 0 0 0 5px rgba(255,255,255,.96);
   transition:opacity var(--dur-fast) var(--ease-enter)}
 #wt-ring.in{box-shadow:inset 0 0 0 3px var(--wt-ink)}
-#wt-ring.mari{box-shadow:0 0 0 3px rgba(255,255,255,.96), 0 0 0 6px var(--indigo900)}
+#wt-ring.onfill{box-shadow:0 0 0 3px rgba(255,255,255,.96), 0 0 0 6px var(--indigo900)}
 #wt-ring.on{opacity:1}
 
 /* ---- the pulse: a glow, not a scaled box ----------------------------------
@@ -9970,7 +10015,7 @@ armMapObserver();
    This is a box-shadow spread instead: uniform in pixels on every side whatever
    the aspect, no hard edge at any point in the cycle, and no second rectangle.
    2600ms with 46% of the cycle at rest, against the old 1200ms with a 360ms hold:
-   a breath rather than a metronome, and 23 fewer pings across the run. */
+   a breath rather than a metronome. */
 #wt-ring i{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   animation:wt-glow 2600ms var(--ease-enter) infinite}
 @keyframes wt-glow{
@@ -9983,33 +10028,46 @@ armMapObserver();
    because hc outlines every elevated surface rather than shading it. */
 .phone.hc #wt-ring{box-shadow:0 0 0 3px var(--wt-ink), 0 0 0 6px #FFFFFF}
 .phone.hc #wt-ring.in{box-shadow:inset 0 0 0 4px var(--wt-ink)}
-.phone.hc #wt-ring.mari{box-shadow:0 0 0 3px #FFFFFF, 0 0 0 7px var(--indigo900)}
+.phone.hc #wt-ring.onfill{box-shadow:0 0 0 3px #FFFFFF, 0 0 0 7px var(--indigo900)}
 
 /* ---- the callout ----------------------------------------------------------
-   A SMALL CARD SIZED TO ITS CONTENT, NOT A CAPTION AT MAX WIDTH.  The previous
-   one measured 366 x 74.5px on eleven of twelve steps because every line wrapped
-   to two lines at max width, and a 97%-of-frame opaque strip covers something
-   almost every time. Two changes together fix that: every line in the route is
-   short enough to render on ONE line at the default text size on a 390px frame
-   (measured per step by the harness, not estimated), and the box is width:max-
-   content, so a 24-character line draws a 24-character card.
+   A SMALL CARD SIZED TO ITS CONTENT, NOT A CAPTION AT MAX WIDTH.  Every line in
+   the route renders on ONE line at the default text size on a 390px frame
+   (measured per stop by the harness, not estimated), and the box is
+   width:max-content, so a 24-character line draws a 24-character card.
 
-   IT IS WHITE WITH A 2px INDIGO KEYLINE, which used to be only the high-contrast
-   variant. The default surface was --ui-lavender-1 with a --ui-lavender-2
-   hairline, and the app is already made of pale rounded cards with hairline
-   borders, so the callout disappeared into the app's own furniture on every light
-   screen. The high-contrast treatment is simply the better object; it is the
-   default now, and hc thickens it further rather than inventing a third look.
+   IT IS WHITE WITH A 2px INDIGO KEYLINE. The app is already made of pale rounded
+   cards with hairline borders, so a pale callout disappeared into the app's own
+   furniture on every light screen.
 
    POINTER EVENTS.  The wrapper is inert; only the button inside it takes a
-   pointer. Off the button -- which folded is the whole chip and expanded is the
-   whole card -- every tap passes through to the app untouched, and placement's
+   pointer, and only while the callout is actually showing -- see .on below.
+   Off the button every tap passes through to the app untouched, and placement's
    hard rule is that the card never covers its own ring target, so the tap the
    step is waiting for is always reachable. */
 #wt-call{position:absolute;left:0;top:0;max-width:calc(100% - 24px);
   pointer-events:none;opacity:0;
   transition:opacity var(--dur-base) var(--ease-exit)}
 #wt-call.on{opacity:1;transition:opacity var(--dur-base) var(--ease-enter)}
+
+/* AN INVISIBLE BUTTON IS NOT A BUTTON.  Until Round 16 #wt-fold kept
+   pointer-events:auto and its place in the tab order for the whole of the window
+   in which the callout is at opacity 0 -- which on a page that boots hidden is
+   unbounded. Measured on a hidden document five seconds after boot: #wt not
+   hidden, #wt-call computed opacity 0, and #wt-fold focusable and hit-testable
+   over the welcome screen's own buttons. This is a class, not a duration and
+   above all not a delay: the universal reduced-motion floor zeroes both. */
+#wt-call:not(.on) #wt-fold{pointer-events:none}
+
+/* A SILENT TRANSITION IS NOT A STOP.  A step that only moves the presenter to the
+   next screen carries a ring and nothing else: no card, no chip, no number. The
+   text is still written into this live region and still reaches a screen reader,
+   because a reader who cannot see the ring would otherwise be told to tap
+   something and never told what. It is clipped rather than display:none for
+   exactly that reason, and #wt-fold is taken out of the tab order in JS so the
+   clipped card can never take focus. */
+#wt-call.silent{width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+  clip-path:inset(50%);pointer-events:none}
 
 #wt-fold{display:block;pointer-events:auto;width:max-content;max-width:100%;
   margin:0;text-align:left;cursor:pointer;
@@ -10055,7 +10113,7 @@ armMapObserver();
 .phone.hc #wt-title{color:var(--purple-ink)}
 .phone.hc #wt-line{color:var(--ink)}
 .phone.hc #wt-arrow{border-width:3px}
-.phone.hc #wt-hud,.phone.hc #wt-menu{border:2px solid var(--indigo900)}
+.phone.hc #wt-hud{border:2px solid var(--indigo900)}
 .phone.hc #wt-hud button{color:var(--ink)}
 
 /* ---- reduced motion -------------------------------------------------------
@@ -10068,8 +10126,8 @@ armMapObserver();
 .rm .phone #wt-ring,.rm .phone #wt-call,.rm .phone #wt-prog i{transition:none}
 
 /* focus is visible on every control this layer owns, on both grounds */
-#wt-hud button:focus-visible,#wt-menu button:focus-visible{outline:3px solid var(--violet600);outline-offset:2px}
-.phone.hc #wt-hud button:focus-visible,.phone.hc #wt-menu button:focus-visible,
+#wt-hud button:focus-visible{outline:3px solid var(--violet600);outline-offset:2px}
+.phone.hc #wt-hud button:focus-visible,
 .phone.hc #wt-fold:focus-visible{outline-color:var(--ink)}
 </style>
 
@@ -10077,12 +10135,10 @@ armMapObserver();
   <div id="wt-prog" aria-hidden="true"><i></i></div>
   <div id="wt-hud">
     <button id="wt-back" type="button" aria-label="Walkthrough: previous step">&lsaquo;</button>
-    <span id="wt-count" aria-hidden="true">1 / 24</span>
+    <span id="wt-count" aria-hidden="true"><b></b> <span></span></span>
     <button id="wt-fwd" type="button" aria-label="Walkthrough: skip to the next step">&rsaquo;</button>
-    <button id="wt-more" type="button" hidden aria-expanded="false" aria-controls="wt-menu"
-            aria-label="More to show from this screen">&#43;</button>
+    <button id="wt-skip" type="button" aria-label="Skip to the next chapter">&raquo;</button>
   </div>
-  <div id="wt-menu" role="group" aria-label="More to show" hidden></div>
   <div id="wt-ring" aria-hidden="true"><i></i></div>
   <div id="wt-call" role="status" aria-live="polite">
     <!-- the space between the two is load-bearing: this button's accessible name is
@@ -10092,7 +10148,6 @@ armMapObserver();
     <i id="wt-arrow" aria-hidden="true"></i>
   </div>
 </div>
-
 <script id="wt-js">
 /* ============================================================================
    THE GUIDED WALKTHROUGH  --  a layer over an app it does not edit.
@@ -10102,15 +10157,16 @@ armMapObserver();
       tap before the app does and then lets the app's own handler do the work, so
       every flow -- on the route or off it -- behaves exactly as it does without
       this file.
-   2. Everything it draws is pointer-events:none except the HUD controls, the
-      branch menu and the callout's own button. An off-script tap always reaches
-      the app.
-   3. It never writes to the app's DOM and never navigates the app. The only two
-      things it touches outside #wt are: moving #wt inside .phone (below), and
-      adding its own id to the app's INERT_EXEMPT set, which is the app's own
-      mechanism for overlay chrome that must survive a modal sheet -- the same
-      exemption the toast and the live region already hold. Both are guarded; if
-      either is gone after a re-sync the layer degrades instead of throwing.
+   2. Everything it draws is pointer-events:none except the HUD controls and the
+      callout's own button, and that button only while the callout is showing.
+      An off-script tap always reaches the app.
+   3. It never navigates the app and writes to the app's DOM in exactly three
+      guarded places, all of them chrome rather than content: moving #wt inside
+      .phone, adding its own id to the app's INERT_EXEMPT set (the app's own
+      mechanism for overlay chrome that must survive a modal sheet), and
+      restoring a <meta name="viewport"> if the document has none -- see
+      ensureViewport(). If any of the three is gone after a re-sync the layer
+      degrades instead of throwing.
    4. It advances on its target's tap, or on a state the target's tap would have
       produced. If the target vanishes it waits and says so.
    5. It reads geometry every frame and never assumes a transition has finished.
@@ -10132,6 +10188,29 @@ try{
     .observe(wt,{attributes:true,attributeFilter:['inert']});
 }catch(e){}
 
+/* ---- the viewport the publish step takes away -----------------------------
+   tools/artifact_unwrap.py deletes this file's own
+   <meta name="viewport" content="width=device-width,initial-scale=1"> because
+   the artifact host is documented as supplying one. If it does not, a phone
+   falls back to a 980px layout viewport, the prototype's (max-width:767px)
+   real-phone block never matches, and the published page is a 412x866 picture of
+   a phone floating in a scrolling 980x2121 document -- measured, at five phone
+   sizes, through that same unwrap function.
+   Restoring the tag is the only lever that answers that; no media query can see
+   past a wrong layout viewport. It is written once, only when the document has
+   none, and it is a no-op everywhere the host behaves as documented. */
+function ensureViewport(){
+  try{
+    if(document.querySelector('meta[name="viewport"]')) return false;
+    var m=document.createElement('meta');
+    m.name='viewport'; m.content='width=device-width,initial-scale=1';
+    (document.head||document.documentElement).appendChild(m);
+    if(typeof fitPhone==='function') try{ fitPhone(); }catch(e){}
+    return true;
+  }catch(e){ return false; }
+}
+var _vpAdded=ensureViewport();
+
 var ring=document.getElementById('wt-ring'),
     call=document.getElementById('wt-call'),
     foldBtn=document.getElementById('wt-fold'),
@@ -10140,10 +10219,11 @@ var ring=document.getElementById('wt-ring'),
     arrow=document.getElementById('wt-arrow'),
     prog=document.getElementById('wt-prog'),
     countEl=document.getElementById('wt-count'),
+    chapEl=countEl.firstElementChild,
+    posEl=countEl.lastElementChild,
     backBtn=document.getElementById('wt-back'),
     fwdBtn=document.getElementById('wt-fwd'),
-    moreBtn=document.getElementById('wt-more'),
-    menuEl=document.getElementById('wt-menu');
+    skipBtn=document.getElementById('wt-skip');
 
 function $(s){ try{ return document.querySelector(s); }catch(e){ return null; } }
 function $$(s){ try{ return document.querySelectorAll(s); }catch(e){ return []; } }
@@ -10182,11 +10262,8 @@ function hitAt(ringNode, tapNode, strict){
    MEASURED FIRST, THEN CHOSEN.  door-11 (Jo's Coffee) is the only Owner-confirmed
    place on the pilot map and it is NOT a standalone pin at 390x844: the map draws
    10 pins and 8 numbered cluster discs there, and door-11 is inside one of them.
-   The previous route rang a Scanned-on-site card under a caption that said the
-   ladder ends at owner-confirmed, which does not survive a viewer reading the
-   ringed text. So the core route no longer claims the top rung at all -- it says
-   what the card in front of it actually says -- and the Owner-confirmed receipt
-   is shown in the Business branch, where the owner workspace has one.
+   So no stop on the map claims the top rung; the Owner-confirmed receipt is shown
+   in the chapter that has one, on the owner's own workspace.
    Preference order here is therefore about a card with plenty on it, not about
    tier: a Scanned-on-site place first (it has photographs and a receipt), then
    any reachable pin. */
@@ -10209,13 +10286,10 @@ function pinTarget(){ return pickPin(['door-04','door-09','door-01']); }
    head and ignores the teardrop's tip, which is what a pin wants and what the
    previous squarish box around a marigold teardrop did not give it. */
 function pinRing(){ var p=pinTarget(); return p?p+' .pin':null; }
-/* THE NUMBERED DISC, AND WHY IT IS PICKED BY ITS COUNT.  A cluster button is a 0x0
-   anchor on the centroid whose drawn disc is a child, exactly like a pin, so it is
-   hit-tested and ringed on `.disc` and never on the button. The app gives clusters
-   no id, so the only stable handle is data-count, which it does set; the biggest
-   reachable count wins, because the largest disc is also the one whose preview has
-   the most to say. Measured at 390x844: 8 discs, counts 14, 8, 6, 6, 5, 4, and the
-   14 is unique. */
+/* THE NUMBERED DISC.  A cluster button is a 0x0 anchor on the centroid whose
+   drawn disc is a child, exactly like a pin, so it is hit-tested and ringed on
+   `.disc` and never on the button. The biggest reachable count wins, because the
+   largest disc is also the one whose preview has the most to say. */
 function clusterPick(){
   var all=$$('#pins .cluster'), best=null, bn=-1;
   for(var i=0;i<all.length;i++){
@@ -10230,9 +10304,9 @@ function clusterPick(){
    NOT unique: measured at 390x844 the eight discs read 6, 14, 5, 4, 6, 8, 3, 8 --
    two sixes and two eights -- so [data-count="6"] matched the first six in DOM
    order rather than the reachable one the hit test had chosen, and the ring never
-   came on for the whole stop. The index among #pins'
-   children is exact. It is re-derived on every retarget, so a re-render between
-   steps cannot leave it pointing at a stranger. */
+   came on for the whole stop. The index among #pins' children is exact. It is
+   re-derived on every retarget, so a re-render between steps cannot leave it
+   pointing at a stranger. */
 function clusterTarget(){
   var b=clusterPick(); if(!b) return null;
   var k=1, n=b;
@@ -10242,252 +10316,348 @@ function clusterTarget(){
 }
 function clusterRing(){ var s=clusterTarget(); return s?s+' .disc':null; }
 
-/* ---- the route -----------------------------------------------------------
-   ONE STOP PER STEP, AND ONE SHORT LINE PER STOP.  The owner lifted the runtime
-   cap, and the only correct way to spend it is more steps rather than longer
-   lines: the callout was a 366px band covering app content on eight of twelve
-   steps precisely BECAUSE every line wrapped to two lines at max width. So the
-   per-callout cap is harder than before, not softer -- a 2-3 word title and one
-   line that renders on ONE line at the default text size on a 390px frame -- and
-   where a step used to carry two ideas it is now two steps.
+/* the way out of whatever is open, and the way back to the map. Used only by the
+   chapter preludes below; the layer still never taps anything itself. */
+function openSheetClose(){
+  var s=document.querySelector('.sheet.on .sheet-close');
+  if(!s) return null;
+  var id=s.closest('.sheet').id;
+  return '#'+id+' .sheet-close';
+}
+function toMap(){
+  var c=['#nav-map','.screen.active .cancel-x','#corr-done-back'];
+  for(var k=0;k<c.length;k++){ var n=$(c[k]); if(n&&n.offsetParent!==null) return c[k]; }
+  return null;
+}
+
+/* ============================================================================
+   THE ROUTE: ONE CONTINUOUS RUN, ORGANISED IN CHAPTERS.
+
+   WHY THE BRANCHES ARE GONE.  Three optional branches over a 24-step core made
+   the room watch the same thing twice: the Community branch opened by tapping a
+   pin and expanding the card, which the core had already spent five steps on,
+   and the Business and Accessibility branches both opened on the profile screen
+   with nearly the same line. The material was not the problem -- the second
+   entrance to it was. Every branch is now folded into the spine at the point
+   where the app is ALREADY in the right place:
+     -- the correction flow starts from the open card, one tap after the receipt,
+        because that is where the card's own "Suggest a correction" lives;
+     -- the owner workspace follows it, because owner-confirmed is the rung above
+        everything the receipt just showed;
+     -- the accessibility excursion is last, because it is the only chapter that
+        is about the product rather than about a door.
+   The one screen this route touches twice is screen-profile, and it is narrated
+   ZERO times: both arrivals are silent transitions, because the app has exactly
+   one entrance to the owner workspace and to the settings and this layer is not
+   allowed to navigate for him.
+
+   A STEP THAT ONLY MOVES HIM TO THE NEXT SCREEN IS NOT A STEP.  Those carry
+   sil:1 -- a ring on what to tap, no card, no chip, no number, no dwell. Their
+   title and line are still written into the live region, because a reader who
+   cannot see the ring would otherwise be told nothing at all.
+
+   EVERY COUNTED STEP CARRIES ONE THING A VIEWER COULD NOT GET BY LOOKING.  A
+   reason, a constraint, a number, a decision, or something the product refuses
+   to do -- and never a restatement of copy that is already on the screen behind
+   it. Each line renders on ONE line at the default text size on a 390px frame,
+   measured per stop by the harness.
+
      t     the 2-3 word title. It is also what the folded chip says.
-     l     one line. Measured, not estimated: the harness reports the rendered
-           line count per step and it is 1 on every step of the core route.
+     l     one line.
      s     selector (or a function returning one) for the thing that is tapped
      r     selector for the thing the RING is drawn on, when that differs
      sc    the screen this stop lives on
-     kc    THE REGION THE STEP IS ABOUT. This is the measurement the previous pass
-           never made -- "does the callout cover the thing this step is about" --
-           and it is a hard constraint now rather than a soft one, because the
-           fold makes it always satisfiable: if no placement clears it, the
-           callout opens folded instead of opening on top of the subject.
-           A comma list is allowed; the union of the matches is the region.
+     kc    THE REGION THE STEP IS ABOUT -- the callout may not cover it. A comma
+           list is allowed; the union of the matches is the region.
      done  a predicate satisfied without a tap. It must have been FALSE at least
-           once since retarget() before it can advance the route -- see armed.
+           once since retarget() before it can advance the route -- unless the
+           step is a prelude (pass:1), which is the whole point of a prelude.
+     sil   a silent transition: ring only, not counted, no dwell
+     pass  a chapter prelude: if its predicate is already true when the route
+           reaches it, the route walks straight through without drawing anything
      tap   false: nothing to tap; the stop ends when the app moves on
      ring  false: no ring at all on this stop
      round true: draw the ring as a circle whatever the target is
      anchor the box the callout is placed against when there is no ring
    Everything the presenter SAYS is in demo-script.md. The line on screen is a
-   label, not a script. */
-var CORE=[
- {t:'Before you arrive', l:'Check the entrance before you go.',
+   label, not a script.
+   ========================================================================== */
+
+/* ---- the preludes ---------------------------------------------------------
+   THE SKIP CONTROL IS ALWAYS THERE, so every chapter has to be enterable cold.
+   A prelude is the set of taps the presenter would have made by hand to get the
+   app where the chapter starts. Run in order, every one of them is already
+   satisfied and the route walks through the whole prelude inside one frame --
+   measured: zero drawn frames and zero counted steps on a straight run. Pressed
+   from the middle of another chapter, they ring, silently, one at a time.  */
+function preOnboard(){ return [
+ {sil:1,pass:1,t:'Continue',l:'Tap Continue as guest.',
+  s:'#ob-guest',done:function(){return scr()!=='ob-welcome';}},
+ {sil:1,pass:1,t:'Continue',l:'Tap Allow location.',
+  s:'#ob-allow-loc',done:function(){return scr()!=='ob-location';}},
+ {sil:1,pass:1,t:'Continue',l:'Tap Continue.',
+  s:'#ob-needs-continue',done:function(){return scr()!=='ob-needs';}}
+]; }
+function preMap(){ return preOnboard().concat([
+ {sil:1,pass:1,t:'Close this',l:'Close what is open.',
+  s:openSheetClose,done:noSheet},
+ {sil:1,pass:1,t:'The map',l:'Back to the map.',
+  s:toMap,done:function(){return scr()==='screen-map';}}
+]); }
+/* the corrections chapter is the one chapter that does not start on the map: it
+   starts on an open card, because that is where the app puts the control. Its
+   prelude therefore closes everything EXCEPT the card, and only walks the card
+   open if it is not already. */
+function preCard(){ return preOnboard().concat([
+ {sil:1,pass:1,t:'Close this',l:'Close what is open.',
+  s:openSheetClose,done:function(){return !document.querySelector('.sheet.on:not(#sheet-card)');}},
+ {sil:1,pass:1,t:'The map',l:'Back to the map.',
+  s:toMap,done:function(){return scr()==='screen-map'||sheetOn('sheet-card');}},
+ {sil:1,pass:1,t:'A door',l:'Tap any pin.',
+  s:pinTarget,r:pinRing,round:true,done:function(){return sheetOn('sheet-card');}},
+ {sil:1,pass:1,t:'Open it',l:'Drag the card up.',
+  s:'#card-grip',done:function(){return cardPos()==='medium'||cardPos()==='full';}},
+ {sil:1,pass:1,t:'All of it',l:'Drag it up again.',
+  s:'#card-grip',done:function(){return cardPos()==='full';}}
+]); }
+
+var CH=[
+{name:'Getting in', enter:[], steps:[
+ /* the welcome screen already says "Continue as guest" and "Guest choices stay
+    on this device". What it does not say is that the guarantee holds for the
+    whole of what follows. */
+ {t:'Before you arrive', l:'Nothing after this asks you to sign in.',
   s:'#ob-guest', sc:'ob-welcome', kc:'#ob-signin'},
 
- {t:'Where you are', l:'The map centres on where you are.',
+ {sil:1, t:'Your location', l:'Tap Allow location.',
   s:'#ob-allow-loc', sc:'ob-location'},
 
- {t:'Your needs', l:'Pick what matters to you.',
+ /* the screen says the choices change match information rather than which
+    businesses appear. The mechanism -- opacity, and only opacity -- is the part
+    a technical room wants and the part that makes the promise checkable. */
+ {t:'Your needs', l:'A place that misses fades. It never leaves.',
   s:'#ob-persona-grid .persona', sc:'ob-needs', kc:'#ob-persona-grid,#ob-needs p.ob-p',
   done:function(e){return e&&e.classList.contains('sel');}},
 
- {t:'Not a filter', l:'This changes the match, not the map.',
-  s:'#ob-needs-continue', sc:'ob-needs', kc:'#ob-persona-grid,#ob-needs p.ob-p'},
+ {sil:1, t:'Continue', l:'Tap Continue.',
+  s:'#ob-needs-continue', sc:'ob-needs'}
+]},
 
- /* ROUND 15 MOVED THIS STEP'S SUBJECT OFF THE SCREEN. The tier card and the match
-    strip are one control now -- a 179x48 pill, measured, shut by default -- so
-    "here are the three tiers" cannot be step one of the map any more: the tiers
-    are not drawn until the key is opened. The teaching moment is therefore two
-    steps, open it and then read it, which is also how a first-time user meets it. */
- {t:'The map key', l:'One control names every mark.',
+{name:'The map', enter:preOnboard(), steps:[
+ /* ROUND 15 made the tier card and the match strip one control -- a 179x48 pill,
+    shut by default -- so the tiers are not drawn until the key is opened. */
+ {t:'Every mark named', l:'Tier is shape and fill, never colour alone.',
   s:'#key-toggle', sc:'screen-map', done:function(){return keyOpenNow();}},
 
- {t:'Three tiers', l:'Estimated, scanned on-site, owner-confirmed.',
+ {sil:1, t:'How trust grows', l:'Tap How trust grows.',
   s:'#key-cta', sc:'screen-map', kc:'#key-body',
   done:function(){return sheetOn('sheet-trust');}},
 
- {t:'How trust grows', l:'Each rung says how we know.',
+ {t:'How trust grows', l:'Pins only move up. Nothing is demoted.',
   s:'#sheet-trust .sheet-close', kc:'#trust-ladder',
   done:function(){return !sheetOn('sheet-trust');}},
 
- /* THIS STOP EARNED ITSELF BY MEASUREMENT. The key stays open once opened, and
-    open it is 322 x 295px over the top-left of the map -- which put the 14-place
-    disc, the biggest one on the frame, underneath it, so the hit test refused
-    every good target for the three stops that follow. Shutting it is also the
-    Round 15 change in one gesture: the key is one control, it is shut by default,
-    and it goes away again. */
- {t:'Shut it again', l:'The key is a control, not furniture.',
+ /* the key stays open once opened, and open it is 322 x 295px over the top-left
+    of the map -- which puts the 14-place disc underneath it and makes the hit
+    test refuse every good target for the stops that follow. Shutting it is
+    housekeeping, so it is silent. */
+ {sil:1, t:'Shut the key', l:'Tap the key again.',
   s:'#key-toggle', sc:'screen-map', kc:'#key-body',
   done:function(){return !keyOpenNow();}},
 
- /* ROUND 15 also gave the map a mark for the reader's own position. It is
-    pointer-events:none and aria-hidden, so it cannot be the tap; the control it
-    is drawn from can, and the two are literally one drawing (youHereSVG()
-    reproduces the locate button's glyph). Ring the control, keep clear of the
-    mark. */
- {t:'You are here', l:'The crosshair is where you stand.',
+ /* the mark is pointer-events:none and aria-hidden, so it cannot be the tap; the
+    control it is drawn from can, and the two are literally one drawing --
+    youHereSVG() reproduces the locate button's glyph. */
+ {t:'You are here', l:'Same drawing as the button, so both agree.',
   s:'#locate-btn', sc:'screen-map', kc:'#you-here'},
 
- /* the numbered disc answers a press-and-hold now, and a hover on a pointer. The
-    stop ends when the preview is up, which is true of either gesture, so the same
-    step works on his phone and on a laptop. */
- {t:'Grouped places', l:'Press and hold a number to see inside.',
+ {t:'Grouped places', l:'The number counts places, not quality.',
   s:clusterTarget, r:clusterRing, sc:'screen-map', round:true, kc:'#cluster-peek',
   done:function(){return peekOn();}},
 
- {t:'Tap a door', l:'The card rises to your thumb.',
-  s:pinTarget, r:pinRing, sc:'screen-map', round:true,
-  done:function(){return sheetOn('sheet-card');}},
-
- {t:'At a glance', l:'Name, entrance, tier and match.',
-  s:'#card-grip', kc:'#card-content',
-  done:function(){return cardPos()==='medium'||cardPos()==='full';}},
-
- {t:'The whole card', l:'Freshness and confidence, both dated.',
-  s:'#card-grip', kc:'#card-content',
-  done:function(){return cardPos()==='full';}},
-
- {t:'How we know', l:'Every line has a source.',
-  s:'#sheet-card [data-act="receipt"]', kc:'#card-content',
-  done:function(){return sheetOn('sheet-receipt');}},
-
- {t:'The receipt', l:'Dated sources, not a rating.',
-  s:'#sheet-receipt .sheet-close', kc:'#rcpt-body',
-  done:function(){return !sheetOn('sheet-receipt');}},
-
- {t:'No account', l:'None of that needed a login.',
-  s:'#sheet-card .sheet-close', kc:'#card-content', done:noSheet},
-
- {t:'Filters', l:'Filters change which places you see.',
+ {sil:1, t:'Filters', l:'Tap Filters.',
   s:'#fab-filters', sc:'screen-map',
   done:function(){return sheetOn('sheet-filters');}},
 
- {t:'Never failing', l:'Nothing here is marked as failing.',
-  s:'#btn-filt-show', kc:'#sheet-filters .sheet-scroll', done:noSheet},
+ {t:'Never failing', l:'Two public states, and neither is failing.',
+  s:'#btn-filt-show', kc:'#sheet-filters .sheet-scroll', done:noSheet}
+]},
 
- {t:'Add a door', l:'Scan is the map continuing.',
+{name:'One place', enter:preMap(), steps:[
+ /* the tap-target rule is stricter than WCAG's and it is the reason the map
+    groups rather than crowds -- so it belongs on the tap itself. */
+ {t:'Tap a door', l:'Every hit area is 48px, and none overlap.',
+  s:pinTarget, r:pinRing, sc:'screen-map', round:true,
+  done:function(){return sheetOn('sheet-card');}},
+
+ /* the grip cycles peek -> medium -> full one tap at a time. The first tap is
+    housekeeping; the card at full is what the stop is about. */
+ {sil:1, t:'Open it up', l:'Drag the card up.',
+  s:'#card-grip', kc:'#card-content',
+  done:function(){return cardPos()==='medium'||cardPos()==='full';}},
+
+ {t:'The whole card', l:'Confidence is agreement, not accuracy.',
+  s:'#card-grip', kc:'#card-content',
+  done:function(){return cardPos()==='full';}},
+
+ {sil:1, t:'The evidence', l:'Tap See the evidence receipt.',
+  s:'#sheet-card [data-act="receipt"]', kc:'#card-content',
+  done:function(){return sheetOn('sheet-receipt');}},
+
+ {t:'How we know', l:'Dated sources. Never a rating, never a score.',
+  s:'#sheet-receipt .sheet-close', kc:'#rcpt-body',
+  done:function(){return !sheetOn('sheet-receipt');}}
+]},
+
+/* THE THESIS THIS CHAPTER OPENS ON: a correction can never change a verdict. It
+   marks a place as needing another look and it reaches a person, not a form.
+   Nothing is erased; earlier evidence stays on the receipt.
+   The sheet already says "corrections stay human; nothing changes without
+   review", so neither line repeats it: they say the two things the screen does
+   not, which is that a note cannot move a tier down and what it CAN do. */
+{name:'Corrections', enter:preCard(), steps:[
+ {t:'Something changed', l:'A correction can never lower a tier.',
+  s:'#sheet-card [data-act="correct"]', kc:'#card-content',
+  done:function(){return sheetOn('sheet-correct');}},
+
+ /* no tap of its own: the app's Send refuses an empty note, so the route waits
+    for the presenter to type rather than ringing a button that will bounce. */
+ {sil:1, t:'In your words', l:'Type what you noticed.',
+  s:'#correct-note', kc:'#sheet-correct .sheet-scroll',
+  done:function(e){return !!(e&&e.value&&e.value.trim().length);}},
+
+ {t:'It reaches a person', l:'It marks the place for another look.',
+  s:'#btn-correct-send', kc:'#sheet-correct .sheet-scroll',
+  done:function(){return scr()==='screen-corr-done';}},
+
+ /* screen-corr-done says "Earlier evidence stays. Nothing is erased" in its own
+    words, at length, on the screen. Captioning it would be reading it aloud. */
+ {sil:1, t:'Back', l:'Tap Back to entrance.',
+  s:'#corr-done-back', sc:'screen-corr-done', kc:'.next-list'},
+
+ {sil:1, t:'Close the card', l:'Close the card.',
+  s:'#sheet-card .sheet-close', kc:'#card-content', done:noSheet}
+]},
+
+/* THE THESIS: this is the one rung a machine cannot produce. Everything else on
+   the map came from a photograph; this came from a person standing at their own
+   door. What an owner knows that a camera cannot see is the point of the flow.
+   The owner workspace is also the only Owner-confirmed receipt in the build:
+   door-11 (Jo's Coffee) is the one owner-confirmed place in the seeded map data
+   and it clusters away at every mobile frame.
+   Two targets that looked right were measured and dropped. [data-ow-receipt] on
+   ow-overview only raises a toast, so a stop that waited on sheet-receipt hung.
+   And #review-publish is aria-disabled until the owner has changed something, so
+   a stop that rang it would ring a button that refuses. */
+{name:'The owner', enter:preMap(), steps:[
+ {t:'The top rung', l:'One rung a photograph can never produce.',
+  s:'#head-profile', sc:'screen-map'},
+
+ {sil:1, t:'My business', l:'Tap My Business.',
+  s:'[data-go="ow-overview"]', sc:'screen-profile'},
+
+ /* measured on a FRESH ow-overview (nothing scrolled): the hero sits at
+    y=122-328 and the first receipt row at y=642-711, both in frame, while the
+    three owner actions start at y=907. */
+ {t:'Owner-confirmed', l:'The rung above this would be a legal claim.',
+  s:'#ow-overview [data-ow-receipt]', sc:'ow-overview', kc:'.ow-hero'},
+
+ {t:'What only they know', l:'Door weight, a buzzer, a side entrance.',
+  s:'[data-go="ow-edit"]', sc:'ow-overview', kc:'#ov-feats'},
+
+ {sil:1, t:'Review changes', l:'Tap Review changes.',
+  s:'[data-go="ow-review"]', sc:'ow-edit', kc:'#edit-list'},
+
+ {t:'Nobody overwrites', l:'An owner cannot delete a neighbor\u2019s scan.',
+  s:'#nav-map', sc:'ow-review', kc:'#review-diff'}
+]},
+
+{name:'Adding a door', enter:preMap(), steps:[
+ {sil:1, t:'Add a door', l:'Tap Scan.',
   s:'#nav-scan', sc:'screen-map', done:function(){return scr()==='scan-primer';}},
 
- {t:'Privacy first', l:'Faces blur and GPS is stripped.',
+ /* the primer already says faces are auto-blurred and GPS is stripped at upload.
+    The two things it does not say are WHERE in the pipeline that happens and
+    what it does when it cannot. */
+ {t:'Privacy first', l:'It runs before the model, and fails closed.',
   s:'#btn-allow-cam', sc:'scan-primer', kc:'.privacy-line,.privacy-sub'},
 
- {t:'Frame the door', l:'Put the doorway inside the guide.',
+ {t:'Frame the door', l:'One photograph. No form and no checklist.',
   s:'#btn-shutter', sc:'scan-capture', kc:'#viewfinder'},
 
  /* NO RING HERE, and that is the whole point of the stop. The app draws its own
-    progress ring -- the strongest motion in the product -- and the previous build
-    pinged a violet ring outward around it every 1.2s for 7.9 seconds, on a
-    control that cannot be pressed, while the app's own #ringwrap shifted 8px at
-    about t=3.2s so both twitched once mid-stillness. Two concentric rings, one of
+    progress ring -- the strongest motion in the product -- and a violet ring
+    pinging outward around it every 1.2s would be two concentric rings, one of
     them insisting. The callout docks below the check rows and the app's ring is
     the star.
     The label says nothing about how long this takes. A live scan is not the
     length of this animation, and latency is not a claim this layer needs to make
     to earn the stop -- what it names is what the app is doing. */
- {t:'It reads the photo', l:'Nothing to tap. Watch what it names.',
+ {t:'It reads the photo', l:'It reads four things and abstains on the rest.',
   sc:'scan-processing', tap:false, ring:false, anchor:'.checklist',
-  /* #ringwrap is in the keep-clear even though the step has no ring of its own:
-     the app's progress ring is the thing this stop is about, and the first
-     placement clipped 6px off the bottom of its arc. */
   kc:'.checklist,#proc-chips,#ringwrap,#proc-caption'},
 
- {t:'Before it publishes', l:'You see what the photo supports.',
+ {t:'Before it publishes', l:'Not visible is an answer we had to teach it.',
   s:'#btn-publish', sc:'scan-review', kc:'#vc-chips'},
 
- {t:'Two public states', l:'Scanned on-site, or not yet checked.',
+ {t:'Published', l:'Coverage comes from whoever is at the door.',
   s:'#btn-done-map', sc:'scan-done', kc:'#mini-map,#done-legend'}
+]},
+
+/* THE THESIS: the product turning its settings on itself, live. Text to 200% while
+   they watch, and NOT narrated -- the line names the number and stops.
+   ROUND 16 CORRECTION: the previous build rang [data-tsize="larger"], whose own
+   aria-label is "Larger text size, 126 percent". The brief asked for 200%. That
+   is [data-tsize="double"], the fifth A. The demo has been showing 126% and
+   calling it two hundred. */
+{name:'On itself', enter:preMap(), steps:[
+ {t:'Its own settings', l:'All three of these change the running app.',
+  s:'#head-profile', sc:'screen-map'},
+
+ {sil:1, t:'Accessibility', l:'Tap Accessibility.',
+  s:'[data-go="screen-a11y"]', sc:'screen-profile'},
+
+ {t:'Text size', l:'Two hundred percent of default.',
+  s:'[data-tsize="double"]', sc:'screen-a11y', kc:'#screen-a11y .tsize-row',
+  done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
+
+ {t:'Nothing was cut', l:'No clipping, and nothing scrolled sideways.',
+  s:'[data-tsize="default"]', sc:'screen-a11y', kc:'#screen-a11y .tsize-row',
+  done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
+
+ {t:'High contrast', l:'It redraws the map, not only the text.',
+  s:'[data-pref="hc"]', sc:'screen-a11y', kc:'#screen-a11y .preview',
+  done:function(e){return e&&e.getAttribute('aria-checked')==='true';}},
+
+ {sil:1, t:'Back to the map', l:'Tap Map.',
+  s:'#nav-map', sc:'screen-a11y'}
+]}
 ];
 
-/* ---- the three branches ---------------------------------------------------
-   ENTERED ONLY FROM THE MAP, WITH NOTHING OPEN, AND THAT IS A DECISION.  All
-   three begin on the map; a branch entered from inside a sheet has nowhere clean
-   to return to, and a branch entered mid-scan would abandon a capture. The
-   control is a fourth disc in the HUD pill, present only when the map is the
-   active screen and no sheet is up, and no step in any route ever points at it,
-   so it is never the thing that blinks.
-   Each branch ends on a stop whose tap is #nav-map -- measured: the nav bar is
-   present and #nav-map is at 12,765 on every setscreen and ownerscreen this
-   route reaches -- so the return is one tap the presenter makes, not a
-   navigation this layer performs. */
-var BRANCH={
- /* THE OWNER WORKSPACE IS THE ONLY OWNER-CONFIRMED RECEIPT IN THE BUILD, and this
-    branch exists to close that gap: door-11 (Jo's Coffee) is the one Owner-confirmed
-    place in the seeded map data and it clusters away at every mobile frame, so the
-    core route can never show the top rung honestly.
-    Two targets that looked right were measured and dropped. `[data-ow-receipt]` on
-    ow-overview only raises a toast -- it does not open the receipt sheet -- so a stop
-    that waited on sheet-receipt hung there. And `#review-publish` is aria-disabled
-    until the owner has actually changed something, so a stop that rang it would ring
-    a button that refuses. The route therefore ends on ow-review, which shows the
-    change and what it replaces, and the publish itself is the presenter's to do or
-    not. */
- A:{name:'Business', sub:'The owner\u2019s side', steps:[
-   {t:'Your account', l:'Settings, contributions and business.',
-    s:'#head-profile', sc:'screen-map'},
-   {t:'My business', l:'The owner\u2019s side of the same door.',
-    s:'[data-go="ow-overview"]', sc:'screen-profile'},
-   /* measured on a FRESH ow-overview (nothing scrolled): the hero sits at
-      y=122-328 and the first receipt row at y=642-711, both in frame, while the
-      three owner actions start at y=907. So the stop whose line is about the hero
-      rings something the reader can see without moving, and the stop that has to
-      reach the actions is the one whose line is about the screen after it. */
-   {t:'Owner-confirmed', l:'Attested at the door, and dated.',
-    s:'#ow-overview [data-ow-receipt]', sc:'ow-overview', kc:'.ow-hero'},
-   {t:'What only they know', l:'Door weight, a buzzer, a side entrance.',
-    s:'[data-go="ow-edit"]', sc:'ow-overview', kc:'#ov-feats'},
-   {t:'Reviewed as well', l:'An owner\u2019s change is dated too.',
-    s:'[data-go="ow-review"]', sc:'ow-edit', kc:'#edit-list'},
-   {t:'Back to the map', l:'Same door, both sides of it.',
-    s:'#nav-map', sc:'ow-review', kc:'#review-diff'}
- ]},
- /* THE POINT THIS BRANCH HAS TO LAND: a correction never changes a verdict. It
-    marks the place as needing another look and it reaches a person. The demo
-    asserts that in the script today without ever showing it.
-    The note stop has no tap of its own: the app's Send refuses an empty note, so
-    the route waits for the presenter to type rather than ringing a button that
-    will bounce. */
- B:{name:'Community', sub:'Corrections', steps:[
-   {t:'Tap a door', l:'Any place on the map.',
-    s:pinTarget, r:pinRing, sc:'screen-map', round:true,
-    done:function(){return sheetOn('sheet-card');}},
-   /* two taps, two stops. The grip cycles peek -> medium -> full one stop at a
-      time, and a single stop that waited on 'full' hung on the first tap. */
-   {t:'Open it up', l:'More of the card.',
-    s:'#card-grip', kc:'#card-content',
-    done:function(){return cardPos()==='medium'||cardPos()==='full';}},
-   {t:'All of it', l:'Everything this card has.',
-    s:'#card-grip', kc:'#card-content',
-    done:function(){return cardPos()==='full';}},
-   {t:'Something changed', l:'Anyone can say so.',
-    s:'#sheet-card [data-act="correct"]', kc:'#card-content',
-    done:function(){return sheetOn('sheet-correct');}},
-   {t:'In your words', l:'Say what you noticed.',
-    s:'#correct-note', kc:'#sheet-correct .sheet-scroll',
-    done:function(e){return !!(e&&e.value&&e.value.trim().length);}},
-   {t:'It reaches a person', l:'Nothing changes without review.',
-    s:'#btn-correct-send', kc:'#sheet-correct .sheet-scroll',
-    done:function(){return scr()==='screen-corr-done';}},
-   {t:'Nothing is erased', l:'Earlier evidence stays on the receipt.',
-    s:'#corr-done-back', sc:'screen-corr-done', kc:'.next-list'},
-   /* "Back to entrance" lands on the map with the card open again, and a branch
-      that hands the core route back a covered map is a branch that has not
-      finished. Measured: the next core stop is the numbered disc, and with the
-      card up not one disc is hit-testable. */
-   {t:'Back to the map', l:'The card is where you left it.',
-    s:'#sheet-card .sheet-close', kc:'#card-content', done:noSheet}
- ]},
- /* An accessibility product demonstrating that it is itself accessible, and the
-    walkthrough layer surviving all three settings is worth seeing rather than
-    claiming. The text-size stop is not narrated: the line says to turn it up and
-    the room watches the interface reflow. */
- C:{name:'Accessibility', sub:'It changes on screen', steps:[
-   {t:'Your account', l:'The app\u2019s own settings live here.',
-    s:'#head-profile', sc:'screen-map'},
-   {t:'Accessibility', l:'Three settings, all of them live.',
-    s:'[data-go="screen-a11y"]', sc:'screen-profile'},
-   {t:'Text size', l:'Turn it up.',
-    s:'[data-tsize="larger"]', sc:'screen-a11y', kc:'#screen-a11y .prof-card',
-    done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
-   {t:'Nothing was cut', l:'Every screen reflows at this size.',
-    s:'[data-tsize="default"]', sc:'screen-a11y', kc:'#screen-a11y .prof-card',
-    done:function(e){return e&&e.getAttribute('aria-pressed')==='true';}},
-   {t:'High contrast', l:'Borders instead of shading.',
-    s:'[data-pref="hc"]', sc:'screen-a11y', kc:'#screen-a11y .preview',
-    done:function(e){return e&&e.getAttribute('aria-checked')==='true';}},
-   {t:'Back to the map', l:'Settings stay on this device.',
-    s:'#nav-map', sc:'screen-a11y'}
- ]}
-};
+/* ---- flatten, and number by SPOKEN stops ---------------------------------
+   Two numbers come out of this. `pos` is where the presenter is inside the
+   chapter and it counts only stops that say something; a silent transition
+   borrows the number of the stop it is on its way to, because that is what it
+   is. `nar` is the same count across the whole route and is what the progress
+   rule draws. Prelude steps are silent by construction. */
+var ROUTE=[], CHS=[], NARTOTAL=0;
+(function(){
+  for(var c=0;c<CH.length;c++){
+    var list=(CH[c].enter||[]).concat(CH[c].steps), k, tot=0;
+    for(k=0;k<list.length;k++) if(!list[k].sil) tot++;
+    CHS.push({name:CH[c].name, total:tot, start:ROUTE.length});
+    var pos=0, fwd=new Array(list.length), run=tot;
+    for(k=list.length-1;k>=0;k--){ fwd[k]=run; if(!list[k].sil) run--; }
+    for(k=0;k<list.length;k++){
+      var s=list[k];
+      s.ch=c;
+      if(s.sil){ s.pos=Math.min(tot,Math.max(1,fwd[k])); }
+      else { pos++; s.pos=pos; NARTOTAL++; s.nar=NARTOTAL; }
+      s.chTotal=tot;
+      ROUTE.push(s);
+    }
+  }
+})();
 
 var TOP_BAND=46;      /* the HUD's band: the callout never enters it */
 var GAP=10;           /* ring to callout */
@@ -10499,39 +10669,40 @@ var RING_CLAMP=6;     /* a full-bleed target still shows its vertical rules */
    groups. The action groups were added after measuring the chip's home -- with
    only the docks in this list the floor on the welcome screen was the nav bar at
    758 and the chip docked at 708, which is on top of Continue as guest (724-772),
-   the very control step 1 rings. The rule the chip is meant to express is "above
-   whatever this screen keeps at the bottom", and .wl-actions / .ob-actions /
-   .scan-actions are that on the five screens that have no dock. */
+   the very control step 1 rings. */
 var KEEPOUT=['#navbar','.capture-dock','.scan-dock','.filt-apply','.sheet-dock',
              '.wl-actions','.ob-actions','.scan-actions'];
 var MARIGOLD='rgb(253, 179, 39)';   /* --marigold400 #FDB327, resolved */
+var VIOLET600='rgb(79, 52, 219)';   /* --violet600 #4F34DB, resolved: the ring's own ink */
 
 /* ---- the dwell before the callout folds itself ---------------------------
    READ IT ALOUD AT 150 WORDS PER MINUTE AND ADD A BEAT.  150 wpm is 400ms a word.
-   The title and the line together run 6 to 11 words across this route, so the
-   reading itself is 2.4s to 4.4s; the beat is 900ms, which is about one breath
-   and is what stops the fold landing on the last syllable. The result is clamped
-   to 2.6s..5.0s so no stop is either a flash or a wait.
+   The beat is 900ms, which is about one breath and is what stops the fold landing
+   on the last syllable. The result is clamped to 2.6s..5.0s so no stop is either
+   a flash or a wait.
    IT IS A JS TIMER AND NOT A TRANSITION-DELAY, deliberately. The universal
    reduced-motion floor zeroes CSS durations and delays, and a reading allowance
    expressed as one would collapse to zero the moment Reduce Motion is on -- which
    is precisely backwards, and is the shape of the seam this build has already
    been bitten by once. Reduce Motion changes what moves; it does not change how
-   long a sentence takes to read. */
+   long a sentence takes to read.
+   A SILENT TRANSITION HAS NO DWELL: there is nothing to read. */
 var WPM_MS=400, BEAT_MS=900, DWELL_MIN=2600, DWELL_MAX=5000;
 function dwellFor(s){
+  if(!s||s.sil) return 0;
   var w=((s.t||'')+' '+(s.l||'')).trim().split(/\s+/).length;
   return Math.max(DWELL_MIN, Math.min(DWELL_MAX, w*WPM_MS + BEAT_MS));
 }
 
 /* ---- state ---------------------------------------------------------------- */
-var route=CORE, branchKey='', ret=null;
 var i=0, started=false, finished=false, lockUntil=0,
     missSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
-    armed=false, folded=false, peeked=false, foldTimer=0, lastPlaced=null;
+    armed=false, folded=false, peeked=false, foldTimer=0, lastPlaced=null,
+    lastTick=0, shown0=false;
 
-function step(){ return route[i]; }
-function nSteps(){ return route.length; }
+function step(){ return ROUTE[i]; }
+function nSteps(){ return ROUTE.length; }
+function silent(){ var s=step(); return !!(s&&s.sil); }
 
 /* a resolver runs ONCE per visit to its stop and the answer is cached: pickPin()
    hit-tests every pin on the map, and doing that twice a frame for the life of a
@@ -10616,13 +10787,17 @@ function isMarigold(cs){
   return cs.backgroundColor===MARIGOLD || cs.borderTopColor===MARIGOLD
       || (cs.boxShadow||'').indexOf('253, 179, 39')>=0;
 }
+/* the control is FILLED with the ring's own violet -- every .btn.primary. The fill
+   only, not the keyline: a ghost button's violet keyline is the INSIDE case above
+   and is the one place a violet band is exactly right. */
+function isVioletFill(cs){ return cs.backgroundColor===VIOLET600; }
 function ringStyleFor(node, b, forceRound){
   var cs=getComputedStyle(node);
   var bw=parseFloat(cs.borderTopWidth)||0;
   var opaqueBorder = bw>=1 && cs.borderTopStyle!=='none'
         && cs.borderTopColor!=='rgba(0, 0, 0, 0)' && cs.borderTopColor!=='transparent';
   var insetShadow = /inset/.test(cs.boxShadow||'');
-  var mari = isMarigold(cs);
+  var mari = isMarigold(cs) || isVioletFill(cs);
   var inside = !mari && (opaqueBorder || insetShadow);
   var rad;
   if(inside){
@@ -10633,7 +10808,7 @@ function ringStyleFor(node, b, forceRound){
   }else{
     rad='var(--r-3)';       /* ONE constant, never inherited */
   }
-  return {inside:inside, mari:mari, rad:rad,
+  return {inside:inside, onfill:mari, rad:rad,
           ink: mari ? 'var(--indigo900)' : 'var(--violet600)',
           glow: mari ? 'rgba(30,17,66,.28)' : 'rgba(79,52,219,.30)'};
 }
@@ -10655,18 +10830,12 @@ function nearCircle(cs,b){
      H3  it never crosses keepOutTop() -- the nav bar and the four docks.
    Three are soft, surrendered in this order:
      S1  clear of the step's kc region, the content the step is ABOUT;
-     S2  clear of the app's own floating furniture -- the nearby rail, the FAB
-         column, the map controls, the filter chips, the app bar, the map key.
-         This is a WEAK preference and it exists because the earlier build, having
-         satisfied every hard rule, still landed a card squarely on a nearby card's
-         name while talking about filters. It is ranked below S1 on purpose: the
-         thing the step is about outranks the thing that merely happens to be
+     S2  clear of the app's own floating furniture. Ranked below S1 on purpose:
+         the thing the step is about outranks the thing that merely happens to be
          under the card.
      S3  drawn at full type scale (then .92, .84, .76).
-   S1 IS NO LONGER A LOST CAUSE ON A SMALL FRAME. If no candidate clears the kc,
-   the caller folds the callout to its chip instead of dropping it on the subject.
-   That is the whole reason the fold is the default state rather than an escape
-   hatch: a placement puzzle with no solution now has one. */
+   S1 IS NOT A LOST CAUSE ON A SMALL FRAME. If no candidate clears the kc, the
+   caller folds the callout to its chip instead of dropping it on the subject. */
 var SCALES=[1,.92,.84,.76];
 var ARROW_GAP=14, ARROW_IN=16;
 var SOFT=['#nearby','.map-fabs','.map-ctls','#chiprow','.apphead','#legend','#navbar',
@@ -10742,14 +10911,10 @@ function placeCall(b, target, kc){
     }
     if(best && best.cost===0 && best.soft===0) break;   /* smaller type cannot beat a clean fit */
   }
-  /* NO CANDIDATE MEANS FOLD, NOT "PUT IT SOMEWHERE".  The previous build's last
-     resort ignored H2 and dropped the card on the target, and it was reached for
-     real: at 320x568 with 200% text the callout is 296 x 128px and the welcome
-     screen's docked actions occupy y=341-449 on a frame whose floor is 482, so
-     there is no rectangle that clears both. The card landed on Continue as guest,
-     the hit test then correctly reported the target as covered, and the ring went
-     out for the rest of the stop. Returning false hands the problem to the fold,
-     which is the one answer that always fits. */
+  /* NO CANDIDATE MEANS FOLD, NOT "PUT IT SOMEWHERE".  At 320x568 with 200% text
+     the callout is 296 x 128px and the welcome screen's docked actions occupy
+     y=341-449 on a frame whose floor is 482, so there is no rectangle that clears
+     both. Returning false hands the problem to the fold, which always fits. */
   if(!best) return false;
   call.style.setProperty('--wt-scale',SCALES[best.si]);
   call.style.left=best.x+'px'; call.style.top=best.y+'px';
@@ -10757,37 +10922,23 @@ function placeCall(b, target, kc){
   setArrow(best.side, best.arrow, b||{x:best.x,y:best.y,w:0,h:0}, lastPlaced);
   return best.cost===0;
 }
-function reArrow(b){
-  if(!lastPlaced||folded) return;
-  var a=arrowFor(b,lastPlaced);
-  setArrow(a.side, a.on, b, lastPlaced);
-}
 
 /* ---- the chip's one home --------------------------------------------------
    THE BOTTOM-LEFT CORNER OF THE FREE BAND: x = 12, bottom edge = keepOutTop()-12.
-   It is one rule and one corner, so the eye learns it once -- which is the actual
-   answer to "the callout never establishes a home, so the eye has to re-find it
-   twelve times". Why that corner and not another:
+   One rule and one corner, so the eye learns it once. Why that corner:
      -- the top band from 0 to 46 is the HUD's, and below it every screen in the
-        route has its own top chrome (the app bar at 0-106 on the map, .ob-back
-        and .cancel-x at 54, .flowhead on every setscreen);
+        route has its own top chrome;
      -- the bottom is the one edge whose furniture the layer already measures, so
         the chip can sit exactly on top of whatever that furniture is on this
         screen and read as attached to the frame rather than floating in it;
      -- left rather than right because the FAB column, .map-ctls and the scan
         screens' cancel control are all right-anchored, and because a
-        press-and-hold to re-expand should not need a reach across the frame.
-   ONE RULE, ONE CORNER, AND THE ONLY THING THAT VARIES IS WHAT IT SITS ON.
-   Measured at 390x844 over the 24-stop route: x=12 on every stop; y=708 on the
-   sixteen stops whose floor is the nav bar, 590 on the two onboarding screens
-   whose floor is their own action group, and 629 / 682 / 685 on the three screens
-   that carry a dock of their own. */
+        press-and-hold to re-expand should not need a reach across the frame. */
 function dockChip(){
   /* ALWAYS AT FULL SCALE. Placement may have stepped the type down to fit the
      expanded card somewhere awkward, and a chip that inherited that step would be
      a different size on different steps -- which is exactly the "no home" the dock
-     exists to fix. Measured before this line existed: 37.8px tall on twenty stops
-     and 34px on the one where placement had fallen to .76. */
+     exists to fix. */
   call.style.setProperty('--wt-scale',1);
   var ch=foldBtn.offsetHeight||34, cw=foldBtn.offsetWidth||44, H=wt.offsetHeight;
   var floor=Math.min(keepOutTop(null), H);
@@ -10795,11 +10946,7 @@ function dockChip(){
   /* AND NEVER ON THE STEP'S OWN CONTROL.  When the thing being rung IS the bottom
      furniture -- Continue on the needs screen, Back to the map on the published
      one -- the dock lands on it, so the chip steps up to just above that control
-     instead. Two earlier versions of this were measured and thrown away: sending
-     the chip to the opposite corner put it at y=52 on three of twenty-four stops,
-     and clamping the floor to the target unconditionally scattered it across
-     twenty different y values, because most targets are nowhere near the bottom.
-     Only a real overlap moves it, so the home holds. */
+     instead. Only a real overlap moves it, so the home holds. */
   var rn=ringEl(), tb=(rn&&shown(rn))?box(rn):null;
   if(tb && areaOv({x:EDGE,y:y,w:cw,h:ch}, tb)>0)
     y=Math.max(TOP_BAND+6, tb.y-EDGE-ch);
@@ -10834,6 +10981,7 @@ function setPeek(on){
 }
 function armFold(ms){
   if(foldTimer) clearTimeout(foldTimer);
+  if(!ms) return;
   foldTimer=setTimeout(function(){
     foldTimer=0;
     /* never fold out from under a finger or a cursor that is holding it open */
@@ -10846,26 +10994,41 @@ function setText(t,l){
   if(titleEl.textContent!==t) titleEl.textContent=t;
   if(lineEl.textContent!==l) lineEl.textContent=l;
 }
+/* THE CALLOUT IS EITHER SHOWING OR IT IS NOT A CONTROL.  .on carries the visual
+   state; this carries the consequence, so an invisible card can never be tabbed
+   to or tapped. A class and an attribute, no duration and no delay. */
+function showCall(on){
+  on=!!on;
+  if(call.classList.contains('on')!==on) call.classList.toggle('on',on);
+  var tabbable = on && (finished || !silent());
+  if((foldBtn.tabIndex===0)!==tabbable) foldBtn.tabIndex = tabbable ? 0 : -1;
+  if(on && !shown0){ shown0=true; if(wt.hidden) wt.hidden=false; }
+}
 function paintHud(){
-  var n=finished?nSteps():i+1;
-  countEl.textContent=(branchKey?branchKey+' ':'')+n+' / '+nSteps();
-  prog.style.setProperty('--wt-n',n);
-  prog.style.setProperty('--wt-of',nSteps());
-  backBtn.disabled=(i===0&&!branchKey);
-  var where=branchKey ? (BRANCH[branchKey].name+' branch, step '+n+' of '+nSteps())
-                      : ('Walkthrough, step '+n+' of '+nSteps());
+  var s=step(), c=CHS[s?s.ch:0]||{name:'',total:1};
+  var pos=s?(s.pos||1):1;
+  var where=finished ? 'Walkthrough, finished'
+                     : (c.name+', step '+pos+' of '+c.total);
+  chapEl.textContent=finished?'Done':c.name;
+  posEl.textContent=finished?'':(pos+'/'+c.total);
+  var nar=finished?NARTOTAL:narSoFar();
+  prog.style.setProperty('--wt-n',nar);
+  prog.style.setProperty('--wt-of',NARTOTAL);
+  backBtn.disabled=(i===0);
   backBtn.setAttribute('aria-label',where+': previous step');
-  fwdBtn.setAttribute('aria-label', (!branchKey&&i===nSteps()-1)
+  fwdBtn.setAttribute('aria-label', (i===nSteps()-1)
     ? 'Walkthrough, last step: finish'
     : where+': skip to the next step');
-  paintMore();
+  var nx=CHS[(s?s.ch:0)+1];
+  skipBtn.disabled=finished;
+  skipBtn.setAttribute('aria-label', nx
+    ? ('Skip to the next chapter: '+nx.name)
+    : 'Skip to the end of the walkthrough');
 }
-/* the branch control exists only where a branch can start */
-function paintMore(){
-  var can = started && !finished && !branchKey && scr()==='screen-map' && noSheet();
-  if(moreBtn.hidden===!can) return;
-  moreBtn.hidden=!can;
-  if(!can) closeMenu();
+/* how many spoken stops are behind him, counting the one he is on */
+function narSoFar(){
+  for(var k=i;k>=0;k--) if(ROUTE[k].nar) return ROUTE[k].nar;
+  return 0;
 }
 
 /* ---- advancing ------------------------------------------------------------ */
@@ -10873,12 +11036,26 @@ function advance(){
   if(finished) return;
   lockUntil=Date.now()+380;
   if(i<nSteps()-1){ i++; retarget(); return; }
-  if(branchKey){ endBranch(); return; }
   finish();
 }
 function back(){
-  if(finished) finished=false;
+  if(finished){ finished=false; fwdBtn.textContent='\u203a'; }
+  /* step BACK OVER a prelude. A prelude walks itself forward the moment its
+     predicate is already true, so landing on one would bounce him straight
+     forward again and the back chevron would be a dead control. */
   if(i>0) i--;
+  while(i>0 && ROUTE[i].pass) i--;
+  lockUntil=Date.now()+380;
+  retarget();
+}
+/* the always-present chapter control. It moves the route to the first step of the
+   next chapter, which is that chapter's prelude; the prelude then rings the taps
+   the presenter would have made by hand. This layer still taps nothing itself. */
+function skipChapter(){
+  if(finished) return;
+  var s=step(), nx=CHS[s.ch+1];
+  if(!nx){ finish(); return; }
+  i=nx.start;
   lockUntil=Date.now()+380;
   retarget();
 }
@@ -10886,67 +11063,50 @@ function finish(){
   finished=true;
   lastPlaced=null;
   if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
-  folded=false; peeked=false; call.classList.remove('mini');
+  folded=false; peeked=false; call.classList.remove('mini','silent');
   foldBtn.setAttribute('aria-expanded','true');
   ring.classList.remove('on');
   setText('That is the walkthrough','The app carries on exactly as it is.');
-  dockChip(); call.classList.add('on');
+  dockChip(); showCall(true);
   paintHud();
   fwdBtn.textContent='\u2715';
   fwdBtn.setAttribute('aria-label','Close the walkthrough');
 }
+
+/* A PRELUDE THAT IS ALREADY SATISFIED IS NOT A STEP EITHER.  On a straight run
+   every prelude predicate is true when the route reaches it, so the whole prelude
+   is consumed here, before anything is drawn or counted. The bound is the route's
+   own length: a predicate that throws or a target that never resolves can cost at
+   most one pass through the list, never a loop. */
+function skipSatisfied(){
+  var guard=0;
+  while(guard++ < nSteps()){
+    var t=ROUTE[i];
+    if(!t || !t.pass || !t.done) return;
+    var ok=false;
+    try{ ok=t.done($(selOf(t.s,t,'_cs')||' ')); }catch(e){ ok=false; }
+    if(!ok) return;
+    if(i>=nSteps()-1) return;
+    delete t._cs; delete t._cr;
+    i++;
+  }
+}
 function retarget(){
+  skipSatisfied();
   missSince=0; waiting=false; lastKey=''; armed=false; lastPlaced=null;
   if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
   peeked=false;
-  /* THE CALLOUT FADES BETWEEN STEPS. The previous build removed .on from the ring
-     and never from the card, so the enter transition ran once, at step 1, and the
-     rest of the run was hard cuts of a full-width card teleporting. .on comes off
-     here and goes back on when the new geometry has settled; there is no timer
-     between the two, so reduced motion turns it into an instant swap rather than
-     a shortened one. */
-  call.classList.remove('on');
+  /* THE CALLOUT FADES BETWEEN STEPS. .on comes off here and goes back on when the
+     new geometry has settled; there is no timer between the two, so reduced
+     motion turns it into an instant swap rather than a shortened one. */
+  showCall(false);
   if(folded){ folded=false; call.classList.remove('mini'); foldBtn.setAttribute('aria-expanded','true'); }
   var t=step(); delete t._cs; delete t._cr;
+  call.classList.toggle('silent', !!t.sil);
   ring.classList.remove('on');
   pending={until:Date.now()+SETTLE_MS, last:null, same:0};
   paintHud();
   setText(t.t,t.l);
-}
-
-/* ---- branches ------------------------------------------------------------- */
-function openMenu(){
-  menuEl.innerHTML='';
-  Object.keys(BRANCH).forEach(function(k){
-    var b=document.createElement('button');
-    b.type='button';
-    b.innerHTML='<b></b><span></span>';
-    b.firstChild.textContent=BRANCH[k].name;
-    b.lastChild.textContent=BRANCH[k].sub;
-    b.setAttribute('aria-label','Show the '+BRANCH[k].name+' branch, '+BRANCH[k].steps.length+' steps');
-    b.addEventListener('click',function(e){ e.stopPropagation(); startBranch(k); });
-    menuEl.appendChild(b);
-  });
-  menuEl.hidden=false;
-  moreBtn.setAttribute('aria-expanded','true');
-}
-function closeMenu(){
-  if(menuEl.hidden) return;
-  menuEl.hidden=true;
-  moreBtn.setAttribute('aria-expanded','false');
-}
-function startBranch(k){
-  closeMenu();
-  ret={route:route, i:i};
-  route=BRANCH[k].steps; branchKey=k; i=0;
-  wt.classList.add('branch');
-  retarget();
-}
-function endBranch(){
-  if(!ret){ branchKey=''; wt.classList.remove('branch'); return; }
-  route=ret.route; i=ret.i; ret=null; branchKey='';
-  wt.classList.remove('branch');
-  retarget();
 }
 
 /* a tap on the current target (or anything inside it) ends the stop. Capture
@@ -10954,7 +11114,6 @@ function endBranch(){
 document.addEventListener('click',function(e){
   if(finished||!started) return;
   if(wt.contains(e.target)){ return; }
-  closeMenu();
   if(Date.now()<lockUntil) return;
   var t=el(); if(!t) return;
   if(t===e.target||t.contains(e.target)){
@@ -10965,8 +11124,8 @@ document.addEventListener('click',function(e){
        navigation first), and in that frame the screen-change resync may already
        have moved the route on. So the queued advance carries the position it was
        queued from and is dropped if anything moved in the meantime. */
-    var si=i, sr=route;
-    requestAnimationFrame(function(){ if(i===si&&route===sr) advance(); });
+    var si=i;
+    requestAnimationFrame(function(){ if(i===si) advance(); });
   }
 },true);
 
@@ -10994,10 +11153,8 @@ foldBtn.addEventListener('pointerdown',function(e){
 /* THE SUPPRESSION IS A WINDOW, NOT A FLAG, and that is a measured correction. A
    touch release fires the browser's synthetic click a moment later, and the first
    version cleared the "that was a hold, not a tap" flag inside that click -- so a
-   hold that produced no click (a cancelled pointer, a finger that slid off, a
-   synthetic release) left the flag set and swallowed the NEXT press, including a
-   keyboard Enter. Measured: after one press-and-hold, Enter on the focused chip
-   did nothing. A 300ms window expires on its own and cannot strand anything. */
+   hold that produced no click left the flag set and swallowed the NEXT press,
+   including a keyboard Enter. A 300ms window expires on its own. */
 var suppressClickUntil=0;
 function endHold(e){
   if(downId===null||e.pointerId!==downId) return;
@@ -11018,16 +11175,13 @@ foldBtn.addEventListener('click',function(e){
   setFold(!folded);
 });
 
-backBtn.addEventListener('click',function(e){ e.stopPropagation(); closeMenu(); back(); });
+backBtn.addEventListener('click',function(e){ e.stopPropagation(); back(); });
 fwdBtn.addEventListener('click',function(e){
-  e.stopPropagation(); closeMenu();
+  e.stopPropagation();
   if(finished){ wt.hidden=true; stop(); return; }
   advance();
 });
-moreBtn.addEventListener('click',function(e){
-  e.stopPropagation();
-  if(menuEl.hidden) openMenu(); else closeMenu();
-});
+skipBtn.addEventListener('click',function(e){ e.stopPropagation(); skipChapter(); });
 
 /* ---- the frame loop -------------------------------------------------------
    Geometry is read every frame and the ring is moved when it has moved. That is
@@ -11036,25 +11190,33 @@ moreBtn.addEventListener('click',function(e){
    its target's rect has been identical for three frames. */
 function tick(){
   raf=requestAnimationFrame(tick);
+  lastTick=Date.now();
   if(!started||finished) return;
+  /* NOTHING IS DECIDED FROM A HIDDEN DOCUMENT.  The gate calls this once,
+     synchronously, and a page that boots in a background tab reaches that call
+     mid screen-transition: measured, the welcome screen's rect was still off the
+     frame, so the one tick a hidden page got latched the "Out of view" hint,
+     unhid #wt and left a live region announcing a control that was in fact
+     exactly where it belonged. rAF then does not run to correct it. So the loop
+     stays armed and stays silent, and visibilitychange decides everything the
+     moment there is somebody to decide it for. */
+  if(document.visibilityState==='hidden') return;
 
-  var now=Date.now(), s=step();
-  paintMore();
+  var now=lastTick, s=step();
 
   var cur=scr();
   if(cur!==lastScreen){
-    lastScreen=cur; paintMore();
+    lastScreen=cur;
     if(s.sc && s.sc!==cur){
-      var nx=route[i+1];
+      var nx=ROUTE[i+1];
       if(nx&&nx.sc===cur){ i++; retarget(); return; }
     }
   }
 
   /* THE PREDICATE HAS TO HAVE BEEN FALSE ONCE.  `done: noSheet` is a state, not
-     an event: the previous build advanced the instant no sheet was open, guarded
-     only by a 380ms lock, so an off-script route that closed both sheets could
-     skid forward at about 2.6 steps a second. A stop now arms itself the first
-     time its predicate reads false and only then can it fire. */
+     an event: an off-script route that closed both sheets could otherwise skid
+     forward at about 2.6 steps a second. A stop arms itself the first time its
+     predicate reads false and only then can it fire. */
   if(s.done){
     var dn=el(), ok=false;
     try{ ok=s.done(dn); }catch(e){ ok=false; }
@@ -11078,7 +11240,7 @@ function tick(){
         var clear0 = placeCall(ab, an, kcBox());
         if(!clear0){ setFold(true); } else { setFold(false); armFold(dwellFor(s)); }
       }
-      call.classList.add('on');
+      showCall(true);
       return;
     }
     if(offscreen){
@@ -11086,27 +11248,42 @@ function tick(){
          200% text step the welcome screen's own content is 774px tall inside a
          568px frame with overflow-y:visible -- nothing scrolls and the buttons
          cannot be reached at all. The layer says which of the two it is, in the
-         product's voice: a line a room can hear without the fiction breaking. */
+         product's voice. A silent transition stops being silent here: he has to
+         be told why nothing is ringing. */
       var mode = canScroll(rn) ? 'scroll' : 'nofit';
       if(waiting!==mode){
         waiting=mode;
+        call.classList.remove('silent');
         if(mode==='scroll') setText('Further down','The next control is below the fold.');
         else setText('Out of view','This control is off the frame at this text size.');
         if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
-        setFold(false); dockChip(); call.classList.add('on');
+        setFold(false); dockChip(); showCall(true);
       }
       return;
     }
+    /* MEASURED, AND IT WAS A LIE ON SCREEN.  The scroll hint used to latch: once
+       waiting was 'scroll' it could only be cleared by the target becoming
+       drawable again, so a target that came back INTO frame and was then covered
+       by something -- the app's own toast over "Edit entrance" on ow-overview,
+       reproduced at 390x844 -- kept the words "The next control is below the
+       fold" on screen while the control sat in the middle of the frame. The
+       hint is re-decided every frame now; a covered target falls through to
+       "Just a moment", which is what a covered target is. */
+    if(waiting==='scroll'||waiting==='nofit'){ waiting=false; missSince=0; }
     if(!missSince) missSince=now;
     if(now-missSince>MISS_MS&&!waiting){
       waiting=true;
+      call.classList.remove('silent');
       setText('Just a moment','Waiting for this screen to settle.');
       if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
-      setFold(false); dockChip(); call.classList.add('on');
+      setFold(false); dockChip(); showCall(true);
     }
     return;
   }
-  if(waiting){ waiting=false; setText(s.t,s.l); lastKey=''; }
+  if(waiting){
+    waiting=false; setText(s.t,s.l); lastKey='';
+    call.classList.toggle('silent', !!s.sil);
+  }
   missSince=0;
 
   /* settle: the same rect three frames running, or SETTLE_MS, whichever first */
@@ -11128,11 +11305,13 @@ function tick(){
     if(rw<24){ rx=b.x; rw=b.w; }
     var st=ringStyleFor(rn, {w:rw,h:b.h}, s.round);
     ring.classList.toggle('in', st.inside);
-    ring.classList.toggle('mari', st.mari);
+    ring.classList.toggle('onfill', st.onfill);
     ring.style.cssText='left:'+rx+'px;top:'+b.y+'px;width:'+rw+'px;height:'+b.h
       +'px;border-radius:'+st.rad+';--wt-ink:'+st.ink+';--wt-glow:'+st.glow;
     var rb2={x:rx,y:b.y,w:rw,h:b.h};
-    if(folded||peeked){ dockChip(); }
+    /* a silent transition places nothing: there is no card to place. */
+    if(s.sil){ /* no placement */ }
+    else if(folded||peeked){ dockChip(); }
     else {
       var clear=placeCall(rb2, rn, kcBox());
       /* IT FOLDS IMMEDIATELY, WITHOUT WAITING, when at full size it would cover
@@ -11142,22 +11321,72 @@ function tick(){
     }
   }
   ring.classList.add('on');
-  call.classList.add('on');
+  showCall(true);
+  if(!shown0){ shown0=true; if(wt.hidden) wt.hidden=false; }
 }
 function stop(){ if(raf) cancelAnimationFrame(raf); raf=0; started=false; }
+
+/* ---- THE LOOP MAY NOT DEPEND ON A FRAME EVER ARRIVING ----------------------
+   requestAnimationFrame does not run while a document is hidden. Measured on this
+   build with visibilityState 'hidden' five seconds after boot, on ob-welcome,
+   with step 1's target #ob-guest resolving to a visible 342x48 rect at (24,724):
+   #wt-ring.className was "", it had no inline style, its computed opacity was 0
+   and #wt-call never received .on. The layer was, for the whole of that window,
+   an unhidden overlay drawing nothing.
+   WHAT I COULD NOT REPRODUCE is the claim that it stays broken. Chrome DEFERS a
+   frame callback registered while hidden rather than dropping it, so when the tab
+   came forward the queued tick ran and the ring was correct 350ms later. Three
+   things are still wrong and are fixed here rather than argued about:
+     -- an unbounded window in which #wt is unhidden and draws nothing at all.
+        #wt now stays hidden until the first frame that actually places something,
+        so the layer either looks right or is not there.
+     -- an unbounded window in which #wt-fold, at opacity 0, was focusable and
+        hit-testable over the app's own controls. See showCall().
+     -- one engine dropping one queued callback is unfalsifiable from here and
+        would be permanent. So the chain is re-armed from two sources that a
+        hidden document cannot stop: the visibilitychange event itself, and a
+        700ms interval that restarts the loop if no frame has arrived in 1.2s.
+        The gate below is an interval for exactly the same reason.
+   The watchdog only fires while the document is visible: a hidden page has no
+   frames to miss, and ticking it anyway would be layout work nobody can see. */
+function kick(){
+  if(!started||finished) return;
+  if(raf){ cancelAnimationFrame(raf); raf=0; }
+  lastKey=''; lastPlaced=null;
+  tick();
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='visible') kick();
+});
+addEventListener('pageshow',function(){ kick(); });
+setInterval(function(){
+  if(!started||finished) return;
+  if(document.visibilityState!=='visible') return;
+  if(Date.now()-lastTick>1200) kick();
+},700);
 
 /* ---- start ---------------------------------------------------------------
    The app boots on the splash, which is a control of its own; the walkthrough
    waits for the welcome screen rather than pointing at a screen that is about to
    leave. The gate is an INTERVAL, not requestAnimationFrame: rAF does not run
    while the document is hidden -- measured, a tab that loaded in the background
-   reported exactly 1 frame in 800ms -- and a walkthrough that only arms itself
-   while something is painting is a walkthrough that is off when he brings the tab
-   forward. */
+   reported exactly 1 frame in 800ms.
+   IT ALSO CHECKS THE SCREEN THE APP RESUMED ON, not only the one it booted on. A
+   page restored from the back/forward cache, or one that spent its splash hidden,
+   can be past ob-welcome by the time anything here runs; starting the route at
+   step 1 then would point at a screen that has already gone. The route is placed
+   on the first step whose own screen is the one that is actually up. */
+function startAt(){
+  var cur=scr(), k;
+  for(k=0;k<ROUTE.length;k++) if(ROUTE[k].sc===cur && !ROUTE[k].pass) return k;
+  return 0;
+}
 var _gate=setInterval(function(){
-  if(scr()!=='ob-welcome') return;
+  var cur=scr();
+  if(!cur||cur==='ob-splash') return;
   clearInterval(_gate);
-  wt.hidden=false; started=true; lastScreen=scr();
+  started=true; lastScreen=cur;
+  i=startAt();
   retarget(); tick();
 },120);
 
@@ -11172,12 +11401,19 @@ window.WT={
   to:function(n){ i=Math.max(0,Math.min(nSteps()-1,(n|0)-1)); finished=false; fwdBtn.textContent='\u203a'; retarget(); },
   off:function(){ wt.hidden=true; stop(); },
   fold:function(on){ setFold(on===undefined?!folded:!!on); return folded; },
-  branch:function(k){ if(BRANCH[k]) startBranch(k); return branchKey; },
-  endBranch:endBranch,
+  chapter:function(n){
+    var c=CHS[(n|0)-1]; if(!c) return null;
+    i=c.start; finished=false; fwdBtn.textContent='\u203a'; retarget(); return c.name;
+  },
+  skip:skipChapter,
+  chapters:function(){ return CHS.map(function(c){ return {name:c.name,total:c.total,start:c.start+1}; }); },
   box:function(){ return lastPlaced; },
+  vp:function(){ return _vpAdded; },
   step:function(){
-    var t=step();
-    return {step:i+1, of:nSteps(), branch:branchKey||null, target:1,
+    var t=step(), c=CHS[t.ch]||{name:'',total:0};
+    return {step:i+1, of:nSteps(), branch:null, target:1,
+            ch:t.ch+1, chName:c.name, pos:t.pos||null, chTotal:c.total,
+            silent:!!t.sil, pre:!!t.pass, nar:t.nar||null, narOf:NARTOTAL,
             sel:selOf(t.s,t,'_cs')||null, subj:t.kc||null, act:t.act||null,
             dwell:dwellFor(t), folded:folded, ring:t.ring!==false, title:t.t};
   }};
