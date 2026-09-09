@@ -10779,11 +10779,24 @@ function kcBox(){ return unionBox(step().kc); }
 /* IN FRAME, and not merely overlapping it. A target three quarters below the fold
    would draw a ring the presenter can only see a sliver of, so anything less than
    60% visible counts as off-frame and gets the scroll hint instead. */
-function inFrame(b){
-  if(!b) return false;
-  var W=wt.offsetWidth, H=wt.offsetHeight;
-  var vis=Math.max(0, Math.min(b.y+b.h,H)-Math.max(b.y,TOP_BAND));
-  return b.x<W && b.x+b.w>0 && vis >= Math.min(b.h,44)*0.6;
+/* IN FRAME IS DECIDED IN THE VIEWPORT'S OWN COORDINATES.  This used to take a box
+   that box() had already converted into #wt-relative layout units through a scale
+   derived from #wt's rendered-vs-layout width, and compare it against
+   #wt.offsetHeight. Two coordinate systems, one inferred from the other by
+   assumptions about the host. On the owner's phone they disagreed, and a Filters
+   button sitting in the middle of the screen read 'This control is off the frame
+   at this text size.' The screen is the frame. getBoundingClientRect() and
+   innerWidth/innerHeight are the same coordinate system and cannot disagree with
+   each other, so that is the only pair this test now uses. The 60%-visible rule
+   and the status band are kept. */
+function inFrame(node){
+  if(!node) return false;
+  var r=node.getBoundingClientRect(); if(!r.width||!r.height) return false;
+  var H=window.innerHeight||document.documentElement.clientHeight;
+  var W=window.innerWidth||document.documentElement.clientWidth;
+  var top=Math.max(r.top,TOP_BAND), bot=Math.min(r.bottom,H);
+  var vis=Math.max(0, bot-top);
+  return r.left<W && r.right>0 && vis >= Math.min(r.height,44)*0.6;
 }
 function shown(node){ return !!(node && node.offsetParent!==null && !node.closest('[hidden]')); }
 function canScroll(node){
@@ -11260,9 +11273,20 @@ function tick(){
   }
 
   var rn=ringEl(), b=(rn&&shown(rn))?box(rn):null;
-  var offscreen = !!(b&&!inFrame(b));
+  var offscreen = !!(b&&!inFrame(rn));
   if(offscreen) b=null;
-  if(b&&!hitAt(rn, el())) b=null;
+  /* The hit test used to be a GATE on every ring: if elementFromPoint did not land on
+     the target, the ring was dropped and the step fell through to 'Just a moment'.
+     elementFromPoint takes VIEWPORT coordinates and getBoundingClientRect gives
+     LAYOUT coordinates; anywhere the two disagree -- a host that scales the frame,
+     iOS pinch state, the toolbar collapsing and moving the visual viewport -- every
+     hit fails and every visible target reads as covered. Headless never disagrees,
+     which is why every measured run showed zero stalls and the owner's phone showed
+     'Just a moment' on step after step. hitAt() keeps its original job -- choosing
+     the pin under the legend in pickPin(), and the strict centre test -- and no
+     longer decides whether a shown, in-frame target gets its ring. A ring drawn
+     over a genuine cover is a cosmetic miss; a route that cannot draw at all is a
+     dead demo. */
 
   if(!b){
     ring.classList.remove('on');
