@@ -452,15 +452,67 @@
      green anywhere in the kit or on the board. That is what "the board in the other
      one is white and blue" was asking for.
 
+     ROUND 16 OVERRULES THE GREEN HALF OF THAT SENTENCE, ON THE OWNER'S OWN DECISION.
+     The line above stays because it is the true record of what Round 7 did; it is no
+     longer the rule. Read on before reverting it.
+
+     WHAT WENT WRONG. Painting the kit's `places` layer in --sky400 made the canopy
+     the ESTIMATED TIER'S colour. Along a treed street the band is a row of pale blue
+     discs at a 7.5px pitch under a 9.2px diameter, so they overlap and fuse; the
+     owner read the result as "blue wavy lines" around Congress and asked, of the same
+     marks, "why aren't the trees on the map". Two complaints, one cause. It also
+     broke visual-language.md section 11 outright -- ground furniture in a semantic
+     hue, in a marker-like shape -- which nothing in the rubric had scored.
+
+     THE DECISION AND WHO MADE IT. The owner was given two options, a lavender canopy
+     or a muted green as a GROUND TOKEN, and answered: "gound token i think." So a
+     green enters this file as --g-canopy and as nothing else. It is NEVER semantic,
+     never a state, never on a pin, a chip, a sheet, a swatch or any UI surface; it is
+     ground furniture with a --g- name like every other ground value. grep is the
+     guard: --g-canopy must resolve in exactly one place, groundSVG's canopy layer.
+
+     WHY GREEN AND NOT A FOURTH LAVENDER. Green is the only hue in this build that
+     carries no product meaning -- sky is Estimated, marigold is Scanned, violet is
+     Owner-confirmed, amber is ageing, red is banned, and the green that once meant
+     needs-match was retired in Round 4 (--match-green is gone; the three halos carry
+     their state in LINE STYLE). NOTE, because a reader will hit it: section 11 of
+     visual-language.md still says "green means needs-match". That sentence is stale
+     by four rounds against this build and is the reason to re-read the tokens rather
+     than the prose. A lavender canopy would have been a FOURTH lavender separable
+     from the other three by lightness alone, which fails in greyscale and in high
+     contrast, and rubric 3.10 exists to stop the lavenders multiplying.
+
+     THE VALUE, and it is the thirteenth authored colour in this file rather than a
+     mix of two of the twelve, because the palette contains no green to mix from --
+     that is the whole content of the owner's decision. --g-canopy #A3C98E, CIE
+     L 77.0 / C 34.6 / h 133. It obeys section 11's rule, which is SATURATION not hue:
+       - the least saturated marker ink is sky700 at chroma 34.7; sky400 is 39.0.
+       - the raw token is chroma 34.6, already under both, and the PAINTED tone is
+         chroma 12.8 over a block and 15.3 over the land at .52 -- against the blue
+         canopy it replaces, which painted at 20.3 and was the loudest ground tone
+         in the file. The canopy got LESS saturated, not more.
+       - after the swap the loudest ground tone is the ROAD CASING over a block,
+         #DACDF2 at chroma 20.1, which is unchanged and untouched by this round. So
+         the ground's ceiling moves 20.3 -> 20.1 and its ratio against the least
+         saturated marker moves 0.58 -> 0.58; the canopy's own ratio moves
+         0.58 -> 0.44. Neither number goes the wrong way.
+     Contrast, re-measured in Round 16 against every tone: table under rubric 3.4.
+
      CONTRAST. The darkest tone the ground now paints is the block edge #CFBCEE at
-     relative luminance 0.554; the darkest FILLED area is the place accent over a
-     block, #C1D4F9 at 0.655. --edge is re-solved above against both. */
+     relative luminance 0.554; the darkest FILLED area is the canopy over a block,
+     #C4D5C0 at 0.631 (the blue it replaces was #C1D4F9 at 0.655; the Estimated
+     outline holds 4.05:1 on it, against 4.17:1 before, and 3.36:1 against the raw
+     token, against 3.08:1 before). --edge is re-solved above against both. */
   --g-land:var(--lavender100);       /* kit land   #F5F2FC */
   --g-block:var(--lavender200);      /* kit blocks #E8E1F7 */
   --g-block-edge:var(--lavender-path); /* kit blocks stroke #CFBCEE */
   --g-road:var(--white);             /* kit roads  #FFFFFF */
   --g-road-edge:var(--lavender-path);/* kit roads casing #CFBCEE, painted at .55 */
-  --g-place:var(--sky400);           /* kit places #76BCFD, painted at .34 */
+  /* ROUND 16. The kit's `places` slot, renamed to what it actually draws and
+     repointed off the Estimated tier's blue. GROUND ONLY -- see the block above for
+     the owner's decision and the saturation numbers. --g-place is deliberately gone
+     rather than left aliased, so nothing can reach the old blue by its old name. */
+  --g-canopy:#A3C98E;                /* the tree canopy, painted at .52. NEVER semantic */
   --g-paper:var(--violet600);        /* kit land pattern dot, painted at .045 */
   --g-building:var(--white);         /* board: faint footprint outlines. Kit is silent. */
   --g-label:var(--indigo900);        /* kit labels #1E1142 -- 15.64:1 on the land */
@@ -3049,7 +3101,11 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
      re-toned onto the canonical lavenders rather than invented afresh. */
   --g-land:#FFFFFF;--g-block:#FFFFFF;--g-block-edge:var(--indigo900);
   --g-road:#E8E1F7;--g-road-edge:#FFFFFF;
-  --g-place:#FFFFFF;--g-paper:#FFFFFF;--g-building:#FFFFFF;
+  /* ROUND 16: --g-canopy is white here for the same reason --g-place was -- the
+     canopy layer is skipped entirely under `if(!hc)`, and a token that resolves to
+     the ground's own white cannot paint anything if that guard is ever lost. The
+     green never reaches high contrast. */
+  --g-canopy:#FFFFFF;--g-paper:#FFFFFF;--g-building:#FFFFFF;
   --g-line:var(--indigo900);--g-label:#140E34}
 .phone.hc .fchip,.phone.hc .persona,.phone.hc .tierchip,.phone.hc .field select,.phone.hc .field textarea{border-width:2px}
 .phone.hc .prof-row .chev{color:var(--sub)}
@@ -5095,9 +5151,32 @@ const V_STREETS = [ /* north-south */
    sparse: a band on every frontage reads as a green stripe glued to every road. */
 const TREED_V = {'-97.74430':'both', '-97.74715':'east'};
 const TREED_H = {'30.26685':'south'};
-/* Which blocks carry open space, keyed (row,col) from the top-left of the frame.
-   Republic Square sits off the north-west corner; Congress is the retail spine. */
-const LANDCOVER = {'0,0':'park','0,1':'park','2,1':'plaza','4,4':'plaza','6,3':'plaza','3,2':'court','5,5':'court'};
+/* Which blocks carry open space. Republic Square sits off the north-west corner;
+   Congress is the retail spine.
+   ROUND 16: THIS WAS KEYED (row,col) FROM THE TOP-LEFT OF THE FRAME, which made
+   landcover a property of the VIEW instead of the ground. Zoom out and streetsFor()
+   adds four rows and four columns on every side, so cell (0,0) stops being Republic
+   Square and becomes a block a quarter of a mile north-west of it. Measured at the
+   overview stop before this change: the one surviving park was emitted at x=-11.1,
+   y=-16 -- off the corner of the frame -- so the wide view drew no open space at all,
+   and the park had silently MOVED between the two named stops. It is keyed
+   geographically now. The six boxes below are the street stop's own cells read off
+   H_STREETS / V_STREETS, bounded north and east by the first extension street so a
+   park cannot grow into a quarter, and a cell is tested by its own centre. The street
+   stop is byte-unchanged (verified by diff); every other frame now agrees with it. */
+const LANDCOVER = [
+  {k:'park',  lat0:30.26685, lat1:30.26778, lng0:-97.74810, lng1:-97.74620}, /* N of 4th, W of Lavaca: 2 cells */
+  {k:'plaza', lat0:30.26592, lat1:30.26638, lng0:-97.74715, lng1:-97.74620},
+  {k:'plaza', lat0:30.26500, lat1:30.26546, lng0:-97.74530, lng1:-97.74430},
+  {k:'plaza', lat0:30.26320, lat1:30.26410, lng0:-97.74575, lng1:-97.74530},
+  {k:'court', lat0:30.26546, lat1:30.26592, lng0:-97.74620, lng1:-97.74575},
+  {k:'court', lat0:30.26410, lat1:30.26500, lng0:-97.74430, lng1:-97.74335}
+];
+function coverAt(lat,lng){
+  for(let i=0;i<LANDCOVER.length;i++){ const c=LANDCOVER[i];
+    if(lat>=c.lat0 && lat<=c.lat1 && lng>=c.lng0 && lng<=c.lng1) return c.k; }
+  return undefined;
+}
 
 /* zoomed out, the grid continues past the pilot blocks (unlabelled, thinner, so
    the far grid reads as texture rather than as stripes) */
@@ -5183,11 +5262,19 @@ function splitRect(r, depth, rnd, out){
 /* one source of truth for every ground tone, so a fill is never a second guess.
    Keys and hex fallbacks are the kit's, read off map-kit/svg/base-map.svg. */
 const G = {land:'#F5F2FC', block:'#E8E1F7', blockEdge:'#CFBCEE', road:'#FFFFFF',
-  roadEdge:'#CFBCEE', place:'#76BCFD', paper:'#4F34DB', building:'#FFFFFF',
+  roadEdge:'#CFBCEE', canopy:'#A3C98E', paper:'#4F34DB', building:'#FFFFFF',
   label:'#1E1142', line:'#1E1142'};
 function gc(k){ return 'var(--g-'+k.replace(/[A-Z]/g,function(c){return '-'+c.toLowerCase();})+',' + G[k] + ')'; }
-/* the kit's own painted opacities, named rather than typed at the call site */
-const G_A = {roadEdge:.55, place:.34, paper:.045, building:.85};
+/* the kit's own painted opacities, named rather than typed at the call site.
+   ROUND 16: `place: .34` becomes `canopy: .52`. The .34 was the kit's, and it was
+   the kit's for a BLUE that reinforced the lavender ground underneath it; green
+   opposes that hue, so at .34 it cancels to a near-neutral (painted chroma 5.1 over
+   a block, hue 161 -- grey, not foliage). .52 is the lowest step that puts the
+   painted canopy back at the presence the blue had while leaving it LESS saturated:
+   painted chroma 12.8 over a block against the blue's 20.3. The group carries the
+   opacity, not the shapes, so overlapping lobes do not build up and a grove is one
+   flat tone however many discs make it. */
+const G_A = {roadEdge:.55, canopy:.52, paper:.045, building:.85};
 /* the kit's casing/road width ratio: stroke-width 62 under stroke-width 48 */
 const ROAD_CASING = 62/48;
 
@@ -5225,21 +5312,53 @@ function groundSVG(W,H,pad,box){
      artboard, i.e. 1 CSS px. The kit's blocks are EMPTY -- no footprints, no cast
      shadows, no lit edges, no plaza, no courtyard. The approved board does show
      faint footprint outlines (screen-exports/png/map-default.png), so those are
-     kept as outline-only strokes and nothing else. */
+     kept as outline-only strokes and nothing else.
+
+     ROUND 16 -- FOUR LITERALS IN THIS LAYER WERE THE SAME BUG AS THE CANOPY'S. The
+     roads scale (widths[cls]*wk); the kerb inset, the block's corner radius, the
+     block edge and the footprint outline did not. Now:
+       kerb inset   CURB[cls]*wk    -- the setback is a distance on the ground, so it
+                                      shrinks with the road it is measured from. It
+                                      was eating 6px off every primary frontage at
+                                      overview, where a whole block is 25px wide.
+       corner rx    4*wk            -- a 4px radius on a 25px block is a lozenge. This
+                                      is half of what the owner called a bento box.
+       block       opacity wk       -- the far grid already thins its ROADS to .62 at
+       footprints  opacity .85*wk      overview (streetsFor). The blocks and the lines
+                                      drawn on them now recede on that same one
+                                      parameter -- the block's fill AND its edge, so
+                                      the whole box settles toward the land rather
+                                      than keeping its fill and losing only its
+                                      outline. The wide view answers "where do the
+                                      doors cluster" instead of drawing 160 outlined
+                                      boxes at full strength. This is section 3 of the
+                                      brief: at overview the ground recedes and the
+                                      marks carry the frame.
+     ALL FOUR ARE EXACT NO-OPS AT THE STREET STOP, where wk === 1: 4*1 prints "4",
+     CURB*1 is CURB, and the two opacity attributes are only emitted when wk < 1. The
+     street stop's block layer is byte-identical to Round 14's. Verified by diff. */
   const rnd = mulberry(GEO_SEED);
+  /* emitted only when it would not be 1, so the street stop's bytes do not move.
+     NEVER IN HIGH CONTRAST. Caught by measurement, not by reading: with the fade
+     applied in hc the block's 1px indigo900 outline was painting at .62 and the
+     darkest thing on the hc overview went from relative luminance 0.011 to 0.163 --
+     a hard outline turned into a grey one, which is the opposite of what high
+     contrast is for. High contrast SIMPLIFIES the ground; it does not modulate it. */
+  const fade = (a)=> (wk<1 && !hc) ? ` opacity="${Math.round(a*wk*1000)/1000}"` : (a<1?` opacity="${a}"`:'');
   const rowEdges = [{y:-16,w:0,cls:'frame'}].concat(hs).concat([{y:H+16,w:0,cls:'frame'}]);
   const colEdges = [{x:-16,w:0,cls:'frame'}].concat(vs).concat([{x:W+16,w:0,cls:'frame'}]);
   const greens = [];
   for(let i=0;i<rowEdges.length-1;i++)for(let j=0;j<colEdges.length-1;j++){
-    const m0=CURB[rowEdges[i].cls]||0, m1=CURB[rowEdges[i+1].cls]||0;
-    const n0=CURB[colEdges[j].cls]||0, n1=CURB[colEdges[j+1].cls]||0;
+    const m0=(CURB[rowEdges[i].cls]||0)*wk, m1=(CURB[rowEdges[i+1].cls]||0)*wk;
+    const n0=(CURB[colEdges[j].cls]||0)*wk, n1=(CURB[colEdges[j+1].cls]||0)*wk;
     const y0=rowEdges[i].y+rowEdges[i].w/2+m0, y1=rowEdges[i+1].y-rowEdges[i+1].w/2-m1;
     const x0=colEdges[j].x+colEdges[j].w/2+n0, x1=colEdges[j+1].x-colEdges[j+1].w/2-n1;
     const cw=x1-x0, ch=y1-y0;
     if(cw<12||ch<12) continue;
-    rect(x0,y0,cw,ch,'block',4,` stroke="${gc('blockEdge')}" stroke-width="1"`);
+    rect(x0,y0,cw,ch,'block',f1(4*wk),` stroke="${gc('blockEdge')}" stroke-width="1"${fade(1)}`);
     if(hc) continue;
-    const cover = LANDCOVER[i+','+j];
+    const cc = unproj((x0+x1)/2,(y0+y1)/2,W,H,pad,box);
+    const cover = coverAt(cc.lat, cc.lng);
     if(cover==='park'){ greens.push({x:x0,y:y0,w:cw,h:ch,kind:'park'}); continue; }
     const leaves=[]; splitRect({x:x0,y:y0,w:cw,h:ch},0,rnd,leaves);
     leaves.forEach(L=>{
@@ -5253,7 +5372,7 @@ function groundSVG(W,H,pad,box){
       if((cover==='plaza'&&roll<.55)||(cover==='court'&&roll<.40)) return;
       if(roll>.935){ greens.push({x:r.x,y:r.y,w:r.w,h:r.h,kind:'court'}); return; }
       s+=`<rect x="${f1(r.x)}" y="${f1(r.y)}" width="${f1(r.w)}" height="${f1(r.h)}" rx="1.5"`
-       + ` fill="none" stroke="${gc('building')}" stroke-width="1" opacity="${G_A.building}"/>`;
+       + ` fill="none" stroke="${gc('building')}" stroke-width="1"${fade(G_A.building)}/>`;
     });
   }
 
@@ -5267,51 +5386,129 @@ function groundSVG(W,H,pad,box){
   vs.forEach(st=>{ if(!hc&&st.cls!=='alley') rect(st.x-cas(st.w)/2,-6,cas(st.w),H+12,'roadEdge',0,` opacity="${G_A.roadEdge}"`);
                    rect(st.x-st.w/2,-6,st.w,H+12,'road'); });
 
-  /* ---- layer: places ----------------------------------------------------------
+  /* ---- layer: canopy (the kit's `places` slot) ---------------------------------
      kit: <g id="places" fill="#76BCFD" opacity=".34"> -- discs and one soft blob.
-     On the approved board this layer IS the tree canopy: pale blue rosettes across
-     the blocks and along the treed streets, which is what "the board in the other
-     one is white and blue" names. The rosette geometry is the build's, because the
-     kit draws four blobs where the board draws many; the colour and the opacity are
-     the kit's. A lobe landing within 26px of a full pin is dropped before it is
-     emitted, so canopy never sits inside a marker's halo. */
+     On the approved board this layer IS the tree canopy: rosettes across the blocks
+     and along the treed streets. The rosette geometry is the build's, because the
+     kit draws four blobs where the board draws many.
+
+     ROUND 16 REWRITES THIS LAYER. Two defects, both reported by the owner about the
+     same marks -- "why aren't the trees on the map... why is congress have a blue
+     wavy lines around it" and "zooming out view looks weird like a bunch of bento
+     boxes with random cloud photos". They had two separate causes.
+
+     (a) THE COLOUR. It was --sky400, the Estimated tier's own hue, so the ground was
+         painted in a marker's colour. See --g-canopy at the top of this file for the
+         owner's decision, the reasoning, and the saturation numbers.
+
+     (b) THE SHAPE. A kerbside band was a row of r=4.6 discs at a 7.5px pitch. The
+         pitch was SMALLER THAN THE DIAMETER (7.5 < 9.2), so consecutive discs fused
+         and the band drew one continuous scalloped stripe down the street. That is
+         literally the "wavy line", and it would still have been a wavy line in green.
+         Every tree on this map is now the same four-lobe ROSETTE at three sizes, and
+         kerbside trees stand 15px apart with a 10.6px silhouette, so they are trees
+         in a row rather than a fused band. This also keeps rubric 3.1's guarantee
+         intact: the canopy is only ever four-or-more overlapping lobes, a kerbside
+         line of them, or a filled grove -- never a lone disc, which is a marker's
+         shape.
+
+     (c) THE SCALE, which is the "cloud photos". `wk` appeared ZERO times in the old
+         version of this layer: r=5.6, r=4.6, pitch 8 and pitch 7.5 were literals, so
+         at the overview stop every tree stayed exactly the same number of pixels
+         across while the blocks it sat on shrank to a quarter of their area (the
+         overview frame covers 4.84x the ground). Counted off the emitted SVG at
+         375x812: 354 same-size kerbside discs and 15 same-size clumps at overview,
+         against 362 and 13 at street -- the same marks, the same pixels, a frame
+         nearly five times as wide. That is what "random cloud photos" was naming.
+
+     WHAT THE CANOPY BECOMES AT EACH SCALE, and this is the point: DENSITY IS HANDLED
+     BY DROPPING DETAIL. Nothing here is ever drawn at true world size until it turns
+     into noise; each form is dropped the moment its own smallest circle falls under
+     R_MIN, the smallest radius at which a 52%-opacity disc still reads as an object
+     on this ground rather than as grain. One floor, three thresholds, all derived:
+
+       form              circle    drawn while       i.e. up to     what replaces it
+       kerbside tree     3.6*cs    3.6*cs >= 3.0     zk <= 1.20     nothing
+       courtyard clump   4.6*cs    4.6*cs >= 3.0     zk <= 1.53     nothing
+       grove disc        5.6*cs    5.6*cs >= 3.0     zk <= 1.87     a filled area
+
+     So zooming out from the street stop: the street trees go first (a tree symbol
+     stops being a tree symbol before a park stops being a park), then the courtyard
+     clumps, and last the grove's texture -- but NOT the grove, which becomes one
+     filled rect in the same fill at the same opacity. A park's painted TONE is
+     therefore identical at every scale; only its edge stops being scalloped. At the
+     overview stop (zk 2.2) the canopy is parks and nothing else, which is the honest
+     answer to what a person is looking for at that scale: not individual trees, but
+     where the doors are and how they cluster.
+
+     Nothing is drawn smaller to fit. Nothing is drawn at a fixed size either. */
   if(!hc){
-    const fullPins = places.filter(p=>p.t!=='est'&&p.tier!=='est').map(p=>{
-      const xy=proj(p.lat,p.lng,W,H,pad,box); return {x:xy[0],y:xy[1]};
-    });
-    const clear=(x,y,r)=>!fullPins.some(q=>Math.hypot(q.x-x,q.y-y) < 26+(r||0));
-    s += `<g fill="${gc('place')}" opacity="${G_A.place}">`;
+    /* zk is this FRAME's span over the pilot bbox's: 1.0 at the street stop, 2.2 at
+       the overview stop, 0.40..3.30 at the ends of the pinch range, and whatever an
+       explicit box asks for (the published-scan mini map, the owner listing preview).
+       It is derived from `box`, which is ALREADY part of GROUND_CACHE's key, so scale
+       becomes an input to the drawing without the cache key having to change -- the
+       constraint that would otherwise let the first view drawn win for every other.
+       cs is the world-to-screen factor a tree obeys, capped at 1.6 on the way in
+       because past that a street tree reaches pin size and the ground starts
+       competing with the marks. */
+    const zk = (box.lng1-box.lng0)/(BBOX.lng1-BBOX.lng0);
+    const cs = Math.min(1.6, 1/zk);
+    const R_MIN = 3.0;
+    /* the one canopy motif, at kit scale: core lobe 4.6, three smaller ones round it.
+       Passing k scales the whole rosette; k=1 reproduces Round 14's courtyard clump
+       byte for byte. */
+    const ROS = [[0,0,4.6],[-3.4,1.4,3.6],[3.2,1,3.4],[0,-3.2,3.4]];
+    const rosette=(x,y,k)=>{ ROS.forEach(l=>{
+      s+=`<circle cx="${f1(x+l[0]*k)}" cy="${f1(y+l[1]*k)}" r="${f1(l[2]*k)}"/>`; }); };
+    /* THE 26px CUT-AWAY IS GONE. Round 3 dropped any lobe whose centre landed within
+       26px of a full pin, so canopy could never sit inside a marker's halo. That rule
+       was written when the canopy WAS a marker's colour. Two measurements retire it:
+       it removed 0 of 661 lobes at the street stop and 8 of 424 at overview, so it
+       was very nearly inert already; and the Estimated outline, the weakest marker
+       boundary in the file, holds 4.05:1 against the canopy over a block where the
+       3:1 floor is the requirement. A ground that does not compete does not have to
+       be cut away from the marks -- and this one no longer reads `places` at all, so
+       the ground layer has stopped depending on the data layer. */
+    s += `<g fill="${gc('canopy')}" opacity="${G_A.canopy}">`;
+    /* 1. GROVES. A park block, filled with overlapping discs at the kit's pitch --
+          a mass of canopy, which is what a park is, not a row of individual trees. */
+    const gr=5.6*cs, gp=8*cs;
     greens.filter(o=>o.kind==='park').forEach(o=>{
-      for(let y=o.y+6;y<=o.y+o.h-4;y+=8) for(let x=o.x+6;x<=o.x+o.w-4;x+=8){
-        if(clear(x,y,5.6)) s+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="5.6"/>`;
+      if(gr>=R_MIN){
+        for(let y=o.y+6*cs;y<=o.y+o.h-4*cs;y+=gp) for(let x=o.x+6*cs;x<=o.x+o.w-4*cs;x+=gp)
+          s+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(gr)}"/>`;
+      } else {
+        s+=`<rect x="${f1(o.x)}" y="${f1(o.y)}" width="${f1(o.w)}" height="${f1(o.h)}" rx="${f1(4*wk)}"/>`;
       }
     });
-    const band=(x0,y0,w,h,vert)=>{
-      if(vert){ const cx=x0+w/2;
-        for(let y=y0+6;y<y0+h-4;y+=7.5) if(clear(cx,y,4.6)) s+=`<circle cx="${f1(cx)}" cy="${f1(y)}" r="4.6"/>`;
-      } else { const cy=y0+h/2;
-        for(let x=x0+6;x<x0+w-4;x+=7.5) if(clear(x,cy,4.6)) s+=`<circle cx="${f1(x)}" cy="${f1(cy)}" r="4.6"/>`;
-      }
-    };
-    const BW=9;
-    vs.forEach(st=>{
-      const side=TREED_V[st.lng!=null?st.lng.toFixed(5):''];
-      if(!side) return;
-      if(side==='both'||side==='west') band(st.x-st.w/2-BW-1,8,BW,H-16,true);
-      if(side==='both'||side==='east') band(st.x+st.w/2+1,8,BW,H-16,true);
-    });
-    hs.forEach(st=>{
-      const side=TREED_H[st.lat!=null?st.lat.toFixed(5):''];
-      if(side==='south') band(8,st.y+st.w/2+1,W-16,BW,false);
-      if(side==='north') band(8,st.y-st.w/2-BW-1,W-16,BW,false);
-    });
-    greens.filter(o=>o.kind==='court'&&o.w>14&&o.h>14).forEach(o=>{
-      const x=o.x+o.w/2, y=o.y+o.h/2;
-      if(!clear(x,y,5)) return;
-      [[0,0,4.6],[-3.4,1.4,3.6],[3.2,1,3.4],[0,-3.2,3.4]].forEach(l=>{
-        s+=`<circle cx="${f1(x+l[0])}" cy="${f1(y+l[1])}" r="${l[2]}"/>`;
+    /* 2. KERBSIDE TREES. Deliberately sparse streets (TREED_V/TREED_H), one rosette
+          every 15 ground-units of frontage, standing clear of the road's own casing
+          -- the setback is measured from the casing edge, so it follows the road
+          hierarchy instead of being a hand-picked number. */
+    const tc=3.6*cs, tk=tc/4.6, tp=15*cs;
+    if(tc>=R_MIN){
+      const set=(w)=> (cas(w)-w)/2 + 5.5*cs;
+      vs.forEach(st=>{
+        const side=TREED_V[st.lng!=null?st.lng.toFixed(5):''];
+        if(!side) return;
+        const off=st.w/2+set(st.w);
+        if(side==='both'||side==='west') for(let y=8+tp/2;y<H-8;y+=tp) rosette(st.x-off,y,tk);
+        if(side==='both'||side==='east') for(let y=8+tp/2;y<H-8;y+=tp) rosette(st.x+off,y,tk);
       });
-    });
+      hs.forEach(st=>{
+        const side=TREED_H[st.lat!=null?st.lat.toFixed(5):''];
+        if(!side) return;
+        const off=st.w/2+set(st.w), sg=(side==='north')?-1:1;
+        for(let x=8+tp/2;x<W-8;x+=tp) rosette(x,st.y+sg*off,tk);
+      });
+    }
+    /* 3. COURTYARD CLUMPS. One rosette in the middle of a leaf the block layer left
+          open. k=cs, so at the street stop this is Round 14's geometry unchanged. */
+    if(4.6*cs>=R_MIN){
+      greens.filter(o=>o.kind==='court'&&o.w>14&&o.h>14)
+            .forEach(o=>rosette(o.x+o.w/2,o.y+o.h/2,cs));
+    }
     s += `</g>`;
   }
 
