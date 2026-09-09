@@ -1442,6 +1442,9 @@ body{
    scroller too. --pad-bottom (104px) is the nav clearance the sheet's own scroller
    used to carry at its foot; it moves down here with the buttons. */
 #sheet-correct .sheet-scroll{flex:1 1 auto;min-height:0;padding-bottom:var(--sp-5)}
+/* ROUND 18: and the needs sheet, whose Continue moved out of the scroller for the
+   same reason -- see the note on its .sheet-dock in the markup. */
+#sheet-needs .sheet-scroll{flex:1 1 auto;min-height:0;padding-bottom:var(--sp-5)}
 .sheet-dock{
   flex:0 0 auto;background:var(--card);
   padding:var(--sp-5) var(--inset-sheet) var(--sp-7);
@@ -2459,6 +2462,102 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .sheet.popup.on{transform:translateY(-50%) scale(1);opacity:1;
   transition:transform var(--dur-base) var(--ease-enter),opacity var(--dur-base) var(--ease-enter),visibility 0s 0s}
 .sheet.popup .sheet-scroll{padding:var(--inset-sheet) var(--inset-sheet) var(--sp-7)}
+
+/* ====== THE FILTER AND NEEDS PANELS: UNDER THE MAP KEY, NOT UP FROM THE BOTTOM ======
+   ROUND 18. The owner, on the filter sheet: "i dont like the filter expansion being
+   at the bottom." Asked where instead: "under the key button." So #sheet-filters and
+   #sheet-needs stop rising from the bottom edge and drop DOWN from the map key's own
+   corner. Both of them, together -- one at the top and one at the bottom would read
+   as an accident. Everything else about them is unchanged: same content, same
+   apply/reset, same live "Show N places" count, same .sheet chrome, same
+   openSheet()/closeSheets() path.
+
+   IT IS STILL A MODAL, DELIBERATELY. The brief allowed either; two facts decided it.
+     1. Nothing underneath moves while you touch this panel. renderMap() is called
+        from exactly two controls in the filter sheet -- "Show N places" and Reset --
+        so toggling a chip changes the count on the apply button and NOTHING on the
+        map. The case for a non-modal popover is "watch the pins change as you
+        toggle", and that is a behaviour this app does not have. It would have bought
+        a live map that never moves, at the price of hand-rolling a second
+        dismiss/focus story beside the one the other eight sheets share.
+     2. Modal keeps Escape, the focus trap, the inert background and focus-return on
+        the SAME code path as every other sheet, which is the only way to be sure
+        this round did not quietly break one of them. aria-modal="true" stays honest:
+        the background really is inert.
+   The map is still read: the panel is narrower than the frame, it stops short of the
+   bottom, and the scrim over the rest measures rgba(30,17,66,.07) -- a 7% veil, which
+   dims rather than hides. (The .scrim comment above calls that 42%; the token it
+   actually paints, --veil, is .07, and every sheet in the file shares it. Measured,
+   not corrected here: the scrim is not this round's surface.) The per-frame numbers
+   are in the rubric.
+
+   GEOMETRY, AND WHY NONE OF IT IS A CONSTANT. --anchor-top / --anchor-left /
+   --anchor-ox are written inline by positionAnchored() from the KEY PILL'S OWN
+   MEASURED RECT on every open, so the panel follows the pill wherever the app bar's
+   wrap, the chip row and the text size put it. The panel is NOT a child of .map-top
+   and takes none of its rules: .map-top is a left:12px/right:12px column with
+   align-items:flex-start, and re-laying a wide panel out inside that column is what
+   cut the key off sideways in Round 16. The values below are the fallback that
+   stands when the pill cannot be measured, and they are the only constants here. */
+.sheet.anchored{
+  --anchor-top:calc(var(--map-chrome-top,104px) + 56px);
+  --anchor-left:12px;
+  top:var(--anchor-top);left:var(--anchor-left);right:auto;bottom:auto;
+  /* its own width, not the frame's and not .map-top's. 336px is the widest this
+     needs to be for its chips; below that it takes the frame minus the same 12px
+     gutter the key sits in, so the two left edges line up on every frame. */
+  width:min(336px, calc(100% - 24px));
+  /* its own height: from just under the pill down to the top of the nav bar.
+     --anchor-foot is the 86px nav plus the 12px gutter the panel keeps everywhere
+     else. THE BRIEF CALLED THE NAV'S 86px "the win" AND THIS ROUND DOES NOT SPEND
+     IT, on a measurement: at 320x568, default text, the filter panel's content is
+     663px against a 233px scroller with a 12px foot and a 147px scroller with this
+     one -- it scrolls either way, and the apply control is DOCKED outside the
+     scroller, so the extra 86px changes nothing a person can reach. What it does
+     change is the only band of map left on the smallest frame. The 86px is spent on
+     the map staying visible, and on the nav bar staying where it is -- which is the
+     first time any sheet in this file has not painted straight over it.
+
+     THE ONE CASE WHERE THE NAV'S 86px IS SPENT AFTER ALL. On 320x568 with a needs
+     profile set (which adds the chip row, so --anchor-top is 270 rather than 214)
+     AND 200% text, clearing the nav leaves the panel 200px tall against a dock that
+     is 155px at that text step: the dock rose until the apply button and the close
+     button overlapped, measured at 42 x 1.2px. --anchor-min is the floor that stops
+     that -- 58px of close button, a 155px dock and a 48px minimum of scroller is
+     261, so 260 is the height at which the two 48px targets part company. Below the
+     floor the panel takes the nav's band; above it, it leaves it alone. */
+  --anchor-foot:98px;
+  --anchor-min:260px;
+  max-height:min(
+    calc(100% - var(--anchor-top) - 12px),
+    max(var(--anchor-min), calc(100% - var(--anchor-top) - var(--anchor-foot)))
+  );
+  border-radius:var(--r-4);box-shadow:var(--elev-3-free);
+  /* it grows FROM the pill, the way .popup grows from its opener. --anchor-ox is the
+     pill's centre measured back into the panel's own box. */
+  transform-origin:var(--anchor-ox,40px) 0;
+  transform:translateY(-6px) scale(.96);opacity:0;
+  transition:transform var(--dur-fast) var(--ease-exit),opacity var(--dur-fast) var(--ease-exit),visibility 0s var(--dur-fast);
+}
+.sheet.anchored.on{transform:translateY(0) scale(1);opacity:1;
+  transition:transform var(--dur-base) var(--ease-enter),opacity var(--dur-base) var(--ease-enter),visibility 0s 0s}
+/* the grip is a bottom sheet's "drag me down" affordance, and this is not one. It is
+   a bare <div> in both sheets -- no handler, no role, no name, nothing that reads it
+   -- so hiding it removes an affordance that would now be a lie and nothing else.
+   (#sheet-card's grip is a BUTTON, .sheet-grip-btn, and is not touched by this.) */
+.sheet.anchored .sheet-grip{display:none}
+/* the grip used to hold the close button off the first row; the padding does now. */
+.sheet.anchored .sheet-scroll{padding-top:var(--sp-7)}
+/* AND A DEFECT MEASURED WHILE MOVING THIS PANEL, FIXED HERE.
+   .filt-head cleared the close button with padding-right:var(--sp-8) -- 32px against
+   a button that is 48px wide and sits 12px in, so Reset's 48px box has always
+   overlapped the close button's by 10px. Measured on the bottom sheet at HEAD,
+   320x568, default text: Reset [222..270] against Close [260..308], a 10 x 21px
+   overlap of two 48px targets. Dropping the grip moved the row up and made it
+   10 x 28px, so this round would have made a pre-existing defect worse.
+   48 + 12 is exactly the button's own width plus its own offset, so Reset now stops
+   where the close button starts, with the sheet's 18px inset still between them. */
+.sheet.anchored .filt-head{padding-right:calc(var(--tap) + var(--sp-5))}
 .key-toggle:focus-visible,.key-cta:focus-visible{outline:3px solid var(--brand-blue-ink);outline-offset:-3px}
 
 /* ============ splash ============ */
@@ -4388,21 +4487,36 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
       </div>
     </div>
 
-    <div class="sheet" id="sheet-needs" role="dialog" aria-modal="true" aria-label="My needs">
+    <!-- ROUND 18: `anchored` -- this opens under the map key now, not up from the
+         bottom edge. It is the filter panel's twin and moves with it. -->
+    <div class="sheet anchored" id="sheet-needs" role="dialog" aria-modal="true" aria-label="My needs">
       <div class="sheet-grip"></div>
       <button class="sheet-close" data-close aria-label="Close">&#x2715;</button>
       <div class="sheet-scroll">
         <h3 class="sheet-h">What should we prioritize?</h3>
         <p class="sheet-p">Optional &middot; choose any that help. These choices change match information &mdash; not which businesses appear.</p>
         <div class="persona-grid" id="persona-grid"></div>
-        <div class="card-actions" style="margin-top:var(--sp-6)">
+      </div>
+      <!-- ROUND 18 -- THE SAME DOCK AS THE FILTER SHEET, FOR THE SAME REASON
+           (Round 6 for #sheet-filters, Round 13 for the scan flow, Round 14 for
+           #sheet-correct). Measured at HEAD, 320x568: Continue sat 763px down a
+           256px scroller at the default text step and 1568px down at 200%, so the
+           control this sheet exists for was never on screen when it opened. It is
+           outside the scroller now, so it is always on screen, and the live thing
+           above it -- five persona rows -- scrolls under it.
+           The two buttons keep their ids, so every handler bound to them is
+           untouched by the move. -->
+      <div class="sheet-dock">
+        <div class="card-actions">
           <button class="btn primary" id="btn-needs-apply">Continue</button>
         </div>
         <button class="btn-textlink" id="btn-needs-skip">Skip for now</button>
       </div>
     </div>
 
-    <div class="sheet" id="sheet-filters" role="dialog" aria-modal="true" aria-label="Filters">
+    <!-- ROUND 18: `anchored` -- see .sheet.anchored. This is the sheet the owner
+         asked to move: it opens under the key pill, top-left, and drops down. -->
+    <div class="sheet anchored" id="sheet-filters" role="dialog" aria-modal="true" aria-label="Filters">
       <div class="sheet-grip"></div>
       <button class="sheet-close" data-close aria-label="Close">&#x2715;</button>
       <div class="sheet-scroll">
@@ -7417,6 +7531,33 @@ function inertOutside(el){
     if(parent===phoneEl) break;
   }
 }
+/* ROUND 18 -- WHERE "UNDER THE KEY BUTTON" IS, MEASURED RATHER THAN ASSUMED.
+   The key pill's top is --map-chrome-top (which syncMapChromeTop() writes from the
+   app bar's real height, because the bar wraps) plus whatever #chiprow is doing that
+   second; its own height is whatever the text size makes it -- 48px at the default
+   step, more at 200%. There is no constant that means "just under the pill", so this
+   reads the pill's rect on every open and writes three inline custom properties that
+   .sheet.anchored consumes. Inline beats the rule's declared fallback, so the
+   fallback only ever applies when this bails out.
+   IT BAILS OUT BY CLEARING, NOT BY LEAVING. #sheet-needs also opens from the profile
+   screen's "My needs" row, where there is no map key laid out; clearing the three
+   properties means the panel falls back to the declared position rather than
+   inheriting a stale one measured over the map two screens ago. */
+function positionAnchored(sh){
+  const key=document.getElementById('key-toggle'), host=sh.offsetParent;
+  const k=key&&key.getBoundingClientRect(), h=host&&host.getBoundingClientRect();
+  if(!k||!h||!k.width||!k.height){
+    sh.style.removeProperty('--anchor-top');
+    sh.style.removeProperty('--anchor-left');
+    sh.style.removeProperty('--anchor-ox');
+    return;
+  }
+  const left=Math.round(k.left-h.left);
+  sh.style.setProperty('--anchor-left', left+'px');
+  /* 8px below the pill: --sp-4, the standard control-to-control step. */
+  sh.style.setProperty('--anchor-top', Math.round(k.bottom-h.top+8)+'px');
+  sh.style.setProperty('--anchor-ox', Math.round(k.left+k.width/2-h.left-left)+'px');
+}
 function openSheet(id, opener, focusSel){
   const sh=document.getElementById(id);
   const modal = id!=='sheet-card';
@@ -7452,6 +7593,9 @@ function openSheet(id, opener, focusSel){
       sh.style.setProperty('--pop-y', ((cy-sh.offsetTop)/sh.offsetHeight*100).toFixed(1)+'%');
     }
   }
+  /* ROUND 18: written BEFORE .on, so the first frame of the grow-in is already at
+     the pill rather than travelling to it. */
+  if(sh.classList.contains('anchored')) positionAnchored(sh);
   sh.classList.add('on');
   openSheetId=id;
   /* the card sheet never dims the map -- the selected pin stays visible above it */
