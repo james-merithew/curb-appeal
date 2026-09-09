@@ -10724,7 +10724,7 @@ function changed(attr){
 
 /* ---- state ---------------------------------------------------------------- */
 var i=0, started=false, finished=false, lockUntil=0,
-    missSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
+    missSince=0, aheadSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
     armed=false, folded=false, peeked=false, foldTimer=0, lastPlaced=null,
     lastTick=0, shown0=false;
 
@@ -11260,6 +11260,25 @@ function tick(){
       if(nx&&nx.sc===cur){ i++; retarget(); return; }
     }
   }
+  /* THE ROUTE MUST NEVER BE AHEAD OF THE APP.  The block above resyncs FORWARD
+     when the app reaches the next step's screen. Nothing pulled the route BACK
+     when it had run ahead -- a stray tap the capture listener counted, a resumed
+     state -- so the pill read 'Getting in 2/2' (the needs screen) while the app
+     sat on welcome, the target did not exist, and every frame after two seconds
+     said 'Just a moment'. Measured on the owner's phone, not in any harness.
+     If the current step's screen is not the one on screen and stays that way past
+     one screen transition, walk back to the nearest earlier step that belongs to
+     the screen actually showing. Sheets keep screen-map active, so a step inside a
+     sheet is never mistaken for being ahead. */
+  if(s.sc && s.sc!==cur){
+    if(!aheadSince) aheadSince=now;
+    if(now-aheadSince>800){
+      for(var bk=i-1; bk>=0; bk--){
+        if(ROUTE[bk].sc===cur){ i=bk; aheadSince=0; retarget(); return; }
+      }
+      aheadSince=0;
+    }
+  } else { aheadSince=0; }
 
   /* THE PREDICATE HAS TO HAVE BEEN FALSE ONCE.  `done: noSheet` is a state, not
      an event: an off-script route that closed both sheets could otherwise skid
@@ -11333,7 +11352,16 @@ function tick(){
     if(now-missSince>MISS_MS&&!waiting){
       waiting=true;
       call.classList.remove('silent');
-      setText('Just a moment','Waiting for this screen to settle.');
+      /* DIAGNOSTIC, deliberately on screen: the owner sees this line on a phone no
+         harness can reproduce, so the line names the condition that produced it.
+         Four things can null the box above; say which, and for which control. */
+      var _rn=ringEl(), _why = !_rn ? 'no target'
+        : !shown(_rn) ? 'target hidden'
+        : !box(_rn) ? 'target has no size'
+        : !inFrame(_rn) ? 'target off frame'
+        : 'unknown';
+      var _sel=(s&&(s.s||s.sel))||'?';
+      setText('Just a moment','Waiting: '+_why+' ('+_sel+').');
       if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
       setFold(false); dockChip(); showCall(true);
     }
