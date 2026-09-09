@@ -611,14 +611,20 @@ body{
    have made both of them un-swipeable, which is the trap this policy is avoiding in
    the other direction). The rails themselves declare the axis they do own. */
 #screen-map .screen-body{touch-action:auto;overscroll-behavior-y:auto}
-.nearby,.map-top.tight .key-body{touch-action:pan-x;overscroll-behavior-x:contain}
+/* ROUND 16: .map-top.tight .key-body was the second name on this rule. The key's
+   horizontal line is gone (see the key sheet, below), so #nearby is the only
+   horizontal rail left inside the map body. The declaration is unchanged. */
+.nearby{touch-action:pan-x;overscroll-behavior-x:contain}
 /* ROUND 14 -- THE MAP'S OWN POLICY, AND WHY IT IS SAFE HERE (#432).
    The map surface owns a two-finger gesture outright, so it declares `none`. This
    is the third value in Round 13's policy and the first surface to need it that is
    not a drag handle.
-   It does NOT reach the horizontal rails. touch-action intersects DOWN the ancestor
-   chain, and #nearby / .key-body are SIBLINGS of #map inside #screen-map .screen-body,
-   not descendants of it -- which is why that body was held at `auto` in Round 13
+   It does NOT reach the horizontal rail. touch-action intersects DOWN the ancestor
+   chain, and #nearby is a SIBLING of #map inside #screen-map .screen-body, not a
+   descendant of it -- which is why that body was held at `auto` in Round 13
+   (Round 16: .key-body was the second sibling named here; it is inside #sheet-key
+   now, which hangs off .phone and inherits the .sheet-scroll `pan-y` policy, so it
+   is no longer under #map's `none` either)
    and why it can stay there. Verified by computed style rather than by reading the
    cascade -- after this change #map computes `none`, #nearby still computes `pan-x`,
    #screen-map .screen-body is still the one `auto` among 15 screen bodies, and the
@@ -838,6 +844,67 @@ body{
    size enters the token table), its accessible name still lists all six marks, and
    the numbered disc is now taught ON the mark by the press-and-hold preview rather
    than only in a row of a card. */
+/* ============ ROUND 16: THE KEY OPENS AS A SHEET, NOT AS A CARD =============
+   The owner, on Round 15's key: "i like the minimized legend. but expanding it cuts
+   off part of the legend." Measured before deciding anything, on the running page,
+   over 5 frames x 5 text steps x {no profile, wheelchair} = 50 configurations:
+
+     - NOTHING was ever clipped vertically. #screen-map .screen-body is the only
+       overflow:hidden ancestor and the expanded card's bottom edge was 227.1px to
+       540.7px ABOVE it in 50 of 50. The band was never the thing that cut.
+     - What cut was `.map-top.tight`. Round 9's fallback re-laid the whole key out
+       as ONE horizontal line inside a box 166-330px wide, with scrollbar-width:none
+       and ::-webkit-scrollbar{display:none}. It fired in 22 of the 50: 16 of the 25
+       with a needs profile set (all five text steps on 320x568, 360x640 and
+       375x667, and Double on 390x844) and 6 of the 25 without one (all five on
+       320x568, and Double on 360x640). In those 22, 4 to 6 of the key's 6-7 rows
+       sat past the card's right edge -- 492px to 1458px of overflow in a window
+       that showed about 300px of it, with no scrollbar, no fade and no arrow. On
+       375x667 at Default with a profile the card read "Estimated | Scanned on-site
+       | Ow" and stopped mid-word. That is the cut, and it is horizontal.
+     - Two further facts that argued against patching the card in place: the tight
+       column STILL overran the FAB row's top in 6 of the 50 -- by 13.0, 16.0, 24.0,
+       39.7 and 99.6px on 320x568 at the five text steps with a profile, and by
+       27.6px on 360x640 at Double; and .map-ctls (z-index 42) paints OVER .map-top
+       (z-index 20), so the zoom and locate buttons sat on top of the expanded
+       card's right-hand rows.
+
+   AFTER, re-measured on the same 50 configurations with the sheet open: 6 rows
+   without a profile and 7 with one in 50 of 50; zero rows unreachable in 50 of 50
+   (each row scrolled into view and its rect tested against the scroller's, rather
+   than assumed); horizontal overflow inside the sheet 0px in 50 of 50, against
+   492-1458px before; vertical scroll needed in 6 of 50 (5-201px) and present when
+   needed. The sheet itself is 33.7% to 73.6% of the frame, under its 76% cap. The
+   floating column's overrun of the FAB row falls from 6 of 50 to 1 of 50 (320x568
+   at Double with a profile, +41.6px), and that one is the chip row plus the pill,
+   with no key in it at all.
+
+   THE DECISION, AND WHAT WAS REJECTED.
+   Rejected -- let it scroll vertically inside its own box, capped at the band. It
+   is the cheapest fix and it keeps the card beside the map, but the band it would
+   be capped to is 62px on 320x568 at Double with a profile and filters, and a 62px
+   window on a seven-row key is a worse legend than a clipped one. It also leaves
+   both facts above standing: the column still overruns, the controls still paint
+   over it, and the affordance is an 8px scroller over a moving map.
+   Rejected -- yield the band, by standing the FAB row or the control rail down
+   while the key is up. It trades one occlusion for another, needs a second set of
+   geometry to be correct, and Round 15 spent the round reducing occlusion.
+   Chosen -- the key is a sheet. It is a thing you open, read and dismiss, which is
+   what this file's sheet component already is: three of them, a scrim, background
+   inert, a Tab trap, Escape, focus in on the heading and focus back to the opener,
+   and a stack so "How trust grows" can open on top and come back. A sheet's height
+   is a function of ITSELF (max-height:76% and its own overflow-y:auto), not of the
+   app bar, the chip row, the FAB row or the nearby rail -- so the entire class of
+   defect this round measured cannot recur in it. One answer on all five frames:
+   there is no media query and no per-frame branch anywhere in this change.
+   WHAT THIS COSTS, said plainly: the key can no longer stand open BESIDE the map.
+   Round 15 remembered the open state for the session so a user who wanted it up
+   kept it up; a modal cannot do that and the memory is gone. The mitigation is the
+   part the owner already likes -- the collapsed pill draws the three tier marks at
+   the receipt sizes, on the map, where they are seen.
+   The pill itself is untouched except for its chevron, which pointed DOWN because
+   the card expanded downward in place. It points right now, which is what this file
+   uses for "opens something" (the same glyph the trust row uses). */
 .legend{
   pointer-events:auto;background:var(--float-white);border-radius:var(--r-3);box-shadow:var(--elev-2);
   display:flex;flex-direction:column;max-width:100%;overflow:hidden;
@@ -849,55 +916,41 @@ body{
   line-height:var(--lh-meta);letter-spacing:var(--ls-flat);width:100%;text-align:left;
 }
 .key-art{display:flex;align-items:flex-end;gap:var(--sp-2);flex:0 0 auto}
-/* the pill's three marks ARE the key when it is shut; when it is open the three
-   labelled rows below say the same thing, so drawing them twice is decoration. */
-.legend:not(.closed) .key-art{display:none}
 .key-word{flex:1 1 auto;white-space:nowrap}
-/* the library ships one chevron and it points right; down is closed, up is open. */
-.key-chev{flex:0 0 auto;display:flex;align-items:center;transform:rotate(90deg);
-  transition:transform var(--dur-fast) var(--ease-enter)}
-.legend:not(.closed) .key-chev{transform:rotate(-90deg)}
-.key-body{
-  display:flex;flex-direction:column;gap:var(--sp-3);
-  padding:var(--sp-0) var(--sp-5) var(--sp-4);max-width:100%;
-}
-.key-body[hidden]{display:none}
-/* the match rows only exist while a needs profile does, and they live INSIDE the key
-   now instead of floating beside it. The swatch contrasts Round 8 raised to 3:1 are
-   the same declarations, on the same tokens, in a new parent. */
+/* the library ships one chevron and it points right, which is this file's mark for
+   "opens something". It is drawn unrotated. */
+.key-chev{flex:0 0 auto;display:flex;align-items:center}
+/* ---- the key sheet's body. The rows are the same objects the card held, at the
+   same sizes, in a surface that scrolls vertically on its own. #sheet-key gets the
+   flex:1/min-height:0 pair #sheet-filters and #sheet-correct already carry, which
+   is what makes .sheet-scroll a real scroller inside a flex column. ---- */
+#sheet-key .sheet-scroll{flex:1 1 auto;min-height:0}
+.key-body{display:flex;flex-direction:column;gap:var(--sp-3);max-width:100%}
+/* the match rows only exist while a needs profile does. The swatch contrasts Round 8
+   raised to 3:1 are the same declarations on the same tokens. */
 .key-match{display:flex;align-items:center;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);
-  padding-top:var(--sp-3);border-top:1px solid var(--hairline);
+  padding-top:var(--sp-4);border-top:1px solid var(--hairline);
   font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);
   line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
 .key-match .lg{display:flex;align-items:center;gap:var(--sp-3);white-space:nowrap}
 .key-match .sw{display:block;width:15px;height:15px;border-radius:50%;flex:0 0 auto}
-/* the sheet link is its own control now. It was a 19px span inside a 200x180 button
-   whose whole area did the same thing; as a real 48px row it is reachable, it is in
-   the tab order in its own right, and it stops being deleted the moment a needs
-   profile arrives (which is what .legend.compact used to do to it). */
+/* the trust link is its own 48px control, in the tab order in its own right, and it
+   is present whether or not a needs profile is. */
 .key-cta{
   min-height:var(--tap);border:none;background:none;cursor:pointer;font-family:inherit;
   display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);width:100%;
-  padding:var(--sp-0);margin-top:var(--sp-1);border-top:1px solid var(--hairline);
-  font-size:var(--fs-micro);font-weight:var(--fw-strong);color:var(--purple-ink);
-  line-height:var(--lh-micro);letter-spacing:var(--ls-flat);text-align:left;
+  padding:var(--sp-0);margin-top:var(--sp-4);border-top:1px solid var(--hairline);
+  font-size:var(--fs-body);font-weight:var(--fw-strong);color:var(--purple-ink);
+  line-height:var(--lh-row);letter-spacing:var(--ls-flat);text-align:left;
 }
-/* ---- ROUND 9's .tight, kept, re-pointed at the body. The column and the FAB row are
-   anchored to opposite ends of the same map, so whether they collide is a fact about
-   the frame and the text size. When the EXPANDED key does not fit the band, its rows
-   lay out as one horizontally scrollable line rather than four stacked ones. No mark
-   is dropped, shrunk or hidden. ---- */
-.map-top.tight .key-body{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
-  column-gap:var(--sp-6);align-items:center;width:100%}
-.map-top.tight .key-body::-webkit-scrollbar{display:none}
-.map-top.tight .key-body .lg{flex:0 0 auto}
-.map-top.tight .key-body .lg .lgpin{flex:0 0 auto}
-.map-top.tight .key-match{border-top:none;padding-top:0;column-gap:var(--sp-4);flex-wrap:nowrap}
-.map-top.tight .key-cta{border-top:none;width:auto;flex:0 0 auto;white-space:nowrap}
 /* the key's rows and the cluster preview's rows are the same object drawn in two
-   places, so they are one declaration. */
-.legend .lg,.cluster-peek .lg{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);white-space:nowrap;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.legend .lg .lgpin,.cluster-peek .lg .lgpin{flex:0 0 40px;display:flex;justify-content:center}
+   places, so they are one declaration. `white-space:nowrap` came off: inside a card
+   that could not grow, a wrapping label was a clipped label; inside a sheet that
+   scrolls, a wrapping label is a wrapping label, and at the 200% text step the
+   longest of them ("Owner-confirmed") is what would otherwise need to be cut. */
+.key-body .lg,.cluster-peek .lg{display:flex;align-items:center;gap:var(--sp-4);font-size:var(--fs-meta);font-weight:var(--fw-strong);color:var(--sub);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
+.cluster-peek .lg{white-space:nowrap}
+.key-body .lg .lgpin,.cluster-peek .lg .lgpin{flex:0 0 40px;display:flex;justify-content:center}
 .sw.good{border:2px solid var(--match-good)}
 .sw.partial{border:2px dashed var(--match-partial)}
 /* ROUND 8: the swatch was dotted sky400 (#76BCFD, 1.83:1 on the legend's white)
@@ -3168,14 +3221,18 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
                one giant button whose only action was "open the trust sheet"; the
                toggle and the sheet link are two separate controls now, which is why
                .legend is a div and no longer a button. -->
-          <div class="legend closed" id="legend">
-            <button class="key-toggle" id="key-toggle" aria-expanded="false" aria-controls="key-body"
-                    aria-label="Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, the crosshair where you are, the pale disc behind a matched pin and the double ring on the one you have open. Show the key">
+          <!-- ROUND 16. THE PILL IS THE SAME PILL; IT OPENS A SHEET NOW.
+               It stopped being a disclosure, so aria-expanded and aria-controls came
+               off (there is no controlled region beside it any more) and
+               aria-haspopup="dialog" went on, which is what the control now does.
+               The name still lists every mark. -->
+          <div class="legend" id="legend">
+            <button class="key-toggle" id="key-toggle" aria-haspopup="dialog"
+                    aria-label="Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, the crosshair where you are, the pale disc behind a matched pin and the double ring on the one you have open. Open the map key">
               <span class="key-art" id="key-art" aria-hidden="true"></span>
               <span class="key-word">Key</span>
               <span class="key-chev" id="key-chev" aria-hidden="true"></span>
             </button>
-            <div class="key-body" id="key-body" hidden></div>
           </div>
         </div>
         <div class="map-ctls">
@@ -4201,6 +4258,21 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
       <button class="sheet-grip-btn" id="card-grip" aria-expanded="false" aria-controls="card-content" aria-label="Expand card &mdash; tap or drag the handle; swipe down to close"><span class="sheet-grip"></span></button>
       <button class="sheet-close" data-close aria-label="Close">&#x2715;</button>
       <div class="sheet-scroll" id="card-content"></div>
+    </div>
+
+    <!-- ROUND 16. The map key, as the sheet it always was in shape: a thing you
+         open, read and dismiss. Same component as the five below it, so it gets the
+         scrim, the background inert, the Tab trap, Escape, focus onto the heading
+         and focus back to the pill for free, and "How trust grows" pushes a level
+         onto the same stack the receipt and the correction sheet use. -->
+    <div class="sheet" id="sheet-key" role="dialog" aria-modal="true" aria-label="Map key">
+      <div class="sheet-grip"></div>
+      <button class="sheet-close" data-close aria-label="Close">&#x2715;</button>
+      <div class="sheet-scroll">
+        <h3 class="sheet-h" style="margin-top:var(--sp-0);padding-right:36px">Map key</h3>
+        <p class="sheet-p" style="margin-top:var(--sp-2)" id="key-cap">Every mark the map can draw.</p>
+        <div class="key-body" id="key-body"></div>
+      </div>
     </div>
 
     <div class="sheet" id="sheet-needs" role="dialog" aria-modal="true" aria-label="My needs">
@@ -6041,7 +6113,21 @@ function renderYouHere(W,H){
    band is from the column's top to the FAB row's top, less an 8px breathing gap, and
    .tight is on exactly when the column does not fit in it. Measuring the natural
    height means removing .tight first, so the test is of the column's own size and
-   not of the answer from the last call -- otherwise it latches. */
+   not of the answer from the last call -- otherwise it latches.
+   ROUND 16: the FLOATING COLUMN's half of this is gone, because the thing it was
+   compressing is gone. Seven selectors in this file carried `.map-top.tight`, and
+   all seven named .key-body, .key-match or .key-cta, which now live in #sheet-key;
+   the class would have been dead. The column is unconditionally SHORTER than either
+   of the two states it used to have -- the key contributes a 48px pill (measured
+   179.5-199.1 x 48 across all 25 frame x text-step cases) instead of a 266-431px
+   card (flow) or a 106-162px line (tight) -- so removing the toggle cannot make any
+   collision worse than the one it replaces. Measured after the change over the same
+   50 configurations: the column overruns the band in 1 (320x568 at Double with a
+   profile, +41.6px), against 6 before. That one is the chip row plus the pill, and
+   none of the seven deleted selectors would have touched it. The chip row's own fit
+   is not this round's ticket and is not silently claimed as fixed.
+   The CONTROL column's test is untouched: it still has a .tight rule and still
+   needs the band. */
 function fitMapColumn(){
   const col=document.querySelector('.map-top'), fabs=document.querySelector('.map-fabs');
   if(!col || !fabs || !mapEl.clientHeight) return;
@@ -6049,7 +6135,6 @@ function fitMapColumn(){
      first -- where the app bar ends, and where the nearby rail's top edge is. */
   syncMapChromeTop();
   syncFabLift();
-  col.classList.remove('tight');
   /* the FAB row's RESTING offset, not its animating one: `bottom` is transitioned
      over --dur-base, so a rect read during the lift reports a band that is up to
      104px too generous and the fit latches on the wrong answer. */
@@ -6057,8 +6142,9 @@ function fitMapColumn(){
   const lift=parseFloat(cs.getPropertyValue(
     fabs.classList.contains('lifted') ? '--fab-bottom-lift' : '--fab-bottom')) || 110;
   const fabTop = mapEl.clientHeight - lift - fabs.offsetHeight;
-  const band = fabTop - col.offsetTop - 8;
-  if(col.getBoundingClientRect().height > band) col.classList.add('tight');
+  /* kept as a measured value rather than deleted: colOver is what a later round
+     needs if the chip row is ever given a fit of its own. It is read, not written. */
+  fitMapColumn.colOver = col.getBoundingClientRect().height - (fabTop - col.offsetTop - 8);
   /* ROUND 15: the control column is measured against the same band, because it is
      anchored to the same two things and had no test at all. */
   const ctls=document.querySelector('.map-ctls');
@@ -6279,7 +6365,19 @@ function tierChip(t){
        200x180px button, and it stops being deleted the moment a profile is applied.
    The key's open state is remembered for the session: a user who wants it up keeps
    it up, and the DEFAULT is shut because the owner's screen had ten things on it. */
-let keyOpen = false;
+/* ROUND 16 REPLACES THE LAST PARAGRAPH ABOVE. The expand-in-place card is gone and
+   the rows live in #sheet-key; see the measurement and the rejected options in the
+   CSS above .legend. Two behaviour changes, both deliberate:
+     - the session memory of "open" is gone. A modal cannot stand open beside the
+       map, so there is no state to remember. The pill is the persistent half now
+       and it still draws all three tier marks.
+     - Escape, the Tab trap, background inert and focus return are no longer this
+       control's own code. They are the sheet component's, which is the same path
+       the other five map sheets take, so there is one implementation instead of
+       two and the key cannot drift from them. The announceUI() calls go with it:
+       a live-region "Map key shown." is what a disclosure needs, and a modal that
+       moves focus onto its own heading has already said the same thing in the way
+       every other sheet in this file says it. Announcing BOTH would say it twice. */
 function renderKey(){
   document.getElementById('key-art').innerHTML =
     ['est','scan','owner'].map(function(t){return pinSVG(t, pinPx(t,'receipt'));}).join('');
@@ -6301,34 +6399,16 @@ function renderKey(){
   document.getElementById('key-cta').addEventListener('click', function(e){
     e.stopPropagation(); openSheet('sheet-trust', e.currentTarget);
   });
-}
-function setKeyOpen(on, announce){
-  keyOpen = !!on;
-  var card=document.getElementById('legend'), tog=document.getElementById('key-toggle');
-  card.classList.toggle('closed', !keyOpen);
-  document.getElementById('key-body').hidden = !keyOpen;
-  tog.setAttribute('aria-expanded', keyOpen?'true':'false');
-  /* the name still lists every mark -- what changes is the verb, because the verb is
-     what the control will do next. */
-  tog.setAttribute('aria-label',
-    'Map key. Estimated, Scanned on-site, Owner-confirmed, the numbered cluster disc, '
-    + 'the crosshair where you are, the pale disc behind a matched pin and the double '
-    + 'ring on the one you have open. '
-    + (keyOpen ? 'Hide the key' : 'Show the key'));
-  if(announce) announceUI(keyOpen ? 'Map key shown.' : 'Map key hidden.');
-  fitMapColumn();
+  /* the caption names whether the match rows are there, because their presence is a
+     fact about the user's profile and not about the key. */
+  document.getElementById('key-cap').textContent = personas.size
+    ? 'Every mark the map can draw, including how it shows fit for ' + lbl + '.'
+    : 'Every mark the map can draw.';
 }
 renderKey();
-document.getElementById('key-toggle').addEventListener('click', function(){ setKeyOpen(!keyOpen, true); });
-/* 7.8: Escape closes what it opens. Scoped to the key rather than added to the global
-   handler, so it cannot reach a sheet's Escape or the search overlay's. */
-document.getElementById('legend').addEventListener('keydown', function(e){
-  if(e.key!=='Escape' || !keyOpen) return;
-  e.stopPropagation();
-  setKeyOpen(false, true);
-  document.getElementById('key-toggle').focus();
+document.getElementById('key-toggle').addEventListener('click', function(e){
+  openSheet('sheet-key', e.currentTarget);
 });
-setKeyOpen(false);
 
 /* ===================== card ===================== */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
