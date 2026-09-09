@@ -488,21 +488,30 @@
      L 77.0 / C 34.6 / h 133. It obeys section 11's rule, which is SATURATION not hue:
        - the least saturated marker ink is sky700 at chroma 34.7; sky400 is 39.0.
        - the raw token is chroma 34.6, already under both, and the PAINTED tone is
-         chroma 12.8 over a block and 15.3 over the land at .52 -- against the blue
-         canopy it replaces, which painted at 20.3 and was the loudest ground tone
-         in the file. The canopy got LESS saturated, not more.
-       - after the swap the loudest ground tone is the ROAD CASING over a block,
-         #DACDF2 at chroma 20.1, which is unchanged and untouched by this round. So
-         the ground's ceiling moves 20.3 -> 20.1 and its ratio against the least
-         saturated marker moves 0.58 -> 0.58; the canopy's own ratio moves
-         0.58 -> 0.44. Neither number goes the wrong way.
+         chroma 12.8 over a block (#C4D5C0) and 15.3 over the land (#CADDC3) at .52,
+         against the blue canopy it replaces at 20.3 (#C1D4F9) and 16.1. The canopy
+         got LESS saturated, not more: its ratio against the least saturated marker
+         moves 0.58 -> 0.44.
+       - RESIST THE TEMPTATION TO CALL THAT A LOWER CEILING FOR THE GROUND. It is
+         not. The canopy was never the loudest thing the ground painted, and this
+         was mis-stated once in this file before it was measured properly. Read off
+         a raster of the emitted SVG, the loudest painted tone is the block EDGE
+         #CFBCEE at chroma 27.6 -- a 1px hairline -- and the loudest FILLED tone is
+         the road casing over that edge, #DACBF2 at 21.3, with casing-over-land at
+         17.9. None of the three is touched by this round, so the ground's ceiling
+         is unchanged at 27.6 / 21.3 and its ratio against sky700 stays 0.80 / 0.61.
+         What this round changes is the canopy, and only the canopy.
      Contrast, re-measured in Round 16 against every tone: table under rubric 3.4.
 
-     CONTRAST. The darkest tone the ground now paints is the block edge #CFBCEE at
-     relative luminance 0.554; the darkest FILLED area is the canopy over a block,
-     #C4D5C0 at 0.631 (the blue it replaces was #C1D4F9 at 0.655; the Estimated
-     outline holds 4.05:1 on it, against 4.17:1 before, and 3.36:1 against the raw
-     token, against 3.08:1 before). --edge is re-solved above against both. */
+     CONTRAST, read off a raster of the emitted SVG rather than modelled. The darkest
+     tone the ground paints is still the block edge #CFBCEE at relative luminance
+     0.554, and the second darkest is still the road casing crossing that edge,
+     #D2C1EF at 0.581; both are hairlines, both predate this round, and the Estimated
+     outline holds 3.59:1 and 3.75:1 on them. The darkest tone of any AREA is now the
+     canopy over a block, #C4D5C0 at 0.631, where the blue it replaces was #C1D4F9 at
+     0.653: the Estimated outline holds 4.05:1 on the green against 4.17:1 on the
+     blue, and 3.36:1 against the raw token against 3.08:1 before. Every figure clears
+     the 3:1 floor. --edge is re-solved above against the two hairlines. */
   --g-land:var(--lavender100);       /* kit land   #F5F2FC */
   --g-block:var(--lavender200);      /* kit blocks #E8E1F7 */
   --g-block-edge:var(--lavender-path); /* kit blocks stroke #CFBCEE */
