@@ -10835,7 +10835,7 @@ var CH=[
  /* the screen says the choices change match information rather than which
     businesses appear. The mechanism -- opacity, and only opacity -- is the part
     a technical room wants and the part that makes the promise checkable. */
- {t:'Your needs', l:'A place that misses fades. It never leaves.',
+ {t:'Your needs', l:'No fit? It dims. It is never hidden.',
   s:'#ob-persona-grid .persona', sc:'ob-needs', kc:'#ob-persona-grid,#ob-needs p.ob-p',
   done:function(e){return e&&e.classList.contains('sel');}},
 
@@ -11134,7 +11134,7 @@ function changed(attr){
 
 /* ---- state ---------------------------------------------------------------- */
 var i=0, started=false, finished=false, lockUntil=0,
-    missSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
+    missSince=0, aheadSince=0, waiting=false, lastKey='', pending=null, raf=0, lastScreen='',
     armed=false, folded=false, peeked=false, foldTimer=0, lastPlaced=null,
     lastTick=0, shown0=false, nudged=false;
 
@@ -11196,11 +11196,13 @@ function kcBox(){ return unionBox(step().kc); }
 /* IN FRAME, and not merely overlapping it. A target three quarters below the fold
    would draw a ring the presenter can only see a sliver of, so anything less than
    60% visible counts as off-frame and gets the scroll hint instead. */
-function inFrame(b){
-  if(!b) return false;
-  var W=wt.offsetWidth, H=wt.offsetHeight;
-  var vis=Math.max(0, Math.min(b.y+b.h,H)-Math.max(b.y,TOP_BAND));
-  return b.x<W && b.x+b.w>0 && vis >= Math.min(b.h,44)*0.6;
+function inFrame(node){
+  if(!node) return false;
+  var r=node.getBoundingClientRect(); if(!r.width||!r.height) return false;
+  var H=window.innerHeight||document.documentElement.clientHeight;
+  var W=window.innerWidth||document.documentElement.clientWidth;
+  var top=Math.max(r.top,TOP_BAND), bot=Math.min(r.bottom,H);
+  return r.left<W && r.right>0 && Math.max(0,bot-top) >= Math.min(r.height,44)*0.6;
 }
 function shown(node){ return !!(node && node.offsetParent!==null && !node.closest('[hidden]')); }
 /* THE NEAREST SCROLLING BOX, AND NEVER .phone.  The loop stops at wt.parentElement,
@@ -11718,6 +11720,13 @@ function tick(){
       if(nx&&nx.sc===cur){ i++; retarget(); return; }
     }
   }
+  if(s.sc && s.sc!==cur){
+    if(!aheadSince) aheadSince=now;
+    if(now-aheadSince>800){
+      for(var bk=i-1; bk>=0; bk--){ if(ROUTE[bk].sc===cur){ i=bk; aheadSince=0; retarget(); return; } }
+      aheadSince=0;
+    }
+  } else { aheadSince=0; }
 
   /* THE PREDICATE HAS TO HAVE BEEN FALSE ONCE.  `done: noSheet` is a state, not
      an event: an off-script route that closed both sheets could otherwise skid
@@ -11731,9 +11740,9 @@ function tick(){
   }
 
   var rn=ringEl(), b=(rn&&shown(rn))?box(rn):null;
-  var offscreen = !!(b&&!inFrame(b));
+  var offscreen = !!(b&&!inFrame(rn));
   if(offscreen) b=null;
-  if(b&&!hitAt(rn, el())) b=null;
+  /* hitAt() keeps its pin-choosing job; it no longer vetoes a shown, in-frame target. */
 
   if(!b){
     ring.classList.remove('on');
@@ -11794,7 +11803,9 @@ function tick(){
     if(now-missSince>MISS_MS&&!waiting){
       waiting=true;
       call.classList.remove('silent');
-      setText('Just a moment','Waiting for this screen to settle.');
+      var _rn=ringEl(), _why = !_rn ? 'no target' : !shown(_rn) ? 'target hidden' : !box(_rn) ? 'target has no size' : !inFrame(_rn) ? 'target off frame' : 'unknown';
+      var _sel=(s&&(s.s||s.sel))||'?';
+      setText('Just a moment','Waiting: '+_why+' ('+_sel+').');
       if(foldTimer){ clearTimeout(foldTimer); foldTimer=0; }
       setFold(false); dockChip(); showCall(true);
     }
