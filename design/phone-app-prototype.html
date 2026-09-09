@@ -889,10 +889,14 @@ body{
    four gaps (8px), the CTA's 2px top margin (2px), the column gap 8 -> 6 (2px), and
    the match strip's own padding 8 -> 6 (4px). */
 /* ROUND 15: the column gap goes 6px -> 12px, which is a 7.15 fix and not rhythm.
-   .achip carries an `inset:-8px` pseudo-element to reach 48px on a 32px chip, so at a
-   6px gap the chip's HIT AREA overlapped the control under it by 2px -- 223 to 344px
-   of shared target in 25 of 25 frame x text-step scans, at Round 14 HEAD and before
-   it. 12px clears the 8px reach with 4px to spare. */
+   .achip carried an `inset:-8px` pseudo-element to reach 48px on a 32px chip, so at
+   a 6px gap the chip's HIT AREA overlapped the control under it by 2px -- 223 to
+   344px of shared target in 25 of 25 frame x text-step scans, at Round 14 HEAD and
+   before it. 12px cleared the 8px reach with 4px to spare.
+   ROUND 18: the chip row is gone, so the column has one child (#legend) and the gap
+   has nothing to separate. It is left at 12px rather than deleted -- the gap is
+   inert at one child, and the value is the one every later measurement in this file
+   was taken against. It becomes live again the moment anything joins the column. */
 .map-top{position:absolute;top:var(--map-chrome-top,104px);left:12px;right:12px;z-index:20;display:flex;flex-direction:column;gap:var(--sp-5);pointer-events:none;align-items:flex-start}
 /* ============ ROUND 15: THE MAP KEY, ONE CONTROL, CLOSED BY DEFAULT ============
    What was here: a permanently open four-row card (#legend) AND a permanently open
@@ -1055,15 +1059,52 @@ body{
    while the halo it stands for is dotted sky700. It now names the same token the
    halo uses -- 6.24:1 on white -- so the legend key and the mark agree. */
 .sw.unknown{border:2px dotted var(--match-unknown)}
-.map-fabs{position:absolute;left:14px;bottom:var(--fab-bottom);z-index:20;display:flex;gap:var(--sp-4);transition:bottom var(--dur-base) var(--ease-enter)}
+/* ROUND 18 GIVES THE FAB ROW A RIGHT EDGE, BECAUSE IT NEVER HAD ONE.
+   The row was `left:14px` and nothing else, so an absolutely positioned shrink-to-fit
+   box whose only ceiling was the containing block -- and flex items default to
+   `min-width:auto`, which is a content-based floor they refuse to shrink below. Put
+   the two together and the row LEAVES THE FRAME rather than reflowing. Measured on
+   the running build at 320x568, the shortest supported frame, before this round
+   touched the label: at the 200% text step the row's right edge was 336.6px on a
+   320px frame -- 16.6px off the screen -- and it shared 293px&sup2; of hit area with
+   the map control column. That was true of the shipped "My needs" label and had
+   never been measured.
+   Round 18 puts the persona's name on this button (see applyPersona), which is a
+   wider string -- "Cane or walker" is the longest -- and at 320 x 200% it took the
+   same failure from 16.6px to 23.1px off-screen and the shared target from 293 to
+   2072px&sup2;. So the row is given its right edge and the two buttons are allowed to
+   shrink. Re-measured over the same 2 labels x 5 text steps at 320: right edge 306px
+   in 10 of 10, overflow 0.0px in 10 of 10, and the longest persona label now costs
+   exactly nothing -- every "Cane or walker" row is identical to its "My needs" row.
+   pointer-events go with it: a row that now spans the frame would otherwise swallow
+   map taps across its whole width, so the container stops taking them and the two
+   buttons take them back. Same idiom as .map-top / its children. */
+.map-fabs{position:absolute;left:14px;right:14px;bottom:var(--fab-bottom);z-index:20;display:flex;gap:var(--sp-4);
+  pointer-events:none;transition:bottom var(--dur-base) var(--ease-enter)}
 .map-fabs.lifted{bottom:var(--fab-bottom-lift)}
 .fab-needs{
   min-height:var(--tap);border:none;border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-6);
   background:var(--purple);color:#fff;font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
+  pointer-events:auto;min-width:0;flex:0 1 auto;
   display:flex;align-items:center;gap:var(--sp-4);box-shadow:var(--elev-2);cursor:pointer;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
+/* THE NEEDS BUTTON IS THE ONE THAT GIVES. Its label is the only variable-length
+   string in the row (a persona name, or "My needs"), so it takes all the shrink and
+   the Filters button takes none. One line, ellipsised at the extreme rather than
+   wrapped: a wrapping label made the button 74px and then 111px tall, which is the
+   thing that walks up into the map control column. The accessible name is never
+   truncated -- it is set in full by applyPersona -- so the state survives the
+   ellipsis even where the pixels do not. */
+#fab-needs-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* AND THE FILTERS BUTTON GIVES NOTHING, because it cannot. Measured at 320x568 at
+   the 200% text step with min-width:0 on both: the button's box shrank to 118.8px
+   while its children kept their size, and the count badge -- overflow is visible on
+   a button -- ended up at 317.3..347.2px on a 320px frame, 41px outside its own
+   button and off the screen. A badge that says how many filters are on is not a
+   thing to lose. flex-shrink:0 keeps it whole. */
 .fab-filters{
   min-height:var(--tap);border:1.5px solid var(--edge);border-radius:999px;padding:var(--sp-0) var(--sp-6) var(--sp-0) var(--sp-5);
   background:var(--float-white);color:var(--purple-ink);font-family:inherit;font-weight:var(--fw-strong);font-size:var(--fs-body);
+  pointer-events:auto;flex:0 0 auto;
   display:flex;align-items:center;gap:var(--sp-4);box-shadow:var(--elev-2);cursor:pointer;line-height:var(--lh-row);letter-spacing:var(--ls-flat);}
 .fab-filters .fcount{background:var(--purple);color:#fff;border-radius:999px;font-size:var(--fs-meta);padding:var(--sp-1) var(--sp-4);line-height:var(--lh-meta);letter-spacing:var(--ls-flat);font-weight:var(--fw-strong);}
 
@@ -2088,10 +2129,10 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
    the one curve in the file that actually overshoots. Under reduced motion both
    are zeroed by the single transition blanket, and a transition's end state is
    its computed style, so nothing can be left part-pressed. */
-.filtchip,.fchip,.persona,.seg button,.recent-chip,.achip,.tsize-btn{
+.filtchip,.fchip,.persona,.seg button,.recent-chip,.tsize-btn{
   transition:background-color var(--dur-fast) var(--ease-enter),border-color var(--dur-fast) var(--ease-enter),color var(--dur-fast) var(--ease-enter),transform var(--dur-peer) var(--ease-sheet);
 }
-.locpill,.hamb,.ctl-btn,.achip,.recent-chip,.filtchip,.fchip,.seg button,.tsize-btn,
+.locpill,.hamb,.ctl-btn,.recent-chip,.filtchip,.fchip,.seg button,.tsize-btn,
 .search-clear,.flowhead .backbtn,.ob-back,.cancel-x,.ow-banner .backbtn,.btn-textlink,
 .filt-reset,.rcpt-back,.correct-btn,.lib-link,.ow-taxlink,.sheet-grip-btn,
 .fab-needs,.fab-filters,.btn,.sheet-close,.ow-photo .ph-btn,.skiplink,.photo-add{
@@ -2101,7 +2142,7 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
   transition:transform var(--dur-peer) var(--ease-sheet),background-color var(--dur-fast) var(--ease-enter),
              box-shadow var(--dur-peer) var(--ease-sheet);   /* ROUND 9: the release half of N8 */
 }
-.locpill:active,.hamb:active,.ctl-btn:active,.achip:active,.recent-chip:active,
+.locpill:active,.hamb:active,.ctl-btn:active,.recent-chip:active,
 .filtchip:active,.fchip:active,.seg button:active,.tsize-btn:active,.search-clear:active,
 .flowhead .backbtn:active,.ob-back:active,.cancel-x:active,.ow-banner .backbtn:active,
 .btn-textlink:active,.filt-reset:active,.rcpt-back:active,.correct-btn:active,
@@ -2156,20 +2197,9 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .list-view.on{opacity:1;transform:none;
   transition:opacity var(--dur-base) var(--ease-enter),transform var(--dur-base) var(--ease-enter)}
 
-/* ============ active-filter chip row ============ */
-.chiprow{
-  pointer-events:auto;display:none;flex-wrap:wrap;gap:var(--sp-3);max-width:100%;padding-right:52px;
-}
-.chiprow.on{display:flex}
-.achip{
-  display:inline-flex;align-items:center;gap:var(--sp-3);background:var(--purple-ink);color:#fff;
-  border:none;border-radius:999px;padding:var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-5);font-size:var(--fs-meta);font-weight:var(--fw-strong);
-  cursor:pointer;font-family:inherit;box-shadow:var(--elev-2);min-height:32px;position:relative;line-height:var(--lh-meta);letter-spacing:var(--ls-flat);}
-.achip::before{content:"";position:absolute;inset:-8px}/* 48px hit area on a 32px chip */
-.achip .x{
-  width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.22);
-  display:inline-flex;align-items:center;justify-content:center;font-size:var(--icon-glyph-sm);line-height:1;
-}
+/* ROUND 18: .chiprow / .achip are gone -- rules, markup, renderer and the two
+   keyframe-bound state classes. See the note in the .map-top markup for the
+   measurement and for what had to move onto the needs FAB before the row could go. */
 
 /* ROUND 11 CLOSES THE LAST FEEDBACK CLAUSE (9.9 / interaction N11): "affected pins
    crossfade over 180ms; newly relevant pins rise 4px while their halos draw."
@@ -2515,9 +2545,8 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .ringwrap.settled .ring-photo{opacity:.35}
 .proc-chips{display:flex;flex-wrap:wrap;gap:var(--sp-4);justify-content:center;margin-top:var(--sp-6);min-height:var(--tap);width:100%}
 @keyframes chipIn{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
-@keyframes chipOut{from{opacity:1;transform:none}to{opacity:0;transform:scale(.96)}}
-.achip.arriving{animation:chipIn var(--dur-base) var(--ease-enter) both}
-.achip.leaving{animation:chipOut var(--dur-fast) var(--ease-exit) both;pointer-events:none}
+/* ROUND 18: chipIn stays -- .proc-chips .fchip is its other user, and always was.
+   chipOut had exactly one user, .achip.leaving, and goes with it. */
 .proc-chips .fchip{animation:chipIn var(--dur-base) var(--ease-enter) both;cursor:default}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* the 64 pins are one Tab each; this lets a keyboard user step over them to the bottom nav.
@@ -2600,11 +2629,9 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 /* the splash is a still frame, and its exit is a state change the JS timer owns */
 .rm .phone .splash-body{animation:none !important;opacity:1;transform:none}
 .rm .phone .splash.leaving{animation:none !important;opacity:0}
-/* chips appear in their final state; a leaving chip is removed by the JS, which
-   already short-circuits its timer under reduced motion */
-.rm .phone .achip.arriving,
+/* chips appear in their final state. ROUND 18: the two .achip lines went with the
+   chip row; the processing chips are the remaining user and keep the guarantee. */
 .rm .phone .proc-chips .fchip{animation:none !important;opacity:1;transform:none}
-.rm .phone .achip.leaving{animation:none !important;opacity:0}
 /* ROUND 6, and the spec names these two itself: "Checks and confidence dots appear
    in their final states." Not shortened -- asserted. */
 .rm .phone .dots i.f{animation:none !important;background-color:var(--purple);transform:none}
@@ -2908,8 +2935,9 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
 .phone[data-dir="lat"] .screen.active .capture-dock,
 .phone[data-dir="lat"] .screen.active .ob-body{animation-name:screen-lat;animation-duration:var(--dur-peer)}
 /* The outgoing screen, held for exactly one transition and then hidden again.
-   Named .screen-out, not .leaving: three other things in this file already use
-   .leaving for their own exits (#scan-processing, .splash, .achip) and a generic
+   Named .screen-out, not .leaving: other things in this file already use
+   .leaving for their own exits (#scan-processing, .splash -- .achip was the third
+   until Round 18 removed the chip row) and a generic
    screen rule on that class would silently overwrite them. The splash and the
    onboarding screens are never given this class at all -- they have their own
    choreography and their own stacking plane. */
@@ -3248,6 +3276,48 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
     border:none;border-radius:0;box-shadow:none;
   }
   .notch{display:none}
+
+  /* ROUND 18 -- THE SECOND CLOCK.
+     "remove the fake timestamp in the upper left of the app" (owner, on a real
+     phone). `.statusbar` paints 9:41 with a signal-strength and a battery icon.
+     That is scenery: on the desktop stage it finishes the illusion the bezel and
+     the notch start, and both of those are already dropped here. On a real phone
+     it is a SECOND, WRONG clock sitting a few millimetres under the device's real
+     one. It goes with the bezel and the notch, in the same block, for the same
+     reason.
+
+     THE 46px BAND IS EMPTIED, NOT RECLAIMED, AND THAT IS A DECISION, NOT AN
+     OVERSIGHT. `.statusbar` is `position:absolute` and `pointer-events:none`, so
+     it contributes nothing to layout and hiding it reflows nothing; the 46px it
+     covered is spent by `--pad-top:58px` (46 + 12), by `--pad-top-hero:70px`, and
+     by the 46px top padding `.apphead` and `.flowhead` each carry. Taking those
+     back was measured on the live build at 320x568 -- the shortest supported frame
+     -- across the 27 screens present at the time of the sweep (the 26 in the markup
+     plus claim-workspace, which the claim flow builds) and all five text steps, by
+     simulating the reclaim (`--pad-top:12px`, `--pad-top-hero:24px`,
+     `--pad-top-map:58px`, header top padding to --sp-5) and re-reading
+     scrollHeight-clientHeight on every body:
+
+       25 screens have a body and 18 of them SCROLL at the default text step. The
+       reclaim shortens 16 of those 18 by 34px (the .flowhead screens, which keep
+       12px of their own) or 46px (the plain ones); one more, #ob-location, gains
+       the 3px that is all it overflowed by, and is the ONLY screen the reclaim
+       takes out of scrolling at the default step (two across all five). One,
+       screen-states, gains nothing at all. The other 17 still scroll, with a
+       median 200px of travel left after the reclaim; the gesture is identical and
+       slightly shorter.
+
+     One screen of 18 stops scrolling, against a reflow of every header in the file
+     and of the six separately measured clearances keyed to the 46 (Round 8's
+     "the header ends at 106px", --pad-top-map:104, --fab-bottom-lift, --dock-floor,
+     the .map-top band, the .flowhead sticky clamp). That is not a trade this round
+     takes on the owner's behalf. The band stays as the top of the dark app bar,
+     which is what it already reads as once the clock is off it -- verified by
+     screenshot at 320x568 and 390x844.
+
+     Nothing was hidden that lives nowhere else (7.7): the time and the battery are
+     the phone's own, and the phone is already drawing them 46px higher. */
+  .statusbar{display:none}
 }
 </style>
 <script>
@@ -3313,7 +3383,37 @@ ul.prof-card>li:last-child .prof-row{border-bottom:none}
           </button>
         </div>
         <div class="map-top">
-          <div class="chiprow" id="chiprow" role="group" aria-label="Active filters"></div>
+          <!-- ROUND 18. THE ACTIVE-FILTER CHIP ROW IS GONE, AND THE NEEDS FAB TOOK
+               BACK THE ONE THING IT WAS CARRYING ALONE.
+               "when you filter or choose needs, it doesn't need to also say it above
+               the key, theres already the my needs and filters buttons" (owner).
+               #chiprow stood here and rendered one dismissible chip per active
+               persona and per active filter. Measured on the running build at
+               390x844, on this build and on a `git show HEAD:` copy of 1d8e047
+               driven into the same state: with a wheelchair profile and TWO feature
+               filters the row was 359 x 32px at 12,104 and the key pill sat at
+               y=148; with the pill at y=104 now, the key rises 44px. With a profile
+               and THREE filters the row wrapped to two lines, 366 x 70px, 7.78% of
+               the frame. Union occlusion of #map by opaque chrome over the same
+               state: total 44.7% -> 42.1%, floating chrome 22.1% -> 19.5%. It said,
+               in words, what the Filters FAB's count badge and the needs FAB
+               already said as state.
+               BUT ONE HALF OF THE OWNER'S SENTENCE WAS NOT TRUE AT HEAD, AND THE
+               CHECK IS WHY THIS ROUND DID NOT SIMPLY DELETE THE ROW. The needs FAB
+               did NOT show the persona's name: Round 15 froze its visible label at
+               "My needs" precisely BECAUSE the chip already said "Wheelchair", and
+               put the name in the aria-label only. Scanning every visible node on
+               the map with a profile set, the chip was the ONLY place a sighted
+               user could read WHICH profile was on -- while a screen reader got it
+               from `aria-label="My needs -- matching for Wheelchair. Change"`. So
+               deleting the row on its own would have opened a sighted/announced
+               asymmetry (7.6, 7.7) rather than closing a duplication. The label is
+               back on the FAB, which is one place and not two, and the owner's
+               sentence is now true of the build. See applyPersona().
+               THE COST, MEASURED, NOT ASSUMED: dropping ONE named criterion was one
+               tap on that chip's dismiss. It is three now -- FAB, the chip in the
+               sheet, "Show N places" -- for a filter and three for a profile. That
+               is the number this was decided on. -->
           <!-- ROUND 15. ONE KEY, NOT TWO, AND IT IS CLOSED UNTIL IT IS ASKED FOR.
                Two floating explainers stood over the map at once -- the tier card and
                the match strip -- and both were open with no way to shut either. They
@@ -7747,16 +7847,31 @@ function applyPersona(){
      2.5.3, and it also put the word "Wheelchair" on the map twice, because the
      removable chip in #chiprow already says it. The button's visible text is now
      constant, the chip stays the single place that names and un-names the profile,
-     and the accessible name CONTAINS the visible text and then adds the state. */
-  document.getElementById('fab-needs-label').textContent='My needs';
+     and the accessible name CONTAINS the visible text and then adds the state.
+
+     ROUND 18 REVERSES THE VISIBLE HALF AND KEEPS THE ACCESSIBLE HALF. Round 15's
+     reasoning was sound and its premise has just been removed: the chip row is gone,
+     so "the chip already says it" no longer holds. Measured on the running build at
+     390x844 with the wheelchair profile applied, scanning every visible node under
+     #screen-map for the profile's name: the chip was the ONLY visible occurrence,
+     and `aria-label="My needs -- matching for Wheelchair. Change"` was the only
+     announced one. Delete the row and the sighted user loses a state the screen
+     reader keeps -- the inverse of 7.7, and the same 7.6 mismatch Round 15 fixed,
+     pointed the other way. So the name goes back on the FAB, and the accessible
+     name is REORDERED to keep Round 15's own rule rather than to break it: it now
+     STARTS with the visible string and then adds the state and the action --
+     "Wheelchair -- my needs, matching. Change". 2.5.3 asks that the accessible name
+     contain the visible label; leading with it is what makes speech input ("click
+     Wheelchair") land. With no profile both are the literal "My needs", as before.
+     One place, not two, and not none. */
+  document.getElementById('fab-needs-label').textContent = personas.size ? lbl : 'My needs';
   document.getElementById('fab-needs').setAttribute('aria-label',
-    personas.size ? 'My needs \u2014 matching for '+lbl+'. Change' : 'My needs');
+    personas.size ? lbl+' \u2014 my needs, matching. Change' : 'My needs');
   renderKey();
   document.getElementById('prof-needs-sub').textContent = personas.size?'Matching for '+[...personas].map(k=>PERSONAS[k].label).join(', '):'Choose any that help \u2014 optional';
   document.getElementById('prof-needs-chips').innerHTML = [...personas].map(k=>`<span class="needchip">${PERSONAS[k].label}</span>`).join('');
   armPinFlux(); renderMap();
   renderNearby();
-  renderChipRow();
   fitMapColumn();     /* ROUND 9: the match strip and the FAB lift both land here */
 }
 document.getElementById('fab-needs').addEventListener('click',()=>{pendingPersonas=new Set(personas);renderPersonas();openSheet('sheet-needs');});
@@ -7921,65 +8036,16 @@ document.getElementById('filt-reset').addEventListener('click',()=>{
 });
 document.getElementById('btn-filt-show').addEventListener('click',()=>{
   filterApplied = anyFilter();
-  armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow(); closeSheets();
+  armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); closeSheets();
   if(filterApplied) toast('Showing '+filtCount()+' places that fit');
 });
 document.getElementById('fab-filters').addEventListener('click',()=>{renderFilters();updateFiltShow();openSheet('sheet-filters');});
 
-/* ===================== active-filter chip row (removable) ===================== */
-function chipEl(label, onRemove){
-  const b=document.createElement('button');
-  b.className='achip';
-  b.setAttribute('aria-label','Remove filter: '+label);
-  b.innerHTML=`${label}<span class="x" aria-hidden="true">\u2715</span>`;
-  b.addEventListener('click',()=>removeChip(b,onRemove));
-  return b;
-}
-/* 4.6: a chip arrives rather than blinking into existence, and on removal runs the
-   reverse before the DOM removal. The timer is guarded by isReduced() for the same
-   reason setListOpen's is -- never `animationend`. */
-function removeChip(el, done){
-  if(isReduced()){ done(); return; }
-  el.classList.add('leaving');
-  defer(160, done);
-}
-function renderChipRow(){
-  const row=document.getElementById('chiprow');
-  const had=new Set([...row.children].map(c=>c.textContent));
-  row.innerHTML='';
-  personas.forEach(k=>{
-    row.appendChild(chipEl(PERSONAS[k].label,()=>{
-      personas.delete(k); pendingPersonas.delete(k);
-      applyPersona(); renderPersonas();
-    }));
-  });
-  if(filterApplied){
-    filtFeats.forEach(k=>{
-      const lbl=(FILT_FEATS.find(f=>f[0]===k)||[k,FEATS[k]?FEATS[k].label:k])[1];
-      row.appendChild(chipEl(lbl,()=>{
-        filtFeats.delete(k);
-        filterApplied = anyFilter();
-        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
-      }));
-    });
-    if(filtDist<FILT_DIST_MAX){
-      row.appendChild(chipEl('Within '+filtDist+' ft',()=>{
-        filtDist=FILT_DIST_MAX; distIn.value=FILT_DIST_MAX; syncDist();
-        filterApplied = anyFilter();
-        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
-      }));
-    }
-    if(filtFresh!=='any'){
-      row.appendChild(chipEl(filtFresh+' days',()=>{
-        filtFresh='any';
-        filterApplied = anyFilter();
-        armPinFlux(); renderMap(); renderNearby(); updateFiltShow(); renderChipRow();
-      }));
-    }
-  }
-  if(!isReduced()) [...row.children].forEach(c=>{ if(!had.has(c.textContent)) c.classList.add('arriving'); });
-  row.classList.toggle('on', row.children.length>0);
-}
+/* ROUND 18: chipEl(), removeChip() and renderChipRow() are gone with the row they
+   drew -- 54 lines here, three call sites elsewhere (applyPersona, btn-filt-show,
+   me-area), one `role="group"`. The state they narrated is
+   carried by the two FABs: the needs FAB's own label (applyPersona) and the filters
+   FAB's count badge (updateFiltShow). */
 
 /* ===================== search (business / address / neighborhood) ===================== */
 const searchOv=document.getElementById('search-ov'), searchIn=document.getElementById('search-in');
@@ -8254,7 +8320,7 @@ document.getElementById('me-pin').innerHTML=illusSVG('street',236);
 document.getElementById('me-scan').addEventListener('click',()=>{closeSheets();startScan();});
 document.getElementById('me-area').addEventListener('click',()=>{
   filtFeats.clear(); filtFresh='any'; filterApplied = personas.size>0;
-  renderFilters(); updateFiltShow(); renderChipRow(); renderMap(); renderNearby();
+  renderFilters(); updateFiltShow(); renderMap(); renderNearby();
   toast('Filters eased \u2014 showing this area again');
 });
 
@@ -8635,6 +8701,93 @@ function motionRMS(){
   return Math.sqrt(motionLog.reduce((s,x)=>s+(x-m)*(x-m),0)/motionLog.length);
 }
 
+/* ============ ROUND 18 -- THE ORIENTATION RULE READ THE WRONG DEVICE ============
+   "in camera mode it says turn up right, but my phone is up right. and it goes
+   away when i turn it sideways" (owner, on a real phone).
+
+   Both halves of that sentence were one bug and it was INVERTED. The rule was
+
+       portrait: v.videoHeight >= v.videoWidth        // the CAMERA TRACK
+
+   which is the sensor's own frame, not the phone's posture. getUserMedia commonly
+   hands back the sensor's native orientation -- 1280x720, landscape -- however the
+   phone is held, so an upright phone gave videoWidth > videoHeight, `portrait` was
+   false, and "Turn the phone upright" spoke. Turn it sideways, some browsers
+   renegotiate the track, the numbers flip, and the line disappears. Exactly the
+   order he reported it in. The line had been telling every upright user to turn
+   their phone upright for as long as the coach has existed; Round 10 measured it
+   ("appears on the 6th landscape sample") by feeding senseFrame() portrait and
+   landscape CANVASES, which tests the mechanism against its own definition and
+   cannot see that the definition is the wrong one.
+
+   The device's posture is the device's to report. Two sources are read and they
+   have to agree -- screen.orientation.type and the orientation media query, both
+   probed for support, because an unsupported feature query silently reports
+   `matches:false`, which would read as "landscape": the exact failure mode this
+   whole block exists to remove. See the note on the read itself.
+
+   THREE THINGS RETURN null, AND null MEANS DO NOT SPEAK, NOT "LANDSCAPE":
+     1. no screen.orientation and no working orientation media query;
+     2. anything that throws;
+     3. ANYTHING THAT IS NOT A PHONE. On the desktop stage the frame is a drawing of
+        a phone inside a landscape window; screen.orientation would truthfully answer
+        "landscape-primary" -- about the monitor -- and the coach would tell you to
+        turn a picture upright. There is no phone to turn, so the answer is
+        unavailable, which is not the same as "wrong way up".
+
+   THE PHONE TEST IS NOT THE 767px MEDIA QUERY, AND THAT IS THE WHOLE POINT OF THIS
+   RULE. The first draft of this fix gated on `(max-width:767px)` -- the same query
+   the rest of the file uses for real-phone mode -- and it was wrong in exactly the
+   direction that started all of this: a 390x844 phone TURNED SIDEWAYS is 844px wide,
+   the query goes false, the function returns null, and the one posture the line
+   exists to name is the one posture it can never see. Caught by reading the gate
+   against the case rather than against the mock.
+   The test that survives rotation is the device, not the viewport: a coarse pointer
+   AND a short screen edge of 767px or less. Both, not either -- a touchscreen laptop
+   is coarse and a narrow desktop window is short, and neither is a phone. screen.width
+   and screen.height do not swap on every platform, so the SHORT side is the one read.
+   A tablet (820 short edge) is silent by this test, and that is deliberate: the line
+   says "phone".
+   The overlay's standing rule (6.9) is that a false instruction is worse than
+   silence, because the user obeys it. ============================================ */
+function devicePortrait(){
+  try{
+    if(!window.matchMedia) return null;
+    const coarse = matchMedia('(pointer: coarse)');
+    /* an unsupported media feature parses to `not all`; a browser that cannot
+       answer the question does not get to answer it by default */
+    if(!coarse || String(coarse.media).indexOf('pointer')<0 || !coarse.matches) return null;
+    const shortEdge = Math.min(screen.width||0, screen.height||0);
+    if(!(shortEdge>0 && shortEdge<=767)) return null;
+  }
+  catch(e){ return null; }
+  /* TWO SOURCES, AND THEY HAVE TO AGREE. Measured on the running build under the
+     browser's own device emulation: the pointer, the viewport and screen.width /
+     screen.height were all emulated to a 390x844 phone while screen.orientation.type
+     still reported the HOST's "landscape-primary" -- so a single-source read of
+     screen.orientation returned false, which is "turn the phone upright" on a frame
+     that is plainly upright. That is the original defect wearing a different hat.
+     screen.orientation is the device's claim; the orientation media query is the
+     viewport's, and in a browser the viewport rotates with the device. When both
+     answer and they agree, that is the answer. When only one answers, it is taken.
+     When they disagree, one of them is lying and there is no way to tell which, so
+     the coach says nothing (6.9). */
+  let claimed = null, seen = null;
+  try{
+    const t = window.screen && screen.orientation && screen.orientation.type;
+    if(typeof t==='string' && t) claimed = (t.indexOf('portrait')===0);
+  }catch(e){}
+  try{
+    const mm = matchMedia('(orientation: portrait)');
+    /* an unsupported media feature parses to `not all`; only a query the browser
+       actually understood is allowed to answer */
+    if(mm && typeof mm.media==='string' && mm.media.indexOf('orientation')>=0) seen = !!mm.matches;
+  }catch(e){}
+  if(claimed===null) return seen;          /* null when neither answered */
+  if(seen===null) return claimed;
+  return claimed===seen ? claimed : null;
+}
+
 /* One pass over a 160-wide greyscale frame. Returns null when there is no live
    video to read -- the illustrated fallback capture is never sampled, so a user
    who declined the camera is never coached about a picture that is a drawing. */
@@ -8685,7 +8838,9 @@ function senseFrame(){
     energy: energy,
     topR: topMean/(intMean+1e-6),
     aniso: topMean/(hTopMean+1e-6),
-    portrait: v.videoHeight >= v.videoWidth
+    /* true portrait, false landscape, null "the device did not say" -- see
+       devicePortrait() above. NOT the camera track's aspect ratio. */
+    portrait: devicePortrait()
   };
 }
 
@@ -8695,7 +8850,9 @@ function coachRules(s){
   s.blurRatio = base>0 ? s.energy/base : 1;          /* reported; see STEADY_ENERGY */
   const moving  = motionSeen && motionRMS() > MOTION_RMS;
   return [
-    {id:'orient', line:'Turn the phone upright', on: !s.portrait},
+    /* `=== false` and not `!s.portrait`: null is "the device did not say", and the
+       one thing this line must never do is treat silence as landscape. */
+    {id:'orient', line:'Turn the phone upright', on: s.portrait === false},
     {id:'dark',   line:"It's dark here",         on: s.lum < DARK_LUMA},
     {id:'steady', line:'Hold steady',            on: moving},
     {id:'frame',  line: FRAMING_LINE,
