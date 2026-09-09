@@ -1993,7 +1993,7 @@ axis.
 
 ---
 
-**Round 17 (2026-09-09). The key that was cut off, and the cut was sideways.**
+**Round 16 (2026-09-09). The key that was cut off, and the cut was sideways.**
 The product owner, on the Round 15 map key: *&ldquo;i like the minimized legend. but
 expanding it cuts off part of the legend. fix that too.&rdquo;* The collapsed pill stays
 as it is. The expanded state does not exist any more.
